@@ -1,0 +1,33 @@
+{
+  "name": "@absolunet/ioc",
+  "version": "0.1.0",
+  "description": "IoC",
+  "definition": "",
+  "homepage": "https://github.com/absolunet/node-ioc",
+  "author": {
+    "name": "Absolunet",
+    "url": "https://absolunet.com"
+  },
+  "keywords": [
+    "ioc"
+  ],
+  "license": "MIT",
+  "repository": {
+    "url": "git://github.com/absolunet/node-ioc.git",
+    "type": "git"
+  },
+  "bugs": {
+    "url": "https://github.com/absolunet/node-ioc/issues"
+  },
+  "engines": {
+    "node": ">= 11.10.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "ava test"
+  },
+  "devDependencies": {
+    "@absolunet/tester": "2.5.0"
+  },
+  "dependencies": {}
+}
