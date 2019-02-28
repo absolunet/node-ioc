@@ -1,8 +1,10 @@
 //--------------------------------------------------------
-//-- Tests
+//-- Spark IoC
 //--------------------------------------------------------
 'use strict';
 
-const tester = require('@absolunet/tester');
+const Application = require('./foundation/Application');
 
-tester.npmPackage.validate();
+const app = Application.make();
+
+module.exports = app;

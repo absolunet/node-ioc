@@ -1,6 +1,8 @@
 //--------------------------------------------------------
-//-- IoC
+//-- Tests - lint
 //--------------------------------------------------------
 'use strict';
 
-module.exports = require('./src/app');
+const tester = require('@absolunet/tester');
+
+tester.npmPackage.validate();
