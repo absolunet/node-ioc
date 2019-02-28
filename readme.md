@@ -7,9 +7,9 @@
 
 [![Code style ESLint](https://img.shields.io/badge/code_style-@absolunet/node-659d32.svg)](https://github.com/absolunet/eslint-config-node)
 
-> IoC
+> IoC: SOLID container for NodeJS application, either for Web server or CLI tool
 
-lorem...
+This packages offers simple IoC container for any NodeJS projects. It allows to do SOLID implementation and easily use project dependencies, as well as writing common packages for multiple projects. It comes with Jest for unit, feature and coverage tests, which can be easily done in an IoC container, and AVA for lint tests.
 
 
 ## Install
@@ -22,33 +22,73 @@ $ npm install @absolunet/ioc
 ## Usage
 
 ```js
-const ioc = require('@absolunet/ioc');
+// Getting the container
+const container = require('@absolunet/ioc');
+
+// Binding an instance to the container
+container.bind('foo', () => {
+    return { foo:true };
+});
+
+// Binding an instance from a class
+class Bar {}
+container.bind('bar', Bar);
+
+// Binding an instance from an object
+const baz = { baz:42 };
+container.bind('baz', baz);
+
+// Binding a singleton
+container.singleton('console', () => {
+    return window.console;
+});
+
+// Getting a registered instance
+const injectedFoo = container.make('foo');
+
+// How about making a not registered instance?
+const madeObject = container.make(() => { // { obj:'resolved' }
+    return { obj:'resolved' };
+});
+
+// How about dependencies injection?
+class Injectable {
+    static get dependencies() {
+        return ['foo'];
+    }
+
+    constructor(fooService) {
+        this.foo = fooService;
+    }
+}
+
+const injectable = container.make(Injectable); // Injectable {}
+console.log(injectable.foo); // { foo:true }, injection was done from binding done in upper code.
+
+// How about decorating dependencies?
+container.decorate('baz', (bazInstance) => {
+    if (bazInstance.baz === 42) {
+        bazInstance.hasAnswerOfLife = true;
+    }
+
+    return bazInstance;
+});
+
+const bazDecoratedInstance = container.make('baz') // { baz:42, hasAnswerOfLife:true }
 
 
-console.log(ioc);
+// This is gread, but it can be better!
+
+// Registering service providers
+const ProjectServiceProvider = require('./providers/project'); // It binds 'project' and 'project.current' service
+container.register(ProjectServiceProvider); // The service provider is registered
+
+// Create a 'foo' instance
+container.onBooted(() => {
+    const projectService = container.make('project'); // ProjectService {}
+    const currentProjectService = container.make('project.current'); // SingleProjectService {}
+});
 ```
-
-
-<br>
-
-
-## API
-
-### `foo(bar)`
-lorem....
-
-#### bar
-*Required*<br>
-Type: `String`<br>
-lorem
-
-
-
-
-
-
-<br>
-<br>
 
 ## License
 
