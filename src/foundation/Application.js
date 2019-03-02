@@ -3,6 +3,8 @@
 //--------------------------------------------------------
 'use strict';
 
+const slash = require('slash');
+const path = require('path');
 const EventEmitter = require('events');
 const Container = require('./../container/Container');
 const ServiceProviderModel = require('./models/ServiceProvider');
@@ -12,14 +14,6 @@ const eventEmitter = new EventEmitter();
 
 
 class Application extends Container {
-
-	/**
-	 * Application constructor.
-	 */
-	constructor() {
-		super();
-		this.configurePaths();
-	}
 
 	/**
 	 * Register a service provider.
@@ -48,7 +42,6 @@ class Application extends Container {
 		}
 
 		eventEmitter.emit('application.booting', this);
-		this.configurePaths();
 		const providers = __(this).get('providers');
 
 		let i;
@@ -116,18 +109,42 @@ class Application extends Container {
 	/**
 	 * Configure application paths.
 	 *
-	 * @param {{[string]:[string]}|string|null} _paths
+	 * @param {{string}|string|null} _paths
 	 * @throws Error
 	 */
 	configurePaths(_paths = null) {
 		const paths = typeof _paths === 'string' || _paths === null ? { base:_paths || process.cwd() } : _paths;
 
-		if (!Object.prototype.hasOwnProperty.call(paths, 'base')) {
+		if (!Object.prototype.hasOwnProperty.call(paths, 'base') && !this.isBound('path.base')) {
 			throw new Error('Configured paths must define at least the base path.');
 		}
 
 		Object.keys(paths).forEach((p) => {
-			this.bind(`path.${p}`, paths[p]);
+			this.bind(`path.${p}`, slash(paths[p]));
+		});
+	}
+
+	configureDefaultPaths() {
+		const basePath = process.cwd();
+
+		this.configurePaths({
+			base: basePath,
+			config: path.join(basePath, 'config')
+		});
+	}
+
+	useBasePath(basePath) {
+		const bindings = __(this).get('bindings');
+		const paths = {};
+		Object.keys(bindings).forEach((name) => {
+			if ((/^path(\.)?/u).test(name)) {
+				paths[name] = bindings[name];
+			}
+		});
+
+		const currentBasePath = paths.base;
+		Object.keys(paths).forEach((name) => {
+			bindings[name] = bindings[name].replace(new RegExp(`^${currentBasePath}`), basePath);
 		});
 	}
 
@@ -138,6 +155,7 @@ class Application extends Container {
 		super.flush();
 		__(this).set('providers', []);
 		__(this).set('booted', false);
+		this.configureDefaultPaths();
 	}
 
 	/**

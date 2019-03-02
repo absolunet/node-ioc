@@ -11,12 +11,27 @@ const ConfigRepository = require('./../../../src/config/repositories/ConfigRepos
 
 describe('Spark IoC - Config', () => {
 
+	const configData = {
+		test: {
+			foo: 'bar'
+		},
+		app: {
+			providers: [
+				'@/test/unit/config/stubs/providers/FakeServiceProvider.js'
+			]
+		}
+	};
+
 	beforeEach(() => {
 		loadFreshContainer();
 		container.register(ConfigServiceProvider);
 		container.configurePaths({
-			base: __dirname,
-			config: path.join(__dirname, 'stubs')
+			config: path.join(__dirname, 'stubs', 'config')
+		});
+		container.decorate('config', (config) => {
+			config.setConfig(configData);
+
+			return config;
 		});
 		container.bootIfNotBooted();
 	});
@@ -37,30 +52,26 @@ describe('Spark IoC - Config', () => {
 
 		beforeEach(() => {
 			config = container.make('config');
-			config.setFile(path.join(__dirname, 'stubs', 'config.js'));
 		});
 
 
 		test('Can read configuration', () => {
-			expect(config.get('test')).toStrictEqual({ foo:'bar' });
-			expect(config.get('test.foo')).toBe('bar');
+			expect(config.get()).toStrictEqual(configData);
+			expect(config.get('test')).toStrictEqual(configData.test);
+			expect(config.get('test.foo')).toBe(configData.test.foo);
 		});
 
 		test('Can set configuration', () => {
-			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+			expect(config.get('test')).toStrictEqual(configData.test);
 
 			config.set({ test:{ foo:'foo' } });
-			expect(config.get('test')).toStrictEqual({ foo:'foo' });
+			expect(config.get('test.foo')).toBe('foo');
 
 			config.setConfig({ test:{ foo:'baz' } });
-			expect(config.get('test')).toStrictEqual({ foo:'baz' });
-		});
+			expect(config.get('test.foo')).toBe('baz');
 
-		test('Can change configuration', () => {
-			expect(config.get('test.foo')).toBe('bar');
-
-			config.set('test.foo', 'foo');
-			expect(config.get('test.foo')).toBe('foo');
+			config.set('test.foo', 'qux');
+			expect(config.get('test.foo')).toBe('qux');
 		});
 
 	});
@@ -75,6 +86,35 @@ describe('Spark IoC - Config', () => {
 			});
 		});
 
+	});
+
+	describe('Drivers', () => {
+
+		let config;
+
+		beforeEach(() => {
+			config = container.make('config');
+		});
+
+		test('JavaScript driver is working', () => {
+			config.setConfigFromFile('config.js');
+			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+		});
+
+		test('JSON driver is working', () => {
+			config.setConfigFromFile('config.json');
+			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+		});
+
+		test('YAML driver is working', () => {
+			config.setConfigFromFile('config.yaml');
+			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+		});
+
+		test('YML driver is working', () => {
+			config.setConfigFromFile('config.yml');
+			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+		});
 	});
 
 });

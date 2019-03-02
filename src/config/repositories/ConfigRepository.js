@@ -23,29 +23,27 @@ class ConfigRepository {
 	 * ConfigRepository constructor.
 	 *
 	 * @param {Container} app
-	 * @param {ConfigLoader} configLoader
+	 * @param {Loader} loader
 	 */
-	constructor(app, configLoader) {
-		__(this).set('loader', configLoader);
-		if (app.isBound('path.config')) {
-			const configPath = app.make('path.config');
-			this.setFirstFile(['js'].map((ext) => {
-				return path.join(configPath, `config.${ext}`);
-			}));
-		} else {
-			this.setConfig({});
-		}
+	constructor(app, loader) {
+		__(this).set('app', app);
+		__(this).set('loader', loader);
+		this.setConfigFromFile(['js', 'json', 'yml', 'yaml'].map((ext) => {
+			return path.join(`config.${ext}`);
+		}));
 	}
 
 	/**
 	 * Get configuration value.
 	 *
-	 * @param {string} key
-	 * @param {*} defaultValue
+	 * @param {string|null} key
+	 * @param {*|null} defaultValue
 	 * @returns {*}
 	 */
-	get(key, defaultValue) {
-		return dot.pick(key, __(this).get('config')) || defaultValue;
+	get(key = null, defaultValue = null) {
+		const config = Object.assign({}, __(this).get('config'));
+
+		return key === null ? config : dot.pick(key, config) || defaultValue;
 	}
 
 	/**
@@ -63,26 +61,6 @@ class ConfigRepository {
 	}
 
 	/**
-	 * Set configuration file to fetch configuration from.
-	 *
-	 * @param {string} file
-	 */
-	setFile(file) {
-		const config = __(this).get('loader').load(file);
-		this.setConfig(config);
-	}
-
-	/**
-	 * Set first existing configuration file from collection to fetch configuration from.
-	 *
-	 * @param {string[]} files
-	 */
-	setFirstFile(files) {
-		const config = __(this).get('loader').loadFirst(files);
-		this.setConfig(config);
-	}
-
-	/**
 	 * Set global configuration.
 	 *
 	 * @param {*} config
@@ -91,13 +69,16 @@ class ConfigRepository {
 		__(this).set('config', config);
 	}
 
-	/**
-	 * File mutator.
-	 *
-	 * @param {string} file
-	 */
-	set file(file) {
-		this.setFile(file);
+	setConfigFromFile(file) {
+		const configPath = __(this).get('app').make('path.config');
+		const files = (Array.isArray(file) ? file : [file]).map((fileName) => {
+			return path.join(configPath, fileName);
+		});
+		this.setConfig(this.loader.loadFirst(files));
+	}
+
+	get loader() {
+		return __(this).get('loader');
 	}
 
 }

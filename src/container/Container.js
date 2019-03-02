@@ -3,6 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
+const fs = require('fs');
 const __ = require('@absolunet/private-registry');
 const ContainerProxy = require('./Proxy');
 
@@ -91,7 +92,11 @@ class Container {
 				return this.getTagged(abstract);
 			}
 
-			if (!this.isInstantiable(abstract) && !this.isFunction(abstract)) {
+			if (!this.isInstantiable(abstract) && !this.isFunction(abstract) && !this.isObject(abstract)) {
+				if (this.isValidJsFile(abstract)) {
+					return this.make(require(abstract));
+				}
+
 				return this.bindingNotFound(abstract);
 			}
 		}
@@ -107,7 +112,7 @@ class Container {
 	}
 
 	isBound(abstract) {
-		return Boolean(__(this).get('bindings')[abstract]);
+		return Object.keys(__(this).get('bindings')).includes(abstract);
 	}
 
 	/**
@@ -281,6 +286,20 @@ class Container {
 	 */
 	isFunction(obj) {
 		return typeof obj === 'function';
+	}
+
+	/**
+	 * Check if the given object is an object.
+	 *
+	 * @param obj
+	 * @returns {boolean}
+	 */
+	isObject(obj) {
+		return typeof obj === 'object' && obj !== null;
+	}
+
+	isValidJsFile(filePath) {
+		return (/\.js$/u).test(filePath) && fs.existsSync(filePath);
 	}
 
 	/**
