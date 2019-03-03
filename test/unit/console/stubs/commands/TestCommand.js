@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const Command = require('./../../../../../src/console/command/Command');
+const Command = require('./../../../../../src/console/Command');
 
 class TestCommand extends Command {
 
@@ -11,15 +11,27 @@ class TestCommand extends Command {
 		return 'test:case';
 	}
 
-	options() {
+	get description() {
+		return 'This is a test case';
+	}
+
+	handle() {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve();
+			}, 2000);
+		});
+	}
+
+	get parameters() {
 		return [
-			['type', true, null, 'Type of the test case']
+			['name']
 		];
 	}
 
-	flags() {
+	get flags() {
 		return [
-			['verbose', 'Show debug information']
+			['force', 'Force the command to run', 'f']
 		];
 	}
 

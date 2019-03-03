@@ -1,7 +1,8 @@
 //--------------------------------------------------------
-//-- Spark IoC - Container - Proxy
+//-- Node IoC - Container - Proxy
 //--------------------------------------------------------
 'use strict';
+
 
 const __ = require('@absolunet/private-registry');
 

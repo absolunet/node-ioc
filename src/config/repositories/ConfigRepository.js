@@ -1,7 +1,8 @@
 //--------------------------------------------------------
-//-- Spark IoC - Config - Config Repository
+//-- Node IoC - Config - Config Repository
 //--------------------------------------------------------
 'use strict';
+
 
 const path = require('path');
 const dot = require('dot-object');
@@ -69,6 +70,11 @@ class ConfigRepository {
 		__(this).set('config', config);
 	}
 
+	/**
+	 * Set global configuration from file.
+	 *
+	 * @param file
+	 */
 	setConfigFromFile(file) {
 		const configPath = __(this).get('app').make('path.config');
 		const files = (Array.isArray(file) ? file : [file]).map((fileName) => {
@@ -77,6 +83,11 @@ class ConfigRepository {
 		this.setConfig(this.loader.loadFirst(files));
 	}
 
+	/**
+	 * Get Loader instance.
+	 *
+	 * @returns {Loader}
+	 */
 	get loader() {
 		return __(this).get('loader');
 	}

@@ -1,5 +1,5 @@
 //--------------------------------------------------------
-//-- Spark IoC - Foundation - Service Provider Model
+//-- Node IoC - Foundation - Service Provider Model
 //--------------------------------------------------------
 'use strict';
 

@@ -1,7 +1,8 @@
 //--------------------------------------------------------
-//-- Spark IoC - Foundation - Application
+//-- Node IoC - Foundation - Application
 //--------------------------------------------------------
 'use strict';
+
 
 const slash = require('slash');
 const path = require('path');
@@ -124,15 +125,24 @@ class Application extends Container {
 		});
 	}
 
+	/**
+	 * Configure default paths within the container.
+	 */
 	configureDefaultPaths() {
 		const basePath = process.cwd();
 
 		this.configurePaths({
 			base: basePath,
-			config: path.join(basePath, 'config')
+			config: path.join(basePath, 'config'),
+			command: path.join(basePath, 'command')
 		});
 	}
 
+	/**
+	 * Use base path for all registered paths.
+	 *
+	 * @param {string} basePath
+	 */
 	useBasePath(basePath) {
 		const bindings = __(this).get('bindings');
 		const paths = {};
@@ -144,7 +154,7 @@ class Application extends Container {
 
 		const currentBasePath = paths.base;
 		Object.keys(paths).forEach((name) => {
-			bindings[name] = bindings[name].replace(new RegExp(`^${currentBasePath}`), basePath);
+			bindings[name] = bindings[name].replace(new RegExp(`^${currentBasePath}`, 'u'), basePath);
 		});
 	}
 
@@ -181,6 +191,17 @@ class Application extends Container {
 		}
 
 		return eventEmitter.on('application.booted', callback);
+	}
+
+	/**
+	 * Set current application version.
+	 *
+	 * @param {string|number} version
+	 */
+	setVersion(version) {
+		if (version) {
+			this.bind('version', version);
+		}
 	}
 
 	/**

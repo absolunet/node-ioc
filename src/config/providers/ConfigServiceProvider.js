@@ -1,12 +1,14 @@
 //--------------------------------------------------------
-//-- Spark IoC - Config - Config Service Provider
+//-- Node IoC - Config - Config Service Provider
 //--------------------------------------------------------
 'use strict';
 
+
 const ServiceProvider = require('./../../foundation/ServiceProvider');
-const Loader = require('./../services/Loader');
-const Grammar = require('./../services/Grammar');
+const ConfigLoader = require('./../services/ConfigLoader');
+const ConfigGrammar = require('./../services/ConfigGrammar');
 const ConfigRepository = require('./../repositories/ConfigRepository');
+
 
 class ConfigServiceProvider extends ServiceProvider {
 
@@ -14,12 +16,27 @@ class ConfigServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
-		this.app.singleton('config.loader', Loader);
-		this.app.singleton('config.grammar', Grammar);
-		this.app.singleton('config', ConfigRepository);
+		this.registerServices();
+		this.registerConfiguredProviders();
+	}
 
+	/**
+	 * Register configuration services.
+	 */
+	registerServices() {
+		this.app.singleton('config.loader', ConfigLoader);
+		this.app.singleton('config.grammar', ConfigGrammar);
+		this.app.singleton('config', ConfigRepository);
+	}
+
+	/**
+	 * Register service providers from configuration file.
+	 */
+	registerConfiguredProviders() {
 		const grammar = this.app.make('config.grammar');
-		this.app.make('config').get('app.providers', []).forEach((provider) => {
+		const config = this.app.make('config');
+
+		config.get('app.providers', []).forEach((provider) => {
 			this.app.register(grammar.formatPath(provider));
 		});
 	}

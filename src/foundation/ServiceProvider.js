@@ -1,7 +1,8 @@
 //--------------------------------------------------------
-//-- Spark IoC - Foundation - Service Provider
+//-- Node IoC - Foundation - Service Provider
 //--------------------------------------------------------
 'use strict';
+
 
 class ServiceProvider {
 

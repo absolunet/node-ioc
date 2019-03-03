@@ -1,22 +1,38 @@
 //--------------------------------------------------------
-//-- Spark IoC - Console - CommandRepository
+//-- Node IoC - Console - CommandRepository
 //--------------------------------------------------------
 'use strict';
+
 
 const __ = require('@absolunet/private-registry');
 
 
 class CommandRepository {
 
+	/**
+	 * Dependencies descriptor.
+	 *
+	 * @returns {string[]}
+	 */
 	static get dependencies() {
 		return ['app'];
 	}
 
+	/**
+	 * CommandRepository constructor.
+	 *
+	 * @param {Application} app
+	 */
 	constructor(app) {
 		__(this).set('app', app);
 		__(this).set('commands', []);
 	}
 
+	/**
+	 *
+	 * @param grouped
+	 * @returns {Command[]|{[name]: Command[]}
+	 */
 	all(grouped = false) {
 		const commands = __(this).get('commands').sort(({ name:a }, { name:b }) => {
 			return a.localeCompare(b);
@@ -41,32 +57,35 @@ class CommandRepository {
 		return commands;
 	}
 
+	/**
+	 * Get command by name.
+	 *
+	 * @param {string} name
+	 * @returns {Command|null}
+	 */
 	get(name) {
 		return __(this).get('commands').find(({ name:commandName }) => {
 			return name === commandName;
 		});
 	}
 
+	/**
+	 * Check if command is registered.
+	 *
+	 * @param {string} name
+	 * @returns {boolean}
+	 */
 	has(name) {
 		return Boolean(this.get(name));
 	}
 
+	/**
+	 * Add given command in the command list.
+	 *
+	 * @param {Command|NewableFunction<Command>} command
+	 */
 	add(command) {
 		__(this).get('commands').push(__(this).get('app').make(command));
-	}
-
-	toString() {
-		const groups = this.all(true);
-
-		let str = '';
-		Object.keys(groups).forEach((group) => {
-			str += `${group}\n`;
-			str += groups[group].map(({ name }) => {
-				return `\t${name}`;
-			}).join(`\n`);
-		});
-
-		return str;
 	}
 
 }

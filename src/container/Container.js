@@ -1,7 +1,8 @@
 //--------------------------------------------------------
-//-- Spark IoC - Container - Container
+//-- Node IoC - Container - Container
 //--------------------------------------------------------
 'use strict';
+
 
 const fs = require('fs');
 const __ = require('@absolunet/private-registry');
@@ -10,8 +11,27 @@ const ContainerProxy = require('./Proxy');
 
 class Container {
 
+	/**
+	 * Make a new Container instance.
+	 *
+	 * @returns {Container}
+	 */
 	static make() {
-		return new Proxy(new this(), new ContainerProxy());
+		const instance = new Proxy(new this(), new ContainerProxy());
+		if (!this.instance) {
+			this.instance = instance;
+		}
+
+		return instance;
+	}
+
+	/**
+	 * Get the current Container instance or create a new one.
+	 *
+	 * @returns {Container}
+	 */
+	static getInstance() {
+		return this.instance || this.make();
 	}
 
 	/**
@@ -94,7 +114,7 @@ class Container {
 
 			if (!this.isInstantiable(abstract) && !this.isFunction(abstract) && !this.isObject(abstract)) {
 				if (this.isValidJsFile(abstract)) {
-					return this.make(require(abstract));
+					return this.make(require(abstract)); // eslint-disable-line global-require
 				}
 
 				return this.bindingNotFound(abstract);
@@ -102,7 +122,9 @@ class Container {
 		}
 
 		const build = this.build(concrete, args);
-		const object = decorators.reduce((obj, decorator) => { return decorator(obj); }, build);
+		const object = decorators.reduce((obj, decorator) => {
+			return decorator(obj);
+		}, build);
 
 		if (shared && Object.keys(args).length === 0) {
 			__(this).get('singletons')[abstract] = object;
@@ -111,6 +133,12 @@ class Container {
 		return object;
 	}
 
+	/**
+	 * Check if the given abstract is bound to the container.
+	 *
+	 * @param {string} abstract
+	 * @returns {boolean}
+	 */
 	isBound(abstract) {
 		return Object.keys(__(this).get('bindings')).includes(abstract);
 	}
@@ -265,7 +293,7 @@ class Container {
 	 * @throws Error
 	 */
 	bindingNotFound(abstract) {
-		throw new Error(`Binding ${abstract} was not found in the container.`);
+		throw new Error(`Binding [${abstract}] was not found in the container.`);
 	}
 
 	/**
@@ -275,7 +303,7 @@ class Container {
 	 * @returns {boolean}
 	 */
 	isInstantiable(obj) {
-		return Boolean(obj.prototype) && Boolean(obj.prototype.constructor.name);
+		return Boolean(obj) && Boolean(obj.prototype) && Boolean(obj.prototype.constructor.name);
 	}
 
 	/**
@@ -298,6 +326,12 @@ class Container {
 		return typeof obj === 'object' && obj !== null;
 	}
 
+	/**
+	 * Check if the given file is a valid and existing JavaScript file with a valid extension.
+	 *
+	 * @param {string} filePath
+	 * @returns {boolean}
+	 */
 	isValidJsFile(filePath) {
 		return (/\.js$/u).test(filePath) && fs.existsSync(filePath);
 	}
