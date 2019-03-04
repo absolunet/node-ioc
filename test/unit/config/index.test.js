@@ -22,6 +22,7 @@ describe('Spark IoC - Config', () => {
 		}
 	};
 
+
 	beforeEach(() => {
 		loadFreshContainer();
 		container.register(ConfigServiceProvider);
@@ -54,7 +55,6 @@ describe('Spark IoC - Config', () => {
 			config = container.make('config');
 		});
 
-
 		test('Can read configuration', () => {
 			expect(config.get()).toStrictEqual(configData);
 			expect(config.get('test')).toStrictEqual(configData.test);
@@ -64,10 +64,10 @@ describe('Spark IoC - Config', () => {
 		test('Can set configuration', () => {
 			expect(config.get('test')).toStrictEqual(configData.test);
 
-			config.set({ test:{ foo:'foo' } });
+			config.set({ test: { foo: 'foo' } });
 			expect(config.get('test.foo')).toBe('foo');
 
-			config.setConfig({ test:{ foo:'baz' } });
+			config.setConfig({ test: { foo: 'baz' } });
 			expect(config.get('test.foo')).toBe('baz');
 
 			config.set('test.foo', 'qux');
@@ -81,8 +81,8 @@ describe('Spark IoC - Config', () => {
 
 		test('Application should register configured service provider', () => {
 			container.onBooted(() => {
-				expect(container.make('test')).toStrictEqual({ foo:'bar' });
-				expect(container.make('test2')).toStrictEqual({ foo:'baz' });
+				expect(container.make('test')).toStrictEqual({ foo: 'bar' });
+				expect(container.make('test2')).toStrictEqual({ foo: 'baz' });
 			});
 		});
 
@@ -98,22 +98,41 @@ describe('Spark IoC - Config', () => {
 
 		test('JavaScript driver is working', () => {
 			config.setConfigFromFile('config.js');
-			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
 		});
 
 		test('JSON driver is working', () => {
 			config.setConfigFromFile('config.json');
-			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
 		});
 
 		test('YAML driver is working', () => {
 			config.setConfigFromFile('config.yaml');
-			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
 		});
 
 		test('YML driver is working', () => {
 			config.setConfigFromFile('config.yml');
-			expect(config.get('test')).toStrictEqual({ foo:'bar' });
+			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
+		});
+	});
+
+
+	describe('Grammar', () => {
+
+		let grammar;
+
+		beforeEach(() => {
+			grammar = container.make('config.grammar');
+		});
+
+		test('Replacements are correctly working', () => {
+			['foo/bar', 'foo/bar.js'].forEach((filePath) => {
+				expect(grammar.formatPath(`/${filePath}`)).toBe(`/${filePath}`);
+				expect(grammar.formatPath(filePath)).toBe(filePath);
+				expect(grammar.formatPath(`@${filePath}`)).toBe(`@${filePath}`);
+				expect(grammar.formatPath(`@/${filePath}`)).toBe(`${container.make('path.base')}/${filePath}`);
+			});
 		});
 	});
 
