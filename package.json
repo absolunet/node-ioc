@@ -35,6 +35,8 @@
     "jest": "24.1.0"
   },
   "dependencies": {
+    "@absolunet/fsp": "^1.5.0",
+    "@absolunet/fss": "^1.5.0",
     "@absolunet/private-registry": "1.1.0",
     "dot-object": "1.7.1",
     "glob": "^7.1.3",

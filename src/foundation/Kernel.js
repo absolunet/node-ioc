@@ -5,9 +5,11 @@
 
 
 const __ = require('@absolunet/private-registry');
+const FileServiceProvider = require('./../file/providers/FileServiceProvider');
 const ConfigServiceProvider = require('./../config/providers/ConfigServiceProvider');
 
 const coreBootstrappers = [
+	FileServiceProvider,
 	ConfigServiceProvider
 ];
 

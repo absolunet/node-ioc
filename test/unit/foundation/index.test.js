@@ -6,7 +6,7 @@
 const { container, loadFreshContainer } = require('./../common');
 const ServiceProvider = require('./../../../src/foundation/ServiceProvider');
 
-describe('Spark IoC - Foundation', () => {
+describe('Node IoC - Foundation', () => {
 
 	beforeEach(loadFreshContainer);
 

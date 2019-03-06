@@ -10,7 +10,7 @@ const ListCommand = require('./../../../src/console/commands/ListCommand');
 const TestCommand = require('./stubs/commands/TestCommand');
 
 
-describe('Spark IoC - Console', () => {
+describe('Node IoC - Console', () => {
 
 	beforeEach(() => {
 		loadFreshContainer();

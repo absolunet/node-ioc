@@ -4,9 +4,9 @@
 'use strict';
 
 
-const fs = require('fs');
-const yaml = require('js-yaml');
-const Driver = require('./../../file/services/Driver');
+const fss = require('@absolunet/fss');
+const fsp = require('@absolunet/fsp');
+const Driver = require('./Driver');
 
 
 class YamlDriver extends Driver {
@@ -15,7 +15,11 @@ class YamlDriver extends Driver {
 	 * {@inheritdoc}
 	 */
 	load(file) {
-		return yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+		return fss.readYaml(file);
+	}
+
+	loadAsync(file) {
+		return fsp.readYaml(file);
 	}
 
 }

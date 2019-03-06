@@ -6,7 +6,7 @@
 const container = require('./../../../src/app');
 
 
-describe('Spark IoC - App', () => {
+describe('Node IoC - App', () => {
 
 	test('App boots correctly', () => {
 		container.onBooted(() => {

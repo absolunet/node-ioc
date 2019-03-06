@@ -17,18 +17,18 @@ class ConfigRepository {
 	 * @returns {string[]}
 	 */
 	static get dependencies() {
-		return ['app', 'config.loader'];
+		return ['app', 'file'];
 	}
 
 	/**
 	 * ConfigRepository constructor.
 	 *
 	 * @param {Container} app
-	 * @param {Loader} loader
+	 * @param {FileLoader} file
 	 */
-	constructor(app, loader) {
+	constructor(app, file) {
 		__(this).set('app', app);
-		__(this).set('loader', loader);
+		__(this).set('file', file);
 		this.setConfigFromFile(['js', 'json', 'yml', 'yaml'].map((ext) => {
 			return path.join(`config.${ext}`);
 		}));
@@ -80,16 +80,16 @@ class ConfigRepository {
 		const files = (Array.isArray(file) ? file : [file]).map((fileName) => {
 			return path.join(configPath, fileName);
 		});
-		this.setConfig(this.loader.loadFirst(files));
+		this.setConfig(this.file.loadFirst(files));
 	}
 
 	/**
-	 * Get Loader instance.
+	 * Get FileLoader instance.
 	 *
-	 * @returns {Loader}
+	 * @returns {FileLoader}
 	 */
-	get loader() {
-		return __(this).get('loader');
+	get file() {
+		return __(this).get('file');
 	}
 
 }

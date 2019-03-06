@@ -4,7 +4,7 @@
 'use strict';
 
 
-const Driver = require('./../../file/services/Driver');
+const Driver = require('./Driver');
 
 
 class JavaScriptDriver extends Driver {
@@ -14,6 +14,13 @@ class JavaScriptDriver extends Driver {
 	 */
 	load(file) {
 		return require(file); // eslint-disable-line global-require
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	loadAsync(file) {
+		return Promise.resolve(require(file)); // eslint-disable-line global-require
 	}
 
 }

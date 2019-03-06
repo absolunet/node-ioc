@@ -7,8 +7,14 @@
 const fs = require('fs');
 const __ = require('@absolunet/private-registry');
 
+const TextDriver = require('./drivers/TextDriver');
+const JavaScriptDriver = require('./drivers/JavaScriptDriver');
+const JsonDriver = require('./drivers/JsonDriver');
+const YamlDriver = require('./drivers/YamlDriver');
+const NullDriver = require('./drivers/NullDriver');
 
-class Loader {
+
+class FileLoader {
 
 	/**
 	 * Dependencies descriptor.
@@ -27,25 +33,47 @@ class Loader {
 	constructor(app) {
 		__(this).set('app', app);
 		__(this).set('drivers', {});
+		this.addDriver('text', TextDriver);
+		this.addDriver('js', JavaScriptDriver);
+		this.addDriver('json', JsonDriver);
+		this.addDriver('yaml', YamlDriver);
+		this.addDriver('null', NullDriver);
+		this.setDriverAlias('yaml', 'yml');
+		this.setDefaultDriver('text');
 	}
 
 	/**
 	 * Load file data.
 	 *
 	 * @param {string} file
+	 * @param {boolean} [async]
 	 * @returns {*}
 	 */
-	load(file) {
-		return Object.assign({}, this.getDriverForFile(file).load(file));
+	load(file, async = false) {
+		const driver = this.getDriverForFile(file);
+		const method = `load${async ? 'Async' : ''}`;
+
+		return driver[method](file);
+	}
+
+	/**
+	 * Asynchronously load file data.
+	 *
+	 * @param {string} file
+	 * @returns {*}
+	 */
+	loadAsync(file) {
+		return this.load(file, true);
 	}
 
 	/**
 	 * Load first existing file.
 	 *
 	 * @param {string[]} files
+	 * @param {boolean} [async]
 	 * @returns {*}
 	 */
-	loadFirst(files) {
+	loadFirst(files, async = false) {
 		const file = files.find((f) => {
 			return fs.existsSync(f);
 		});
@@ -53,7 +81,17 @@ class Loader {
 			return {};
 		}
 
-		return this.load(file);
+		return this.load(file, async);
+	}
+
+	/**
+	 * Asynchronously load first existing file.
+	 *
+	 * @param {string[]} files
+	 * @returns {*}
+	 */
+	loadFirstAsync(files) {
+		return this.ooadFirst(files, true);
 	}
 
 	/**
@@ -78,7 +116,14 @@ class Loader {
 	 * @returns {Driver}
 	 */
 	getDriverForFile(file) {
+		if (!file) {
+			return this.driver('null');
+		}
+
 		const ext = file.split('.').pop();
+		if (!__(this).get('drivers')[ext]) {
+			return this.driver();
+		}
 
 		return this.driver(ext);
 	}
@@ -114,4 +159,4 @@ class Loader {
 
 }
 
-module.exports = Loader;
+module.exports = FileLoader;

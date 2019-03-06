@@ -17,6 +17,17 @@ class Driver {
 		throw new Error('Method load() must be implemented.');
 	}
 
+	/**
+	 * Asynchronously load the given file.
+	 *
+	 * @param {string} file
+	 * @returns {Promise<*>}
+	 * @abstract
+	 */
+	loadAsync() {
+		throw new Error('Method load() must be implemented.');
+	}
+
 }
 
 module.exports = Driver;

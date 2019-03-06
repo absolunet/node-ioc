@@ -5,7 +5,6 @@
 
 
 const ServiceProvider = require('./../../foundation/ServiceProvider');
-const ConfigLoader = require('./../services/ConfigLoader');
 const ConfigGrammar = require('./../services/ConfigGrammar');
 const ConfigRepository = require('./../repositories/ConfigRepository');
 
@@ -24,7 +23,6 @@ class ConfigServiceProvider extends ServiceProvider {
 	 * Register configuration services.
 	 */
 	registerServices() {
-		this.app.singleton('config.loader', ConfigLoader);
 		this.app.singleton('config.grammar', ConfigGrammar);
 		this.app.singleton('config', ConfigRepository);
 	}

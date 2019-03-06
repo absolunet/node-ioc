@@ -5,7 +5,7 @@
 
 const { container, loadFreshContainer } = require('./../common');
 
-describe('Spark IoC - Container', () => {
+describe('Node IoC - Container', () => {
 
 	beforeEach(loadFreshContainer);
 

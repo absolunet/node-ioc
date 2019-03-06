@@ -1,6 +1,0 @@
-test:
-  foo: bar
-
-app:
-  providers:
-    '@/test/unit/config/stubs/providers/FakeServiceProvider.js'

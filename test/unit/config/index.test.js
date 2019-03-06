@@ -7,21 +7,11 @@ const path = require('path');
 const { container, loadFreshContainer } = require('./../common');
 const ConfigServiceProvider = require('./../../../src/config/providers/ConfigServiceProvider');
 const ConfigRepository = require('./../../../src/config/repositories/ConfigRepository');
+const FileLoader = require('./stubs/services/FakeFileLoader');
+const configData = require('./stubs/config/data');
 
 
-describe('Spark IoC - Config', () => {
-
-	const configData = {
-		test: {
-			foo: 'bar'
-		},
-		app: {
-			providers: [
-				'@/test/unit/config/stubs/providers/FakeServiceProvider.js'
-			]
-		}
-	};
-
+describe('Node IoC - Config', () => {
 
 	beforeEach(() => {
 		loadFreshContainer();
@@ -29,11 +19,8 @@ describe('Spark IoC - Config', () => {
 		container.configurePaths({
 			config: path.join(__dirname, 'stubs', 'config')
 		});
-		container.decorate('config', (config) => {
-			config.setConfig(configData);
 
-			return config;
-		});
+		container.singleton('file', FileLoader);
 		container.bootIfNotBooted();
 	});
 
@@ -64,10 +51,10 @@ describe('Spark IoC - Config', () => {
 		test('Can set configuration', () => {
 			expect(config.get('test')).toStrictEqual(configData.test);
 
-			config.set({ test: { foo: 'foo' } });
+			config.set({ test:{ foo:'foo' } });
 			expect(config.get('test.foo')).toBe('foo');
 
-			config.setConfig({ test: { foo: 'baz' } });
+			config.setConfig({ test:{ foo:'baz' } });
 			expect(config.get('test.foo')).toBe('baz');
 
 			config.set('test.foo', 'qux');
@@ -81,40 +68,11 @@ describe('Spark IoC - Config', () => {
 
 		test('Application should register configured service provider', () => {
 			container.onBooted(() => {
-				expect(container.make('test')).toStrictEqual({ foo: 'bar' });
-				expect(container.make('test2')).toStrictEqual({ foo: 'baz' });
+				expect(container.make('test')).toStrictEqual({ foo:'bar' });
+				expect(container.make('test2')).toStrictEqual({ foo:'baz' });
 			});
 		});
 
-	});
-
-	describe('Drivers', () => {
-
-		let config;
-
-		beforeEach(() => {
-			config = container.make('config');
-		});
-
-		test('JavaScript driver is working', () => {
-			config.setConfigFromFile('config.js');
-			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
-		});
-
-		test('JSON driver is working', () => {
-			config.setConfigFromFile('config.json');
-			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
-		});
-
-		test('YAML driver is working', () => {
-			config.setConfigFromFile('config.yaml');
-			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
-		});
-
-		test('YML driver is working', () => {
-			config.setConfigFromFile('config.yml');
-			expect(config.get('test')).toStrictEqual({ foo: 'bar' });
-		});
 	});
 
 
