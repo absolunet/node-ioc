@@ -29,9 +29,8 @@ class ConfigRepository {
 	constructor(app, file) {
 		__(this).set('app', app);
 		__(this).set('file', file);
-		this.setConfigFromFile(['js', 'json', 'yml', 'yaml'].map((ext) => {
-			return path.join(`config.${ext}`);
-		}));
+		this.setConfig({});
+		this.loadConfigFromFolder();
 	}
 
 	/**
@@ -68,6 +67,29 @@ class ConfigRepository {
 	 */
 	setConfig(config) {
 		__(this).set('config', config);
+	}
+
+	/**
+	 * Set global configuration based on folder files.
+	 *
+	 * @param {string} folder
+	 */
+	loadConfigFromFolder(folder = null) {
+		const dir = folder || __(this).get('app').make('path.config');
+		this.file.scandir(dir).forEach((file) => {
+			const index = file.split('/').pop().split('.').shift();
+			this.loadConfig(index, path.join(dir, file));
+		});
+	}
+
+	/**
+	 * Load configuration from file and store as a root index.
+	 *
+	 * @param {string} index
+	 * @param {string} filePath
+	 */
+	loadConfig(index, filePath) {
+		this.set(index, this.file.load(filePath));
 	}
 
 	/**

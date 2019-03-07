@@ -5,10 +5,11 @@
 
 
 const __ = require('@absolunet/private-registry');
-const fs = require('fs');
+const fss = require('@absolunet/fss');
 const JavaScriptDriver = require('./drivers/JavaScriptDriver');
 const NullDriver = require('./drivers/NullDriver');
 const JsonDriver = require('./drivers/JsonDriver');
+const path = require('path');
 const TextDriver = require('./drivers/TextDriver');
 const YamlDriver = require('./drivers/YamlDriver');
 
@@ -74,7 +75,7 @@ class FileLoader {
 	 */
 	loadFirst(files, async = false) {
 		const file = files.find((f) => {
-			return fs.existsSync(f);
+			return fss.exists(f);
 		});
 		if (!file) {
 			return {};
@@ -90,7 +91,47 @@ class FileLoader {
 	 * @returns {*}
 	 */
 	loadFirstAsync(files) {
-		return this.ooadFirst(files, true);
+		return this.loadFirst(files, true);
+	}
+
+	/**
+	 * Load all files in folder.
+	 *
+	 * @param {string} folder
+	 * @returns {*}
+	 */
+	loadInFolder(folder) {
+		if (!fss.exists(folder)) {
+			throw new Error(`Folder [${folder}] does not exists`);
+		}
+
+		const files = fss.scandir(folder, 'file');
+		const data = {};
+
+		files.forEach((file) => {
+			const fileData = this.getDriverForFile(file).load(path.join(folder, file));
+			const fileName = file.split('/').pop().split('.').shift();
+
+			data[fileName] = fileData;
+		});
+
+		return data;
+	}
+
+	/**
+	 * Scan directory.
+	 *
+	 * @param {string} folder
+	 * @param {string} [type]
+	 * @param {*} [options]
+	 * @returns {string[]}
+	 */
+	scandir(folder, type = 'file', options = {}) {
+		try {
+			return fss.scandir(folder, type, options);
+		} catch (error) {
+			return [];
+		}
 	}
 
 	/**
