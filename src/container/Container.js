@@ -333,7 +333,9 @@ class Container {
 	 * @returns {boolean}
 	 */
 	isValidJsFile(filePath) {
-		return (/\.js$/u).test(filePath) && fs.existsSync(filePath);
+		const fileName = `${filePath}${(/\.js$/u).test(filePath) ? '' : '.js'}`;
+
+		return fs.existsSync(fileName);
 	}
 
 	/**
