@@ -3,9 +3,10 @@
 //--------------------------------------------------------
 'use strict';
 
-const path = require('path');
+
 const { container, loadFreshContainer } = require('./../common');
 const FileServiceProvider = require('./../../../src/file/providers/FileServiceProvider');
+const path = require('path');
 
 
 describe('Node IoC - File', () => {

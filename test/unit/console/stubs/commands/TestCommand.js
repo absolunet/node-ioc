@@ -3,7 +3,9 @@
 //--------------------------------------------------------
 'use strict';
 
+
 const Command = require('./../../../../../src/console/Command');
+
 
 class TestCommand extends Command {
 

@@ -4,14 +4,13 @@
 'use strict';
 
 
-const fs = require('fs');
 const __ = require('@absolunet/private-registry');
-
-const TextDriver = require('./drivers/TextDriver');
+const fs = require('fs');
 const JavaScriptDriver = require('./drivers/JavaScriptDriver');
-const JsonDriver = require('./drivers/JsonDriver');
-const YamlDriver = require('./drivers/YamlDriver');
 const NullDriver = require('./drivers/NullDriver');
+const JsonDriver = require('./drivers/JsonDriver');
+const TextDriver = require('./drivers/TextDriver');
+const YamlDriver = require('./drivers/YamlDriver');
 
 
 class FileLoader {

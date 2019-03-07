@@ -38,6 +38,7 @@
     "@absolunet/fsp": "^1.5.0",
     "@absolunet/fss": "^1.5.0",
     "@absolunet/private-registry": "1.1.0",
+    "@absolunet/terminal": "^1.2.1",
     "dot-object": "1.7.1",
     "glob": "^7.1.3",
     "js-yaml": "3.12.1",

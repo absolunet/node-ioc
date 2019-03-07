@@ -4,13 +4,13 @@
 'use strict';
 
 
+// Get a fresh instance of application
+const app = require('./..');
+
+
 // Load application main handlers
 const ConsoleKernel = require('./../foundation/console/Kernel');
 const ExceptionHandler = require('./../foundation/exceptions/Handler');
-
-
-// Get a fresh instance of application
-const app = require('./..');
 
 
 // Register main handlers in the container

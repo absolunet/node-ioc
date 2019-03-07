@@ -4,8 +4,8 @@
 'use strict';
 
 
-const ServiceProvider = require('./../../foundation/ServiceProvider');
 const FileLoader = require('./../services/loader/FileLoader');
+const ServiceProvider = require('./../../foundation/ServiceProvider');
 
 
 class FileServiceProvider extends ServiceProvider {

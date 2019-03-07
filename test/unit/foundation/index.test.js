@@ -3,8 +3,10 @@
 //--------------------------------------------------------
 'use strict';
 
+
 const { container, loadFreshContainer } = require('./../common');
 const ServiceProvider = require('./../../../src/foundation/ServiceProvider');
+
 
 describe('Node IoC - Foundation', () => {
 

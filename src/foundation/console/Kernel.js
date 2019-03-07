@@ -4,8 +4,8 @@
 'use strict';
 
 
-const Kernel = require('./../Kernel');
 const ConsoleServiceProvider = require('./../../console/providers/ConsoleServiceProvider');
+const Kernel = require('./../Kernel');
 
 
 class ConsoleKernel extends Kernel {

@@ -4,16 +4,10 @@
 'use strict';
 
 
-class Terminal {
+const BaseTerminal = require('@absolunet/terminal').constructor;
 
-	/**
-	 * Print the given arguments.
-	 *
-	 * @param {*[]} args
-	 */
-	print(...args) {
-		console.log(...args); // eslint-disable-line no-console
-	}
+
+class Terminal extends BaseTerminal {
 
 	/**
 	 * Get the current console command.

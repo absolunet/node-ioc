@@ -4,12 +4,12 @@
 'use strict';
 
 
-const slash = require('slash');
-const path = require('path');
-const EventEmitter = require('events');
-const Container = require('./../container/Container');
-const ServiceProviderModel = require('./models/ServiceProvider');
 const __ = require('@absolunet/private-registry');
+const Container = require('./../container/Container');
+const EventEmitter = require('events');
+const path = require('path');
+const ServiceProviderModel = require('./models/ServiceProvider');
+const slash = require('slash');
 
 const eventEmitter = new EventEmitter();
 

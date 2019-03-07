@@ -4,11 +4,11 @@
 'use strict';
 
 
-const ServiceProvider = require('./../../foundation/ServiceProvider');
-const CommandRepository = require('./../repository/CommandRepository');
 const CommandRegistrar = require('./../services/CommandRegistrar');
-const Terminal = require('./../services/Terminal');
+const CommandRepository = require('./../repository/CommandRepository');
 const ListCommand = require('./../commands/ListCommand');
+const ServiceProvider = require('./../../foundation/ServiceProvider');
+const Terminal = require('./../services/Terminal');
 
 
 class ConsoleServiceProvider extends ServiceProvider {

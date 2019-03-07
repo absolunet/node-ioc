@@ -4,9 +4,9 @@
 'use strict';
 
 
-const fss = require('@absolunet/fss');
-const fsp = require('@absolunet/fsp');
 const Driver = require('./JavaScriptDriver');
+const fsp = require('@absolunet/fsp');
+const fss = require('@absolunet/fss');
 
 
 class JsonDriver extends Driver {

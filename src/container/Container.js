@@ -4,9 +4,9 @@
 'use strict';
 
 
-const fs = require('fs');
 const __ = require('@absolunet/private-registry');
 const ContainerProxy = require('./Proxy');
+const fs = require('fs');
 
 
 class Container {

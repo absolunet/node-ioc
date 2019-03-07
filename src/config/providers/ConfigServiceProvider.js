@@ -4,9 +4,9 @@
 'use strict';
 
 
-const ServiceProvider = require('./../../foundation/ServiceProvider');
 const ConfigGrammar = require('./../services/ConfigGrammar');
 const ConfigRepository = require('./../repositories/ConfigRepository');
+const ServiceProvider = require('./../../foundation/ServiceProvider');
 
 
 class ConfigServiceProvider extends ServiceProvider {

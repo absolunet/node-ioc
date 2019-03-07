@@ -4,9 +4,9 @@
 'use strict';
 
 
-const path = require('path');
-const dot = require('dot-object');
 const __ = require('@absolunet/private-registry');
+const dot = require('dot-object');
+const path = require('path');
 
 
 class ConfigRepository {

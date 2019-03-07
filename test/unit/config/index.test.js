@@ -3,12 +3,12 @@
 //--------------------------------------------------------
 'use strict';
 
-const path = require('path');
-const { container, loadFreshContainer } = require('./../common');
-const ConfigServiceProvider = require('./../../../src/config/providers/ConfigServiceProvider');
-const ConfigRepository = require('./../../../src/config/repositories/ConfigRepository');
-const FileLoader = require('./stubs/services/FakeFileLoader');
 const configData = require('./stubs/config/data');
+const ConfigRepository = require('./../../../src/config/repositories/ConfigRepository');
+const ConfigServiceProvider = require('./../../../src/config/providers/ConfigServiceProvider');
+const { container, loadFreshContainer } = require('./../common');
+const FileLoader = require('./stubs/services/FakeFileLoader');
+const path = require('path');
 
 
 describe('Node IoC - Config', () => {

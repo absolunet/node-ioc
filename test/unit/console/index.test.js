@@ -4,8 +4,8 @@
 'use strict';
 
 const childProcess = require('child_process');
-const { container, loadFreshContainer } = require('./../common');
 const ConsoleServiceProvider = require('./../../../src/console/providers/ConsoleServiceProvider');
+const { container, loadFreshContainer } = require('./../common');
 const ListCommand = require('./../../../src/console/commands/ListCommand');
 const TestCommand = require('./stubs/commands/TestCommand');
 
