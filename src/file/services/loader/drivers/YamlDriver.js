@@ -18,6 +18,9 @@ class YamlDriver extends Driver {
 		return fss.readYaml(file);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	loadAsync(file) {
 		return fsp.readYaml(file);
 	}
