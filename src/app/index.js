@@ -20,11 +20,11 @@ app.singleton('exception.handler', ExceptionHandler);
 
 // Add a delay before bootstrapping to allow external registering
 setTimeout(async () => {
-	// Boot the application
-	app.bootIfNotBooted();
-
 	// Get the kernel instance
 	const kernel = app.make(`kernel.console`);
+
+	// Boot the application
+	app.bootIfNotBooted();
 
 	try { // Handle the incoming command or request
 		await kernel.handle();
