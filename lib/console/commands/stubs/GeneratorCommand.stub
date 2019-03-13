@@ -1,0 +1,52 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Command - %COMMAND%
+//--------------------------------------------------------
+'use strict';
+
+
+const { GeneratorCommand } = require('@absolunet/ioc');
+const path = require('path');
+
+
+class %COMMAND% extends GeneratorCommand {
+
+	/**
+	 * {@inheritdoc}
+	 */
+	get name() {
+		return 'make:type';
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	get description() {
+		return '%COMMAND% description';
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	get files() {
+		return {
+			base: path.join(__dirname, 'stubs', 'BaseFile.stub')
+		};
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	get destination() {
+		return path.join(process.cwd(), 'lib', 'folder', `${this.parameter('class')}.js`);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	handle() {
+		this.generate('base');
+	}
+
+}
+
+module.exports = %COMMAND%;
