@@ -3,21 +3,30 @@
 //--------------------------------------------------------
 'use strict';
 
-const container = require('./../../../src/app');
+const container = require('./../../../lib/app');
+
+
+beforeEach(() => {
+	container.flush();
+});
 
 
 describe('Node IoC - App', () => {
 
 	test('App boots correctly', () => {
-		container.onBooted(() => {
-			expect(container.booted).toBe(true);
-		});
+		expect(container.booted).toBe(false);
+		container.bootIfNotBooted();
+		expect(container.booted).toBe(true);
 	});
 
 	test('App contains core services', () => {
-		expect(container.isBound('config')).toBe(false);
 		container.onBooted(() => {
-			expect(container.isBound('config')).toBe(true);
+			const coreServices = ['config', 'file'];
+
+			coreServices.forEach((coreService) => {
+				expect(container.booted).toBe(true);
+				expect(container.isBound(coreService)).toBe(true);
+			});
 		});
 	});
 

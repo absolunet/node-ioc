@@ -4,8 +4,8 @@
 'use strict';
 
 
-const { container, loadFreshContainer } = require('./../common');
-const FileServiceProvider = require('./../../../src/file/providers/FileServiceProvider');
+const container = require('./../common');
+const FileServiceProvider = require('./../../../lib/file/providers/FileServiceProvider');
 const path = require('path');
 
 
@@ -13,7 +13,6 @@ describe('Node IoC - File', () => {
 
 
 	beforeEach(() => {
-		loadFreshContainer();
 		container.register(FileServiceProvider);
 		container.bootIfNotBooted();
 	});

@@ -3,11 +3,9 @@
 //--------------------------------------------------------
 'use strict';
 
-const { container, loadFreshContainer } = require('./../common');
+const container = require('./../common');
 
 describe('Node IoC - Container', () => {
-
-	beforeEach(loadFreshContainer);
 
 
 	describe('Bindings', () => {

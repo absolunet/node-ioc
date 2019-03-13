@@ -4,13 +4,11 @@
 'use strict';
 
 
-const { container, loadFreshContainer } = require('./../common');
-const ServiceProvider = require('./../../../src/foundation/ServiceProvider');
+const container = require('./../common');
+const ServiceProvider = require('./../../../lib/foundation/ServiceProvider');
 
 
 describe('Node IoC - Foundation', () => {
-
-	beforeEach(loadFreshContainer);
 
 
 	describe('Bootstrap', () => {
@@ -50,9 +48,9 @@ describe('Node IoC - Foundation', () => {
 
 			class TestServiceProvider {
 
-				register(app) {
+				register() {
 					mockedRegister();
-					app.bind('test', () => {
+					this.app.bind('test', () => {
 						return obj;
 					});
 				}
@@ -70,8 +68,8 @@ describe('Node IoC - Foundation', () => {
 
 			class SubtestServiceProvider {
 
-				register(app) {
-					app.bind('test', () => {
+				register() {
+					this.app.bind('test', () => {
 						return obj;
 					});
 				}
@@ -80,8 +78,8 @@ describe('Node IoC - Foundation', () => {
 
 			class TestServiceProvider {
 
-				register(app) {
-					app.register(SubtestServiceProvider);
+				register() {
+					this.app.register(SubtestServiceProvider);
 				}
 
 			}
@@ -95,9 +93,8 @@ describe('Node IoC - Foundation', () => {
 		test('Service provider automatically injects the application', () => {
 			class TestServiceProvider extends ServiceProvider {
 
-				register(app) {
+				register() {
 					expect(this.app).toBe(container.make('app'));
-					expect(this.app).toBe(app);
 					expect(this.app).toBeInstanceOf(container.constructor);
 				}
 

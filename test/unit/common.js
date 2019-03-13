@@ -4,13 +4,10 @@
 'use strict';
 
 
-const container = require('../../src');
+const container = require('../../lib');
 
-const loadFreshContainer = () => {
+beforeEach(() => {
 	container.flush();
-};
+});
 
-module.exports = {
-	container,
-	loadFreshContainer
-};
+module.exports = container;

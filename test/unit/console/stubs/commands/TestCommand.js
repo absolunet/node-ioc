@@ -4,7 +4,7 @@
 'use strict';
 
 
-const Command = require('./../../../../../src/console/Command');
+const Command = require('./../../../../../lib/console/Command');
 
 
 class TestCommand extends Command {

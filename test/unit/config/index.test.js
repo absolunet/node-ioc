@@ -4,9 +4,9 @@
 'use strict';
 
 const configData = require('./stubs/config/data');
-const ConfigRepository = require('./../../../src/config/repositories/ConfigRepository');
-const ConfigServiceProvider = require('./../../../src/config/providers/ConfigServiceProvider');
-const { container, loadFreshContainer } = require('./../common');
+const ConfigRepository = require('./../../../lib/config/repositories/ConfigRepository');
+const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
+const container = require('./../common');
 const FileLoader = require('./stubs/services/FakeFileLoader');
 const path = require('path');
 
@@ -14,7 +14,6 @@ const path = require('path');
 describe('Node IoC - Config', () => {
 
 	beforeEach(() => {
-		loadFreshContainer();
 		container.register(ConfigServiceProvider);
 		container.configurePaths({
 			config: path.join(__dirname, 'stubs', 'config')

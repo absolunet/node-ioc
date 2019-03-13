@@ -4,16 +4,16 @@
 'use strict';
 
 const childProcess = require('child_process');
-const ConsoleServiceProvider = require('./../../../src/console/providers/ConsoleServiceProvider');
-const { container, loadFreshContainer } = require('./../common');
-const ListCommand = require('./../../../src/console/commands/ListCommand');
+const ConsoleServiceProvider = require('./../../../lib/console/providers/ConsoleServiceProvider');
+const container = require('./../common');
+const ListCommand = require('./../../../lib/console/commands/ListCommand');
 const TestCommand = require('./stubs/commands/TestCommand');
+const yargs = require('yargs');
 
 
 describe('Node IoC - Console', () => {
 
 	beforeEach(() => {
-		loadFreshContainer();
 		container.register(ConsoleServiceProvider);
 		container.bootIfNotBooted();
 	});
@@ -36,7 +36,7 @@ describe('Node IoC - Console', () => {
 				const c = command ? ` ${command}` : '';
 
 				return new Promise((resolve) => {
-					childProcess.exec(`node index.js${c}`, (err, stdout) => {
+					childProcess.exec(`node index.js${c}`, { stdio:'pipe' }, (err, stdout) => {
 						expect(err).toBeFalsy();
 						const { description } = container.make(ListCommand);
 						const regex = new RegExp(`[a-z-.]+\n\n${description}`, 'u');
@@ -47,12 +47,15 @@ describe('Node IoC - Console', () => {
 				});
 			};
 
-			return Promise.all([
+
+			const promises = [
 				testCase('--help'),
 				testCase('help'),
 				testCase('list'),
 				testCase('')
-			]).then(() => {
+			];
+
+			return Promise.all(promises).then(() => {
 				const out = stdouts.shift();
 				stdouts.forEach((stdout) => {
 					expect(stdout).toBe(out);
