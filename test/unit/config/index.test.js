@@ -3,6 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
+
 const configData = require('./stubs/config/data');
 const ConfigRepository = require('./../../../lib/config/repositories/ConfigRepository');
 const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
@@ -12,6 +13,7 @@ const path = require('path');
 
 
 describe('Node IoC - Config', () => {
+
 
 	beforeEach(() => {
 		container.register(ConfigServiceProvider);

@@ -3,15 +3,16 @@
 //--------------------------------------------------------
 'use strict';
 
+
 const childProcess = require('child_process');
 const ConsoleServiceProvider = require('./../../../lib/console/providers/ConsoleServiceProvider');
 const container = require('./../common');
 const ListCommand = require('./../../../lib/console/commands/ListCommand');
 const TestCommand = require('./stubs/commands/TestCommand');
-const yargs = require('yargs');
 
 
 describe('Node IoC - Console', () => {
+
 
 	beforeEach(() => {
 		container.register(ConsoleServiceProvider);
@@ -46,7 +47,6 @@ describe('Node IoC - Console', () => {
 					});
 				});
 			};
-
 
 			const promises = [
 				testCase('--help'),

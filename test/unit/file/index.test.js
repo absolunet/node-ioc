@@ -20,11 +20,13 @@ describe('Node IoC - File', () => {
 
 	describe('Loader', () => {
 
+
 		let loader;
 
 		const getFileName = (ext) => {
 			return `${path.join(__dirname, 'stubs', 'files', 'file')}.${ext}`;
 		};
+
 
 		beforeEach(() => {
 			loader = container.make('file');
