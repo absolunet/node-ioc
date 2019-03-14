@@ -4,7 +4,7 @@
 'use strict';
 
 
-const { GeneratorCommand } = require('@absolunet/ioc');
+const { classes:{ GeneratorCommand } } = require('@absolunet/ioc');
 const path = require('path');
 
 
