@@ -37,10 +37,10 @@ describe('Node IoC - Console', () => {
 				const c = command ? ` ${command}` : '';
 
 				return new Promise((resolve) => {
-					childProcess.exec(`node index.js${c}`, { stdio:'pipe' }, (err, stdout) => {
+					childProcess.exec(`node lib/app/index.js${c}`, { stdio:'pipe' }, (err, stdout) => {
 						expect(err).toBeFalsy();
 						const { description } = container.make(ListCommand);
-						const regex = new RegExp(`[a-z-.]+\n\n${description}`, 'u');
+						const regex = new RegExp(`${description}`, 'u');
 						expect(regex.test(stdout)).toBeTruthy();
 						stdouts.push(stdout);
 						resolve();
