@@ -10,12 +10,11 @@ const Command = require('./lib/console/Command');
 const ConsoleServiceProvider = require('./lib/console/BaseConsoleServiceProvider');
 const GeneratorCommand = require('./lib/console/GeneratorCommand');
 const Mapper = require('./lib/foundation/data/Mapper');
+const mixins = require('./lib/support/mixins');
 const Model = require('./lib/foundation/data/Model');
+const NullDriverProxy = require('./lib/support/drivers/NullDriverProxy');
 const Repository = require('./lib/foundation/data/Repository');
 const ServiceProvider = require('./lib/foundation/ServiceProvider');
-
-
-const hasDriver = require('./lib/foundation/mixins/hasDriver');
 
 
 // eslint-disable-next-line accessor-pairs
@@ -31,13 +30,12 @@ module.exports = {
 			get GeneratorCommand() { return GeneratorCommand; },
 			get Mapper() { return Mapper; },
 			get Model() { return Model; },
+			get NullDriverProxy() { return NullDriverProxy; },
 			get Repository() { return Repository; },
 			get ServiceProvider() { return ServiceProvider; }
 		};
 	},
 	get mixins() {
-		return {
-			hasDriver
-		};
+		return mixins;
 	}
 };
