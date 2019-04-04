@@ -5,9 +5,11 @@
 
 
 const Application = require('./lib');
+const BaseProxy = require('./lib/support/proxy/BaseProxy');
 const CollectionMapper = require('./lib/foundation/data/CollectionMapper');
 const Command = require('./lib/console/Command');
 const ConsoleServiceProvider = require('./lib/console/BaseConsoleServiceProvider');
+const ForwardProxy = require('./lib/support/proxy/ForwardProxy');
 const GeneratorCommand = require('./lib/console/GeneratorCommand');
 const Mapper = require('./lib/foundation/data/Mapper');
 const mixins = require('./lib/support/mixins');
@@ -24,9 +26,11 @@ module.exports = {
 		// eslint-disable-next-line accessor-pairs
 		return {
 			get Application() { return Application; },
+			get BaseProxy() { return BaseProxy; },
 			get CollectionMapper() { return CollectionMapper; },
 			get Command() { return Command; },
 			get ConsoleServiceProvider() { return ConsoleServiceProvider; },
+			get ForwardProxy() { return ForwardProxy; },
 			get GeneratorCommand() { return GeneratorCommand; },
 			get Mapper() { return Mapper; },
 			get Model() { return Model; },
