@@ -121,6 +121,16 @@ describe('Node IoC - Container', () => {
 			expect(container.make('my-tag')).toStrictEqual({ test, test2 });
 		});
 
+		test('can use tags on multiple bindings at once', () => {
+			const test = { foo:'foo' };
+			const test2 = { foo:'bar' };
+			container.bind('test', test);
+			container.bind('test2', test2);
+			container.tag(['test', 'test2'], 'my-tag');
+
+			expect(container.make('my-tag')).toStrictEqual({ test, test2 });
+		});
+
 	});
 
 
