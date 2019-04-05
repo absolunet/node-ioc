@@ -211,4 +211,52 @@ describe('Node IoC - Container', () => {
 
 	});
 
+
+	describe('Dynamic accessor', () => {
+
+		test('Dependency is automatically assign as read-only property', () => {
+			class AnyTest {
+
+				static get dependencies() {
+					return ['foo'];
+				}
+
+			}
+
+			const foo = { foo:'foo' };
+			container.bind('foo', foo);
+			container.bind('foo.factory', () => {
+				return foo;
+			});
+
+			const instance = container.make(AnyTest);
+			expect(instance.foo).toBe(foo);
+			expect(typeof instance.bar).toBe('undefined');
+			expect(() => {
+				instance.foo = 'bar';
+			}).toThrow();
+		});
+
+		test('Dependency property name is dotted-syntax compliant', () => {
+			class AnyTest {
+
+				static get dependencies() {
+					return ['foo.factory'];
+				}
+
+			}
+
+			const foo = { foo:'foo' };
+			container.bind('foo', foo);
+			container.bind('foo.factory', () => {
+				return foo;
+			});
+
+			const instance = container.make(AnyTest);
+			expect(instance.fooFactory).toBe(foo);
+			expect(typeof instance['foo.factory']).toBe('undefined');
+		});
+
+	});
+
 });
