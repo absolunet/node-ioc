@@ -1,8 +1,11 @@
 //--------------------------------------------------------
-//-- Tests
+//-- Tests - File - Dummy file
 //--------------------------------------------------------
 'use strict';
 
-const tester = require('@absolunet/tester');
 
-tester.npmPackage.validate();
+module.exports = {
+	test: {
+		foo: 'bar'
+	}
+};
