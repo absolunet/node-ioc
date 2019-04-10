@@ -5,7 +5,10 @@
 
 
 const container = require('./../common');
+const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
 const FileServiceProvider = require('./../../../lib/file/providers/FileServiceProvider');
+const fsp = require('@absolunet/fsp');
+const fss = require('@absolunet/fss');
 const path = require('path');
 
 
@@ -14,9 +17,45 @@ describe('Node IoC - File', () => {
 
 	beforeEach(() => {
 		container.register(FileServiceProvider);
+		container.register(ConfigServiceProvider);
 		container.bootIfNotBooted();
 	});
 
+
+	describe('Engine', () => {
+
+
+		let engine;
+
+
+		beforeEach(() => {
+			engine = container.make('file.engine');
+		});
+
+		test('Engine exposes fss', () => {
+			expect(engine.sync).toBe(fss);
+		});
+
+		test('Engine exposes fsp', () => {
+			expect(engine.async).toBe(fsp);
+		});
+
+		test('Engine exposes sync fs by default', () => {
+			const args = [__dirname, 'file'];
+			const scandir = engine.scandir(...args);
+
+			expect(scandir).toStrictEqual(fss.scandir(...args));
+			expect(scandir).not.toBeInstanceOf(Promise);
+		});
+
+		test('Engine can exposes async fs by default bu changing configuration', () => {
+			const config = container.make('config');
+			config.set('filesystem.defaults.sync', false);
+
+			expect(engine.scandir(__dirname, 'file')).toBeInstanceOf(Promise);
+		});
+
+	});
 
 	describe('Loader', () => {
 
