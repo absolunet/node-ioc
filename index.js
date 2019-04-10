@@ -23,23 +23,20 @@ const ServiceProvider = require('./lib/foundation/ServiceProvider');
 module.exports = {
 	get app() { return require('./lib/app'); }, // eslint-disable-line global-require
 	get classes() {
-		// eslint-disable-next-line accessor-pairs
 		return {
-			get Application() { return Application; },
-			get BaseProxy() { return BaseProxy; },
-			get CollectionMapper() { return CollectionMapper; },
-			get Command() { return Command; },
-			get ConsoleServiceProvider() { return ConsoleServiceProvider; },
-			get ForwardProxy() { return ForwardProxy; },
-			get GeneratorCommand() { return GeneratorCommand; },
-			get Mapper() { return Mapper; },
-			get Model() { return Model; },
-			get NullDriverProxy() { return NullDriverProxy; },
-			get Repository() { return Repository; },
-			get ServiceProvider() { return ServiceProvider; }
+			Application,
+			BaseProxy,
+			CollectionMapper,
+			Command,
+			ConsoleServiceProvider,
+			ForwardProxy,
+			GeneratorCommand,
+			Mapper,
+			Model,
+			NullDriverProxy,
+			Repository,
+			ServiceProvider
 		};
 	},
-	get mixins() {
-		return mixins;
-	}
+	get mixins() { return mixins; }
 };
