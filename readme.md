@@ -83,7 +83,6 @@ const bazDecoratedInstance = container.make('baz') // { baz:42, hasAnswerOfLife:
 const ProjectServiceProvider = require('./providers/project'); // It binds 'project' and 'project.current' service
 container.register(ProjectServiceProvider); // The service provider is registered
 
-// Create a 'foo' instance
 container.onBooted(() => {
     const projectService = container.make('project'); // ProjectService {}
     const currentProjectService = container.make('project.current'); // SingleProjectService {}
