@@ -77,7 +77,7 @@ container.decorate('baz', (bazInstance) => {
 const bazDecoratedInstance = container.make('baz') // { baz:42, hasAnswerOfLife:true }
 
 
-// This is gread, but it can be better!
+// This is great, but it can be better!
 
 // Registering service providers
 const ProjectServiceProvider = require('./providers/project'); // It binds 'project' and 'project.current' service
