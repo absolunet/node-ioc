@@ -3,14 +3,13 @@
 //--------------------------------------------------------
 'use strict';
 
-
-const container = require('./../common');
-const HttpServiceProvider = require('./../../../lib/http/providers/HttpServiceProvider');
 const axios = require('axios');
+
+const container           = require('./../common');
+const HttpServiceProvider = require('./../../../lib/http/providers/HttpServiceProvider');
 
 
 describe('Node IoC - HTTP', () => {
-
 
 	beforeEach(() => {
 		container.register(HttpServiceProvider);

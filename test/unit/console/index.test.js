@@ -3,16 +3,15 @@
 //--------------------------------------------------------
 'use strict';
 
+const childProcess           = require('child_process');
 
-const childProcess = require('child_process');
+const TestCommand            = require('./stubs/commands/TestCommand');
+const container              = require('./../common');
+const ListCommand            = require('./../../../lib/console/commands/ListCommand');
 const ConsoleServiceProvider = require('./../../../lib/console/providers/ConsoleServiceProvider');
-const container = require('./../common');
-const ListCommand = require('./../../../lib/console/commands/ListCommand');
-const TestCommand = require('./stubs/commands/TestCommand');
 
 
 describe('Node IoC - Console', () => {
-
 
 	beforeEach(() => {
 		container.register(ConsoleServiceProvider);
@@ -37,8 +36,8 @@ describe('Node IoC - Console', () => {
 				const c = command ? ` ${command}` : '';
 
 				return new Promise((resolve) => {
-					childProcess.exec(`node lib/app/index.js${c}`, { stdio:'pipe' }, (err, stdout) => {
-						expect(err).toBeFalsy();
+					childProcess.exec(`node lib/app/index.js${c}`, { stdio: 'pipe' }, (error, stdout) => {
+						expect(error).toBeFalsy();
 						const { description } = container.make(ListCommand);
 						const regex = new RegExp(`${description}`, 'u');
 						expect(regex.test(stdout)).toBeTruthy();

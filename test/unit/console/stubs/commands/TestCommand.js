@@ -3,7 +3,6 @@
 //--------------------------------------------------------
 'use strict';
 
-
 const Command = require('./../../../../../lib/console/Command');
 
 
@@ -53,5 +52,6 @@ class TestCommand extends Command {
 	}
 
 }
+
 
 module.exports = TestCommand;

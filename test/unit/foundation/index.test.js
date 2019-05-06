@@ -3,18 +3,16 @@
 //--------------------------------------------------------
 'use strict';
 
-
-const container = require('./../common');
-const hasRepository = require('./../../../lib/foundation/data/concerns/hasRepository');
-const Mapper = require('./../../../lib/foundation/data/Mapper');
-const Model = require('./../../../lib/foundation/data/Model');
-const Repository = require('./../../../lib/foundation/data/Repository');
+const container       = require('./../common');
+const hasRepository   = require('./../../../lib/foundation/data/concerns/hasRepository');
+const Mapper          = require('./../../../lib/foundation/data/Mapper');
+const Model           = require('./../../../lib/foundation/data/Model');
+const Repository      = require('./../../../lib/foundation/data/Repository');
 const ServiceProvider = require('./../../../lib/foundation/ServiceProvider');
 
 
 
 describe('Node IoC - Foundation', () => {
-
 
 	describe('Bootstrap', () => {
 
@@ -48,7 +46,7 @@ describe('Node IoC - Foundation', () => {
 	describe('Service providers', () => {
 
 		test('Can register service provider', () => {
-			const obj = { pass:true };
+			const object = { pass: true };
 			const mockedRegister = jest.fn();
 
 			class TestServiceProvider {
@@ -56,7 +54,7 @@ describe('Node IoC - Foundation', () => {
 				register() {
 					mockedRegister();
 					this.app.bind('test', () => {
-						return obj;
+						return object;
 					});
 				}
 
@@ -65,17 +63,17 @@ describe('Node IoC - Foundation', () => {
 			container.register(TestServiceProvider);
 			container.bootIfNotBooted();
 			expect(mockedRegister.mock.calls.length).toBe(1);
-			expect(container.make('test')).toBe(obj);
+			expect(container.make('test')).toBe(object);
 		});
 
 		test('Service provider can register other service providers', () => {
-			const obj = { pass:true };
+			const object = { pass: true };
 
 			class SubtestServiceProvider {
 
 				register() {
 					this.app.bind('test', () => {
-						return obj;
+						return object;
 					});
 				}
 
@@ -92,7 +90,7 @@ describe('Node IoC - Foundation', () => {
 			container.register(TestServiceProvider);
 			container.boot();
 
-			expect(container.make('test')).toBe(obj);
+			expect(container.make('test')).toBe(object);
 		});
 
 		test('Service provider automatically injects the application', () => {
@@ -148,17 +146,18 @@ describe('Node IoC - Foundation', () => {
 						return ['foo', 'bar'];
 					}
 
-					getFullFooAttribute(attributes) {
+					getFullFooAttribute() {
 						return `${fullFooPrefix}${this.getAttribute('foo') || ''}`;
 					}
 
 					setFullFooAttribute(value) {
 						if (!value.startsWith(fullFooPrefix)) {
-							throw new Error();
+							throw new Error('No prefix');
 						}
 
 						this.setAttribute('foo', value.substr(fullFooPrefix.length));
 					}
+
 				}
 
 				beforeEach(() => {
@@ -188,7 +187,7 @@ describe('Node IoC - Foundation', () => {
 					expect(model.full_foo).toBe(fullFooPrefix);
 					expect(model.foo).toBe('');
 
-					model.full_foo = newFullFoo;
+					model.full_foo = newFullFoo;  // eslint-disable-line camelcase
 					expect(model.full_foo).toBe(newFullFoo);
 					expect(model.foo).toBe(newFoo);
 				});
@@ -232,6 +231,7 @@ describe('Node IoC - Foundation', () => {
 						get repository() {
 							return repositoryName;
 						}
+
 					}
 
 					class TestMapper extends Mapper {

@@ -1,4 +1,7 @@
 extends: '@absolunet/node'
 
+env:
+  jest: true
+
 rules:
   unicorn/filename-case: [off]
