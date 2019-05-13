@@ -3,7 +3,6 @@
 //--------------------------------------------------------
 'use strict';
 
-
 const container = require('./../common');
 
 
@@ -13,12 +12,12 @@ describe('Node IoC - Container', () => {
 	describe('Bindings', () => {
 
 		test('can add callback binding', () => {
-			const obj = { pass:true };
+			const object = { pass: true };
 			container.bind('test', () => {
-				return obj;
+				return object;
 			});
 
-			expect(container.make('test')).toBe(obj);
+			expect(container.make('test')).toBe(object);
 		});
 
 		test('can add constructor binding', () => {
@@ -33,19 +32,19 @@ describe('Node IoC - Container', () => {
 		});
 
 		test('can add concrete binding', () => {
-			const obj = { pass:true };
-			container.bind('test', obj);
+			const object = { pass: true };
+			container.bind('test', object);
 
-			expect(container.make('test')).toBe(obj);
+			expect(container.make('test')).toBe(object);
 		});
 
 		test('can get binding from proxy', () => {
-			const obj = { pass:true };
+			const object = { pass: true };
 			container.bind('test', () => {
-				return obj;
+				return object;
 			});
 
-			expect(container.test).toBe(obj);
+			expect(container.test).toBe(object);
 		});
 
 	});
@@ -54,15 +53,15 @@ describe('Node IoC - Container', () => {
 	describe('Singletons', () => {
 
 		test('can add callback singleton', () => {
-			const obj = { pass:true };
+			const object = { pass: true };
 			container.singleton('test', () => {
-				return obj;
+				return object;
 			});
 
 			const singleton = container.make('test');
 			singleton.foo = 'foo';
 
-			expect(singleton).toBe(obj);
+			expect(singleton).toBe(object);
 			expect(container.make('test')).toBe(singleton);
 		});
 
@@ -85,24 +84,24 @@ describe('Node IoC - Container', () => {
 	describe('Contextual', () => {
 
 		test('can add contextual binding', () => {
-			const Obj = function(pass = null) {
+			const MyObject = function(pass = null) {
 				this.pass = pass;
 			};
 			container.bind('test', (app, { pass }) => {
-				return new Obj(pass);
+				return new MyObject(pass);
 			});
 
-			const resolvedObj = container.make('test', { pass:true });
-			expect(resolvedObj).toBeInstanceOf(Obj);
-			expect(resolvedObj).toHaveProperty('pass');
-			expect(resolvedObj.pass).toBe(true);
+			const resolvedObject = container.make('test', { pass: true });
+			expect(resolvedObject).toBeInstanceOf(MyObject);
+			expect(resolvedObject).toHaveProperty('pass');
+			expect(resolvedObject.pass).toBe(true);
 
-			const otherResolvedObj = container.make('test', { pass:false });
-			expect(otherResolvedObj).toBeInstanceOf(Obj);
-			expect(otherResolvedObj).toHaveProperty('pass');
-			expect(otherResolvedObj.pass).toBe(false);
+			const otherResolvedObject = container.make('test', { pass: false });
+			expect(otherResolvedObject).toBeInstanceOf(MyObject);
+			expect(otherResolvedObject).toHaveProperty('pass');
+			expect(otherResolvedObject.pass).toBe(false);
 
-			expect(otherResolvedObj).not.toBe(resolvedObj);
+			expect(otherResolvedObject).not.toBe(resolvedObject);
 		});
 
 	});
@@ -111,8 +110,8 @@ describe('Node IoC - Container', () => {
 	describe('Tags', () => {
 
 		test('can use tags', () => {
-			const test = { foo:'foo' };
-			const test2 = { foo:'bar' };
+			const test = { foo: 'foo' };
+			const test2 = { foo: 'bar' };
 			container.bind('test', test);
 			container.bind('test2', test2);
 			container.tag('test', 'my-tag');
@@ -122,8 +121,8 @@ describe('Node IoC - Container', () => {
 		});
 
 		test('can use tags on multiple bindings at once', () => {
-			const test = { foo:'foo' };
-			const test2 = { foo:'bar' };
+			const test = { foo: 'foo' };
+			const test2 = { foo: 'bar' };
 			container.bind('test', test);
 			container.bind('test2', test2);
 			container.tag(['test', 'test2'], 'my-tag');
@@ -151,9 +150,9 @@ describe('Node IoC - Container', () => {
 
 			}
 
-			const test = { foo:'foo' };
-			const test2 = { foo:'bar' };
-			const test3 = { foo:'myCustomBar' };
+			const test = { foo: 'foo' };
+			const test2 = { foo: 'bar' };
+			const test3 = { foo: 'myCustomBar' };
 
 			container.bind('test', test);
 			container.bind('test2', test2);
@@ -175,7 +174,7 @@ describe('Node IoC - Container', () => {
 	describe('Decorators', () => {
 
 		test('can modify instance before returning it', () => {
-			const test = { foo:'foo' };
+			const test = { foo: 'foo' };
 			container.bind('test', test);
 			container.decorate('test', (inst) => {
 				inst.foo = 'bar';
@@ -189,7 +188,7 @@ describe('Node IoC - Container', () => {
 		});
 
 		test('can decorate instance before returning it', () => {
-			const test = { foo:'foo' };
+			const test = { foo: 'foo' };
 			container.bind('test', test);
 			container.decorate('test', (inst) => {
 				return {
@@ -223,7 +222,7 @@ describe('Node IoC - Container', () => {
 
 			}
 
-			const foo = { foo:'foo' };
+			const foo = { foo: 'foo' };
 			container.bind('foo', foo);
 			container.bind('foo.factory', () => {
 				return foo;
@@ -246,7 +245,7 @@ describe('Node IoC - Container', () => {
 
 			}
 
-			const foo = { foo:'foo' };
+			const foo = { foo: 'foo' };
 			container.bind('foo', foo);
 			container.bind('foo.factory', () => {
 				return foo;

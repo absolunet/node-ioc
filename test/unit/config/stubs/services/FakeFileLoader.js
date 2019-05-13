@@ -3,9 +3,9 @@
 //--------------------------------------------------------
 'use strict';
 
+const slash = require('slash');
 
 const configData = require('./../config/data');
-const slash = require('slash');
 
 
 class FakeFileLoader {
@@ -25,5 +25,6 @@ class FakeFileLoader {
 	}
 
 }
+
 
 module.exports = FakeFileLoader;

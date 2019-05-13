@@ -4,16 +4,16 @@
 'use strict';
 
 
-const container = require('./../common');
-const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
-const FileServiceProvider = require('./../../../lib/file/providers/FileServiceProvider');
-const fsp = require('@absolunet/fsp');
-const fss = require('@absolunet/fss');
 const path = require('path');
+const fsp  = require('@absolunet/fsp');
+const fss  = require('@absolunet/fss');
+
+const container             = require('./../common');
+const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
+const FileServiceProvider   = require('./../../../lib/file/providers/FileServiceProvider');
 
 
 describe('Node IoC - File', () => {
-
 
 	beforeEach(() => {
 		container.register(FileServiceProvider);
@@ -24,9 +24,7 @@ describe('Node IoC - File', () => {
 
 	describe('Engine', () => {
 
-
 		let engine;
-
 
 		beforeEach(() => {
 			engine = container.make('file.engine');
@@ -41,10 +39,10 @@ describe('Node IoC - File', () => {
 		});
 
 		test('Engine exposes sync fs by default', () => {
-			const args = [__dirname, 'file'];
-			const scandir = engine.scandir(...args);
+			const parameters = [__dirname, 'file'];
+			const scandir = engine.scandir(...parameters);
 
-			expect(scandir).toStrictEqual(fss.scandir(...args));
+			expect(scandir).toStrictEqual(fss.scandir(...parameters));
 			expect(scandir).not.toBeInstanceOf(Promise);
 		});
 
@@ -62,8 +60,8 @@ describe('Node IoC - File', () => {
 
 		let loader;
 
-		const getFileName = (ext) => {
-			return `${path.join(__dirname, 'stubs', 'files', 'file')}.${ext}`;
+		const getFileName = (extension) => {
+			return `${path.join(__dirname, 'stubs', 'files', 'file')}.${extension}`;
 		};
 
 
@@ -79,19 +77,19 @@ describe('Node IoC - File', () => {
 			});
 
 			test('JavaScript driver is working', () => {
-				expect(loader.load(getFileName('js'))).toStrictEqual({ test:{ foo:'bar' } });
+				expect(loader.load(getFileName('js'))).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('JSON driver is working', () => {
-				expect(loader.load(getFileName('json'))).toStrictEqual({ test:{ foo:'bar' } });
+				expect(loader.load(getFileName('json'))).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('YAML driver is working', () => {
-				expect(loader.load(getFileName('yaml'))).toStrictEqual({ test:{ foo:'bar' } });
+				expect(loader.load(getFileName('yaml'))).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('YML driver is working', () => {
-				expect(loader.load(getFileName('yml'))).toStrictEqual({ test:{ foo:'bar' } });
+				expect(loader.load(getFileName('yml'))).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('Null driver is working', () => {
@@ -110,22 +108,22 @@ describe('Node IoC - File', () => {
 
 			test('JavaScript driver is working', async () => {
 				const data = await loader.loadAsync(getFileName('js'));
-				expect(data).toStrictEqual({ test:{ foo:'bar' } });
+				expect(data).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('JSON driver is working', async () => {
 				const data = await loader.loadAsync(getFileName('json'));
-				expect(data).toStrictEqual({ test:{ foo:'bar' } });
+				expect(data).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('YAML driver is working', async () => {
 				const data = await loader.loadAsync(getFileName('yaml'));
-				expect(data).toStrictEqual({ test:{ foo:'bar' } });
+				expect(data).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('YML driver is working', async () => {
 				const data = await loader.loadAsync(getFileName('yml'));
-				expect(data).toStrictEqual({ test:{ foo:'bar' } });
+				expect(data).toStrictEqual({ test: { foo: 'bar' } });
 			});
 
 			test('Null driver is working', async () => {

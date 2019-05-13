@@ -3,19 +3,18 @@
 //--------------------------------------------------------
 'use strict';
 
-
-const { classes:{ GeneratorCommand } } = require('@absolunet/ioc');
-const path = require('path');
+const { classes: { GeneratorCommand } } = require('@absolunet/ioc');
+const path                              = require('path');
 
 
 class %COMMAND% extends GeneratorCommand {
 
-    /**
-     * {@inheritdoc}
-     */
-    get policies() {
-        return ['env:local'];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	get policies() {
+		return ['env:local'];
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -55,5 +54,6 @@ class %COMMAND% extends GeneratorCommand {
 	}
 
 }
+
 
 module.exports = %COMMAND%;

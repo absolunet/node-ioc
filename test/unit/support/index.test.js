@@ -3,7 +3,6 @@
 //--------------------------------------------------------
 'use strict';
 
-
 const container = require('./../common');
 const NullDriverProxy = require('./../../../lib/support/drivers/NullDriverProxy');
 
@@ -16,16 +15,16 @@ describe('Node IoC - Support', () => {
 
 			test('Proxy always return manipulable object', () => {
 				expect(() => {
-					const nullProxy = container.make(NullDriverProxy);
-					expect(nullProxy.foo).toBeTruthy();
-					expect(nullProxy.bar()).toBeTruthy();
-					expect(new nullProxy()).toBeTruthy();
-					expect(nullProxy[0]).toBeTruthy();
-					delete nullProxy.baz;
-					expect(nullProxy.prototype).toBeTruthy();
-					expect(Object.keys(nullProxy)).toBeTruthy();
-					expect(Object.getPrototypeOf(nullProxy)).toBeTruthy();
-					nullProxy.newProperty = true;
+					const NullProxy = container.make(NullDriverProxy);
+					expect(NullProxy.foo).toBeTruthy();
+					expect(NullProxy.bar()).toBeTruthy();
+					expect(new NullProxy()).toBeTruthy();
+					expect(NullProxy[0]).toBeTruthy();
+					delete NullProxy.baz;
+					expect(NullProxy.prototype).toBeTruthy();
+					expect(Object.keys(NullProxy)).toBeTruthy();
+					expect(Object.getPrototypeOf(NullProxy)).toBeTruthy();
+					NullProxy.newProperty = true;
 				}).not.toThrow();
 			});
 
@@ -36,6 +35,7 @@ describe('Node IoC - Support', () => {
 
 	describe('Mixins', () => {
 
+		//
 
 	});
 

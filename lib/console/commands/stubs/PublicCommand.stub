@@ -3,18 +3,17 @@
 //--------------------------------------------------------
 'use strict';
 
-
-const { classes:{ Command } } = require('@absolunet/ioc');
+const { classes: { Command } } = require('@absolunet/ioc');
 
 
 class %COMMAND% extends Command {
 
-    /**
-     * {@inheritdoc}
-     */
-    get policies() {
-        return ['public'];
-    }
+	/**
+	* {@inheritdoc}
+	*/
+	get policies() {
+		return ['public'];
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -38,5 +37,6 @@ class %COMMAND% extends Command {
 	}
 
 }
+
 
 module.exports = %COMMAND%;

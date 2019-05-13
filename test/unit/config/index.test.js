@@ -3,17 +3,16 @@
 //--------------------------------------------------------
 'use strict';
 
-
-const configData = require('./stubs/config/data');
-const ConfigRepository = require('./../../../lib/config/repositories/ConfigRepository');
-const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
-const container = require('./../common');
-const FileLoader = require('./stubs/services/FakeFileLoader');
 const path = require('path');
+
+const configData            = require('./stubs/config/data');
+const FileLoader            = require('./stubs/services/FakeFileLoader');
+const container             = require('./../common');
+const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
+const ConfigRepository      = require('./../../../lib/config/repositories/ConfigRepository');
 
 
 describe('Node IoC - Config', () => {
-
 
 	beforeEach(() => {
 		container.register(ConfigServiceProvider);
@@ -52,10 +51,10 @@ describe('Node IoC - Config', () => {
 		test('Can set configuration', () => {
 			expect(config.get('test')).toStrictEqual(configData.test);
 
-			config.set({ test:{ foo:'foo' } });
+			config.set({ test: { foo: 'foo' } });
 			expect(config.get('test.foo')).toBe('foo');
 
-			config.setConfig({ test:{ foo:'baz' } });
+			config.setConfig({ test: { foo: 'baz' } });
 			expect(config.get('test.foo')).toBe('baz');
 
 			config.set('test.foo', 'qux');
@@ -69,8 +68,8 @@ describe('Node IoC - Config', () => {
 
 		test('Application should register configured service provider', () => {
 			container.onBooted(() => {
-				expect(container.make('test')).toStrictEqual({ foo:'bar' });
-				expect(container.make('test2')).toStrictEqual({ foo:'baz' });
+				expect(container.make('test')).toStrictEqual({ foo: 'bar' });
+				expect(container.make('test2')).toStrictEqual({ foo: 'baz' });
 			});
 		});
 

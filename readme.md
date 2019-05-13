@@ -27,7 +27,7 @@ const container = require('@absolunet/ioc');
 
 // Binding an instance to the container
 container.bind('foo', () => {
-    return { foo:true };
+	return { foo: true };
 });
 
 // Binding an instance from a class
@@ -35,12 +35,12 @@ class Bar {}
 container.bind('bar', Bar);
 
 // Binding an instance from an object
-const baz = { baz:42 };
+const baz = { baz: 42 };
 container.bind('baz', baz);
 
 // Binding a singleton
 container.singleton('console', () => {
-    return window.console;
+	return window.console;
 });
 
 // Getting a registered instance
@@ -48,18 +48,18 @@ const injectedFoo = container.make('foo');
 
 // How about making a not registered instance?
 const madeObject = container.make(() => { // { obj:'resolved' }
-    return { obj:'resolved' };
+	return { obj: 'resolved' };
 });
 
 // How about dependencies injection?
 class Injectable {
-    static get dependencies() {
-        return ['foo'];
-    }
+	static get dependencies() {
+		return ['foo'];
+	}
 
-    constructor(fooService) {
-        this.foo = fooService;
-    }
+	constructor(fooService) {
+		this.foo = fooService;
+	}
 }
 
 const injectable = container.make(Injectable); // Injectable {}
@@ -67,11 +67,11 @@ console.log(injectable.foo); // { foo:true }, injection was done from binding do
 
 // How about decorating dependencies?
 container.decorate('baz', (bazInstance) => {
-    if (bazInstance.baz === 42) {
-        bazInstance.hasAnswerOfLife = true;
-    }
+	if (bazInstance.baz === 42) {
+		bazInstance.hasAnswerOfLife = true;
+	}
 
-    return bazInstance;
+	return bazInstance;
 });
 
 const bazDecoratedInstance = container.make('baz') // { baz:42, hasAnswerOfLife:true }
@@ -84,8 +84,8 @@ const ProjectServiceProvider = require('./providers/project'); // It binds 'proj
 container.register(ProjectServiceProvider); // The service provider is registered
 
 container.onBooted(() => {
-    const projectService = container.make('project'); // ProjectService {}
-    const currentProjectService = container.make('project.current'); // SingleProjectService {}
+	const projectService = container.make('project'); // ProjectService {}
+	const currentProjectService = container.make('project.current'); // SingleProjectService {}
 });
 ```
 

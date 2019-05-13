@@ -3,14 +3,13 @@
 //--------------------------------------------------------
 'use strict';
 
-
 const __ = require('@absolunet/private-registry');
-const container = require('./../common');
+
+const container               = require('./../common');
 const SecurityServiceProvider = require('./../../../lib/security/providers/SecurityServiceProvider');
 
 
 describe('Node IoC - Security', () => {
-
 
 	beforeEach(() => {
 		container.register(SecurityServiceProvider);
@@ -29,7 +28,7 @@ describe('Node IoC - Security', () => {
 		let gate;
 
 		const getPoliciesCount = () => {
-			return Object.keys(__(gate).get('policies')).length
+			return Object.keys(__(gate).get('policies')).length;
 		};
 
 
@@ -95,11 +94,11 @@ describe('Node IoC - Security', () => {
 			expect(gate.can('test:case')).toBe(true);
 			expect(gate.can('test:foo')).toBe(false);
 
-			gate.policy('other-test', (...args) => {
-				const validArgs = ['foo', 'bar', 'baz'];
+			gate.policy('other-test', (...parameters) => {
+				const validParameters = ['foo', 'bar', 'baz'];
 
-				return args.length === 0 || args.every((arg) => {
-					return validArgs.includes(arg);
+				return parameters.length === 0 || parameters.every((parameter) => {
+					return validParameters.includes(parameter);
 				});
 			});
 
