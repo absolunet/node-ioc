@@ -1,0 +1,8 @@
+default: sqlite
+
+
+connections:
+
+  sqlite:
+    driver: sqlite
+    database: ~/.node-ioc/database.sqlite
