@@ -1,6 +1,8 @@
 .DS_Store
 test
+.babelrc
 .editorconfig
 .eslintrc.yaml
 .gitignore
 .travis.yml
+manager.js
