@@ -24,8 +24,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "test": "npm run test:standard && npm run test:unit",
-    "test:standard": "ava test/standard",
+    "test": "npm run test:standards && npm run test:unit",
+    "test:standards": "ava test/standards",
     "test:unit": "jest test/unit",
     "installer": "node manager.js --task=install",
     "outdated": "node manager.js --task=outdated",
