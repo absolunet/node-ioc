@@ -17,6 +17,8 @@ const Model                  = require('./lib/foundation/data/Model');
 const NullDriverProxy        = require('./lib/support/drivers/NullDriverProxy');
 const Repository             = require('./lib/foundation/data/Repository');
 const ServiceProvider        = require('./lib/foundation/ServiceProvider');
+const TestCase               = require('./lib/test/TestCase');
+const Tester                 = require('./lib/test/services/Tester');
 
 
 // eslint-disable-next-line accessor-pairs
@@ -35,7 +37,9 @@ module.exports = {
 			Model,
 			NullDriverProxy,
 			Repository,
-			ServiceProvider
+			ServiceProvider,
+			TestCase,
+			Tester
 		};
 	},
 	get mixins() { return mixins; }

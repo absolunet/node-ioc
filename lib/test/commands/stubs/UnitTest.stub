@@ -1,0 +1,18 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Test - Unit - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const { classes: { TestCase } } = require('@absolunet/ioc');
+
+
+class %CLASS% extends TestCase {
+
+	testSomething() {
+		this.expect(true).toBe(true);
+	}
+
+}
+
+
+module.exports = %CLASS%;
