@@ -109,11 +109,10 @@ describe('Node IoC - Test', () => {
 						expect(file.endsWith(`${name}.js`)).toBe(true);
 
 						tests.forEach(({ method, description }) => {
-							console.log(method, instance[method]);
 							expect(typeof method).toBe('string');
 							expect(typeof instance[method]).toBe('function');
 							expect(typeof description).toBe('string');
-							expect(description).toMatch(/^[A-Z][a-z\s]+$/);
+							expect(description).toMatch(/^[A-Z][a-z\s]+$/u);
 						});
 					});
 				});
@@ -176,35 +175,16 @@ describe('Node IoC - Test', () => {
 			const testRepository = container.make('test');
 
 			const [singleItem] = testRepository.all();
+
 			const { instance: originalInstance } = singleItem;
-			singleItem.instance = (() => {
-				const mock = {};
+			const emptyFunctions = ['constructor', 'setEngine', 'setApp'];
 
-				((obj) => {
-					const properties = new Set();
-					let currentObject = obj;
-
-					do {
-						Object.getOwnPropertyNames(currentObject).forEach((item) => {
-							properties.add(item);
-						});
-
-					} while ((currentObject = Object.getPrototypeOf(currentObject)));
-
-					return [...properties.keys()].filter((item) => {
-						return typeof obj[item] === 'function';
-					});
-				})(originalInstance)
-					.forEach((name) => {
-						if (!['constructor', 'setEngine', 'setApp'].includes(name)) {
-							mock[name] = jest.fn();
-						} else if (name !== 'constructor') {
-							mock[name] = function() { return this; };
-						}
-					});
-
-				return mock;
-			})();
+			singleItem.instance = Object.assign(...testRepository.getAllInstanceMethods(originalInstance)
+				.map((name) => {
+					return {
+						[name]: emptyFunctions.includes(name) ? function() { return this; } : jest.fn()
+					};
+				}));
 
 			testRunner.runTest(singleItem);
 
@@ -223,7 +203,6 @@ describe('Node IoC - Test', () => {
 
 		test('Worker can run all tests', () => {
 			const testRepository = container.make('test');
-			const testRunner = container.make('test.runner');
 
 			const testList = testRepository.all();
 
