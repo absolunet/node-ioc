@@ -27,7 +27,7 @@ class %COMMAND% extends GeneratorCommand {
 	 * {@inheritdoc}
 	 */
 	get description() {
-		return '%COMMAND% description';
+		return '%CLASS% description';
 	}
 
 	/**
@@ -56,4 +56,4 @@ class %COMMAND% extends GeneratorCommand {
 }
 
 
-module.exports = %COMMAND%;
+module.exports = %CLASS%;
