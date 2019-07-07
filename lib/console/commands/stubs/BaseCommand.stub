@@ -1,12 +1,12 @@
 //--------------------------------------------------------
-//-- %PROJECT% - Command - %COMMAND%
+//-- %PROJECT% - Command - %CLASS%
 //--------------------------------------------------------
 'use strict';
 
 const { classes: { Command } } = require('@absolunet/ioc');
 
 
-class %COMMAND% extends Command {
+class %CLASS% extends Command {
 
 	/**
 	 * {@inheritdoc}
@@ -19,7 +19,7 @@ class %COMMAND% extends Command {
 	 * {@inheritdoc}
 	 */
 	get description() {
-		return '%COMMAND% description';
+		return '%CLASS% description';
 	}
 
 	/**
@@ -32,4 +32,4 @@ class %COMMAND% extends Command {
 }
 
 
-module.exports = %COMMAND%;
+module.exports = %CLASS%;

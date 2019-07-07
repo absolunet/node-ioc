@@ -9,7 +9,11 @@
 
 > IoC: SOLID container for NodeJS application, either for Web server or CLI tool
 
-This packages offers simple IoC container for any NodeJS projects. It allows to do SOLID implementation and easily use project dependencies, as well as writing common packages for multiple projects. It comes with Jest for unit, feature and coverage tests, which can be easily done in an IoC container, and AVA for lint tests.
+This packages offers simple IoC container for any NodeJS projects. It allows to do SOLID implementation and easily use project dependencies, as well as writing common packages for multiple projects. It comes with a Jest OOP wrapper for unit, feature and end-to-end tests (PHPUnit and NUnit lookalike), which can be easily done in an IoC container, and AVA for code and structure standards tests.
+
+## Official documentation
+
+See the official documentation at [https://absolunet.github.io/docs-node-ioc/en/1.0/intro/getting-started](https://absolunet.github.io/docs-node-ioc/en/1.0/intro/getting-started)
 
 
 ## Install

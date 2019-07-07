@@ -17,7 +17,9 @@ describe('Node IoC - Container', () => {
 				return object;
 			});
 
-			expect(container.make('test')).toBe(object);
+			const binding = container.make('test');
+
+			expect(binding).toBe(object);
 		});
 
 		test('can add constructor binding', () => {
@@ -27,6 +29,7 @@ describe('Node IoC - Container', () => {
 			container.bind('test', Test);
 
 			const binding = container.make('test');
+
 			expect(binding).toBeInstanceOf(Test);
 			expect(container.make('test')).not.toBe(binding);
 		});
