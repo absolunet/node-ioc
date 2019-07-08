@@ -20,7 +20,7 @@
     "url": "https://github.com/absolunet/node-ioc/issues"
   },
   "engines": {
-    "node": ">= 12.1.0"
+    "node": ">= 12.5.0"
   },
   "main": "index.js",
   "scripts": {
