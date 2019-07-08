@@ -2,3 +2,4 @@ extends: '@absolunet/node'
 
 rules:
   unicorn/filename-case: [off]
+  no-process-env: [off]
