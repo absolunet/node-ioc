@@ -50,6 +50,7 @@
     "glob": "^7.1.4",
     "inquirer": "^6.3.1",
     "js-yaml": "^3.13.1",
+    "run-middleware": "^0.9.10",
     "slash": "^3.0.0",
     "table": "^5.3.3",
     "to-case": "^2.0.0",
