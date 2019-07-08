@@ -5,7 +5,8 @@
 
 const {
 	IncomingMessage,
-	ServerResponse }         = require('http');
+	ServerResponse
+}                            = require('http');
 const container              = require('./../common');
 const HttpServiceProvider    = require('./../../../lib/http/providers/HttpServiceProvider');
 const RoutingServiceProvider = require('./../../../lib/routing/providers/RoutingServiceProvider');
@@ -67,7 +68,7 @@ describe('Node IoC - Routing', () => {
 			expect(routeRepository.all().length).toBe(0);
 		});
 
-		test('Group properly assign attributes to underlying routes', () => {
+		test('Group properly assign attributes to underlying routes', () => {
 			router.group({ prefix: '/test' }, () => {
 				router.get('/foo', (request, response) => {
 					response.send('foo');
@@ -77,7 +78,7 @@ describe('Node IoC - Routing', () => {
 			expect(routeRepository.all()[0].path).toBe('/test/foo');
 		});
 
-		test('Group "prefix" properly format path', () => {
+		test('Group "prefix" properly format path', () => {
 			router.group({ prefix: '/test/' }, () => {
 				router.get('/foo', (request, response) => {
 					response.send('foo');
@@ -257,7 +258,7 @@ describe('Node IoC - Routing', () => {
 		});
 
 		test('Can call a route handler by name', () => {
-			const controller = jest.fn(() => {});
+			const controller = jest.fn();
 			router.get('/foo', controller).name('foo');
 
 			expect(() => {
@@ -270,7 +271,7 @@ describe('Node IoC - Routing', () => {
 		});
 
 		test('Can call a route handler by path', () => {
-			const controller = jest.fn(() => {});
+			const controller = jest.fn();
 			router.get('/foo', controller);
 
 			expect(() => {
@@ -283,7 +284,7 @@ describe('Node IoC - Routing', () => {
 		});
 
 		test('Can call a configurable route handler by path', () => {
-			const controller = jest.fn(() => {});
+			const controller = jest.fn();
 			router.get('/foo/:param', controller);
 
 			expect(() => {
@@ -299,22 +300,21 @@ describe('Node IoC - Routing', () => {
 
 	describe('Controller repository', () => {
 
-		let router;
 		let controllerRepository;
+		let FooController;
 
 		beforeEach(() => {
-			router               = container.make('router');
 			controllerRepository = container.make('router.controller');
+			FooController = class {};
 		});
 
 
 		test('Can register controller', () => {
-			controllerRepository.add('foo', () => {});
+			controllerRepository.add('foo', FooController);
 			expect(controllerRepository.has('foo')).toBe(true);
 		});
 
 		test('Can get controller instance', () => {
-			class FooController {}
 			controllerRepository.add('foo', FooController);
 			expect(controllerRepository.get('foo')).toBeInstanceOf(FooController);
 		});
@@ -331,7 +331,7 @@ describe('Node IoC - Routing', () => {
 
 
 		test('Router can bootstrap express router', () => {
-			const controller = jest.fn(() => {});
+			const controller = jest.fn();
 			router.get('/foo', controller);
 			const express = router.generate();
 
