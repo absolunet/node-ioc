@@ -8,6 +8,8 @@ const {
 	ServerResponse
 }                            = require('http');
 const container              = require('./../common');
+const ConfigServiceProvider  = require('./../../../lib/config/providers/ConfigServiceProvider');
+const FileServiceProvider    = require('./../../../lib/file/providers/FileServiceProvider');
 const HttpServiceProvider    = require('./../../../lib/http/providers/HttpServiceProvider');
 const RoutingServiceProvider = require('./../../../lib/routing/providers/RoutingServiceProvider');
 
@@ -16,6 +18,8 @@ describe('Node IoC - Routing', () => {
 
 
 	beforeEach(() => {
+		container.register(FileServiceProvider);
+		container.register(ConfigServiceProvider);
 		container.register(HttpServiceProvider);
 		container.register(RoutingServiceProvider);
 		container.bootIfNotBooted();
