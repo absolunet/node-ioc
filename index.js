@@ -7,6 +7,7 @@
 const Application            = require('./lib');
 const BaseProxy              = require('./lib/support/proxy/BaseProxy');
 const CollectionMapper       = require('./lib/foundation/data/CollectionMapper');
+const Controller             = require('./lib/http/controllers/Controller');
 const Command                = require('./lib/console/Command');
 const ConsoleServiceProvider = require('./lib/console/BaseConsoleServiceProvider');
 const ForwardProxy           = require('./lib/support/proxy/ForwardProxy');
@@ -29,6 +30,7 @@ module.exports = {
 			Application,
 			BaseProxy,
 			CollectionMapper,
+			Controller,
 			Command,
 			ConsoleServiceProvider,
 			ForwardProxy,
