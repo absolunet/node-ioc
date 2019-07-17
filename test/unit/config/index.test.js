@@ -92,6 +92,7 @@ describe('Node IoC - Config', () => {
 				expect(grammar.formatPath(`@/${filePath}`)).toBe(`${container.make('path.base')}/${filePath}`);
 			});
 		});
+
 	});
 
 });
