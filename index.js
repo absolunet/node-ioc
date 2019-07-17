@@ -12,6 +12,7 @@ const Command                = require('./lib/console/Command');
 const ConsoleServiceProvider = require('./lib/console/BaseConsoleServiceProvider');
 const ForwardProxy           = require('./lib/support/proxy/ForwardProxy');
 const GeneratorCommand       = require('./lib/console/GeneratorCommand');
+const Kernel                 = require('./lib/foundation/Kernel');
 const Mapper                 = require('./lib/foundation/data/Mapper');
 const mixins                 = require('./lib/support/mixins');
 const Model                  = require('./lib/foundation/data/Model');
@@ -35,6 +36,7 @@ module.exports = {
 			ConsoleServiceProvider,
 			ForwardProxy,
 			GeneratorCommand,
+			Kernel,
 			Mapper,
 			Model,
 			NullDriverProxy,
