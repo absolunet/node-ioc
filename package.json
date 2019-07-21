@@ -45,20 +45,20 @@
     "@absolunet/private-registry": "^2.0.0",
     "@absolunet/terminal": "^2.0.0",
     "axios": "^0.19.0",
-    "dot-object": "^1.7.1",
+    "dot-object": "^1.8.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "glob": "^7.1.4",
-    "inquirer": "^6.3.1",
+    "inquirer": "^6.5.0",
     "intercept-stdout": "^0.1.2",
     "js-yaml": "^3.13.1",
     "jsrender": "^1.0.3",
     "nodemon": "^1.19.1",
     "run-middleware": "^0.9.10",
     "slash": "^3.0.0",
-    "table": "^5.3.3",
+    "table": "^5.4.4",
     "to-case": "^2.0.0",
-    "yargs": "^13.2.4"
+    "yargs": "^13.3.0"
   },
   "jest": {
     "setupFilesAfterEnv": [
