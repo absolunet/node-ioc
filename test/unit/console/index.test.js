@@ -48,8 +48,6 @@ describe('Node IoC - Console', () => {
 			};
 
 			const promises = [
-				testCase('--help'),
-				testCase('help'),
 				testCase('list'),
 				testCase('')
 			];
