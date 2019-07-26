@@ -31,11 +31,15 @@ describe('Node IoC - File', () => {
 		});
 
 		test('Engine exposes fss', () => {
-			expect(engine.sync).toBe(fss);
+			Object.getOwnPropertyNames(Object.getPrototypeOf(fss)).forEach((name) => {
+				expect(engine.sync).toHaveProperty(name);
+			});
 		});
 
 		test('Engine exposes fsp', () => {
-			expect(engine.async).toBe(fsp);
+			Object.getOwnPropertyNames(Object.getPrototypeOf(fsp)).forEach((name) => {
+				expect(engine.async).toHaveProperty(name);
+			});
 		});
 
 		test('Engine exposes sync fs by default', () => {
