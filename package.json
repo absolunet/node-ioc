@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/ioc",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "IoC",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-ioc",
@@ -35,9 +35,7 @@
   "devDependencies": {
     "@absolunet/manager": "1.1.0",
     "@absolunet/tester": "2.6.8",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
-    "jest": "24.8.0",
-    "jest-extended": "^0.11.2"
+    "jest": "24.8.0"
   },
   "dependencies": {
     "@absolunet/fsp": "^1.6.1",
@@ -54,15 +52,11 @@
     "js-yaml": "^3.13.1",
     "jsrender": "^1.0.3",
     "nodemon": "^1.19.1",
+    "replace-in-file": "^4.1.1",
     "run-middleware": "^0.9.10",
     "slash": "^3.0.0",
     "table": "^5.4.4",
     "to-case": "^2.0.0",
     "yargs": "^13.3.0"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "jest-extended"
-    ]
   }
 }
