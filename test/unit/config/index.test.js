@@ -61,6 +61,16 @@ describe('Node IoC - Config', () => {
 			expect(config.get('test.foo')).toBe('qux');
 		});
 
+		test('Can set configuration by overwriting object', () => {
+			const oldFoo = { bar: 'baz' };
+			config.set({ foo: oldFoo });
+			expect(config.get('foo')).toStrictEqual(oldFoo);
+
+			const newFoo = { lorem: 'ipsum' };
+			config.set('foo', newFoo);
+			expect(config.get('foo')).toStrictEqual(newFoo);
+		});
+
 	});
 
 
