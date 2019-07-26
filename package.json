@@ -54,6 +54,7 @@
     "js-yaml": "^3.13.1",
     "jsrender": "^1.0.3",
     "nodemon": "^1.19.1",
+    "replace-in-file": "^4.1.1",
     "run-middleware": "^0.9.10",
     "slash": "^3.0.0",
     "table": "^5.4.4",
