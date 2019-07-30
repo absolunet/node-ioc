@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/ioc",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "IoC",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-ioc",
@@ -44,7 +44,7 @@
     "@absolunet/terminal": "^2.0.0",
     "@hapi/joi": "^15.1.0",
     "axios": "^0.19.0",
-    "dot-object": "^1.8.1",
+    "dot-object": "^1.9.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "glob": "^7.1.4",
