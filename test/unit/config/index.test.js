@@ -61,6 +61,16 @@ describe('Node IoC - Config', () => {
 			expect(config.get('test.foo')).toBe('qux');
 		});
 
+		test('Can set configuration by overwriting object', () => {
+			const oldFoo = { bar: 'baz' };
+			config.set({ foo: oldFoo });
+			expect(config.get('foo')).toStrictEqual(oldFoo);
+
+			const newFoo = { lorem: 'ipsum' };
+			config.set('foo', newFoo);
+			expect(config.get('foo')).toStrictEqual(newFoo);
+		});
+
 	});
 
 
@@ -79,19 +89,100 @@ describe('Node IoC - Config', () => {
 	describe('Grammar', () => {
 
 		let grammar;
+		let environment;
 
 		beforeEach(() => {
 			grammar = container.make('config.grammar');
+			environment = container.make('env');
 		});
 
-		test('Replacements are correctly working', () => {
-			['foo/bar', 'foo/bar.js'].forEach((filePath) => {
-				expect(grammar.formatPath(`/${filePath}`)).toBe(`/${filePath}`);
-				expect(grammar.formatPath(filePath)).toBe(filePath);
-				expect(grammar.formatPath(`@${filePath}`)).toBe(`@${filePath}`);
-				expect(grammar.formatPath(`@/${filePath}`)).toBe(`${container.make('path.base')}/${filePath}`);
+
+		describe('Path', () => {
+
+			test('Replacement is correctly working', () => {
+				['foo/bar', 'foo/bar.js'].forEach((filePath) => {
+					expect(grammar.formatPath(`/${filePath}`)).toBe(`/${filePath}`);
+					expect(grammar.formatPath(filePath)).toBe(filePath);
+					expect(grammar.formatPath(`@${filePath}`)).toBe(`@${filePath}`);
+					expect(grammar.formatPath(`@/${filePath}`)).toBe(`${container.make('path.base')}/${filePath}`);
+				});
 			});
+
 		});
+
+
+		describe('Environment', () => {
+
+			beforeEach(() => {
+				environment.setFromFile(path.join(__dirname, 'stubs', '.env.stub'));
+			});
+
+			test('Replacement is working with existing variable', () => {
+				expect(grammar.formatEnvironment('{{APP_ENV}}')).toBe('test');
+			});
+
+			test('Replacement is working with existing variable with fallback', () => {
+				expect(grammar.formatEnvironment('{{APP_ENV|fallback}}')).toBe('test');
+			});
+
+			test('Replacement is working with undefined variable', () => {
+				expect(grammar.formatEnvironment('{{APP_UNDEFINED}}')).toBeNull();
+			});
+
+			test('Replacement is working with undefined variable with fallback', () => {
+				expect(grammar.formatEnvironment('{{APP_UNDEFINED|fallback}}')).toBe('fallback');
+			});
+
+		});
+
+
+		describe('Global formatting', () => {
+
+			beforeEach(() => {
+				environment.setFromFile(path.join(__dirname, 'stubs', '.env.stub'));
+			});
+
+			test('Replacement is working with path', () => {
+				expect(grammar.format('@/foo/bar')).toBe(`${container.make('path.base')}/foo/bar`);
+			});
+
+			test('Replacement is working with environment variable', () => {
+				expect(grammar.format('{{APP_ENV}}')).toBe('test');
+			});
+
+			test('Replacement is working with combination of path and environment variable', () => {
+				expect(grammar.format('@/foo/{{APP_ENV}}')).toBe(`${container.make('path.base')}/foo/test`);
+			});
+
+		});
+
+
+		describe('Dynamic formatting', () => {
+
+			let config;
+
+			beforeEach(() => {
+				config = container.make('config');
+				environment.setFromFile(path.join(__dirname, 'stubs', '.env.stub'));
+			});
+
+			test('Configuration value is dynamically formatted for paths', () => {
+				config.set('foo.bar', '@/foo/bar');
+				expect(config.get('foo.bar')).toBe(`${container.make('path.base')}/foo/bar`);
+			});
+
+			test('Configuration value is dynamically formatted for environment variables', () => {
+				config.set('foo.bar', '{{APP_ENV}}');
+				expect(config.get('foo.bar')).toBe('test');
+			});
+
+			test('Value evaluated to null returns null', () => {
+				config.set('foo.bar', '{{APP_UNDEFINED|null}}');
+				expect(config.get('foo.bar')).toBeNull();
+			});
+
+		});
+
 	});
 
 });

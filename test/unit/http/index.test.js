@@ -5,13 +5,17 @@
 
 const axios = require('axios');
 
-const container           = require('./../common');
-const HttpServiceProvider = require('./../../../lib/http/providers/HttpServiceProvider');
+const container              = require('./../common');
+const FileServiceProvider    = require('./../../../lib/file/providers/FileServiceProvider');
+const HttpServiceProvider    = require('./../../../lib/http/providers/HttpServiceProvider');
+const RoutingServiceProvider = require('./../../../lib/routing/providers/RoutingServiceProvider');
 
 
 describe('Node IoC - HTTP', () => {
 
 	beforeEach(() => {
+		container.register(FileServiceProvider);
+		container.register(RoutingServiceProvider);
 		container.register(HttpServiceProvider);
 		container.bootIfNotBooted();
 	});

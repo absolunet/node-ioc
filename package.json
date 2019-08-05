@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/ioc",
-  "version": "0.1.2",
+  "version": "0.5.0",
   "description": "IoC",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-ioc",
@@ -20,7 +20,7 @@
     "url": "https://github.com/absolunet/node-ioc/issues"
   },
   "engines": {
-    "node": ">= 12.1.0"
+    "node": ">= 12.5.0"
   },
   "main": "index.js",
   "scripts": {
@@ -35,32 +35,31 @@
   "devDependencies": {
     "@absolunet/manager": "1.1.0",
     "@absolunet/tester": "2.6.8",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.26.2",
-    "jest": "24.8.0",
-    "jest-extended": "^0.11.1"
+    "jest": "24.8.0"
   },
   "dependencies": {
     "@absolunet/fsp": "^1.6.1",
     "@absolunet/fss": "^1.6.1",
     "@absolunet/private-registry": "^2.0.0",
     "@absolunet/terminal": "^2.0.0",
+    "@hapi/joi": "^15.1.0",
     "axios": "^0.19.0",
-    "dot-object": "^1.7.1",
+    "dot-object": "^1.9.0",
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "glob": "^7.1.4",
-    "inquirer": "^6.3.1",
+    "inquirer": "^6.5.0",
+    "intercept-stdout": "^0.1.2",
     "js-yaml": "^3.13.1",
+    "jsrender": "^1.0.3",
     "knex": "^0.16.3",
+    "nodemon": "^1.19.1",
+    "replace-in-file": "^4.1.1",
     "run-middleware": "^0.9.10",
     "sqlite3": "^4.0.6",
     "slash": "^3.0.0",
-    "table": "^5.3.3",
+    "table": "^5.4.4",
     "to-case": "^2.0.0",
-    "yargs": "^13.2.4"
-  },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "jest-extended"
-    ]
+    "yargs": "^13.3.0"
   }
 }

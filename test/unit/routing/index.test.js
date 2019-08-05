@@ -7,15 +7,22 @@ const {
 	IncomingMessage,
 	ServerResponse
 }                            = require('http');
+const path                   = require('path');
 const container              = require('./../common');
+const ConfigServiceProvider  = require('./../../../lib/config/providers/ConfigServiceProvider');
+const FileServiceProvider    = require('./../../../lib/file/providers/FileServiceProvider');
 const HttpServiceProvider    = require('./../../../lib/http/providers/HttpServiceProvider');
 const RoutingServiceProvider = require('./../../../lib/routing/providers/RoutingServiceProvider');
+const TestController         = require('./stubs/controllers/TestController');
+const NamespaceController    = require('./stubs/controllers/namespace/NamespaceController');
 
 
 describe('Node IoC - Routing', () => {
 
 
 	beforeEach(() => {
+		container.register(FileServiceProvider);
+		container.register(ConfigServiceProvider);
 		container.register(HttpServiceProvider);
 		container.register(RoutingServiceProvider);
 		container.bootIfNotBooted();
@@ -317,6 +324,22 @@ describe('Node IoC - Routing', () => {
 		test('Can get controller instance', () => {
 			controllerRepository.add('foo', FooController);
 			expect(controllerRepository.get('foo')).toBeInstanceOf(FooController);
+		});
+
+		test('Can resolve controller file by path', () => {
+			const controllerPath = path.join(__dirname, 'stubs', 'controllers');
+			const controllerName = 'TestController';
+			const controller = controllerRepository.getFromPath(controllerPath, controllerName);
+
+			expect(controller).toBeInstanceOf(TestController);
+		});
+
+		test('Can resolve controller file by path with namespace', () => {
+			const controllerPath = path.join(__dirname, 'stubs', 'controllers');
+			const controllerName = 'namespace.NamespaceController';
+			const controller = controllerRepository.getFromPath(controllerPath, controllerName);
+
+			expect(controller).toBeInstanceOf(NamespaceController);
 		});
 
 	});
