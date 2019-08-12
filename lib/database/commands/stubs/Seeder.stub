@@ -1,0 +1,24 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Database - Seeds - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const { Seeder } = require('@absolunet/ioc').classes;
+
+
+class %CLASS% extends Seeder {
+
+	/**
+	 * Seed the application's database.
+	 *
+	 * @param {Knex} connection
+	 * @returns {Promise<void>}
+	 */
+	async seed(connection) {
+		await this.factory('%MODEL%').save();
+	}
+
+}
+
+
+module.exports = %CLASS%;

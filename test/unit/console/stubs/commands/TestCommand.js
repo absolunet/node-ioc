@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const Command = require('./../../../../../lib/console/Command');
+const Command = require('../../../../../lib/console/Command');
 
 
 class TestCommand extends Command {

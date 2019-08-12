@@ -1,0 +1,14 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Database - Models - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const { Model } = require('@absolunet/ioc').classes;
+
+
+class %CLASS% extends Model {
+
+}
+
+
+module.exports = %CLASS%;

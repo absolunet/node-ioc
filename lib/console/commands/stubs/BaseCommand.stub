@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const { classes: { Command } } = require('@absolunet/ioc');
+const { Command } = require('@absolunet/ioc').classes;
 
 
 class %CLASS% extends Command {

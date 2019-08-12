@@ -1,8 +1,18 @@
-default: sqlite
+command_namespace: '{{DB_COMMAND_NAMESPACE|db}}'
+
+
+default: '{{DB_CONNECTION|sqlite}}'
 
 
 connections:
 
   sqlite:
     driver: sqlite
-    database: ~/.node-ioc/database.sqlite
+    database: '{{DB_FILE|@/database/database.sqlite}}'
+
+
+paths:
+  factories: '@/database/factories'
+  models: '@/database/models'
+  migrations: '@/database/migrations'
+  seeds: '@/database/seeds'

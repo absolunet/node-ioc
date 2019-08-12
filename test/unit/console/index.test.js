@@ -6,15 +6,19 @@
 const childProcess           = require('child_process');
 
 const TestCommand            = require('./stubs/commands/TestCommand');
-const container              = require('./../common');
-const ListCommand            = require('./../../../lib/console/commands/ListCommand');
-const ConsoleServiceProvider = require('./../../../lib/console/providers/ConsoleServiceProvider');
+const container              = require('../common');
+const ListCommand            = require('../../../lib/console/commands/ListCommand');
+const FileServiceProvider    = require('../../../lib/file/providers/FileServiceProvider');
+const SupportServiceProvider = require('../../../lib/support/providers/SupportServiceProvider');
+const ConsoleServiceProvider = require('../../../lib/console/providers/ConsoleServiceProvider');
 
 
 describe('Node IoC - Console', () => {
 
 	beforeEach(() => {
+		container.register(FileServiceProvider);
 		container.register(ConsoleServiceProvider);
+		container.register(SupportServiceProvider);
 		container.bootIfNotBooted();
 	});
 
@@ -30,7 +34,7 @@ describe('Node IoC - Console', () => {
 			});
 		});
 
-		test('Command "list" should exists and be the default command', () => {
+		test('Command "list" should exists and be the default command', async (done) => {
 			const stdouts = [];
 			const testCase = (command) => {
 				const c = command ? ` ${command}` : '';
@@ -47,17 +51,17 @@ describe('Node IoC - Console', () => {
 				});
 			};
 
-			const promises = [
+			await Promise.all([
 				testCase('list'),
 				testCase('')
-			];
+			]);
 
-			return Promise.all(promises).then(() => {
-				const out = stdouts.shift();
-				stdouts.forEach((stdout) => {
-					expect(stdout).toBe(out);
-				});
+			const out = stdouts.shift();
+			stdouts.forEach((stdout) => {
+				expect(stdout).toBe(out);
 			});
+
+			done();
 		});
 
 	});

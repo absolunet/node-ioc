@@ -5,7 +5,7 @@
 
 const slash = require('slash');
 
-const configData = require('./../config/data');
+const configData = require('../config/data');
 
 
 class FakeFileLoader {
