@@ -35,6 +35,7 @@ describe('Node IoC - Database', () => {
 		container.bootIfNotBooted();
 
 		container.make('config').set('database', {
+			'enabled': true,
 			'command_namespace': 'db',
 			'default': 'test-sqlite',
 			'connections': {
@@ -91,7 +92,6 @@ describe('Node IoC - Database', () => {
 
 		beforeEach(() => {
 			builder = container.make('db');
-
 		});
 
 		test('Can build default connection', () => {
@@ -318,6 +318,7 @@ describe('Node IoC - Database', () => {
 		beforeEach(() => {
 			constructorCall = jest.fn();
 			factory = container.make('db.factory');
+
 			TestFactory = class extends BaseModelFactory {
 
 				constructor(...parameters) {
@@ -429,23 +430,40 @@ describe('Node IoC - Database', () => {
 
 		describe('policies', () => {
 
-			test('Can hide commands if configured', () => {
-				container.make('config').set('database.command_namespace', null);
-				const commandCount = container.make('command').all().length;
+			const resetPolicy = () => {
 				const policy = 'db';
 				__(container.make('gate')).get('policies')[policy] = [() => {
 					return true;
 				}];
+			};
+
+			test('Can hide commands if database is not enabled', () => {
+				container.make('config').set('database.enabled', false);
+				const commandCount = container.make('command').all().length;
+				resetPolicy();
+				expect(commandCount).toBeLessThan(container.make('command').all().length);
+			});
+
+			test('Can hide commands if namespace is not configured', () => {
+				container.make('config').set('database.command_namespace', null);
+				const commandCount = container.make('command').all().length;
+				resetPolicy();
+				expect(commandCount).toBeLessThan(container.make('command').all().length);
+			});
+
+			test('Can hide commands if both database is not enabled and namespace is not configured', () => {
+				container.make('config').set('database.enabled', false);
+				container.make('config').set('database.command_namespace', null);
+				const commandCount = container.make('command').all().length;
+				resetPolicy();
 				expect(commandCount).toBeLessThan(container.make('command').all().length);
 			});
 
 			test('Can show commands if configured', () => {
+				container.make('config').set('database.enabled', true);
 				container.make('config').set('database.command_namespace', 'database');
 				const commandCount = container.make('command').all().length;
-				const policy = 'db';
-				__(container.make('gate')).get('policies')[policy] = [() => {
-					return true;
-				}];
+				resetPolicy();
 				expect(commandCount).toBe(container.make('command').all().length);
 			});
 

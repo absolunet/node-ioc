@@ -1,3 +1,6 @@
+enabled: true
+
+
 command_namespace: '{{DB_COMMAND_NAMESPACE|db}}'
 
 
