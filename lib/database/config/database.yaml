@@ -16,3 +16,5 @@ paths:
   models: '@/database/models'
   migrations: '@/database/migrations'
   seeds: '@/database/seeds'
+
+migration_table: 'migrations'
