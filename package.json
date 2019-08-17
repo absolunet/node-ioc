@@ -53,6 +53,7 @@
     "js-yaml": "^3.13.1",
     "jsrender": "^1.0.3",
     "nodemon": "^1.19.1",
+    "pubsub-js": "^1.7.0",
     "replace-in-file": "^4.1.1",
     "run-middleware": "^0.9.10",
     "slash": "^3.0.0",

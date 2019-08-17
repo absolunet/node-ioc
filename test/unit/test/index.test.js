@@ -7,7 +7,6 @@
 const container       		 = require('./../common');
 const path					 = require('path');
 const ConsoleServiceProvider = require('./../../../lib/console/providers/ConsoleServiceProvider');
-const FileServiceProvider 	 = require('./../../../lib/file/providers/FileServiceProvider');
 const TestServiceProvider 	 = require('./../../../lib/test/providers/TestServiceProvider');
 const TestCase 				 = require('./../../../lib/test/TestCase');
 
@@ -16,7 +15,6 @@ describe('Node IoC - Test', () => {
 
 
 	beforeEach(() => {
-		container.register(FileServiceProvider);
 		container.register(ConsoleServiceProvider);
 		container.register(TestServiceProvider);
 		container.bootIfNotBooted();
