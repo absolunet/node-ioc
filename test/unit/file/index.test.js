@@ -50,13 +50,6 @@ describe('Node IoC - File', () => {
 			expect(scandir).not.toBeInstanceOf(Promise);
 		});
 
-		test('Engine can exposes async fs by default bu changing configuration', () => {
-			const config = container.make('config');
-			config.set('filesystem.defaults.sync', false);
-
-			expect(engine.scandir(__dirname, 'file')).toBeInstanceOf(Promise);
-		});
-
 	});
 
 	describe('Loader', () => {
