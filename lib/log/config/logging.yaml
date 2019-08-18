@@ -1,0 +1,7 @@
+default: file
+
+channels:
+
+  file:
+    driver: file
+    path: '@/storage/logs/ioc.log'
