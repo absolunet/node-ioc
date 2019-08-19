@@ -307,6 +307,236 @@ describe('Node IoC - Log', () => {
 
 			});
 
+			describe('File Driver', () => {
+
+				const command = 'test:log:database';
+				let connection;
+				let getConnection;
+				let insert;
+				let now;
+
+				beforeEach(() => {
+					now = jest.fn(() => { return '1970-01-01 00:00:01'; });
+					insert = jest.fn(() => {
+						return Promise.resolve();
+					});
+					connection = jest.fn(() => {
+						return { insert };
+					});
+					connection.fn = { now };
+					getConnection = jest.fn(() => {
+						return connection;
+					});
+					container.singleton('db', { getConnection });
+					container.singleton('terminal', { command });
+					driver = logger.driver('database');
+				});
+
+
+				test('Can change configuration', async (done) => {
+					await driver.log('debug', message);
+					driver.setConfig({ connection: 'other' });
+					await driver.log('debug', message);
+					expect(getConnection).toHaveBeenCalledTimes(2);
+					expect(getConnection.mock.calls[0][0]).toBe('default');
+					expect(getConnection.mock.calls[1][0]).toBe('other');
+					done();
+				});
+
+				test('Can log a debug message with level as string', async (done) => {
+					const level = 0;
+					await driver.log('debug', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log a debug message with level as number', async (done) => {
+					const level = 0;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an info message with level as string', async (done) => {
+					const level = 1;
+					await driver.log('info', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an info message with level as number', async (done) => {
+					const level = 1;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log a notice message with level as string', async (done) => {
+					const level = 2;
+					await driver.log('notice', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log a notice message with level as number', async (done) => {
+					const level = 2;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log a warning message with level as string', async (done) => {
+					const level = 3;
+					await driver.log('warning', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log a warning message with level as number', async (done) => {
+					const level = 3;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an error message with level as string', async (done) => {
+					const level = 4;
+					await driver.log('error', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an error message with level as number', async (done) => {
+					const level = 4;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log a critical message with level as string', async (done) => {
+					const level = 5;
+					await driver.log('critical', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log a critical message with level as number', async (done) => {
+					const level = 5;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an alert message with level as string', async (done) => {
+					const level = 6;
+					await driver.log('alert', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an alert message with level as number', async (done) => {
+					const level = 6;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an emergency message with level as string', async (done) => {
+					const level = 7;
+					await driver.log('emergency', message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+				test('Can log an emergency message with level as number', async (done) => {
+					const level = 7;
+					await driver.log(level, message);
+					expect(insert).toHaveBeenCalledTimes(1);
+					expect(insert.mock.calls[0][0]).toEqual(expect.objectContaining({
+						level,
+						message,
+						command
+					}));
+					done();
+				});
+
+			});
+
 		});
 
 	});
