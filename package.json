@@ -59,6 +59,7 @@
     "knex-cleaner": "^1.2.1",
     "nodemon": "^1.19.1",
     "pluralize": "^8.0.0",
+    "pubsub-js": "^1.7.0",
     "replace-in-file": "^4.1.1",
     "run-middleware": "^0.9.10",
     "slash": "^3.0.0",
