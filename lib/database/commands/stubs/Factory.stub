@@ -1,0 +1,35 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Database - Factories - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const { ModelFactory } = require('@absolunet/ioc').classes;
+
+
+class %CLASS% extends ModelFactory {
+
+	/**
+	 * Name of the associated model.
+	 *
+	 * @type {string}
+	 */
+	get model() {
+		return '%MODEL%';
+	}
+
+	/**
+	 * Factory model attributes.
+	 *
+	 * @param {Faker} faker
+	 * @returns {object}
+	 */
+	make(faker) {
+		return {
+			//
+		};
+	}
+
+}
+
+
+module.exports = %CLASS%;

@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const TestCase = require('./../../../../../../../lib/test/TestCase');
+const TestCase = require('../../../../../../../lib/test/TestCase');
 
 
 class SomeTest extends TestCase {

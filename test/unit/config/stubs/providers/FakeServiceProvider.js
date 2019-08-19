@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const ServiceProvider = require('./../../../../../lib/foundation/ServiceProvider');
+const ServiceProvider = require('../../../../../lib/foundation/ServiceProvider');
 
 
 class FakeServiceProvider extends ServiceProvider {

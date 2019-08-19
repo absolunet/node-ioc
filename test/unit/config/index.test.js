@@ -7,9 +7,9 @@ const path = require('path');
 
 const configData            = require('./stubs/config/data');
 const FileLoader            = require('./stubs/services/FakeFileLoader');
-const container             = require('./../common');
-const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
-const ConfigRepository      = require('./../../../lib/config/repositories/ConfigRepository');
+const container             = require('../common');
+const ConfigServiceProvider = require('../../../lib/config/providers/ConfigServiceProvider');
+const ConfigRepository      = require('../../../lib/config/repositories/ConfigRepository');
 
 
 describe('Node IoC - Config', () => {
