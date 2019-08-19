@@ -245,6 +245,20 @@ describe('Node IoC - Database', () => {
 					expect(otherDriver).not.toBe(driver);
 				});
 
+				test('Can generate model with given connection', () => {
+					const TestModel = class extends BaseModel {};
+					driver.model('testConnectionModel', TestModel);
+					const model1 = driver.model('testConnectionModel');
+					const otherDriver = driver.withConnection(container.make('db').getConnection('test-other-sqlite'));
+					const model2 = otherDriver.model('testConnectionModel');
+
+					expect(model1).toBe(driver.model('testConnectionModel'));
+					expect(model2).toBe(otherDriver.model('testConnectionModel'));
+					expect(model1).not.toBe(model2);
+					expect(model1.query().client.connectionSettings.filename).toBe(databases.test);
+					expect(model2.query().client.connectionSettings.filename).toBe(databases.other);
+				});
+
 			});
 
 		});
@@ -263,12 +277,16 @@ describe('Node IoC - Database', () => {
 		beforeEach(() => {
 			registry = {};
 
-			const FakeORM = class extends container.make('db.orm').constructor {};
-			FakeORM.prototype.registerModel = jest.fn((name, model) => {
-				registry[name] = container.make(model);
+			const FakeORM = class {};
+			FakeORM.prototype.registerModel = jest.fn(function(name, model) {
+				const engine = this.engine();
+				registry[name] = container.make(model, { engine });
 			});
 			FakeORM.prototype.getModel = jest.fn((name) => {
 				return registry[name];
+			});
+			FakeORM.prototype.engine = jest.fn(() => {
+				return { Model: { prototype: {}, extend: (a) => { return a; } } };
 			});
 			fakeORM = container.make(FakeORM);
 		});
@@ -298,7 +316,7 @@ describe('Node IoC - Database', () => {
 		test('Throws if model does not exists', () => {
 			repository = container.make('db.model');
 			expect(() => {
-				return repository.get('testModel');
+				repository.get('testUndefined');
 			}).toThrow();
 		});
 
@@ -329,7 +347,7 @@ describe('Node IoC - Database', () => {
 				}
 
 				get model() {
-					return 'testModel';
+					return 'testModelFactory';
 				}
 
 				make() {
@@ -350,8 +368,8 @@ describe('Node IoC - Database', () => {
 
 		test('Can retrieve model factory', () => {
 			factory.register(TestFactory);
-			container.make('db.model').set('testModel', TestModel);
-			const modelFactory = factory.make('testModel');
+			container.make('db.model').set('testModelFactory', TestModel);
+			const modelFactory = factory.make('testModelFactory');
 
 			expect(modelFactory).toBeTruthy();
 			expect(typeof modelFactory).toBe('object');
@@ -372,16 +390,16 @@ describe('Node IoC - Database', () => {
 			factory.register(TestFactory);
 
 			expect(() => {
-				factory.make('testModel');
+				factory.make('testUndefined');
 			}).toThrow();
 		});
 
 		test('Can get fake model collection from factory', () => {
-			factory.register(TestFactory);
-			container.make('db.model').set('testModel', TestModel);
+			factory.register(TestFactory, 'testModelCollection');
+			container.make('db.model').set('testModelCollection', TestModel);
 
-			const model = factory.make('testModel');
-			const collection = factory.make('testModel', 10);
+			const model = factory.make('testModelCollection');
+			const collection = factory.make('testModelCollection', 10);
 
 			expect(collection.length).toBe(10);
 			expect(collection).not.toBeInstanceOf(Array);

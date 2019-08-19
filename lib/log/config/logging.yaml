@@ -1,7 +1,12 @@
-default: file
+default: '{{LOG_CHANNEL|file}}'
 
 channels:
 
   file:
     driver: file
-    path: '@/storage/logs/ioc.log'
+    path: '{{LOG_FILE|@/storage/logs/ioc.log}}'
+
+  database:
+    driver: database
+    connection: default
+    table: logs
