@@ -3,6 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
+const slash           = require('slash');
 const container       = require('../common');
 const ServiceProvider = require('../../../lib/foundation/ServiceProvider');
 
@@ -34,6 +35,58 @@ describe('Node IoC - Foundation', () => {
 			expect(container.booted).toBe(true);
 			expect(container.bootIfNotBooted.bind(container)).not.toThrow();
 			expect(container.booted).toBe(true);
+		});
+
+	});
+
+
+	describe('Paths', () => {
+
+		test('Can set base path', () => {
+			const originalBasePath       = container.make('path.base');
+			const originalAppPath        = container.make('path.app');
+			const originalConfigPath     = container.make('path.config');
+			const originalControllerPath = container.make('path.controller');
+
+			container.useBasePath(__dirname);
+
+			const newBasePath       = container.make('path.base');
+			const newAppPath        = container.make('path.app');
+			const newConfigPath     = container.make('path.config');
+			const newControllerPath = container.make('path.controller');
+
+			expect(newBasePath).not.toBe(originalBasePath);
+			expect(newAppPath).not.toBe(originalAppPath);
+			expect(newConfigPath).not.toBe(originalConfigPath);
+			expect(newControllerPath).not.toBe(originalControllerPath);
+
+			expect(newBasePath).toBe(slash(__dirname));
+			expect(newAppPath.startsWith(slash(__dirname))).toBe(true);
+			expect(newConfigPath.startsWith(slash(__dirname))).toBe(true);
+			expect(newControllerPath.startsWith(slash(__dirname))).toBe(true);
+		});
+
+		test('Can set app base path', () => {
+			const originalBasePath       = container.make('path.base');
+			const originalAppPath        = container.make('path.app');
+			const originalConfigPath     = container.make('path.config');
+			const originalControllerPath = container.make('path.controller');
+
+			container.useAppPath('otherApp');
+
+			const newBasePath       = container.make('path.base');
+			const newAppPath        = container.make('path.app');
+			const newConfigPath     = container.make('path.config');
+			const newControllerPath = container.make('path.controller');
+
+			expect(newBasePath).toBe(originalBasePath);
+			expect(newConfigPath).toBe(originalConfigPath);
+			expect(newAppPath).not.toBe(originalAppPath);
+			expect(newControllerPath).not.toBe(originalControllerPath);
+
+			expect(newAppPath.endsWith('otherApp')).toBe(true);
+			expect(newControllerPath.startsWith(slash(originalBasePath))).toBe(true);
+			expect(newControllerPath.endsWith(slash('otherApp/http/controllers'))).toBe(true);
 		});
 
 	});
