@@ -20,4 +20,6 @@ paths:
   migrations: '@/database/migrations'
   seeds: '@/database/seeds'
 
+
+
 migration_table: 'migrations'

@@ -43,7 +43,7 @@ class %CLASS% extends GeneratorCommand {
 	 * {@inheritdoc}
 	 */
 	get destination() {
-		return path.join(process.cwd(), 'lib', 'folder', `${this.parameter('class')}.js`);
+		return this.app.appPath('folder');
 	}
 
 	/**
