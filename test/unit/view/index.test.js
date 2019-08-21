@@ -4,16 +4,14 @@
 'use strict';
 
 const path                  = require('path');
-const container             = require('./../common');
-const ConfigServiceProvider = require('./../../../lib/config/providers/ConfigServiceProvider');
-const FileServiceProvider   = require('./../../../lib/file/providers/FileServiceProvider');
-const ViewServiceProvider   = require('./../../../lib/view/providers/ViewServiceProvider');
+const container             = require('../common');
+const ConfigServiceProvider = require('../../../lib/config/providers/ConfigServiceProvider');
+const ViewServiceProvider   = require('../../../lib/view/providers/ViewServiceProvider');
 
 
 describe('Node IoC - View', () => {
 
 	beforeEach(() => {
-		container.register(FileServiceProvider);
 		container.register(ConfigServiceProvider);
 		container.register(ViewServiceProvider);
 		container.bootIfNotBooted();

@@ -1,13 +1,13 @@
 //--------------------------------------------------------
-//-- %PROJECT% - Command - %COMMAND%
+//-- %PROJECT% - Command - %CLASS%
 //--------------------------------------------------------
 'use strict';
 
-const { classes: { GeneratorCommand } } = require('@absolunet/ioc');
-const path                              = require('path');
+const path                 = require('path');
+const { GeneratorCommand } = require('@absolunet/ioc').classes;
 
 
-class %COMMAND% extends GeneratorCommand {
+class %CLASS% extends GeneratorCommand {
 
 	/**
 	 * {@inheritdoc}
@@ -43,14 +43,14 @@ class %COMMAND% extends GeneratorCommand {
 	 * {@inheritdoc}
 	 */
 	get destination() {
-		return path.join(process.cwd(), 'lib', 'folder', `${this.parameter('class')}.js`);
+		return this.app.appPath('folder');
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	handle() {
-		this.generate('base');
+	async handle() {
+		await this.generate('base');
 	}
 
 }

@@ -8,11 +8,10 @@ const {
 	ServerResponse
 }                            = require('http');
 const path                   = require('path');
-const container              = require('./../common');
-const ConfigServiceProvider  = require('./../../../lib/config/providers/ConfigServiceProvider');
-const FileServiceProvider    = require('./../../../lib/file/providers/FileServiceProvider');
-const HttpServiceProvider    = require('./../../../lib/http/providers/HttpServiceProvider');
-const RoutingServiceProvider = require('./../../../lib/routing/providers/RoutingServiceProvider');
+const container              = require('../common');
+const ConfigServiceProvider  = require('../../../lib/config/providers/ConfigServiceProvider');
+const HttpServiceProvider    = require('../../../lib/http/providers/HttpServiceProvider');
+const RoutingServiceProvider = require('../../../lib/routing/providers/RoutingServiceProvider');
 const TestController         = require('./stubs/controllers/TestController');
 const NamespaceController    = require('./stubs/controllers/namespace/NamespaceController');
 
@@ -21,7 +20,6 @@ describe('Node IoC - Routing', () => {
 
 
 	beforeEach(() => {
-		container.register(FileServiceProvider);
 		container.register(ConfigServiceProvider);
 		container.register(HttpServiceProvider);
 		container.register(RoutingServiceProvider);
@@ -112,8 +110,8 @@ describe('Node IoC - Routing', () => {
 				}).name('bar');
 			});
 
-			expect(routeRepository.all()[0].getAttributes().as).toBeFalsy();
-			expect(routeRepository.all()[1].getAttributes().as).toBe('test.bar');
+			expect(routeRepository.all()[0].as).toBeFalsy();
+			expect(routeRepository.all()[1].as).toBe('test.bar');
 		});
 
 		test('Group "namespace" properly prefix named controller', () => {
@@ -121,7 +119,7 @@ describe('Node IoC - Routing', () => {
 				router.get('/foo', 'TestController@foo');
 			});
 
-			expect(routeRepository.all()[0].getAttribute('action')).toBe('Test.TestController@foo');
+			expect(routeRepository.all()[0].action).toBe('Test.TestController@foo');
 		});
 
 		test('Can nest groups', () => {
@@ -135,13 +133,13 @@ describe('Node IoC - Routing', () => {
 			});
 
 			expect(routeRepository.all().length).toBe(2);
-			expect(routeRepository.all()[0].getAttributes()).toMatchObject({
+			expect(routeRepository.all()[0]).toMatchObject({
 				path: '/test/foo',
 				as: 'test.foo',
 				action: 'Test.SubTest.TestController@foo',
 				method: 'get'
 			});
-			expect(routeRepository.all()[1].getAttributes()).toMatchObject({
+			expect(routeRepository.all()[1]).toMatchObject({
 				path: '/test/sub/bar',
 				as: 'test.bar',
 				action: 'Test.SubTest.TestController@bar',
@@ -173,7 +171,7 @@ describe('Node IoC - Routing', () => {
 			router.get('/bar', 'TestController@bar').name('bar');
 
 			expect(routeRepository.findByName('foo')).toBeTruthy();
-			expect(routeRepository.findByName('foo').getAttributes()).toMatchObject({
+			expect(routeRepository.findByName('foo')).toMatchObject({
 				path: '/foo',
 				action: 'TestController@foo',
 				as: 'foo',
@@ -181,7 +179,7 @@ describe('Node IoC - Routing', () => {
 			});
 
 			expect(routeRepository.findByName('bar')).toBeTruthy();
-			expect(routeRepository.findByName('bar').getAttributes()).toMatchObject({
+			expect(routeRepository.findByName('bar')).toMatchObject({
 				path: '/bar',
 				action: 'TestController@bar',
 				as: 'bar',
@@ -219,18 +217,18 @@ describe('Node IoC - Routing', () => {
 
 			const fooRoute = routeRepository.findByPathForMethod('/foo', 'get');
 			expect(fooRoute).toBeTruthy();
-			expect(fooRoute.getAttribute('path')).toBe('/foo');
-			expect(fooRoute.getAttribute('method')).toBe('get');
+			expect(fooRoute.path).toBe('/foo');
+			expect(fooRoute.method).toBe('get');
 
 			const fooPostRoute = routeRepository.findByPathForMethod('/foo', 'post');
 			expect(fooPostRoute).toBeTruthy();
-			expect(fooPostRoute.getAttribute('path')).toBe('/foo');
-			expect(fooPostRoute.getAttribute('method')).toBe('post');
+			expect(fooPostRoute.path).toBe('/foo');
+			expect(fooPostRoute.method).toBe('post');
 
 			const barRoute = routeRepository.findByPathForMethod('/bar', 'get');
 			expect(barRoute).toBeTruthy();
-			expect(barRoute.getAttribute('path')).toBe('/bar');
-			expect(barRoute.getAttribute('method')).toBe('get');
+			expect(barRoute.path).toBe('/bar');
+			expect(barRoute.method).toBe('get');
 
 			const bazRoute = routeRepository.findByPathForMethod('/baz', 'get');
 			expect(bazRoute).toBeFalsy();
@@ -241,9 +239,9 @@ describe('Node IoC - Routing', () => {
 
 			const fooRoute = routeRepository.findByPathForMethod('/foo/bar', 'get');
 			expect(fooRoute).toBeTruthy();
-			expect(fooRoute.getAttribute('path')).toBe('/foo/:param');
-			expect(fooRoute.getAttribute('compiledPath')).toBe('/foo/bar');
-			expect(fooRoute.getAttribute('method')).toBe('get');
+			expect(fooRoute.path).toBe('/foo/:param');
+			expect(fooRoute.compiledPath).toBe('/foo/bar');
+			expect(fooRoute.method).toBe('get');
 		});
 
 		test('Can add route parameter constraint', () => {
@@ -253,15 +251,15 @@ describe('Node IoC - Routing', () => {
 
 			const digitRoute = routeRepository.findByPathForMethod('/foo/123', 'get');
 			expect(digitRoute).toBeTruthy();
-			expect(digitRoute.getAttribute('as')).toBe('foo.digit');
+			expect(digitRoute.as).toBe('foo.digit');
 
 			const alphaRoute = routeRepository.findByPathForMethod('/foo/bar', 'get');
 			expect(alphaRoute).toBeTruthy();
-			expect(alphaRoute.getAttribute('as')).toBe('foo.alpha');
+			expect(alphaRoute.as).toBe('foo.alpha');
 
 			const defaultRoute = routeRepository.findByPathForMethod('/foo/bar-baz', 'get');
 			expect(defaultRoute).toBeTruthy();
-			expect(defaultRoute.getAttribute('as')).toBe('foo.default');
+			expect(defaultRoute.as).toBe('foo.default');
 		});
 
 		test('Can call a route handler by name', () => {

@@ -5,8 +5,8 @@
 
 const __ = require('@absolunet/private-registry');
 
-const container               = require('./../common');
-const SecurityServiceProvider = require('./../../../lib/security/providers/SecurityServiceProvider');
+const container               = require('../common');
+const SecurityServiceProvider = require('../../../lib/security/providers/SecurityServiceProvider');
 
 
 describe('Node IoC - Security', () => {

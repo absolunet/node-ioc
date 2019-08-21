@@ -3,9 +3,9 @@
 //--------------------------------------------------------
 'use strict';
 
-const container              = require('./../common');
-const SupportServiceProvider = require('./../../../lib/support/providers/SupportServiceProvider');
-const NullDriverProxy        = require('./../../../lib/support/drivers/NullDriverProxy');
+const container              = require('../common');
+const SupportServiceProvider = require('../../../lib/support/providers/SupportServiceProvider');
+const NullDriverProxy        = require('../../../lib/support/drivers/NullDriverProxy');
 
 
 describe('Node IoC - Support', () => {

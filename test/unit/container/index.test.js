@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const container = require('./../common');
+const container = require('../common');
 
 
 describe('Node IoC - Container', () => {

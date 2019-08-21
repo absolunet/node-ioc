@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const container = require('./../../../lib/app');
+const container = require('../../../lib/app');
 
 
 beforeEach(() => {
