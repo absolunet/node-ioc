@@ -4,6 +4,7 @@
 'use strict';
 
 const path                  = require('path');
+const slash                 = require('slash');
 const container             = require('../common');
 const ConfigServiceProvider = require('../../../lib/config/providers/ConfigServiceProvider');
 const ViewServiceProvider   = require('../../../lib/view/providers/ViewServiceProvider');
@@ -107,7 +108,7 @@ describe('Node IoC - View', () => {
 
 		describe('Resolving', () => {
 
-			const viewsPath = path.join(__dirname, 'stubs', 'views');
+			const viewsPath = slash(path.join(__dirname, 'stubs', 'views'));
 			let resolver;
 
 			beforeEach(() => {
