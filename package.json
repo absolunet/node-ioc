@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/ioc",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "IoC",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-ioc",
@@ -25,7 +25,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test:standards && npm run test:unit",
-    "test:standards": "ava test/standards",
+    "test:standards": "ava test/standards/index.js",
     "test:unit": "jest test/unit",
     "installer": "node manager.js --task=installer",
     "outdated": "node manager.js --task=outdated",
