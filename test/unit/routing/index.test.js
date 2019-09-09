@@ -9,7 +9,6 @@ const {
 }                            = require('http');
 const path                   = require('path');
 const container              = require('../common');
-const ConfigServiceProvider  = require('../../../lib/config/providers/ConfigServiceProvider');
 const HttpServiceProvider    = require('../../../lib/http/providers/HttpServiceProvider');
 const RoutingServiceProvider = require('../../../lib/routing/providers/RoutingServiceProvider');
 const TestController         = require('./stubs/controllers/TestController');
@@ -20,7 +19,6 @@ describe('Node IoC - Routing', () => {
 
 
 	beforeEach(() => {
-		container.register(ConfigServiceProvider);
 		container.register(HttpServiceProvider);
 		container.register(RoutingServiceProvider);
 		container.bootIfNotBooted();

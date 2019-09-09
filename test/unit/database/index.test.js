@@ -7,10 +7,8 @@ const __                      = require('@absolunet/private-registry');
 const fs                      = require('fs');
 const path                    = require('path');
 const container               = require('../common');
-const ConfigServiceProvider   = require('../../../lib/config/providers/ConfigServiceProvider');
 const ConsoleServiceProvider  = require('../../../lib/console/providers/ConsoleServiceProvider');
 const DatabaseServiceProvider = require('../../../lib/database/providers/DatabaseServiceProvider');
-const FileServiceProvider     = require('../../../lib/file/providers/FileServiceProvider');
 const SecurityServiceProvider = require('../../../lib/security/providers/SecurityServiceProvider');
 const SupportServiceProvider  = require('../../../lib/support/providers/SupportServiceProvider');
 const BaseModel               = require('../../../lib/database/Model');
@@ -26,8 +24,6 @@ const databases = {
 describe('Node IoC - Database', () => {
 
 	beforeEach(() => {
-		container.register(FileServiceProvider);
-		container.register(ConfigServiceProvider);
 		container.register(ConsoleServiceProvider);
 		container.register(SecurityServiceProvider);
 		container.register(SupportServiceProvider);
@@ -41,18 +37,18 @@ describe('Node IoC - Database', () => {
 			'connections': {
 				'test-sqlite': {
 					driver: 'sqlite',
-					database: databases.test
+					filename: databases.test
 				},
 				'test-other-sqlite': {
 					driver: 'sqlite',
-					database: databases.other
+					filename: databases.other
 				},
 				'test-no-driver-sqlite': {
-					database: databases.other
+					filename: databases.other
 				},
 				'test-unexisting-driver-sqlite': {
 					driver: 'not-a-driver',
-					database: databases.other
+					filename: databases.other
 				}
 			},
 			'paths': {

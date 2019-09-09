@@ -9,13 +9,11 @@ const fsp  = require('@absolunet/fsp');
 const fss  = require('@absolunet/fss');
 
 const container             = require('../common');
-const ConfigServiceProvider = require('../../../lib/config/providers/ConfigServiceProvider');
 
 
 describe('Node IoC - File', () => {
 
 	beforeEach(() => {
-		container.register(ConfigServiceProvider);
 		container.bootIfNotBooted();
 	});
 

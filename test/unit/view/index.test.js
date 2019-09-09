@@ -6,14 +6,12 @@
 const path                  = require('path');
 const slash                 = require('slash');
 const container             = require('../common');
-const ConfigServiceProvider = require('../../../lib/config/providers/ConfigServiceProvider');
 const ViewServiceProvider   = require('../../../lib/view/providers/ViewServiceProvider');
 
 
 describe('Node IoC - View', () => {
 
 	beforeEach(() => {
-		container.register(ConfigServiceProvider);
 		container.register(ViewServiceProvider);
 		container.bootIfNotBooted();
 	});
