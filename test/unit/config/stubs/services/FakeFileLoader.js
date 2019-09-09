@@ -5,7 +5,13 @@
 
 const slash = require('slash');
 
-const configData = require('../config/data');
+const appData  = require('../config/app');
+const miscData = require('../config/misc');
+
+const configData = {
+	app: appData,
+	misc: miscData
+};
 
 
 class FakeFileLoader {
@@ -14,10 +20,6 @@ class FakeFileLoader {
 		const index = slash(file).split('/').pop().split('.').shift();
 
 		return configData[index] || {};
-	}
-
-	loadFirst() {
-		return configData;
 	}
 
 	scandir() {
