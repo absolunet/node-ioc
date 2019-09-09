@@ -5,17 +5,16 @@
 
 const path = require('path');
 
-const configData            = require('./stubs/config/data');
-const FileLoader            = require('./stubs/services/FakeFileLoader');
-const container             = require('../common');
-const ConfigServiceProvider = require('../../../lib/config/providers/ConfigServiceProvider');
-const ConfigRepository      = require('../../../lib/config/repositories/ConfigRepository');
+const appData          = require('./stubs/config/app');
+const miscData         = require('./stubs/config/misc');
+const FileLoader       = require('./stubs/services/FakeFileLoader');
+const container        = require('../common');
+const ConfigRepository = require('../../../lib/config/repositories/ConfigRepository');
 
 
 describe('Node IoC - Config', () => {
 
 	beforeEach(() => {
-		container.register(ConfigServiceProvider);
 		container.configurePaths({
 			config: path.join(__dirname, 'stubs', 'config')
 		});
@@ -43,22 +42,22 @@ describe('Node IoC - Config', () => {
 		});
 
 		test('Can read configuration', () => {
-			expect(config.get()).toStrictEqual(configData);
-			expect(config.get('test')).toStrictEqual(configData.test);
-			expect(config.get('test.foo')).toBe(configData.test.foo);
+			expect(config.get()).toMatchObject({ misc: miscData, app: appData });
+			expect(config.get('misc')).toStrictEqual(miscData);
+			expect(config.get('misc.foo')).toBe(miscData.foo);
 		});
 
 		test('Can set configuration', () => {
-			expect(config.get('test')).toStrictEqual(configData.test);
+			expect(config.get('misc')).toStrictEqual(miscData);
 
-			config.set({ test: { foo: 'foo' } });
-			expect(config.get('test.foo')).toBe('foo');
+			config.set({ misc: { foo: 'foo' } });
+			expect(config.get('misc.foo')).toBe('foo');
 
-			config.setConfig({ test: { foo: 'baz' } });
-			expect(config.get('test.foo')).toBe('baz');
+			config.setConfig({ misc: { foo: 'baz' } });
+			expect(config.get('misc.foo')).toBe('baz');
 
-			config.set('test.foo', 'qux');
-			expect(config.get('test.foo')).toBe('qux');
+			config.set('misc.foo', 'qux');
+			expect(config.get('misc.foo')).toBe('qux');
 		});
 
 		test('Can set configuration by overwriting object', () => {
@@ -151,7 +150,7 @@ describe('Node IoC - Config', () => {
 			});
 
 			test('Replacement is working with combination of path and environment variable', () => {
-				expect(grammar.format('@/foo/{{APP_ENV}}')).toBe(`${container.make('path.base')}/foo/test`);
+				expect(grammar.format('@/foo/{{APP_ENV}}')).toBe(container.basePath('/foo/test'));
 			});
 
 		});

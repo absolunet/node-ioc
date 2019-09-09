@@ -1,12 +1,17 @@
-default: '{{LOG_CHANNEL|file}}'
+# Default logging channel.
+default: '{{LOG_CHANNEL|single}}'
 
+
+# Available logging channels.
 channels:
 
-  file:
+  single:
     driver: file
     path: '{{LOG_FILE|@/storage/logs/ioc.log}}'
+    limit: '{{LOG_FILE_LIMIT|10mb}}'
 
   database:
     driver: database
     connection: default
     table: logs
+    limit: '{{LOG_DATABASE_LIMIT|1000}}'
