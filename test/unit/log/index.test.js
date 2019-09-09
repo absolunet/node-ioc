@@ -39,7 +39,7 @@ describe('Node IoC - Log', () => {
 					test: {
 						driver: 'test'
 					},
-					file: {
+					single: {
 						driver: 'file'
 					}
 				}
@@ -113,23 +113,23 @@ describe('Node IoC - Log', () => {
 				logger.addDriver('file', { log: fakeLog, setConfig: fakeSetConfig });
 			});
 
-			test('Fallback to file channel if error happens during logging process', (done) => {
+			test('Fallback to file driver on single channel if error happens during logging process', (done) => {
 				logger.logWithChannel('broken', 1, message)
 					.catch(errorCallback)
 					.finally(() => {
 						expect(errorCallback).not.toHaveBeenCalled();
 						expect(fakeLog).toHaveBeenCalledTimes(2);
 						expect(fakeLog.mock.calls[0][0]).toBe(4);
-						expect(fakeLog.mock.calls[0][1]).toBe('Error thrown while logging: Cannot find logging channel [broken]. Switching to [file] channel.');
+						expect(fakeLog.mock.calls[0][1]).toBe('Error thrown while logging: Cannot find logging channel [broken]. Switching to [single] channel.');
 						expect(fakeLog.mock.calls[1][0]).toBe(1);
 						expect(fakeLog.mock.calls[1][1]).toBe(message);
 						done();
 					});
 			});
 
-			test('Does not exit process if file channel throws', (done) => {
+			test('Does not exit process if file driver on single channel throws', (done) => {
 				fakeLog = jest.fn(() => { throw new TypeError('Fallback driver error'); });
-				logger.addDriver(logger.fallbackChannel, { log: fakeLog, setConfig: fakeSetConfig });
+				logger.addDriver('file', { log: fakeLog, setConfig: fakeSetConfig });
 				logger.logWithFallbackChannel(1, message)
 					.catch(errorCallback)
 					.finally(() => {
