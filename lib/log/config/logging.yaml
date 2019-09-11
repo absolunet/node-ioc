@@ -1,9 +1,15 @@
 # Default logging channel.
-default: '{{LOG_CHANNEL|single}}'
+default: '{{LOG_CHANNEL|stack}}'
 
 
 # Available logging channels.
 channels:
+
+  stack:
+    driver: stack
+    channels:
+      - single
+    ignore_exceptions: true
 
   single:
     driver: file
