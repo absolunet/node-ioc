@@ -63,6 +63,34 @@ describe('Node IoC - Console', () => {
 			done();
 		});
 
+		describe('Strict mode', () => {
+
+			test('Command called with unhandled parameter fails', (done) => {
+				childProcess.exec(`node lib/app/index.js list foo`, { stdio: 'pipe' }, (error) => {
+					expect(error).toBeTruthy();
+					expect(error.message).toMatch(/Unknown argument: foo/u);
+					done();
+				});
+			});
+
+			test('Command called with unhandled option fails', (done) => {
+				childProcess.exec(`node lib/app/index.js list --foo=bar`, { stdio: 'pipe' }, (error) => {
+					expect(error).toBeTruthy();
+					expect(error.message).toMatch(/Unknown argument: foo/u);
+					done();
+				});
+			});
+
+			test('Command called with unhandled flag fails', (done) => {
+				childProcess.exec(`node lib/app/index.js list --foo`, { stdio: 'pipe' }, (error) => {
+					expect(error).toBeTruthy();
+					expect(error.message).toMatch(/Unknown argument: foo/u);
+					done();
+				});
+			});
+
+		});
+
 
 		describe('Generator commands', () => {
 
