@@ -454,13 +454,21 @@ describe('Node IoC - Log', () => {
 			describe('Database Driver', () => {
 
 				const command = 'test:log:database';
+
 				let records;
+
 				let connection;
+
 				let getConnection;
+
 				let fakeInsert;
+
 				let fakeDelete;
+
 				let fakeBuilder;
+
 				let fakeSelect;
+
 				let now;
 
 				beforeEach(() => {
@@ -727,6 +735,98 @@ describe('Node IoC - Log', () => {
 						done();
 					});
 
+				});
+
+			});
+
+			describe('Stack Driver', () => {
+
+				let fakeLog1;
+
+				let fakeLog2;
+
+				let brokenLog;
+
+				let errorCallback;
+
+				beforeEach(() => {
+					driver = logger.driver('stack');
+					container.make('config').set('logging.channels', {
+						single: {
+							driver: 'fake1'
+						},
+						database: {
+							driver: 'fake2'
+						},
+						broken: {
+							driver: 'broken'
+						}
+					});
+					fakeLog1  = jest.fn(() => { return Promise.resolve(); });
+					fakeLog2  = jest.fn(() => { return Promise.resolve(); });
+					brokenLog = jest.fn(() => { throw new TypeError('Broken log'); });
+					errorCallback = jest.fn();
+					logger.addDriver('fake1',  { log: fakeLog1,  setConfig: fakeSetConfig });
+					logger.addDriver('fake2',  { log: fakeLog2,  setConfig: fakeSetConfig });
+					logger.addDriver('broken', { log: brokenLog, setConfig: fakeSetConfig });
+				});
+
+				test('Calls configured channels', async (done) => {
+					driver.setConfig({ channels: ['single', 'database'] });
+					await driver.log(1, message);
+					expect(fakeLog1).toHaveBeenCalledTimes(1);
+					expect(fakeLog2).toHaveBeenCalledTimes(1);
+					expect(brokenLog).not.toHaveBeenCalled();
+					done();
+				});
+
+				test('Prevent and log error if configured accordingly', (done) => {
+					driver.setConfig({
+						channels: ['single', 'database', 'broken'],
+						ignore_exceptions: true // eslint-disable-line camelcase
+					});
+					driver.log(1, message)
+						.catch(errorCallback)
+						.finally(() => {
+							expect(errorCallback).not.toHaveBeenCalled();
+							// FakeLog1 will be called twice on error,
+							// once for error during log and once as fallback for brokenLog
+							expect(fakeLog1).toHaveBeenCalledTimes(3);
+							expect(fakeLog2).toHaveBeenCalledTimes(1);
+							expect(brokenLog).toHaveBeenCalledTimes(1);
+							done();
+						});
+				});
+
+				test('Prevent error without logging it if configured accordingly', (done) => {
+					driver.setConfig({
+						channels: ['single', 'database', 'broken'],
+						ignore_exceptions: false // eslint-disable-line camelcase
+					});
+					driver.log(1, message)
+						.catch(errorCallback)
+						.finally(() => {
+							expect(errorCallback).not.toHaveBeenCalled();
+							expect(fakeLog1).toHaveBeenCalledTimes(1);
+							expect(fakeLog2).toHaveBeenCalledTimes(1);
+							expect(brokenLog).toHaveBeenCalledTimes(1);
+							done();
+						});
+				});
+
+				test('Prevent error without logging it if not configured', (done) => {
+					driver.setConfig({
+						channels: ['single', 'database', 'broken']
+					});
+					driver.log(1, message)
+						.catch(errorCallback)
+						.finally(() => {
+							expect(errorCallback).not.toHaveBeenCalled();
+							expect(fakeLog1).toHaveBeenCalledTimes(1);
+							expect(fakeLog2).toHaveBeenCalledTimes(1);
+							expect(brokenLog).toHaveBeenCalledTimes(1);
+							done();
+						});
 				});
 
 			});
