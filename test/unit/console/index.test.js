@@ -3,12 +3,12 @@
 //--------------------------------------------------------
 'use strict';
 
+const __                     = require('@absolunet/private-registry');
 const childProcess           = require('child_process');
-
 const TestCommand            = require('./stubs/commands/TestCommand');
+const TestMakeCommand        = require('./stubs/commands/TestMakeCommand');
 const container              = require('../common');
 const ListCommand            = require('../../../lib/console/commands/ListCommand');
-const FileServiceProvider    = require('../../../lib/file/providers/FileServiceProvider');
 const SupportServiceProvider = require('../../../lib/support/providers/SupportServiceProvider');
 const ConsoleServiceProvider = require('../../../lib/console/providers/ConsoleServiceProvider');
 
@@ -16,7 +16,6 @@ const ConsoleServiceProvider = require('../../../lib/console/providers/ConsoleSe
 describe('Node IoC - Console', () => {
 
 	beforeEach(() => {
-		container.register(FileServiceProvider);
 		container.register(ConsoleServiceProvider);
 		container.register(SupportServiceProvider);
 		container.bootIfNotBooted();
@@ -62,6 +61,81 @@ describe('Node IoC - Console', () => {
 			});
 
 			done();
+		});
+
+		describe('Strict mode', () => {
+
+			test('Command called with unhandled parameter fails', (done) => {
+				childProcess.exec(`node lib/app/index.js list foo`, { stdio: 'pipe' }, (error) => {
+					expect(error).toBeTruthy();
+					expect(error.message).toMatch(/Unknown argument: foo/u);
+					done();
+				});
+			});
+
+			test('Command called with unhandled option fails', (done) => {
+				childProcess.exec(`node lib/app/index.js list --foo=bar`, { stdio: 'pipe' }, (error) => {
+					expect(error).toBeTruthy();
+					expect(error.message).toMatch(/Unknown argument: foo/u);
+					done();
+				});
+			});
+
+			test('Command called with unhandled flag fails', (done) => {
+				childProcess.exec(`node lib/app/index.js list --foo`, { stdio: 'pipe' }, (error) => {
+					expect(error).toBeTruthy();
+					expect(error.message).toMatch(/Unknown argument: foo/u);
+					done();
+				});
+			});
+
+		});
+
+
+		describe('Generator commands', () => {
+
+			let ensureDir; // eslint-disable-line unicorn/prevent-abbreviations
+
+			let handleException;
+
+			let writeFile;
+
+			beforeEach(() => {
+				ensureDir = jest.fn(() => { return Promise.resolve(); });
+				handleException = jest.fn(() => { return Promise.resolve(); });
+				writeFile = jest.fn(() => { return Promise.resolve(); });
+				__(container.make('file.engine').__instance).set('async', { ensureDir, writeFile });
+				container.singleton('exception.handler', { handle: handleException });
+			});
+
+			test('Can make file', async (done) => {
+				const registrar = container.make('command.registrar');
+				registrar.add(TestMakeCommand);
+				await registrar.resolve('test:case:make SomeClass', true);
+				expect(handleException).not.toHaveBeenCalled();
+				expect(writeFile).toHaveBeenCalledTimes(1);
+				const [[filePath, content]] = writeFile.mock.calls;
+				expect(filePath.replace(/\\/gu, '/')).toMatch(/test\/unit\/console\/stubs\/commands\/stubs\/SomeClass\.js$/u);
+				expect(content).toMatch(/\/\/-- Node IoC - Command - SomeClass\n/u);
+				expect(content).toMatch(/class SomeClass \{\n/u);
+				expect(content).toMatch(/module.exports = SomeClass;\n/u);
+				done();
+			});
+
+			test('Can make file in directory', async (done) => {
+				const registrar = container.make('command.registrar');
+				registrar.add(TestMakeCommand);
+				await registrar.resolve('test:case:make foo/SomeClass', true);
+				expect(handleException).not.toHaveBeenCalled();
+				expect(writeFile).toHaveBeenCalledTimes(1);
+				const [[filePath, content]] = writeFile.mock.calls;
+				expect(filePath.replace(/\\/gu, '/')).toMatch(/test\/unit\/console\/stubs\/commands\/stubs\/foo\/SomeClass\.js$/u);
+				expect(content).toMatch(/\/\/-- Node IoC - Command - SomeClass\n/u);
+				expect(content).toMatch(/class SomeClass \{\n/u);
+				expect(content).toMatch(/module.exports = SomeClass;\n/u);
+				done();
+			});
+
 		});
 
 	});
