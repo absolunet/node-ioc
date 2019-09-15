@@ -6,14 +6,12 @@
 const __                     = require('@absolunet/private-registry');
 const container              = require('../common');
 const LogServiceProvider     = require('../../../lib/log/providers/LogServiceProvider');
-const SupportServiceProvider = require('../../../lib/support/providers/SupportServiceProvider');
 
 
 describe('Node IoC - Log', () => {
 
 	beforeEach(() => {
 		container.register(LogServiceProvider);
-		container.register(SupportServiceProvider);
 		container.bootIfNotBooted();
 	});
 

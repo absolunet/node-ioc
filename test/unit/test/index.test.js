@@ -3,10 +3,8 @@
 //--------------------------------------------------------
 'use strict';
 
-
 const container              = require('../common');
 const path                   = require('path');
-const SupportServiceProvider = require('../../../lib/support/providers/SupportServiceProvider');
 const ConsoleServiceProvider = require('../../../lib/console/providers/ConsoleServiceProvider');
 const TestServiceProvider    = require('../../../lib/test/providers/TestServiceProvider');
 const TestCase               = require('../../../lib/test/TestCase');
@@ -17,7 +15,6 @@ describe('Node IoC - Test', () => {
 
 	beforeEach(() => {
 		container.register(ConsoleServiceProvider);
-		container.register(SupportServiceProvider);
 		container.register(TestServiceProvider);
 		container.bootIfNotBooted();
 	});
