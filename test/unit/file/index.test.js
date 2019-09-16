@@ -49,7 +49,6 @@ describe('Node IoC - File', () => {
 
 	describe('Loader', () => {
 
-
 		let loader;
 
 		const getFileName = (extension) => {
