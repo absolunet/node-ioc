@@ -18,6 +18,7 @@ stores:
     table: cache
 
 
+# Common store configuration
 common:
 
   prefix: '{{CACHE_PREFIX|node_ioc_cache}}'
