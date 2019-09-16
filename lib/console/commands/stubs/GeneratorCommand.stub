@@ -3,7 +3,6 @@
 //--------------------------------------------------------
 'use strict';
 
-const path                 = require('path');
 const { GeneratorCommand } = require('@absolunet/ioc').classes;
 
 
@@ -35,7 +34,7 @@ class %CLASS% extends GeneratorCommand {
 	 */
 	get files() {
 		return {
-			base: path.join(__dirname, 'stubs', 'BaseFile.stub')
+			base: this.app.formatPath(__dirname, 'stubs', 'BaseFile.stub')
 		};
 	}
 
