@@ -101,9 +101,9 @@ describe('Node IoC - Console', () => {
 			let writeFile;
 
 			beforeEach(() => {
-				ensureDir = jest.fn(() => { return Promise.resolve(); });
+				ensureDir       = jest.fn(() => { return Promise.resolve(); });
 				handleException = jest.fn(() => { return Promise.resolve(); });
-				writeFile = jest.fn(() => { return Promise.resolve(); });
+				writeFile       = jest.fn(() => { return Promise.resolve(); });
 				__(container.make('file.engine').__instance).set('async', { ensureDir, writeFile });
 				container.singleton('exception.handler', { handle: handleException });
 			});
