@@ -6,4 +6,5 @@ test
 .gitignore
 .travis.yml
 manager.js
+storage/logs
 !lib/test

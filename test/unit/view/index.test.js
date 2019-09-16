@@ -3,15 +3,21 @@
 //--------------------------------------------------------
 'use strict';
 
-const path                  = require('path');
-const slash                 = require('slash');
-const container             = require('../common');
-const ViewServiceProvider   = require('../../../lib/view/providers/ViewServiceProvider');
+const path                       = require('path');
+const slash                      = require('slash');
+const container                  = require('../common');
+const HttpServiceProvider        = require('../../../lib/http/providers/HttpServiceProvider');
+const RoutingServiceProvider     = require('../../../lib/routing/providers/RoutingServiceProvider');
+const TranslationServiceProvider = require('../../../lib/translation/providers/TranslationServiceProvider');
+const ViewServiceProvider        = require('../../../lib/view/providers/ViewServiceProvider');
 
 
 describe('Node IoC - View', () => {
 
 	beforeEach(() => {
+		container.register(HttpServiceProvider);
+		container.register(RoutingServiceProvider);
+		container.register(TranslationServiceProvider);
 		container.register(ViewServiceProvider);
 		container.bootIfNotBooted();
 	});
@@ -88,6 +94,40 @@ describe('Node IoC - View', () => {
 			const result = jsrenderDriver.render(template, { text: 'Bar' });
 
 			expect(result).toBe(template);
+		});
+
+		test('Can use dependency injection', () => {
+			container.make('config').set('foo.bar', 'baz');
+			const template = `<p>{{:~inject('config').get('foo.bar')}}</p>`;
+			const result   = jsrenderDriver.render(template);
+
+			expect(result).toBe('<p>baz</p>');
+		});
+
+		test('Can use configuration', () => {
+			container.make('config').set('foo.bar', 'baz');
+			const template = `<p>{{:~config('foo.bar')}}</p>`;
+			const result   = jsrenderDriver.render(template);
+
+			expect(result).toBe('<p>baz</p>');
+		});
+
+		test('Can use router to display a resolved route URL', () => {
+			container.make('router').get('/lorem/:value', () => {}).name('foo.bar'); // eslint-disable-line no-empty-function
+			const template = `<p>{{:~route('foo.bar', { 'value': 'ipsum' })}}</p>`;
+			const result   = jsrenderDriver.render(template);
+
+			expect(result).toBe('<p>/lorem/ipsum</p>');
+		});
+
+		test('Can use translator', () => {
+			const translator = container.make('translator');
+			translator.setLocale('en');
+			translator.addTranslation('foo', 'bar', 'en');
+			const template = `<p>{{:~t('foo')}}</p>`;
+			const result   = jsrenderDriver.render(template);
+
+			expect(result).toBe('<p>bar</p>');
 		});
 
 	});

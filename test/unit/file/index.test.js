@@ -3,7 +3,6 @@
 //--------------------------------------------------------
 'use strict';
 
-
 const path = require('path');
 const fsp  = require('@absolunet/fsp');
 const fss  = require('@absolunet/fss');

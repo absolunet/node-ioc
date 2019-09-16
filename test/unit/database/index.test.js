@@ -10,7 +10,6 @@ const container               = require('../common');
 const ConsoleServiceProvider  = require('../../../lib/console/providers/ConsoleServiceProvider');
 const DatabaseServiceProvider = require('../../../lib/database/providers/DatabaseServiceProvider');
 const SecurityServiceProvider = require('../../../lib/security/providers/SecurityServiceProvider');
-const SupportServiceProvider  = require('../../../lib/support/providers/SupportServiceProvider');
 const BaseModel               = require('../../../lib/database/Model');
 const BaseModelFactory        = require('../../../lib/database/Factory');
 
@@ -21,12 +20,12 @@ const databases = {
 	other: path.join(__dirname, 'stubs', 'database', 'test-other.sqlite')
 };
 
+
 describe('Node IoC - Database', () => {
 
 	beforeEach(() => {
 		container.register(ConsoleServiceProvider);
 		container.register(SecurityServiceProvider);
-		container.register(SupportServiceProvider);
 
 		container.bootIfNotBooted();
 
