@@ -8,7 +8,6 @@ const container       = require('../common');
 const ServiceProvider = require('../../../lib/foundation/ServiceProvider');
 
 
-
 describe('Node IoC - Foundation', () => {
 
 	describe('Bootstrap', () => {

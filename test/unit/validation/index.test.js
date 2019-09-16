@@ -8,7 +8,6 @@ const container                 = require('../common');
 const ValidationServiceProvider = require('../../../lib/validation/providers/ValidationServiceProvider');
 
 
-
 describe('Node IoC - Validation', () => {
 
 	beforeEach(() => {

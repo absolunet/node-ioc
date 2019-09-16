@@ -9,7 +9,6 @@ const TestCommand            = require('./stubs/commands/TestCommand');
 const TestMakeCommand        = require('./stubs/commands/TestMakeCommand');
 const container              = require('../common');
 const ListCommand            = require('../../../lib/console/commands/ListCommand');
-const SupportServiceProvider = require('../../../lib/support/providers/SupportServiceProvider');
 const ConsoleServiceProvider = require('../../../lib/console/providers/ConsoleServiceProvider');
 
 
@@ -17,7 +16,6 @@ describe('Node IoC - Console', () => {
 
 	beforeEach(() => {
 		container.register(ConsoleServiceProvider);
-		container.register(SupportServiceProvider);
 		container.bootIfNotBooted();
 	});
 
@@ -65,28 +63,40 @@ describe('Node IoC - Console', () => {
 
 		describe('Strict mode', () => {
 
-			test('Command called with unhandled parameter fails', (done) => {
-				childProcess.exec(`node lib/app/index.js list foo`, { stdio: 'pipe' }, (error) => {
-					expect(error).toBeTruthy();
-					expect(error.message).toMatch(/Unknown argument: foo/u);
-					done();
-				});
+			let errorCallback;
+			const { error } = console; // eslint-disable-line no-console
+
+			beforeEach(() => {
+				console.error = jest.fn(); // eslint-disable-line no-console
+				errorCallback = jest.fn();
 			});
 
-			test('Command called with unhandled option fails', (done) => {
-				childProcess.exec(`node lib/app/index.js list --foo=bar`, { stdio: 'pipe' }, (error) => {
-					expect(error).toBeTruthy();
-					expect(error.message).toMatch(/Unknown argument: foo/u);
-					done();
-				});
+			afterAll(() => {
+				console.error = error; // eslint-disable-line no-console
 			});
 
-			test('Command called with unhandled flag fails', (done) => {
-				childProcess.exec(`node lib/app/index.js list --foo`, { stdio: 'pipe' }, (error) => {
-					expect(error).toBeTruthy();
-					expect(error.message).toMatch(/Unknown argument: foo/u);
-					done();
-				});
+			test('Command called with unhandled parameter fails', async (done) => {
+				const registrar = container.make('command.registrar');
+				await registrar.resolve('list foo').catch(errorCallback);
+				expect(errorCallback).toHaveBeenCalledTimes(1);
+				expect(errorCallback.mock.calls[0][0].message).toMatch(/Unknown argument: foo/u);
+				done();
+			});
+
+			test('Command called with unhandled option fails', async (done) => {
+				const registrar = container.make('command.registrar');
+				await registrar.resolve('list --foo=bar').catch(errorCallback);
+				expect(errorCallback).toHaveBeenCalledTimes(1);
+				expect(errorCallback.mock.calls[0][0].message).toMatch(/Unknown argument: foo/u);
+				done();
+			});
+
+			test('Command called with unhandled flag fails', async (done) => {
+				const registrar = container.make('command.registrar');
+				await registrar.resolve('list --foo').catch(errorCallback);
+				expect(errorCallback).toHaveBeenCalledTimes(1);
+				expect(errorCallback.mock.calls[0][0].message).toMatch(/Unknown argument: foo/u);
+				done();
 			});
 
 		});
@@ -101,9 +111,9 @@ describe('Node IoC - Console', () => {
 			let writeFile;
 
 			beforeEach(() => {
-				ensureDir = jest.fn(() => { return Promise.resolve(); });
+				ensureDir       = jest.fn(() => { return Promise.resolve(); });
 				handleException = jest.fn(() => { return Promise.resolve(); });
-				writeFile = jest.fn(() => { return Promise.resolve(); });
+				writeFile       = jest.fn(() => { return Promise.resolve(); });
 				__(container.make('file.engine').__instance).set('async', { ensureDir, writeFile });
 				container.singleton('exception.handler', { handle: handleException });
 			});
