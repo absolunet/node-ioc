@@ -57,6 +57,7 @@ const madeObject = container.make(() => { // { obj:'resolved' }
 
 // How about dependencies injection?
 class Injectable {
+
 	static get dependencies() {
 		return ['foo'];
 	}
@@ -64,6 +65,7 @@ class Injectable {
 	constructor(fooService) {
 		this.foo = fooService;
 	}
+
 }
 
 const injectable = container.make(Injectable); // Injectable {}
@@ -78,13 +80,13 @@ container.decorate('baz', (bazInstance) => {
 	return bazInstance;
 });
 
-const bazDecoratedInstance = container.make('baz') // { baz:42, hasAnswerOfLife:true }
+const bazDecoratedInstance = container.make('baz'); // { baz:42, hasAnswerOfLife:true }
 
 
 // This is great, but it can be better!
 
 // Registering service providers
-const ProjectServiceProvider = require('./providers/project'); // It binds 'project' and 'project.current' service
+const ProjectServiceProvider = require('./providers/ProjectServiceProvider'); // It binds 'project' and 'project.current' service
 container.register(ProjectServiceProvider); // The service provider is registered
 
 container.onBooted(() => {

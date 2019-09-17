@@ -9,22 +9,21 @@ module.exports = {
 	get app() { return require('./lib/app'); },
 	get classes() {
 		return {
-			Application:            require('./lib'),
-			BaseProxy:              require('./lib/support/proxy/BaseProxy'),
-			Controller:             require('./lib/http/controllers/Controller'),
-			Command:                require('./lib/console/Command'),
-			ConsoleServiceProvider: require('./lib/console/BaseConsoleServiceProvider'),
-			ForwardProxy:           require('./lib/support/proxy/ForwardProxy'),
-			GeneratorCommand:       require('./lib/console/GeneratorCommand'),
-			Kernel:                 require('./lib/foundation/Kernel'),
-			Migration:              require('./lib/database/Migration'),
-			Model:                  require('./lib/database/Model'),
-			ModelFactory:           require('./lib/database/Factory'),
-			NullDriverProxy:        require('./lib/support/drivers/NullDriverProxy'),
-			Seeder:                 require('./lib/database/Seeder'),
-			ServiceProvider:        require('./lib/foundation/ServiceProvider'),
-			TestCase:               require('./lib/test/TestCase'),
-			Tester:                 require('./lib/test/services/Tester')
+			get Application() {      return require('./lib'); },
+			get BaseProxy() {        return require('./lib/support/proxy/BaseProxy'); },
+			get Controller() {       return require('./lib/http/controllers/Controller'); },
+			get Command() {          return require('./lib/console/Command'); },
+			get ForwardProxy() {     return require('./lib/support/proxy/ForwardProxy'); },
+			get GeneratorCommand() { return require('./lib/console/GeneratorCommand'); },
+			get Kernel() {           return require('./lib/foundation/Kernel'); },
+			get Migration() {        return require('./lib/database/Migration'); },
+			get Model() {            return require('./lib/database/Model'); },
+			get ModelFactory() {     return require('./lib/database/Factory'); },
+			get NullDriverProxy() {  return require('./lib/support/drivers/NullDriverProxy'); },
+			get Seeder() {           return require('./lib/database/Seeder'); },
+			get ServiceProvider() {  return require('./lib/foundation/ServiceProvider'); },
+			get TestCase() {         return require('./lib/test/TestCase'); },
+			get Tester() {           return require('./lib/test/services/Tester'); }
 		};
 	},
 	get mixins() { return require('./lib/support/mixins'); }

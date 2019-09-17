@@ -5,7 +5,7 @@
 
 const path                       = require('path');
 const container                  = require('../common');
-const TranslationServiceProvider = require('../../../lib/translation/providers/TranslationServiceProvider');
+const TranslationServiceProvider = require('../../../lib/translation/TranslationServiceProvider');
 const FileDriver                 = require('../../../lib/translation/services/Translator/drivers/FileDriver');
 
 

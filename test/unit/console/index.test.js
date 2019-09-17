@@ -9,7 +9,7 @@ const TestCommand            = require('./stubs/commands/TestCommand');
 const TestMakeCommand        = require('./stubs/commands/TestMakeCommand');
 const container              = require('../common');
 const ListCommand            = require('../../../lib/console/commands/ListCommand');
-const ConsoleServiceProvider = require('../../../lib/console/providers/ConsoleServiceProvider');
+const ConsoleServiceProvider = require('../../../lib/console/ConsoleServiceProvider');
 
 
 describe('Node IoC - Console', () => {

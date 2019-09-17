@@ -6,10 +6,10 @@
 const path                       = require('path');
 const slash                      = require('slash');
 const container                  = require('../common');
-const HttpServiceProvider        = require('../../../lib/http/providers/HttpServiceProvider');
-const RoutingServiceProvider     = require('../../../lib/routing/providers/RoutingServiceProvider');
-const TranslationServiceProvider = require('../../../lib/translation/providers/TranslationServiceProvider');
-const ViewServiceProvider        = require('../../../lib/view/providers/ViewServiceProvider');
+const HttpServiceProvider        = require('../../../lib/http/HttpServiceProvider');
+const RoutingServiceProvider     = require('../../../lib/routing/RoutingServiceProvider');
+const TranslationServiceProvider = require('../../../lib/translation/TranslationServiceProvider');
+const ViewServiceProvider        = require('../../../lib/view/ViewServiceProvider');
 
 
 describe('Node IoC - View', () => {
