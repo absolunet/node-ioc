@@ -6,8 +6,8 @@
 const axios = require('axios');
 
 const container              = require('../common');
-const HttpServiceProvider    = require('../../../lib/http/providers/HttpServiceProvider');
-const RoutingServiceProvider = require('../../../lib/routing/providers/RoutingServiceProvider');
+const HttpServiceProvider    = require('../../../lib/http/HttpServiceProvider');
+const RoutingServiceProvider = require('../../../lib/routing/RoutingServiceProvider');
 
 
 describe('Node IoC - HTTP', () => {

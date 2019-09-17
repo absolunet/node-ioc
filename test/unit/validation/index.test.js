@@ -5,7 +5,7 @@
 
 const joi                       = require('@hapi/joi');
 const container                 = require('../common');
-const ValidationServiceProvider = require('../../../lib/validation/providers/ValidationServiceProvider');
+const ValidationServiceProvider = require('../../../lib/validation/ValidationServiceProvider');
 
 
 describe('Node IoC - Validation', () => {

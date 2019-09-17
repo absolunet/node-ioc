@@ -13,7 +13,6 @@ module.exports = {
 			BaseProxy:              require('./lib/support/proxy/BaseProxy'),
 			Controller:             require('./lib/http/controllers/Controller'),
 			Command:                require('./lib/console/Command'),
-			ConsoleServiceProvider: require('./lib/console/BaseConsoleServiceProvider'),
 			ForwardProxy:           require('./lib/support/proxy/ForwardProxy'),
 			GeneratorCommand:       require('./lib/console/GeneratorCommand'),
 			Kernel:                 require('./lib/foundation/Kernel'),

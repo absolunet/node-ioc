@@ -7,9 +7,9 @@ const __                      = require('@absolunet/private-registry');
 const fs                      = require('fs');
 const path                    = require('path');
 const container               = require('../common');
-const ConsoleServiceProvider  = require('../../../lib/console/providers/ConsoleServiceProvider');
-const DatabaseServiceProvider = require('../../../lib/database/providers/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../lib/security/providers/SecurityServiceProvider');
+const ConsoleServiceProvider  = require('../../../lib/console/ConsoleServiceProvider');
+const DatabaseServiceProvider = require('../../../lib/database/DatabaseServiceProvider');
+const SecurityServiceProvider = require('../../../lib/security/SecurityServiceProvider');
 const BaseModel               = require('../../../lib/database/Model');
 const BaseModelFactory        = require('../../../lib/database/Factory');
 
