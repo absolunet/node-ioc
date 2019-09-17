@@ -5,8 +5,8 @@
 
 const container              = require('../common');
 const path                   = require('path');
-const ConsoleServiceProvider = require('../../../lib/console/providers/ConsoleServiceProvider');
-const TestServiceProvider    = require('../../../lib/test/providers/TestServiceProvider');
+const ConsoleServiceProvider = require('../../../lib/console/ConsoleServiceProvider');
+const TestServiceProvider    = require('../../../lib/test/TestServiceProvider');
 const TestCase               = require('../../../lib/test/TestCase');
 
 

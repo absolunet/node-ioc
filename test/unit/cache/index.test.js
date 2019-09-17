@@ -7,9 +7,9 @@ const fs         = require('fs');
 const path       = require('path');
 const container  = require('../common');
 
-const CacheServiceProvider    = require('../../../lib/cache/providers/CacheServiceProvider');
-const DatabaseServiceProvider = require('../../../lib/database/providers/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../lib/security/providers/SecurityServiceProvider');
+const CacheServiceProvider    = require('../../../lib/cache/CacheServiceProvider');
+const DatabaseServiceProvider = require('../../../lib/database/DatabaseServiceProvider');
+const SecurityServiceProvider = require('../../../lib/security/SecurityServiceProvider');
 
 const DatabaseDriver = require('../../../lib/cache/services/CacheManager/drivers/DatabaseDriver');
 const FileDriver     = require('../../../lib/cache/services/CacheManager/drivers/FileDriver');

@@ -9,8 +9,8 @@ const {
 }                            = require('http');
 const path                   = require('path');
 const container              = require('../common');
-const HttpServiceProvider    = require('../../../lib/http/providers/HttpServiceProvider');
-const RoutingServiceProvider = require('../../../lib/routing/providers/RoutingServiceProvider');
+const HttpServiceProvider    = require('../../../lib/http/HttpServiceProvider');
+const RoutingServiceProvider = require('../../../lib/routing/RoutingServiceProvider');
 const TestController         = require('./stubs/controllers/TestController');
 const NamespaceController    = require('./stubs/controllers/namespace/NamespaceController');
 

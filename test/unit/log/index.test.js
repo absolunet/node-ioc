@@ -5,7 +5,7 @@
 
 const __                     = require('@absolunet/private-registry');
 const container              = require('../common');
-const LogServiceProvider     = require('../../../lib/log/providers/LogServiceProvider');
+const LogServiceProvider     = require('../../../lib/log/LogServiceProvider');
 
 
 describe('Node IoC - Log', () => {
