@@ -46,7 +46,7 @@
     "@absolunet/fss": "^1.6.1",
     "@absolunet/private-registry": "^2.0.0",
     "@absolunet/terminal": "^2.1.1",
-    "@hapi/joi": "^16.0.1",
+    "@hapi/joi": "^16.1.1",
     "axios": "^0.19.0",
     "bookshelf": "^1.0.0",
     "bookshelf-uuid": "^1.0.1",
