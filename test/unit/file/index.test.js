@@ -7,7 +7,7 @@ const path = require('path');
 const fsp  = require('@absolunet/fsp');
 const fss  = require('@absolunet/fss');
 
-const container             = require('../common');
+const container = require('../container');
 
 
 describe('Node IoC - File', () => {

@@ -8,7 +8,7 @@ const {
 	ServerResponse
 }                            = require('http');
 const path                   = require('path');
-const container              = require('../common');
+const container              = require('../container');
 const HttpServiceProvider    = require('../../../lib/http/HttpServiceProvider');
 const RoutingServiceProvider = require('../../../lib/routing/RoutingServiceProvider');
 const TestController         = require('./stubs/controllers/TestController');

@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const container              = require('../common');
+const container              = require('../container');
 const path                   = require('path');
 const ConsoleServiceProvider = require('../../../lib/console/ConsoleServiceProvider');
 const TestServiceProvider    = require('../../../lib/test/TestServiceProvider');

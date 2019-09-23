@@ -39,7 +39,8 @@
   "devDependencies": {
     "@absolunet/manager": "1.1.0",
     "@absolunet/tester": "2.6.9",
-    "jest": "24.9.0"
+    "jest": "24.9.0",
+    "mock-knex": "0.4.6"
   },
   "dependencies": {
     "@absolunet/fsp": "^1.6.1",

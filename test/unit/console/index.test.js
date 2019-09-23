@@ -7,7 +7,7 @@ const __                     = require('@absolunet/private-registry');
 const childProcess           = require('child_process');
 const TestCommand            = require('./stubs/commands/TestCommand');
 const TestMakeCommand        = require('./stubs/commands/TestMakeCommand');
-const container              = require('../common');
+const container              = require('../container');
 const ListCommand            = require('../../../lib/console/commands/ListCommand');
 const ConsoleServiceProvider = require('../../../lib/console/ConsoleServiceProvider');
 
@@ -282,12 +282,12 @@ describe('Node IoC - Console', () => {
 		test('Can remove color from chalk in interceptors', () => {
 			givenCleanInterceptorsForJest();
 			const loggedContent = 'Test';
-			let receivedContent;
+			let receivedContent = '';
 
 			interceptor.removeStyle();
 
 			interceptor.add((content) => {
-				receivedContent = content;
+				receivedContent += content;
 			});
 
 			process.stdout.write(`\u001B[36m${loggedContent}\u001B[0m`);

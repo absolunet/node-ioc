@@ -4,7 +4,7 @@
 'use strict';
 
 const slash           = require('slash');
-const container       = require('../common');
+const container       = require('../container');
 const ServiceProvider = require('../../../lib/foundation/ServiceProvider');
 
 
