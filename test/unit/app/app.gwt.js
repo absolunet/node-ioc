@@ -5,14 +5,19 @@
 
 const { given, when, then } = require('../common.gwt');
 
-const container = require('../../../lib/app');
+let container;
 
 
 //-- Mocks
 //--------------------------------------------------------
 
 const fakeKernel = {
-	handle: jest.fn(),
+	handle:    jest.fn(),
+	terminate: jest.fn()
+};
+
+const brokenKernel = {
+	handle:    jest.fn(() => { throw new TypeError('An error occurred...'); }),
 	terminate: jest.fn()
 };
 
@@ -25,9 +30,13 @@ const fakeExceptionHandler = {
 //--------------------------------------------------------
 
 given.freshContainer = () => {
-	container.flush();
-	container.bind('kernel.console', fakeKernel);
+	container = require('../../../lib/app'); // eslint-disable-line global-require
+	container.bind('kernel.console',    fakeKernel);
 	container.bind('exception.handler', fakeExceptionHandler);
+};
+
+given.brokenKernel = () => {
+	container.bind('kernel.console', brokenKernel);
 };
 
 
@@ -67,6 +76,10 @@ then.shouldNotHaveHandled = () => {
 
 then.shouldNotHaveCaughtException = () => {
 	expect(fakeExceptionHandler.handle).not.toHaveBeenCalled();
+};
+
+then.shouldHaveCaughtException = () => {
+	expect(fakeExceptionHandler.handle).toHaveBeenCalled();
 };
 
 then.shouldHaveTerminated = () => {

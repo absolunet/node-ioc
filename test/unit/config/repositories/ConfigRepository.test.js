@@ -83,6 +83,11 @@ describe('With fake file manager', () => {
 		then.configShouldEqual({ some: { key: 'value' } });
 	});
 
+	test('Can add configuration from object instead of key-paired value', () => {
+		when.settingConfig({ key: 'value' });
+		then.configShouldEqual({ key: 'value' });
+	});
+
 	test('Can add configuration collection', () => {
 		when.settingConfig('some', { key: 'value' });
 		then.configShouldEqual({ some: { key: 'value' } });

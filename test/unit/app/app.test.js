@@ -7,6 +7,7 @@ const { given, when, then } = require('./app.gwt');
 
 
 beforeEach(() => {
+	jest.resetModules();
 	given.freshContainer();
 });
 
@@ -29,4 +30,10 @@ test('App contains core services', () => {
 	then.shouldHaveBindings(['event']);
 	then.shouldHaveBindings(['file', 'file.engine']);
 	then.shouldHaveBindings(['helper.date', 'helper.file', 'helper.string', 'faker']);
+});
+
+test('App handles exception if it occurred during handling process', async () => {
+	given.brokenKernel();
+	await when.waitingForNextTick();
+	then.shouldHaveCaughtException();
 });

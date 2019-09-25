@@ -7,7 +7,6 @@ const { given, when, then, build } = require('../common.gwt');
 
 const container              = require('../container');
 const HttpServiceProvider    = require('../../../lib/http/HttpServiceProvider');
-const RoutingServiceProvider = require('../../../lib/routing/RoutingServiceProvider');
 
 
 //-- Given
@@ -15,7 +14,6 @@ const RoutingServiceProvider = require('../../../lib/routing/RoutingServiceProvi
 
 given.providersAndDependencies = () => {
 	container.register(HttpServiceProvider);
-	container.register(RoutingServiceProvider);
 };
 
 given.bootedContainer = () => {

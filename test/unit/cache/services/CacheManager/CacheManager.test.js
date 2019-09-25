@@ -22,6 +22,11 @@ test('Can resolve default store', () => {
 	then.shouldHaveRuntimeDriver();
 });
 
+test('Can resolve default store from resolve() method', () => {
+	when.resolvingStore();
+	then.shouldHaveRuntimeDriver();
+});
+
 test('Can resolve store by name', () => {
 	given.configForTestStore({ foo: 'bar' });
 	when.resolvingStore('test');

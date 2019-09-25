@@ -31,16 +31,23 @@
     "test": "npm run test:standards && npm run test:unit",
     "test:standards": "ava test/standards/index.js",
     "test:unit": "jest test/unit",
+    "test:coverage": "npm run test:unit -- --coverage && rimraf ./coverage",
     "installer": "node manager.js --task=installer",
     "outdated": "node manager.js --task=outdated",
     "build": "node manager.js --task=build",
     "deploy": "node manager.js --task=deploy"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "lib/**/*.js"
+    ]
+  },
   "devDependencies": {
     "@absolunet/manager": "1.1.0",
     "@absolunet/tester": "2.6.9",
     "jest": "24.9.0",
-    "mock-knex": "0.4.6"
+    "mock-knex": "0.4.6",
+    "rimraf": "^3.0.0"
   },
   "dependencies": {
     "@absolunet/fsp": "^1.6.1",
