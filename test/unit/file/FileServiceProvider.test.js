@@ -31,3 +31,22 @@ test('File engine service is a singleton', () => {
 	then.fileEngineShouldBeSingleton();
 });
 
+test('Async file system is resolvable', () => {
+	when.bootingContainer();
+	then.asyncFileSystemShouldBeResolvable();
+});
+
+test('Async file system is a singleton', () => {
+	when.bootingContainer();
+	then.asyncFileSystemShouldBeSingleton();
+});
+
+test('Sync file system is resolvable', () => {
+	when.bootingContainer();
+	then.syncFileSystemShouldBeResolvable();
+});
+
+test('Sync file system is a singleton', () => {
+	when.bootingContainer();
+	then.syncFileSystemShouldBeSingleton();
+});

@@ -26,7 +26,7 @@
   "engines": {
     "node": ">= 12.5.0"
   },
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "npm run test:standards && npm run test:unit",
     "test:standards": "ava test/standards/index.js",

@@ -3,7 +3,9 @@
 //--------------------------------------------------------
 'use strict';
 
-const container = require('../../lib');
+const { Application } = require('../../lib');
+
+const container = Application.make();
 
 
 beforeEach(() => {

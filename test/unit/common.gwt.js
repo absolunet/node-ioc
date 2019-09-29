@@ -76,7 +76,15 @@ then.shouldNotHaveThrown = () => {
 };
 
 then.exceptionShouldBe = (expected) => {
-	expect(exception).toBe(expected);
+	expect(exception.message).toBe(expected);
+};
+
+then.exceptionShouldMatch = (expected) => {
+	expect(exception.message).toMatch(expected);
+};
+
+then.exceptionShouldBeInstanceOf = (expected) => {
+	expect(exception).toBeInstanceOf(expected);
 };
 
 

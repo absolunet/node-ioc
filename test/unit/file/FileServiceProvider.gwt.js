@@ -25,5 +25,21 @@ then.fileEngineShouldBeSingleton = () => {
 	then.shouldHaveSingleton('file.engine');
 };
 
+then.asyncFileSystemShouldBeResolvable = () => {
+	then.serviceShouldBeResolvable('file.system.async');
+};
+
+then.asyncFileSystemShouldBeSingleton = () => {
+	then.shouldHaveSingleton('file.system.async');
+};
+
+then.syncFileSystemShouldBeResolvable = () => {
+	then.serviceShouldBeResolvable('file.system.sync');
+};
+
+then.syncFileSystemShouldBeSingleton = () => {
+	then.shouldHaveSingleton('file.system.sync');
+};
+
 
 module.exports = build({ given, when, then });

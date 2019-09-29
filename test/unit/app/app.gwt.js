@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const { given, when, then } = require('../common.gwt');
+const { given, when, then, build } = require('../common.gwt');
 
 let container;
 
@@ -87,4 +87,4 @@ then.shouldHaveTerminated = () => {
 };
 
 
-module.exports = { given, when, then };
+module.exports = build({ given, when, then });
