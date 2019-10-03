@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/ioc",
-  "version": "0.8.3",
+  "version": "0.9.0",
   "description": "The perfect IoC framework for Node.js lovers",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-ioc",
@@ -64,7 +64,6 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "glob": "^7.1.4",
     "inquirer": "^7.0.0",
     "intercept-stdout": "^0.1.2",
     "js-yaml": "^3.13.1",
