@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const { Seeder } = require('@absolunet/ioc').classes;
+const { Seeder } = require('@absolunet/ioc');
 
 
 class %CLASS% extends Seeder {
