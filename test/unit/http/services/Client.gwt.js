@@ -5,9 +5,9 @@
 
 const { given, when, then, build } = require('../common.gwt');
 
+const axios     = require('axios');
 const container = require('../../container');
 const Client    = require('../../../../lib/http/services/Client');
-const axios     = require('axios');
 
 let result;
 

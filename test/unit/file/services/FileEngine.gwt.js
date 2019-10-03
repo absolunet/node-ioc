@@ -3,10 +3,10 @@
 //--------------------------------------------------------
 'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+const { given, when, then, build } = require('../common.gwt');
 
-const container = require('../../../container');
-const FileEngine = require('../../../../../lib/file/services/FileEngine');
+const container  = require('../../container');
+const FileEngine = require('../../../../lib/file/services/FileEngine');
 
 let fileEngine;
 let result;
@@ -42,7 +42,7 @@ given.fileEngine = () => {
 //-- When
 //--------------------------------------------------------
 
-when.gettingAsync = () => {
+when.gettingAsync = () => {
 	when.attempting(() => {
 		result = fileEngine.async;
 	});

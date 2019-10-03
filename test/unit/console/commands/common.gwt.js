@@ -56,7 +56,7 @@ given.fakeTerminal = () => {
 
 given.command = (Command) => {
 	command = container.make(Command, {
-		app: container,
+		app:      container,
 		terminal: container.make('terminal')
 	});
 };
@@ -75,7 +75,7 @@ given.fakeInterceptorAndConsole = () => {
 
 when.runningCommand = async () => {
 	await when.attemptingAsync(async () => {
-		await commandRunner.run(command);
+		await commandRunner.unsafeRun(command);
 	});
 };
 

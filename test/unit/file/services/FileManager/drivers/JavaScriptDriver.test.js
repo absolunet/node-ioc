@@ -4,27 +4,9 @@
 'use strict';
 
 const { given, when, then } = require('./JavaScriptDriver.gwt');
+const common                = require('./common');
 
 
-beforeEach(() => {
-	given.providersAndDependencies();
-	given.bootedContainer();
+describe('JavaScript driver', () => {
+	common({ given, when, then });
 });
-
-
-test('Can load file', () => {
-
-});
-
-test('Can load file asynchronously', () => {
-
-});
-
-test('Can write file', () => {
-
-});
-
-test('Can write file asynchronously', () => {
-
-});
-

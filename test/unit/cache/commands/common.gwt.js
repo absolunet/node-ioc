@@ -39,7 +39,7 @@ given.runner = () => {
 
 given.command = (Command, dependencies = {}) => {
 	command = container.make(Command, {
-		app: container,
+		app:      container,
 		terminal: fakeTerminal,
 		...dependencies
 	});

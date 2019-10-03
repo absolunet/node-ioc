@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const { GeneratorCommand } = require('@absolunet/ioc').classes;
+const { GeneratorCommand } = require('@absolunet/ioc');
 
 
 class %CLASS% extends GeneratorCommand {

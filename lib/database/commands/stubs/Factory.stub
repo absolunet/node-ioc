@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const { ModelFactory } = require('@absolunet/ioc').classes;
+const { ModelFactory } = require('@absolunet/ioc');
 
 
 class %CLASS% extends ModelFactory {
