@@ -8,16 +8,6 @@ const ServiceProvider = require('../../../../../lib/foundation/ServiceProvider')
 
 class FakeServiceProvider extends ServiceProvider {
 
-	register() {
-		this.app.bind('test', () => {
-			return { foo: 'bar' };
-		});
-
-		this.app.bind('test2', () => {
-			return { foo: 'baz' };
-		});
-	}
-
 }
 
 

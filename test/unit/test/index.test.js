@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const container              = require('../common');
+const container              = require('../container');
 const path                   = require('path');
 const ConsoleServiceProvider = require('../../../lib/console/ConsoleServiceProvider');
 const TestServiceProvider    = require('../../../lib/test/TestServiceProvider');
@@ -103,7 +103,7 @@ describe('Node IoC - Test', () => {
 						expect(instance).toBeInstanceOf(TestCase);
 						expect(typeof namespace).toBe('string');
 						expect(typeof tests).toBe(typeof []);
-						expect(file.endsWith(`${name}.js`)).toBe(true);
+						expect(file.endsWith(`${name.split(' ').join('')}Test.js`)).toBe(true);
 
 						tests.forEach(({ method, description }) => {
 							expect(typeof method).toBe('string');
@@ -200,8 +200,23 @@ describe('Node IoC - Test', () => {
 
 		test('Worker can run all tests', () => {
 			const testRepository = container.make('test');
+			const emptyFunctions = ['constructor', 'setEngine', 'setApp'];
 
-			const testList = testRepository.all();
+			const testList = testRepository.all().map((singleItem) => {
+
+				const { instance: originalInstance } = singleItem;
+
+				singleItem.instance = Object.assign(...testRepository.getAllInstanceMethods(originalInstance)
+					.map((name) => {
+						return {
+							[name]: emptyFunctions.includes(name) ? function() {
+								return this;
+							} : jest.fn()
+						};
+					}));
+
+				return singleItem;
+			});
 
 			testRunner.run(testList);
 

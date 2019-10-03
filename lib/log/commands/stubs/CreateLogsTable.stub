@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const { Migration } = require('@absolunet/ioc').classes;
+const { Migration } = require('@absolunet/ioc');
 
 
 class %CLASS% extends Migration {
