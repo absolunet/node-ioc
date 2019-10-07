@@ -21,17 +21,22 @@ test('File helper is resolvable', () => {
 	then.fileHelperShouldBeResolvable();
 });
 
+test('Path helper is resolvable', () => {
+	when.bootingContainer();
+	then.pathHelperShouldBeResolvable();
+});
+
 test('String helper is resolvable', () => {
 	when.bootingContainer();
 	then.stringHelperShouldBeResolvable();
 });
 
-test('Caker service is resolvable', () => {
+test('Faker service is resolvable', () => {
 	when.bootingContainer();
 	then.fakerShouldBeResolvable();
 });
 
-test('Caker service is a singleton', () => {
+test('Faker service is a singleton', () => {
 	when.bootingContainer();
 	then.fakerShouldBeSingleton();
 });

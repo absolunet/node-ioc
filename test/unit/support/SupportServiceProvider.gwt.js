@@ -17,6 +17,10 @@ then.fileHelperShouldBeResolvable = () => {
 	then.serviceShouldBeResolvable('helper.file');
 };
 
+then.pathHelperShouldBeResolvable = () => {
+	then.serviceShouldBeResolvable('helper.path');
+};
+
 then.stringHelperShouldBeResolvable = () => {
 	then.serviceShouldBeResolvable('helper.string');
 };
