@@ -19,7 +19,7 @@ class %CLASS% extends Command {
 	 * {@inheritdoc}
 	 */
 	get description() {
-		return '%CLASS% description';
+		return '%CLASS% description.';
 	}
 
 	/**
