@@ -44,7 +44,7 @@ test('Throws while making model if the model does not exists in the model reposi
 
 });
 
-test('Throws while making model if the model factory does not exists', () => {
+test('Throws while making model if the model factory does not exists', () => {
 
 });
 

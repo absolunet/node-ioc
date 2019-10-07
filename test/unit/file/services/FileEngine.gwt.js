@@ -65,7 +65,7 @@ then.resultShouldBe = (expected) => {
 	expect(result).toBe(expected);
 };
 
-then.shouldHaveAsyncSystem = () => {
+then.shouldHaveAsyncSystem = () => {
 	then.resultShouldBe(fakeAsync);
 };
 

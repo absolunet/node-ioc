@@ -30,7 +30,7 @@ test('Can get newly created runner', () => {
 
 });
 
-test('Can get existing runner', () => {
+test('Can get existing runner', () => {
 
 });
 

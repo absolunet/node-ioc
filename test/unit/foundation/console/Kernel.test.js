@@ -31,7 +31,7 @@ test('Handles the console command through the command registrar', async () => {
 	then.commandRegistrarShouldHaveResolvedCommand();
 });
 
-test('Register all application commands before handling the command',  async() => {
+test('Register all application commands before handling the command', async () => {
 	given.fakeCommandRegistrar();
 	given.fakeCommandPath();
 	given.fakeTerminal();

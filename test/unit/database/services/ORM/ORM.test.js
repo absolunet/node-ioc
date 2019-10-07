@@ -20,7 +20,7 @@ test('Can register model with given name regardless of the specified model class
 
 });
 
-test('Can retrieve a model instance by name', () => {
+test('Can retrieve a model instance by name', () => {
 
 });
 

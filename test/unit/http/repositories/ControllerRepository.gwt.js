@@ -78,7 +78,7 @@ when.checkingIfControllerExists = () => {
 	});
 };
 
-when.creatingGroupWithController = () => {
+when.creatingGroupWithController = () => {
 	when.attempting(() => {
 		controllerRepository.group('namespace', (repository) => {
 			repository.add('StubController', fakeController);

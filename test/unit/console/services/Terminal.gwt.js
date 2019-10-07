@@ -66,7 +66,7 @@ when.calling = (method, parameters = []) => {
 	});
 };
 
-when.callingWithoutResult = (method, parameters = []) => {
+when.callingWithoutResult = (method, parameters = []) => {
 	when.attempting(() => {
 		terminal[method](...parameters);
 	});

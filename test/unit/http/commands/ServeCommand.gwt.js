@@ -25,7 +25,7 @@ const fakeTerminal = {
 	echo:       jest.fn(),
 	println:    jest.fn((...parameters) => { return fakeTerminal.echo(...parameters); }),
 	echoIndent: jest.fn((...parameters) => { return fakeTerminal.echo(...parameters); }),
-	spacer:     jest.fn((...parameters) => { return fakeTerminal.echo(...parameters); }),
+	spacer:     jest.fn((...parameters) => { return fakeTerminal.echo(...parameters); })
 };
 
 const fakeExpress = {
@@ -39,7 +39,7 @@ const fakeRouter = {
 	generate: jest.fn(() => { return fakeExpressRouter; })
 };
 
-const fakeRequest  = {
+const fakeRequest = {
 	get method() { return 'GET'; },
 	get url()    { return '/foo/bar'; }
 };

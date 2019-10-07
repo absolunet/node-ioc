@@ -69,7 +69,7 @@ when.addingGetRoute = () => {
 	});
 };
 
-when.gettingAllRoutes = () => {
+when.gettingAllRoutes = () => {
 	when.attempting(() => {
 		result = routeRepository.all();
 	});
@@ -87,7 +87,7 @@ when.gettingRouteByPath = () => {
 	});
 };
 
-when.gettingGetRouteByPath = () => {
+when.gettingGetRouteByPath = () => {
 	when.attempting(() => {
 		result = routeRepository.findByPathForMethod('/foo/bar', 'get');
 	});
@@ -137,7 +137,7 @@ then.shouldHaveReceivedGetRoute = () => {
 	then.resultShouldBe(getRoute);
 };
 
-then.shouldHaveReceivedGetRouteWithName = () => {
+then.shouldHaveReceivedGetRouteWithName = () => {
 	then.resultShouldBe(getRouteWithName);
 };
 

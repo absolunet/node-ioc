@@ -3,6 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
+/* eslint-disable no-console */
 const { given, when, then, build } = require('../common.gwt');
 
 const container     = require('../../container');
@@ -98,3 +99,4 @@ then.restoreConsole = () => {
 
 
 module.exports = build({ given, when, then });
+/* eslint-enable no-console */

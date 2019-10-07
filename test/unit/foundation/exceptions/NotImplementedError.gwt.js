@@ -38,7 +38,7 @@ given.class = () => {
 	instance = FakeClass;
 };
 
-given.method = () => {
+given.method = () => {
 	method = 'method';
 };
 
