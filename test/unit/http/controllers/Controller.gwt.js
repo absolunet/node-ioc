@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('../common.gwt');
 
-const container = require('../../container');
+const container  = require('../../container');
 const Controller = require('../../../../lib/http/controllers/Controller');
 
 let controller;
@@ -20,7 +20,7 @@ let spiedWriteStreamLineHandler;
 //--------------------------------------------------------
 
 const fakeViewFactory = {
-	make: jest.fn(() => { return '<div>Some content</div>' })
+	make: jest.fn(() => { return '<div>Some content</div>'; })
 };
 const fakeCommandRegistrar = {
 	resolve: jest.fn(() => { return new Promise(setTimeout); })

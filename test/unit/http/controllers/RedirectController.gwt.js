@@ -53,7 +53,7 @@ then.shouldHaveRedirectTemporarily = () => {
 	expect(fakeResponse.redirect).toHaveBeenCalledWith(302, '/new/path');
 };
 
-then.shouldHaveRedirectPermanently = () => {
+then.shouldHaveRedirectPermanently = () => {
 	then.shouldNotHaveThrown();
 	expect(fakeResponse.redirect).toHaveBeenCalledWith(301, '/new/path');
 };

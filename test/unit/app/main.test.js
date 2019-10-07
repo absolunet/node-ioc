@@ -30,7 +30,7 @@ test('All framework accessible classes are working', () => {
 	then.allKeysShouldBeConstructor();
 });
 
-test('All exposed mixins are class factories', () => {
+test('All exposed mixins are class factories', () => {
 	given.mainFile();
 	when.gettingMixinsWithoutFactory();
 	then.allKeysShouldFactoryConstructor();

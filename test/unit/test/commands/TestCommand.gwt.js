@@ -28,8 +28,7 @@ let commandArgv;
 //--------------------------------------------------------
 
 const fakeJestEngine = {
-	getPathArgument: jest.fn(() => { return '/path/to/jest'; }),
-
+	getPathArgument: jest.fn(() => { return '/path/to/jest'; })
 };
 
 const fakeTerminal = {};

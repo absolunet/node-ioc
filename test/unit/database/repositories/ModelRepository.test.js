@@ -16,7 +16,7 @@ test('Can set model through ORM', () => {
 
 });
 
-test('Can get model by name through ORM', () => {
+test('Can get model by name through ORM', () => {
 
 });
 

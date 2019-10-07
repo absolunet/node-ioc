@@ -63,7 +63,7 @@ test('Model repository has a short alias', () => {
 
 });
 
-test('"db" policy passes if the database is enabled in the configuration and the command namespace is truthy', () => {
+test('"db" policy passes if the database is enabled in the configuration and the command namespace is truthy', () => {
 
 });
 

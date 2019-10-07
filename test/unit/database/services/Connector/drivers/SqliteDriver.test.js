@@ -16,7 +16,7 @@ test('Specified a valid Knex client', () => {
 
 });
 
-test('Can set connection by name', () => {
+test('Can set connection by name', () => {
 
 });
 

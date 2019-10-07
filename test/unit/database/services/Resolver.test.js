@@ -28,7 +28,7 @@ test('Can resolve all database paths', () => {
 
 });
 
-test('Can resolve a single path by type', () => {
+test('Can resolve a single path by type', () => {
 
 });
 
