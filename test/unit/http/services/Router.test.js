@@ -123,14 +123,24 @@ test('Can add a controller group in controller repository', () => {
 	then.controllerRepositoryShouldHaveReceivedControllerGroup();
 });
 
-test('Can create resource routes with "index", "store", "show", "update" and "destroy"', () => {
+test('Can create resource routes with "index", "create", "store", "show", "edit", "update" and "destroy"', () => {
 	when.creatingResourceRouteWithControllerName();
 	then.routeRepositoryShouldHaveReceivedResourceRoutesWithControllerResourceActionsExcept([]);
 });
 
 test('Can create resource routes with restrictions on wanted routes', () => {
 	when.creatingResourceRouteWithControllerNameWithRestriction(['index', 'show']);
-	then.routeRepositoryShouldHaveReceivedResourceRoutesWithControllerResourceActionsExcept(['store', 'update', 'destroy']);
+	then.routeRepositoryShouldHaveReceivedResourceRoutesWithControllerResourceActionsExcept(['create', 'store', 'edit', 'update', 'destroy']);
+});
+
+test('Can create API resource with "index", "store", "show", "update" and "destroy"', () => {
+	when.creatingApiResourceRouteWithControllerName();
+	then.routeRepositoryShouldHaveReceivedResourceRoutesWithControllerResourceActionsExcept(['create', 'edit']);
+});
+
+test('Can create API resource with restriction on wanted routes', () => {
+	when.creatingApiResourceRouteWithControllerNameWithRestriction(['index', 'show']);
+	then.routeRepositoryShouldHaveReceivedResourceRoutesWithControllerResourceActionsExcept(['create', 'store', 'edit', 'update', 'destroy']);
 });
 
 test('Can generate routes through an Express server instance', () => {

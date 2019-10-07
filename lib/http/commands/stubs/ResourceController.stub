@@ -1,0 +1,77 @@
+//--------------------------------------------------------
+//-- %PROJECT% - HTTP - Controllers - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const Controller = require('%BASE_CONTROLLER_PATH%');
+
+
+class %CLASS% extends Controller {
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @returns {response}
+	 */
+	index() {
+		//
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @returns {response}
+	 */
+	create() {
+		//
+	}
+
+	/**
+     * Store a newly created resource.
+	 *
+	 * @returns {response}
+	 */
+	store() {
+		//
+	}
+
+	/**
+     * Display the specified resource.
+	 *
+	 * @returns {response}
+	 */
+	show() {
+		//
+	}
+
+	/**
+     * Show the form for editing the specified resource.
+	 *
+	 * @returns {response}
+	 */
+	edit() {
+		//
+	}
+
+	/**
+     * Update the specified resource.
+	 *
+	 * @returns {response}
+	 */
+	update() {
+		//
+	}
+
+	/**
+     * Remove the specified resource.
+     *
+	 * @returns {response}
+	 */
+	destroy() {
+		//
+	}
+
+}
+
+
+module.exports = %CLASS%;

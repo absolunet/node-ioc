@@ -1,0 +1,23 @@
+//--------------------------------------------------------
+//-- %PROJECT% - HTTP - Controllers - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const Controller = require('%BASE_CONTROLLER_PATH%');
+
+
+class %CLASS% extends Controller {
+
+	/**
+	 * Handle incoming request.
+	 *
+	 * @returns {response}
+	 */
+	handle() {
+		//
+	}
+
+}
+
+
+module.exports = %CLASS%;

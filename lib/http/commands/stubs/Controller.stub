@@ -1,0 +1,14 @@
+//--------------------------------------------------------
+//-- %PROJECT% - HTTP - Controllers - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const Controller = require('%BASE_CONTROLLER_PATH%');
+
+
+class %CLASS% extends Controller {
+
+}
+
+
+module.exports = %CLASS%;

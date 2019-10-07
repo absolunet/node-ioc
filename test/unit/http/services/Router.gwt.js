@@ -196,6 +196,16 @@ when.creatingResourceRouteWithControllerName = () => {
 	when.creatingResourceRouteWithControllerNameWithRestriction(undefined);
 };
 
+when.creatingApiResourceRouteWithControllerNameWithRestriction = (only) => {
+	when.attempting(() => {
+		result = router.apiResource('resource-name', fakeControllerName, only);
+	});
+};
+
+when.creatingApiResourceRouteWithControllerName = () => {
+	when.creatingApiResourceRouteWithControllerNameWithRestriction(undefined);
+};
+
 when.generating = () => {
 	when.attempting(() => {
 		result = router.generate();
@@ -307,7 +317,7 @@ then.routeActionShouldStartWith = (prefix) => {
 then.routeRepositoryShouldHaveReceivedResourceRoutesWithControllerResourceActionsExcept = (except) => {
 	then.shouldNotHaveThrown();
 	const routes = fakeRouteRepository.add.mock.calls.map(([route]) => { return route; });
-	const only = ['index', 'store', 'show', 'update', 'destroy'].filter((method) => {
+	const only = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'].filter((method) => {
 		return !except.includes(method);
 	});
 	const wasBuiltClosure = (method) => {
