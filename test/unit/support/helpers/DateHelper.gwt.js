@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const moment     = require('moment');
 const container  = require('../../container');
-const DateHelper = require('.././../../../lib/support/helpers/Date');
+const DateHelper = require('../../../../lib/support/helpers/DateHelper');
 
 let dateHelper;
 let result;
