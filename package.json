@@ -50,8 +50,8 @@
     "rimraf": "^3.0.0"
   },
   "dependencies": {
-    "@absolunet/fsp": "^1.6.1",
-    "@absolunet/fss": "^1.6.1",
+    "@absolunet/fsp": "^1.6.2",
+    "@absolunet/fss": "^1.6.2",
     "@absolunet/private-registry": "^2.0.0",
     "@absolunet/terminal": "^2.1.1",
     "@hapi/joi": "^16.1.5",

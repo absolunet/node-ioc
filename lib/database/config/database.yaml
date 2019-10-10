@@ -16,8 +16,8 @@ connections:
 
 paths:
   factories: '@/database/factories'
-  models: '@/database/models'
   migrations: '@/database/migrations'
+  models: '@/database/models'
   seeds: '@/database/seeds'
 
 

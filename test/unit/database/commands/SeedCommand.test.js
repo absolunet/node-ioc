@@ -9,17 +9,27 @@ const { given, when, then } = require('./SeedCommand.gwt');
 beforeEach(() => {
 	given.providersAndDependencies();
 	given.bootedContainer();
+	given.emptyResult();
+	given.fakeConnectionBuilder();
+	given.commandRunner();
+	given.fakeTerminal();
+	given.fakeInterceptor();
+	given.fakeConfigRepository();
+	given.fakeCommandRegistrar();
+	given.databasePrefix('db');
+	given.seedCommand();
 });
 
 
-test('Can seed database with default connection', () => {
-
-});
-
-test('Can seed database with specified connection', () => {
-
+test('Can seed database', async () => {
+	given.twoSeeders();
+	await when.runningCommand();
+	then.shouldHaveSeeded();
+	then.shouldHavePrintedTwoSeededClasses();
 });
 
 test('Uses database prefix', () => {
-
+	given.databasePrefix('database');
+	when.gettingCommandName();
+	then.resultShouldStartBy('database:');
 });
