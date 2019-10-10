@@ -14,17 +14,62 @@ let router;
 let action;
 let uriPath;
 let fakeRoutes;
+let fakeInternalCallResultHandler;
 
 
 //-- Mocks
 //--------------------------------------------------------
 
-const fakeServer = {};
+const fakeExpress = {
+	use: jest.fn(() => {
+		return fakeExpress;
+	}),
+	runMiddleware: jest.fn((path, request, handler) => { return new Promise(handler); })
+};
 
-const fakeHandler = {};
+const fakeRouter = {
+	'get':    jest.fn(),
+	'post':   jest.fn(),
+	'put':    jest.fn(),
+	'patch':  jest.fn(),
+	'delete': jest.fn()
+};
+
+const fakeServer = {
+	getRouter: jest.fn(() => {
+		return fakeRouter;
+	}),
+	make: jest.fn(() => {
+		return fakeExpress;
+	})
+};
+
+const fakeInternalCallResultHandlerFactory = jest.fn((resolve) => {
+	fakeInternalCallResultHandler = jest.fn((code, data) => {
+		resolve({ code, data });
+	});
+
+	return fakeInternalCallResultHandler;
+});
+
+const fakeHandler = {
+	handleRequest: jest.fn(() => { return Promise.resolve(); }),
+	prepareHandling: jest.fn(),
+	get getInternalCallResultHandler() { return fakeInternalCallResultHandlerFactory; }
+};
 
 const fakeRouteRepository = {
-	add: jest.fn()
+	add: jest.fn((route) => {
+		fakeRoutes.push(route);
+	}),
+	all: jest.fn(() => {
+		return [...fakeRoutes];
+	}),
+	findByName: jest.fn((name) => {
+		return fakeRoutes.find(({ as }) => {
+			return as === name;
+		});
+	})
 };
 
 const fakeControllerRepository = {
@@ -65,6 +110,7 @@ given.fakeServer = () => {
 
 given.fakeHandler = () => {
 	container.singleton('router.handler', fakeHandler);
+	fakeInternalCallResultHandler = undefined;
 };
 
 given.fakeRouteRepository = () => {
@@ -212,9 +258,9 @@ when.generating = () => {
 	});
 };
 
-when.callingGetRouteHandler = () => {
-	when.attempting(() => {
-		result = router.call('/foo/bar');
+when.callingGetRouteHandler = async () => {
+	await when.attemptingAsync(async () => {
+		result = await router.call('/foo/bar');
 	});
 };
 
@@ -333,11 +379,16 @@ then.routeRepositoryShouldHaveReceivedResourceRoutesWithControllerResourceAction
 };
 
 then.expressRouterShouldHaveBeenGeneratedWithGetRouteAndOtherGetRoute = () => {
-
+	then.shouldNotHaveThrown();
+	expect(fakeRouter.get).toHaveBeenCalledTimes(2);
+	expect(fakeRouter.get.mock.calls[0][0]).toBe('/foo/bar');
+	expect(fakeRouter.get.mock.calls[1][0]).toBe('/baz/qux');
 };
 
 then.getRouteHandlerShouldHaveBeenCalled = () => {
-
+	then.shouldNotHaveThrown();
+	expect(fakeExpress.runMiddleware).toHaveBeenCalledTimes(1);
+	expect(fakeExpress.runMiddleware).toHaveBeenCalledWith('/foo/bar', { method: 'get' }, fakeInternalCallResultHandler);
 };
 
 
