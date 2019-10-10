@@ -11,12 +11,7 @@ beforeEach(() => {
 	given.bootedContainer();
 	given.commandRunner();
 	given.fakeTerminal();
-	given.fakeInterceptorAndConsole();
 	given.environmentCommand();
-});
-
-afterEach(() => {
-	then.restoreConsole();
 });
 
 

@@ -5,5 +5,15 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
+const MigrateCommand = require('../../../../lib/database/commands/MigrateCommand');
+
+
+//-- Given
+//--------------------------------------------------------
+
+given.migrateCommand = () => {
+	given.command(MigrateCommand);
+};
+
 
 module.exports = build({ given, when, then });

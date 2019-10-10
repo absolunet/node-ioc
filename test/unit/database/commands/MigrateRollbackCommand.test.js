@@ -9,17 +9,33 @@ const { given, when, then } = require('./MigrateRollbackCommand.gwt');
 beforeEach(() => {
 	given.providersAndDependencies();
 	given.bootedContainer();
+	given.emptyResult();
+	given.fakeConnectionBuilder();
+	given.commandRunner();
+	given.fakeTerminal();
+	given.fakeInterceptor();
+	given.fakeConfigRepository();
+	given.fakeCommandRegistrar();
+	given.databasePrefix('db');
+	given.migrateRollbackCommand();
 });
 
 
-test('Can drop all tables and call migrate command afterwards', () => {
-
+test('Can rollback previous migrations', async () => {
+	given.twoMigrationsInFirstBatch();
+	given.oneMigrationInSecondBatch();
+	await when.runningCommand();
+	then.oneMigrationShouldHaveRunDown();
+	then.shouldHaveTwoMigrationsInOneBatchRemaining();
 });
 
-test('Send seed flag to migrate command if given', () => {
-
+test('Indicates that no migration can be rolled back', async () => {
+	await when.runningCommand();
+	then.noMigrationShouldHaveRunDown();
 });
 
 test('Uses database prefix', () => {
-
+	given.databasePrefix('database');
+	when.gettingCommandName();
+	then.resultShouldStartBy('database:');
 });

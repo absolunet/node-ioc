@@ -150,18 +150,18 @@ test('Can generate routes through an Express server instance', () => {
 	then.expressRouterShouldHaveBeenGeneratedWithGetRouteAndOtherGetRoute();
 });
 
-test('Can call a route handler based on path and method', () => {
+test('Can call a route handler based on path and method', async () => {
 	given.getRoute();
 	given.otherGetRoute();
-	when.callingGetRouteHandler();
+	await when.callingGetRouteHandler();
 	then.expressRouterShouldHaveBeenGeneratedWithGetRouteAndOtherGetRoute();
 	then.getRouteHandlerShouldHaveBeenCalled();
 });
 
-test('Can call a route handler based on route name', () => {
+test('Can call a route handler based on route name', async () => {
 	given.getRoute();
 	given.otherGetRoute();
-	when.callingGetRouteHandlerByName();
+	await when.callingGetRouteHandlerByName();
 	then.expressRouterShouldHaveBeenGeneratedWithGetRouteAndOtherGetRoute();
 	then.getRouteHandlerShouldHaveBeenCalled();
 });
