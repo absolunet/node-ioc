@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container          = require('../container');
-const RedirectController = require('../../../lib/http/controllers/RedirectController');
-const StaticController   = require('../../../lib/http/controllers/StaticController');
+const RedirectController = require('../../../src/http/controllers/RedirectController');
+const StaticController   = require('../../../src/http/controllers/StaticController');
 
 
 //-- Mocks

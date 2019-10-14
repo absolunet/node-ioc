@@ -74,8 +74,8 @@ describe('With fake file manager', () => {
 	});
 
 	test('Can add configuration value', () => {
-		when.settingConfig('newKey', 'value');
-		then.configShouldEqual({ newKey: 'value' });
+		when.settingConfig('otherKey', 'value');
+		then.configShouldEqual({ otherKey: 'value' });
 	});
 
 	test('Can add configuration value with dotted-syntax', () => {

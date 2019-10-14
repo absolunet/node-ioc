@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container                 = require('../container');
-const ValidationServiceProvider = require('../../../lib/validation/ValidationServiceProvider');
+const ValidationServiceProvider = require('../../../src/validation/ValidationServiceProvider');
 
 
 

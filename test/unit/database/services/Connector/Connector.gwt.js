@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../../common.gwt');
 
 const container    = require('../../../container');
-const Connector    = require('../../../../../lib/database/services/Connector');
-const SqliteDriver = require('../../../../../lib/database/services/Connector/drivers/SqliteDriver');
+const Connector    = require('../../../../../src/database/services/Connector');
+const SqliteDriver = require('../../../../../src/database/services/Connector/drivers/SqliteDriver');
 
 let connector;
 let result;

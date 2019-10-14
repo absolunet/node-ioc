@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const joi       = require('@hapi/joi');
 const container = require('../../container');
-const Validator = require('../../../../lib/validation/services/Validator');
+const Validator = require('../../../../src/validation/services/Validator');
 
 let validator;
 let result;

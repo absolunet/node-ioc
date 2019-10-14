@@ -6,19 +6,19 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container = require('../container');
-const Kernel    = require('../../../lib/foundation/Kernel');
+const Kernel    = require('../../../src/foundation/Kernel');
 
-const NotImplementedError = require('../../../lib/foundation/exceptions/NotImplementedError');
+const NotImplementedError = require('../../../src/foundation/exceptions/NotImplementedError');
 
-const CacheServiceProvider       = require('../../../lib/cache/CacheServiceProvider');
-const DatabaseServiceProvider    = require('../../../lib/database/DatabaseServiceProvider');
-const HttpServiceProvider        = require('../../../lib/http/HttpServiceProvider');
-const LogServiceProvider         = require('../../../lib/log/LogServiceProvider');
-const SecurityServiceProvider    = require('../../../lib/security/SecurityServiceProvider');
-const TestServiceProvider        = require('../../../lib/test/TestServiceProvider');
-const TranslationServiceProvider = require('../../../lib/translation/TranslationServiceProvider');
-const ValidationServiceProvider  = require('../../../lib/validation/ValidationServiceProvider');
-const ViewServiceProvider        = require('../../../lib/view/ViewServiceProvider');
+const CacheServiceProvider       = require('../../../src/cache/CacheServiceProvider');
+const DatabaseServiceProvider    = require('../../../src/database/DatabaseServiceProvider');
+const HttpServiceProvider        = require('../../../src/http/HttpServiceProvider');
+const LogServiceProvider         = require('../../../src/log/LogServiceProvider');
+const SecurityServiceProvider    = require('../../../src/security/SecurityServiceProvider');
+const TestServiceProvider        = require('../../../src/test/TestServiceProvider');
+const TranslationServiceProvider = require('../../../src/translation/TranslationServiceProvider');
+const ValidationServiceProvider  = require('../../../src/validation/ValidationServiceProvider');
+const ViewServiceProvider        = require('../../../src/view/ViewServiceProvider');
 
 let kernel;
 

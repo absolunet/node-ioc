@@ -1,0 +1,35 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Command - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const { Command } = require('@absolunet/ioc');
+
+
+class %CLASS% extends Command {
+
+	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'name:command';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	get description() {
+		return '%CLASS% description.';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	handle() {
+		console.log('To be implemented...');
+	}
+
+}
+
+
+module.exports = %CLASS%;

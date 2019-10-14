@@ -1,3 +1,0 @@
-# View rendering engine to be used.
-# The only engine provided by the application is "jsrender"
-engine: jsrender

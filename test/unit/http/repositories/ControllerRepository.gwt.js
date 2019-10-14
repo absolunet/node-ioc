@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const path                 = require('path');
 const container            = require('../../container');
-const ControllerRepository = require('../../../../lib/http/repositories/ControllerRepository');
+const ControllerRepository = require('../../../../src/http/repositories/ControllerRepository');
 
 let controllerRepository;
 let result;

@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Tester    = require('../../../../lib/test/services/Tester');
+const Tester    = require('../../../../src/test/services/Tester');
 
 let result;
 let tester;
@@ -37,7 +37,8 @@ const FakeApplication = class {
 		return fakeApplication;
 	}
 
-	static setDefaultInstance() { // eslint-disable-line no-empty-function
+	static setDefaultInstance() {
+		//
 	}
 
 	constructor() {

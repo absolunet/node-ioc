@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../common.gwt');
 
 const container = require('../../../container');
-const ORM       = require('../../../../../lib/database/services/ORM');
+const ORM       = require('../../../../../src/database/services/ORM');
 
 let orm;
 let result;

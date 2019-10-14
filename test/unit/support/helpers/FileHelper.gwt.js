@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container  = require('../../container');
-const FileHelper = require('../../../../lib/support/helpers/FileHelper');
+const FileHelper = require('../../../../src/support/helpers/FileHelper');
 
 let fileHelper;
 let size;

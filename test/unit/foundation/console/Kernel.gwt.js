@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container              = require('../../container');
-const ConsoleKernel          = require('../../../../lib/foundation/console/Kernel');
-const ConsoleServiceProvider = require('../../../../lib/console/ConsoleServiceProvider');
+const ConsoleKernel          = require('../../../../src/foundation/console/Kernel');
+const ConsoleServiceProvider = require('../../../../src/console/ConsoleServiceProvider');
 
 let consoleKernel;
 let mockExit;

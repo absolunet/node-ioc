@@ -5,8 +5,8 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const Application     = require('../../../lib/foundation/Application');
-const ServiceProvider = require('../../../lib/foundation/ServiceProvider');
+const Application     = require('../../../src/foundation/Application');
+const ServiceProvider = require('../../../src/foundation/ServiceProvider');
 
 let application;
 let fakeConfig;
@@ -114,7 +114,7 @@ given.fakePathFromBasePath = () => {
 	application.bind('path.fake', `${application.make('path.base')}/fake/path`);
 };
 
-given.newPublicPath = () => {
+given.fakePublicPath = () => {
 	result = application.make('path.public');
 	application.bind('path.public', '/fake/public/path');
 };

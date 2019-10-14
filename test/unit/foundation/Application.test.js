@@ -169,7 +169,7 @@ test('Can configure paths', () => {
 
 test('Can reset default paths', () => {
 	given.fakePath();
-	given.newPublicPath();
+	given.fakePublicPath();
 	when.configuringDefaultPaths();
 	then.shouldHaveFakePathBound();
 	then.shouldHaveOriginalPublicPath();

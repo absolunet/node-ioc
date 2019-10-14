@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const PubSubJsDriver = require('../../../../../../lib/events/services/Dispatcher/drivers/PubSubJsDriver');
+const PubSubJsDriver = require('../../../../../../src/events/services/Dispatcher/drivers/PubSubJsDriver');
 
 
 //-- Given

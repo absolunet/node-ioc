@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const StaticController = require('../../../../lib/http/controllers/StaticController');
+const StaticController = require('../../../../src/http/controllers/StaticController');
 
 let staticController;
 let folderPath;
@@ -17,7 +17,7 @@ let filePath;
 //--------------------------------------------------------
 
 const fakeRequest  = {
-	get params() {
+	get params() { // eslint-disable-line unicorn/prevent-abbreviations
 		return {
 			file: filePath
 		};

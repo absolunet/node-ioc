@@ -8,7 +8,7 @@ const { given, when, then, build } = require('./common.gwt');
 const fs             = require('fs');
 const path           = require('path');
 const container      = require('../../../../container');
-const DatabaseDriver = require('../../../../../../lib/cache/services/CacheManager/drivers/DatabaseDriver');
+const DatabaseDriver = require('../../../../../../src/cache/services/CacheManager/drivers/DatabaseDriver');
 
 const databaseFilePath = path.join(__dirname, '..', '..', '..', 'stubs', 'database.sqlite');
 

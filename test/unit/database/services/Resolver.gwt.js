@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Resolver  = require('../../../../lib/database/services/Resolver');
+const Resolver  = require('../../../../src/database/services/Resolver');
 
 let result;
 let resolver;

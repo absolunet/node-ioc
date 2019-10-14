@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container  = require('../../container');
-const PathHelper = require('../../../../lib/support/helpers/PathHelper');
+const PathHelper = require('../../../../src/support/helpers/PathHelper');
 
 let result;
 let pathHelper;

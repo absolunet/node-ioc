@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const ExceptionHandler = require('../../../../lib/foundation/exceptions/Handler');
+const ExceptionHandler = require('../../../../src/foundation/exceptions/Handler');
 
 let exceptionHandler;
 let result;

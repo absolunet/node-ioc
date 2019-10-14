@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const { Application } = require('../../lib');
+const { Application } = require('../../src');
 
 const container = Application.make();
 

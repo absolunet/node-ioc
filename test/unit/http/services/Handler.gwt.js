@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Handler   = require('../../../../lib/http/services/Handler');
-const Route     = require('../../../../lib/http/models/Route');
+const Handler   = require('../../../../src/http/services/Handler');
+const Route     = require('../../../../src/http/Route');
 
 let handler;
 let result;

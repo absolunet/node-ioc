@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const CacheForgetCommand = require('../../../../lib/cache/commands/CacheForgetCommand');
+const CacheForgetCommand = require('../../../../src/cache/commands/CacheForgetCommand');
 
 
 given.cacheForgetCommand = () => {

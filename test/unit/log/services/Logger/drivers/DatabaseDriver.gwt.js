@@ -8,7 +8,7 @@ const { given, when, then, build } = require('../../../common.gwt');
 const knex           = require('knex');
 const mockConnection = require('mock-knex');
 const container      = require('../../../../container');
-const DatabaseDriver = require('../../../../../../lib/log/services/Logger/drivers/DatabaseDriver');
+const DatabaseDriver = require('../../../../../../src/log/services/Logger/drivers/DatabaseDriver');
 
 let tracker;
 let connections;
@@ -44,6 +44,38 @@ const fakeTerminal = {
 	command: 'some:command'
 };
 
+const insert = (query) => {
+	const [insertCommand, insertContext, insertLevel, insertMessage, insertVersion] = query.bindings;
+	const insertId = connections[currentConnection].values.length + 1;
+	connections[currentConnection].values.push({
+		id: insertId,
+		command: insertCommand,
+		context: insertContext,
+		level: insertLevel,
+		message: insertMessage,
+		version: insertVersion
+	});
+	query.response();
+};
+
+const select = (query) => {
+	if (query.sql === 'select count(`id`) as `count` from `logs`') {
+		const { length: count } = connections[currentConnection].values;
+
+		return [{ count }];
+	}
+
+	return [...connections[currentConnection].values];
+};
+
+const del = (query) => {
+	if (query.sql === 'delete from `logs` where `id` < ?') {
+		const { values } = connections[currentConnection];
+		values.splice(0, values.length, ...values.filter(({ id }) => {
+			return id >= query.bindings[0];
+		}));
+	}
+};
 
 //-- Given
 //--------------------------------------------------------
@@ -79,39 +111,6 @@ given.queryTracker = () => {
 
 	tracker = mockConnection.getTracker();
 	tracker.install();
-
-	const insert = (query) => {
-		const [insertCommand, insertContext, insertLevel, insertMessage, insertVersion] = query.bindings;
-		const insertId = connections[currentConnection].values.length + 1;
-		connections[currentConnection].values.push({
-			id: insertId,
-			command: insertCommand,
-			context: insertContext,
-			level: insertLevel,
-			message: insertMessage,
-			version: insertVersion
-		});
-		query.response();
-	};
-
-	const select = (query) => {
-		if (query.sql === 'select count(`id`) as `count` from `logs`') {
-			const { length: count } = connections[currentConnection].values;
-
-			return [{ count }];
-		}
-
-		return [...connections[currentConnection].values];
-	};
-
-	const del = (query) => {
-		if (query.sql === 'delete from `logs` where `id` < ?') {
-			const { values } = connections[currentConnection];
-			values.splice(0, values.length, ...values.filter(({ id }) => {
-				return id >= query.bindings[0];
-			}));
-		}
-	};
 
 	const response = (query, result) => {
 		lastResult = result;

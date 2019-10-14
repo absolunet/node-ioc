@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const inquirer     = require('inquirer');
 const container    = require('../../container');
-const Terminal     = require('../../../../lib/console/services/Terminal');
+const Terminal     = require('../../../../src/console/services/Terminal');
 const originalArgv = process.argv;
 
 let mockedPrompt;

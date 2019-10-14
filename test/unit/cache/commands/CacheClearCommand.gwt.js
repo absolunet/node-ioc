@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const CacheClearCommand = require('../../../../lib/cache/commands/CacheClearCommand');
+const CacheClearCommand = require('../../../../src/cache/commands/CacheClearCommand');
 
 
 //-- Given

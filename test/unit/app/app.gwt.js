@@ -30,7 +30,7 @@ const fakeExceptionHandler = {
 //--------------------------------------------------------
 
 given.freshContainer = () => {
-	container = require('../../../lib/app'); // eslint-disable-line global-require
+	container = require('../../../src/app'); // eslint-disable-line global-require
 	container.bind('kernel.console',    fakeKernel);
 	container.bind('exception.handler', fakeExceptionHandler);
 };

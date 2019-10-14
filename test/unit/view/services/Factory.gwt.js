@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const path      = require('path');
 const container = require('../../container');
-const Factory   = require('../../../../lib/view/services/Factory');
+const Factory   = require('../../../../src/view/services/Factory');
 
 let factory;
 let viewName;

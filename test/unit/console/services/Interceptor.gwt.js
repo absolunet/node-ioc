@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container   = require('../../container');
-const Interceptor = require('../../../../lib/console/services/Interceptor');
+const Interceptor = require('../../../../src/console/services/Interceptor');
 
 const normalText  = 'Some text';
 const coloredText = '\u001B[36mSome text\u001B[0m';

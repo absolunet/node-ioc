@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container        = require('../../container');
-const CommandRegistrar = require('../../../../lib/console/services/CommandRegistrar');
-const Command          = require('../../../../lib/console/Command');
+const CommandRegistrar = require('../../../../src/console/services/CommandRegistrar');
+const Command          = require('../../../../src/console/Command');
 
 const folder      = '/path/to/folder';
 const emptyFolder = '/path/to/empty/folder';

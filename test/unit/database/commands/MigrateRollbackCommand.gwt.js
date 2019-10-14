@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const MigrateRollbackCommand = require('../../../../lib/database/commands/MigrateRollbackCommand');
+const MigrateRollbackCommand = require('../../../../src/database/commands/MigrateRollbackCommand');
 
 
 //-- Given

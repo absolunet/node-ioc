@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../../common.gwt');
 
 const container  = require('../../../../container');
-const FileDriver = require('../../../../../../lib/log/services/Logger/drivers/FileDriver');
+const FileDriver = require('../../../../../../src/log/services/Logger/drivers/FileDriver');
 
 const filePath      = '/log/file/path.log';
 const otherFilePath = '/log/other/file/path.log';

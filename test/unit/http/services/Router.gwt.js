@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Router    = require('../../../../lib/http/services/Router');
-const Route     = require('../../../../lib/http/models/Route');
+const Router    = require('../../../../src/http/services/Router');
+const Route     = require('../../../../src/http/Route');
 
 let result;
 let router;

@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container = require('../container');
-const Migration = require('../../../lib/database/Migration');
+const Migration = require('../../../src/database/Migration');
 
 let result;
 

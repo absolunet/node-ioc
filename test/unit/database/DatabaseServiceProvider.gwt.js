@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container = require('../container');
-const DatabaseServiceProvider = require('../../../lib/database/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../lib/security/SecurityServiceProvider');
+const DatabaseServiceProvider = require('../../../src/database/DatabaseServiceProvider');
+const SecurityServiceProvider = require('../../../src/security/SecurityServiceProvider');
 
 let result;
 let fakeFiles;

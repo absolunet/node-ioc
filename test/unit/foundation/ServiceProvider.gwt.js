@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container       = require('../container');
-const Command         = require('../../../lib/console/Command');
-const ServiceProvider = require('../../../lib/foundation/ServiceProvider');
+const Command         = require('../../../src/console/Command');
+const ServiceProvider = require('../../../src/foundation/ServiceProvider');
 
 let serviceProvider;
 let commands;

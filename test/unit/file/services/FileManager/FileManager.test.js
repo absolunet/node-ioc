@@ -118,14 +118,14 @@ test('Can scan directory for folder', () => {
 });
 
 test('Can write content in a given destination', () => {
-	given.newJsonFilePath();
+	given.writeJsonFilePath();
 	given.jsonContent();
 	when.writing();
 	then.shouldHaveWrittenFileThroughJsonDriver();
 });
 
 test('Can write content asynchronously in a given destination', async () => {
-	given.newJsonFilePath();
+	given.writeJsonFilePath();
 	given.jsonContent();
 	await when.writingAsynchronously();
 	then.shouldHaveWrittenAsynchronouslyFileThroughJsonDriver();

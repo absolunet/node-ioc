@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../../common.gwt');
 
 
 const container = require('../../../container');
-const Translator = require('../../../../../lib/translation/services/Translator');
+const Translator = require('../../../../../src/translation/services/Translator');
 
 
 let translator;

@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const TextDriver = require('../../../../../../lib/file/services/FileManager/drivers/TextDriver');
+const TextDriver = require('../../../../../../src/file/services/FileManager/drivers/TextDriver');
 
 
 //-- Given

@@ -46,7 +46,7 @@ test('Can check if connection does not exists by name', () => {
 
 test('Can get new connection with connection config', () => {
 	given.connectionConfig();
-	when.makingNewConnection();
+	when.makingConnection();
 	then.shouldNotHaveConnection('foo');
 	then.resultShouldBeKnexInstanceWithConfig();
 	then.resultShouldBeAwareOfCurrentDriver();

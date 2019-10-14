@@ -9,8 +9,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container      = require('../../container');
-const TestCommand    = require('../../../../lib/test/commands/TestCommand');
-const CommandRunner  = require('../../../../lib/console/services/CommandRunner');
+const TestCommand    = require('../../../../src/test/commands/TestCommand');
+const CommandRunner  = require('../../../../src/console/services/CommandRunner');
 
 const originalProcessArgv = process.argv;
 const originalProcessEnv  = process.env;

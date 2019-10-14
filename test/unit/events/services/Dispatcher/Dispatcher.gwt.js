@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../common.gwt');
 
 const container = require('../../../container');
-const Dispatcher = require('../../../../../lib/events/services/Dispatcher');
+const Dispatcher = require('../../../../../src/events/services/Dispatcher');
 
 let dispatcher;
 let result;

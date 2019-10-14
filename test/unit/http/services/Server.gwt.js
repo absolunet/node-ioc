@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Server    = require('../../../../lib/http/services/Server');
+const Server    = require('../../../../src/http/services/Server');
 
 let result;
 let server;

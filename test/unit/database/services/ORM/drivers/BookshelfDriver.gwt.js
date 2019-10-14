@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../../common.gwt');
 
 const container       = require('../../../../container');
-const BookshelfDriver = require('../../../../../../lib/database/services/ORM/drivers/BookshelfDriver');
+const BookshelfDriver = require('../../../../../../src/database/services/ORM/drivers/BookshelfDriver');
 
 let result;
 let bookshelfDriver;

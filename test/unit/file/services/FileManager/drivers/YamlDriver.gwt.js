@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const YamlDriver = require('../../../../../../lib/file/services/FileManager/drivers/YamlDriver');
+const YamlDriver = require('../../../../../../src/file/services/FileManager/drivers/YamlDriver');
 
 
 //-- Given

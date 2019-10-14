@@ -13,7 +13,7 @@ This packages offers simple IoC container for any NodeJS projects. It allows to 
 
 ## Official documentation
 
-See the official documentation at [https://absolunet.github.io/docs-node-ioc/en/1.0/intro/getting-started](https://absolunet.github.io/docs-node-ioc/en/1.0/intro/getting-started)
+See the official documentation at [https://documentation.absolunet.com/docs-node-ioc/en/1.0/intro/getting-started](https://documentation.absolunet.com/docs-node-ioc/en/1.0/intro/getting-started)
 
 
 ## Install

@@ -1,0 +1,4 @@
+extends: '@absolunet/package'
+
+rules:
+  strict: [off]

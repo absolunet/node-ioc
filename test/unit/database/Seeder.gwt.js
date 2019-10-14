@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container = require('../container');
-const Seeder    = require('../../../lib/database/Seeder');
+const Seeder    = require('../../../src/database/Seeder');
 
 let result;
 

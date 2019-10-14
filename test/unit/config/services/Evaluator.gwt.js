@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Evaluator = require('../../../../lib/config/services/Evaluator');
+const Evaluator = require('../../../../src/config/services/Evaluator');
 
 let evaluator;
 let result;

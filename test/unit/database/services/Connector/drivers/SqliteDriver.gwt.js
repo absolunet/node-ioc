@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../../../common.gwt');
 
 const __           = require('@absolunet/private-registry');
 const container    = require('../../../../container');
-const SqliteDriver = require('../../../../../../lib/database/services/Connector/drivers/SqliteDriver');
+const SqliteDriver = require('../../../../../../src/database/services/Connector/drivers/SqliteDriver');
 
 let result;
 let sqliteDriver;
@@ -111,9 +111,9 @@ when.checkingIfConnectionExists = (name) => {
 	});
 };
 
-when.makingNewConnection = () => {
+when.makingConnection = () => {
 	when.attempting(() => {
-		result = sqliteDriver.newConnection(config);
+		result = sqliteDriver.makeConnection(config);
 	});
 };
 

@@ -7,9 +7,9 @@ const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../container');
 
-const CacheServiceProvider    = require('../../../lib/cache/CacheServiceProvider');
-const DatabaseServiceProvider = require('../../../lib/database/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../lib/security/SecurityServiceProvider');
+const CacheServiceProvider    = require('../../../src/cache/CacheServiceProvider');
+const DatabaseServiceProvider = require('../../../src/database/DatabaseServiceProvider');
+const SecurityServiceProvider = require('../../../src/security/SecurityServiceProvider');
 
 
 //-- Given

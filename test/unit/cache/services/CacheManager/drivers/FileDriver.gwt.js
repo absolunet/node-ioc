@@ -7,7 +7,7 @@ const { given, when, then, build } = require('./common.gwt');
 
 const fs         = require('fs');
 const path       = require('path');
-const FileDriver = require('../../../../../../lib/cache/services/CacheManager/drivers/FileDriver');
+const FileDriver = require('../../../../../../src/cache/services/CacheManager/drivers/FileDriver');
 
 const fileDriverCacheFolderPath = path.join(__dirname, '..', '..', '..', 'stubs', 'data');
 const fileDriverCacheFilePath   = path.join(fileDriverCacheFolderPath, 'test.json');
@@ -24,7 +24,9 @@ given.fileDriver = (parameters) => {
 };
 
 given.existingCacheDirectory = () => {
-	fs.mkdirSync(fileDriverCacheFolderPath);
+	if (!fs.existsSync(fileDriverCacheFolderPath)) {
+		fs.mkdirSync(fileDriverCacheFolderPath);
+	}
 };
 
 
@@ -38,7 +40,9 @@ then.removeCacheFile = () => {
 };
 
 then.removeCacheDirectory = () => {
-	fs.rmdirSync(fileDriverCacheFolderPath);
+	if (fs.existsSync(fileDriverCacheFolderPath)) {
+		fs.rmdirSync(fileDriverCacheFolderPath);
+	}
 };
 
 

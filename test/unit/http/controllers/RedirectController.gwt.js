@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const RedirectController = require('../../../../lib/http/controllers/RedirectController');
+const RedirectController = require('../../../../src/http/controllers/RedirectController');
 
 let redirectController;
 

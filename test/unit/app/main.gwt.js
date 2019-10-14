@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('../common.gwt');
 
-const Application = require('../../../lib/foundation/Application');
+const Application = require('../../../src/foundation/Application');
 
 let main;
 let result;
@@ -20,7 +20,7 @@ given.emptyResult = () => {
 };
 
 given.mainFile = () => {
-	main = require('../../../lib'); // eslint-disable-line global-require
+	main = require('../../../src'); // eslint-disable-line global-require
 };
 
 given.mockedSetTimeout = () => {
@@ -46,7 +46,7 @@ when.gettingMixinsWithoutFactory = () => {
 
 when.loadingMainFile = () => {
 	when.attempting(() => {
-		require('../../../lib'); // eslint-disable-line global-require
+		require('../../../src'); // eslint-disable-line global-require
 	});
 };
 

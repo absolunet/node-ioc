@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../common.gwt');
 
 const container   = require('../../../container');
-const FileManager = require('../../../../../lib/file/services/FileManager');
+const FileManager = require('../../../../../src/file/services/FileManager');
 
 let fakeFiles;
 let result;
@@ -120,7 +120,7 @@ given.folder = () => {
 	folderPath = '/path/to';
 };
 
-given.newJsonFilePath = () => {
+given.writeJsonFilePath = () => {
 	filePath = '/path/to/new/file.json';
 };
 

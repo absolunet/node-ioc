@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container  = require('../../container');
-const TestRunner = require('../../../../lib/test/services/TestRunner');
+const TestRunner = require('../../../../src/test/services/TestRunner');
 
 let testRunner;
 

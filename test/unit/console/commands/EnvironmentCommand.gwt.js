@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container          = require('../../container');
-const EnvironmentCommand = require('../../../../lib/console/commands/EnvironmentCommand');
+const EnvironmentCommand = require('../../../../src/console/commands/EnvironmentCommand');
 
 
 //-- Given

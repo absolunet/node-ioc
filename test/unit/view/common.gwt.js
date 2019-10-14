@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container           = require('../container');
-const ViewServiceProvider = require('../../../lib/view/ViewServiceProvider');
+const ViewServiceProvider = require('../../../src/view/ViewServiceProvider');
 
 
 //-- Given

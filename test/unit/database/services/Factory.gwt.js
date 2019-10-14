@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Factory   = require('../../../../lib/database/services/Factory');
+const Factory   = require('../../../../src/database/services/Factory');
 
 const fakeNames = ['one', 'two', 'three', 'four', 'five', 'six'];
 
