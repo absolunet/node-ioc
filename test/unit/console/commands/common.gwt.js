@@ -7,7 +7,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container     = require('../../container');
-const CommandRunner = require('../../../../src/console/services/CommandRunner');
+const CommandRunner = require('../../../../dist/node/console/services/CommandRunner');
 const { log: consoleLog, error: consoleError } = console;
 
 const fakeCapture = [];

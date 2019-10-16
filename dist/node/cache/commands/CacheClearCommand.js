@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("../../console/Command"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Cache - Command - Cache Clear
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
 /**
  * Command that flushes the whole cache.
  *
@@ -11,11 +17,9 @@ const Command = require('../../console/Command');
  * @augments console.Command
  * @hideconstructor
  */
-
-
-class CacheClearCommand extends Command {
+class CacheClearCommand extends _Command.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['cache']</code>.
    *
    * @type {Array<string>}
    */
@@ -80,4 +84,7 @@ class CacheClearCommand extends Command {
 
 }
 
-module.exports = CacheClearCommand;
+var _default = CacheClearCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _GeneratorCommand = _interopRequireDefault(require("../../console/GeneratorCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Command - Make Controller
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
 /**
  * Command that makes a controller class file inside the application controllers folder.
  *
@@ -11,11 +17,9 @@ const GeneratorCommand = require('../../console/GeneratorCommand');
  * @augments console.GeneratorCommand
  * @hideconstructor
  */
-
-
-class MakeControllerCommand extends GeneratorCommand {
+class MakeControllerCommand extends _GeneratorCommand.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['helper.path']</code>.
    *
    * @type {Array<string>}
    */
@@ -57,7 +61,7 @@ class MakeControllerCommand extends GeneratorCommand {
 
 
   get destination() {
-    return this.app.controllerPath();
+    return this.app.sourcePath('controller', '');
   }
   /**
    * @inheritdoc
@@ -124,4 +128,7 @@ class MakeControllerCommand extends GeneratorCommand {
 
 }
 
-module.exports = MakeControllerCommand;
+var _default = MakeControllerCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

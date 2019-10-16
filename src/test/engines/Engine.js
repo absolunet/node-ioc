@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Engines - Engine
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../../foundation/exceptions/NotImplementedError');
+import NotImplementedError from '../../foundation/exceptions/NotImplementedError';
 
 
 /**
@@ -128,4 +127,4 @@ class Engine {
 }
 
 
-module.exports = Engine;
+export default Engine;

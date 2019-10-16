@@ -1,17 +1,21 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Services - Server
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * HTTP server class that decorates Express server and router.
  *
  * @memberof http.services
  * @hideconstructor
  */
-
-
 class Server {
   /**
    * Make a new server instance.
@@ -36,7 +40,7 @@ class Server {
 
 
   getInstance() {
-    return this.hasInstance() ? __(this).get('instance') : this.make();
+    return this.hasInstance() ? (0, _privateRegistry.default)(this).get('instance') : this.make();
   }
   /**
    * Set default server instance.
@@ -47,8 +51,7 @@ class Server {
 
 
   setDefaultInstance(server) {
-    __(this).set('instance', server);
-
+    (0, _privateRegistry.default)(this).set('instance', server);
     return this;
   }
   /**
@@ -59,7 +62,7 @@ class Server {
 
 
   hasInstance() {
-    return Boolean(__(this).get('instance'));
+    return Boolean((0, _privateRegistry.default)(this).get('instance'));
   }
   /**
    * Get Express router.
@@ -133,4 +136,7 @@ class Server {
 
 }
 
-module.exports = Server;
+var _default = Server;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _hasEngine = _interopRequireDefault(require("../../support/mixins/hasEngine"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Service - Test runner
 //--------------------------------------------------------
-'use strict';
 
-const hasEngine = require('../../support/mixins/hasEngine');
 /**
  * Test runner that handles all the pipeline to run given tests.
  *
@@ -11,11 +17,9 @@ const hasEngine = require('../../support/mixins/hasEngine');
  * @augments support.mixins.HasEngine
  * @hideconstructor
  */
-
-
-class TestRunner extends hasEngine() {
+class TestRunner extends (0, _hasEngine.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -144,4 +148,7 @@ class TestRunner extends hasEngine() {
 
 }
 
-module.exports = TestRunner;
+var _default = TestRunner;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

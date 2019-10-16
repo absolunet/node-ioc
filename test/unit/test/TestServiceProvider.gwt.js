@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container      = require('../container');
-const TestRepository = require('../../../src/test/repositories/TestRepository');
+const TestRepository = require('../../../dist/node/test/repositories/TestRepository');
 
 
 //-- Then
@@ -36,20 +36,20 @@ then.featureTestRepositoryShouldBeSingleton = () => {
 	then.shouldHaveSingleton('test.feature');
 };
 
-then.standardsTestRepositoryShouldBeResolvable = () => {
-	then.serviceShouldBeResolvable('test.standards');
-};
-
-then.standardsTestRepositoryShouldBeSingleton = () => {
-	then.shouldHaveSingleton('test.standards');
-};
-
 then.endToEndTestRepositoryShouldBeResolvable = () => {
-	then.serviceShouldBeResolvable('test.e2e');
+	then.serviceShouldBeResolvable('test.endtoend');
 };
 
-then.endToEndRepositoryShouldBeSingleton = () => {
-	then.shouldHaveSingleton('test.e2e');
+then.endToEndTestRepositoryShouldBeSingleton = () => {
+	then.shouldHaveSingleton('test.endtoend');
+};
+
+then.integrationTestRepositoryShouldBeResolvable = () => {
+	then.serviceShouldBeResolvable('test.integration');
+};
+
+then.integrationTestRepositoryShouldBeSingleton = () => {
+	then.shouldHaveSingleton('test.integration');
 };
 
 then.testRunnerShouldBeResolvable = () => {

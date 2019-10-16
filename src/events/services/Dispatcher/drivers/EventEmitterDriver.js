@@ -1,11 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher - Drivers - Event Emitter Driver
 //--------------------------------------------------------
-'use strict';
 
-const __           = require('@absolunet/private-registry');
-const EventEmitter = require('events');
-const Driver       = require('./Driver');
+import __           from '@absolunet/private-registry';
+import EventEmitter from 'events';
+import Driver       from './Driver';
 
 
 /**
@@ -100,4 +99,4 @@ class EventEmitterDriver extends Driver {
 }
 
 
-module.exports = EventEmitterDriver;
+export default EventEmitterDriver;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Services - Faker proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../proxies/ForwardProxy');
+import ForwardProxy from '../../proxies/ForwardProxy';
 
 
 /**
@@ -18,4 +17,4 @@ class FakerProxy extends ForwardProxy {
 }
 
 
-module.exports = FakerProxy;
+export default FakerProxy;

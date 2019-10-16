@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _mixinFactory = _interopRequireDefault(require("./concerns/mixinFactory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Mixins - Has driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const factory = require('./concerns/mixinFactory');
 /**
  * Has driver mixin.
  *
@@ -14,15 +20,13 @@ const factory = require('./concerns/mixinFactory');
  * @memberof support.mixins
  * @hideconstructor
  */
-
-
-const hasDriver = factory(SuperClass => {
+const hasDriver = (0, _mixinFactory.default)(SuperClass => {
   /**
    * Has driver mixin.
    */
   return class HasDriverMixin extends SuperClass {
     /**
-     * Class dependencies.
+     * Class dependencies: <code>['app']</code>.
      *
      * @type {Array<string>}
      * @ignore
@@ -41,9 +45,8 @@ const hasDriver = factory(SuperClass => {
         super.init();
       }
 
-      __(this).set('drivers', {});
-
-      __(this).set('aliases', {});
+      (0, _privateRegistry.default)(this).set('drivers', {});
+      (0, _privateRegistry.default)(this).set('aliases', {});
     }
     /**
      * Get loader driver by name.
@@ -61,7 +64,7 @@ const hasDriver = factory(SuperClass => {
         throw new TypeError(`Driver [${name}] cannot be found.`);
       }
 
-      const data = __(this).get('drivers')[name];
+      const data = (0, _privateRegistry.default)(this).get('drivers')[name];
 
       if (!data.concrete || Object.keys(parameters) > 0) {
         const concrete = this.app.make(data.abstract, parameters);
@@ -105,7 +108,7 @@ const hasDriver = factory(SuperClass => {
 
 
     addDriver(name, driver) {
-      __(this).get('drivers')[name] = {
+      (0, _privateRegistry.default)(this).get('drivers')[name] = {
         name,
         'abstract': driver,
         'concrete': null
@@ -137,7 +140,7 @@ const hasDriver = factory(SuperClass => {
       this.addDriver(alias, () => {
         return this.driver(name);
       });
-      __(this).get('aliases')[alias] = name;
+      (0, _privateRegistry.default)(this).get('aliases')[alias] = name;
     }
     /**
      * Check if driver exists.
@@ -150,7 +153,7 @@ const hasDriver = factory(SuperClass => {
 
 
     hasDriver(name) {
-      return Boolean(__(this).get('drivers')[name]);
+      return Boolean((0, _privateRegistry.default)(this).get('drivers')[name]);
     }
     /**
      * Check if given driver name is an alias.
@@ -163,9 +166,12 @@ const hasDriver = factory(SuperClass => {
 
 
     isAlias(name) {
-      return Object.keys(__(this).get('aliases')).includes(name);
+      return Object.keys((0, _privateRegistry.default)(this).get('aliases')).includes(name);
     }
 
   };
 });
-module.exports = hasDriver;
+var _default = hasDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

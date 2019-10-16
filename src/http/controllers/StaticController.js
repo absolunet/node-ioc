@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Controllers - Default Controller
 //--------------------------------------------------------
-'use strict';
 
-const Controller = require('./Controller');
+import Controller from './Controller';
 
 
 /**
@@ -16,7 +15,7 @@ const Controller = require('./Controller');
 class StaticController extends Controller {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['file']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -44,4 +43,4 @@ class StaticController extends Controller {
 }
 
 
-module.exports = StaticController;
+export default StaticController;

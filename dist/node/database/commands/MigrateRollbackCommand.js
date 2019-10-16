@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("../../console/Command"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Migrate Rollback
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
 /**
  * Command that rollbacks the last database migrations.
  *
@@ -11,11 +17,9 @@ const Command = require('../../console/Command');
  * @augments console.Command
  * @hideconstructor
  */
-
-
-class MigrateRollbackCommand extends Command {
+class MigrateRollbackCommand extends _Command.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['config', 'db', 'terminal.interceptor']</code>.
    *
    * @type {Array<string>}
    */
@@ -103,4 +107,7 @@ class MigrateRollbackCommand extends Command {
 
 }
 
-module.exports = MigrateRollbackCommand;
+var _default = MigrateRollbackCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

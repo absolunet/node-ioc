@@ -1,10 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Translation - Services - Translator
 //--------------------------------------------------------
-'use strict';
+
+import Translator from './Translator';
 
 
-const Translator = require('./Translator');
-
-
-module.exports = Translator;
+export default Translator;

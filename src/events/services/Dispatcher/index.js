@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher
 //--------------------------------------------------------
-'use strict';
 
-const Dispatcher = require('./Dispatcher');
+import Dispatcher from './Dispatcher';
 
 
-module.exports = Dispatcher;
+export default Dispatcher;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Drivers - JSRender driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver   = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -16,7 +15,7 @@ const Driver   = require('./Driver');
 class JsRenderDriver extends Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -102,4 +101,5 @@ class JsRenderDriver extends Driver {
 
 }
 
-module.exports = JsRenderDriver;
+
+export default JsRenderDriver;

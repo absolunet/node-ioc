@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _NotImplementedError = _interopRequireDefault(require("../../../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - Driver
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
 /* istanbul ignore next */
 
 /**
@@ -13,11 +19,9 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
  * @abstract
  * @hideconstructor
  */
-
-
 class Driver {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['file.engine']</code>.
    *
    * @type {Array<string>}
    */
@@ -35,7 +39,7 @@ class Driver {
 
   load(file) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'load', 'any');
+    throw new _NotImplementedError.default(this, 'load', 'any');
   }
   /**
    * Asynchronously load the given file.
@@ -48,7 +52,7 @@ class Driver {
 
   loadAsync(file) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'loadAsync', 'Promise<any>');
+    throw new _NotImplementedError.default(this, 'loadAsync', 'Promise<any>');
   }
   /**
    * Write file in the given destination.
@@ -84,4 +88,7 @@ class Driver {
 
 }
 
-module.exports = Driver;
+var _default = Driver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

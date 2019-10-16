@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const JsonDriver = require('../../../../../../src/file/services/FileManager/drivers/JsonDriver');
+const JsonDriver = require('../../../../../../dist/node/file/services/FileManager/drivers/JsonDriver');
 
 
 //-- Given

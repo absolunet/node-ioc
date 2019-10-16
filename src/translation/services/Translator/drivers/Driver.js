@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Translation - Services - Translator - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
+import NotImplementedError from '../../../../foundation/exceptions/NotImplementedError';
 
 /* istanbul ignore next */
 /**
@@ -78,4 +77,4 @@ class Driver {
 }
 
 
-module.exports = Driver;
+export default Driver;

@@ -1,14 +1,13 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Manager
 //--------------------------------------------------------
-'use strict';
 
-const JavaScriptDriver = require('./drivers/JavaScriptDriver');
-const JsonDriver       = require('./drivers/JsonDriver');
-const NullDriver       = require('./drivers/NullDriver');
-const TextDriver       = require('./drivers/TextDriver');
-const YamlDriver       = require('./drivers/YamlDriver');
-const hasDriver        = require('../../../support/mixins/hasDriver');
+import JavaScriptDriver from './drivers/JavaScriptDriver';
+import JsonDriver       from './drivers/JsonDriver';
+import NullDriver       from './drivers/NullDriver';
+import TextDriver       from './drivers/TextDriver';
+import YamlDriver       from './drivers/YamlDriver';
+import hasDriver        from '../../../support/mixins/hasDriver';
 
 
 /**
@@ -217,4 +216,4 @@ class FileManager extends hasDriver() {
 }
 
 
-module.exports = FileManager;
+export default FileManager;

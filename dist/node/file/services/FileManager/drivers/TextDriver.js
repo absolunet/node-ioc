@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * Plain text driver that does not parse or write in any particular way.
  *
@@ -11,9 +17,7 @@ const Driver = require('./Driver');
  * @augments file.services.FileManager.drivers.Driver
  * @hideconstructor
  */
-
-
-class TextDriver extends Driver {
+class TextDriver extends _Driver.default {
   /**
    * @inheritdoc
    */
@@ -31,4 +35,7 @@ class TextDriver extends Driver {
 
 }
 
-module.exports = TextDriver;
+var _default = TextDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

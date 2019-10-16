@@ -1,17 +1,20 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Command Runner
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Class that is used to run a command instance through the wanted pipes.
  *
  * @memberof console.services
  * @hideconstructor
  */
-
 class CommandRunner {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -98,4 +101,7 @@ class CommandRunner {
 
 }
 
-module.exports = CommandRunner;
+var _default = CommandRunner;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

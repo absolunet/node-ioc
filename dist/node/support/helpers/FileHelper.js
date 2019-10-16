@@ -1,14 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Date
 //--------------------------------------------------------
-'use strict';
+
 /**
  * File helper.
  *
  * @memberof support.helpers
  * @hideconstructor
  */
-
 class FileHelper {
   /**
    * Get a human readable file size.
@@ -50,4 +53,7 @@ class FileHelper {
 
 }
 
-module.exports = FileHelper;
+var _default = FileHelper;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

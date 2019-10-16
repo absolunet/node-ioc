@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- IoC - Foundation - Mixins - Concerns - Generic class
 //--------------------------------------------------------
-'use strict';
 
 /**
  * Generic class.
@@ -14,4 +13,4 @@ class GenericClass {
 }
 
 
-module.exports = GenericClass;
+export default GenericClass;

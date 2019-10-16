@@ -31,15 +31,6 @@ test('Handles the console command through the command registrar', async () => {
 	then.commandRegistrarShouldHaveResolvedCommand();
 });
 
-test('Register all application commands before handling the command', async () => {
-	given.fakeCommandRegistrar();
-	given.fakeCommandPath();
-	given.fakeTerminal();
-	given.consoleKernel();
-	await when.handling();
-	then.shouldHaveLoadedCommandsFromApplication();
-});
-
 test('Exit process on termination if asked to with 0 if no exception were reported', () => {
 	given.fakeExceptionHandler();
 	given.noException();

@@ -1,13 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _events = _interopRequireDefault(require("events"));
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher - Drivers - Event Emitter Driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const EventEmitter = require('events');
-
-const Driver = require('./Driver');
 /**
  * Dispatcher driver that uses the native EventEmitter from Node.js as dispatcher engine.
  *
@@ -15,17 +21,14 @@ const Driver = require('./Driver');
  * @augments events.services.Dispatcher.drivers.Driver
  * @hideconstructor
  */
-
-
-class EventEmitterDriver extends Driver {
+class EventEmitterDriver extends _Driver.default {
   /**
    * @inheritdoc
    * @private
    */
   init() {
-    __(this).set('listeners', new WeakMap());
-
-    this.setEngine(new EventEmitter());
+    (0, _privateRegistry.default)(this).set('listeners', new WeakMap());
+    this.setEngine(new _events.default());
   }
   /**
    * @inheritdoc
@@ -51,7 +54,7 @@ class EventEmitterDriver extends Driver {
 
 
   off(event, listener) {
-    this.engine.off(event, __(this).get('listeners').get(listener) || listener);
+    this.engine.off(event, (0, _privateRegistry.default)(this).get('listeners').get(listener) || listener);
     return this;
   }
   /**
@@ -95,11 +98,13 @@ class EventEmitterDriver extends Driver {
       return listener(event, payload);
     };
 
-    __(this).get('listeners').set(listener, realListener);
-
+    (0, _privateRegistry.default)(this).get('listeners').set(listener, realListener);
     return realListener;
   }
 
 }
 
-module.exports = EventEmitterDriver;
+var _default = EventEmitterDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

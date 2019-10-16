@@ -1,15 +1,13 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Support Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const DateHelper   = require('./helpers/DateHelper');
-const FileHelper   = require('./helpers/FileHelper');
-const PathHelper   = require('./helpers/PathHelper');
-const StringHelper = require('./helpers/StringHelper');
-const Faker        = require('./services/Faker');
+import ServiceProvider from '../foundation/ServiceProvider';
+import DateHelper      from './helpers/DateHelper';
+import FileHelper      from './helpers/FileHelper';
+import PathHelper      from './helpers/PathHelper';
+import StringHelper    from './helpers/StringHelper';
+import Faker           from './services/Faker';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -44,4 +42,4 @@ class SupportServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = SupportServiceProvider;
+export default SupportServiceProvider;

@@ -1,36 +1,40 @@
+"use strict";
+
+exports.default = void 0;
+
+var _NotImplementedError = _interopRequireDefault(require("./exceptions/NotImplementedError"));
+
+var _CacheServiceProvider = _interopRequireDefault(require("../cache/CacheServiceProvider"));
+
+var _DatabaseServiceProvider = _interopRequireDefault(require("../database/DatabaseServiceProvider"));
+
+var _HttpServiceProvider = _interopRequireDefault(require("../http/HttpServiceProvider"));
+
+var _LogServiceProvider = _interopRequireDefault(require("../log/LogServiceProvider"));
+
+var _SecurityServiceProvider = _interopRequireDefault(require("../security/SecurityServiceProvider"));
+
+var _TestServiceProvider = _interopRequireDefault(require("../test/TestServiceProvider"));
+
+var _TranslationServiceProvider = _interopRequireDefault(require("../translation/TranslationServiceProvider"));
+
+var _ValidationServiceProvider = _interopRequireDefault(require("../validation/ValidationServiceProvider"));
+
+var _ViewServiceProvider = _interopRequireDefault(require("../view/ViewServiceProvider"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Kernel
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('./exceptions/NotImplementedError');
-
-const CacheServiceProvider = require('../cache/CacheServiceProvider');
-
-const DatabaseServiceProvider = require('../database/DatabaseServiceProvider');
-
-const HttpServiceProvider = require('../http/HttpServiceProvider');
-
-const LogServiceProvider = require('../log/LogServiceProvider');
-
-const SecurityServiceProvider = require('../security/SecurityServiceProvider');
-
-const TestServiceProvider = require('../test/TestServiceProvider');
-
-const TranslationServiceProvider = require('../translation/TranslationServiceProvider');
-
-const ValidationServiceProvider = require('../validation/ValidationServiceProvider');
-
-const ViewServiceProvider = require('../view/ViewServiceProvider');
 /**
  * Default kernel bootstrappers.
  *
  * @type {Array<ServiceProvider>}
  * @ignore
  */
-
-
-const coreBootstrappers = [CacheServiceProvider, LogServiceProvider, HttpServiceProvider, SecurityServiceProvider, DatabaseServiceProvider, TranslationServiceProvider, ValidationServiceProvider, ViewServiceProvider];
+const coreBootstrappers = [_CacheServiceProvider.default, _LogServiceProvider.default, _HttpServiceProvider.default, _SecurityServiceProvider.default, _DatabaseServiceProvider.default, _TranslationServiceProvider.default, _ValidationServiceProvider.default, _ViewServiceProvider.default];
 /**
  * Default dev kernel bootstrappers.
  *
@@ -38,7 +42,7 @@ const coreBootstrappers = [CacheServiceProvider, LogServiceProvider, HttpService
  * @ignore
  */
 
-const coreDevelopmentBootstrappers = [TestServiceProvider];
+const coreDevelopmentBootstrappers = [_TestServiceProvider.default];
 /**
  * The base kernel for a Node IoC application.
  * It bootstraps the basic service providers into the application in order to unleash the full Node IoC power.
@@ -50,7 +54,7 @@ const coreDevelopmentBootstrappers = [TestServiceProvider];
 
 class Kernel {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -74,8 +78,7 @@ class Kernel {
         });
       }
     });
-  } // eslint-disable-next-line jsdoc/require-returns-check
-
+  }
   /**
    * Handle the incoming request.
    *
@@ -86,7 +89,7 @@ class Kernel {
 
 
   handle() {
-    throw new NotImplementedError(this, 'handle');
+    throw new _NotImplementedError.default(this, 'handle');
   }
   /**
    * Terminate the request handling.
@@ -108,4 +111,7 @@ class Kernel {
 
 }
 
-module.exports = Kernel;
+var _default = Kernel;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

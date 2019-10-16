@@ -1,15 +1,21 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _Level = _interopRequireDefault(require("./enums/Level"));
+
+var _Logger = _interopRequireDefault(require("./services/Logger"));
+
+var _LogTableCommand = _interopRequireDefault(require("./commands/LogTableCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Log - Log Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Level = require('./enums/Level');
-
-const Logger = require('./services/Logger');
-
-const LogTableCommand = require('./commands/LogTableCommand'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The log service provider.
@@ -28,15 +34,13 @@ const LogTableCommand = require('./commands/LogTableCommand'); // eslint-disable
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class LogServiceProvider extends ServiceProvider {
+class LogServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
   register() {
-    this.app.singleton('log', Logger);
-    this.app.singleton('log.level', Level);
+    this.app.singleton('log', _Logger.default);
+    this.app.singleton('log.level', _Level.default);
   }
   /**
    * Boot the service provider.
@@ -45,7 +49,7 @@ class LogServiceProvider extends ServiceProvider {
 
   boot() {
     this.loadConfig();
-    this.loadCommands([LogTableCommand]);
+    this.loadCommands([_LogTableCommand.default]);
   }
   /**
    * Load configuration file.
@@ -60,4 +64,7 @@ class LogServiceProvider extends ServiceProvider {
 
 }
 
-module.exports = LogServiceProvider;
+var _default = LogServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

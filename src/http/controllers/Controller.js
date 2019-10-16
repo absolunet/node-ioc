@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Controller - Controller
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -303,4 +302,5 @@ class Controller {
 
 }
 
-module.exports = Controller;
+
+export default Controller;

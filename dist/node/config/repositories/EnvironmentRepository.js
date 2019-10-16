@@ -1,22 +1,26 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _dotenv = _interopRequireDefault(require("dotenv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Grammar
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const dotenv = require('dotenv');
 /**
  * Environment repository that exposes all environment variables.
  *
  * @memberof config.repositories
  * @hideconstructor
  */
-
-
 class EnvironmentRepository {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'evaluator']</code>.
    *
    * @type {Array<string>}
    */
@@ -43,15 +47,16 @@ class EnvironmentRepository {
     const {
       error,
       parsed
-    } = dotenv.config({
+    } = _dotenv.default.config({
       path: file
     });
+
     const environment = Object.entries(error ? {} : parsed).reduce((object, [key, value]) => {
       object[key] = value;
       return object;
-    }, process.env);
+    }, process.env); // eslint-disable-line no-process-env
 
-    __(this).set('env', environment);
+    (0, _privateRegistry.default)(this).set('env', environment);
   }
   /**
    * Get all loaded environment variables.
@@ -61,7 +66,7 @@ class EnvironmentRepository {
 
 
   all() {
-    return { ...(__(this).get('env') || {})
+    return { ...((0, _privateRegistry.default)(this).get('env') || {})
     };
   }
   /**
@@ -96,4 +101,7 @@ class EnvironmentRepository {
 
 }
 
-module.exports = EnvironmentRepository;
+var _default = EnvironmentRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

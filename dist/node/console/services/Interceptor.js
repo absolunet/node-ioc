@@ -1,20 +1,24 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Interceptor
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * The stdout interceptor.
  *
  * @memberof console.services
  * @hideconstructor
  */
-
-
 class Interceptor {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['terminal.interceptor.capture']</code>.
    *
    * @type {Array<string>}
    */
@@ -29,19 +33,15 @@ class Interceptor {
 
   init() {
     const interceptors = [];
-
-    __(this).set('interceptors', interceptors);
-
-    __(this).set('interceptor', content => {
-      const editable = __(this).get('editable');
-
+    (0, _privateRegistry.default)(this).set('interceptors', interceptors);
+    (0, _privateRegistry.default)(this).set('interceptor', content => {
+      const editable = (0, _privateRegistry.default)(this).get('editable');
       const editedContent = interceptors.reduce((value, closure) => {
         const transformedValue = closure(this.styleCleaner(value));
         return editable && typeof transformedValue !== 'undefined' ? transformedValue : value;
       }, content);
-      return __(this).get('mute') ? '' : editedContent;
+      return (0, _privateRegistry.default)(this).get('mute') ? '' : editedContent;
     });
-
     this.enable().unmute().removeStyle().uneditable();
   }
   /**
@@ -54,8 +54,7 @@ class Interceptor {
 
 
   add(closure, index = null) {
-    const interceptors = __(this).get('interceptors');
-
+    const interceptors = (0, _privateRegistry.default)(this).get('interceptors');
     interceptors.splice(index === null ? interceptors.length : index, 0, closure);
     return this;
   }
@@ -68,7 +67,7 @@ class Interceptor {
 
 
   remove(closure) {
-    const interceptors = __(this).get('interceptors');
+    const interceptors = (0, _privateRegistry.default)(this).get('interceptors');
 
     if (interceptors.includes(closure)) {
       interceptors.splice(interceptors.indexOf(closure), 1);
@@ -84,8 +83,7 @@ class Interceptor {
 
 
   removeAll() {
-    __(this).get('interceptors').splice(0);
-
+    (0, _privateRegistry.default)(this).get('interceptors').splice(0);
     return this;
   }
   /**
@@ -134,9 +132,9 @@ class Interceptor {
 
 
   enable() {
-    if (!__(this).get('disable')) {
-      __(this).set('disable', this.interceptStdout(content => {
-        return __(this).get('interceptor')(content);
+    if (!(0, _privateRegistry.default)(this).get('disable')) {
+      (0, _privateRegistry.default)(this).set('disable', this.interceptStdout(content => {
+        return (0, _privateRegistry.default)(this).get('interceptor')(content);
       }));
     }
 
@@ -150,12 +148,11 @@ class Interceptor {
 
 
   disable() {
-    const disable = __(this).get('disable');
+    const disable = (0, _privateRegistry.default)(this).get('disable');
 
     if (disable) {
       disable();
-
-      __(this).set('disable', undefined);
+      (0, _privateRegistry.default)(this).set('disable', undefined);
     }
 
     return this;
@@ -169,8 +166,7 @@ class Interceptor {
 
 
   mute(state = true) {
-    __(this).set('mute', state);
-
+    (0, _privateRegistry.default)(this).set('mute', state);
     return this;
   }
   /**
@@ -192,8 +188,7 @@ class Interceptor {
 
 
   editable(state = true) {
-    __(this).set('editable', state);
-
+    (0, _privateRegistry.default)(this).set('editable', state);
     return this;
   }
   /**
@@ -216,8 +211,7 @@ class Interceptor {
 
 
   keepStyle(state = true) {
-    __(this).set('style', state);
-
+    (0, _privateRegistry.default)(this).set('style', state);
     return this;
   }
   /**
@@ -242,7 +236,7 @@ class Interceptor {
 
   get styleCleaner() {
     return content => {
-      if (__(this).get('style')) {
+      if ((0, _privateRegistry.default)(this).get('style')) {
         return content;
       }
 
@@ -257,7 +251,7 @@ class Interceptor {
 
 
   get captureInterceptor() {
-    return __(this).get('terminal.interceptor.capture');
+    return (0, _privateRegistry.default)(this).get('terminal.interceptor.capture');
   }
   /**
    * Captured output.
@@ -292,4 +286,7 @@ class Interceptor {
 
 }
 
-module.exports = Interceptor;
+var _default = Interceptor;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

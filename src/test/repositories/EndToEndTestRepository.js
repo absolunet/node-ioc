@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - End To End Test repository
 //--------------------------------------------------------
-'use strict';
 
-const TestRepository = require('./TestRepository');
+import TestRepository from './TestRepository';
 
 
 /**
@@ -19,9 +18,10 @@ class EndToEndTestRepository extends TestRepository {
 	 * @inheritdoc
 	 */
 	get scope() {
-		return 'e2e';
+		return 'endtoend';
 	}
 
 }
 
-module.exports = EndToEndTestRepository;
+
+export default EndToEndTestRepository;

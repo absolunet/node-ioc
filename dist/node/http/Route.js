@@ -1,13 +1,16 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Models - Route
 //--------------------------------------------------------
-'use strict';
+
 /**
  * The class that describes a route entity.
  *
  * @memberof http
  */
-
 class Route {
   /**
    * Route constructor.
@@ -101,4 +104,7 @@ class Route {
 
 }
 
-module.exports = Route;
+var _default = Route;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

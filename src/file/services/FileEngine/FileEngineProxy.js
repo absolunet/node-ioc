@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine Proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../../support/proxies/ForwardProxy');
+import ForwardProxy from '../../../support/proxies/ForwardProxy';
 
 
 /**
@@ -18,4 +17,4 @@ class FileEngineProxy extends ForwardProxy {
 }
 
 
-module.exports = FileEngineProxy;
+export default FileEngineProxy;

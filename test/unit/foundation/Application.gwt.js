@@ -5,8 +5,8 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const Application     = require('../../../src/foundation/Application');
-const ServiceProvider = require('../../../src/foundation/ServiceProvider');
+const Application     = require('../../../dist/node/foundation/Application');
+const ServiceProvider = require('../../../dist/node/foundation/ServiceProvider');
 
 let application;
 let fakeConfig;
@@ -212,7 +212,15 @@ when.usingNewBasePath = () => {
 };
 
 when.usingNewAppPath = () => {
-	when.callingWithoutResult('useAppPath', ['/new/app/path']);
+	when.callingWithoutResult('useAppPath', ['new/app/path']);
+};
+
+when.usingNewSourcePath = () => {
+	when.callingWithoutResult('useSourcePath', ['lib']);
+};
+
+when.usingNewDistributionPath = () => {
+	when.callingWithoutResult('useDistributionPath', ['new/dist/path']);
 };
 
 when.usingNewHomePath = () => {
@@ -225,6 +233,14 @@ when.formattingWindowsPath = () => {
 
 when.settingNewApplicationVersion = () => {
 	when.callingWithoutResult('setVersion', ['12.34.56']);
+};
+
+when.gettingSourcePath = () => {
+	when.calling('sourcePath');
+};
+
+when.gettingDistributionPath = () => {
+	when.calling('distributionPath');
 };
 
 
@@ -360,7 +376,27 @@ then.fakePathShouldBePrefixedByNewBasePath = () => {
 
 then.appPathShouldBeNewAppPath = () => {
 	then.shouldNotHaveThrown();
-	expect(application.make('path.app')).toBe(`${application.make('path.base')}/new/app/path`);
+	expect(application.make('path.app')).toBe(`${application.make('path.base')}/dist/node/new/app/path`);
+	expect(application.make('path.src.app')).toBe(`${application.make('path.base')}/src/new/app/path`);
+};
+
+then.appPathShouldNotHaveChanged = () => {
+	then.shouldNotHaveThrown();
+	expect(application.make('path.app')).toBe(`${application.make('path.base')}/dist/node/app`);
+};
+
+then.appSourcePathShouldUseNewSourcePath = () => {
+	then.shouldNotHaveThrown();
+	expect(application.make('path.src.app')).toBe(`${application.make('path.base')}/lib/app`);
+};
+
+then.appPathShouldUseNewDistributionPath = () => {
+	then.shouldNotHaveThrown();
+	expect(application.make('path.app')).toBe(`${application.make('path.base')}/new/dist/path/app`);
+};
+
+then.appSourcePathShouldNotHaveChanged = () => {
+	expect(application.make('path.src.app')).toBe(`${application.make('path.base')}/src/app`);
 };
 
 then.fakePathShouldNotHaveChanged = () => {
@@ -369,7 +405,8 @@ then.fakePathShouldNotHaveChanged = () => {
 
 then.providerPathShouldBePrefixedByNewAppPath = () => {
 	then.shouldNotHaveThrown();
-	expect(application.make('path.provider')).toBe(`${application.make('path.base')}/new/app/path/providers`);
+	expect(application.make('path.provider')).toBe(`${application.make('path.base')}/dist/node/new/app/path/providers`);
+	expect(application.make('path.src.provider')).toBe(`${application.make('path.base')}/src/new/app/path/providers`);
 };
 
 then.homePathShouldHaveChanged = () => {

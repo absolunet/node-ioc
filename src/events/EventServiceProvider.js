@@ -1,11 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Events - Event Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Dispatcher = require('./services/Dispatcher');
+import ServiceProvider from '../foundation/ServiceProvider';
+import Dispatcher      from './services/Dispatcher';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -49,4 +47,4 @@ class EventServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = EventServiceProvider;
+export default EventServiceProvider;

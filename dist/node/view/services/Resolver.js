@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Resolver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * View file resolver.
  * It allows to resolve path of a given view name.
@@ -11,11 +17,9 @@ const __ = require('@absolunet/private-registry');
  * @memberof view.services
  * @hideconstructor
  */
-
-
 class Resolver {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'config', 'file', 'file.engine']</code>.
    *
    * @type {Array<string>}
    */
@@ -29,7 +33,7 @@ class Resolver {
 
 
   init() {
-    __(this).set('namespaces', {});
+    (0, _privateRegistry.default)(this).set('namespaces', {});
   }
   /**
    * Find view path by name.
@@ -77,8 +81,7 @@ class Resolver {
     }
 
     const namespace = view.slice(0, view.indexOf(this.namespaceDelimiter));
-
-    const namespacePath = __(this).get('namespaces')[namespace];
+    const namespacePath = (0, _privateRegistry.default)(this).get('namespaces')[namespace];
 
     if (!namespacePath) {
       throw new TypeError(`View namespace "${namespace}" (${view}) does not exist`);
@@ -96,7 +99,7 @@ class Resolver {
 
 
   namespace(namespace, folder) {
-    __(this).get('namespaces')[namespace] = folder;
+    (0, _privateRegistry.default)(this).get('namespaces')[namespace] = folder;
     return this;
   }
   /**
@@ -132,4 +135,7 @@ class Resolver {
 
 }
 
-module.exports = Resolver;
+var _default = Resolver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

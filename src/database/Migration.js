@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Migration
 //--------------------------------------------------------
-'use strict';
 
-const __          = require('@absolunet/private-registry');
-const Application = require('../foundation/Application');
+import __          from '@absolunet/private-registry';
+import Application from '../foundation/Application';
 
 
 /**
@@ -92,4 +91,4 @@ class Migration {
 }
 
 
-module.exports = Migration;
+export default Migration;

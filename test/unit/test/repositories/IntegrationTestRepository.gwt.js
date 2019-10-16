@@ -1,18 +1,18 @@
 //--------------------------------------------------------
-//-- Tests - Unit - Test - Repositories - Standards Test Repository - GWT
+//-- Tests - Unit - Test - Repositories - End-To-End Test Repository - GWT
 //--------------------------------------------------------
 'use strict';
 
 const { given, when, then, build } = require('./common.gwt');
 
-const StandardsTestRepository = require('../../../../src/test/repositories/StandardsTestRepository');
+const IntegrationTestRepository = require('../../../../dist/node/test/repositories/IntegrationTestRepository');
 
 
 //-- Given
 //--------------------------------------------------------
 
-given.standardsTestRepository = () => {
-	given.repository(StandardsTestRepository);
+given.IntegrationTestRepository = () => {
+	given.repository(IntegrationTestRepository);
 };
 
 

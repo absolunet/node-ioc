@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Argument = _interopRequireDefault(require("./Argument"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Flag
 //--------------------------------------------------------
-'use strict';
 
-const Argument = require('./Argument');
 /**
  * Flag argument class.
  * Represents a boolean option that look like "some:command --flag" in a command.
@@ -11,9 +17,7 @@ const Argument = require('./Argument');
  * @memberof console.models
  * @augments console.models.Argument
  */
-
-
-class Flag extends Argument {
+class Flag extends _Argument.default {
   /**
    * Flag constructor.
    *
@@ -39,4 +43,7 @@ class Flag extends Argument {
 
 }
 
-module.exports = Flag;
+var _default = Flag;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

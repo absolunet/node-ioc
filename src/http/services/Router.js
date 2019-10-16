@@ -1,10 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Services - Router
 //--------------------------------------------------------
-'use strict';
 
-const __    = require('@absolunet/private-registry');
-const Route = require('../Route');
+import __    from '@absolunet/private-registry';
+import Route from '../Route';
+
 
 /**
  * @private
@@ -53,7 +53,7 @@ const Route = require('../Route');
 class Router {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'server', 'router.handler', 'router.route', 'router.controller']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -581,4 +581,4 @@ class Router {
 }
 
 
-module.exports = Router;
+export default Router;

@@ -1,14 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Exceptions - Not Implemented Error
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Error that needs to be thrown to simulate a method that was not implemented, such as would do a typed engine with interfaces or abstract methods.
  *
  * @memberof foundation.exceptions
  * @augments TypeError
  */
-
 class NotImplementedError extends TypeError {
   /**
    * NotImplementedError constructor.
@@ -26,4 +29,7 @@ class NotImplementedError extends TypeError {
 
 }
 
-module.exports = NotImplementedError;
+var _default = NotImplementedError;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

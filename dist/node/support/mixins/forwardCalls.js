@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _mixinFactory = _interopRequireDefault(require("./concerns/mixinFactory"));
+
+var _NotImplementedError = _interopRequireDefault(require("../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- IoC - Support - Mixins - Has driver
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('./concerns/mixinFactory');
-
-const NotImplementedError = require('../../foundation/exceptions/NotImplementedError');
 /**
  * Forward calls mixin.
  *
@@ -14,9 +20,7 @@ const NotImplementedError = require('../../foundation/exceptions/NotImplementedE
  * @memberof support.mixins
  * @hideconstructor
  */
-
-
-const forwardCalls = factory(SuperClass => {
+const forwardCalls = (0, _mixinFactory.default)(SuperClass => {
   /**
    * Forward calls mixin.
    */
@@ -44,9 +48,12 @@ const forwardCalls = factory(SuperClass => {
 
 
     getForward() {
-      throw new NotImplementedError(this, 'getForward', 'object');
+      throw new _NotImplementedError.default(this, 'getForward', 'object');
     }
 
   };
 });
-module.exports = forwardCalls;
+var _default = forwardCalls;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

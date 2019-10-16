@@ -5,11 +5,8 @@
 
 const { given, when, then, build } = require('../common.gwt');
 
-const Application = require('../../../src/foundation/Application');
-
 let main;
 let result;
-let mockedSetTimeout;
 
 
 //-- Given
@@ -20,33 +17,17 @@ given.emptyResult = () => {
 };
 
 given.mainFile = () => {
-	main = require('../../../src'); // eslint-disable-line global-require
-};
-
-given.mockedSetTimeout = () => {
-	mockedSetTimeout = jest.spyOn(global, 'setTimeout');
+	main = require('../../../dist/node'); // eslint-disable-line global-require
 };
 
 
 //-- When
 //--------------------------------------------------------
 
-when.gettingApplication = () => {
-	when.attempting(() => {
-		result = main.app;
-	});
-};
-
 when.gettingMixinsWithoutFactory = () => {
 	when.attempting(() => {
 		({ ...result } = main.mixins);
 		delete result.factory;
-	});
-};
-
-when.loadingMainFile = () => {
-	when.attempting(() => {
-		require('../../../src'); // eslint-disable-line global-require
 	});
 };
 
@@ -66,19 +47,6 @@ when.gettingAllKeysExceptApplicationAndMixins = () => {
 
 //-- Then
 //--------------------------------------------------------
-
-then.shouldHaveReceivedApplicationInstance = () => {
-	expect(result).toBeInstanceOf(Application);
-};
-
-then.mockedSetTimeoutCallbackShouldNotHaveBeenCalled = () => {
-	then.shouldNotHaveThrown();
-	expect(mockedSetTimeout).not.toHaveBeenCalled();
-};
-
-then.restoreMockedSetTimeout = () => {
-	mockedSetTimeout.mockRestore();
-};
 
 then.allKeysShouldBeConstructor = () => {
 	then.shouldNotHaveThrown();

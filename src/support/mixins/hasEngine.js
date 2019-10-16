@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Mixins - Has engine
 //--------------------------------------------------------
-'use strict';
 
-const __      = require('@absolunet/private-registry');
-const factory = require('./concerns/mixinFactory');
+import __      from '@absolunet/private-registry';
+import factory from './concerns/mixinFactory';
 
 
 /**
@@ -52,4 +51,4 @@ const hasEngine = factory((SuperClass) => {
 });
 
 
-module.exports = hasEngine;
+export default hasEngine;

@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container     = require('../../container');
-const ConfigGrammar = require('../../../../src/config/services/ConfigGrammar');
+const ConfigGrammar = require('../../../../dist/node/config/services/ConfigGrammar');
 
 let configGrammar;
 let result;

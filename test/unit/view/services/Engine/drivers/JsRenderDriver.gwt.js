@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../../common.gwt');
 
 const container = require('../../../../container');
-const JsRenderDriver = require('../../../../../../src/view/services/Engine/drivers/JsRenderDriver');
+const JsRenderDriver = require('../../../../../../dist/node/view/services/Engine/drivers/JsRenderDriver');
 
 let driver;
 let template;

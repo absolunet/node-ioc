@@ -1,20 +1,24 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - Abstract Test repository
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Base test repository, that scopes to the whole test folder.
  *
  * @memberof test.repositories
  * @hideconstructor
  */
-
-
 class TestRepository {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'file', 'helper.path', 'helper.string']</code>.
    *
    * @type {Array<string>}
    */
@@ -208,8 +212,7 @@ class TestRepository {
 
 
   setBasePath(basePath) {
-    __(TestRepository).set('basePath', basePath);
-
+    (0, _privateRegistry.default)(TestRepository).set('basePath', basePath);
     return this;
   }
   /**
@@ -221,8 +224,7 @@ class TestRepository {
 
 
   setPattern(pattern) {
-    __(TestRepository).set('pattern', pattern);
-
+    (0, _privateRegistry.default)(TestRepository).set('pattern', pattern);
     return this;
   }
   /**
@@ -262,7 +264,7 @@ class TestRepository {
 
 
   get basePath() {
-    return __(TestRepository).get('basePath') || this.app.testPath();
+    return (0, _privateRegistry.default)(TestRepository).get('basePath') || this.app.testPath();
   }
   /**
    * Current pattern accessor.
@@ -272,9 +274,12 @@ class TestRepository {
 
 
   get pattern() {
-    return __(TestRepository).get('pattern') || '[A-Z]\\w*Test.js$';
+    return (0, _privateRegistry.default)(TestRepository).get('pattern') || '[A-Z]\\w*Test.js$';
   }
 
 }
 
-module.exports = TestRepository;
+var _default = TestRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

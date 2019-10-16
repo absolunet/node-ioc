@@ -1,19 +1,17 @@
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Kernel
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('./exceptions/NotImplementedError');
-
-const CacheServiceProvider       = require('../cache/CacheServiceProvider');
-const DatabaseServiceProvider    = require('../database/DatabaseServiceProvider');
-const HttpServiceProvider        = require('../http/HttpServiceProvider');
-const LogServiceProvider         = require('../log/LogServiceProvider');
-const SecurityServiceProvider    = require('../security/SecurityServiceProvider');
-const TestServiceProvider        = require('../test/TestServiceProvider');
-const TranslationServiceProvider = require('../translation/TranslationServiceProvider');
-const ValidationServiceProvider  = require('../validation/ValidationServiceProvider');
-const ViewServiceProvider        = require('../view/ViewServiceProvider');
+import NotImplementedError        from './exceptions/NotImplementedError';
+import CacheServiceProvider       from '../cache/CacheServiceProvider';
+import DatabaseServiceProvider    from '../database/DatabaseServiceProvider';
+import HttpServiceProvider        from '../http/HttpServiceProvider';
+import LogServiceProvider         from '../log/LogServiceProvider';
+import SecurityServiceProvider    from '../security/SecurityServiceProvider';
+import TestServiceProvider        from '../test/TestServiceProvider';
+import TranslationServiceProvider from '../translation/TranslationServiceProvider';
+import ValidationServiceProvider  from '../validation/ValidationServiceProvider';
+import ViewServiceProvider        from '../view/ViewServiceProvider';
 
 
 /**
@@ -55,7 +53,7 @@ const coreDevelopmentBootstrappers = [
 class Kernel {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -82,7 +80,6 @@ class Kernel {
 		});
 	}
 
-	// eslint-disable-next-line jsdoc/require-returns-check
 	/**
 	 * Handle the incoming request.
 	 *
@@ -113,4 +110,4 @@ class Kernel {
 }
 
 
-module.exports = Kernel;
+export default Kernel;

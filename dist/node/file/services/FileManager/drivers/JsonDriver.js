@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * JSON driver that allow .json file interpretation load. Allow to write into .json file from a JSON serialisable instance.
  *
@@ -11,9 +17,7 @@ const Driver = require('./Driver');
  * @augments file.services.FileManager.drivers.Driver
  * @hideconstructor
  */
-
-
-class JsonDriver extends Driver {
+class JsonDriver extends _Driver.default {
   /**
    * @inheritdoc
    */
@@ -57,4 +61,7 @@ class JsonDriver extends Driver {
 
 }
 
-module.exports = JsonDriver;
+var _default = JsonDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

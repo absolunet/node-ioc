@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Repositories - Model Repository
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -13,7 +12,7 @@
 class ModelRepository {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['db.orm']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -68,4 +67,4 @@ class ModelRepository {
 }
 
 
-module.exports = ModelRepository;
+export default ModelRepository;

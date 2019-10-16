@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Controllers - Default Controller
 //--------------------------------------------------------
-'use strict';
 
-const Controller = require('./Controller');
+import Controller from './Controller';
 
 
 /**
@@ -28,4 +27,4 @@ class RedirectController extends Controller {
 }
 
 
-module.exports = RedirectController;
+export default RedirectController;

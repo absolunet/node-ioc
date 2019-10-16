@@ -1,20 +1,23 @@
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Application
 //--------------------------------------------------------
-'use strict';
 
-const os    = require('os');
-const path  = require('path');
-const slash = require('slash');
-const __    = require('@absolunet/private-registry');
+import * as os                from 'os';
+import * as path              from 'path';
+import slash                  from 'slash';
+import __                     from '@absolunet/private-registry';
+import Container              from '../container/Container';
+import ConfigServiceProvider  from '../config/ConfigServiceProvider';
+import EventServiceProvider   from '../events/EventServiceProvider';
+import FileServiceProvider    from '../file/FileServiceProvider';
+import SupportServiceProvider from '../support/SupportServiceProvider';
 
-const Container = require('../container/Container');
-
-const ConfigServiceProvider  = require('../config/ConfigServiceProvider');
-const EventServiceProvider   = require('../events/EventServiceProvider');
-const FileServiceProvider    = require('../file/FileServiceProvider');
-const SupportServiceProvider = require('../support/SupportServiceProvider');
-
+/**
+ * Base application service providers.
+ *
+ * @type {Array<foundation.ServiceProvider>}
+ * @ignore
+ */
 const coreProviders = [
 	EventServiceProvider,
 	FileServiceProvider,
@@ -238,8 +241,8 @@ class Application extends Container {
 	/**
 	 * Configure application paths.
 	 *
-	 * @param {{string}|string|null} paths - The paths to configure into the application.
-	 * @returns {Application} - The current application instance.
+	 * @param {object<string, string>|string|null} paths - The paths to configure into the application.
+	 * @returns {foundation.Application} - The current application instance.
 	 * @throws TypeError - Indicates that the base path was never defined.
 	 */
 	configurePaths(paths = null) {
@@ -257,28 +260,90 @@ class Application extends Container {
 	}
 
 	/**
-	 * Configure default paths within the container.
+	 * Configure application namespaces.
 	 *
-	 * @returns {Application} - The current application instane.
+	 * @param {object<string, string>} namespaces - The namespaces to configure into the application.
+	 * @returns {foundation.Application} - The current application instance.
 	 */
-	configureDefaultPaths() {
-		const basePath = process.cwd();
-
-		this.configurePaths({
-			'base':      this.formatPath(basePath),
-			'config':    this.formatPath(basePath, 'config'),
-			'database':  this.formatPath(basePath, 'database'),
-			'lang':      this.formatPath(basePath, 'resources', 'lang'),
-			'public':    this.formatPath(basePath, 'resources', 'static'),
-			'resources': this.formatPath(basePath, 'resources'),
-			'routes':    this.formatPath(basePath, 'routes'),
-			'storage':   this.formatPath(basePath, 'storage'),
-			'test':      this.formatPath(basePath, 'test'),
-			'view':      this.formatPath(basePath, 'resources', 'views')
+	configureNamespaces(namespaces) {
+		Object.keys(namespaces).forEach((namespace) => {
+			this.bind(`namespace.${namespace}`, namespaces[namespace]);
 		});
 
-		this.useAppPath('app');
-		this.useHomePath(os.homedir());
+		return this;
+	}
+
+	/**
+	 * Configure default paths within the container.
+	 *
+	 * @returns {Application} - The current application instance.
+	 */
+	configureDefaultPaths() {
+		const basePath              = process.cwd();
+		const appNamespace          = 'app';
+		const sourceNamespace       = 'src';
+		const distributionNamespace = this.formatPath('dist', 'node');
+
+		this.configureNamespaces({
+			app: appNamespace,
+			src: sourceNamespace, // eslint-disable-line unicorn/prevent-abbreviations
+			dist: distributionNamespace
+		});
+
+		this.configurePaths({
+			'home':           os.homedir(),
+			'base':           this.formatPath(basePath),
+			'config':         this.formatPath(basePath, 'config'),
+			'lang':           this.formatPath(basePath, 'resources', 'lang'),
+			'public':         this.formatPath(basePath, 'resources', 'static'),
+			'resources':      this.formatPath(basePath, 'resources'),
+			'storage':        this.formatPath(basePath, 'storage'),
+			'test':           this.formatPath(basePath, 'test'),
+			'view':           this.formatPath(basePath, 'resources', 'views'),
+			'dist':           this.formatPath(basePath, distributionNamespace),
+			'bootstrap':      this.formatPath(basePath, distributionNamespace, 'bootstrap'),
+			'database':       this.formatPath(basePath, distributionNamespace, 'database'),
+			'routes':         this.formatPath(basePath, distributionNamespace, 'routes'),
+			'app':            this.formatPath(basePath, distributionNamespace, appNamespace),
+			'command':        this.formatPath(basePath, distributionNamespace, appNamespace, 'console', 'commands'),
+			'controller':     this.formatPath(basePath, distributionNamespace, appNamespace, 'http', 'controllers'),
+			'provider':       this.formatPath(basePath, distributionNamespace, appNamespace, 'providers'),
+			'src':            this.formatPath(basePath, sourceNamespace),
+			'src.bootstrap':  this.formatPath(basePath, sourceNamespace, 'bootstrap'),
+			'src.database':   this.formatPath(basePath, sourceNamespace, 'database'),
+			'src.routes':     this.formatPath(basePath, sourceNamespace, 'routes'),
+			'src.app':        this.formatPath(basePath, sourceNamespace, appNamespace),
+			'src.command':    this.formatPath(basePath, sourceNamespace, appNamespace, 'console', 'commands'),
+			'src.controller': this.formatPath(basePath, sourceNamespace, appNamespace, 'http', 'controllers'),
+			'src.provider':   this.formatPath(basePath, sourceNamespace, appNamespace, 'providers')
+		});
+
+		return this;
+	}
+
+	/**
+	 * Replace bound paths that matches the given original one by a new one.
+	 *
+	 * @example
+	 * this.bind('app.foo', '/base/foo/path');
+	 * this.bind('app.bar', '/base/bar/path');
+	 * this.bind('app.baz', '/some/baz/path');
+	 * this.replacePaths('/base/', '/new/');
+	 * this.make('app.foo'); // "/new/foo/path"
+	 * this.make('app.bar'); // "/new/bar/path"
+	 * this.make('app.baz'); // "/some/baz/path" (hasn't changed since not matching)
+	 *
+	 * @param {string} from - The original path to replace.
+	 * @param {string} to - The new path that replaces the older.
+	 * @param {boolean} isSource - Indicates that the replacement must affect.
+	 * @returns {Application} - The current application instance.
+	 */
+	replacePaths(from, to, isSource = false) {
+		this.getBounds().forEach((name) => {
+			if (new RegExp(`^path\\.${isSource ? 'src\\.?' : '?(?!src\\.)'}`, 'u').test(name)) {
+				this.bind(name, this.formatPath(this.make(name).replace(new RegExp(`^${from}`, 'u'), to)));
+			}
+		});
 
 		return this;
 	}
@@ -302,35 +367,46 @@ class Application extends Container {
 	 * @returns {Application} - The current application instance.
 	 */
 	useBasePath(basePath) {
-		const currentBasePath = this.make('path.base');
-
-		this.getBounds().forEach((name) => {
-			if ((/^path.?/u).test(name)) {
-				this.bind(name, this.formatPath(this.make(name).replace(new RegExp(`^${currentBasePath}`, 'u'), basePath)));
-			}
-		});
-
-		return this;
+		return this.replacePaths(this.basePath(), basePath);
 	}
 
 	/**
 	 * Use application path for all application-related registered paths.
 	 *
-	 * @param {string} appPath - The new application path.
+	 * @param {string} appPath - The new application relative path.
 	 * @returns {Application} - The current application instance.
 	 */
 	useAppPath(appPath) {
-		const basePath    = this.make('path.base');
-		const baseAppPath = this.formatPath(basePath, appPath);
+		this.configureNamespaces({ app: appPath });
 
-		this.configurePaths({
-			app:        baseAppPath,
-			command:    this.formatPath(baseAppPath, 'commands'),
-			controller: this.formatPath(baseAppPath, 'http', 'controllers'),
-			provider:   this.formatPath(baseAppPath, 'providers')
-		});
+		this.replacePaths(this.sourcePath('app', ''),       this.sourcePath(appPath), true);
+		this.replacePaths(this.distributionPath('app', ''), this.distributionPath(appPath));
 
 		return this;
+	}
+
+	/**
+	 * Use source path for all application-related registered paths.
+	 *
+	 * @param {string} sourcePath - The new source path.
+	 * @returns {Application} - The current application instance.
+	 */
+	useSourcePath(sourcePath) {
+		this.configureNamespaces({ src: sourcePath }); // eslint-disable-line unicorn/prevent-abbreviations
+
+		return this.replacePaths(this.sourcePath(), this.basePath(sourcePath));
+	}
+
+	/**
+	 * Use source path for all application-related registered paths.
+	 *
+	 * @param {string} distributionPath - The new distribution path.
+	 * @returns {Application} - The current application instance.
+	 */
+	useDistributionPath(distributionPath) {
+		this.configureNamespaces({ dist: distributionPath });
+
+		return this.replacePaths(this.distributionPath(), this.basePath(distributionPath));
 	}
 
 	/**
@@ -428,6 +504,23 @@ class Application extends Container {
 	}
 
 	/**
+	 * Get full path from distribution path.
+	 * If a type is provided first, the relative path to the source folder type will be returned.
+	 * Otherwise, the full path from the source folder will be returned.
+	 *
+	 * @param {string} [type] - Either the source type name, or the relative path.
+	 * @param {string} [relativePath] - The relative path from the given source folder type.
+	 * @returns {string} - The formatted path from distribution path.
+	 */
+	distributionPath(type, relativePath) {
+		if (typeof relativePath === 'undefined') {
+			return this.path('dist', type);
+		}
+
+		return this.path(type, relativePath);
+	}
+
+	/**
 	 * Get full path from lang path.
 	 *
 	 * @param {string|Array<string>} [relativePath] - The relative path from lang path.
@@ -470,11 +563,28 @@ class Application extends Container {
 	/**
 	 * Get full path from routes path.
 	 *
-	 * @param {string|Array<string>} [relativePath] - The relative path from routes path.
-	 * @returns {string} - The formatted path from routes path.
+	 * @param {string|Array<string>} [relativePath] - The relative path from resources path.
+	 * @returns {string} - The formatted path from resources path.
 	 */
 	routesPath(relativePath) {
 		return this.path('routes', relativePath);
+	}
+
+	/**
+	 * Get full path from source path.
+	 * If a type is provided first, the relative path to the source folder type will be returned.
+	 * Otherwise, the full path from the source folder will be returned.
+	 *
+	 * @param {string} [type] - Either the source type name, or the relative path.
+	 * @param {string} [relativePath] - The relative path from the given source folder type.
+	 * @returns {string} - The formatted path from source path.
+	 */
+	sourcePath(type, relativePath) {
+		if (typeof relativePath === 'undefined') {
+			return this.path('src', type);
+		}
+
+		return this.path(`src.${type}`, relativePath);
 	}
 
 	/**
@@ -589,7 +699,7 @@ class Application extends Container {
 			this.make('config').set('app.env', environment);
 		}
 
-		process.env.APP_ENV = environment;
+		process.env.APP_ENV = environment; // eslint-disable-line no-process-env
 
 		return this;
 	}
@@ -622,7 +732,7 @@ class Application extends Container {
 	 * @type {string}
 	 */
 	get environment() {
-		const defaultEnvironment = process.env.APP_ENV || process.env.NODE_ENV || 'production';
+		const defaultEnvironment = process.env.APP_ENV || process.env.NODE_ENV || 'production'; // eslint-disable-line no-process-env
 
 		if (this.isBound('config')) {
 			return this.make('config').get('app.env', defaultEnvironment);
@@ -643,4 +753,4 @@ class Application extends Container {
 }
 
 
-module.exports = Application;
+export default Application;

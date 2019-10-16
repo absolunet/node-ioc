@@ -1,27 +1,24 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Database Service provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider        = require('../foundation/ServiceProvider');
-
-const Builder         = require('./services/Builder');
-const Connector       = require('./services/Connector');
-const Factory         = require('./services/Factory');
-const ModelRepository = require('./repositories/ModelRepository');
-const ORM             = require('./services/ORM');
-const Resolver        = require('./services/Resolver');
-
-const MakeFactoryCommand     = require('./commands/MakeFactoryCommand');
-const MakeMigrationCommand   = require('./commands/MakeMigrationCommand');
-const MakeModelCommand       = require('./commands/MakeModelCommand');
-const MakeSeederCommand      = require('./commands/MakeSeederCommand');
-const MigrateCommand         = require('./commands/MigrateCommand');
-const MigrateFreshCommand    = require('./commands/MigrateFreshCommand');
-const MigrateRefreshCommand  = require('./commands/MigrateRefreshCommand');
-const MigrateRollbackCommand = require('./commands/MigrateRollbackCommand');
-const MigrateStatusCommand   = require('./commands/MigrateStatusCommand');
-const SeedCommand            = require('./commands/SeedCommand');
+import ServiceProvider        from '../foundation/ServiceProvider';
+import Builder                from './services/Builder';
+import Connector              from './services/Connector';
+import Factory                from './services/Factory';
+import ModelRepository        from './repositories/ModelRepository';
+import ORM                    from './services/ORM';
+import Resolver               from './services/Resolver';
+import MakeFactoryCommand     from './commands/MakeFactoryCommand';
+import MakeMigrationCommand   from './commands/MakeMigrationCommand';
+import MakeModelCommand       from './commands/MakeModelCommand';
+import MakeSeederCommand      from './commands/MakeSeederCommand';
+import MigrateCommand         from './commands/MigrateCommand';
+import MigrateFreshCommand    from './commands/MigrateFreshCommand';
+import MigrateRefreshCommand  from './commands/MigrateRefreshCommand';
+import MigrateRollbackCommand from './commands/MigrateRollbackCommand';
+import MigrateStatusCommand   from './commands/MigrateStatusCommand';
+import SeedCommand            from './commands/SeedCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -122,8 +119,7 @@ class DatabaseServiceProvider extends ServiceProvider {
 	loadAppModelFactories() {
 		const file    = this.app.make('file');
 		const factory = this.app.make('db.factory');
-
-		const folder = this.app.make('db.resolver').resolvePath('factories');
+		const folder  = this.app.make('db.resolver').resolvePath('factories');
 
 		if (file.exists(folder)) {
 			Object.values(file.loadInFolder(folder))
@@ -136,4 +132,4 @@ class DatabaseServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = DatabaseServiceProvider;
+export default DatabaseServiceProvider;

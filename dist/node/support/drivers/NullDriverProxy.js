@@ -1,7 +1,11 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Drivers - Null Driver proxy
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Null driver proxy that is infinitely chaineable.
  * It is a great solution to test something that needs a complex instance or a suite of nested dependencies.
@@ -9,7 +13,6 @@
  * @memberof support.drivers
  * @hideconstructor
  */
-
 class NullDriverProxy {
   /**
    * NullDriverProxy constructor.
@@ -99,4 +102,7 @@ class NullDriverProxy {
 
 }
 
-module.exports = NullDriverProxy;
+var _default = NullDriverProxy;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

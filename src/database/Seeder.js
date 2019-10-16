@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Seeder
 //--------------------------------------------------------
-'use strict';
 
-const __          = require('@absolunet/private-registry');
-const Application = require('../foundation/Application');
+import __          from '@absolunet/private-registry';
+import Application from '../foundation/Application';
 
 
 /**
@@ -18,7 +17,7 @@ const Application = require('../foundation/Application');
 class Seeder {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['db.model', 'db.factory']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -102,4 +101,4 @@ class Seeder {
 }
 
 
-module.exports = Seeder;
+export default Seeder;

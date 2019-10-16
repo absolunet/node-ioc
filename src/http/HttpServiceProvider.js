@@ -1,29 +1,23 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - HTTP Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const HttpClient = require('./services/Client');
-const HttpServer = require('./services/Server');
-const Handler    = require('./services/Handler');
-const Router     = require('./services/Router');
-
-const RouteRepository      = require('./repositories/RouteRepository');
-const ControllerRepository = require('./repositories/ControllerRepository');
-
-const RedirectController = require('./controllers/RedirectController');
-const StaticController   = require('./controllers/StaticController');
-
-const MakeControllerCommand = require('./commands/MakeControllerCommand');
-const ServeCommand          = require('./commands/ServeCommand');
+import ServiceProvider       from '../foundation/ServiceProvider';
+import HttpClient            from './services/Client';
+import HttpServer            from './services/Server';
+import Handler               from './services/Handler';
+import Router                from './services/Router';
+import RouteRepository       from './repositories/RouteRepository';
+import ControllerRepository  from './repositories/ControllerRepository';
+import RedirectController    from './controllers/RedirectController';
+import StaticController      from './controllers/StaticController';
+import MakeControllerCommand from './commands/MakeControllerCommand';
+import ServeCommand          from './commands/ServeCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
 /**
  * The HTTP service provider.
- *
  * It bind these following services:
  * <ul>
  *     <li><a href="http.services.Client.html">http</a></li>
@@ -113,4 +107,4 @@ class HttpServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = HttpServiceProvider;
+export default HttpServiceProvider;

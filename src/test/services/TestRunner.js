@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Service - Test runner
 //--------------------------------------------------------
-'use strict';
 
-const hasEngine = require('../../support/mixins/hasEngine');
+import hasEngine from '../../support/mixins/hasEngine';
 
 
 /**
@@ -16,7 +15,7 @@ const hasEngine = require('../../support/mixins/hasEngine');
 class TestRunner extends hasEngine() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -123,4 +122,5 @@ class TestRunner extends hasEngine() {
 
 }
 
-module.exports = TestRunner;
+
+export default TestRunner;

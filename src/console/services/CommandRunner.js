@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Command Runner
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -13,7 +12,7 @@
 class CommandRunner {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -97,4 +96,4 @@ class CommandRunner {
 }
 
 
-module.exports = CommandRunner;
+export default CommandRunner;

@@ -1,12 +1,11 @@
 //--------------------------------------------------------
 //-- Node IoC - Translation - Services - Translator - Drivers - File Driver
 //--------------------------------------------------------
-'use strict';
 
-const __        = require('@absolunet/private-registry');
-const deepMerge = require('deepmerge');
-const dot       = require('dot-object');
-const Driver    = require('./Driver');
+import __        from '@absolunet/private-registry';
+import deepMerge from 'deepmerge';
+import dot       from 'dot-object';
+import Driver    from './Driver';
 
 
 /**
@@ -19,7 +18,7 @@ const Driver    = require('./Driver');
 class FileDriver extends Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'file']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -212,4 +211,4 @@ class FileDriver extends Driver {
 }
 
 
-module.exports = FileDriver;
+export default FileDriver;

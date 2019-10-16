@@ -1,17 +1,23 @@
+"use strict";
+
+exports.default = void 0;
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+
+var _DispatcherProxy = _interopRequireDefault(require("./DispatcherProxy"));
+
+var _EventEmitterDriver = _interopRequireDefault(require("./drivers/EventEmitterDriver"));
+
+var _PubSubJsDriver = _interopRequireDefault(require("./drivers/PubSubJsDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher
 //--------------------------------------------------------
-'use strict';
 
-const hasDriver = require('../../../support/mixins/hasDriver');
-
-const forwardCalls = require('../../../support/mixins/forwardCalls');
-
-const DispatcherProxy = require('./DispatcherProxy');
-
-const EventEmitterDriver = require('./drivers/EventEmitterDriver');
-
-const PubSubJsDriver = require('./drivers/PubSubJsDriver');
 /**
  * Event dispatcher that manages the events publishing and subscribing.
  *
@@ -20,9 +26,7 @@ const PubSubJsDriver = require('./drivers/PubSubJsDriver');
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-
-
-class Dispatcher extends forwardCalls(hasDriver()) {
+class Dispatcher extends (0, _forwardCalls.default)((0, _hasDriver.default)()) {
   /**
    * Dispatcher constructor.
    *
@@ -31,7 +35,7 @@ class Dispatcher extends forwardCalls(hasDriver()) {
    */
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new DispatcherProxy());
+    return new Proxy(this, new _DispatcherProxy.default());
   }
   /**
    * @inheritdoc
@@ -41,8 +45,8 @@ class Dispatcher extends forwardCalls(hasDriver()) {
 
   init() {
     super.init();
-    this.addDriver('emitter', EventEmitterDriver);
-    this.addDriver('pubsubjs', PubSubJsDriver);
+    this.addDriver('emitter', _EventEmitterDriver.default);
+    this.addDriver('pubsubjs', _PubSubJsDriver.default);
     const {
       app
     } = this;
@@ -60,4 +64,7 @@ class Dispatcher extends forwardCalls(hasDriver()) {
 
 }
 
-module.exports = Dispatcher;
+var _default = Dispatcher;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

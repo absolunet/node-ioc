@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Sync
 //--------------------------------------------------------
-'use strict';
 
-const SyncProxy   = require('./SyncProxy');
-const forwardCalls = require('../../../support/mixins/forwardCalls');
+import SyncProxy    from './SyncProxy';
+import forwardCalls from '../../../support/mixins/forwardCalls';
 
 
 /**
@@ -59,4 +58,4 @@ class Sync extends forwardCalls() {
 
 
 
-module.exports = Sync;
+export default Sync;

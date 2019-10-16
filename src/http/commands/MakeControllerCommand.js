@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Command - Make Controller
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
+import GeneratorCommand from '../../console/GeneratorCommand';
 
 
 /**
@@ -16,7 +15,7 @@ const GeneratorCommand = require('../../console/GeneratorCommand');
 class MakeControllerCommand extends GeneratorCommand {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['helper.path']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -54,7 +53,7 @@ class MakeControllerCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get destination() {
-		return this.app.controllerPath();
+		return this.app.sourcePath('controller', '');
 	}
 
 	/**
@@ -122,4 +121,4 @@ class MakeControllerCommand extends GeneratorCommand {
 }
 
 
-module.exports = MakeControllerCommand;
+export default MakeControllerCommand;

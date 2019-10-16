@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Engine = _interopRequireDefault(require("./Engine"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Engines - Jest
 //--------------------------------------------------------
-'use strict';
 
-const Engine = require('./Engine');
 /**
  * Jest engine.
  *
@@ -11,9 +17,7 @@ const Engine = require('./Engine');
  * @augments test.engines.Engine
  * @hideconstructor
  */
-
-
-class JestEngine extends Engine {
+class JestEngine extends _Engine.default {
   /**
    * @inheritdoc
    */
@@ -27,14 +31,6 @@ class JestEngine extends Engine {
 
   get path() {
     return 'node_modules/jest/bin/jest';
-  }
-  /**
-   * @inheritdoc
-   */
-
-
-  getPathArgument() {
-    return '';
   }
   /**
    * @inheritdoc
@@ -103,4 +99,7 @@ class JestEngine extends Engine {
 
 }
 
-module.exports = JestEngine;
+var _default = JestEngine;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store resolver - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const hasEngine           = require('../../../../support/mixins/hasEngine');
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
+import hasEngine           from '../../../../support/mixins/hasEngine';
+import NotImplementedError from '../../../../foundation/exceptions/NotImplementedError';
 
 /* istanbul ignore next */
 /**
@@ -17,7 +16,7 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
 class Driver extends hasEngine() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['driver.config', 'helper.date']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -143,4 +142,4 @@ class Driver extends hasEngine() {
 }
 
 
-module.exports = Driver;
+export default Driver;

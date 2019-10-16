@@ -1,17 +1,23 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _hasEngine = _interopRequireDefault(require("../support/mixins/hasEngine"));
+
+var _asserts = _interopRequireDefault(require("./mixins/core/asserts"));
+
+var _expects = _interopRequireDefault(require("./mixins/core/expects"));
+
+var _setsUp = _interopRequireDefault(require("./mixins/core/setsUp"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Test Case
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const hasEngine = require('../support/mixins/hasEngine');
-
-const asserts = require('./mixins/core/asserts');
-
-const expects = require('./mixins/core/expects');
-
-const setsUp = require('./mixins/core/setsUp');
 /**
  * Base test case class for the test system.
  *
@@ -22,9 +28,7 @@ const setsUp = require('./mixins/core/setsUp');
  * @augments support.mixins.HasEngine
  * @hideconstructor
  */
-
-
-class TestCase extends setsUp(expects(asserts(hasEngine()))) {
+class TestCase extends (0, _setsUp.default)((0, _expects.default)((0, _asserts.default)((0, _hasEngine.default)()))) {
   /**
    * Call make method from the current application.
    *
@@ -54,8 +58,7 @@ class TestCase extends setsUp(expects(asserts(hasEngine()))) {
 
 
   setApp(app) {
-    __(this).set('app', app);
-
+    (0, _privateRegistry.default)(this).set('app', app);
     return this;
   }
   /**
@@ -66,9 +69,12 @@ class TestCase extends setsUp(expects(asserts(hasEngine()))) {
 
 
   get app() {
-    return __(this).get('app');
+    return (0, _privateRegistry.default)(this).get('app');
   }
 
 }
 
-module.exports = TestCase;
+var _default = TestCase;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

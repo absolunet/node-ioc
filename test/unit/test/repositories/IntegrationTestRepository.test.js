@@ -1,9 +1,9 @@
 //--------------------------------------------------------
-//-- Tests - Unit - Test - Repositories - Standards Test Repository
+//-- Tests - Unit - Test - Repositories - End-To-End Test Repository
 //--------------------------------------------------------
 'use strict';
 
-const { given, when, then } = require('./StandardsTestRepository.gwt');
+const { given, when, then } = require('./IntegrationTestRepository.gwt');
 
 
 beforeEach(() => {
@@ -14,12 +14,12 @@ beforeEach(() => {
 	given.emptyTestCaseInstance();
 	given.methodName(undefined);
 	given.fakeFileManager();
-	given.standardsTestRepository();
+	given.IntegrationTestRepository();
 	given.fakeTestPath();
 });
 
 
-test('Scopes for folder under "standards"', () => {
+test('Scopes for folder under "integration"', () => {
 	when.gettingScope();
-	then.resultShouldBe('standards');
+	then.resultShouldBe('integration');
 });

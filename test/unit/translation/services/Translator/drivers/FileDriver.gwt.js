@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../../common.gwt');
 
 const container  = require('../../../../container');
-const FileDriver = require('../../../../../../src/translation/services/Translator/drivers/FileDriver');
+const FileDriver = require('../../../../../../dist/node/translation/services/Translator/drivers/FileDriver');
 
 let driver;
 let result;

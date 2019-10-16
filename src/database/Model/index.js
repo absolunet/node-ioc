@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Model
 //--------------------------------------------------------
-'use strict';
 
-const Model = require('./Model');
+import Model from './Model';
 
 
-module.exports = Model;
+export default Model;

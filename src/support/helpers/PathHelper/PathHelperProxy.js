@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Path Helper proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../proxies/ForwardProxy');
+import ForwardProxy from '../../proxies/ForwardProxy';
 
 
 /**
@@ -18,4 +17,4 @@ class PathHelperProxy extends ForwardProxy {
 }
 
 
-module.exports = PathHelperProxy;
+export default PathHelperProxy;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher - Dispatcher Proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../../support/proxies/ForwardProxy');
+import ForwardProxy from '../../../support/proxies/ForwardProxy';
 
 
 /**
@@ -18,4 +17,4 @@ class DispatcherProxy extends ForwardProxy {
 }
 
 
-module.exports = DispatcherProxy;
+export default DispatcherProxy;

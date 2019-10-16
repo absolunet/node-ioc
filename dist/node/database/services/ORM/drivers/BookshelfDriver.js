@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - ORM - Drivers - Bookshelf driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * ORM Driver for Bookshelf ORM for Knex.
  *
@@ -11,9 +17,7 @@ const Driver = require('./Driver');
  * @augments database.services.ORM.drivers.Driver
  * @hideconstructor
  */
-
-
-class BookshelfDriver extends Driver {
+class BookshelfDriver extends _Driver.default {
   /**
    * @inheritdoc
    */
@@ -94,4 +98,7 @@ class BookshelfDriver extends Driver {
 
 }
 
-module.exports = BookshelfDriver;
+var _default = BookshelfDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

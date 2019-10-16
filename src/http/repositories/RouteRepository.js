@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Repositories - Route Repository
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -100,4 +99,4 @@ class RouteRepository {
 }
 
 
-module.exports = RouteRepository;
+export default RouteRepository;

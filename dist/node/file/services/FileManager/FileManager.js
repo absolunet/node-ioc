@@ -1,19 +1,25 @@
+"use strict";
+
+exports.default = void 0;
+
+var _JavaScriptDriver = _interopRequireDefault(require("./drivers/JavaScriptDriver"));
+
+var _JsonDriver = _interopRequireDefault(require("./drivers/JsonDriver"));
+
+var _NullDriver = _interopRequireDefault(require("./drivers/NullDriver"));
+
+var _TextDriver = _interopRequireDefault(require("./drivers/TextDriver"));
+
+var _YamlDriver = _interopRequireDefault(require("./drivers/YamlDriver"));
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - File - Manager
 //--------------------------------------------------------
-'use strict';
 
-const JavaScriptDriver = require('./drivers/JavaScriptDriver');
-
-const JsonDriver = require('./drivers/JsonDriver');
-
-const NullDriver = require('./drivers/NullDriver');
-
-const TextDriver = require('./drivers/TextDriver');
-
-const YamlDriver = require('./drivers/YamlDriver');
-
-const hasDriver = require('../../../support/mixins/hasDriver');
 /**
  * File manager that wraps some opinionated file system actions through the file engine.
  *
@@ -21,20 +27,18 @@ const hasDriver = require('../../../support/mixins/hasDriver');
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-
-
-class FileManager extends hasDriver() {
+class FileManager extends (0, _hasDriver.default)() {
   /**
    * @inheritdoc
    * @private
    */
   init() {
     super.init();
-    this.addDriver('text', TextDriver);
-    this.addDriver('js', JavaScriptDriver);
-    this.addDriver('json', JsonDriver);
-    this.addDriver('yaml', YamlDriver);
-    this.addDriver('null', NullDriver);
+    this.addDriver('text', _TextDriver.default);
+    this.addDriver('js', _JavaScriptDriver.default);
+    this.addDriver('json', _JsonDriver.default);
+    this.addDriver('yaml', _YamlDriver.default);
+    this.addDriver('null', _NullDriver.default);
     this.setDriverAlias('yaml', 'yml');
     this.setDefaultDriver('text');
   }
@@ -230,4 +234,7 @@ class FileManager extends hasDriver() {
 
 }
 
-module.exports = FileManager;
+var _default = FileManager;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _SyncProxy = _interopRequireDefault(require("./SyncProxy"));
+
+var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Sync
 //--------------------------------------------------------
-'use strict';
 
-const SyncProxy = require('./SyncProxy');
-
-const forwardCalls = require('../../../support/mixins/forwardCalls');
 /**
  * The sync file system.
  *
@@ -13,9 +19,7 @@ const forwardCalls = require('../../../support/mixins/forwardCalls');
  * @augments support.mixins.ForwardCalls
  * @hideconstructor
  */
-
-
-class Sync extends forwardCalls() {
+class Sync extends (0, _forwardCalls.default)() {
   /**
    * Sync constructor.
    *
@@ -24,7 +28,7 @@ class Sync extends forwardCalls() {
    */
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new SyncProxy());
+    return new Proxy(this, new _SyncProxy.default());
   }
   /**
    * Replace searched content by replacement string.
@@ -58,4 +62,7 @@ class Sync extends forwardCalls() {
 
 }
 
-module.exports = Sync;
+var _default = Sync;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

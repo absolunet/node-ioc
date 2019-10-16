@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container        = require('../../container');
-const NullDriverProxy = require('../../../../src/support/drivers/NullDriverProxy');
+const NullDriverProxy = require('../../../../dist/node/support/drivers/NullDriverProxy');
 
 let nullInstance;
 let result;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Resolver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -16,7 +15,7 @@ const __ = require('@absolunet/private-registry');
 class Resolver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'config', 'file', 'file.engine']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -128,4 +127,5 @@ class Resolver {
 
 }
 
-module.exports = Resolver;
+
+export default Resolver;

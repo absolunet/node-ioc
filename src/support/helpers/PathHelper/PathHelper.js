@@ -1,12 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Path Helper
 //--------------------------------------------------------
-'use strict';
 
-const path            = require('path');
-const slash           = require('slash');
-const PathHelperProxy = require('./PathHelperProxy');
-const forwardsCall    = require('../../mixins/forwardCalls');
+import slash           from 'slash';
+import PathHelperProxy from './PathHelperProxy';
+import forwardsCall    from '../../mixins/forwardCalls';
 
 
 /**
@@ -200,10 +198,10 @@ class PathHelper extends forwardsCall() {
 	 * @inheritdoc
 	 */
 	getForward() {
-		return path;
+		return require('path'); // eslint-disable-line global-require
 	}
 
 }
 
 
-module.exports = PathHelper;
+export default PathHelper;

@@ -1,11 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Builder
 //--------------------------------------------------------
-'use strict';
 
-const __           = require('@absolunet/private-registry');
-const BuilderProxy = require('./BuilderProxy');
-const forwardCalls = require('../../../support/mixins/forwardCalls');
+import __           from '@absolunet/private-registry';
+import BuilderProxy from './BuilderProxy';
+import forwardCalls from '../../../support/mixins/forwardCalls';
 
 
 /**
@@ -18,7 +17,7 @@ const forwardCalls = require('../../../support/mixins/forwardCalls');
 class Builder extends forwardCalls() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['config', 'db.connection']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -92,4 +91,5 @@ class Builder extends forwardCalls() {
 
 }
 
-module.exports = Builder;
+
+export default Builder;

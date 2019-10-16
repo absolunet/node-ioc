@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * Null driver to be used when testing or if fake load/write process is needed.
  * Always load null value and successfully write given files.
@@ -12,9 +18,7 @@ const Driver = require('./Driver');
  * @augments file.services.FileManager.drivers.Driver
  * @hideconstructor
  */
-
-
-class NullDriver extends Driver {
+class NullDriver extends _Driver.default {
   /**
    * @inheritdoc
    */
@@ -48,4 +52,7 @@ class NullDriver extends Driver {
 
 }
 
-module.exports = NullDriver;
+var _default = NullDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

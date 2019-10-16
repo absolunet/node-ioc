@@ -7,7 +7,7 @@ const { given, when, then, build } = require('./common.gwt');
 
 const BookshelfModel = require('bookshelf/lib/model');
 const container      = require('../container');
-const AbstractModel  = require('../../../src/database/Model');
+const AbstractModel  = require('../../../dist/node/database/Model');
 
 let model;
 let baseModel;

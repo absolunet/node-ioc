@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _Application = _interopRequireDefault(require("../foundation/Application"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Migration
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const Application = require('../foundation/Application');
 /**
  * Abstract migration class.
  * Offers basic forwarding for up and down method to singleton instance.
@@ -14,8 +20,6 @@ const Application = require('../foundation/Application');
  * @abstract
  * @hideconstructor
  */
-
-
 class Migration {
   /**
    * Call up method on instance.
@@ -45,10 +49,10 @@ class Migration {
 
 
   static getInstance() {
-    let instance = __(this).get('instance');
+    let instance = (0, _privateRegistry.default)(this).get('instance');
 
     if (!instance) {
-      instance = Application.getInstance().make(this);
+      instance = _Application.default.getInstance().make(this);
       this.setDefaultInstance(instance);
     }
 
@@ -67,7 +71,7 @@ class Migration {
       throw new TypeError(`Default instance must be instance of ${this.name}.`);
     }
 
-    __(this).set('instance', instance);
+    (0, _privateRegistry.default)(this).set('instance', instance);
   }
   /**
    * Run the migrations.
@@ -96,4 +100,7 @@ class Migration {
 
 }
 
-module.exports = Migration;
+var _default = Migration;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

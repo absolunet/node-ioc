@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _AsyncProxy = _interopRequireDefault(require("./AsyncProxy"));
+
+var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Async
 //--------------------------------------------------------
-'use strict';
 
-const AsyncProxy = require('./AsyncProxy');
-
-const forwardCalls = require('../../../support/mixins/forwardCalls');
 /**
  * The async file system.
  *
@@ -13,9 +19,7 @@ const forwardCalls = require('../../../support/mixins/forwardCalls');
  * @augments support.mixins.ForwardCalls
  * @hideconstructor
  */
-
-
-class Async extends forwardCalls() {
+class Async extends (0, _forwardCalls.default)() {
   /**
    * Async constructor.
    *
@@ -24,7 +28,7 @@ class Async extends forwardCalls() {
    */
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new AsyncProxy());
+    return new Proxy(this, new _AsyncProxy.default());
   }
   /**
    * Replace searched content by replacement string.
@@ -58,4 +62,7 @@ class Async extends forwardCalls() {
 
 }
 
-module.exports = Async;
+var _default = Async;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

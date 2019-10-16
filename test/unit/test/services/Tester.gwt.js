@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const Tester    = require('../../../../src/test/services/Tester');
+const Tester    = require('../../../../dist/node/test/services/Tester');
 
 let result;
 let tester;
@@ -92,7 +92,7 @@ given.fakeApplication = () => {
 };
 
 given.fakeConsoleKernel = () =>  {
-	container.singleton('kernel.console', FakeConsoleKernel);
+	container.singleton('kernel', FakeConsoleKernel);
 };
 
 given.fakeTestRepository = () => {

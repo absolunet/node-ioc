@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Connector - Driver
 //--------------------------------------------------------
-'use strict';
 
-const __                  = require('@absolunet/private-registry');
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
+import __                  from '@absolunet/private-registry';
+import NotImplementedError from '../../../../foundation/exceptions/NotImplementedError';
 
 /* istanbul ignore next */
 /**
@@ -17,7 +16,7 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
 class Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['config', 'db.resolver', 'file']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -234,4 +233,5 @@ class Driver {
 
 }
 
-module.exports = Driver;
+
+export default Driver;

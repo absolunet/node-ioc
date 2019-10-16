@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container          = require('../../container');
-const CaptureInterceptor = require('../../../../src/console/interceptors/CaptureInterceptor');
+const CaptureInterceptor = require('../../../../dist/node/console/interceptors/CaptureInterceptor');
 
 let captureInterceptor;
 let result;

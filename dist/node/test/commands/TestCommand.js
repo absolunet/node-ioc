@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("../../console/Command"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Command - Test
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
 /**
  * Command that tests the application.
  *
@@ -11,11 +17,9 @@ const Command = require('../../console/Command');
  * @augments console.Command
  * @hideconstructor
  */
-
-
-class TestCommand extends Command {
+class TestCommand extends _Command.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['test.type']</code>.
    *
    * @type {Array<string>}
    */
@@ -60,7 +64,7 @@ class TestCommand extends Command {
 
 
   get flags() {
-    return [[this.testType.UNIT, 'Run unit tests.'], [this.testType.FEATURE, 'Run feature tests.'], [this.testType.STANDARDS, 'Run code and structure standards tests.'], [this.testType.E2E, 'Run end-to-end tests.']];
+    return [[this.testType.UNIT, 'Run unit tests.'], [this.testType.FEATURE, 'Run feature tests.'], [this.testType.ENDTOEND, 'Run end-to-end tests.'], [this.testType.INTEGRATION, 'Run integration tests.']];
   }
   /**
    * @inheritdoc
@@ -78,12 +82,12 @@ class TestCommand extends Command {
 
 
   runTestEngine() {
-    this.storeRepositoryName(this.getRepositoryName());
+    const repositoryName = this.getRepositoryName();
+    this.storeRepositoryName(repositoryName);
     this.storeEngineName(this.getEngineName());
     this.formatArgv();
     const engine = this.getEngine();
-    const engineArguments = engine.getPathArgument(this.getRepositoryName());
-    return this.run(`${engine.path} ${engineArguments}`);
+    return this.run(`${engine.path} ${this.app.testPath('bootstrap')}`);
   }
   /**
    * Resolve repository name based on input.
@@ -117,7 +121,8 @@ class TestCommand extends Command {
 
 
   storeRepositoryName(repositoryName) {
-    process.env.TEST_REPOSITORY = repositoryName;
+    process.env.TEST_REPOSITORY = repositoryName; // eslint-disable-line no-process-env
+
     return this;
   }
   /**
@@ -149,7 +154,8 @@ class TestCommand extends Command {
 
 
   storeEngineName(engineName) {
-    process.env.TEST_ENGINE = engineName;
+    process.env.TEST_ENGINE = engineName; // eslint-disable-line no-process-env
+
     return this;
   }
   /**
@@ -163,7 +169,8 @@ class TestCommand extends Command {
     const {
       argv
     } = process;
-    process.env.TEST_ARGV = JSON.stringify(argv);
+    process.env.TEST_ARGV = JSON.stringify(argv); // eslint-disable-line no-process-env
+
     const nameIndex = argv.indexOf(this.name);
     process.argv = nameIndex > -1 ? argv.slice(0, nameIndex + 1) : argv;
     return this;
@@ -181,11 +188,14 @@ class TestCommand extends Command {
       'all': 'test',
       [this.testType.UNIT]: 'test.unit',
       [this.testType.FEATURE]: 'test.feature',
-      [this.testType.STANDARDS]: 'test.standards',
-      [this.testType.E2E]: 'test.e2e'
+      [this.testType.ENDTOEND]: 'test.endtoend',
+      [this.testType.INTEGRATION]: 'test.integration'
     };
   }
 
 }
 
-module.exports = TestCommand;
+var _default = TestCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

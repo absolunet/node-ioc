@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Connector Proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../../support/proxies/ForwardProxy');
+import ForwardProxy from '../../../support/proxies/ForwardProxy';
 
 
 /**
@@ -18,4 +17,4 @@ class ConnectorProxy extends ForwardProxy {
 }
 
 
-module.exports = ConnectorProxy;
+export default ConnectorProxy;

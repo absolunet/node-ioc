@@ -1,13 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _pubsubJs = _interopRequireDefault(require("pubsub-js"));
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher - Drivers - PubSubJS Driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const PubSub = require('pubsub-js');
-
-const Driver = require('./Driver');
 /**
  * Dispatcher driver that uses PubSubJS as dispatcher engine.
  *
@@ -15,17 +21,14 @@ const Driver = require('./Driver');
  * @augments events.services.Dispatcher.drivers.Driver
  * @hideconstructor
  */
-
-
-class PubSubJsDriver extends Driver {
+class PubSubJsDriver extends _Driver.default {
   /**
    * @inheritdoc
    * @private
    */
   init() {
-    __(this).set('tokens', {});
-
-    this.setEngine(PubSub);
+    (0, _privateRegistry.default)(this).set('tokens', {});
+    this.setEngine(_pubsubJs.default);
   }
   /**
    * @inheritdoc
@@ -51,7 +54,7 @@ class PubSubJsDriver extends Driver {
 
 
   off(event, listener) {
-    const tokenMap = __(this).get('tokens')[event];
+    const tokenMap = (0, _privateRegistry.default)(this).get('tokens')[event];
 
     if (tokenMap) {
       const token = tokenMap.get(listener);
@@ -101,8 +104,7 @@ class PubSubJsDriver extends Driver {
 
 
   saveTokenForCall(event, listener, method) {
-    const tokens = __(this).get('tokens');
-
+    const tokens = (0, _privateRegistry.default)(this).get('tokens');
     tokens[event] = tokens[event] || new Map();
     tokens[event].set(listener, this.engine[method](event, listener));
     return this;
@@ -110,4 +112,7 @@ class PubSubJsDriver extends Driver {
 
 }
 
-module.exports = PubSubJsDriver;
+var _default = PubSubJsDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

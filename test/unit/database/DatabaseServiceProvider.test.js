@@ -118,6 +118,7 @@ test('The application models are loaded dynamically into model factory', () => {
 	given.fakeConfigRepository();
 	given.fakeFileManager();
 	given.fakeModelsFolderPathInConfiguration();
+	given.fakeDatabasePath();
 	when.bootingContainer();
 	then.shouldHaveRegisteredModelFactoriesInFactory();
 });

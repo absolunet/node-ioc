@@ -1,21 +1,18 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Console Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const CommandRepository  = require('./repositories/CommandRepository');
-const CommandRegistrar   = require('./services/CommandRegistrar');
-const CommandRunner      = require('./services/CommandRunner');
-const Terminal           = require('./services/Terminal');
-const Interceptor        = require('./services/Interceptor');
-const YargsEngine        = require('./services/YargsEngine');
-const CaptureInterceptor = require('./interceptors/CaptureInterceptor');
-
-const EnvironmentCommand = require('./commands/EnvironmentCommand');
-const ListCommand        = require('./commands/ListCommand');
-const MakeCommandCommand = require('./commands/MakeCommandCommand');
+import ServiceProvider    from '../foundation/ServiceProvider';
+import CommandRepository  from './repositories/CommandRepository';
+import CommandRegistrar   from './services/CommandRegistrar';
+import CommandRunner      from './services/CommandRunner';
+import Terminal           from './services/Terminal';
+import Interceptor        from './services/Interceptor';
+import YargsEngine        from './services/YargsEngine';
+import CaptureInterceptor from './interceptors/CaptureInterceptor';
+import EnvironmentCommand from './commands/EnvironmentCommand';
+import ListCommand        from './commands/ListCommand';
+import MakeCommandCommand from './commands/MakeCommandCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -80,4 +77,4 @@ class ConsoleServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = ConsoleServiceProvider;
+export default ConsoleServiceProvider;

@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _TestRepository = _interopRequireDefault(require("./TestRepository"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - Unit Test repository
 //--------------------------------------------------------
-'use strict';
 
-const TestRepository = require('./TestRepository');
 /**
  * Unit test repository that scopes to the "unit" folder.
  *
@@ -11,9 +17,7 @@ const TestRepository = require('./TestRepository');
  * @augments test.repositories.TestRepository
  * @hideconstructor
  */
-
-
-class UnitTestRepository extends TestRepository {
+class UnitTestRepository extends _TestRepository.default {
   /**
    * @inheritdoc
    */
@@ -23,4 +27,7 @@ class UnitTestRepository extends TestRepository {
 
 }
 
-module.exports = UnitTestRepository;
+var _default = UnitTestRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

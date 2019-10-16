@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _hasEngine = _interopRequireDefault(require("../../../../support/mixins/hasEngine"));
+
+var _NotImplementedError = _interopRequireDefault(require("../../../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const hasEngine = require('../../../../support/mixins/hasEngine');
-
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
 /* istanbul ignore next */
 
 /**
@@ -16,9 +22,7 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
  * @abstract
  * @hideconstructor
  */
-
-
-class Driver extends hasEngine() {
+class Driver extends (0, _hasEngine.default)() {
   /**
    * Create a template instance.
    *
@@ -28,7 +32,7 @@ class Driver extends hasEngine() {
    */
   make(view) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'make');
+    throw new _NotImplementedError.default(this, 'make');
   }
   /**
    * Render a template with the given data.
@@ -42,9 +46,12 @@ class Driver extends hasEngine() {
 
   render(view, data) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'render');
+    throw new _NotImplementedError.default(this, 'render');
   }
 
 }
 
-module.exports = Driver;
+var _default = Driver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

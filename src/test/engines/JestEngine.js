@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Engines - Jest
 //--------------------------------------------------------
-'use strict';
 
-const Engine = require('./Engine');
+import Engine from './Engine';
 
 
 /**
@@ -27,13 +26,6 @@ class JestEngine extends Engine {
 	 */
 	get path() {
 		return 'node_modules/jest/bin/jest';
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	getPathArgument() {
-		return '';
 	}
 
 	/**
@@ -95,4 +87,4 @@ class JestEngine extends Engine {
 }
 
 
-module.exports = JestEngine;
+export default JestEngine;

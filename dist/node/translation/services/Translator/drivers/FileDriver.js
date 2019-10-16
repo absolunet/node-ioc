@@ -1,15 +1,21 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _deepmerge = _interopRequireDefault(require("deepmerge"));
+
+var _dotObject = _interopRequireDefault(require("dot-object"));
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Translation - Services - Translator - Drivers - File Driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const deepMerge = require('deepmerge');
-
-const dot = require('dot-object');
-
-const Driver = require('./Driver');
 /**
  * File driver to handle translations.
  *
@@ -17,11 +23,9 @@ const Driver = require('./Driver');
  * @augments translation.services.Translator.drivers.Driver
  * @hideconstructor
  */
-
-
-class FileDriver extends Driver {
+class FileDriver extends _Driver.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'file']</code>.
    *
    * @type {Array<string>}
    */
@@ -35,13 +39,10 @@ class FileDriver extends Driver {
 
 
   init() {
-    __(this).set('locale', null);
-
-    __(this).set('fallbackLocale', null);
-
-    __(this).set('translations', {});
-
-    __(this).set('loaded', false);
+    (0, _privateRegistry.default)(this).set('locale', null);
+    (0, _privateRegistry.default)(this).set('fallbackLocale', null);
+    (0, _privateRegistry.default)(this).set('translations', {});
+    (0, _privateRegistry.default)(this).set('loaded', false);
   }
   /**
    * @inheritdoc
@@ -63,7 +64,8 @@ class FileDriver extends Driver {
 
 
   addTranslation(key, value, locale = this.locale) {
-    dot.str(`${key}.${locale}`, value, __(this).get('translations'));
+    _dotObject.default.str(`${key}.${locale}`, value, (0, _privateRegistry.default)(this).get('translations'));
+
     return this;
   }
   /**
@@ -72,8 +74,7 @@ class FileDriver extends Driver {
 
 
   useTranslationFolder(folder) {
-    __(this).set('folder', folder);
-
+    (0, _privateRegistry.default)(this).set('folder', folder);
     return this;
   }
   /**
@@ -82,8 +83,7 @@ class FileDriver extends Driver {
 
 
   setLocale(locale) {
-    __(this).set('locale', locale);
-
+    (0, _privateRegistry.default)(this).set('locale', locale);
     return this;
   }
   /**
@@ -92,8 +92,7 @@ class FileDriver extends Driver {
 
 
   setFallbackLocale(locale) {
-    __(this).set('fallbackLocale', locale);
-
+    (0, _privateRegistry.default)(this).set('fallbackLocale', locale);
     return this;
   }
   /**
@@ -104,14 +103,13 @@ class FileDriver extends Driver {
 
 
   ensureTranslationsAreLoaded() {
-    if (!__(this).get('loaded')) {
+    if (!(0, _privateRegistry.default)(this).get('loaded')) {
       if (this.file.exists(this.folder)) {
         const translations = this.file.loadInFolder(this.folder, {
           recursive: true
         });
         this.addTranslations(translations);
-
-        __(this).set('loaded', true);
+        (0, _privateRegistry.default)(this).set('loaded', true);
       }
     }
 
@@ -128,15 +126,15 @@ class FileDriver extends Driver {
 
 
   getTranslationForLocale(key, locale) {
-    const translations = __(this).get('translations');
-
+    const translations = (0, _privateRegistry.default)(this).get('translations');
     const {
       fallbackLocale
     } = this;
-    let translation = dot.pick(`${key}.${locale}`, translations);
+
+    let translation = _dotObject.default.pick(`${key}.${locale}`, translations);
 
     if (!translation) {
-      translation = dot.pick(`${this.defaultNamespace}.${key}.${locale}`, translations);
+      translation = _dotObject.default.pick(`${this.defaultNamespace}.${key}.${locale}`, translations);
     }
 
     if (!translation && locale !== fallbackLocale) {
@@ -154,8 +152,7 @@ class FileDriver extends Driver {
 
 
   addTranslations(translations) {
-    __(this).set('translations', deepMerge(__(this).get('translations'), translations));
-
+    (0, _privateRegistry.default)(this).set('translations', (0, _deepmerge.default)((0, _privateRegistry.default)(this).get('translations'), translations));
     return this;
   }
   /**
@@ -199,7 +196,7 @@ class FileDriver extends Driver {
 
 
   get locale() {
-    return __(this).get('locale');
+    return (0, _privateRegistry.default)(this).get('locale');
   }
   /**
    * The fallback locale.
@@ -209,7 +206,7 @@ class FileDriver extends Driver {
 
 
   get fallbackLocale() {
-    return __(this).get('fallbackLocale');
+    return (0, _privateRegistry.default)(this).get('fallbackLocale');
   }
   /**
    * The folder in which the translations are stored.
@@ -219,7 +216,7 @@ class FileDriver extends Driver {
 
 
   get folder() {
-    return __(this).get('folder') || this.app.langPath();
+    return (0, _privateRegistry.default)(this).get('folder') || this.app.langPath();
   }
   /**
    * The default namespace for translations.
@@ -234,4 +231,7 @@ class FileDriver extends Driver {
 
 }
 
-module.exports = FileDriver;
+var _default = FileDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

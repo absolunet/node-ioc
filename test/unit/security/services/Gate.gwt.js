@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('./../common.gwt');
 
 const container = require('../../container');
-const Gate      = require('../../../../src/security/services/Gate');
+const Gate      = require('../../../../dist/node/security/services/Gate');
 
 let gate;
 let result;

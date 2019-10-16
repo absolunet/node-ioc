@@ -1,14 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Validation - Services - Validator
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Validator that decorates Hapi Joi module.
  *
  * @memberof validation.services
  * @hideconstructor
  */
-
 class Validator {
   /**
    * Validator constructor.
@@ -21,4 +24,7 @@ class Validator {
 
 }
 
-module.exports = Validator;
+var _default = Validator;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

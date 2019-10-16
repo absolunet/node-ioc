@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _GeneratorCommand = _interopRequireDefault(require("../../console/GeneratorCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Log Table
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
 /**
  * Command that creates the migration for "logs" database table.
  *
@@ -11,9 +17,7 @@ const GeneratorCommand = require('../../console/GeneratorCommand');
  * @augments console.GeneratorCommand
  * @hideconstructor
  */
-
-
-class LogTableCommand extends GeneratorCommand {
+class LogTableCommand extends _GeneratorCommand.default {
   /**
    * @inheritdoc
    */
@@ -52,7 +56,7 @@ class LogTableCommand extends GeneratorCommand {
 
 
   get destination() {
-    return this.app.make('db.resolver').resolvePath('migrations');
+    return this.app.make('db.resolver').resolveSourcePath('migrations');
   }
   /**
    * @inheritdoc
@@ -148,4 +152,7 @@ class LogTableCommand extends GeneratorCommand {
 
 }
 
-module.exports = LogTableCommand;
+var _default = LogTableCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

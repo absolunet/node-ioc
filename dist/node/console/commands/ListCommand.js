@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("../Command"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Command - List
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../Command');
 /**
  * Command that displays a list of the available commands.
  *
@@ -11,9 +17,7 @@ const Command = require('../Command');
  * @augments console.Command
  * @hideconstructor
  */
-
-
-class ListCommand extends Command {
+class ListCommand extends _Command.default {
   /**
    * @inheritdoc
    */
@@ -153,4 +157,7 @@ class ListCommand extends Command {
 
 }
 
-module.exports = ListCommand;
+var _default = ListCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

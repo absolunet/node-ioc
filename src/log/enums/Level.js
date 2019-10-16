@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Log - Enums - Level
 //--------------------------------------------------------
-'use strict';
 
-const Enum = require('../../support/Enum');
+import Enum from '../../support/Enum';
 
 
 /**
@@ -74,4 +73,4 @@ class Level extends Enum {
 }
 
 
-module.exports = Level;
+export default Level;

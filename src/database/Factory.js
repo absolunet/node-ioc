@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Factory
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../foundation/exceptions/NotImplementedError');
+import NotImplementedError from '../foundation/exceptions/NotImplementedError';
 
 
 /**
@@ -39,4 +38,4 @@ class Factory {
 }
 
 
-module.exports = Factory;
+export default Factory;

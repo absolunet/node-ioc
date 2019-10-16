@@ -1,17 +1,23 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _ConfigRepository = _interopRequireDefault(require("./repositories/ConfigRepository"));
+
+var _ConfigGrammar = _interopRequireDefault(require("./services/ConfigGrammar"));
+
+var _EnvironmentRepository = _interopRequireDefault(require("./repositories/EnvironmentRepository"));
+
+var _Evaluator = _interopRequireDefault(require("./services/Evaluator"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const ConfigRepository = require('./repositories/ConfigRepository');
-
-const ConfigGrammar = require('./services/ConfigGrammar');
-
-const EnvironmentRepository = require('./repositories/EnvironmentRepository');
-
-const Evaluator = require('./services/Evaluator'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The config service provider.
@@ -28,9 +34,7 @@ const Evaluator = require('./services/Evaluator'); // eslint-disable-next-line j
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class ConfigServiceProvider extends ServiceProvider {
+class ConfigServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
@@ -44,10 +48,10 @@ class ConfigServiceProvider extends ServiceProvider {
 
 
   registerServices() {
-    this.app.singleton('config.grammar', ConfigGrammar);
-    this.app.singleton('config', ConfigRepository);
-    this.app.singleton('env', EnvironmentRepository);
-    this.app.singleton('evaluator', Evaluator);
+    this.app.singleton('config.grammar', _ConfigGrammar.default);
+    this.app.singleton('config', _ConfigRepository.default);
+    this.app.singleton('env', _EnvironmentRepository.default);
+    this.app.singleton('evaluator', _Evaluator.default);
   }
   /**
    * Register service providers from configuration file.
@@ -62,4 +66,7 @@ class ConfigServiceProvider extends ServiceProvider {
 
 }
 
-module.exports = ConfigServiceProvider;
+var _default = ConfigServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Connector - Sqlite Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * SQLite connector driver.
  *
@@ -11,9 +17,7 @@ const Driver = require('./Driver');
  * @augments database.services.Connector.drivers.Driver
  * @hideconstructor
  */
-
-
-class SqliteDriver extends Driver {
+class SqliteDriver extends _Driver.default {
   /**
    * @inheritdoc
    */
@@ -47,4 +51,7 @@ class SqliteDriver extends Driver {
 
 }
 
-module.exports = SqliteDriver;
+var _default = SqliteDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

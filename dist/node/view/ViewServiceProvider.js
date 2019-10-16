@@ -1,15 +1,21 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _Engine = _interopRequireDefault(require("./services/Engine"));
+
+var _Factory = _interopRequireDefault(require("./services/Factory"));
+
+var _Resolver = _interopRequireDefault(require("./services/Resolver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - View - View Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Engine = require('./services/Engine');
-
-const Factory = require('./services/Factory');
-
-const Resolver = require('./services/Resolver'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The view service provider.
@@ -25,16 +31,14 @@ const Resolver = require('./services/Resolver'); // eslint-disable-next-line jsd
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class ViewServiceProvider extends ServiceProvider {
+class ViewServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
   register() {
-    this.app.singleton('view', Factory);
-    this.app.singleton('view.engine', Engine);
-    this.app.singleton('view.resolver', Resolver);
+    this.app.singleton('view', _Factory.default);
+    this.app.singleton('view.engine', _Engine.default);
+    this.app.singleton('view.resolver', _Resolver.default);
   }
   /**
    * Boot the service provider.
@@ -57,4 +61,7 @@ class ViewServiceProvider extends ServiceProvider {
 
 }
 
-module.exports = ViewServiceProvider;
+var _default = ViewServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

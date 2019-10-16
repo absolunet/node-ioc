@@ -1,13 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _BuilderProxy = _interopRequireDefault(require("./BuilderProxy"));
+
+var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Builder
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const BuilderProxy = require('./BuilderProxy');
-
-const forwardCalls = require('../../../support/mixins/forwardCalls');
 /**
  * Database connection builder that uses configuration to create connection without effort.
  *
@@ -15,11 +21,9 @@ const forwardCalls = require('../../../support/mixins/forwardCalls');
  * @augments support.mixins.ForwardCalls
  * @hideconstructor
  */
-
-
-class Builder extends forwardCalls() {
+class Builder extends (0, _forwardCalls.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['config', 'db.connection']</code>.
    *
    * @type {Array<string>}
    */
@@ -36,7 +40,7 @@ class Builder extends forwardCalls() {
 
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new BuilderProxy());
+    return new Proxy(this, new _BuilderProxy.default());
   }
   /**
    * Get connection by name.
@@ -83,7 +87,7 @@ class Builder extends forwardCalls() {
 
   getDriverForConnection(name = 'default') {
     const connection = typeof name === 'function' ? name : this.getConnection(name);
-    return __(connection).get('driver');
+    return (0, _privateRegistry.default)(connection).get('driver');
   }
   /**
    * @inheritdoc
@@ -96,4 +100,7 @@ class Builder extends forwardCalls() {
 
 }
 
-module.exports = Builder;
+var _default = Builder;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

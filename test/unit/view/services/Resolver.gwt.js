@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const path      = require('path');
 const container = require('../../container');
-const Resolver  = require('../../../../src/view/services/Resolver');
+const Resolver  = require('../../../../dist/node/view/services/Resolver');
 
 let resolver;
 let viewName;

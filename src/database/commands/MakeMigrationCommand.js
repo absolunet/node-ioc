@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Make Migration
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
+import GeneratorCommand from '../../console/GeneratorCommand';
 
 
 /**
@@ -45,7 +44,7 @@ class MakeMigrationCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get destination() {
-		return this.app.make('db.resolver').resolvePath('migrations');
+		return this.app.make('db.resolver').resolveSourcePath('migrations');
 	}
 
 	/**
@@ -103,4 +102,4 @@ class MakeMigrationCommand extends GeneratorCommand {
 }
 
 
-module.exports = MakeMigrationCommand;
+export default MakeMigrationCommand;

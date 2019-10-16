@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const SeedCommand = require('../../../../src/database/commands/SeedCommand');
+const SeedCommand = require('../../../../dist/node/database/commands/SeedCommand');
 
 
 //-- Given

@@ -1,33 +1,38 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _Client = _interopRequireDefault(require("./services/Client"));
+
+var _Server = _interopRequireDefault(require("./services/Server"));
+
+var _Handler = _interopRequireDefault(require("./services/Handler"));
+
+var _Router = _interopRequireDefault(require("./services/Router"));
+
+var _RouteRepository = _interopRequireDefault(require("./repositories/RouteRepository"));
+
+var _ControllerRepository = _interopRequireDefault(require("./repositories/ControllerRepository"));
+
+var _RedirectController = _interopRequireDefault(require("./controllers/RedirectController"));
+
+var _StaticController = _interopRequireDefault(require("./controllers/StaticController"));
+
+var _MakeControllerCommand = _interopRequireDefault(require("./commands/MakeControllerCommand"));
+
+var _ServeCommand = _interopRequireDefault(require("./commands/ServeCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - HTTP Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const HttpClient = require('./services/Client');
-
-const HttpServer = require('./services/Server');
-
-const Handler = require('./services/Handler');
-
-const Router = require('./services/Router');
-
-const RouteRepository = require('./repositories/RouteRepository');
-
-const ControllerRepository = require('./repositories/ControllerRepository');
-
-const RedirectController = require('./controllers/RedirectController');
-
-const StaticController = require('./controllers/StaticController');
-
-const MakeControllerCommand = require('./commands/MakeControllerCommand');
-
-const ServeCommand = require('./commands/ServeCommand'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The HTTP service provider.
- *
  * It bind these following services:
  * <ul>
  *     <li><a href="http.services.Client.html">http</a></li>
@@ -48,9 +53,7 @@ const ServeCommand = require('./commands/ServeCommand'); // eslint-disable-next-
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class HttpServiceProvider extends ServiceProvider {
+class HttpServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
@@ -66,7 +69,7 @@ class HttpServiceProvider extends ServiceProvider {
     this.loadConfig();
     this.createPolicies();
     this.bootDefaultControllers();
-    this.loadCommands([MakeControllerCommand, ServeCommand]);
+    this.loadCommands([_MakeControllerCommand.default, _ServeCommand.default]);
   }
   /**
    * Register HTTP services.
@@ -74,12 +77,12 @@ class HttpServiceProvider extends ServiceProvider {
 
 
   registerServices() {
-    this.app.singleton('http', HttpClient);
-    this.app.singleton('server', HttpServer);
-    this.app.singleton('router', Router);
-    this.app.singleton('router.handler', Handler);
-    this.app.singleton('router.route', RouteRepository);
-    this.app.singleton('router.controller', ControllerRepository);
+    this.app.singleton('http', _Client.default);
+    this.app.singleton('server', _Server.default);
+    this.app.singleton('router', _Router.default);
+    this.app.singleton('router.handler', _Handler.default);
+    this.app.singleton('router.route', _RouteRepository.default);
+    this.app.singleton('router.controller', _ControllerRepository.default);
   }
   /**
    * Load configuration file.
@@ -111,11 +114,14 @@ class HttpServiceProvider extends ServiceProvider {
   bootDefaultControllers() {
     const controllerRepository = this.app.make('router.controller');
     controllerRepository.group(controllerRepository.coreNamespace, () => {
-      controllerRepository.add('StaticController', StaticController);
-      controllerRepository.add('RedirectController', RedirectController);
+      controllerRepository.add('StaticController', _StaticController.default);
+      controllerRepository.add('RedirectController', _RedirectController.default);
     });
   }
 
 }
 
-module.exports = HttpServiceProvider;
+var _default = HttpServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

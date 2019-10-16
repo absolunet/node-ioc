@@ -1,18 +1,15 @@
 //--------------------------------------------------------
 //-- IoC - Foundation - Mixins
 //--------------------------------------------------------
-'use strict';
 
 /* istanbul ignore next */
-
-const factory = require('./concerns/mixinFactory');
-
-const checksTypes  = require('./checksTypes');
-const forwardCalls = require('./forwardCalls');
-const hasDriver    = require('./hasDriver');
+import factory      from './concerns/mixinFactory';
+import checksTypes  from './checksTypes';
+import forwardCalls from './forwardCalls';
+import hasDriver    from './hasDriver';
 
 
-module.exports = {
+export {
 	factory,
 	checksTypes,
 	forwardCalls,

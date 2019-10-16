@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _NotImplementedError = _interopRequireDefault(require("../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Factory
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../foundation/exceptions/NotImplementedError');
 /**
  * Model factory base class.
  *
@@ -11,8 +17,6 @@ const NotImplementedError = require('../foundation/exceptions/NotImplementedErro
  * @abstract
  * @hideconstructor
  */
-
-
 class Factory {
   /**
    * Name of the associated model.
@@ -21,7 +25,7 @@ class Factory {
    * @abstract
    */
   get model() {
-    throw new NotImplementedError(this, 'model', 'string', 'accessor');
+    throw new _NotImplementedError.default(this, 'model', 'string', 'accessor');
   }
   /**
    * Factory model attributes.
@@ -34,9 +38,12 @@ class Factory {
 
   make(faker) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'make', 'attributes object');
+    throw new _NotImplementedError.default(this, 'make', 'attributes object');
   }
 
 }
 
-module.exports = Factory;
+var _default = Factory;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

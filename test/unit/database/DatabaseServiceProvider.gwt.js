@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container = require('../container');
-const DatabaseServiceProvider = require('../../../src/database/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../src/security/SecurityServiceProvider');
+const DatabaseServiceProvider = require('../../../dist/node/database/DatabaseServiceProvider');
+const SecurityServiceProvider = require('../../../dist/node/security/SecurityServiceProvider');
 
 let result;
 let fakeFiles;
@@ -66,6 +66,10 @@ given.emptyResult = () => {
 	result = undefined;
 };
 
+given.fakeDatabasePath = () => {
+	container.configurePaths({ database: '/database' });
+};
+
 given.databaseEnabledInConfiguration = () => {
 	fakeConfig['database.enabled'] = true;
 };
@@ -79,14 +83,14 @@ given.databaseDisabledInConfiguration = () => {
 };
 
 given.fakeModelsFolderPathInConfiguration = () => {
-	fakeConfig['database.paths'] = { factories: '/path/to/factories' };
+	fakeConfig['database.paths'] = { factories: 'path/to/factories' };
 	fakeConfig['database.paths.factories'] = fakeConfig['database.paths'].factories;
-	fakeFiles[`${fakeConfig['database.paths'].factories}/FooFactory.js`] = fakeFactory;
-	fakeFiles[`${fakeConfig['database.paths'].factories}/barFactory.js`] = otherFactory;
+	fakeFiles[`/database/${fakeConfig['database.paths'].factories}/FooFactory.js`] = fakeFactory;
+	fakeFiles[`/database/${fakeConfig['database.paths'].factories}/barFactory.js`] = otherFactory;
 };
 
 given.emptyModelsFolderPathInConfiguration = () => {
-	fakeConfig['database.paths'] = { factories: '/path/to/empty/factories' };
+	fakeConfig['database.paths'] = { factories: 'path/to/empty/factories' };
 	fakeConfig['database.paths.factories'] = fakeConfig['database.paths'].factories;
 };
 

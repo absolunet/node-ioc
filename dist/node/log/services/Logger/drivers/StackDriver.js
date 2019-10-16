@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger - Drivers - Stack Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * Driver that logs into a suite of configured channels at once.
  *
@@ -11,11 +17,9 @@ const Driver = require('./Driver');
  * @augments log.services.Logger.drivers.Driver
  * @hideconstructor
  */
-
-
-class StackDriver extends Driver {
+class StackDriver extends _Driver.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'log.level']</code>.
    *
    * @type {Array<string>}
    */
@@ -54,4 +58,7 @@ class StackDriver extends Driver {
 
 }
 
-module.exports = StackDriver;
+var _default = StackDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

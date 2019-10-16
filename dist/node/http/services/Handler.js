@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _checksTypes = _interopRequireDefault(require("../../support/mixins/checksTypes"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Services - Handler
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const checksTypes = require('../../support/mixins/checksTypes');
 /**
  * Route handler that handle all the pipeline from request to response.
  *
@@ -13,11 +19,9 @@ const checksTypes = require('../../support/mixins/checksTypes');
  * @augments support.mixins.CheckTypes
  * @hideconstructor
  */
-
-
-class Handler extends checksTypes() {
+class Handler extends (0, _checksTypes.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'config', 'router.controller']</code>.
    *
    * @type {Array<string>}
    */
@@ -119,7 +123,7 @@ class Handler extends checksTypes() {
 
 
   prepareHandling(objects) {
-    __(this).set('handling', objects);
+    (0, _privateRegistry.default)(this).set('handling', objects);
   }
   /**
    * Terminate request handling.
@@ -132,9 +136,7 @@ class Handler extends checksTypes() {
     const {
       response
     } = this;
-
-    __(this).set('handling', {});
-
+    (0, _privateRegistry.default)(this).set('handling', {});
     return response;
   }
   /**
@@ -233,7 +235,7 @@ class Handler extends checksTypes() {
 
 
   get route() {
-    return __(this).get('handling').route;
+    return (0, _privateRegistry.default)(this).get('handling').route;
   }
   /**
    * The current request.
@@ -243,7 +245,7 @@ class Handler extends checksTypes() {
 
 
   get request() {
-    return __(this).get('handling').request;
+    return (0, _privateRegistry.default)(this).get('handling').request;
   }
   /**
    * The current response.
@@ -253,9 +255,12 @@ class Handler extends checksTypes() {
 
 
   get response() {
-    return __(this).get('handling').response;
+    return (0, _privateRegistry.default)(this).get('handling').response;
   }
 
 }
 
-module.exports = Handler;
+var _default = Handler;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

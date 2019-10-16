@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _BaseProxy = _interopRequireDefault(require("../support/proxies/BaseProxy"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Container - Proxy
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const BaseProxy = require('../support/proxies/BaseProxy');
 /**
  * Container proxy that allows dynamic resolving without using container.make().
  *
@@ -18,9 +24,7 @@ const BaseProxy = require('../support/proxies/BaseProxy');
  * @augments support.proxies.BaseProxy
  * @hideconstructor
  */
-
-
-class ContainerProxy extends BaseProxy {
+class ContainerProxy extends _BaseProxy.default {
   /**
    * @inheritdoc
    */
@@ -46,9 +50,12 @@ class ContainerProxy extends BaseProxy {
 
 
   has(object, property) {
-    return __(this).get('has')(object, property) || Boolean(__(object).get('bindings')[property]) || object.isTag(property);
+    return (0, _privateRegistry.default)(this).get('has')(object, property) || Boolean((0, _privateRegistry.default)(object).get('bindings')[property]) || object.isTag(property);
   }
 
 }
 
-module.exports = ContainerProxy;
+var _default = ContainerProxy;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

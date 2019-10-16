@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("../../console/Command"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Command - List
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
 /**
  * Command that serves the application.
  *
@@ -11,11 +17,9 @@ const Command = require('../../console/Command');
  * @augments console.Command
  * @hideconstructor
  */
-
-
-class ServeCommand extends Command {
+class ServeCommand extends _Command.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['server', 'router']</code>.
    *
    * @type {Array<string>}
    */
@@ -161,4 +165,7 @@ class ServeCommand extends Command {
 
 }
 
-module.exports = ServeCommand;
+var _default = ServeCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

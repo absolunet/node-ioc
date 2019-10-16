@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const path             = require('path');
 const container        = require('../../container');
-const ConfigRepository = require('../../../../src/config/repositories/ConfigRepository');
+const ConfigRepository = require('../../../../dist/node/config/repositories/ConfigRepository');
 
 let configRepository;
 let result;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -47,4 +46,4 @@ class NullDriver extends Driver {
 }
 
 
-module.exports = NullDriver;
+export default NullDriver;

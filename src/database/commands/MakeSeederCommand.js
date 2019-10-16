@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Make Seeder
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
+import GeneratorCommand from '../../console/GeneratorCommand';
 
 
 /**
@@ -42,7 +41,7 @@ class MakeSeederCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get destination() {
-		return this.app.make('db.resolver').resolvePath('seeds');
+		return this.app.make('db.resolver').resolveSourcePath('seeds');
 	}
 
 	/**
@@ -80,4 +79,4 @@ class MakeSeederCommand extends GeneratorCommand {
 }
 
 
-module.exports = MakeSeederCommand;
+export default MakeSeederCommand;

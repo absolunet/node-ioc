@@ -1,15 +1,12 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Command
 //--------------------------------------------------------
-'use strict';
 
-const __        = require('@absolunet/private-registry');
-
-const NotImplementedError = require('../foundation/exceptions/NotImplementedError');
-
-const Flag      = require('./models/Flag');
-const Option    = require('./models/Option');
-const Parameter = require('./models/Parameter');
+import __                  from '@absolunet/private-registry';
+import NotImplementedError from '../foundation/exceptions/NotImplementedError';
+import Flag                from './models/Flag';
+import Option              from './models/Option';
+import Parameter           from './models/Parameter';
 
 
 /**
@@ -38,7 +35,7 @@ class Command {
 	 * @type {Array<string>}
 	 */
 	get policies() {
-		return ['private'];
+		return ['public'];
 	}
 
 	/**
@@ -708,4 +705,4 @@ class Command {
 }
 
 
-module.exports = Command;
+export default Command;

@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - Evaluator
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -58,4 +57,4 @@ class Evaluator {
 }
 
 
-module.exports = Evaluator;
+export default Evaluator;

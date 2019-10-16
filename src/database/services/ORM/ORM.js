@@ -1,11 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - ORM
 //--------------------------------------------------------
-'use strict';
 
-const checksTypes     = require('../../../support/mixins/checksTypes');
-const hasDriver       = require('../../../support/mixins/hasDriver');
-const BookshelfDriver = require('./drivers/BookshelfDriver');
+import checksTypes     from '../../../support/mixins/checksTypes';
+import hasDriver       from '../../../support/mixins/hasDriver';
+import BookshelfDriver from './drivers/BookshelfDriver';
 
 
 /**
@@ -19,7 +18,7 @@ const BookshelfDriver = require('./drivers/BookshelfDriver');
 class ORM extends hasDriver(checksTypes()) {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'db', 'helper.string']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -101,4 +100,4 @@ class ORM extends hasDriver(checksTypes()) {
 }
 
 
-module.exports = ORM;
+export default ORM;

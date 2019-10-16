@@ -1,15 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _slash = _interopRequireDefault(require("slash"));
+
+var _PathHelperProxy = _interopRequireDefault(require("./PathHelperProxy"));
+
+var _forwardCalls = _interopRequireDefault(require("../../mixins/forwardCalls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Path Helper
 //--------------------------------------------------------
-'use strict';
 
-const path = require('path');
-
-const slash = require('slash');
-
-const PathHelperProxy = require('./PathHelperProxy');
-
-const forwardsCall = require('../../mixins/forwardCalls');
 /**
  * Path helper.
  *
@@ -17,9 +21,7 @@ const forwardsCall = require('../../mixins/forwardCalls');
  * @augments support.mixins.ForwardCalls
  * @hideconstructor
  */
-
-
-class PathHelper extends forwardsCall() {
+class PathHelper extends (0, _forwardCalls.default)() {
   /**
    * PathHelper constructor.
    *
@@ -27,7 +29,7 @@ class PathHelper extends forwardsCall() {
    */
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new PathHelperProxy());
+    return new Proxy(this, new _PathHelperProxy.default());
   }
   /**
    * Return the last portion of a path. Similar to the Unix basename command.
@@ -195,7 +197,7 @@ class PathHelper extends forwardsCall() {
 
 
   slash(filePath) {
-    return slash(filePath);
+    return (0, _slash.default)(filePath);
   }
   /**
    * @inheritdoc
@@ -214,9 +216,12 @@ class PathHelper extends forwardsCall() {
 
 
   getForward() {
-    return path;
+    return require('path'); // eslint-disable-line global-require
   }
 
 }
 
-module.exports = PathHelper;
+var _default = PathHelper;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,13 +1,11 @@
 //--------------------------------------------------------
 //-- Node IoC - View - View Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Engine   = require('./services/Engine');
-const Factory  = require('./services/Factory');
-const Resolver = require('./services/Resolver');
+import ServiceProvider from '../foundation/ServiceProvider';
+import Engine          from './services/Engine';
+import Factory         from './services/Factory';
+import Resolver        from './services/Resolver';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -55,4 +53,4 @@ class ViewServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = ViewServiceProvider;
+export default ViewServiceProvider;

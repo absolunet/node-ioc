@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store resolver - Drivers - File driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const Driver = require('./Driver');
 /**
  * Cache driver that uses a runtime variable to cache data.
  * Since it only uses a variable, the cached values are flushed hen the process closes.
@@ -14,15 +20,13 @@ const Driver = require('./Driver');
  * @augments cache.services.CacheManager.drivers.Driver
  * @hideconstructor
  */
-
-
-class RuntimeDriver extends Driver {
+class RuntimeDriver extends _Driver.default {
   /**
    * @inheritdoc
    * @private
    */
   init() {
-    __(this).set('store', {});
+    (0, _privateRegistry.default)(this).set('store', {});
   }
   /**
    * @inheritdoc
@@ -30,7 +34,7 @@ class RuntimeDriver extends Driver {
 
 
   get(key, defaultValue = null) {
-    const entry = __(this).get('store')[key];
+    const entry = (0, _privateRegistry.default)(this).get('store')[key];
 
     if (!entry || typeof entry.value === 'undefined') {
       return defaultValue;
@@ -59,7 +63,7 @@ class RuntimeDriver extends Driver {
 
 
   put(key, value, seconds = this.driverConfig.expiration || 600) {
-    __(this).get('store')[key] = {
+    (0, _privateRegistry.default)(this).get('store')[key] = {
       value: JSON.stringify(value),
       expiration: seconds !== 0 ? this.now() + seconds : Number.MAX_SAFE_INTEGER
     };
@@ -81,7 +85,7 @@ class RuntimeDriver extends Driver {
     const value = this.get(key, 0);
     const {
       expiration
-    } = __(this).get('store')[key] || {};
+    } = (0, _privateRegistry.default)(this).get('store')[key] || {};
     return this.put(key, value + increment, expiration ? expiration - this.now() : undefined);
   }
   /**
@@ -98,7 +102,7 @@ class RuntimeDriver extends Driver {
 
 
   delete(key) {
-    delete __(this).get('store')[key];
+    delete (0, _privateRegistry.default)(this).get('store')[key];
   }
   /**
    * @inheritdoc
@@ -106,9 +110,12 @@ class RuntimeDriver extends Driver {
 
 
   flush() {
-    __(this).set('store', {});
+    (0, _privateRegistry.default)(this).set('store', {});
   }
 
 }
 
-module.exports = RuntimeDriver;
+var _default = RuntimeDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

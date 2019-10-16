@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const NullDriver = require('../../../../../../src/file/services/FileManager/drivers/NullDriver');
+const NullDriver = require('../../../../../../dist/node/file/services/FileManager/drivers/NullDriver');
 
 
 //-- Given

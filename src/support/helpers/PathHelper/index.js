@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Path Helper
 //--------------------------------------------------------
-'use strict';
 
-const PathHelper = require('./PathHelper');
+import PathHelper from './PathHelper';
 
 
-module.exports = PathHelper;
+export default PathHelper;

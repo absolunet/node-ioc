@@ -1,17 +1,23 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _FileEngine = _interopRequireDefault(require("./services/FileEngine"));
+
+var _FileManager = _interopRequireDefault(require("./services/FileManager"));
+
+var _Async = _interopRequireDefault(require("./systems/Async"));
+
+var _Sync = _interopRequireDefault(require("./systems/Sync"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const FileEngine = require('./services/FileEngine');
-
-const FileManager = require('./services/FileManager');
-
-const Async = require('./systems/Async');
-
-const Sync = require('./systems/Sync'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The file service provider.
@@ -27,9 +33,7 @@ const Sync = require('./systems/Sync'); // eslint-disable-next-line jsdoc/requir
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class FileServiceProvider extends ServiceProvider {
+class FileServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
@@ -42,12 +46,15 @@ class FileServiceProvider extends ServiceProvider {
 
 
   registerServices() {
-    this.app.singleton('file', FileManager);
-    this.app.singleton('file.engine', FileEngine);
-    this.app.singleton('file.system.async', Async);
-    this.app.singleton('file.system.sync', Sync);
+    this.app.singleton('file', _FileManager.default);
+    this.app.singleton('file.engine', _FileEngine.default);
+    this.app.singleton('file.system.async', _Async.default);
+    this.app.singleton('file.system.sync', _Sync.default);
   }
 
 }
 
-module.exports = FileServiceProvider;
+var _default = FileServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

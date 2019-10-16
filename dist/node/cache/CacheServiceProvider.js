@@ -1,17 +1,23 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _CacheManager = _interopRequireDefault(require("./services/CacheManager"));
+
+var _CacheClearCommand = _interopRequireDefault(require("./commands/CacheClearCommand"));
+
+var _CacheForgetCommand = _interopRequireDefault(require("./commands/CacheForgetCommand"));
+
+var _CacheTableCommand = _interopRequireDefault(require("./commands/CacheTableCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Cache - Cache Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const CacheManager = require('./services/CacheManager');
-
-const CacheClearCommand = require('./commands/CacheClearCommand');
-
-const CacheForgetCommand = require('./commands/CacheForgetCommand');
-
-const CacheTableCommand = require('./commands/CacheTableCommand'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The cache service provider.
@@ -27,14 +33,12 @@ const CacheTableCommand = require('./commands/CacheTableCommand'); // eslint-dis
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class CacheServiceProvider extends ServiceProvider {
+class CacheServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
   register() {
-    this.app.singleton('cache', CacheManager);
+    this.app.singleton('cache', _CacheManager.default);
   }
   /**
    * Boot the service provider.
@@ -43,7 +47,7 @@ class CacheServiceProvider extends ServiceProvider {
 
   boot() {
     this.loadConfig();
-    this.loadCommands([CacheClearCommand, CacheForgetCommand, CacheTableCommand]);
+    this.loadCommands([_CacheClearCommand.default, _CacheForgetCommand.default, _CacheTableCommand.default]);
   }
   /**
    * Load configuration file.
@@ -56,4 +60,7 @@ class CacheServiceProvider extends ServiceProvider {
 
 }
 
-module.exports = CacheServiceProvider;
+var _default = CacheServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

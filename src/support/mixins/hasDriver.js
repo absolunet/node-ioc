@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Mixins - Has driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-const factory = require('./concerns/mixinFactory');
+import __      from '@absolunet/private-registry';
+import factory from './concerns/mixinFactory';
 
 
 /**
@@ -23,7 +22,7 @@ const hasDriver = factory((SuperClass) => {
 	return class HasDriverMixin extends SuperClass {
 
 		/**
-		 * Class dependencies.
+		 * Class dependencies: <code>['app']</code>.
 		 *
 		 * @type {Array<string>}
 		 * @ignore
@@ -161,4 +160,4 @@ const hasDriver = factory((SuperClass) => {
 });
 
 
-module.exports = hasDriver;
+export default hasDriver;

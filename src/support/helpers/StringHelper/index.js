@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - String
 //--------------------------------------------------------
-'use strict';
 
-const StringHelper = require('./StringHelper');
+import StringHelper from './StringHelper';
 
 
-module.exports = StringHelper;
+export default StringHelper;

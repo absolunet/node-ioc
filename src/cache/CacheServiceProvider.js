@@ -1,15 +1,12 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Cache Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const CacheManager = require('./services/CacheManager');
-
-const CacheClearCommand  = require('./commands/CacheClearCommand');
-const CacheForgetCommand = require('./commands/CacheForgetCommand');
-const CacheTableCommand  = require('./commands/CacheTableCommand');
+import ServiceProvider    from '../foundation/ServiceProvider';
+import CacheManager       from './services/CacheManager';
+import CacheClearCommand  from './commands/CacheClearCommand';
+import CacheForgetCommand from './commands/CacheForgetCommand';
+import CacheTableCommand  from './commands/CacheTableCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -58,4 +55,4 @@ class CacheServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = CacheServiceProvider;
+export default CacheServiceProvider;

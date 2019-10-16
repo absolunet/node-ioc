@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Validation - Services - Validator
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -24,4 +23,4 @@ class Validator {
 }
 
 
-module.exports = Validator;
+export default Validator;

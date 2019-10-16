@@ -1,14 +1,12 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const ConfigRepository      = require('./repositories/ConfigRepository');
-const ConfigGrammar         = require('./services/ConfigGrammar');
-const EnvironmentRepository = require('./repositories/EnvironmentRepository');
-const Evaluator             = require('./services/Evaluator');
+import ServiceProvider       from '../foundation/ServiceProvider';
+import ConfigRepository      from './repositories/ConfigRepository';
+import ConfigGrammar         from './services/ConfigGrammar';
+import EnvironmentRepository from './repositories/EnvironmentRepository';
+import Evaluator             from './services/Evaluator';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -60,4 +58,4 @@ class ConfigServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = ConfigServiceProvider;
+export default ConfigServiceProvider;

@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- IoC - Support - Mixins - Has driver
 //--------------------------------------------------------
-'use strict';
 
-const factory             = require('./concerns/mixinFactory');
-const NotImplementedError = require('../../foundation/exceptions/NotImplementedError');
+import factory             from './concerns/mixinFactory';
+import NotImplementedError from '../../foundation/exceptions/NotImplementedError';
 
 
 /**
@@ -52,4 +51,4 @@ const forwardCalls = factory((SuperClass) => {
 });
 
 
-module.exports = forwardCalls;
+export default forwardCalls;

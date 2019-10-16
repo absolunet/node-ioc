@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const fsp         = require('@absolunet/fsp');
 const container   = require('../../container');
-const AsyncSystem = require('../../../../src/file/systems/Async');
+const AsyncSystem = require('../../../../dist/node/file/systems/Async');
 
 let asyncSystem;
 let file;

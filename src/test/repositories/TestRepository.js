@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - Abstract Test repository
 //--------------------------------------------------------
-'use strict';
 
-const __   = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -15,7 +14,7 @@ const __   = require('@absolunet/private-registry');
 class TestRepository {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'file', 'helper.path', 'helper.string']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -253,4 +252,4 @@ class TestRepository {
 
 }
 
-module.exports = TestRepository;
+export default TestRepository;

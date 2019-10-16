@@ -11,19 +11,6 @@ beforeEach(() => {
 });
 
 
-test('Framework exposes application', () => {
-	given.mainFile();
-	when.gettingApplication();
-	then.shouldHaveReceivedApplicationInstance();
-});
-
-test('Framework does not start application', () => {
-	given.mockedSetTimeout();
-	when.loadingMainFile();
-	then.mockedSetTimeoutCallbackShouldNotHaveBeenCalled();
-	then.restoreMockedSetTimeout();
-});
-
 test('All framework accessible classes are working', () => {
 	given.mainFile();
 	when.gettingAllKeysExceptApplicationAndMixins();

@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Repository
 //--------------------------------------------------------
-'use strict';
 
-const __  = require('@absolunet/private-registry');
-const dot = require('dot-object');
+import __  from '@absolunet/private-registry';
+import dot from 'dot-object';
 
 
 /**
@@ -16,7 +15,7 @@ const dot = require('dot-object');
 class ConfigRepository {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'config.grammar', 'file']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -148,4 +147,4 @@ class ConfigRepository {
 }
 
 
-module.exports = ConfigRepository;
+export default ConfigRepository;

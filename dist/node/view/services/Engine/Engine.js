@@ -1,13 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _JsRenderDriver = _interopRequireDefault(require("./drivers/JsRenderDriver"));
+
+var _NullDriver = _interopRequireDefault(require("./drivers/NullDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Engine
 //--------------------------------------------------------
-'use strict';
 
-const hasDriver = require('../../../support/mixins/hasDriver');
-
-const JsRenderDriver = require('./drivers/JsRenderDriver');
-
-const NullDriver = require('./drivers/NullDriver');
 /**
  * View engine that uses driver to make and render templates.
  *
@@ -15,11 +21,9 @@ const NullDriver = require('./drivers/NullDriver');
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-
-
-class Engine extends hasDriver() {
+class Engine extends (0, _hasDriver.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'config']</code>.
    *
    * @type {Array<string>}
    */
@@ -34,8 +38,8 @@ class Engine extends hasDriver() {
 
   init() {
     super.init();
-    this.addDriver('jsrender', JsRenderDriver);
-    this.addDriver('null', NullDriver);
+    this.addDriver('jsrender', _JsRenderDriver.default);
+    this.addDriver('null', _NullDriver.default);
     this.setDefaultDriver(this.config.get('view.engine', 'jsrender'));
   }
   /**
@@ -64,4 +68,7 @@ class Engine extends hasDriver() {
 
 }
 
-module.exports = Engine;
+var _default = Engine;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Exceptions - Not Implemented Error
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -29,4 +28,4 @@ class NotImplementedError extends TypeError {
 }
 
 
-module.exports = NotImplementedError;
+export default NotImplementedError;

@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Grammar
 //--------------------------------------------------------
-'use strict';
 
-const __     = require('@absolunet/private-registry');
-const dotenv = require('dotenv');
+import __     from '@absolunet/private-registry';
+import dotenv from 'dotenv';
 
 
 /**
@@ -16,7 +15,7 @@ const dotenv = require('dotenv');
 class EnvironmentRepository {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'evaluator']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -43,7 +42,7 @@ class EnvironmentRepository {
 			object[key] = value;
 
 			return object;
-		}, process.env);
+		}, process.env); // eslint-disable-line no-process-env
 		__(this).set('env', environment);
 	}
 
@@ -86,4 +85,4 @@ class EnvironmentRepository {
 }
 
 
-module.exports = EnvironmentRepository;
+export default EnvironmentRepository;

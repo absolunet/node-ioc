@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Async
 //--------------------------------------------------------
-'use strict';
 
-const AsyncProxy   = require('./AsyncProxy');
-const forwardCalls = require('../../../support/mixins/forwardCalls');
+import AsyncProxy   from './AsyncProxy';
+import forwardCalls from '../../../support/mixins/forwardCalls';
 
 
 /**
@@ -60,4 +59,4 @@ class Async extends forwardCalls() {
 
 
 
-module.exports = Async;
+export default Async;

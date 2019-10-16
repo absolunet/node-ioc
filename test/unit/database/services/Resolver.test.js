@@ -10,6 +10,7 @@ beforeEach(() => {
 	given.providersAndDependencies();
 	given.bootedContainer();
 	given.emptyResult();
+	given.fakeDatabasePath();
 	given.fakeConfigRepository();
 	given.fakeConfigGrammar();
 });

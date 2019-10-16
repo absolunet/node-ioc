@@ -1,15 +1,13 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store Resolver
 //--------------------------------------------------------
-'use strict';
 
-const forwardCalls      = require('../../../support/mixins/forwardCalls');
-const hasDriver         = require('../../../support/mixins/hasDriver');
-const CacheManagerProxy = require('./CacheManagerProxy');
-
-const DatabaseDriver    = require('./drivers/DatabaseDriver');
-const FileDriver        = require('./drivers/FileDriver');
-const RuntimeDriver     = require('./drivers/RuntimeDriver');
+import forwardCalls      from '../../../support/mixins/forwardCalls';
+import hasDriver         from '../../../support/mixins/hasDriver';
+import CacheManagerProxy from './CacheManagerProxy';
+import DatabaseDriver    from './drivers/DatabaseDriver';
+import FileDriver        from './drivers/FileDriver';
+import RuntimeDriver     from './drivers/RuntimeDriver';
 
 
 /**
@@ -23,7 +21,7 @@ const RuntimeDriver     = require('./drivers/RuntimeDriver');
 class CacheManager extends forwardCalls(hasDriver()) {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'config']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -116,4 +114,4 @@ class CacheManager extends forwardCalls(hasDriver()) {
 }
 
 
-module.exports = CacheManager;
+export default CacheManager;

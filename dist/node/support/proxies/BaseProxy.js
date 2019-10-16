@@ -1,23 +1,27 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Proxies - Base Proxy
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Base proxy handler.
  *
  * @memberof support.proxies
  * @hideconstructor
  */
-
-
 class BaseProxy {
   /**
    * ConnectorProxy constructor.
    */
   constructor() {
-    __(this).set('has', (object, property) => {
+    (0, _privateRegistry.default)(this).set('has', (object, property) => {
       const inPrototype = Object.prototype.hasOwnProperty.call(object.constructor.prototype, property);
       const inInstance = Object.prototype.hasOwnProperty.call(object, property);
       return inPrototype || inInstance || Boolean(object[property]);
@@ -37,7 +41,7 @@ class BaseProxy {
       return object;
     }
 
-    if (__(this).get('has')(object, property)) {
+    if ((0, _privateRegistry.default)(this).get('has')(object, property)) {
       const value = object[property];
 
       if (typeof value === 'function') {
@@ -56,4 +60,7 @@ class BaseProxy {
 
 }
 
-module.exports = BaseProxy;
+var _default = BaseProxy;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

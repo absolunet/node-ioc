@@ -1,13 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _hasEngine = _interopRequireDefault(require("../../../../support/mixins/hasEngine"));
+
+var _NotImplementedError = _interopRequireDefault(require("../../../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - ORM - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const hasEngine = require('../../../../support/mixins/hasEngine');
-
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
 /* istanbul ignore next */
 
 /**
@@ -18,11 +24,9 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
  * @augments support.mixins.HasEngine
  * @hideconstructor
  */
-
-
-class Driver extends hasEngine() {
+class Driver extends (0, _hasEngine.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'connection', 'db.resolver', 'file', 'helper.string']</code>.
    *
    * @type {Array<string>}
    */
@@ -37,10 +41,8 @@ class Driver extends hasEngine() {
 
   init() {
     this.setEngine(this.buildEngine(this.connection));
-    const models = __(this.constructor).get('models') || {};
-
-    __(this.constructor).set('models', models);
-
+    const models = (0, _privateRegistry.default)(this.constructor).get('models') || {};
+    (0, _privateRegistry.default)(this.constructor).set('models', models);
     Object.entries(models).forEach(([name, model]) => {
       this.model(name, model);
     });
@@ -56,7 +58,7 @@ class Driver extends hasEngine() {
 
   buildEngine(connection) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'buildEngine', 'ORM engine');
+    throw new _NotImplementedError.default(this, 'buildEngine', 'ORM engine');
   }
   /**
    * Get ORM driver with given connection.
@@ -86,7 +88,7 @@ class Driver extends hasEngine() {
       return this.getModel(name);
     }
 
-    __(this.constructor).get('models')[name] = Model;
+    (0, _privateRegistry.default)(this.constructor).get('models')[name] = Model;
     const model = this.buildModel(Model);
     this.setModel(name, model);
     return model;
@@ -160,4 +162,7 @@ class Driver extends hasEngine() {
 
 }
 
-module.exports = Driver;
+var _default = Driver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

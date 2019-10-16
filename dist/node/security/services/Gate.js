@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _checksTypes = _interopRequireDefault(require("../../support/mixins/checksTypes"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Security - Services - Gate
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const checksTypes = require('../../support/mixins/checksTypes');
 /**
  * Gate service that allows to register policies and test those policies before executing command or anything that needs security checks.
  *
@@ -13,11 +19,9 @@ const checksTypes = require('../../support/mixins/checksTypes');
  * @augments support.mixins.CheckTypes
  * @hideconstructor
  */
-
-
-class Gate extends checksTypes() {
+class Gate extends (0, _checksTypes.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -31,7 +35,7 @@ class Gate extends checksTypes() {
 
 
   init() {
-    __(this).set('policies', {});
+    (0, _privateRegistry.default)(this).set('policies', {});
   }
   /**
    * Determine if the user is authorized to get through the given gates.
@@ -62,8 +66,7 @@ class Gate extends checksTypes() {
 
 
   policy(policy, handler) {
-    const policies = __(this).get('policies');
-
+    const policies = (0, _privateRegistry.default)(this).get('policies');
     policies[policy] = policies[policy] || [];
     policies[policy].push(handler);
   }
@@ -78,7 +81,7 @@ class Gate extends checksTypes() {
   resolve(gate) {
     const name = this.getGateName(gate);
     const parameters = this.getGateParameters(gate);
-    const policies = (__(this).get('policies')[name] || []).map(policy => {
+    const policies = ((0, _privateRegistry.default)(this).get('policies')[name] || []).map(policy => {
       return this.getPolicyConcrete(policy);
     });
     return {
@@ -135,4 +138,7 @@ class Gate extends checksTypes() {
 
 }
 
-module.exports = Gate;
+var _default = Gate;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

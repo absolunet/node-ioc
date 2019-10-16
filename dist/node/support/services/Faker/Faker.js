@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _FakerProxy = _interopRequireDefault(require("./FakerProxy"));
+
+var _forwardCalls = _interopRequireDefault(require("../../mixins/forwardCalls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Services - Faker
 //--------------------------------------------------------
-'use strict';
 
-const FakerProxy = require('./FakerProxy');
-
-const forwardCalls = require('../../mixins/forwardCalls');
 /**
  * Faker class that decorates the faker module.
  *
@@ -13,9 +19,7 @@ const forwardCalls = require('../../mixins/forwardCalls');
  * @augments support.mixins.ForwardCalls
  * @hideconstructor
  */
-
-
-class Faker extends forwardCalls() {
+class Faker extends (0, _forwardCalls.default)() {
   /**
    * Faker constructor.
    *
@@ -24,7 +28,7 @@ class Faker extends forwardCalls() {
    */
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new FakerProxy());
+    return new Proxy(this, new _FakerProxy.default());
   }
   /**
    * @inheritdoc
@@ -37,4 +41,7 @@ class Faker extends forwardCalls() {
 
 }
 
-module.exports = Faker;
+var _default = Faker;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

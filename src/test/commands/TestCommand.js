@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Command - Test
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
+import Command from '../../console/Command';
 
 
 /**
@@ -16,7 +15,7 @@ const Command = require('../../console/Command');
 class TestCommand extends Command {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['test.type']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -62,8 +61,8 @@ class TestCommand extends Command {
 		return [
 			[this.testType.UNIT,      'Run unit tests.'],
 			[this.testType.FEATURE,   'Run feature tests.'],
-			[this.testType.STANDARDS, 'Run code and structure standards tests.'],
-			[this.testType.E2E,       'Run end-to-end tests.']
+			[this.testType.ENDTOEND,       'Run end-to-end tests.'],
+			[this.testType.INTEGRATION, 'Run integration tests.']
 		];
 	}
 
@@ -80,14 +79,14 @@ class TestCommand extends Command {
 	 * @returns {Promise} - The async process promise.
 	 */
 	runTestEngine() {
-		this.storeRepositoryName(this.getRepositoryName());
+		const repositoryName = this.getRepositoryName();
+		this.storeRepositoryName(repositoryName);
 		this.storeEngineName(this.getEngineName());
 		this.formatArgv();
 
-		const engine          = this.getEngine();
-		const engineArguments = engine.getPathArgument(this.getRepositoryName());
+		const engine = this.getEngine();
 
-		return this.run(`${engine.path} ${engineArguments}`);
+		return this.run(`${engine.path} ${this.app.testPath('bootstrap')}`);
 	}
 
 	/**
@@ -117,7 +116,7 @@ class TestCommand extends Command {
 	 * @returns {TestCommand} - The current command instance.
 	 */
 	storeRepositoryName(repositoryName) {
-		process.env.TEST_REPOSITORY = repositoryName;
+		process.env.TEST_REPOSITORY = repositoryName; // eslint-disable-line no-process-env
 
 		return this;
 	}
@@ -147,7 +146,7 @@ class TestCommand extends Command {
 	 * @returns {TestCommand} - The current command instance.
 	 */
 	storeEngineName(engineName) {
-		process.env.TEST_ENGINE = engineName;
+		process.env.TEST_ENGINE = engineName; // eslint-disable-line no-process-env
 
 		return this;
 	}
@@ -160,7 +159,7 @@ class TestCommand extends Command {
 	formatArgv() {
 		const { argv } = process;
 
-		process.env.TEST_ARGV = JSON.stringify(argv);
+		process.env.TEST_ARGV = JSON.stringify(argv); // eslint-disable-line no-process-env
 		const nameIndex = argv.indexOf(this.name);
 		process.argv = nameIndex > -1 ? argv.slice(0, nameIndex + 1) : argv;
 
@@ -178,12 +177,12 @@ class TestCommand extends Command {
 			'all':                     'test',
 			[this.testType.UNIT]:      'test.unit',
 			[this.testType.FEATURE]:   'test.feature',
-			[this.testType.STANDARDS]: 'test.standards',
-			[this.testType.E2E]:       'test.e2e'
+			[this.testType.ENDTOEND]:       'test.endtoend',
+			[this.testType.INTEGRATION]: 'test.integration'
 		};
 	}
 
 }
 
 
-module.exports = TestCommand;
+export default TestCommand;

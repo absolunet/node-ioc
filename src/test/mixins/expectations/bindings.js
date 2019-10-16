@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Mixins - Expectations - Bindings
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('../../../support/mixins/concerns/mixinFactory');
+import factory from '../../../support/mixins/concerns/mixinFactory';
 
 
 /**
@@ -49,4 +48,4 @@ const bindings = factory((SuperClass) => {
 });
 
 
-module.exports = bindings;
+export default bindings;

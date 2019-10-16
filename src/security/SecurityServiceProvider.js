@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Security - Security Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const Gate            = require('./services/Gate');
-const ServiceProvider = require('../foundation/ServiceProvider');
+import Gate            from './services/Gate';
+import ServiceProvider from '../foundation/ServiceProvider';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -57,4 +56,4 @@ class SecurityServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = SecurityServiceProvider;
+export default SecurityServiceProvider;

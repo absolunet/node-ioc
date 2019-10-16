@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ForwardProxy = _interopRequireDefault(require("../../../support/proxies/ForwardProxy"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - File - Engine Proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../../support/proxies/ForwardProxy');
 /**
  * File engine proxy handler that forwards calls to the sync file system.
  *
@@ -11,8 +17,9 @@ const ForwardProxy = require('../../../support/proxies/ForwardProxy');
  * @augments support.proxies.ForwardProxy
  * @hideconstructor
  */
+class FileEngineProxy extends _ForwardProxy.default {}
 
-
-class FileEngineProxy extends ForwardProxy {}
-
-module.exports = FileEngineProxy;
+var _default = FileEngineProxy;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

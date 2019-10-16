@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Interceptor
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -15,7 +14,7 @@ const __ = require('@absolunet/private-registry');
 class Interceptor {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['terminal.interceptor.capture']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -279,4 +278,4 @@ class Interceptor {
 }
 
 
-module.exports = Interceptor;
+export default Interceptor;

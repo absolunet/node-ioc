@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Flag
 //--------------------------------------------------------
-'use strict';
 
-const Argument = require('./Argument');
+import Argument from './Argument';
 
 
 /**
@@ -41,4 +40,4 @@ class Flag extends Argument {
 }
 
 
-module.exports = Flag;
+export default Flag;

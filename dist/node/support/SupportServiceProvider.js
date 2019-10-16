@@ -1,19 +1,25 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _DateHelper = _interopRequireDefault(require("./helpers/DateHelper"));
+
+var _FileHelper = _interopRequireDefault(require("./helpers/FileHelper"));
+
+var _PathHelper = _interopRequireDefault(require("./helpers/PathHelper"));
+
+var _StringHelper = _interopRequireDefault(require("./helpers/StringHelper"));
+
+var _Faker = _interopRequireDefault(require("./services/Faker"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Support Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const DateHelper = require('./helpers/DateHelper');
-
-const FileHelper = require('./helpers/FileHelper');
-
-const PathHelper = require('./helpers/PathHelper');
-
-const StringHelper = require('./helpers/StringHelper');
-
-const Faker = require('./services/Faker'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The support service provider.
@@ -30,20 +36,21 @@ const Faker = require('./services/Faker'); // eslint-disable-next-line jsdoc/req
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class SupportServiceProvider extends ServiceProvider {
+class SupportServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
   register() {
-    this.app.bind('helper.date', DateHelper);
-    this.app.bind('helper.file', FileHelper);
-    this.app.bind('helper.path', PathHelper);
-    this.app.bind('helper.string', StringHelper);
-    this.app.singleton('faker', Faker);
+    this.app.bind('helper.date', _DateHelper.default);
+    this.app.bind('helper.file', _FileHelper.default);
+    this.app.bind('helper.path', _PathHelper.default);
+    this.app.bind('helper.string', _StringHelper.default);
+    this.app.singleton('faker', _Faker.default);
   }
 
 }
 
-module.exports = SupportServiceProvider;
+var _default = SupportServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

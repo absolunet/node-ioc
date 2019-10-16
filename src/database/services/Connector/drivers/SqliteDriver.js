@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Connector - Sqlite Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -54,4 +53,5 @@ class SqliteDriver extends Driver {
 
 }
 
-module.exports = SqliteDriver;
+
+export default SqliteDriver;

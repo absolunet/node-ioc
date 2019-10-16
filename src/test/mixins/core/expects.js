@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Mixins - Expects
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('../../../support/mixins/concerns/mixinFactory');
+import factory from '../../../support/mixins/concerns/mixinFactory';
 
 
 /**
@@ -37,4 +36,4 @@ const expects = factory((SuperClass) => {
 });
 
 
-module.exports = expects;
+export default expects;

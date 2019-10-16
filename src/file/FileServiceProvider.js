@@ -1,14 +1,12 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const FileEngine  = require('./services/FileEngine');
-const FileManager = require('./services/FileManager');
-const Async       = require('./systems/Async');
-const Sync        = require('./systems/Sync');
+import ServiceProvider from '../foundation/ServiceProvider';
+import FileEngine      from './services/FileEngine';
+import FileManager     from './services/FileManager';
+import Async           from './systems/Async';
+import Sync            from './systems/Sync';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -48,4 +46,4 @@ class FileServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = FileServiceProvider;
+export default FileServiceProvider;

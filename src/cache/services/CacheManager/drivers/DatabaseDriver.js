@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store resolver - Drivers - Database driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -16,7 +15,7 @@ const Driver = require('./Driver');
 class DatabaseDriver extends Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['db', 'driver.config', 'helper.date']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -142,4 +141,4 @@ class DatabaseDriver extends Driver {
 }
 
 
-module.exports = DatabaseDriver;
+export default DatabaseDriver;

@@ -1,22 +1,26 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _ModelProxy = _interopRequireDefault(require("./ModelProxy"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Model
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const ModelProxy = require('./ModelProxy');
 /**
  * Database model that implements ORM features to transact with Knex with an Active Record Pattern (ARP) approach.
  *
  * @memberof database
  * @abstract
  */
-
-
 class Model {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'engine']</code>.
    *
    * @type {Array<string>}
    */
@@ -93,13 +97,10 @@ class Model {
       return self;
     };
 
-    __(this).set('app', app);
-
-    __(this).set('super', model.prototype);
-
-    __(this).set('model', model.extend(this.definition));
-
-    return new Proxy(factory, new ModelProxy());
+    (0, _privateRegistry.default)(this).set('app', app);
+    (0, _privateRegistry.default)(this).set('super', model.prototype);
+    (0, _privateRegistry.default)(this).set('model', model.extend(this.definition));
+    return new Proxy(factory, new _ModelProxy.default());
   }
   /**
    * Boot the model on initialization.
@@ -181,7 +182,7 @@ class Model {
 
 
   getForward() {
-    return __(this).get('model');
+    return (0, _privateRegistry.default)(this).get('model');
   }
   /**
    * Create a new record in the database.
@@ -213,8 +214,7 @@ class Model {
       uuid: this.getIdType() === 'uuid',
 
       initialize() {
-        __(self).get('super').initialize.call(this);
-
+        (0, _privateRegistry.default)(self).get('super').initialize.call(this);
         return self.boot(this);
       }
 
@@ -228,9 +228,12 @@ class Model {
 
 
   get app() {
-    return __(this).get('app');
+    return (0, _privateRegistry.default)(this).get('app');
   }
 
 }
 
-module.exports = Model;
+var _default = Model;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

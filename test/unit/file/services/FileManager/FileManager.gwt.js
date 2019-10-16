@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../common.gwt');
 
 const container   = require('../../../container');
-const FileManager = require('../../../../../src/file/services/FileManager');
+const FileManager = require('../../../../../dist/node/file/services/FileManager');
 
 let fakeFiles;
 let result;

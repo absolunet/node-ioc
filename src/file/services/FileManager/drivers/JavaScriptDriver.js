@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -16,7 +15,7 @@ const Driver = require('./Driver');
 class JavaScriptDriver extends Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'file.engine']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -41,4 +40,4 @@ class JavaScriptDriver extends Driver {
 }
 
 
-module.exports = JavaScriptDriver;
+export default JavaScriptDriver;

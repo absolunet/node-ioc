@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const MigrateCommand = require('../../../../src/database/commands/MigrateCommand');
+const MigrateCommand = require('../../../../dist/node/database/commands/MigrateCommand');
 
 
 //-- Given

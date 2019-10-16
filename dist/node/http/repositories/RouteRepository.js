@@ -1,24 +1,28 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Repositories - Route Repository
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Route repository that stores all the routes made from the router.
  *
  * @memberof http.repositories
  * @hideconstructor
  */
-
-
 class RouteRepository {
   /**
    * @inheritdoc
    * @private
    */
   init() {
-    __(this).set('routes', []);
+    (0, _privateRegistry.default)(this).set('routes', []);
   }
   /**
    * Add a route instance.
@@ -29,8 +33,7 @@ class RouteRepository {
 
 
   add(route) {
-    __(this).get('routes').push(route);
-
+    (0, _privateRegistry.default)(this).get('routes').push(route);
     return this;
   }
   /**
@@ -41,7 +44,7 @@ class RouteRepository {
 
 
   all() {
-    return [...__(this).get('routes')];
+    return [...(0, _privateRegistry.default)(this).get('routes')];
   }
   /**
    * Find a route by given name.
@@ -105,4 +108,7 @@ class RouteRepository {
 
 }
 
-module.exports = RouteRepository;
+var _default = RouteRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

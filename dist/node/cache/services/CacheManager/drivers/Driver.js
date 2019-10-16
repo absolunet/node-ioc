@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _hasEngine = _interopRequireDefault(require("../../../../support/mixins/hasEngine"));
+
+var _NotImplementedError = _interopRequireDefault(require("../../../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store resolver - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const hasEngine = require('../../../../support/mixins/hasEngine');
-
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
 /* istanbul ignore next */
 
 /**
@@ -15,11 +21,9 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
  * @augments support.mixins.HasEngine
  * @hideconstructor
  */
-
-
-class Driver extends hasEngine() {
+class Driver extends (0, _hasEngine.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['driver.config', 'helper.date']</code>.
    *
    * @type {Array<string>}
    */
@@ -38,7 +42,7 @@ class Driver extends hasEngine() {
 
   get(key, defaultValue) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'get', 'Promise<any>');
+    throw new _NotImplementedError.default(this, 'get', 'Promise<any>');
   }
   /**
    * Insert an item in the cache with key and expiration delay.
@@ -54,7 +58,7 @@ class Driver extends hasEngine() {
 
   put(key, value, seconds) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'put', 'Promise<void>');
+    throw new _NotImplementedError.default(this, 'put', 'Promise<void>');
   }
   /**
    * Insert an item in the cache with key forever, without expiration.
@@ -69,7 +73,7 @@ class Driver extends hasEngine() {
 
   forever(key, value) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'forever', 'Promise<void>');
+    throw new _NotImplementedError.default(this, 'forever', 'Promise<void>');
   }
   /**
    * Increment an item in cache.
@@ -84,7 +88,7 @@ class Driver extends hasEngine() {
 
   increment(key, increment = 1) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'increment', 'Promise<void>');
+    throw new _NotImplementedError.default(this, 'increment', 'Promise<void>');
   }
   /**
    * Decrement an item in cache.
@@ -99,7 +103,7 @@ class Driver extends hasEngine() {
 
   decrement(key, decrement = 1) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'decrement', 'Promise<void>');
+    throw new _NotImplementedError.default(this, 'decrement', 'Promise<void>');
   }
   /**
    * Delete an item in the cache by key.
@@ -113,7 +117,7 @@ class Driver extends hasEngine() {
 
   delete(key) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'delete', 'Promise<void>');
+    throw new _NotImplementedError.default(this, 'delete', 'Promise<void>');
   }
   /**
    * Delete all items the cache.
@@ -125,7 +129,7 @@ class Driver extends hasEngine() {
 
 
   flush() {
-    throw new NotImplementedError(this, 'flush', 'Promise<void>');
+    throw new _NotImplementedError.default(this, 'flush', 'Promise<void>');
   }
   /**
    * Get current time in seconds.
@@ -160,4 +164,7 @@ class Driver extends hasEngine() {
 
 }
 
-module.exports = Driver;
+var _default = Driver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

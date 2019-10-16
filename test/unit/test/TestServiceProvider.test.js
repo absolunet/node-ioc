@@ -41,16 +41,6 @@ test('Feature test repository should be a singleton', () => {
 	then.featureTestRepositoryShouldBeSingleton();
 });
 
-test('Standards test repository should be resolvable', () => {
-	when.bootingContainer();
-	then.standardsTestRepositoryShouldBeResolvable();
-});
-
-test('Standards test repository should be a singleton', () => {
-	when.bootingContainer();
-	then.standardsTestRepositoryShouldBeSingleton();
-});
-
 test('End-To-End test repository should be resolvable', () => {
 	when.bootingContainer();
 	then.endToEndTestRepositoryShouldBeResolvable();
@@ -58,7 +48,17 @@ test('End-To-End test repository should be resolvable', () => {
 
 test('End-To-End test repository should be a singleton', () => {
 	when.bootingContainer();
-	then.endToEndRepositoryShouldBeSingleton();
+	then.endToEndTestRepositoryShouldBeSingleton();
+});
+
+test('Integration test repository should be resolvable', () => {
+	when.bootingContainer();
+	then.integrationTestRepositoryShouldBeResolvable();
+});
+
+test('Integration test repository should be a singleton', () => {
+	when.bootingContainer();
+	then.integrationTestRepositoryShouldBeSingleton();
 });
 
 test('Test runner service should be resolvable', () => {

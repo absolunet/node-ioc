@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container    = require('../../container');
-const StringHelper = require('../../../../src/support/helpers/StringHelper');
+const StringHelper = require('../../../../dist/node/support/helpers/StringHelper');
 
 let stringHelper;
 let string;

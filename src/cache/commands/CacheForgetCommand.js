@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Command - Cache Flush
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
+import Command from '../../console/Command';
 
 
 /**
@@ -16,7 +15,7 @@ const Command = require('../../console/Command');
 class CacheForgetCommand extends Command {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['cache']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -81,4 +80,4 @@ class CacheForgetCommand extends Command {
 
 }
 
-module.exports = CacheForgetCommand;
+export default CacheForgetCommand;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Factory
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -15,7 +14,7 @@ const __ = require('@absolunet/private-registry');
 class Factory {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'db.model', 'faker']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -96,4 +95,4 @@ class Factory {
 }
 
 
-module.exports = Factory;
+export default Factory;

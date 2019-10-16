@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ForwardProxy = _interopRequireDefault(require("../../proxies/ForwardProxy"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Services - Faker proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../proxies/ForwardProxy');
 /**
  * The faker proxy handler that forwards calls to the Faker instance.
  *
@@ -11,8 +17,9 @@ const ForwardProxy = require('../../proxies/ForwardProxy');
  * @augments support.proxies.ForwardProxy
  * @hideconstructor
  */
+class FakerProxy extends _ForwardProxy.default {}
 
-
-class FakerProxy extends ForwardProxy {}
-
-module.exports = FakerProxy;
+var _default = FakerProxy;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

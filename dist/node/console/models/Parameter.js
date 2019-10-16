@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Argument = _interopRequireDefault(require("./Argument"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Parameter
 //--------------------------------------------------------
-'use strict';
 
-const Argument = require('./Argument');
 /**
  * Parameter argument class.
  * Represents a string value that look like "some:command argument" in a command.
@@ -11,9 +17,7 @@ const Argument = require('./Argument');
  * @memberof console.models
  * @augments console.models.Argument
  */
-
-
-class Parameter extends Argument {
+class Parameter extends _Argument.default {
   /**
    * Parameter constructor.
    *
@@ -43,4 +47,7 @@ class Parameter extends Argument {
 
 }
 
-module.exports = Parameter;
+var _default = Parameter;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

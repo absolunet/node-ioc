@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -58,4 +57,4 @@ class JsonDriver extends Driver {
 }
 
 
-module.exports = JsonDriver;
+export default JsonDriver;

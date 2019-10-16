@@ -10,7 +10,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const path                  = require('path');
 const container             = require('../../container');
-const EnvironmentRepository = require('../../../../src/config/repositories/EnvironmentRepository');
+const EnvironmentRepository = require('../../../../dist/node/config/repositories/EnvironmentRepository');
 
 const originalProcessEnv = process.env;
 const baseDotEnvFile     = path.join(__dirname, '..', 'stubs', '.env');

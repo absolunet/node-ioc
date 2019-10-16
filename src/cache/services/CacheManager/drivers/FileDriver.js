@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store resolver - Drivers - File driver
 //--------------------------------------------------------
-'use strict';
 
-const __     = require('@absolunet/private-registry');
-const Driver = require('./Driver');
+import __     from '@absolunet/private-registry';
+import Driver from './Driver';
 
 
 /**
@@ -17,7 +16,7 @@ const Driver = require('./Driver');
 class FileDriver extends Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'driver.config', 'file', 'helper.date']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -175,4 +174,4 @@ class FileDriver extends Driver {
 }
 
 
-module.exports = FileDriver;
+export default FileDriver;

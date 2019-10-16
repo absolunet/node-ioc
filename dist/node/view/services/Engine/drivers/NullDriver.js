@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * Null view engine driver.
  * It always renders empty templates and never throws.
@@ -11,9 +17,7 @@ const Driver = require('./Driver');
  * @memberof view.services.Engine.drivers
  * @hideconstructor
  */
-
-
-class NullDriver extends Driver {
+class NullDriver extends _Driver.default {
   /**
    * @inheritdoc
    */
@@ -31,4 +35,7 @@ class NullDriver extends Driver {
 
 }
 
-module.exports = NullDriver;
+var _default = NullDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

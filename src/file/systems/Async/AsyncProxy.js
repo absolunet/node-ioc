@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Async proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../../support/proxies/ForwardProxy');
+import ForwardProxy from '../../../support/proxies/ForwardProxy';
 
 
 /**
@@ -18,4 +17,4 @@ class AsyncProxy extends ForwardProxy {
 }
 
 
-module.exports = AsyncProxy;
+export default AsyncProxy;

@@ -8,7 +8,7 @@ const { given, when, then, build } = require('../../../common.gwt');
 const knex           = require('knex');
 const mockConnection = require('mock-knex');
 const container      = require('../../../../container');
-const DatabaseDriver = require('../../../../../../src/log/services/Logger/drivers/DatabaseDriver');
+const DatabaseDriver = require('../../../../../../dist/node/log/services/Logger/drivers/DatabaseDriver');
 
 let tracker;
 let connections;

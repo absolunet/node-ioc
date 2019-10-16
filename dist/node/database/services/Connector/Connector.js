@@ -1,15 +1,21 @@
+"use strict";
+
+exports.default = void 0;
+
+var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _ConnectorProxy = _interopRequireDefault(require("./ConnectorProxy"));
+
+var _SqliteDriver = _interopRequireDefault(require("./drivers/SqliteDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Connector
 //--------------------------------------------------------
-'use strict';
 
-const forwardsCall = require('../../../support/mixins/forwardCalls');
-
-const hasDriver = require('../../../support/mixins/hasDriver');
-
-const ConnectorProxy = require('./ConnectorProxy');
-
-const SqliteDriver = require('./drivers/SqliteDriver');
 /**
  * Connector that decorates a Knex connection through a driver.
  *
@@ -18,9 +24,7 @@ const SqliteDriver = require('./drivers/SqliteDriver');
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-
-
-class Connector extends forwardsCall(hasDriver()) {
+class Connector extends (0, _forwardCalls.default)((0, _hasDriver.default)()) {
   /**
    * Connector constructor.
    *
@@ -29,7 +33,7 @@ class Connector extends forwardsCall(hasDriver()) {
    */
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new ConnectorProxy());
+    return new Proxy(this, new _ConnectorProxy.default());
   }
   /**
    * @inheritdoc
@@ -39,7 +43,7 @@ class Connector extends forwardsCall(hasDriver()) {
 
   init() {
     super.init();
-    this.addDriver('sqlite', SqliteDriver);
+    this.addDriver('sqlite', _SqliteDriver.default);
   }
   /**
    * @inheritdoc
@@ -52,4 +56,7 @@ class Connector extends forwardsCall(hasDriver()) {
 
 }
 
-module.exports = Connector;
+var _default = Connector;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

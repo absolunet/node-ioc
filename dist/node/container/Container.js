@@ -1,15 +1,21 @@
+"use strict";
+
+exports.default = void 0;
+
+var _toCase = _interopRequireDefault(require("to-case"));
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _checksTypes = _interopRequireDefault(require("../support/mixins/checksTypes"));
+
+var _Proxy = _interopRequireDefault(require("./Proxy"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Container - Container
 //--------------------------------------------------------
-'use strict';
 
-const to = require('to-case');
-
-const __ = require('@absolunet/private-registry');
-
-const checksTypes = require('../support/mixins/checksTypes');
-
-const ContainerProxy = require('./Proxy');
 /**
  * Inversion of Control container that allows bindings and factory with dependency injection, exposes tags, aliases and other IoC features.
  *
@@ -17,9 +23,7 @@ const ContainerProxy = require('./Proxy');
  * @augments support.mixins.CheckTypes
  * @hideconstructor
  */
-
-
-class Container extends checksTypes() {
+class Container extends (0, _checksTypes.default)() {
   /**
    * Make a new Container instance.
    *
@@ -67,9 +71,8 @@ class Container extends checksTypes() {
   constructor() {
     super();
     this.setContext(module);
-
-    __(this).set('pushInto', (property, key, value) => {
-      const collection = __(this).get(property);
+    (0, _privateRegistry.default)(this).set('pushInto', (property, key, value) => {
+      const collection = (0, _privateRegistry.default)(this).get(property);
 
       if (!collection[key]) {
         collection[key] = [];
@@ -77,9 +80,8 @@ class Container extends checksTypes() {
 
       collection[key].push(value);
     });
-
     this.flush();
-    return new Proxy(this, new ContainerProxy());
+    return new Proxy(this, new _Proxy.default());
   }
   /**
    * Set JavaScript module context.
@@ -93,7 +95,7 @@ class Container extends checksTypes() {
       throw new TypeError('The given context is not a valid module.');
     }
 
-    __(this).set('context', context);
+    (0, _privateRegistry.default)(this).set('context', context);
   }
   /**
    * Get current JavaScript module context.
@@ -103,7 +105,7 @@ class Container extends checksTypes() {
 
 
   getContext() {
-    return __(this).get('context');
+    return (0, _privateRegistry.default)(this).get('context');
   }
   /**
    * Bind abstract to the container.
@@ -116,11 +118,11 @@ class Container extends checksTypes() {
 
 
   bind(abstract, concrete, shared = false) {
-    __(this).get('bindings')[abstract] = {
+    (0, _privateRegistry.default)(this).get('bindings')[abstract] = {
       concrete,
       shared
     };
-    delete __(this).get('singletons')[abstract];
+    delete (0, _privateRegistry.default)(this).get('singletons')[abstract];
     return this;
   }
   /**
@@ -163,9 +165,8 @@ class Container extends checksTypes() {
 
 
   resolve(abstract, parameters = {}) {
-    const bindings = __(this).get('bindings');
-
-    const decorators = __(this).get('decorators')[abstract] || [];
+    const bindings = (0, _privateRegistry.default)(this).get('bindings');
+    const decorators = (0, _privateRegistry.default)(this).get('decorators')[abstract] || [];
     let concrete = abstract;
     let shared = false;
 
@@ -196,7 +197,7 @@ class Container extends checksTypes() {
     }, build);
 
     if (shared && Object.keys(parameters).length === 0) {
-      __(this).get('singletons')[abstract] = object;
+      (0, _privateRegistry.default)(this).get('singletons')[abstract] = object;
     }
 
     return object;
@@ -220,7 +221,7 @@ class Container extends checksTypes() {
 
 
   getBounds() {
-    return Object.keys(__(this).get('bindings') || {});
+    return Object.keys((0, _privateRegistry.default)(this).get('bindings') || {});
   }
   /**
    * Get singleton from its abstract.
@@ -231,7 +232,7 @@ class Container extends checksTypes() {
 
 
   getSingleton(abstract) {
-    return __(this).get('singletons')[abstract];
+    return (0, _privateRegistry.default)(this).get('singletons')[abstract];
   }
   /**
    * Check if a given abstract has a resolved singleton.
@@ -242,7 +243,7 @@ class Container extends checksTypes() {
 
 
   isSingleton(abstract) {
-    return Object.prototype.hasOwnProperty.call(__(this).get('singletons'), abstract);
+    return Object.prototype.hasOwnProperty.call((0, _privateRegistry.default)(this).get('singletons'), abstract);
   }
   /**
    * Instantiate a given class and resolve its dependencies.
@@ -263,9 +264,9 @@ class Container extends checksTypes() {
     const instance = new Concrete(...resolvedDependencies);
     const realInstance = instance.__instance || instance;
     dependencies.forEach((dependency, index) => {
-      __(realInstance).set(dependency, resolvedDependencies[index]);
+      (0, _privateRegistry.default)(realInstance).set(dependency, resolvedDependencies[index]);
 
-      const formattedName = to.camel(dependency);
+      const formattedName = _toCase.default.camel(dependency);
 
       if (!Object.prototype.hasOwnProperty.call(realInstance, formattedName)) {
         Object.defineProperty(realInstance, formattedName, {
@@ -337,7 +338,7 @@ class Container extends checksTypes() {
 
 
   decorate(abstract, decorator) {
-    __(this).get('pushInto')('decorators', abstract, decorator);
+    (0, _privateRegistry.default)(this).get('pushInto')('decorators', abstract, decorator);
   }
   /**
    * Tag a given abstract.
@@ -350,7 +351,7 @@ class Container extends checksTypes() {
   tag(abstract, tag) {
     const abstracts = Array.isArray(abstract) ? abstract : [abstract];
     abstracts.forEach(a => {
-      __(this).get('pushInto')('tags', tag, a);
+      (0, _privateRegistry.default)(this).get('pushInto')('tags', tag, a);
     });
   }
   /**
@@ -375,7 +376,7 @@ class Container extends checksTypes() {
 
 
   isTag(tag) {
-    return Object.prototype.hasOwnProperty.call(__(this).get('tags'), tag);
+    return Object.prototype.hasOwnProperty.call((0, _privateRegistry.default)(this).get('tags'), tag);
   }
   /**
    * Get tagged dependencies from the tag name.
@@ -386,7 +387,7 @@ class Container extends checksTypes() {
 
 
   getTagged(tag) {
-    const tagged = __(this).get('tags')[tag] || [];
+    const tagged = (0, _privateRegistry.default)(this).get('tags')[tag] || [];
     const bindings = {};
     tagged.forEach(binding => {
       bindings[binding] = this.make(binding);
@@ -399,14 +400,10 @@ class Container extends checksTypes() {
 
 
   flush() {
-    __(this).set('bindings', {});
-
-    __(this).set('singletons', {});
-
-    __(this).set('decorators', {});
-
-    __(this).set('tags', {});
-
+    (0, _privateRegistry.default)(this).set('bindings', {});
+    (0, _privateRegistry.default)(this).set('singletons', {});
+    (0, _privateRegistry.default)(this).set('decorators', {});
+    (0, _privateRegistry.default)(this).set('tags', {});
     this.singleton('app', this);
   }
   /**
@@ -432,7 +429,9 @@ class Container extends checksTypes() {
   getModule(filePath) {
     try {
       if (typeof filePath === 'string') {
-        return this.getContext().require(filePath);
+        const value = this.getContext().require(filePath);
+
+        return value && value.__esModule ? value.default : value;
       }
 
       return null;
@@ -447,4 +446,7 @@ class Container extends checksTypes() {
 
 }
 
-module.exports = Container;
+var _default = Container;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

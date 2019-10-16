@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _GeneratorCommand = _interopRequireDefault(require("../GeneratorCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Command - Make Command
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../GeneratorCommand');
 /**
  * Command that makes a command class file inside the application commands folder.
  *
@@ -11,9 +17,7 @@ const GeneratorCommand = require('../GeneratorCommand');
  * @augments console.GeneratorCommand
  * @hideconstructor
  */
-
-
-class MakeCommandCommand extends GeneratorCommand {
+class MakeCommandCommand extends _GeneratorCommand.default {
   /**
    * @inheritdoc
    */
@@ -36,7 +40,7 @@ class MakeCommandCommand extends GeneratorCommand {
   get files() {
     return {
       'base': this.app.formatPath(__dirname, 'stubs', 'BaseCommand.stub'),
-      'public': this.app.formatPath(__dirname, 'stubs', 'PublicCommand.stub'),
+      'private': this.app.formatPath(__dirname, 'stubs', 'PrivateCommand.stub'),
       'generator': this.app.formatPath(__dirname, 'stubs', 'GeneratorCommand.stub')
     };
   }
@@ -46,7 +50,7 @@ class MakeCommandCommand extends GeneratorCommand {
 
 
   get destination() {
-    return this.app.commandPath();
+    return this.app.sourcePath('command', '');
   }
   /**
    * @inheritdoc
@@ -54,7 +58,7 @@ class MakeCommandCommand extends GeneratorCommand {
 
 
   async handle() {
-    const type = this.flag('generator') ? 'generator' : this.flag('public') ? 'public' : 'base'; // eslint-disable-line unicorn/no-nested-ternary
+    const type = this.flag('generator') ? 'generator' : this.flag('private') ? 'private' : 'base'; // eslint-disable-line unicorn/no-nested-ternary
 
     this.debug(`Generating ${type} command file.`);
     await this.generate(type);
@@ -66,9 +70,12 @@ class MakeCommandCommand extends GeneratorCommand {
 
 
   get flags() {
-    return [['generator', 'Generate a generator command class.'], ['public', 'Generate a public command class.']];
+    return [['generator', 'Generate a generator command class.'], ['private', 'Generate a private command class.']];
   }
 
 }
 
-module.exports = MakeCommandCommand;
+var _default = MakeCommandCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,22 +1,26 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _dotObject = _interopRequireDefault(require("dot-object"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Repository
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const dot = require('dot-object');
 /**
  * Configuration repository that loads, stores and exposes application configuration.
  *
  * @memberof config.repositories
  * @hideconstructor
  */
-
-
 class ConfigRepository {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'config.grammar', 'file']</code>.
    *
    * @type {Array<string>}
    */
@@ -43,8 +47,8 @@ class ConfigRepository {
 
 
   get(key = null, defaultValue = null) {
-    const config = Object.assign({}, __(this).get('config'));
-    const value = typeof key === 'string' ? dot.pick(key, config) : config;
+    const config = Object.assign({}, (0, _privateRegistry.default)(this).get('config'));
+    const value = typeof key === 'string' ? _dotObject.default.pick(key, config) : config;
     return typeof value === 'undefined' ? defaultValue : value;
   }
   /**
@@ -57,10 +61,12 @@ class ConfigRepository {
 
   set(key, value) {
     if (typeof key === 'string') {
-      dot.override = true;
+      _dotObject.default.override = true;
       const formattedValue = this.formatValues(value);
-      dot.str(key, formattedValue, __(this).get('config'));
-      dot.override = false;
+
+      _dotObject.default.str(key, formattedValue, (0, _privateRegistry.default)(this).get('config'));
+
+      _dotObject.default.override = false;
     } else {
       this.setConfig(key);
     }
@@ -89,7 +95,7 @@ class ConfigRepository {
 
 
   setConfig(config) {
-    __(this).set('config', this.formatValues(config));
+    (0, _privateRegistry.default)(this).set('config', this.formatValues(config));
   }
   /**
    * Set global configuration based on folder files.
@@ -153,4 +159,7 @@ class ConfigRepository {
 
 }
 
-module.exports = ConfigRepository;
+var _default = ConfigRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

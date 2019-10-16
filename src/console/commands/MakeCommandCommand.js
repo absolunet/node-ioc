@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Command - Make Command
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../GeneratorCommand');
+import GeneratorCommand from '../GeneratorCommand';
 
 
 /**
@@ -35,7 +34,7 @@ class MakeCommandCommand extends GeneratorCommand {
 	get files() {
 		return {
 			'base':      this.app.formatPath(__dirname, 'stubs', 'BaseCommand.stub'),
-			'public':    this.app.formatPath(__dirname, 'stubs', 'PublicCommand.stub'),
+			'private':   this.app.formatPath(__dirname, 'stubs', 'PrivateCommand.stub'),
 			'generator': this.app.formatPath(__dirname, 'stubs', 'GeneratorCommand.stub')
 		};
 	}
@@ -44,14 +43,14 @@ class MakeCommandCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get destination() {
-		return this.app.commandPath();
+		return this.app.sourcePath('command', '');
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	async handle() {
-		const type = this.flag('generator') ? 'generator' : this.flag('public') ? 'public' : 'base'; // eslint-disable-line unicorn/no-nested-ternary
+		const type = this.flag('generator') ? 'generator' : this.flag('private') ? 'private' : 'base'; // eslint-disable-line unicorn/no-nested-ternary
 		this.debug(`Generating ${type} command file.`);
 		await this.generate(type);
 		this.info(`Command ${this.parameter('class')} file successfully generated!`);
@@ -63,11 +62,11 @@ class MakeCommandCommand extends GeneratorCommand {
 	get flags() {
 		return [
 			['generator', 'Generate a generator command class.'],
-			['public',    'Generate a public command class.']
+			['private',   'Generate a private command class.']
 		];
 	}
 
 }
 
 
-module.exports = MakeCommandCommand;
+export default MakeCommandCommand;

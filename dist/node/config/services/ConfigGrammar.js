@@ -1,7 +1,11 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Grammar
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Class that handle configuration specific grammar.
  * It formats configuration entry by replacing specific tokens and patterns.
@@ -18,10 +22,9 @@
  * @memberof config.services
  * @hideconstructor
  */
-
 class ConfigGrammar {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'env', 'evaluator']</code>.
    *
    * @type {Array<string>}
    */
@@ -129,4 +132,7 @@ class ConfigGrammar {
 
 }
 
-module.exports = ConfigGrammar;
+var _default = ConfigGrammar;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

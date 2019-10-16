@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Command - List
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
+import Command from '../../console/Command';
 
 
 /**
@@ -16,7 +15,7 @@ const Command = require('../../console/Command');
 class ServeCommand extends Command {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['server', 'router']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -164,4 +163,5 @@ class ServeCommand extends Command {
 
 }
 
-module.exports = ServeCommand;
+
+export default ServeCommand;

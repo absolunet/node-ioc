@@ -1,13 +1,11 @@
 //--------------------------------------------------------
 //-- Node IoC - Container - Container
 //--------------------------------------------------------
-'use strict';
 
-const to = require('to-case');
-const __ = require('@absolunet/private-registry');
-
-const checksTypes    = require('../support/mixins/checksTypes');
-const ContainerProxy = require('./Proxy');
+import to             from 'to-case';
+import __             from '@absolunet/private-registry';
+import checksTypes    from '../support/mixins/checksTypes';
+import ContainerProxy from './Proxy';
 
 
 /**
@@ -400,7 +398,9 @@ class Container extends checksTypes() {
 	getModule(filePath) {
 		try {
 			if (typeof filePath === 'string') {
-				return this.getContext().require(filePath);
+				const value = this.getContext().require(filePath);
+
+				return value && value.__esModule ? value.default : value;
 			}
 
 			return null;
@@ -416,4 +416,4 @@ class Container extends checksTypes() {
 }
 
 
-module.exports = Container;
+export default Container;

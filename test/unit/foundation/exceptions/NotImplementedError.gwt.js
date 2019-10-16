@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('../common.gwt');
 
-const NotImplementedError = require('../../../../src/foundation/exceptions/NotImplementedError');
+const NotImplementedError = require('../../../../dist/node/foundation/exceptions/NotImplementedError');
 
 let instance;
 let expectedValue;

@@ -1,14 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Yargs Engine
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Yargs engine.
  *
  * @memberof console.services
  * @hideconstructor
  */
-
 class YargsEngine {
   /**
    * YargsEngine constructor.
@@ -21,4 +24,7 @@ class YargsEngine {
 
 }
 
-module.exports = YargsEngine;
+var _default = YargsEngine;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

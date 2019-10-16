@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Drivers - JSRender driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * JSRender view engine driver.
  *
@@ -11,11 +17,9 @@ const Driver = require('./Driver');
  * @augments view.services.Engine.drivers.Driver
  * @hideconstructor
  */
-
-
-class JsRenderDriver extends Driver {
+class JsRenderDriver extends _Driver.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -110,4 +114,7 @@ class JsRenderDriver extends Driver {
 
 }
 
-module.exports = JsRenderDriver;
+var _default = JsRenderDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

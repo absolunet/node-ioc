@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _NotImplementedError = _interopRequireDefault(require("../../../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Connector - Driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
 /* istanbul ignore next */
 
 /**
@@ -15,11 +21,9 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
  * @abstract
  * @hideconstructor
  */
-
-
 class Driver {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['config', 'db.resolver', 'file']</code>.
    *
    * @type {Array<string>}
    */
@@ -35,7 +39,7 @@ class Driver {
 
 
   get client() {
-    throw new NotImplementedError(this, 'client', 'string', 'accessor');
+    throw new _NotImplementedError.default(this, 'client', 'string', 'accessor');
   }
   /**
    * @inheritdoc
@@ -44,7 +48,7 @@ class Driver {
 
 
   init() {
-    __(this).set('connections', {});
+    (0, _privateRegistry.default)(this).set('connections', {});
   }
   /**
    * Get Knex connection.
@@ -59,7 +63,7 @@ class Driver {
       throw new TypeError(`The [${name}] connection does not exists.`);
     }
 
-    return __(this).get('connections')[name];
+    return (0, _privateRegistry.default)(this).get('connections')[name];
   }
   /**
    * Get default Knex connection.
@@ -81,7 +85,7 @@ class Driver {
 
 
   setConnection(name, connection) {
-    __(this).get('connections')[name] = connection;
+    (0, _privateRegistry.default)(this).get('connections')[name] = connection;
     return this;
   }
   /**
@@ -105,7 +109,7 @@ class Driver {
 
 
   hasConnection(name) {
-    return Boolean(__(this).get('connections')[name]);
+    return Boolean((0, _privateRegistry.default)(this).get('connections')[name]);
   }
   /**
    * Get connection if it exists, otherwise create a new connection and returns it.
@@ -149,8 +153,7 @@ class Driver {
     const connection = require('knex')(this.mapConfig(config)); // eslint-disable-line global-require
 
 
-    __(connection).set('driver', this);
-
+    (0, _privateRegistry.default)(connection).set('driver', this);
     return connection;
   }
   /**
@@ -248,4 +251,7 @@ class Driver {
 
 }
 
-module.exports = Driver;
+var _default = Driver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

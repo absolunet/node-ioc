@@ -1,7 +1,7 @@
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Service Provider
 //--------------------------------------------------------
-'use strict';
+
 
 /**
  * Base service provider class.
@@ -30,4 +30,4 @@ class ServiceProvider {
 }
 
 
-module.exports = ServiceProvider;
+export default ServiceProvider;

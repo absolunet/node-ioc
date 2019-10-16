@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- IoC - Foundation - Mixins - Checks types
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('./concerns/mixinFactory');
+import factory from './concerns/mixinFactory';
 
 
 /**
@@ -74,4 +73,4 @@ const checkTypes = factory((SuperClass) => {
 });
 
 
-module.exports = checkTypes;
+export default checkTypes;

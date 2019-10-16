@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -31,4 +30,5 @@ class NullDriver extends Driver {
 
 }
 
-module.exports = NullDriver;
+
+export default NullDriver;

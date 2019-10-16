@@ -15,10 +15,10 @@ connections:
 
 
 paths:
-  factories: '@/database/factories'
-  migrations: '@/database/migrations'
-  models: '@/database/models'
-  seeds: '@/database/seeds'
+  factories: 'factories'
+  migrations: 'migrations'
+  models: 'models'
+  seeds: 'seeds'
 
 
 

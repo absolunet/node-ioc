@@ -1,11 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const __                  = require('@absolunet/private-registry');
-const hasEngine           = require('../../../../support/mixins/hasEngine');
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
+import __                  from '@absolunet/private-registry';
+import hasEngine           from '../../../../support/mixins/hasEngine';
+import NotImplementedError from '../../../../foundation/exceptions/NotImplementedError';
 
 /* istanbul ignore next */
 /**
@@ -19,7 +18,7 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
 class Driver extends hasEngine() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['log.level']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -74,4 +73,4 @@ class Driver extends hasEngine() {
 }
 
 
-module.exports = Driver;
+export default Driver;

@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _TestRepository = _interopRequireDefault(require("./TestRepository"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - End To End Test repository
 //--------------------------------------------------------
-'use strict';
 
-const TestRepository = require('./TestRepository');
 /**
  * End to end test repository that scopes to the "e2e" folder.
  *
@@ -11,16 +17,17 @@ const TestRepository = require('./TestRepository');
  * @augments test.repositories.TestRepository
  * @hideconstructor
  */
-
-
-class EndToEndTestRepository extends TestRepository {
+class EndToEndTestRepository extends _TestRepository.default {
   /**
    * @inheritdoc
    */
   get scope() {
-    return 'e2e';
+    return 'endtoend';
   }
 
 }
 
-module.exports = EndToEndTestRepository;
+var _default = EndToEndTestRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

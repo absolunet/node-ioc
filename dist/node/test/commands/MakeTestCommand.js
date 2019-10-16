@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _GeneratorCommand = _interopRequireDefault(require("../../console/GeneratorCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Command - Make Test
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
 /**
  * Command that makes a test class file inside the test folder.
  *
@@ -11,16 +17,14 @@ const GeneratorCommand = require('../../console/GeneratorCommand');
  * @augments console.GeneratorCommand
  * @hideconstructor
  */
-
-
-class MakeTestCommand extends GeneratorCommand {
+class MakeTestCommand extends _GeneratorCommand.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['helper.path', 'helper.string', 'test.type']</code>.
    *
    * @type {Array<string>}
    */
   static get dependencies() {
-    return (super.dependencies || []).concat(['test.type', 'helper.path', 'helper.string']);
+    return (super.dependencies || []).concat(['helper.path', 'helper.string', 'test.type']);
   }
   /**
    * @inheritdoc
@@ -169,4 +173,7 @@ class MakeTestCommand extends GeneratorCommand {
 
 }
 
-module.exports = MakeTestCommand;
+var _default = MakeTestCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

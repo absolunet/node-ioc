@@ -1,20 +1,24 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Repositories - Controller Repository
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Controller repository where controller registration and instantiation are done.
  *
  * @memberof http.repositories
  * @hideconstructor
  */
-
-
 class ControllerRepository {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -27,7 +31,7 @@ class ControllerRepository {
 
 
   constructor() {
-    __(this).set('groups', []);
+    (0, _privateRegistry.default)(this).set('groups', []);
   }
   /**
    * Add a controller binding.
@@ -81,8 +85,7 @@ class ControllerRepository {
 
 
   group(name, group) {
-    const groups = __(this).get('groups');
-
+    const groups = (0, _privateRegistry.default)(this).get('groups');
     const index = groups.push({
       name
     }) - 1;
@@ -116,7 +119,7 @@ class ControllerRepository {
 
 
   buildName(name) {
-    return this.getName([...__(this).get('groups'), {
+    return this.getName([...(0, _privateRegistry.default)(this).get('groups'), {
       name
     }].map(({
       name: part
@@ -195,4 +198,7 @@ class ControllerRepository {
 
 }
 
-module.exports = ControllerRepository;
+var _default = ControllerRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

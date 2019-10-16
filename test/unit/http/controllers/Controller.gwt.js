@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container  = require('../../container');
-const Controller = require('../../../../src/http/controllers/Controller');
+const Controller = require('../../../../dist/node/http/controllers/Controller');
 
 let controller;
 let viewModel;

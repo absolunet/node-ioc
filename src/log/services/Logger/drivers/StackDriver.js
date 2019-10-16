@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger - Drivers - Stack Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -16,7 +15,7 @@ const Driver = require('./Driver');
 class StackDriver extends Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'log.level']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -53,4 +52,4 @@ class StackDriver extends Driver {
 }
 
 
-module.exports = StackDriver;
+export default StackDriver;

@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Drivers - Null Driver proxy
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -95,4 +94,4 @@ class NullDriverProxy {
 }
 
 
-module.exports = NullDriverProxy;
+export default NullDriverProxy;

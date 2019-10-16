@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Gate = _interopRequireDefault(require("./services/Gate"));
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Security - Security Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const Gate = require('./services/Gate');
-
-const ServiceProvider = require('../foundation/ServiceProvider'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The security service provider.
@@ -18,14 +24,12 @@ const ServiceProvider = require('../foundation/ServiceProvider'); // eslint-disa
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class SecurityServiceProvider extends ServiceProvider {
+class SecurityServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
   register() {
-    this.app.singleton('gate', Gate);
+    this.app.singleton('gate', _Gate.default);
   }
   /**
    * Boot the service provider.
@@ -56,4 +60,7 @@ class SecurityServiceProvider extends ServiceProvider {
 
 }
 
-module.exports = SecurityServiceProvider;
+var _default = SecurityServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Services - Faker
 //--------------------------------------------------------
-'use strict';
 
-const Faker = require('./Faker');
+import Faker from './Faker';
 
 
-module.exports = Faker;
+export default Faker;

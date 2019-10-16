@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - ORM - Drivers - Bookshelf driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -81,4 +80,4 @@ class BookshelfDriver extends Driver {
 }
 
 
-module.exports = BookshelfDriver;
+export default BookshelfDriver;

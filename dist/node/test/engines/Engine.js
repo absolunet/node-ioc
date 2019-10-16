@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _NotImplementedError = _interopRequireDefault(require("../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Engines - Engine
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../../foundation/exceptions/NotImplementedError');
 /**
  * Abstract test engine.
  *
@@ -11,8 +17,6 @@ const NotImplementedError = require('../../foundation/exceptions/NotImplementedE
  * @abstract
  * @hideconstructor
  */
-
-
 class Engine {
   /**
    * Engine accessor.
@@ -21,7 +25,7 @@ class Engine {
    * @abstract
    */
   get engine() {
-    throw new NotImplementedError(this, 'engine', 'engine', 'accessor');
+    throw new _NotImplementedError.default(this, 'engine', 'engine', 'accessor');
   }
   /**
    * Engine CLI path accessor.
@@ -32,7 +36,7 @@ class Engine {
 
 
   get path() {
-    throw new NotImplementedError(this, 'path', 'string', 'accessor');
+    throw new _NotImplementedError.default(this, 'path', 'string', 'accessor');
   }
   /**
    * Extra argument to send to the CLI from the tested folder type.
@@ -55,7 +59,7 @@ class Engine {
 
 
   get describe() {
-    throw new NotImplementedError(this, 'describe', 'function', 'accessor');
+    throw new _NotImplementedError.default(this, 'describe', 'function', 'accessor');
   }
   /**
    * Get test method.
@@ -66,7 +70,7 @@ class Engine {
 
 
   get test() {
-    throw new NotImplementedError(this, 'test', 'function', 'accessor');
+    throw new _NotImplementedError.default(this, 'test', 'function', 'accessor');
   }
   /**
    * Get beforeAll method.
@@ -77,7 +81,7 @@ class Engine {
 
 
   get beforeAll() {
-    throw new NotImplementedError(this, 'beforeAll', 'function', 'accessor');
+    throw new _NotImplementedError.default(this, 'beforeAll', 'function', 'accessor');
   }
   /**
    * Get beforeEach method.
@@ -88,7 +92,7 @@ class Engine {
 
 
   get beforeEach() {
-    throw new NotImplementedError(this, 'beforeEach', 'function', 'accessor');
+    throw new _NotImplementedError.default(this, 'beforeEach', 'function', 'accessor');
   }
   /**
    * Get afterEach method.
@@ -99,7 +103,7 @@ class Engine {
 
 
   get afterEach() {
-    throw new NotImplementedError(this, 'afterEach', 'function', 'accessor');
+    throw new _NotImplementedError.default(this, 'afterEach', 'function', 'accessor');
   }
   /**
    * Get afterAll method.
@@ -110,7 +114,7 @@ class Engine {
 
 
   get afterAll() {
-    throw new NotImplementedError(this, 'afterAll', 'function', 'accessor');
+    throw new _NotImplementedError.default(this, 'afterAll', 'function', 'accessor');
   }
   /**
    * Get expect method.
@@ -121,7 +125,7 @@ class Engine {
 
 
   get expect() {
-    throw new NotImplementedError(this, 'expect', 'function', 'accessor');
+    throw new _NotImplementedError.default(this, 'expect', 'function', 'accessor');
   }
   /**
    * Get assert object.
@@ -132,9 +136,12 @@ class Engine {
 
 
   get assert() {
-    throw new NotImplementedError(this, 'asserts', 'object', 'accessor');
+    throw new _NotImplementedError.default(this, 'asserts', 'object', 'accessor');
   }
 
 }
 
-module.exports = Engine;
+var _default = Engine;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

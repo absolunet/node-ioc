@@ -1,11 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Security - Services - Gate
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const checksTypes = require('../../support/mixins/checksTypes');
+import __          from '@absolunet/private-registry';
+import checksTypes from '../../support/mixins/checksTypes';
 
 
 /**
@@ -18,7 +16,7 @@ const checksTypes = require('../../support/mixins/checksTypes');
 class Gate extends checksTypes() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -126,4 +124,4 @@ class Gate extends checksTypes() {
 }
 
 
-module.exports = Gate;
+export default Gate;

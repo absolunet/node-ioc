@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Model
 //--------------------------------------------------------
-'use strict';
 
-const __         = require('@absolunet/private-registry');
-const ModelProxy = require('./ModelProxy');
+import __         from '@absolunet/private-registry';
+import ModelProxy from './ModelProxy';
 
 
 /**
@@ -16,7 +15,7 @@ const ModelProxy = require('./ModelProxy');
 class Model {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'engine']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -218,4 +217,4 @@ class Model {
 }
 
 
-module.exports = Model;
+export default Model;

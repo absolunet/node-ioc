@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Models - Route
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -101,4 +100,4 @@ class Route {
 }
 
 
-module.exports = Route;
+export default Route;

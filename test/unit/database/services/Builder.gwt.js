@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../common.gwt');
 
 const __        = require('@absolunet/private-registry');
 const container = require('../../container');
-const Builder   = require('../../../../src/database/services/Builder');
+const Builder   = require('../../../../dist/node/database/services/Builder');
 
 let builder;
 let result;

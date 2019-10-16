@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Controller = _interopRequireDefault(require("./Controller"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Controllers - Default Controller
 //--------------------------------------------------------
-'use strict';
 
-const Controller = require('./Controller');
 /**
  * Controller that handle static content response.
  *
@@ -11,11 +17,9 @@ const Controller = require('./Controller');
  * @augments http.controllers.Controller
  * @hideconstructor
  */
-
-
-class StaticController extends Controller {
+class StaticController extends _Controller.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['file']</code>.
    *
    * @type {Array<string>}
    */
@@ -47,4 +51,7 @@ class StaticController extends Controller {
 
 }
 
-module.exports = StaticController;
+var _default = StaticController;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -8,7 +8,7 @@ const { given, when, then, build } = require('../common.gwt');
 const fss           = require('@absolunet/fss');
 const replaceInFile = require('replace-in-file');
 const container     = require('../../container');
-const SyncSystem    = require('../../../../src/file/systems/Sync');
+const SyncSystem    = require('../../../../dist/node/file/systems/Sync');
 
 let syncSystem;
 let file;

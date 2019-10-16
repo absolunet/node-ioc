@@ -1,7 +1,7 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Date
 //--------------------------------------------------------
-'use strict';
+
 
 /**
  * File helper.
@@ -50,4 +50,4 @@ class FileHelper {
 }
 
 
-module.exports = FileHelper;
+export default FileHelper;

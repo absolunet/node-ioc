@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -32,4 +31,4 @@ class TextDriver extends Driver {
 }
 
 
-module.exports = TextDriver;
+export default TextDriver;

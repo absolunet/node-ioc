@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Enum = _interopRequireDefault(require("../../support/Enum"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Enums - Type
 //--------------------------------------------------------
-'use strict';
 
-const Enum = require('../../support/Enum');
 /**
  * Test type enum.
  *
@@ -11,14 +17,11 @@ const Enum = require('../../support/Enum');
  * @augments support.Enum
  * @hideconstructor
  */
-
-
-class Type extends Enum {
+class Type extends _Enum.default {
   /**
    * Unit tests.
    *
-   * @returns {string} - Unit test value.
-   * @static
+   * @type {string} - Unit test value.
    */
   get UNIT() {
     return 'unit';
@@ -26,8 +29,7 @@ class Type extends Enum {
   /**
    * Feature tests.
    *
-   * @returns {string} - Feature test value.
-   * @static
+   * @type {string} - Feature test value.
    */
 
 
@@ -35,28 +37,29 @@ class Type extends Enum {
     return 'feature';
   }
   /**
-   * Standards (linting, structure and meta) tests.
-   *
-   * @returns {string} - Standards test value.
-   * @static
-   */
-
-
-  get STANDARDS() {
-    return 'standards';
-  }
-  /**
    * End to end tests.
    *
-   * @returns {string} - End-To-End test value.
-   * @static
+   * @type {string} - End-To-End test value.
    */
 
 
-  get E2E() {
-    return 'e2e';
+  get ENDTOEND() {
+    return 'endtoend';
+  }
+  /**
+   * Integration tests.
+   *
+   * @type {string}
+   */
+
+
+  get INTEGRATION() {
+    return 'integration';
   }
 
 }
 
-module.exports = Type;
+var _default = Type;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

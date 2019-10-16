@@ -4,7 +4,7 @@
 'use strict';
 
 const path             = require('path');
-const GeneratorCommand = require('../../../../../src/console/GeneratorCommand');
+const GeneratorCommand = require('../../../../../dist/node/console/GeneratorCommand');
 
 
 class TestMakeCommand extends GeneratorCommand {

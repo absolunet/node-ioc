@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const FeatureTestRepository = require('../../../../src/test/repositories/FeatureTestRepository');
+const FeatureTestRepository = require('../../../../dist/node/test/repositories/FeatureTestRepository');
 
 
 //-- Given

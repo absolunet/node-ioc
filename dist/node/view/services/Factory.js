@@ -1,17 +1,20 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Factory
 //--------------------------------------------------------
-'use strict';
+
 /**
  * View factory that generate a fully rendered template as string from view paths and view-model.
  *
  * @memberof view.services
  * @hideconstructor
  */
-
 class Factory {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['view.resolver', 'view.engine']</code>.
    *
    * @type {Array<string>}
    */
@@ -33,4 +36,7 @@ class Factory {
 
 }
 
-module.exports = Factory;
+var _default = Factory;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

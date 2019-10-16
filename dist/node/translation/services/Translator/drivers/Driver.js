@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _NotImplementedError = _interopRequireDefault(require("../../../../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Translation - Services - Translator - Drivers - Driver
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
 /* istanbul ignore next */
 
 /**
@@ -13,8 +19,6 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
  * @abstract
  * @hideconstructor
  */
-
-
 class Driver {
   /**
    * Translate a string for the current locale.
@@ -28,7 +32,7 @@ class Driver {
    */
   translate(string, replacements, count) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'translate', 'string');
+    throw new _NotImplementedError.default(this, 'translate', 'string');
   }
   /**
    * Add translation key and value for given locale or current locale.
@@ -43,7 +47,7 @@ class Driver {
 
   addTranslation(key, value, locale) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'addTranslation', 'Driver');
+    throw new _NotImplementedError.default(this, 'addTranslation', 'Driver');
   }
   /**
    * Use given translation folder to load all default available translations.
@@ -56,7 +60,7 @@ class Driver {
 
   useTranslationFolder(folder) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'useTranslationFolder');
+    throw new _NotImplementedError.default(this, 'useTranslationFolder');
   }
   /**
    * Set locale to use for translation.
@@ -69,7 +73,7 @@ class Driver {
 
   setLocale(locale) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'setLocale');
+    throw new _NotImplementedError.default(this, 'setLocale');
   }
   /**
    * Set fallback locale.
@@ -82,9 +86,12 @@ class Driver {
 
   setFallbackLocale(locale) {
     // eslint-disable-line no-unused-vars
-    throw new NotImplementedError(this, 'setFallbackLocale');
+    throw new _NotImplementedError.default(this, 'setFallbackLocale');
   }
 
 }
 
-module.exports = Driver;
+var _default = Driver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

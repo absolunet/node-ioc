@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _hasEngine = _interopRequireDefault(require("../../support/mixins/hasEngine"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Service - Tester
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const hasEngine = require('../../support/mixins/hasEngine');
 /**
  * Tester that runs tests through test repositories.
  *
@@ -13,11 +19,9 @@ const hasEngine = require('../../support/mixins/hasEngine');
  * @augments support.mixins.HasEngine
  * @hideconstructor
  */
-
-
-class Tester extends hasEngine() {
+class Tester extends (0, _hasEngine.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -30,9 +34,8 @@ class Tester extends hasEngine() {
 
 
   boot() {
-    __(this).set('booted', true);
-
-    this.app.make('kernel.console');
+    (0, _privateRegistry.default)(this).set('booted', true);
+    this.app.make('kernel');
     this.app.bootIfNotBooted();
     this.app.singleton('tester', this);
     this.createFreshApplication();
@@ -43,7 +46,7 @@ class Tester extends hasEngine() {
 
 
   bootIfNotBooted() {
-    if (!__(this).get('booted')) {
+    if (!(0, _privateRegistry.default)(this).get('booted')) {
       this.boot();
     }
   }
@@ -92,7 +95,7 @@ class Tester extends hasEngine() {
     app.setContext(this.app.getContext());
     app.setEnvironment('test');
     this.app.singleton('app', app);
-    app.make(this.app.make('kernel.console').constructor);
+    app.make(this.app.make('kernel').constructor);
     app.bootIfNotBooted();
   }
   /**
@@ -104,7 +107,7 @@ class Tester extends hasEngine() {
 
 
   setRunner(runner) {
-    __(this).set('test.runner', runner);
+    (0, _privateRegistry.default)(this).set('test.runner', runner);
   }
   /**
    * Set the application kernel.
@@ -116,7 +119,7 @@ class Tester extends hasEngine() {
 
 
   setKernel(kernel) {
-    __(this).set('kernel', kernel.constructor);
+    (0, _privateRegistry.default)(this).set('kernel', kernel.constructor);
   }
   /**
    * Test runner accessor.
@@ -127,12 +130,11 @@ class Tester extends hasEngine() {
 
   get runner() {
     const name = 'test.runner';
-
-    const runner = __(this).get(name);
+    const runner = (0, _privateRegistry.default)(this).get(name);
 
     if (!runner) {
       this.setRunner(this.app.make(name));
-      return __(this).get(name);
+      return (0, _privateRegistry.default)(this).get(name);
     }
 
     return runner;
@@ -145,9 +147,12 @@ class Tester extends hasEngine() {
 
 
   get kernel() {
-    return __(this).get('kernel');
+    return (0, _privateRegistry.default)(this).get('kernel');
   }
 
 }
 
-module.exports = Tester;
+var _default = Tester;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

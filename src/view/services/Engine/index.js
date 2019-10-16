@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Engine
 //--------------------------------------------------------
-'use strict';
 
-const Engine = require('./Engine');
+import Engine from './Engine';
 
 
-module.exports = Engine;
+export default Engine;

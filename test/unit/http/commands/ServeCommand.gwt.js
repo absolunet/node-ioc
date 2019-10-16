@@ -7,8 +7,8 @@ const { given, when, then, build } = require('../common.gwt');
 
 const EventEmitter  = require('events');
 const container     = require('../../container');
-const ServeCommand  = require('../../../../src/http/commands/ServeCommand');
-const CommandRunner = require('../../../../src/console/services/CommandRunner');
+const ServeCommand  = require('../../../../dist/node/http/commands/ServeCommand');
+const CommandRunner = require('../../../../dist/node/console/services/CommandRunner');
 
 let command;
 let commandArguments;

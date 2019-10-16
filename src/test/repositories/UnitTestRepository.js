@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - Unit Test repository
 //--------------------------------------------------------
-'use strict';
 
-const TestRepository = require('./TestRepository');
+import TestRepository from './TestRepository';
 
 
 /**
@@ -24,4 +23,5 @@ class UnitTestRepository extends TestRepository {
 
 }
 
-module.exports = UnitTestRepository;
+
+export default UnitTestRepository;

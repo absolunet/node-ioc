@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Mixins - Asserts
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('../../../support/mixins/concerns/mixinFactory');
+import factory from '../../../support/mixins/concerns/mixinFactory';
 
 
 /**
@@ -36,4 +35,4 @@ const asserts = factory((SuperClass) => {
 });
 
 
-module.exports = asserts;
+export default asserts;

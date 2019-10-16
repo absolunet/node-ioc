@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _GeneratorCommand = _interopRequireDefault(require("../../console/GeneratorCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Make Seeder
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
 /**
  * Command that makes a seeder class file inside the database seeders folder.
  *
@@ -11,9 +17,7 @@ const GeneratorCommand = require('../../console/GeneratorCommand');
  * @augments console.GeneratorCommand
  * @hideconstructor
  */
-
-
-class MakeSeederCommand extends GeneratorCommand {
+class MakeSeederCommand extends _GeneratorCommand.default {
   /**
    * @inheritdoc
    */
@@ -44,7 +48,7 @@ class MakeSeederCommand extends GeneratorCommand {
 
 
   get destination() {
-    return this.app.make('db.resolver').resolvePath('seeds');
+    return this.app.make('db.resolver').resolveSourcePath('seeds');
   }
   /**
    * @inheritdoc
@@ -84,4 +88,7 @@ class MakeSeederCommand extends GeneratorCommand {
 
 }
 
-module.exports = MakeSeederCommand;
+var _default = MakeSeederCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

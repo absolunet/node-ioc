@@ -1,14 +1,11 @@
 //--------------------------------------------------------
 //-- Node IoC - Log - Log Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Level  = require('./enums/Level');
-const Logger = require('./services/Logger');
-
-const LogTableCommand = require('./commands/LogTableCommand');
+import ServiceProvider from '../foundation/ServiceProvider';
+import Level           from './enums/Level';
+import Logger          from './services/Logger';
+import LogTableCommand from './commands/LogTableCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -61,4 +58,4 @@ class LogServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = LogServiceProvider;
+export default LogServiceProvider;

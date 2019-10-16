@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Enums
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -81,4 +80,4 @@ class Enum {
 }
 
 
-module.exports = Enum;
+export default Enum;

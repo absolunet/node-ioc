@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Migrate Rollback
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
+import Command from '../../console/Command';
 
 
 /**
@@ -16,7 +15,7 @@ const Command = require('../../console/Command');
 class MigrateRollbackCommand extends Command {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['config', 'db', 'terminal.interceptor']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -94,4 +93,4 @@ class MigrateRollbackCommand extends Command {
 }
 
 
-module.exports = MigrateRollbackCommand;
+export default MigrateRollbackCommand;

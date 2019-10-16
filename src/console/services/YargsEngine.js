@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Yargs Engine
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -24,4 +23,4 @@ class YargsEngine {
 }
 
 
-module.exports = YargsEngine;
+export default YargsEngine;

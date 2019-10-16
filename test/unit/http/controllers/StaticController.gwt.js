@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const StaticController = require('../../../../src/http/controllers/StaticController');
+const StaticController = require('../../../../dist/node/http/controllers/StaticController');
 
 let staticController;
 let folderPath;

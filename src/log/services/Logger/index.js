@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger
 //--------------------------------------------------------
-'use strict';
 
-const Logger = require('./Logger');
+import Logger from './Logger';
 
 
-module.exports = Logger;
+export default Logger;

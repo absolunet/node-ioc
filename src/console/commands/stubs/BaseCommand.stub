@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- %PROJECT% - Command - %CLASS%
 //--------------------------------------------------------
-'use strict';
 
-const { Command } = require('@absolunet/ioc');
+import { Command } from '@absolunet/ioc';
 
 
 class %CLASS% extends Command {
@@ -26,10 +25,10 @@ class %CLASS% extends Command {
 	 * @inheritdoc
 	 */
 	handle() {
-		console.log('To be implemented...');
+		this.info('To be implemented...');
 	}
 
 }
 
 
-module.exports = %CLASS%;
+export default %CLASS%;

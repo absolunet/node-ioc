@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _Application = _interopRequireDefault(require("../foundation/Application"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Seeder
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const Application = require('../foundation/Application');
 /**
  * Abstract seeder class.
  * Offers basic forwarding for seed method to singleton instance.
@@ -14,11 +20,9 @@ const Application = require('../foundation/Application');
  * @abstract
  * @hideconstructor
  */
-
-
 class Seeder {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['db.model', 'db.factory']</code>.
    *
    * @type {Array<string>}
    */
@@ -44,10 +48,10 @@ class Seeder {
 
 
   static getInstance() {
-    let instance = __(this).get('instance');
+    let instance = (0, _privateRegistry.default)(this).get('instance');
 
     if (!instance) {
-      instance = Application.getInstance().make(this);
+      instance = _Application.default.getInstance().make(this);
       this.setDefaultInstance(instance);
     }
 
@@ -66,7 +70,7 @@ class Seeder {
       throw new TypeError(`Default instance must be instance of ${this.name}.`);
     }
 
-    __(this).set('instance', instance);
+    (0, _privateRegistry.default)(this).set('instance', instance);
   }
   /**
    * Seed the application's database.
@@ -89,7 +93,7 @@ class Seeder {
 
 
   model(model) {
-    return __(this).get('db.model').get(model);
+    return (0, _privateRegistry.default)(this).get('db.model').get(model);
   }
   /**
    * Get a factory for a model by name.
@@ -102,9 +106,12 @@ class Seeder {
 
 
   factory(model, parameters, times) {
-    return __(this).get('db.factory').make(model, parameters, times);
+    return (0, _privateRegistry.default)(this).get('db.factory').make(model, parameters, times);
   }
 
 }
 
-module.exports = Seeder;
+var _default = Seeder;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

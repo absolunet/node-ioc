@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - CommandRepository
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -15,7 +14,7 @@ const __ = require('@absolunet/private-registry');
 class CommandRepository {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'terminal', 'yargs']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -118,4 +117,4 @@ class CommandRepository {
 }
 
 
-module.exports = CommandRepository;
+export default CommandRepository;

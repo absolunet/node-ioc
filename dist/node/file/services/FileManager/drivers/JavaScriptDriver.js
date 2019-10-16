@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Config - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * JavaScript driver that allows .js file interpretation on load. However, it writes in plain text.
  *
@@ -11,11 +17,9 @@ const Driver = require('./Driver');
  * @augments file.services.FileManager.drivers.Driver
  * @hideconstructor
  */
-
-
-class JavaScriptDriver extends Driver {
+class JavaScriptDriver extends _Driver.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'file.engine']</code>.
    *
    * @type {Array<string>}
    */
@@ -41,4 +45,7 @@ class JavaScriptDriver extends Driver {
 
 }
 
-module.exports = JavaScriptDriver;
+var _default = JavaScriptDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

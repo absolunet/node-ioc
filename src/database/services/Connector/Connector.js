@@ -1,12 +1,11 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Connector
 //--------------------------------------------------------
-'use strict';
 
-const forwardsCall   = require('../../../support/mixins/forwardCalls');
-const hasDriver      = require('../../../support/mixins/hasDriver');
-const ConnectorProxy = require('./ConnectorProxy');
-const SqliteDriver   = require('./drivers/SqliteDriver');
+import forwardsCall   from '../../../support/mixins/forwardCalls';
+import hasDriver      from '../../../support/mixins/hasDriver';
+import ConnectorProxy from './ConnectorProxy';
+import SqliteDriver   from './drivers/SqliteDriver';
 
 
 /**
@@ -51,4 +50,4 @@ class Connector extends forwardsCall(hasDriver()) {
 }
 
 
-module.exports = Connector;
+export default Connector;

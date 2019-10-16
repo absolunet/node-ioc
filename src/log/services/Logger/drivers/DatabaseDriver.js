@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger - Drivers - File Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
+import Driver from './Driver';
 
 
 /**
@@ -16,7 +15,7 @@ const Driver = require('./Driver');
 class DatabaseDriver extends Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'db', 'log.level', 'terminal']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -141,4 +140,4 @@ class DatabaseDriver extends Driver {
 }
 
 
-module.exports = DatabaseDriver;
+export default DatabaseDriver;

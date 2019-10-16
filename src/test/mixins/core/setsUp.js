@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Mixins - Sets up
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('../../../support/mixins/concerns/mixinFactory');
+import factory from '../../../support/mixins/concerns/mixinFactory';
 
 
 /**
@@ -66,4 +65,4 @@ const setsUp = factory((SuperClass) => {
 });
 
 
-module.exports = setsUp;
+export default setsUp;

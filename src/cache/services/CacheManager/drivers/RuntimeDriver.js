@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store resolver - Drivers - File driver
 //--------------------------------------------------------
-'use strict';
 
-const __     = require('@absolunet/private-registry');
-const Driver = require('./Driver');
+import __     from '@absolunet/private-registry';
+import Driver from './Driver';
 
 
 /**
@@ -103,4 +102,4 @@ class RuntimeDriver extends Driver {
 }
 
 
-module.exports = RuntimeDriver;
+export default RuntimeDriver;

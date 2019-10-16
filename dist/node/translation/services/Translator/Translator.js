@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _FileDriver = _interopRequireDefault(require("./drivers/FileDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Translation - Services - Translator
 //--------------------------------------------------------
-'use strict';
 
-const hasDriver = require('../../../support/mixins/hasDriver');
-
-const FileDriver = require('./drivers/FileDriver');
 /**
  * Translator that implements i18n basic features.
  *
@@ -13,11 +19,9 @@ const FileDriver = require('./drivers/FileDriver');
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-
-
-class Translator extends hasDriver() {
+class Translator extends (0, _hasDriver.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'config']</code>.
    *
    * @type {Array<string>}
    */
@@ -32,7 +36,7 @@ class Translator extends hasDriver() {
 
   init() {
     super.init();
-    this.addDriver('file', FileDriver);
+    this.addDriver('file', _FileDriver.default);
     this.setDefaultDriver('file');
   }
   /**
@@ -170,4 +174,7 @@ class Translator extends hasDriver() {
 
 }
 
-module.exports = Translator;
+var _default = Translator;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

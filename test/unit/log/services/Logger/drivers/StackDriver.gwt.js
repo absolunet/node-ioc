@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../../../common.gwt');
 
 const container   = require('../../../../container');
-const StackDriver = require('../../../../../../src/log/services/Logger/drivers/StackDriver');
+const StackDriver = require('../../../../../../dist/node/log/services/Logger/drivers/StackDriver');
 
 let driver;
 let config;

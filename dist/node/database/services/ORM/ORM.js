@@ -1,13 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _checksTypes = _interopRequireDefault(require("../../../support/mixins/checksTypes"));
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _BookshelfDriver = _interopRequireDefault(require("./drivers/BookshelfDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - ORM
 //--------------------------------------------------------
-'use strict';
 
-const checksTypes = require('../../../support/mixins/checksTypes');
-
-const hasDriver = require('../../../support/mixins/hasDriver');
-
-const BookshelfDriver = require('./drivers/BookshelfDriver');
 /**
  * ORM to interact with the database with an Active Record Pattern (ARP).
  *
@@ -16,11 +22,9 @@ const BookshelfDriver = require('./drivers/BookshelfDriver');
  * @augments support.mixins.CheckTypes
  * @hideconstructor
  */
-
-
-class ORM extends hasDriver(checksTypes()) {
+class ORM extends (0, _hasDriver.default)((0, _checksTypes.default)()) {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'db', 'helper.string']</code>.
    *
    * @type {Array<string>}
    */
@@ -35,7 +39,7 @@ class ORM extends hasDriver(checksTypes()) {
 
   init() {
     super.init();
-    this.addDriver('bookshelf', BookshelfDriver);
+    this.addDriver('bookshelf', _BookshelfDriver.default);
     this.setDefaultDriver('bookshelf');
   }
   /**
@@ -109,4 +113,7 @@ class ORM extends hasDriver(checksTypes()) {
 
 }
 
-module.exports = ORM;
+var _default = ORM;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

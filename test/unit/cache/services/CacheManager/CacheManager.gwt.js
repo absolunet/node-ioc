@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../../common.gwt');
 
 const container     = require('../../../container');
-const RuntimeDriver = require('../../../../../src/cache/services/CacheManager/drivers/RuntimeDriver');
-const CacheManager  = require('../../../../../src/cache/services/CacheManager');
+const RuntimeDriver = require('../../../../../dist/node/cache/services/CacheManager/drivers/RuntimeDriver');
+const CacheManager  = require('../../../../../dist/node/cache/services/CacheManager');
 
 
 //-- Mocks

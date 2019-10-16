@@ -1,29 +1,35 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _CommandRepository = _interopRequireDefault(require("./repositories/CommandRepository"));
+
+var _CommandRegistrar = _interopRequireDefault(require("./services/CommandRegistrar"));
+
+var _CommandRunner = _interopRequireDefault(require("./services/CommandRunner"));
+
+var _Terminal = _interopRequireDefault(require("./services/Terminal"));
+
+var _Interceptor = _interopRequireDefault(require("./services/Interceptor"));
+
+var _YargsEngine = _interopRequireDefault(require("./services/YargsEngine"));
+
+var _CaptureInterceptor = _interopRequireDefault(require("./interceptors/CaptureInterceptor"));
+
+var _EnvironmentCommand = _interopRequireDefault(require("./commands/EnvironmentCommand"));
+
+var _ListCommand = _interopRequireDefault(require("./commands/ListCommand"));
+
+var _MakeCommandCommand = _interopRequireDefault(require("./commands/MakeCommandCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Console Service Provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const CommandRepository = require('./repositories/CommandRepository');
-
-const CommandRegistrar = require('./services/CommandRegistrar');
-
-const CommandRunner = require('./services/CommandRunner');
-
-const Terminal = require('./services/Terminal');
-
-const Interceptor = require('./services/Interceptor');
-
-const YargsEngine = require('./services/YargsEngine');
-
-const CaptureInterceptor = require('./interceptors/CaptureInterceptor');
-
-const EnvironmentCommand = require('./commands/EnvironmentCommand');
-
-const ListCommand = require('./commands/ListCommand');
-
-const MakeCommandCommand = require('./commands/MakeCommandCommand'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The console service provider.
@@ -48,20 +54,18 @@ const MakeCommandCommand = require('./commands/MakeCommandCommand'); // eslint-d
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class ConsoleServiceProvider extends ServiceProvider {
+class ConsoleServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
   register() {
-    this.app.singleton('command', CommandRepository);
-    this.app.singleton('command.registrar', CommandRegistrar);
-    this.app.singleton('command.runner', CommandRunner);
-    this.app.singleton('terminal', Terminal);
-    this.app.singleton('terminal.interceptor', Interceptor);
-    this.app.singleton('terminal.interceptor.capture', CaptureInterceptor);
-    this.app.singleton('yargs', YargsEngine);
+    this.app.singleton('command', _CommandRepository.default);
+    this.app.singleton('command.registrar', _CommandRegistrar.default);
+    this.app.singleton('command.runner', _CommandRunner.default);
+    this.app.singleton('terminal', _Terminal.default);
+    this.app.singleton('terminal.interceptor', _Interceptor.default);
+    this.app.singleton('terminal.interceptor.capture', _CaptureInterceptor.default);
+    this.app.singleton('yargs', _YargsEngine.default);
   }
   /**
    * Boot the service provider.
@@ -71,7 +75,7 @@ class ConsoleServiceProvider extends ServiceProvider {
   boot() {
     this.setDefaultCommand();
     this.app.make('terminal.interceptor').enable();
-    this.loadCommands([EnvironmentCommand, ListCommand, MakeCommandCommand]);
+    this.loadCommands([_EnvironmentCommand.default, _ListCommand.default, _MakeCommandCommand.default]);
   }
   /**
    * Set default command into the command registrar.
@@ -79,9 +83,12 @@ class ConsoleServiceProvider extends ServiceProvider {
 
 
   setDefaultCommand() {
-    this.app.make('command.registrar').setDefault(ListCommand);
+    this.app.make('command.registrar').setDefault(_ListCommand.default);
   }
 
 }
 
-module.exports = ConsoleServiceProvider;
+var _default = ConsoleServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

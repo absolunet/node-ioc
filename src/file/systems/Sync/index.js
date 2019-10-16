@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Async
 //--------------------------------------------------------
-'use strict';
 
-const Sync = require('./Sync');
+import Sync from './Sync';
 
 
-module.exports = Sync;
+export default Sync;

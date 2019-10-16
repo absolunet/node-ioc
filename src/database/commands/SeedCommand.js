@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Seed
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
+import Command from '../../console/Command';
 
 
 /**
@@ -16,7 +15,7 @@ const Command = require('../../console/Command');
 class SeedCommand extends Command {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['config', 'db', 'terminal.interceptor']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -93,4 +92,4 @@ class SeedCommand extends Command {
 }
 
 
-module.exports = SeedCommand;
+export default SeedCommand;

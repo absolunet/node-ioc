@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - Driver
 //--------------------------------------------------------
-'use strict';
 
-const NotImplementedError = require('../../../../foundation/exceptions/NotImplementedError');
+import NotImplementedError from '../../../../foundation/exceptions/NotImplementedError';
 
 /* istanbul ignore next */
 /**
@@ -16,7 +15,7 @@ const NotImplementedError = require('../../../../foundation/exceptions/NotImplem
 class Driver {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['file.engine']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -79,4 +78,4 @@ class Driver {
 }
 
 
-module.exports = Driver;
+export default Driver;

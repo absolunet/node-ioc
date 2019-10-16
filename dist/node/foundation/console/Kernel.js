@@ -1,13 +1,19 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _ConsoleServiceProvider = _interopRequireDefault(require("../../console/ConsoleServiceProvider"));
+
+var _Kernel = _interopRequireDefault(require("../Kernel"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Console Kernel
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const ConsoleServiceProvider = require('../../console/ConsoleServiceProvider');
-
-const Kernel = require('../Kernel');
 /**
  * The console kernel that implements the needed flow for a proper CLI request handling.
  *
@@ -15,9 +21,7 @@ const Kernel = require('../Kernel');
  * @augments foundation.Kernel
  * @hideconstructor
  */
-
-
-class ConsoleKernel extends Kernel {
+class Kernel extends _Kernel.default {
   /**
    * ConsoleKernel constructor.
    *
@@ -33,9 +37,28 @@ class ConsoleKernel extends Kernel {
 
 
   async handle() {
-    this.registerCommands();
+    await this.onBeforeHandling();
     await this.call(this.terminal.argv);
+    await this.onAfterHandling();
   }
+  /**
+   * Called just before handling incoming request.
+   *
+   * @abstract
+   */
+
+
+  onBeforeHandling() {} //
+
+  /**
+   * Called just after handling incoming request, if no error was thrown.
+   *
+   * @abstract
+   */
+
+
+  onAfterHandling() {} //
+
   /**
    * Call the given command and process it through the command registrar.
    *
@@ -48,14 +71,6 @@ class ConsoleKernel extends Kernel {
     await this.commandRegistrar.resolve(command);
   }
   /**
-   * Register commands in the command registrar based on application command path.
-   */
-
-
-  registerCommands() {
-    this.commandRegistrar.addFromFolder(this.app.commandPath());
-  }
-  /**
    * Specify if the kernel should exit the current process when terminating.
    *
    * @param {boolean} [shouldExit] - Indicates if the process should exit at the end.
@@ -63,7 +78,7 @@ class ConsoleKernel extends Kernel {
 
 
   shouldExit(shouldExit = true) {
-    __(this).set('shouldExit', shouldExit);
+    (0, _privateRegistry.default)(this).set('shouldExit', shouldExit);
   }
   /**
    * @inheritdoc
@@ -71,10 +86,21 @@ class ConsoleKernel extends Kernel {
 
 
   terminate() {
-    if (__(this).get('shouldExit')) {
+    this.onTerminating();
+
+    if ((0, _privateRegistry.default)(this).get('shouldExit')) {
       process.exit(this.app.make('exception.handler').hadException ? 1 : 0); // eslint-disable-line unicorn/no-process-exit, no-process-exit
     }
   }
+  /**
+   * Called when the application is terminating.
+   *
+   * @abstract
+   */
+
+
+  onTerminating() {} //
+
   /**
    * CommandRegistrar accessor.
    *
@@ -101,9 +127,12 @@ class ConsoleKernel extends Kernel {
 
 
   get bootstrappers() {
-    return [ConsoleServiceProvider];
+    return [_ConsoleServiceProvider.default];
   }
 
 }
 
-module.exports = ConsoleKernel;
+var _default = Kernel;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,14 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Argument
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Abstract argument class.
  *
  * @memberof console.models
  * @abstract
  */
-
 class Argument {
   /**
    * Argument constructor.
@@ -47,4 +50,7 @@ class Argument {
 
 }
 
-module.exports = Argument;
+var _default = Argument;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

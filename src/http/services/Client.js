@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Services - Client - HTTP Client
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -22,4 +21,4 @@ class Client {
 }
 
 
-module.exports = Client;
+export default Client;

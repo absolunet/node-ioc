@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _Route = _interopRequireDefault(require("../Route"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Services - Router
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const Route = require('../Route');
 /**
  * @private
  * @typedef {object} GroupOptions
@@ -50,11 +56,9 @@ const Route = require('../Route');
  * @memberof http.services
  * @hideconstructor
  */
-
-
 class Router {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'server', 'router.handler', 'router.route', 'router.controller']</code>.
    *
    * @type {Array<string>}
    */
@@ -68,9 +72,8 @@ class Router {
 
 
   init() {
-    __(this).set('groups', []);
-
-    __(this).set('expressRouter', null);
+    (0, _privateRegistry.default)(this).set('groups', []);
+    (0, _privateRegistry.default)(this).set('expressRouter', null);
   }
   /**
    * Register a new GET route with the router.
@@ -299,8 +302,7 @@ class Router {
 
 
   group(options, group) {
-    const data = __(this).get('groups');
-
+    const data = (0, _privateRegistry.default)(this).get('groups');
     const index = data.push(options) - 1;
     group(this, this.app);
     data.splice(index, 1);
@@ -339,7 +341,7 @@ class Router {
       path: '',
       action: ''
     };
-    [...__(this).get('groups'), attributes].forEach(current => {
+    [...(0, _privateRegistry.default)(this).get('groups'), attributes].forEach(current => {
       Object.entries(this.getRouteMapping(current)).forEach(([key, value]) => {
         data[key] = `${data[key] || ''}${value}`;
       });
@@ -354,7 +356,7 @@ class Router {
       data.action = action;
     }
 
-    return new Route(data);
+    return new _Route.default(data);
   }
   /**
    * Get route or route group mapping.
@@ -424,7 +426,7 @@ class Router {
 
 
   generate() {
-    if (!__(this).get('expressRouter')) {
+    if (!(0, _privateRegistry.default)(this).get('expressRouter')) {
       const router = this.server.getRouter();
       this.routes.all().forEach(route => {
         const {
@@ -436,11 +438,10 @@ class Router {
           return this.routerHandler.handleRequest(route, request, response);
         });
       });
-
-      __(this).set('expressRouter', router);
+      (0, _privateRegistry.default)(this).set('expressRouter', router);
     }
 
-    return __(this).get('expressRouter');
+    return (0, _privateRegistry.default)(this).get('expressRouter');
   }
   /**
    * Call the route handler.
@@ -660,7 +661,7 @@ class Router {
 
 
   get routes() {
-    return __(this).get('router.route');
+    return (0, _privateRegistry.default)(this).get('router.route');
   }
   /**
    * Controller repository.
@@ -670,9 +671,12 @@ class Router {
 
 
   get controllers() {
-    return __(this).get('router.controller');
+    return (0, _privateRegistry.default)(this).get('router.controller');
   }
 
 }
 
-module.exports = Router;
+var _default = Router;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

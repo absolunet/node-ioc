@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store resolver - Drivers - File driver
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const Driver = require('./Driver');
 /**
  * Cache driver that uses the file system to store data.
  *
@@ -13,11 +19,9 @@ const Driver = require('./Driver');
  * @augments cache.services.CacheManager.drivers.Driver
  * @hideconstructor
  */
-
-
-class FileDriver extends Driver {
+class FileDriver extends _Driver.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'driver.config', 'file', 'helper.date']</code>.
    *
    * @type {Array<string>}
    */
@@ -35,7 +39,7 @@ class FileDriver extends Driver {
       super.init();
     }
 
-    __(this).set('name', this.driverConfig.name || 'file');
+    (0, _privateRegistry.default)(this).set('name', this.driverConfig.name || 'file');
   }
   /**
    * @inheritdoc
@@ -186,9 +190,12 @@ class FileDriver extends Driver {
 
 
   get fileName() {
-    return this.driverConfig.file || this.app.storagePath(`framework/cache/data/${__(this).get('name')}.json`);
+    return this.driverConfig.file || this.app.storagePath(`framework/cache/data/${(0, _privateRegistry.default)(this).get('name')}.json`);
   }
 
 }
 
-module.exports = FileDriver;
+var _default = FileDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

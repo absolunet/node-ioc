@@ -7,7 +7,7 @@ const { given, when, then, build } = require('./common.gwt');
 
 const fs         = require('fs');
 const path       = require('path');
-const FileDriver = require('../../../../../../src/cache/services/CacheManager/drivers/FileDriver');
+const FileDriver = require('../../../../../../dist/node/cache/services/CacheManager/drivers/FileDriver');
 
 const fileDriverCacheFolderPath = path.join(__dirname, '..', '..', '..', 'stubs', 'data');
 const fileDriverCacheFilePath   = path.join(fileDriverCacheFolderPath, 'test.json');

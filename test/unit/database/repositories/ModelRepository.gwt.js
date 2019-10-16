@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container = require('../../container');
-const ModelRepository = require('../../../../src/database/repositories/ModelRepository');
+const ModelRepository = require('../../../../dist/node/database/repositories/ModelRepository');
 
 let result;
 let modelRepository;

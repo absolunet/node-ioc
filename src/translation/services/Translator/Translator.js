@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Translation - Services - Translator
 //--------------------------------------------------------
-'use strict';
 
-const hasDriver  = require('../../../support/mixins/hasDriver');
-const FileDriver = require('./drivers/FileDriver');
+import hasDriver  from '../../../support/mixins/hasDriver';
+import FileDriver from './drivers/FileDriver';
 
 
 /**
@@ -17,7 +16,7 @@ const FileDriver = require('./drivers/FileDriver');
 class Translator extends hasDriver() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'config']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -165,4 +164,4 @@ class Translator extends hasDriver() {
 }
 
 
-module.exports = Translator;
+export default Translator;

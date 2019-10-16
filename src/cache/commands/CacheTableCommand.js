@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Cache Table
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
+import GeneratorCommand from '../../console/GeneratorCommand';
 
 
 /**
@@ -49,7 +48,7 @@ class CacheTableCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get destination() {
-		return this.app.make('db.resolver').resolvePath('migrations');
+		return this.app.make('db.resolver').resolveSourcePath('migrations');
 	}
 
 	/**
@@ -139,4 +138,4 @@ class CacheTableCommand extends GeneratorCommand {
 }
 
 
-module.exports = CacheTableCommand;
+export default CacheTableCommand;

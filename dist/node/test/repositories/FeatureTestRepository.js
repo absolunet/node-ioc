@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _TestRepository = _interopRequireDefault(require("./TestRepository"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - Feature Test repository
 //--------------------------------------------------------
-'use strict';
 
-const TestRepository = require('./TestRepository');
 /**
  * Feature test repository that scopes to the "feature" folder.
  *
@@ -11,9 +17,7 @@ const TestRepository = require('./TestRepository');
  * @augments test.repositories.TestRepository
  * @hideconstructor
  */
-
-
-class FeatureTestRepository extends TestRepository {
+class FeatureTestRepository extends _TestRepository.default {
   /**
    * @inheritdoc
    */
@@ -23,4 +27,7 @@ class FeatureTestRepository extends TestRepository {
 
 }
 
-module.exports = FeatureTestRepository;
+var _default = FeatureTestRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

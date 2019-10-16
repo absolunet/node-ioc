@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Command - List
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../Command');
+import Command from '../Command';
 
 
 /**
@@ -152,4 +151,4 @@ class ListCommand extends Command {
 }
 
 
-module.exports = ListCommand;
+export default ListCommand;

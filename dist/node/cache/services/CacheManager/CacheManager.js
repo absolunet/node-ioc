@@ -1,19 +1,25 @@
+"use strict";
+
+exports.default = void 0;
+
+var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _CacheManagerProxy = _interopRequireDefault(require("./CacheManagerProxy"));
+
+var _DatabaseDriver = _interopRequireDefault(require("./drivers/DatabaseDriver"));
+
+var _FileDriver = _interopRequireDefault(require("./drivers/FileDriver"));
+
+var _RuntimeDriver = _interopRequireDefault(require("./drivers/RuntimeDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store Resolver
 //--------------------------------------------------------
-'use strict';
 
-const forwardCalls = require('../../../support/mixins/forwardCalls');
-
-const hasDriver = require('../../../support/mixins/hasDriver');
-
-const CacheManagerProxy = require('./CacheManagerProxy');
-
-const DatabaseDriver = require('./drivers/DatabaseDriver');
-
-const FileDriver = require('./drivers/FileDriver');
-
-const RuntimeDriver = require('./drivers/RuntimeDriver');
 /**
  * Cache manager that uses the configuration to properly handle caching operation through drivers.
  *
@@ -22,11 +28,9 @@ const RuntimeDriver = require('./drivers/RuntimeDriver');
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-
-
-class CacheManager extends forwardCalls(hasDriver()) {
+class CacheManager extends (0, _forwardCalls.default)((0, _hasDriver.default)()) {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'config']</code>.
    *
    * @type {Array<string>}
    */
@@ -43,7 +47,7 @@ class CacheManager extends forwardCalls(hasDriver()) {
 
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new CacheManagerProxy());
+    return new Proxy(this, new _CacheManagerProxy.default());
   }
   /**
    * @inheritdoc
@@ -53,9 +57,9 @@ class CacheManager extends forwardCalls(hasDriver()) {
 
   init() {
     super.init();
-    this.addDriver('database', DatabaseDriver);
-    this.addDriver('file', FileDriver);
-    this.addDriver('runtime', RuntimeDriver);
+    this.addDriver('database', _DatabaseDriver.default);
+    this.addDriver('file', _FileDriver.default);
+    this.addDriver('runtime', _RuntimeDriver.default);
   }
   /**
    * Resolve cache store by name.
@@ -123,4 +127,7 @@ class CacheManager extends forwardCalls(hasDriver()) {
 
 }
 
-module.exports = CacheManager;
+var _default = CacheManager;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

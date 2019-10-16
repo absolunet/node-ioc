@@ -1,20 +1,24 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Exceptions - Handler
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Main exception handler.
  *
  * @memberof foundation.exceptions
  * @hideconstructor
  */
-
-
 class Handler {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
@@ -28,7 +32,7 @@ class Handler {
 
 
   init() {
-    __(this).set('exceptions', []);
+    (0, _privateRegistry.default)(this).set('exceptions', []);
   }
   /**
    * Handle the given exception.
@@ -41,8 +45,7 @@ class Handler {
 
 
   async handle(exception, request, response) {
-    __(this).get('exceptions').push(exception);
-
+    (0, _privateRegistry.default)(this).get('exceptions').push(exception);
     await this.report(exception);
     this.render(exception, request, response);
   }
@@ -119,8 +122,7 @@ class Handler {
 
 
   handleReportException(exception) {
-    __(this).get('exceptions').push(exception);
-
+    (0, _privateRegistry.default)(this).get('exceptions').push(exception);
     this.terminal.warning(this.formatConsoleContent(exception));
   }
   /**
@@ -190,11 +192,13 @@ class Handler {
 
 
   get lastException() {
-    const exceptions = __(this).get('exceptions');
-
+    const exceptions = (0, _privateRegistry.default)(this).get('exceptions');
     return exceptions[exceptions.length - 1];
   }
 
 }
 
-module.exports = Handler;
+var _default = Handler;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

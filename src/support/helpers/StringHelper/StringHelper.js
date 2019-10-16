@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - String
 //--------------------------------------------------------
-'use strict';
 
-const StringHelperProxy = require('./StringHelperProxy');
-const forwardsCall      = require('../../mixins/forwardCalls');
+import StringHelperProxy from './StringHelperProxy';
+import forwardsCall      from '../../mixins/forwardCalls';
 
 
 /**
@@ -58,4 +57,4 @@ class StringHelper extends forwardsCall() {
 }
 
 
-module.exports = StringHelper;
+export default StringHelper;

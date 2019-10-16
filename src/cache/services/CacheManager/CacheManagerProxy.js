@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Repositories - Cache repository proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../../support/proxies/ForwardProxy');
+import ForwardProxy from '../../../support/proxies/ForwardProxy';
 
 
 /**
@@ -18,4 +17,4 @@ class CacheManagerProxy extends ForwardProxy {
 }
 
 
-module.exports = CacheManagerProxy;
+export default CacheManagerProxy;

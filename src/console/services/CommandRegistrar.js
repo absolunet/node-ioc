@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Command Registrar
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -15,7 +14,7 @@ const __ = require('@absolunet/private-registry');
 class CommandRegistrar {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'command', 'command.runner', 'file', 'terminal', 'yargs']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -163,4 +162,4 @@ class CommandRegistrar {
 }
 
 
-module.exports = CommandRegistrar;
+export default CommandRegistrar;

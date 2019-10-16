@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Command
 //--------------------------------------------------------
-'use strict';
 
-const Command             = require('./Command');
-const NotImplementedError = require('../foundation/exceptions/NotImplementedError');
+import Command             from './Command';
+import NotImplementedError from '../foundation/exceptions/NotImplementedError';
 
 
 /**
@@ -13,7 +12,7 @@ const NotImplementedError = require('../foundation/exceptions/NotImplementedErro
  * It relies on existing stub that will be formatted with a given grammar.
  *
  * @memberof console
- * @augments console.COmmand
+ * @augments console.Command
  * @abstract
  * @hideconstructor
  */
@@ -179,4 +178,4 @@ class GeneratorCommand extends Command {
 }
 
 
-module.exports = GeneratorCommand;
+export default GeneratorCommand;

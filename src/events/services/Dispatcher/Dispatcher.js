@@ -1,13 +1,12 @@
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher
 //--------------------------------------------------------
-'use strict';
 
-const hasDriver          = require('../../../support/mixins/hasDriver');
-const forwardCalls       = require('../../../support/mixins/forwardCalls');
-const DispatcherProxy    = require('./DispatcherProxy');
-const EventEmitterDriver = require('./drivers/EventEmitterDriver');
-const PubSubJsDriver     = require('./drivers/PubSubJsDriver');
+import hasDriver          from '../../../support/mixins/hasDriver';
+import forwardCalls       from '../../../support/mixins/forwardCalls';
+import DispatcherProxy    from './DispatcherProxy';
+import EventEmitterDriver from './drivers/EventEmitterDriver';
+import PubSubJsDriver     from './drivers/PubSubJsDriver';
 
 
 /**
@@ -58,4 +57,4 @@ class Dispatcher extends forwardCalls(hasDriver()) {
 }
 
 
-module.exports = Dispatcher;
+export default Dispatcher;

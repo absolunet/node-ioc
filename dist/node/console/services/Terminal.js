@@ -1,20 +1,20 @@
+"use strict";
+
+exports.default = void 0;
+
+var _terminal = require("@absolunet/terminal");
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Terminal
 //--------------------------------------------------------
-'use strict';
 
-const {
-  Terminal: BaseTerminal
-} = require('@absolunet/terminal');
 /**
  * The enhanced Absolunet terminal class.
  *
  * @memberof console.services
  * @hideconstructor
  */
-
-
-class Terminal extends BaseTerminal {
+class Terminal extends _terminal.Terminal {
   /**
    * The <a href="https://www.npmjs.com/package/chalk">Chalk</a> instance.
    *
@@ -640,4 +640,7 @@ class Terminal extends BaseTerminal {
 
 }
 
-module.exports = Terminal;
+var _default = Terminal;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

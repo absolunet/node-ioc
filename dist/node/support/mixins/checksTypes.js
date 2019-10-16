@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _mixinFactory = _interopRequireDefault(require("./concerns/mixinFactory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- IoC - Foundation - Mixins - Checks types
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('./concerns/mixinFactory');
 /**
  * Check types mixin.
  *
@@ -12,9 +18,7 @@ const factory = require('./concerns/mixinFactory');
  * @memberof support.mixins
  * @hideconstructor
  */
-
-
-const checkTypes = factory(SuperClass => {
+const checkTypes = (0, _mixinFactory.default)(SuperClass => {
   /**
    * Checks types mixin.
    */
@@ -72,4 +76,7 @@ const checkTypes = factory(SuperClass => {
 
   };
 });
-module.exports = checkTypes;
+var _default = checkTypes;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

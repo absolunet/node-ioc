@@ -5,7 +5,7 @@
 
 const { given, when, then, build } = require('./common.gwt');
 
-const EventEmitterDriver = require('../../../../../../src/events/services/Dispatcher/drivers/EventEmitterDriver');
+const EventEmitterDriver = require('../../../../../../dist/node/events/services/Dispatcher/drivers/EventEmitterDriver');
 
 
 //-- Given

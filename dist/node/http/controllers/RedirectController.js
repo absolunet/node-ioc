@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Controller = _interopRequireDefault(require("./Controller"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Controllers - Default Controller
 //--------------------------------------------------------
-'use strict';
 
-const Controller = require('./Controller');
 /**
  * Controller that handles redirection.
  *
@@ -11,9 +17,7 @@ const Controller = require('./Controller');
  * @augments http.controllers.Controller
  * @hideconstructor
  */
-
-
-class RedirectController extends Controller {
+class RedirectController extends _Controller.default {
   /**
    * Handle redirection.
    *
@@ -29,4 +33,7 @@ class RedirectController extends Controller {
 
 }
 
-module.exports = RedirectController;
+var _default = RedirectController;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

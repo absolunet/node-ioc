@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Command - Environment
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../Command');
+import Command from '../Command';
 
 
 /**
@@ -46,4 +45,4 @@ class EnvironmentCommand extends Command {
 }
 
 
-module.exports = EnvironmentCommand;
+export default EnvironmentCommand;

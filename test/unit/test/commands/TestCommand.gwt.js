@@ -9,8 +9,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container      = require('../../container');
-const TestCommand    = require('../../../../src/test/commands/TestCommand');
-const CommandRunner  = require('../../../../src/console/services/CommandRunner');
+const TestCommand    = require('../../../../dist/node/test/commands/TestCommand');
+const CommandRunner  = require('../../../../dist/node/console/services/CommandRunner');
 
 const originalProcessArgv = process.argv;
 const originalProcessEnv  = process.env;
@@ -95,12 +95,12 @@ given.featureFlag = () => {
 	given.argv('feature', true);
 };
 
-given.standardsFlag = () => {
-	given.argv('standards', true);
+given.endToEndFlag = () => {
+	given.argv('endtoend', true);
 };
 
-given.endToEndFlag = () => {
-	given.argv('e2e', true);
+given.integrationFlag = () => {
+	given.argv('integration', true);
 };
 
 given.unitOption = () => {
@@ -111,12 +111,12 @@ given.featureOption = () => {
 	given.argv('type', 'feature');
 };
 
-given.standardsOption = () => {
-	given.argv('type', 'standards');
+given.endToEndOption = () => {
+	given.argv('type', 'endtoend');
 };
 
-given.endToEndOption = () => {
-	given.argv('type', 'e2e');
+given.integrationOption = () => {
+	given.argv('type', 'integration');
 };
 
 
@@ -176,12 +176,12 @@ then.shouldRunFeatureTests = () => {
 	then.shouldRunTestInRepository('test.feature');
 };
 
-then.shouldRunStandardsTests = () => {
-	then.shouldRunTestInRepository('test.standards');
+then.shouldRunEndToEndTests = () => {
+	then.shouldRunTestInRepository('test.endtoend');
 };
 
-then.shouldRunEndToEndTests = () => {
-	then.shouldRunTestInRepository('test.e2e');
+then.shouldRunIntegrationTests = () => {
+	then.shouldRunTestInRepository('test.integration');
 };
 
 

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Builder
 //--------------------------------------------------------
-'use strict';
 
-const Builder = require('./Builder');
+import Builder from './Builder';
 
 
-module.exports = Builder;
+export default Builder;

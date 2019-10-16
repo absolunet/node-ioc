@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container              = require('../../container');
-const ConsoleKernel          = require('../../../../src/foundation/console/Kernel');
-const ConsoleServiceProvider = require('../../../../src/console/ConsoleServiceProvider');
+const ConsoleKernel          = require('../../../../dist/node/foundation/console/Kernel');
+const ConsoleServiceProvider = require('../../../../dist/node/console/ConsoleServiceProvider');
 
 let consoleKernel;
 let mockExit;
@@ -46,10 +46,6 @@ given.consoleKernel = () => {
 
 given.fakeCommandRegistrar = () => {
 	container.singleton('command.registrar', fakeCommandRegistrar);
-};
-
-given.fakeCommandPath = () => {
-	container.bind('path.command', '/fake/command/path');
 };
 
 given.fakeProcessExit = () => {
@@ -118,11 +114,6 @@ then.consoleServiceProviderShouldHaveBeenRegistered = () => {
 then.commandRegistrarShouldHaveResolvedCommand = () => {
 	then.shouldNotHaveThrown();
 	expect(fakeCommandRegistrar.resolve).toHaveBeenCalledWith(fakeTerminal.argv);
-};
-
-then.shouldHaveLoadedCommandsFromApplication = () => {
-	then.shouldNotHaveThrown();
-	expect(fakeCommandRegistrar.addFromFolder).toHaveBeenCalledWith(container.make('path.command'));
 };
 
 then.shouldHaveExitedWith = (code) => {

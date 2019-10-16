@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Option
 //--------------------------------------------------------
-'use strict';
 
-const Argument = require('./Argument');
+import Argument from './Argument';
 
 
 /**
@@ -18,4 +17,4 @@ class Option extends Argument {
 }
 
 
-module.exports = Option;
+export default Option;

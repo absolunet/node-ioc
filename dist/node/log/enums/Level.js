@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Enum = _interopRequireDefault(require("../../support/Enum"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Log - Enums - Level
 //--------------------------------------------------------
-'use strict';
 
-const Enum = require('../../support/Enum');
 /**
  * Log levels.
  *
@@ -11,9 +17,7 @@ const Enum = require('../../support/Enum');
  * @augments support.Enum
  * @hideconstructor
  */
-
-
-class Level extends Enum {
+class Level extends _Enum.default {
   /**
    * Emergency level.
    *
@@ -95,4 +99,7 @@ class Level extends Enum {
 
 }
 
-module.exports = Level;
+var _default = Level;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

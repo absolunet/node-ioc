@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Argument
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -49,4 +48,4 @@ class Argument {
 }
 
 
-module.exports = Argument;
+export default Argument;

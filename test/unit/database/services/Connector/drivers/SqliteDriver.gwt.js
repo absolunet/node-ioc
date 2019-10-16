@@ -7,7 +7,7 @@ const { given, when, then, build } = require('../../../common.gwt');
 
 const __           = require('@absolunet/private-registry');
 const container    = require('../../../../container');
-const SqliteDriver = require('../../../../../../src/database/services/Connector/drivers/SqliteDriver');
+const SqliteDriver = require('../../../../../../dist/node/database/services/Connector/drivers/SqliteDriver');
 
 let result;
 let sqliteDriver;

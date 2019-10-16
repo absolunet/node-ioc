@@ -1,17 +1,20 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Repositories - Model Repository
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Model repository that bridges the application models with the ORM engine.
  *
  * @memberof database.repositories
  * @hideconstructor
  */
-
 class ModelRepository {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['db.orm']</code>.
    *
    * @type {Array<string>}
    */
@@ -67,4 +70,7 @@ class ModelRepository {
 
 }
 
-module.exports = ModelRepository;
+var _default = ModelRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

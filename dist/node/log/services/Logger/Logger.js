@@ -1,17 +1,23 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _DatabaseDriver = _interopRequireDefault(require("./drivers/DatabaseDriver"));
+
+var _FileDriver = _interopRequireDefault(require("./drivers/FileDriver"));
+
+var _StackDriver = _interopRequireDefault(require("./drivers/StackDriver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const hasDriver = require('../../../support/mixins/hasDriver');
-
-const DatabaseDriver = require('./drivers/DatabaseDriver');
-
-const FileDriver = require('./drivers/FileDriver');
-
-const StackDriver = require('./drivers/StackDriver');
 /**
  * Logger service that exposes logging methods representing levels.
  * It forwards the logging to the configured driver.
@@ -20,11 +26,9 @@ const StackDriver = require('./drivers/StackDriver');
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-
-
-class Logger extends hasDriver() {
+class Logger extends (0, _hasDriver.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'config', log.level']</code>.
    *
    * @type {Array<string>}
    */
@@ -39,9 +43,9 @@ class Logger extends hasDriver() {
 
   init() {
     super.init();
-    this.addDriver('database', DatabaseDriver);
-    this.addDriver('file', FileDriver);
-    this.addDriver('stack', StackDriver);
+    this.addDriver('database', _DatabaseDriver.default);
+    this.addDriver('file', _FileDriver.default);
+    this.addDriver('stack', _StackDriver.default);
     this.setFallbackChannel('single');
   }
   /**
@@ -258,7 +262,7 @@ class Logger extends hasDriver() {
 
 
   setFallbackChannel(channel) {
-    __(this).set('fallbackChannel', channel);
+    (0, _privateRegistry.default)(this).set('fallbackChannel', channel);
   }
   /**
    * Log level enum.
@@ -268,7 +272,7 @@ class Logger extends hasDriver() {
 
 
   get LEVEL() {
-    return __(this).get('log.level');
+    return (0, _privateRegistry.default)(this).get('log.level');
   }
   /**
    * The fallback channel.
@@ -278,9 +282,12 @@ class Logger extends hasDriver() {
 
 
   get fallbackChannel() {
-    return __(this).get('fallbackChannel');
+    return (0, _privateRegistry.default)(this).get('fallbackChannel');
   }
 
 }
 
-module.exports = Logger;
+var _default = Logger;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

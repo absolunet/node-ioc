@@ -1,12 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Proxies - Base Proxy
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const forwardCalls = require('../mixins/forwardCalls');
-const BaseProxy    = require('./BaseProxy');
+import __           from '@absolunet/private-registry';
+import forwardCalls from '../mixins/forwardCalls';
+import BaseProxy    from './BaseProxy';
 
 
 /**
@@ -40,4 +38,4 @@ class ForwardProxy extends forwardCalls(BaseProxy) {
 }
 
 
-module.exports = ForwardProxy;
+export default ForwardProxy;

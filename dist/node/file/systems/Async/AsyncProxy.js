@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ForwardProxy = _interopRequireDefault(require("../../../support/proxies/ForwardProxy"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Async proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../../support/proxies/ForwardProxy');
 /**
  * The Async system proxy handler that forward calls to @absolunet/fsp module.
  *
@@ -11,8 +17,9 @@ const ForwardProxy = require('../../../support/proxies/ForwardProxy');
  * @augments support.proxies.ForwardProxy
  * @hideconstructor
  */
+class AsyncProxy extends _ForwardProxy.default {}
 
-
-class AsyncProxy extends ForwardProxy {}
-
-module.exports = AsyncProxy;
+var _default = AsyncProxy;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

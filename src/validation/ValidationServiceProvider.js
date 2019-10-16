@@ -1,11 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Validation - Validation Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Validator = require('./services/Validator');
+import ServiceProvider from '../foundation/ServiceProvider';
+import Validator       from './services/Validator';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -32,4 +30,4 @@ class ValidationServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = ValidationServiceProvider;
+export default ValidationServiceProvider;

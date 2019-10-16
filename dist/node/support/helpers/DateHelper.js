@@ -1,14 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Date
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Date helper.
  *
  * @memberof support.helpers
  * @hideconstructor
  */
-
 class DateHelper {
   /**
    * DateHelper constructor.
@@ -21,4 +24,7 @@ class DateHelper {
 
 }
 
-module.exports = DateHelper;
+var _default = DateHelper;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

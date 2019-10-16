@@ -6,8 +6,8 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container         = require('../../container');
-const CommandRepository = require('../../../../src/console/repositories/CommandRepository');
-const Command           = require('../../../../src/console/Command');
+const CommandRepository = require('../../../../dist/node/console/repositories/CommandRepository');
+const Command           = require('../../../../dist/node/console/Command');
 
 let commandRepository;
 let result;

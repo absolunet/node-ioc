@@ -1,13 +1,12 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Test Case
 //--------------------------------------------------------
-'use strict';
 
-const __        = require('@absolunet/private-registry');
-const hasEngine = require('../support/mixins/hasEngine');
-const asserts   = require('./mixins/core/asserts');
-const expects   = require('./mixins/core/expects');
-const setsUp    = require('./mixins/core/setsUp');
+import __        from '@absolunet/private-registry';
+import hasEngine from '../support/mixins/hasEngine';
+import asserts   from './mixins/core/asserts';
+import expects   from './mixins/core/expects';
+import setsUp    from './mixins/core/setsUp';
 
 
 /**
@@ -66,4 +65,4 @@ class TestCase extends setsUp(expects(asserts(hasEngine()))) {
 }
 
 
-module.exports = TestCase;
+export default TestCase;

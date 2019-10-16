@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _FileEngineProxy = _interopRequireDefault(require("./FileEngineProxy"));
+
+var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - File - Engine
 //--------------------------------------------------------
-'use strict';
 
-const FileEngineProxy = require('./FileEngineProxy');
-
-const forwardCalls = require('../../../support/mixins/forwardCalls');
 /**
  * File engine that allows simple operation inside the native Node.js file system.
  *
@@ -15,11 +21,9 @@ const forwardCalls = require('../../../support/mixins/forwardCalls');
  * @augments support.mixins.ForwardCalls
  * @hideconstructor
  */
-
-
-class FileEngine extends forwardCalls() {
+class FileEngine extends (0, _forwardCalls.default)() {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'file.system.async', 'file.system.sync']</code>.
    *
    * @type {Array<string>}
    */
@@ -36,7 +40,7 @@ class FileEngine extends forwardCalls() {
 
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new FileEngineProxy());
+    return new Proxy(this, new _FileEngineProxy.default());
   }
   /**
    * Async file system.
@@ -69,4 +73,7 @@ class FileEngine extends forwardCalls() {
 
 }
 
-module.exports = FileEngine;
+var _default = FileEngine;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

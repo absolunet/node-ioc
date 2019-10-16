@@ -1,13 +1,12 @@
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger
 //--------------------------------------------------------
-'use strict';
 
-const __             = require('@absolunet/private-registry');
-const hasDriver      = require('../../../support/mixins/hasDriver');
-const DatabaseDriver = require('./drivers/DatabaseDriver');
-const FileDriver     = require('./drivers/FileDriver');
-const StackDriver    = require('./drivers/StackDriver');
+import __             from '@absolunet/private-registry';
+import hasDriver      from '../../../support/mixins/hasDriver';
+import DatabaseDriver from './drivers/DatabaseDriver';
+import FileDriver     from './drivers/FileDriver';
+import StackDriver    from './drivers/StackDriver';
 
 
 /**
@@ -21,7 +20,7 @@ const StackDriver    = require('./drivers/StackDriver');
 class Logger extends hasDriver() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'config', log.level']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -265,4 +264,4 @@ class Logger extends hasDriver() {
 }
 
 
-module.exports = Logger;
+export default Logger;

@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Model - Model Proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../support/proxies/ForwardProxy');
+import ForwardProxy from '../../support/proxies/ForwardProxy';
 
 
 /**
@@ -38,4 +37,4 @@ class ModelProxy extends ForwardProxy {
 }
 
 
-module.exports = ModelProxy;
+export default ModelProxy;

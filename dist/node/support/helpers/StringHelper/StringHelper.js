@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _StringHelperProxy = _interopRequireDefault(require("./StringHelperProxy"));
+
+var _forwardCalls = _interopRequireDefault(require("../../mixins/forwardCalls"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - String
 //--------------------------------------------------------
-'use strict';
 
-const StringHelperProxy = require('./StringHelperProxy');
-
-const forwardsCall = require('../../mixins/forwardCalls');
 /**
  * String helper.
  *
@@ -13,9 +19,7 @@ const forwardsCall = require('../../mixins/forwardCalls');
  * @augments support.mixins.ForwardCalls
  * @hideconstructor
  */
-
-
-class StringHelper extends forwardsCall() {
+class StringHelper extends (0, _forwardCalls.default)() {
   /**
    * StringHelper constructor.
    *
@@ -23,7 +27,7 @@ class StringHelper extends forwardsCall() {
    */
   constructor(...parameters) {
     super(...parameters);
-    return new Proxy(this, new StringHelperProxy());
+    return new Proxy(this, new _StringHelperProxy.default());
   }
   /**
    * Convert to plural version of the string.
@@ -59,4 +63,7 @@ class StringHelper extends forwardsCall() {
 
 }
 
-module.exports = StringHelper;
+var _default = StringHelper;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

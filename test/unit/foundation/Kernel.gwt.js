@@ -6,19 +6,19 @@
 const { given, when, then, build } = require('./common.gwt');
 
 const container = require('../container');
-const Kernel    = require('../../../src/foundation/Kernel');
+const Kernel    = require('../../../dist/node/foundation/Kernel');
 
-const NotImplementedError = require('../../../src/foundation/exceptions/NotImplementedError');
+const NotImplementedError = require('../../../dist/node/foundation/exceptions/NotImplementedError');
 
-const CacheServiceProvider       = require('../../../src/cache/CacheServiceProvider');
-const DatabaseServiceProvider    = require('../../../src/database/DatabaseServiceProvider');
-const HttpServiceProvider        = require('../../../src/http/HttpServiceProvider');
-const LogServiceProvider         = require('../../../src/log/LogServiceProvider');
-const SecurityServiceProvider    = require('../../../src/security/SecurityServiceProvider');
-const TestServiceProvider        = require('../../../src/test/TestServiceProvider');
-const TranslationServiceProvider = require('../../../src/translation/TranslationServiceProvider');
-const ValidationServiceProvider  = require('../../../src/validation/ValidationServiceProvider');
-const ViewServiceProvider        = require('../../../src/view/ViewServiceProvider');
+const CacheServiceProvider       = require('../../../dist/node/cache/CacheServiceProvider');
+const DatabaseServiceProvider    = require('../../../dist/node/database/DatabaseServiceProvider');
+const HttpServiceProvider        = require('../../../dist/node/http/HttpServiceProvider');
+const LogServiceProvider         = require('../../../dist/node/log/LogServiceProvider');
+const SecurityServiceProvider    = require('../../../dist/node/security/SecurityServiceProvider');
+const TestServiceProvider        = require('../../../dist/node/test/TestServiceProvider');
+const TranslationServiceProvider = require('../../../dist/node/translation/TranslationServiceProvider');
+const ValidationServiceProvider  = require('../../../dist/node/validation/ValidationServiceProvider');
+const ViewServiceProvider        = require('../../../dist/node/view/ViewServiceProvider');
 
 let kernel;
 

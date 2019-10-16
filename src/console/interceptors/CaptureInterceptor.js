@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Interceptors - Capture Interceptor
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -60,4 +59,4 @@ class CaptureInterceptor {
 }
 
 
-module.exports = CaptureInterceptor;
+export default CaptureInterceptor;

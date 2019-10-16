@@ -1,41 +1,47 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
+
+var _Builder = _interopRequireDefault(require("./services/Builder"));
+
+var _Connector = _interopRequireDefault(require("./services/Connector"));
+
+var _Factory = _interopRequireDefault(require("./services/Factory"));
+
+var _ModelRepository = _interopRequireDefault(require("./repositories/ModelRepository"));
+
+var _ORM = _interopRequireDefault(require("./services/ORM"));
+
+var _Resolver = _interopRequireDefault(require("./services/Resolver"));
+
+var _MakeFactoryCommand = _interopRequireDefault(require("./commands/MakeFactoryCommand"));
+
+var _MakeMigrationCommand = _interopRequireDefault(require("./commands/MakeMigrationCommand"));
+
+var _MakeModelCommand = _interopRequireDefault(require("./commands/MakeModelCommand"));
+
+var _MakeSeederCommand = _interopRequireDefault(require("./commands/MakeSeederCommand"));
+
+var _MigrateCommand = _interopRequireDefault(require("./commands/MigrateCommand"));
+
+var _MigrateFreshCommand = _interopRequireDefault(require("./commands/MigrateFreshCommand"));
+
+var _MigrateRefreshCommand = _interopRequireDefault(require("./commands/MigrateRefreshCommand"));
+
+var _MigrateRollbackCommand = _interopRequireDefault(require("./commands/MigrateRollbackCommand"));
+
+var _MigrateStatusCommand = _interopRequireDefault(require("./commands/MigrateStatusCommand"));
+
+var _SeedCommand = _interopRequireDefault(require("./commands/SeedCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Database Service provider
 //--------------------------------------------------------
-'use strict';
-
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Builder = require('./services/Builder');
-
-const Connector = require('./services/Connector');
-
-const Factory = require('./services/Factory');
-
-const ModelRepository = require('./repositories/ModelRepository');
-
-const ORM = require('./services/ORM');
-
-const Resolver = require('./services/Resolver');
-
-const MakeFactoryCommand = require('./commands/MakeFactoryCommand');
-
-const MakeMigrationCommand = require('./commands/MakeMigrationCommand');
-
-const MakeModelCommand = require('./commands/MakeModelCommand');
-
-const MakeSeederCommand = require('./commands/MakeSeederCommand');
-
-const MigrateCommand = require('./commands/MigrateCommand');
-
-const MigrateFreshCommand = require('./commands/MigrateFreshCommand');
-
-const MigrateRefreshCommand = require('./commands/MigrateRefreshCommand');
-
-const MigrateRollbackCommand = require('./commands/MigrateRollbackCommand');
-
-const MigrateStatusCommand = require('./commands/MigrateStatusCommand');
-
-const SeedCommand = require('./commands/SeedCommand'); // eslint-disable-next-line jsdoc/require-description-complete-sentence
+// eslint-disable-next-line jsdoc/require-description-complete-sentence
 
 /**
  * The database service provider.
@@ -68,19 +74,17 @@ const SeedCommand = require('./commands/SeedCommand'); // eslint-disable-next-li
  * @augments foundation.ServiceProvider
  * @hideconstructor
  */
-
-
-class DatabaseServiceProvider extends ServiceProvider {
+class DatabaseServiceProvider extends _ServiceProvider.default {
   /**
    * Register the service provider.
    */
   register() {
-    this.app.singleton('db', Builder);
-    this.app.singleton('db.connection', Connector);
-    this.app.singleton('db.factory', Factory);
-    this.app.singleton('db.model', ModelRepository);
-    this.app.singleton('db.orm', ORM);
-    this.app.singleton('db.resolver', Resolver);
+    this.app.singleton('db', _Builder.default);
+    this.app.singleton('db.connection', _Connector.default);
+    this.app.singleton('db.factory', _Factory.default);
+    this.app.singleton('db.model', _ModelRepository.default);
+    this.app.singleton('db.orm', _ORM.default);
+    this.app.singleton('db.resolver', _Resolver.default);
     this.app.alias('model', 'db.model');
   }
   /**
@@ -92,7 +96,7 @@ class DatabaseServiceProvider extends ServiceProvider {
     this.loadConfig();
     this.createPolicies();
     this.loadAppModelFactories();
-    this.loadCommands([MakeFactoryCommand, MakeMigrationCommand, MakeModelCommand, MakeSeederCommand, MigrateCommand, MigrateFreshCommand, MigrateRefreshCommand, MigrateRollbackCommand, MigrateStatusCommand, SeedCommand]);
+    this.loadCommands([_MakeFactoryCommand.default, _MakeMigrationCommand.default, _MakeModelCommand.default, _MakeSeederCommand.default, _MigrateCommand.default, _MigrateFreshCommand.default, _MigrateRefreshCommand.default, _MigrateRollbackCommand.default, _MigrateStatusCommand.default, _SeedCommand.default]);
   }
   /**
    * Load configuration file.
@@ -136,4 +140,7 @@ class DatabaseServiceProvider extends ServiceProvider {
 
 }
 
-module.exports = DatabaseServiceProvider;
+var _default = DatabaseServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

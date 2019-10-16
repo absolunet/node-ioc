@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("../Command"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Command - Environment
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../Command');
 /**
  * Command that displays the application environment.
  *
@@ -11,9 +17,7 @@ const Command = require('../Command');
  * @augments console.Command
  * @hideconstructor
  */
-
-
-class EnvironmentCommand extends Command {
+class EnvironmentCommand extends _Command.default {
   /**
    * @inheritdoc
    */
@@ -47,4 +51,7 @@ class EnvironmentCommand extends Command {
 
 }
 
-module.exports = EnvironmentCommand;
+var _default = EnvironmentCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

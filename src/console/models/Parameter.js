@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Parameter
 //--------------------------------------------------------
-'use strict';
 
-const Argument = require('./Argument');
+import Argument from './Argument';
 
 
 /**
@@ -44,4 +43,4 @@ class Parameter extends Argument {
 }
 
 
-module.exports = Parameter;
+export default Parameter;

@@ -19,7 +19,7 @@ beforeEach(() => {
 });
 
 
-test('Scopes for folder under "e2e"', () => {
+test('Scopes for folder under "endtoend"', () => {
 	when.gettingScope();
-	then.resultShouldBe('e2e');
+	then.resultShouldBe('endtoend');
 });

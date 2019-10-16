@@ -1,7 +1,11 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Config - Evaluator
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Class that evaluates a value.
  * It handles undefined, null, string, boolean, number and bigint types.
@@ -21,7 +25,6 @@
  * @memberof config.services
  * @hideconstructor
  */
-
 class Evaluator {
   /**
    * Safely evaluate primitive type.
@@ -55,4 +58,7 @@ class Evaluator {
 
 }
 
-module.exports = Evaluator;
+var _default = Evaluator;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,24 +1,19 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Test Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const TestRepository          = require('./repositories/TestRepository');
-const UnitTestRepository      = require('./repositories/UnitTestRepository');
-const FeatureTestRepository   = require('./repositories/FeatureTestRepository');
-const StandardsTestRepository = require('./repositories/StandardsTestRepository');
-const EndToEndTestRepository  = require('./repositories/EndToEndTestRepository');
-
-const TestRunner = require('./services/TestRunner');
-const Tester     = require('./services/Tester');
-const JestEngine = require('./engines/JestEngine');
-
-const Type = require('./enums/Type');
-
-const MakeTestCommand = require('./commands/MakeTestCommand');
-const TestCommand     = require('./commands/TestCommand');
+import ServiceProvider         from '../foundation/ServiceProvider';
+import TestRepository          from './repositories/TestRepository';
+import UnitTestRepository      from './repositories/UnitTestRepository';
+import FeatureTestRepository   from './repositories/FeatureTestRepository';
+import EndToEndTestRepository  from './repositories/EndToEndTestRepository';
+import IntegrationTestRepository from './repositories/IntegrationTestRepository';
+import TestRunner              from './services/TestRunner';
+import Tester                  from './services/Tester';
+import JestEngine              from './engines/JestEngine';
+import Type                    from './enums/Type';
+import MakeTestCommand         from './commands/MakeTestCommand';
+import TestCommand             from './commands/TestCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -33,7 +28,6 @@ const TestCommand     = require('./commands/TestCommand');
  *     <li><a href="test.repositories.TestRepository.html">test</a></li>
  *     <li><a href="test.repositories.UnitTestRepository.html">test.unit</a></li>
  *     <li><a href="test.repositories.FeatureTestRepository.html">test.feature</a></li>
- *     <li><a href="test.repositories.StandardsTestRepository.html">test.standards</a></li>
  *     <li><a href="test.repositories.EndToEndTestRepository.html">test.e2e</a></li>
  * </ul>
  * It also binds these tags:
@@ -42,7 +36,6 @@ const TestCommand     = require('./commands/TestCommand');
  *     		<ul>
  *     		 	<li><a href="test.repositories.UnitTestRepository.html">test.unit</a></li>
  *     		 	<li><a href="test.repositories.FeatureTestRepository.html">test.feature</a></li>
- *     		 	<li><a href="test.repositories.StandardsTestRepository.html">test.standards</a></li>
  *     		 	<li><a href="test.repositories.EndToEndTestRepository.html">test.e2e</a></li>
  *     		</ul>
  *     </li>
@@ -85,9 +78,9 @@ class TestServiceProvider extends ServiceProvider {
 		this.app.singleton('test',           TestRepository);
 		this.app.singleton('test.unit',      UnitTestRepository);
 		this.app.singleton('test.feature',   FeatureTestRepository);
-		this.app.singleton('test.standards', StandardsTestRepository);
-		this.app.singleton('test.e2e',       EndToEndTestRepository);
-		this.app.tag(['test.unit', 'test.feature', 'test.standards', 'test.e2e'], 'tests');
+		this.app.singleton('test.endtoend',  EndToEndTestRepository);
+		this.app.singleton('test.integration',   IntegrationTestRepository);
+		this.app.tag(['test.unit', 'test.feature', 'test.endtoend', 'test.integration'], 'tests');
 	}
 
 	/**
@@ -109,4 +102,4 @@ class TestServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = TestServiceProvider;
+export default TestServiceProvider;

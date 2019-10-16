@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Terminal
 //--------------------------------------------------------
-'use strict';
 
-const { Terminal: BaseTerminal } = require('@absolunet/terminal');
+import { Terminal as BaseTerminal } from '@absolunet/terminal';
 
 /**
  * The enhanced Absolunet terminal class.
@@ -624,4 +623,4 @@ class Terminal extends BaseTerminal {
 }
 
 
-module.exports = Terminal;
+export default Terminal;

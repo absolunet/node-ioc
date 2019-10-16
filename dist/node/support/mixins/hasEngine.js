@@ -1,11 +1,17 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _mixinFactory = _interopRequireDefault(require("./concerns/mixinFactory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Mixins - Has engine
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const factory = require('./concerns/mixinFactory');
 /**
  * Has engine mixin.
  *
@@ -14,9 +20,7 @@ const factory = require('./concerns/mixinFactory');
  * @memberof support.mixins
  * @hideconstructor
  */
-
-
-const hasEngine = factory(SuperClass => {
+const hasEngine = (0, _mixinFactory.default)(SuperClass => {
   /**
    * Has engine mixin.
    */
@@ -30,8 +34,7 @@ const hasEngine = factory(SuperClass => {
      * @instance
      */
     setEngine(engine) {
-      __(this).set('engine', engine);
-
+      (0, _privateRegistry.default)(this).set('engine', engine);
       return this;
     }
     /**
@@ -44,9 +47,12 @@ const hasEngine = factory(SuperClass => {
 
 
     get engine() {
-      return __(this).get('engine');
+      return (0, _privateRegistry.default)(this).get('engine');
     }
 
   };
 });
-module.exports = hasEngine;
+var _default = hasEngine;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

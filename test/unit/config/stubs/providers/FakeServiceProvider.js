@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const ServiceProvider = require('../../../../../src/foundation/ServiceProvider');
+const ServiceProvider = require('../../../../../dist/node/foundation/ServiceProvider');
 
 
 class FakeServiceProvider extends ServiceProvider {

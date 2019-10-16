@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Config - Config Grammar
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -23,7 +22,7 @@
 class ConfigGrammar {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'env', 'evaluator']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -125,4 +124,4 @@ class ConfigGrammar {
 }
 
 
-module.exports = ConfigGrammar;
+export default ConfigGrammar;

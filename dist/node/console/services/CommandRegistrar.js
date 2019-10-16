@@ -1,20 +1,24 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Services - Command Registrar
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Class that registers the command and bootstraps all the needed instances in order to make the CLI engine works.
  *
  * @memberof console.services
  * @hideconstructor
  */
-
-
 class CommandRegistrar {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'command', 'command.runner', 'file', 'terminal', 'yargs']</code>.
    *
    * @type {Array<string>}
    */
@@ -28,7 +32,7 @@ class CommandRegistrar {
 
 
   init() {
-    __(this).set('handlers', __(this).get('handlers') || []);
+    (0, _privateRegistry.default)(this).set('handlers', (0, _privateRegistry.default)(this).get('handlers') || []);
   }
   /**
    * Add a command in the repository.
@@ -145,7 +149,7 @@ class CommandRegistrar {
 
 
   get handlers() {
-    return __(this).get('handlers');
+    return (0, _privateRegistry.default)(this).get('handlers');
   }
   /**
    * The command repository.
@@ -155,9 +159,12 @@ class CommandRegistrar {
 
 
   get commandRepository() {
-    return __(this).get('command');
+    return (0, _privateRegistry.default)(this).get('command');
   }
 
 }
 
-module.exports = CommandRegistrar;
+var _default = CommandRegistrar;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

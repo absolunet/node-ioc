@@ -1,12 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Console Kernel
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const ConsoleServiceProvider = require('../../console/ConsoleServiceProvider');
-const Kernel                 = require('../Kernel');
+import __                     from '@absolunet/private-registry';
+import ConsoleServiceProvider from '../../console/ConsoleServiceProvider';
+import BaseKernel             from '../Kernel';
 
 
 /**
@@ -16,7 +14,7 @@ const Kernel                 = require('../Kernel');
  * @augments foundation.Kernel
  * @hideconstructor
  */
-class ConsoleKernel extends Kernel {
+class Kernel extends BaseKernel {
 
 	/**
 	 * ConsoleKernel constructor.
@@ -32,9 +30,27 @@ class ConsoleKernel extends Kernel {
 	 * @inheritdoc
 	 */
 	async handle() {
-		this.registerCommands();
-
+		await this.onBeforeHandling();
 		await this.call(this.terminal.argv);
+		await this.onAfterHandling();
+	}
+
+	/**
+	 * Called just before handling incoming request.
+	 *
+	 * @abstract
+	 */
+	onBeforeHandling() {
+		//
+	}
+
+	/**
+	 * Called just after handling incoming request, if no error was thrown.
+	 *
+	 * @abstract
+	 */
+	onAfterHandling() {
+		//
 	}
 
 	/**
@@ -45,13 +61,6 @@ class ConsoleKernel extends Kernel {
 	 */
 	async call(command) {
 		await this.commandRegistrar.resolve(command);
-	}
-
-	/**
-	 * Register commands in the command registrar based on application command path.
-	 */
-	registerCommands() {
-		this.commandRegistrar.addFromFolder(this.app.commandPath());
 	}
 
 	/**
@@ -67,9 +76,20 @@ class ConsoleKernel extends Kernel {
 	 * @inheritdoc
 	 */
 	terminate() {
+		this.onTerminating();
+
 		if (__(this).get('shouldExit')) {
 			process.exit(this.app.make('exception.handler').hadException ? 1 : 0); // eslint-disable-line unicorn/no-process-exit, no-process-exit
 		}
+	}
+
+	/**
+	 * Called when the application is terminating.
+	 *
+	 * @abstract
+	 */
+	onTerminating() {
+		//
 	}
 
 	/**
@@ -103,4 +123,4 @@ class ConsoleKernel extends Kernel {
 }
 
 
-module.exports = ConsoleKernel;
+export default Kernel;

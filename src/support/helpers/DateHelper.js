@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Helpers - Date
 //--------------------------------------------------------
-'use strict';
 
 /**
  * Date helper.
@@ -23,4 +22,4 @@ class DateHelper {
 }
 
 
-module.exports = DateHelper;
+export default DateHelper;

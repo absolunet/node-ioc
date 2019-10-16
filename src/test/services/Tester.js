@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Service - Tester
 //--------------------------------------------------------
-'use strict';
 
-const __        = require('@absolunet/private-registry');
-const hasEngine = require('../../support/mixins/hasEngine');
+import __        from '@absolunet/private-registry';
+import hasEngine from '../../support/mixins/hasEngine';
 
 
 /**
@@ -17,7 +16,7 @@ const hasEngine = require('../../support/mixins/hasEngine');
 class Tester extends hasEngine() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -31,7 +30,7 @@ class Tester extends hasEngine() {
 	boot() {
 		__(this).set('booted', true);
 
-		this.app.make('kernel.console');
+		this.app.make('kernel');
 		this.app.bootIfNotBooted();
 		this.app.singleton('tester', this);
 
@@ -91,7 +90,7 @@ class Tester extends hasEngine() {
 		app.setContext(this.app.getContext());
 		app.setEnvironment('test');
 		this.app.singleton('app', app);
-		app.make(this.app.make('kernel.console').constructor);
+		app.make(this.app.make('kernel').constructor);
 		app.bootIfNotBooted();
 	}
 
@@ -145,4 +144,5 @@ class Tester extends hasEngine() {
 
 }
 
-module.exports = Tester;
+
+export default Tester;

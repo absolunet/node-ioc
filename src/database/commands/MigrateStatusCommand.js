@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Migrate Fresh
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
+import Command from '../../console/Command';
 
 
 /**
@@ -16,7 +15,7 @@ const Command = require('../../console/Command');
 class MigrateStatusCommand extends Command {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['config', 'db']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -69,4 +68,4 @@ class MigrateStatusCommand extends Command {
 }
 
 
-module.exports = MigrateStatusCommand;
+export default MigrateStatusCommand;

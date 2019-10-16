@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Make Factory
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
+import GeneratorCommand from '../../console/GeneratorCommand';
 
 
 /**
@@ -42,7 +41,7 @@ class MakeFactoryCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get destination() {
-		return this.app.make('db.resolver').resolvePath('factories');
+		return this.app.make('db.resolver').resolveSourcePath('factories');
 	}
 
 	/**
@@ -78,4 +77,4 @@ class MakeFactoryCommand extends GeneratorCommand {
 }
 
 
-module.exports = MakeFactoryCommand;
+export default MakeFactoryCommand;

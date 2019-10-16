@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Services - Store Resolver
 //--------------------------------------------------------
-'use strict';
 
-const CacheManager = require('./CacheManager');
+import CacheManager from './CacheManager';
 
 
-module.exports = CacheManager;
+export default CacheManager;

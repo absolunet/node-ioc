@@ -6,7 +6,7 @@
 const { given, when, then, build } = require('../common.gwt');
 
 const container            = require('../container');
-const EventServiceProvider = require('../../../src/events/EventServiceProvider');
+const EventServiceProvider = require('../../../dist/node/events/EventServiceProvider');
 
 
 //-- Given

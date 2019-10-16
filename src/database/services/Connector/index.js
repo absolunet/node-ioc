@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Connector
 //--------------------------------------------------------
-'use strict';
 
-const Connector = require('./Connector');
+import Connector from './Connector';
 
 
-module.exports = Connector;
+export default Connector;

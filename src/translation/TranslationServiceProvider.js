@@ -1,11 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Translation - Translation Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const ServiceProvider = require('../foundation/ServiceProvider');
-
-const Translator = require('./services/Translator');
+import ServiceProvider from '../foundation/ServiceProvider';
+import Translator      from './services/Translator';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -32,4 +30,4 @@ class TranslationServiceProvider extends ServiceProvider {
 }
 
 
-module.exports = TranslationServiceProvider;
+export default TranslationServiceProvider;

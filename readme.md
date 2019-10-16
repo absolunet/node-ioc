@@ -1,4 +1,4 @@
-# @absolunet/ioc
+# Node IoC
 
 [![npm](https://img.shields.io/npm/v/@absolunet/ioc.svg)](https://www.npmjs.com/package/@absolunet/ioc)
 [![npm dependencies](https://david-dm.org/absolunet/node-ioc/status.svg)](https://david-dm.org/absolunet/node-ioc)
@@ -7,94 +7,41 @@
 
 [![Code style ESLint](https://img.shields.io/badge/code_style-@absolunet/node-659d32.svg)](https://github.com/absolunet/eslint-config-node)
 
-> IoC: SOLID container for NodeJS application, either for Web server or CLI tool
 
-This packages offers simple IoC container for any NodeJS projects. It allows to do SOLID implementation and easily use project dependencies, as well as writing common packages for multiple projects. It comes with a Jest OOP wrapper for unit, feature and end-to-end tests (PHPUnit and NUnit lookalike), which can be easily done in an IoC container, and AVA for code and structure standards tests.
+## About Node IoC
 
-## Official documentation
+> **NOTE**: This is the Node IoC framework repository. If you want to build an application, please visit the [main application repository](https://github.com/absolunet/node-ioc-app).
 
-See the official documentation at [https://documentation.absolunet.com/docs-node-ioc/en/1.0/intro/getting-started](https://documentation.absolunet.com/docs-node-ioc/en/1.0/intro/getting-started)
+Node IoC is a [node.js](https://nodejs.org) framework designed to help developers create elegant and well-designed applications, for both the Web and the CLI. Based on _[SOLID](https://en.wikipedia.org/wiki/SOLID)_ principles, it comes out with a lot of features that removes the pain of crafting new applications:
 
+ - Simple, yet powerful, [dependency injection container](https://documentation.absolunet.com/docs-node-ioc/en/1.0/architecture/container)
+ - Complete [CLI command system](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/commands) powered by [Yargs](http://yargs.js.org/)
+ - Full [routing and HTTP handling](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/routing) powered by [Express](https://expressjs.com/)
+ - [Knex](http://knexjs.org/) [database connections](https://documentation.absolunet.com/docs-node-ioc/en/1.0/handling-data/database) with [Bookshelf ORM](https://bookshelfjs.org/)
+ - [Cache system with multiple back-ends](https://documentation.absolunet.com/docs-node-ioc/en/1.0/going-deeper/caching)  
+ - [Configuration over code approach](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/config)
+ - Multiple 3rd-party integrations such as [PubSubJS](https://github.com/mroderick/PubSubJS), [joi](https://hapi.dev/family/joi/), [JsRender](https://www.jsviews.com/) and much more
+ - [Modular structure with simple integration](https://documentation.absolunet.com/docs-node-ioc/en/1.0/architecture/service-provider)
+ - Complete and powerful [Jest integration for testing](https://documentation.absolunet.com/docs-node-ioc/en/1.0/going-deeper/test) with a class-based approach, like [PHPUnit (PHP)](https://phpunit.de/) or [NUnit (C#)](https://nunit.org/)
 
-## Install
-
-```sh
-$ npm install @absolunet/ioc
-```
-
-
-## Usage
-
-```js
-// Getting the container
-const container = require('@absolunet/ioc');
-
-// Binding an instance to the container
-container.bind('foo', () => {
-	return { foo: true };
-});
-
-// Binding an instance from a class
-class Bar {}
-container.bind('bar', Bar);
-
-// Binding an instance from an object
-const baz = { baz: 42 };
-container.bind('baz', baz);
-
-// Binding a singleton
-container.singleton('console', () => {
-	return window.console;
-});
-
-// Getting a registered instance
-const injectedFoo = container.make('foo');
-
-// How about making a not registered instance?
-const madeObject = container.make(() => { // { obj:'resolved' }
-	return { obj: 'resolved' };
-});
-
-// How about dependencies injection?
-class Injectable {
-
-	static get dependencies() {
-		return ['foo'];
-	}
-
-	constructor(fooService) {
-		this.foo = fooService;
-	}
-
-}
-
-const injectable = container.make(Injectable); // Injectable {}
-console.log(injectable.foo); // { foo:true }, injection was done from binding done in upper code.
-
-// How about decorating dependencies?
-container.decorate('baz', (bazInstance) => {
-	if (bazInstance.baz === 42) {
-		bazInstance.hasAnswerOfLife = true;
-	}
-
-	return bazInstance;
-});
-
-const bazDecoratedInstance = container.make('baz'); // { baz:42, hasAnswerOfLife:true }
+Node IoC was mostly inspired by Laravel and Symfony for the structure, as well by Angular.js for the dependency injection approach. The key that makes Node IoC a better platform to start with is that it is based on all the better things that have been made in JavaScript so far: it unifies the most popular tools and makes implementing them under a complex application feel like a breeze.
 
 
-// This is great, but it can be better!
+## Learning Node IoC
 
-// Registering service providers
-const ProjectServiceProvider = require('./providers/ProjectServiceProvider'); // It binds 'project' and 'project.current' service
-container.register(ProjectServiceProvider); // The service provider is registered
+The simplest way to learn Node IoC is through the [official documentation](https://documentation.absolunet.com/docs-node-ioc). You can easily get started with the early chapters that give you the step-by-step approach to install the application and to implement basic features. However, if you want to go deeper, the documentation covers all key features, or you can read the [API documentation](https://documentation.absolunet.com/docs-node-ioc/api).
 
-container.onBooted(() => {
-	const projectService = container.make('project'); // ProjectService {}
-	const currentProjectService = container.make('project.current'); // SingleProjectService {}
-});
-```
+
+## Contributing
+
+You are welcome to contribute to the Node IoC framework. You can find the official contribution guide in the [official documentation](https://documentation.absolunet.com/docs-node-ioc/en/1.0/contributions).
+
+
+## Code of Conduct
+
+To ensure that the Node IoC community is welcoming to all, please review and abide by the [Code of Conduct](code_of_conduct.md).
+
 
 ## License
 
-MIT © [Absolunet](https://absolunet.com)
+The Node IoC framework is open-sourced software created by [Absolunet](https://absolunet.com) and licensed under the [MIT license](https://opensource.org/licenses/MIT).

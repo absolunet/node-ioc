@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Support - Enums
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Base enum class that emulate the TypeScript enum feature, but by using an instantiable and injectable class instead of a plain object.
  *
@@ -25,8 +31,6 @@ const __ = require('@absolunet/private-registry');
  * 	@abstract
  * 	@hideconstructor
  */
-
-
 class Enum {
   /**
    * Enum constructor.
@@ -36,9 +40,7 @@ class Enum {
    */
   constructor() {
     const entries = {};
-
-    __(this).set('entries', entries);
-
+    (0, _privateRegistry.default)(this).set('entries', entries);
     Object.entries(Object.getOwnPropertyDescriptors(this.constructor.prototype)).forEach(([key, descriptor]) => {
       if (key === key.toUpperCase() && Object.prototype.hasOwnProperty.call(descriptor, 'get')) {
         const value = this[key];
@@ -59,7 +61,7 @@ class Enum {
 
 
   keys() {
-    return Object.keys(__(this).get('entries'));
+    return Object.keys((0, _privateRegistry.default)(this).get('entries'));
   }
   /**
    * Get enumeration values.
@@ -69,7 +71,7 @@ class Enum {
 
 
   values() {
-    return Object.values(__(this).get('entries'));
+    return Object.values((0, _privateRegistry.default)(this).get('entries'));
   }
   /**
    * Get enumeration entries.
@@ -79,9 +81,12 @@ class Enum {
 
 
   entries() {
-    return Object.entries(__(this).get('entries'));
+    return Object.entries((0, _privateRegistry.default)(this).get('entries'));
   }
 
 }
 
-module.exports = Enum;
+var _default = Enum;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

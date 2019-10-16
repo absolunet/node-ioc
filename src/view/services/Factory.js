@@ -1,7 +1,6 @@
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Factory
 //--------------------------------------------------------
-'use strict';
 
 
 /**
@@ -13,7 +12,7 @@
 class Factory {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['view.resolver', 'view.engine']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -34,4 +33,5 @@ class Factory {
 
 }
 
-module.exports = Factory;
+
+export default Factory;

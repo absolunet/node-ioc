@@ -1,20 +1,24 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - CommandRepository
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Command repository that stores all the register commands through the command registrar.
  *
  * @memberof console.repositories
  * @hideconstructor
  */
-
-
 class CommandRepository {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'terminal', 'yargs']</code>.
    *
    * @type {Array<string>}
    */
@@ -28,10 +32,10 @@ class CommandRepository {
 
 
   init() {
-    __(this).set('commands', []);
+    (0, _privateRegistry.default)(this).set('commands', []);
 
     if (this.app.isBound('gate')) {
-      __(this).set('gate', this.app.make('gate'));
+      (0, _privateRegistry.default)(this).set('gate', this.app.make('gate'));
     }
   }
   /**
@@ -45,9 +49,8 @@ class CommandRepository {
 
 
   all(withPolicies = true, grouped = false) {
-    const gate = __(this).get('gate');
-
-    const commands = __(this).get('commands').filter(({
+    const gate = (0, _privateRegistry.default)(this).get('gate');
+    const commands = (0, _privateRegistry.default)(this).get('commands').filter(({
       policies = []
     }) => {
       return !withPolicies || policies.every(scope => {
@@ -93,7 +96,7 @@ class CommandRepository {
 
 
   get(name) {
-    return __(this).get('commands').find(({
+    return (0, _privateRegistry.default)(this).get('commands').find(({
       name: commandName
     }) => {
       return name === commandName;
@@ -129,12 +132,13 @@ class CommandRepository {
       terminal,
       yargs
     });
-
-    __(this).get('commands').push(instance);
-
+    (0, _privateRegistry.default)(this).get('commands').push(instance);
     return instance;
   }
 
 }
 
-module.exports = CommandRepository;
+var _default = CommandRepository;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _ForwardProxy = _interopRequireDefault(require("../../support/proxies/ForwardProxy"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Model - Model Proxy
 //--------------------------------------------------------
-'use strict';
 
-const ForwardProxy = require('../../support/proxies/ForwardProxy');
 /**
  * Model proxy handler that forwards calls to an ORM model factory.
  *
@@ -11,9 +17,7 @@ const ForwardProxy = require('../../support/proxies/ForwardProxy');
  * @augments support.proxies.ForwardProxy
  * @hideconstructor
  */
-
-
-class ModelProxy extends ForwardProxy {
+class ModelProxy extends _ForwardProxy.default {
   /**
    * @inheritdoc
    */
@@ -36,4 +40,7 @@ class ModelProxy extends ForwardProxy {
 
 }
 
-module.exports = ModelProxy;
+var _default = ModelProxy;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

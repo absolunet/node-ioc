@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _GenericClass = _interopRequireDefault(require("./GenericClass"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- IoC - Foundation - Mixins - Concerns - Define mixin
 //--------------------------------------------------------
-'use strict';
 
-const GenericClass = require('./GenericClass');
 /**
  * Mixin factory.
  *
@@ -11,12 +17,13 @@ const GenericClass = require('./GenericClass');
  * @returns {Function} - Mixin.
  * @memberof support.mixins.concerns
  */
-
-
 const factory = callback => {
-  return (SuperClass = GenericClass) => {
+  return (SuperClass = _GenericClass.default) => {
     return callback(SuperClass);
   };
 };
 
-module.exports = factory;
+var _default = factory;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

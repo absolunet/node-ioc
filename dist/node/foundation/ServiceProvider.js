@@ -1,7 +1,11 @@
+"use strict";
+
+exports.default = void 0;
+
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Service Provider
 //--------------------------------------------------------
-'use strict';
+
 /**
  * Base service provider class.
  *
@@ -9,7 +13,6 @@
  * @abstract
  * @hideconstructor
  */
-
 class ServiceProvider {
   /**
    * Load commands into the registrar.
@@ -27,4 +30,7 @@ class ServiceProvider {
 
 }
 
-module.exports = ServiceProvider;
+var _default = ServiceProvider;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

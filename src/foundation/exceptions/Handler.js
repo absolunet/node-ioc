@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Exceptions - Handler
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -15,7 +14,7 @@ const __ = require('@absolunet/private-registry');
 class Handler {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -186,4 +185,4 @@ class Handler {
 }
 
 
-module.exports = Handler;
+export default Handler;

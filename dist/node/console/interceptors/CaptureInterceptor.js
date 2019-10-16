@@ -1,17 +1,21 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Interceptors - Capture Interceptor
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Interceptor that captures the output and make it available for reuse by other instances.
  *
  * @memberof console.interceptors
  * @hideconstructor
  */
-
-
 class CaptureInterceptor {
   /**
    * @inheritdoc
@@ -19,10 +23,8 @@ class CaptureInterceptor {
    */
   init() {
     const capture = [];
-
-    __(this).set('capture', capture);
-
-    __(this).set('handler', string => {
+    (0, _privateRegistry.default)(this).set('capture', capture);
+    (0, _privateRegistry.default)(this).set('handler', string => {
       capture.push(string.trim());
       return string;
     });
@@ -35,8 +37,7 @@ class CaptureInterceptor {
 
 
   flush() {
-    __(this).get('capture').splice(0);
-
+    (0, _privateRegistry.default)(this).get('capture').splice(0);
     return this;
   }
   /**
@@ -47,7 +48,7 @@ class CaptureInterceptor {
 
 
   get handler() {
-    return __(this).get('handler');
+    return (0, _privateRegistry.default)(this).get('handler');
   }
   /**
    * Captured output.
@@ -57,9 +58,12 @@ class CaptureInterceptor {
 
 
   get capture() {
-    return [...__(this).get('capture')];
+    return [...(0, _privateRegistry.default)(this).get('capture')];
   }
 
 }
 
-module.exports = CaptureInterceptor;
+var _default = CaptureInterceptor;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

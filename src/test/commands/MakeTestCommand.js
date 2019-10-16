@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Command - Make Test
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
+import GeneratorCommand from '../../console/GeneratorCommand';
 
 
 /**
@@ -16,12 +15,12 @@ const GeneratorCommand = require('../../console/GeneratorCommand');
 class MakeTestCommand extends GeneratorCommand {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['helper.path', 'helper.string', 'test.type']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
 	static get dependencies() {
-		return (super.dependencies || []).concat(['test.type', 'helper.path', 'helper.string']);
+		return (super.dependencies || []).concat(['helper.path', 'helper.string', 'test.type']);
 	}
 
 	/**
@@ -161,4 +160,4 @@ class MakeTestCommand extends GeneratorCommand {
 }
 
 
-module.exports = MakeTestCommand;
+export default MakeTestCommand;

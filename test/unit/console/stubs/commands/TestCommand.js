@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 'use strict';
 
-const Command = require('../../../../../src/console/Command');
+const Command = require('../../../../../dist/node/console/Command');
 
 
 class TestCommand extends Command {

@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Driver = _interopRequireDefault(require("./Driver"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Log - Services - Logger - Drivers - File Driver
 //--------------------------------------------------------
-'use strict';
 
-const Driver = require('./Driver');
 /**
  * Driver that logs into a database table.
  *
@@ -11,11 +17,9 @@ const Driver = require('./Driver');
  * @augments log.services.Logger.drivers.Driver
  * @hideconstructor
  */
-
-
-class DatabaseDriver extends Driver {
+class DatabaseDriver extends _Driver.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'db', 'log.level', 'terminal']</code>.
    *
    * @type {Array<string>}
    */
@@ -165,4 +169,7 @@ class DatabaseDriver extends Driver {
 
 }
 
-module.exports = DatabaseDriver;
+var _default = DatabaseDriver;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

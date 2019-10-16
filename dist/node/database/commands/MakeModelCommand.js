@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _GeneratorCommand = _interopRequireDefault(require("../../console/GeneratorCommand"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Command - Make Model
 //--------------------------------------------------------
-'use strict';
 
-const GeneratorCommand = require('../../console/GeneratorCommand');
 /**
  * Command that makes a model class file inside the database models folder.
  *
@@ -11,9 +17,7 @@ const GeneratorCommand = require('../../console/GeneratorCommand');
  * @augments console.GeneratorCommand
  * @hideconstructor
  */
-
-
-class MakeModelCommand extends GeneratorCommand {
+class MakeModelCommand extends _GeneratorCommand.default {
   /**
    * @inheritdoc
    */
@@ -52,7 +56,7 @@ class MakeModelCommand extends GeneratorCommand {
 
 
   get destination() {
-    return this.app.make('db.resolver').resolvePath('models');
+    return this.app.make('db.resolver').resolveSourcePath('models');
   }
   /**
    * @inheritdoc
@@ -82,4 +86,7 @@ class MakeModelCommand extends GeneratorCommand {
 
 }
 
-module.exports = MakeModelCommand;
+var _default = MakeModelCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

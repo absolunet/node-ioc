@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine
 //--------------------------------------------------------
-'use strict';
 
-const FileEngineProxy = require('./FileEngineProxy');
-const forwardCalls    = require('../../../support/mixins/forwardCalls');
+import FileEngineProxy from './FileEngineProxy';
+import forwardCalls    from '../../../support/mixins/forwardCalls';
 
 
 /**
@@ -19,7 +18,7 @@ const forwardCalls    = require('../../../support/mixins/forwardCalls');
 class FileEngine extends forwardCalls() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'file.system.async', 'file.system.sync']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -67,4 +66,4 @@ class FileEngine extends forwardCalls() {
 }
 
 
-module.exports = FileEngine;
+export default FileEngine;

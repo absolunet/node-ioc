@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine - System - Async
 //--------------------------------------------------------
-'use strict';
 
-const Async = require('./Async');
+import Async from './Async';
 
 
-module.exports = Async;
+export default Async;

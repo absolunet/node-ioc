@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _mixinFactory = _interopRequireDefault(require("../../../support/mixins/concerns/mixinFactory"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Test - Mixins - Sets up
 //--------------------------------------------------------
-'use strict';
 
-const factory = require('../../../support/mixins/concerns/mixinFactory');
 /**
  * Sets up mixin.
  *
@@ -12,9 +18,7 @@ const factory = require('../../../support/mixins/concerns/mixinFactory');
  * @memberof test.mixins.core
  * @hideconstructor
  */
-
-
-const setsUp = factory(SuperClass => {
+const setsUp = (0, _mixinFactory.default)(SuperClass => {
   /**
    * Sets up mixin.
    */
@@ -60,4 +64,7 @@ const setsUp = factory(SuperClass => {
 
   };
 });
-module.exports = setsUp;
+var _default = setsUp;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

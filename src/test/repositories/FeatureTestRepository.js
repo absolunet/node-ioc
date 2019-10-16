@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Test - Repository - Feature Test repository
 //--------------------------------------------------------
-'use strict';
 
-const TestRepository = require('./TestRepository');
+import TestRepository from './TestRepository';
 
 
 /**
@@ -24,4 +23,5 @@ class FeatureTestRepository extends TestRepository {
 
 }
 
-module.exports = FeatureTestRepository;
+
+export default FeatureTestRepository;

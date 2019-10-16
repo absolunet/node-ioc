@@ -1,9 +1,15 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - HTTP - Controller - Controller
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Abstract controller class that describes all the shortcuts to take action on the response object.
  *
@@ -11,8 +17,6 @@ const __ = require('@absolunet/private-registry');
  * @abstract
  * @hideconstructor
  */
-
-
 class Controller {
   /**
    * Prepare request handling.
@@ -22,13 +26,10 @@ class Controller {
    * @param {response} response - The current response instance.
    */
   prepareHandling(app, request, response) {
-    __(this).set('app', app);
-
-    __(this).set('request', request);
-
-    __(this).set('response', response);
-
-    __(this).set('isStreaming', false);
+    (0, _privateRegistry.default)(this).set('app', app);
+    (0, _privateRegistry.default)(this).set('request', request);
+    (0, _privateRegistry.default)(this).set('response', response);
+    (0, _privateRegistry.default)(this).set('isStreaming', false);
   }
   /**
    * Send HTML response.
@@ -63,8 +64,7 @@ class Controller {
 
 
   async stream(handler) {
-    __(this).set('isStreaming', true);
-
+    (0, _privateRegistry.default)(this).set('isStreaming', true);
     this.response.writeHead(200, {
       'Content-Type': 'text/plain',
       'Transfer-Encoding': 'chunked'
@@ -292,7 +292,7 @@ class Controller {
 
 
   get isStreaming() {
-    return __(this).get('isStreaming');
+    return (0, _privateRegistry.default)(this).get('isStreaming');
   }
   /**
    * Container.
@@ -302,7 +302,7 @@ class Controller {
 
 
   get app() {
-    return __(this).get('app');
+    return (0, _privateRegistry.default)(this).get('app');
   }
   /**
    * Express request.
@@ -312,7 +312,7 @@ class Controller {
 
 
   get request() {
-    return __(this).get('request');
+    return (0, _privateRegistry.default)(this).get('request');
   }
   /**
    * Express response.
@@ -322,9 +322,12 @@ class Controller {
 
 
   get response() {
-    return __(this).get('response');
+    return (0, _privateRegistry.default)(this).get('response');
   }
 
 }
 
-module.exports = Controller;
+var _default = Controller;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

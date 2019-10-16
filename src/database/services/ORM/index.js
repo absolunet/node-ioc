@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - ORM
 //--------------------------------------------------------
-'use strict';
 
-const ORM = require('./ORM');
+import ORM from './ORM';
 
 
-module.exports = ORM;
+export default ORM;

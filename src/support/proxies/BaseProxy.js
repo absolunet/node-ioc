@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Proxies - Base Proxy
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
+import __ from '@absolunet/private-registry';
 
 
 /**
@@ -58,4 +57,4 @@ class BaseProxy {
 }
 
 
-module.exports = BaseProxy;
+export default BaseProxy;

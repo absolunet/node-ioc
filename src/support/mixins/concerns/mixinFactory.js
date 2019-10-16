@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- IoC - Foundation - Mixins - Concerns - Define mixin
 //--------------------------------------------------------
-'use strict';
 
-const GenericClass = require('./GenericClass');
+import GenericClass from './GenericClass';
 
 
 /**
@@ -20,4 +19,4 @@ const factory = (callback) => {
 };
 
 
-module.exports = factory;
+export default factory;

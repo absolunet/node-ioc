@@ -1,11 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - View - Services - Engine
 //--------------------------------------------------------
-'use strict';
 
-const hasDriver      = require('../../../support/mixins/hasDriver');
-const JsRenderDriver = require('./drivers/JsRenderDriver');
-const NullDriver     = require('./drivers/NullDriver');
+import hasDriver      from '../../../support/mixins/hasDriver';
+import JsRenderDriver from './drivers/JsRenderDriver';
+import NullDriver     from './drivers/NullDriver';
 
 
 /**
@@ -18,7 +17,7 @@ const NullDriver     = require('./drivers/NullDriver');
 class Engine extends hasDriver() {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['app', 'config']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -62,4 +61,4 @@ class Engine extends hasDriver() {
 }
 
 
-module.exports = Engine;
+export default Engine;

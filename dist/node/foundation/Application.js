@@ -1,27 +1,42 @@
+"use strict";
+
+exports.default = void 0;
+
+var os = _interopRequireWildcard(require("os"));
+
+var path = _interopRequireWildcard(require("path"));
+
+var _slash = _interopRequireDefault(require("slash"));
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _Container = _interopRequireDefault(require("../container/Container"));
+
+var _ConfigServiceProvider = _interopRequireDefault(require("../config/ConfigServiceProvider"));
+
+var _EventServiceProvider = _interopRequireDefault(require("../events/EventServiceProvider"));
+
+var _FileServiceProvider = _interopRequireDefault(require("../file/FileServiceProvider"));
+
+var _SupportServiceProvider = _interopRequireDefault(require("../support/SupportServiceProvider"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 //--------------------------------------------------------
 //-- Node IoC - Foundation - Application
 //--------------------------------------------------------
-'use strict';
 
-const os = require('os');
-
-const path = require('path');
-
-const slash = require('slash');
-
-const __ = require('@absolunet/private-registry');
-
-const Container = require('../container/Container');
-
-const ConfigServiceProvider = require('../config/ConfigServiceProvider');
-
-const EventServiceProvider = require('../events/EventServiceProvider');
-
-const FileServiceProvider = require('../file/FileServiceProvider');
-
-const SupportServiceProvider = require('../support/SupportServiceProvider');
-
-const coreProviders = [EventServiceProvider, FileServiceProvider, SupportServiceProvider, ConfigServiceProvider];
+/**
+ * Base application service providers.
+ *
+ * @type {Array<foundation.ServiceProvider>}
+ * @ignore
+ */
+const coreProviders = [_EventServiceProvider.default, _FileServiceProvider.default, _SupportServiceProvider.default, _ConfigServiceProvider.default];
 /**
  * The main Node IoC application class that does all the bootstrapping over core providers and allow module registration.
  *
@@ -30,7 +45,7 @@ const coreProviders = [EventServiceProvider, FileServiceProvider, SupportService
  * @hideconstructor
  */
 
-class Application extends Container {
+class Application extends _Container.default {
   /**
    * Register a service provider.
    *
@@ -74,8 +89,7 @@ class Application extends Container {
 
   ensureProviderCanBeRegistered() {
     if (!this.booted) {
-      const providers = __(this).get('providers');
-
+      const providers = (0, _privateRegistry.default)(this).get('providers');
       const wereAllRegistered = providers.length > 0 && providers.every(({
         registered
       }) => {
@@ -98,9 +112,7 @@ class Application extends Container {
   pushProvider(provider) {
     this.ensureProviderCanBeRegistered();
     const model = this.getProviderModel(provider);
-
-    __(this).get('providers').push(model);
-
+    (0, _privateRegistry.default)(this).get('providers').push(model);
     return model;
   }
   /**
@@ -114,9 +126,7 @@ class Application extends Container {
   unshiftProvider(provider) {
     this.ensureProviderCanBeRegistered();
     const model = this.getProviderModel(provider);
-
-    __(this).get('providers').unshift(model);
-
+    (0, _privateRegistry.default)(this).get('providers').unshift(model);
     return model;
   }
   /**
@@ -134,20 +144,15 @@ class Application extends Container {
 
     this.bootCoreProviders();
     const dispatcher = this.make('event');
-
-    __(this).get('onBooting').forEach(callback => {
+    (0, _privateRegistry.default)(this).get('onBooting').forEach(callback => {
       dispatcher.on('application.booting', callback);
     });
-
-    __(this).get('onBooted').forEach(callback => {
+    (0, _privateRegistry.default)(this).get('onBooted').forEach(callback => {
       dispatcher.on('application.booted', callback);
     });
-
     dispatcher.emit('application.booting', this);
-
-    const providers = __(this).get('providers'); // We use a for loop instead of a forEach to allow providers to register other providers,
+    const providers = (0, _privateRegistry.default)(this).get('providers'); // We use a for loop instead of a forEach to allow providers to register other providers,
     // so they can be properly registered and booted during application boot process.
-
 
     let i;
 
@@ -159,8 +164,7 @@ class Application extends Container {
       this.bootProvider(providers[i]);
     }
 
-    __(this).set('booted', true);
-
+    (0, _privateRegistry.default)(this).set('booted', true);
     this.make('event').emit('application.booted', this);
     return this;
   }
@@ -174,14 +178,13 @@ class Application extends Container {
       throw new TypeError('The container was already booted.');
     }
 
-    if (!__(this).get('booted.core')) {
+    if (!(0, _privateRegistry.default)(this).get('booted.core')) {
       [...coreProviders].reverse().map(provider => {
         return this.unshiftProvider(provider);
       }).reverse().forEach(providerModel => {
         this.registerProvider(providerModel);
       });
-
-      __(this).set('booted.core', true);
+      (0, _privateRegistry.default)(this).set('booted.core', true);
     }
   }
   /**
@@ -219,7 +222,7 @@ class Application extends Container {
 
 
   isRegistered(provider) {
-    return __(this).get('providers').some(({
+    return (0, _privateRegistry.default)(this).get('providers').some(({
       provider: p
     }) => {
       return provider === p;
@@ -263,8 +266,8 @@ class Application extends Container {
   /**
    * Configure application paths.
    *
-   * @param {{string}|string|null} paths - The paths to configure into the application.
-   * @returns {Application} - The current application instance.
+   * @param {object<string, string>|string|null} paths - The paths to configure into the application.
+   * @returns {foundation.Application} - The current application instance.
    * @throws TypeError - Indicates that the base path was never defined.
    */
 
@@ -284,28 +287,91 @@ class Application extends Container {
     return this;
   }
   /**
+   * Configure application namespaces.
+   *
+   * @param {object<string, string>} namespaces - The namespaces to configure into the application.
+   * @returns {foundation.Application} - The current application instance.
+   */
+
+
+  configureNamespaces(namespaces) {
+    Object.keys(namespaces).forEach(namespace => {
+      this.bind(`namespace.${namespace}`, namespaces[namespace]);
+    });
+    return this;
+  }
+  /**
    * Configure default paths within the container.
    *
-   * @returns {Application} - The current application instane.
+   * @returns {Application} - The current application instance.
    */
 
 
   configureDefaultPaths() {
     const basePath = process.cwd();
+    const appNamespace = 'app';
+    const sourceNamespace = 'src';
+    const distributionNamespace = this.formatPath('dist', 'node');
+    this.configureNamespaces({
+      app: appNamespace,
+      src: sourceNamespace,
+      // eslint-disable-line unicorn/prevent-abbreviations
+      dist: distributionNamespace
+    });
     this.configurePaths({
+      'home': os.homedir(),
       'base': this.formatPath(basePath),
       'config': this.formatPath(basePath, 'config'),
-      'database': this.formatPath(basePath, 'database'),
       'lang': this.formatPath(basePath, 'resources', 'lang'),
       'public': this.formatPath(basePath, 'resources', 'static'),
       'resources': this.formatPath(basePath, 'resources'),
-      'routes': this.formatPath(basePath, 'routes'),
       'storage': this.formatPath(basePath, 'storage'),
       'test': this.formatPath(basePath, 'test'),
-      'view': this.formatPath(basePath, 'resources', 'views')
+      'view': this.formatPath(basePath, 'resources', 'views'),
+      'dist': this.formatPath(basePath, distributionNamespace),
+      'bootstrap': this.formatPath(basePath, distributionNamespace, 'bootstrap'),
+      'database': this.formatPath(basePath, distributionNamespace, 'database'),
+      'routes': this.formatPath(basePath, distributionNamespace, 'routes'),
+      'app': this.formatPath(basePath, distributionNamespace, appNamespace),
+      'command': this.formatPath(basePath, distributionNamespace, appNamespace, 'console', 'commands'),
+      'controller': this.formatPath(basePath, distributionNamespace, appNamespace, 'http', 'controllers'),
+      'provider': this.formatPath(basePath, distributionNamespace, appNamespace, 'providers'),
+      'src': this.formatPath(basePath, sourceNamespace),
+      'src.bootstrap': this.formatPath(basePath, sourceNamespace, 'bootstrap'),
+      'src.database': this.formatPath(basePath, sourceNamespace, 'database'),
+      'src.routes': this.formatPath(basePath, sourceNamespace, 'routes'),
+      'src.app': this.formatPath(basePath, sourceNamespace, appNamespace),
+      'src.command': this.formatPath(basePath, sourceNamespace, appNamespace, 'console', 'commands'),
+      'src.controller': this.formatPath(basePath, sourceNamespace, appNamespace, 'http', 'controllers'),
+      'src.provider': this.formatPath(basePath, sourceNamespace, appNamespace, 'providers')
     });
-    this.useAppPath('app');
-    this.useHomePath(os.homedir());
+    return this;
+  }
+  /**
+   * Replace bound paths that matches the given original one by a new one.
+   *
+   * @example
+   * this.bind('app.foo', '/base/foo/path');
+   * this.bind('app.bar', '/base/bar/path');
+   * this.bind('app.baz', '/some/baz/path');
+   * this.replacePaths('/base/', '/new/');
+   * this.make('app.foo'); // "/new/foo/path"
+   * this.make('app.bar'); // "/new/bar/path"
+   * this.make('app.baz'); // "/some/baz/path" (hasn't changed since not matching)
+   *
+   * @param {string} from - The original path to replace.
+   * @param {string} to - The new path that replaces the older.
+   * @param {boolean} isSource - Indicates that the replacement must affect.
+   * @returns {Application} - The current application instance.
+   */
+
+
+  replacePaths(from, to, isSource = false) {
+    this.getBounds().forEach(name => {
+      if (new RegExp(`^path\\.${isSource ? 'src\\.?' : '?(?!src\\.)'}`, 'u').test(name)) {
+        this.bind(name, this.formatPath(this.make(name).replace(new RegExp(`^${from}`, 'u'), to)));
+      }
+    });
     return this;
   }
   /**
@@ -331,32 +397,52 @@ class Application extends Container {
 
 
   useBasePath(basePath) {
-    const currentBasePath = this.make('path.base');
-    this.getBounds().forEach(name => {
-      if (/^path.?/u.test(name)) {
-        this.bind(name, this.formatPath(this.make(name).replace(new RegExp(`^${currentBasePath}`, 'u'), basePath)));
-      }
-    });
-    return this;
+    return this.replacePaths(this.basePath(), basePath);
   }
   /**
    * Use application path for all application-related registered paths.
    *
-   * @param {string} appPath - The new application path.
+   * @param {string} appPath - The new application relative path.
    * @returns {Application} - The current application instance.
    */
 
 
   useAppPath(appPath) {
-    const basePath = this.make('path.base');
-    const baseAppPath = this.formatPath(basePath, appPath);
-    this.configurePaths({
-      app: baseAppPath,
-      command: this.formatPath(baseAppPath, 'commands'),
-      controller: this.formatPath(baseAppPath, 'http', 'controllers'),
-      provider: this.formatPath(baseAppPath, 'providers')
+    this.configureNamespaces({
+      app: appPath
     });
+    this.replacePaths(this.sourcePath('app', ''), this.sourcePath(appPath), true);
+    this.replacePaths(this.distributionPath('app', ''), this.distributionPath(appPath));
     return this;
+  }
+  /**
+   * Use source path for all application-related registered paths.
+   *
+   * @param {string} sourcePath - The new source path.
+   * @returns {Application} - The current application instance.
+   */
+
+
+  useSourcePath(sourcePath) {
+    this.configureNamespaces({
+      src: sourcePath
+    }); // eslint-disable-line unicorn/prevent-abbreviations
+
+    return this.replacePaths(this.sourcePath(), this.basePath(sourcePath));
+  }
+  /**
+   * Use source path for all application-related registered paths.
+   *
+   * @param {string} distributionPath - The new distribution path.
+   * @returns {Application} - The current application instance.
+   */
+
+
+  useDistributionPath(distributionPath) {
+    this.configureNamespaces({
+      dist: distributionPath
+    });
+    return this.replacePaths(this.distributionPath(), this.basePath(distributionPath));
   }
   /**
    * Format given path or path segments.
@@ -367,7 +453,7 @@ class Application extends Container {
 
 
   formatPath(...segments) {
-    return slash(path.join(...segments));
+    return (0, _slash.default)(path.join(...segments));
   }
   /**
    * Get full path from given base path type.
@@ -461,6 +547,24 @@ class Application extends Container {
     return this.path('database', relativePath);
   }
   /**
+   * Get full path from distribution path.
+   * If a type is provided first, the relative path to the source folder type will be returned.
+   * Otherwise, the full path from the source folder will be returned.
+   *
+   * @param {string} [type] - Either the source type name, or the relative path.
+   * @param {string} [relativePath] - The relative path from the given source folder type.
+   * @returns {string} - The formatted path from distribution path.
+   */
+
+
+  distributionPath(type, relativePath) {
+    if (typeof relativePath === 'undefined') {
+      return this.path('dist', type);
+    }
+
+    return this.path(type, relativePath);
+  }
+  /**
    * Get full path from lang path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from lang path.
@@ -507,13 +611,31 @@ class Application extends Container {
   /**
    * Get full path from routes path.
    *
-   * @param {string|Array<string>} [relativePath] - The relative path from routes path.
-   * @returns {string} - The formatted path from routes path.
+   * @param {string|Array<string>} [relativePath] - The relative path from resources path.
+   * @returns {string} - The formatted path from resources path.
    */
 
 
   routesPath(relativePath) {
     return this.path('routes', relativePath);
+  }
+  /**
+   * Get full path from source path.
+   * If a type is provided first, the relative path to the source folder type will be returned.
+   * Otherwise, the full path from the source folder will be returned.
+   *
+   * @param {string} [type] - Either the source type name, or the relative path.
+   * @param {string} [relativePath] - The relative path from the given source folder type.
+   * @returns {string} - The formatted path from source path.
+   */
+
+
+  sourcePath(type, relativePath) {
+    if (typeof relativePath === 'undefined') {
+      return this.path('src', type);
+    }
+
+    return this.path(`src.${type}`, relativePath);
   }
   /**
    * Get full path from storage path.
@@ -559,17 +681,11 @@ class Application extends Container {
     }
 
     super.flush();
-
-    __(this).set('providers', []);
-
-    __(this).set('booted', false);
-
-    __(this).set('booted.core', false);
-
-    __(this).set('onBooting', []);
-
-    __(this).set('onBooted', []);
-
+    (0, _privateRegistry.default)(this).set('providers', []);
+    (0, _privateRegistry.default)(this).set('booted', false);
+    (0, _privateRegistry.default)(this).set('booted.core', false);
+    (0, _privateRegistry.default)(this).set('onBooting', []);
+    (0, _privateRegistry.default)(this).set('onBooted', []);
     this.configureDefaultPaths();
   }
   /**
@@ -581,8 +697,7 @@ class Application extends Container {
 
 
   onBooting(callback) {
-    __(this).get('onBooting').push(callback);
-
+    (0, _privateRegistry.default)(this).get('onBooting').push(callback);
     return this;
   }
   /**
@@ -599,8 +714,7 @@ class Application extends Container {
       return callback(this);
     }
 
-    __(this).get('onBooted').push(callback);
-
+    (0, _privateRegistry.default)(this).get('onBooted').push(callback);
     return this;
   }
   /**
@@ -634,13 +748,14 @@ class Application extends Container {
 
 
   setEnvironment(environment) {
-    __(this).set('env', environment);
+    (0, _privateRegistry.default)(this).set('env', environment);
 
     if (this.isBound('config')) {
       this.make('config').set('app.env', environment);
     }
 
-    process.env.APP_ENV = environment;
+    process.env.APP_ENV = environment; // eslint-disable-line no-process-env
+
     return this;
   }
   /**
@@ -665,7 +780,7 @@ class Application extends Container {
 
 
   get booted() {
-    return __(this).get('booted');
+    return (0, _privateRegistry.default)(this).get('booted');
   }
   /**
    * Current environment accessor.
@@ -675,13 +790,13 @@ class Application extends Container {
 
 
   get environment() {
-    const defaultEnvironment = process.env.APP_ENV || process.env.NODE_ENV || 'production';
+    const defaultEnvironment = process.env.APP_ENV || process.env.NODE_ENV || 'production'; // eslint-disable-line no-process-env
 
     if (this.isBound('config')) {
       return this.make('config').get('app.env', defaultEnvironment);
     }
 
-    return __(this).get('env') || defaultEnvironment;
+    return (0, _privateRegistry.default)(this).get('env') || defaultEnvironment;
   }
   /**
    * Current environment mutator.
@@ -696,4 +811,7 @@ class Application extends Container {
 
 }
 
-module.exports = Application;
+var _default = Application;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

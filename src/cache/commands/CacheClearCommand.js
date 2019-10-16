@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - Cache - Command - Cache Clear
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
+import Command from '../../console/Command';
 
 
 /**
@@ -16,7 +15,7 @@ const Command = require('../../console/Command');
 class CacheClearCommand extends Command {
 
 	/**
-	 * Class dependencies.
+	 * Class dependencies: <code>['cache']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
@@ -79,4 +78,4 @@ class CacheClearCommand extends Command {
 
 }
 
-module.exports = CacheClearCommand;
+export default CacheClearCommand;

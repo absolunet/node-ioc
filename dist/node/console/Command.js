@@ -1,17 +1,23 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+var _NotImplementedError = _interopRequireDefault(require("../foundation/exceptions/NotImplementedError"));
+
+var _Flag = _interopRequireDefault(require("./models/Flag"));
+
+var _Option = _interopRequireDefault(require("./models/Option"));
+
+var _Parameter = _interopRequireDefault(require("./models/Parameter"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Command
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
-
-const NotImplementedError = require('../foundation/exceptions/NotImplementedError');
-
-const Flag = require('./models/Flag');
-
-const Option = require('./models/Option');
-
-const Parameter = require('./models/Parameter');
 /**
  * Abstract command class.
  * It allows to properly create a valid command into the command registrar.
@@ -20,16 +26,13 @@ const Parameter = require('./models/Parameter');
  * @abstract
  * @hideconstructor
  */
-
-
 class Command {
   /**
    * @inheritdoc
    * @private
    */
   init() {
-    __(this).set('verbose', 0);
-
+    (0, _privateRegistry.default)(this).set('verbose', 0);
     this.formatArguments();
     this.initOutputInterceptor();
   }
@@ -41,7 +44,7 @@ class Command {
 
 
   get policies() {
-    return ['private'];
+    return ['public'];
   }
   /**
    * Command name accessor.
@@ -52,7 +55,7 @@ class Command {
 
 
   get name() {
-    throw new NotImplementedError(this, 'name', 'string', 'accessor');
+    throw new _NotImplementedError.default(this, 'name', 'string', 'accessor');
   }
   /**
    * Command description accessor.
@@ -181,9 +184,7 @@ class Command {
       argumentModels
     } = this;
     const parameters = {};
-
-    __(this).set('arguments', parameters);
-
+    (0, _privateRegistry.default)(this).set('arguments', parameters);
     Object.keys(argumentModels).forEach(type => {
       const Argument = argumentModels[type];
       parameters[type] = [];
@@ -299,16 +300,14 @@ class Command {
 
   get args() {
     // eslint-disable-line unicorn/prevent-abbreviations
-    let parameters = __(this).get('arguments');
+    let parameters = (0, _privateRegistry.default)(this).get('arguments');
 
     if (parameters) {
       return parameters;
     }
 
     parameters = {};
-
-    __(this).set('arguments', parameters);
-
+    (0, _privateRegistry.default)(this).set('arguments', parameters);
     return parameters;
   }
   /**
@@ -595,11 +594,9 @@ class Command {
 
   initOutputInterceptor() {
     const capturedOutput = 'capturedOutput';
-
-    __(this).set(capturedOutput, '');
-
-    __(this).set('outputInterceptor', output => {
-      __(this).set(capturedOutput, `${__(this).get(capturedOutput)}\n${output}`);
+    (0, _privateRegistry.default)(this).set(capturedOutput, '');
+    (0, _privateRegistry.default)(this).set('outputInterceptor', output => {
+      (0, _privateRegistry.default)(this).set(capturedOutput, `${(0, _privateRegistry.default)(this).get(capturedOutput)}\n${output}`);
     });
   }
   /**
@@ -637,7 +634,7 @@ class Command {
       this.stopCaptureOutput();
     }
 
-    return __(this).get('capturedOutput');
+    return (0, _privateRegistry.default)(this).get('capturedOutput');
   }
   /**
    * Get verbose level, from 0 to 3.
@@ -654,7 +651,7 @@ class Command {
 
 
   get verbose() {
-    return __(this).get('verbose');
+    return (0, _privateRegistry.default)(this).get('verbose');
   }
   /**
    * Yargs instance accessor.
@@ -664,7 +661,7 @@ class Command {
 
 
   get yargs() {
-    return __(this).get('yargs');
+    return (0, _privateRegistry.default)(this).get('yargs');
   }
   /**
    * Yargs mutator.
@@ -684,7 +681,7 @@ class Command {
 
 
   setYargs(yargs) {
-    __(this).set('yargs', yargs);
+    (0, _privateRegistry.default)(this).set('yargs', yargs);
   }
   /**
    * Set the current arguments from the console.
@@ -708,8 +705,7 @@ class Command {
         argument.value = argv[argument.name];
       }
     });
-
-    __(this).set('verbose', argv.v || (argv.verbose ? 1 : 0));
+    (0, _privateRegistry.default)(this).set('verbose', argv.v || (argv.verbose ? 1 : 0));
   }
   /**
    * Build yargs model.
@@ -726,12 +722,10 @@ class Command {
     }
 
     const builder = {};
-
     const {
       options,
       flags
-    } = __(this).get('arguments');
-
+    } = (0, _privateRegistry.default)(this).get('arguments');
     [...options, ...flags].forEach(argument => {
       builder[argument.name] = argument.yargsModel;
     });
@@ -760,9 +754,9 @@ class Command {
 
   get argumentModels() {
     return {
-      parameters: Parameter,
-      options: Option,
-      flags: Flag
+      parameters: _Parameter.default,
+      options: _Option.default,
+      flags: _Flag.default
     };
   }
   /**
@@ -773,7 +767,7 @@ class Command {
 
 
   get outputInterceptor() {
-    return __(this).get('outputInterceptor');
+    return (0, _privateRegistry.default)(this).get('outputInterceptor');
   }
   /**
    * The terminal interceptor.
@@ -788,4 +782,7 @@ class Command {
 
 }
 
-module.exports = Command;
+var _default = Command;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

@@ -1,8 +1,14 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("../../console/Command"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //-- Node IoC - Database - Command - Migrate Fresh
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../console/Command');
 /**
  * Command that drops all tables and re-runs all migrations.
  *
@@ -10,11 +16,9 @@ const Command = require('../../console/Command');
  * @augments console.Command
  * @hideconstructor
  */
-
-
-class MigrateFreshCommand extends Command {
+class MigrateFreshCommand extends _Command.default {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['config', 'db']</code>.
    *
    * @type {Array<string>}
    */
@@ -92,4 +96,7 @@ class MigrateFreshCommand extends Command {
 
 }
 
-module.exports = MigrateFreshCommand;
+var _default = MigrateFreshCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

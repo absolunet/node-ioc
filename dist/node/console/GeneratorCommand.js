@@ -1,24 +1,28 @@
+"use strict";
+
+exports.default = void 0;
+
+var _Command = _interopRequireDefault(require("./Command"));
+
+var _NotImplementedError = _interopRequireDefault(require("../foundation/exceptions/NotImplementedError"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Console - Command
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('./Command');
-
-const NotImplementedError = require('../foundation/exceptions/NotImplementedError');
 /**
  * This abstract class allows to create a command that generates a file.
  * It is normally used to create a command, a controller, a migration, any kind of file.
  * It relies on existing stub that will be formatted with a given grammar.
  *
  * @memberof console
- * @augments console.COmmand
+ * @augments console.Command
  * @abstract
  * @hideconstructor
  */
-
-
-class GeneratorCommand extends Command {
+class GeneratorCommand extends _Command.default {
   /**
    * @inheritdoc
    */
@@ -35,7 +39,7 @@ class GeneratorCommand extends Command {
 
 
   get files() {
-    throw new NotImplementedError(this, 'files', 'associative set of paths', 'accessor');
+    throw new _NotImplementedError.default(this, 'files', 'associative set of paths', 'accessor');
   }
   /**
    * Destination accessor.
@@ -48,7 +52,7 @@ class GeneratorCommand extends Command {
 
 
   get destination() {
-    throw new NotImplementedError(this, 'destination', 'string', 'accessor');
+    throw new _NotImplementedError.default(this, 'destination', 'string', 'accessor');
   }
   /**
    * Filename accessor.
@@ -184,4 +188,7 @@ class GeneratorCommand extends Command {
 
 }
 
-module.exports = GeneratorCommand;
+var _default = GeneratorCommand;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

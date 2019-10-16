@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Node IoC - File - Engine
 //--------------------------------------------------------
-'use strict';
 
-const FileEngine = require('./FileEngine');
+import FileEngine from './FileEngine';
 
 
-module.exports = FileEngine;
+export default FileEngine;

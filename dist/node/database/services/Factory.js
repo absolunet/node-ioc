@@ -1,20 +1,24 @@
+"use strict";
+
+exports.default = void 0;
+
+var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //--------------------------------------------------------
 //-- Node IoC - Database - Services - Factory
 //--------------------------------------------------------
-'use strict';
 
-const __ = require('@absolunet/private-registry');
 /**
  * Factory service that helps build factoried model instances through defined model factories.
  *
  * @memberof database.services
  * @hideconstructor
  */
-
-
 class Factory {
   /**
-   * Class dependencies.
+   * Class dependencies: <code>['app', 'db.model', 'faker']</code>.
    *
    * @type {Array<string>}
    */
@@ -28,7 +32,7 @@ class Factory {
 
 
   init() {
-    __(this).set('factories', {});
+    (0, _privateRegistry.default)(this).set('factories', {});
   }
   /**
    * Get model factory instance by name.
@@ -39,7 +43,7 @@ class Factory {
 
 
   get(name) {
-    const factory = __(this).get('factories')[name];
+    const factory = (0, _privateRegistry.default)(this).get('factories')[name];
 
     if (!factory) {
       throw new TypeError(`Cannot find factory for model [${name}].`);
@@ -64,8 +68,7 @@ class Factory {
 
 
   make(model, parameters = {}, times = 1) {
-    const ModelInstance = __(this).get('db.model').get(model);
-
+    const ModelInstance = (0, _privateRegistry.default)(this).get('db.model').get(model);
     const factory = this.get(model);
     const count = typeof parameters === 'number' ? parameters : times;
     const properties = typeof parameters === 'number' ? {} : parameters;
@@ -93,10 +96,13 @@ class Factory {
 
   register(factory, model = null) {
     const instance = this.app.make(factory);
-    __(this).get('factories')[model || instance.model] = instance;
+    (0, _privateRegistry.default)(this).get('factories')[model || instance.model] = instance;
     return this;
   }
 
 }
 
-module.exports = Factory;
+var _default = Factory;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

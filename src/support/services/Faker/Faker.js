@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Node IoC - Support - Services - Faker
 //--------------------------------------------------------
-'use strict';
 
-const FakerProxy   = require('./FakerProxy');
-const forwardCalls = require('../../mixins/forwardCalls');
+import FakerProxy   from './FakerProxy';
+import forwardCalls from '../../mixins/forwardCalls';
 
 
 /**
@@ -38,4 +37,4 @@ class Faker extends forwardCalls() {
 }
 
 
-module.exports = Faker;
+export default Faker;

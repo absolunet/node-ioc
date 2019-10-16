@@ -1,11 +1,10 @@
 //--------------------------------------------------------
 //-- Node IoC - Events - Services - Dispatcher - Drivers - PubSubJS Driver
 //--------------------------------------------------------
-'use strict';
 
-const __     = require('@absolunet/private-registry');
-const PubSub = require('pubsub-js');
-const Driver = require('./Driver');
+import __     from '@absolunet/private-registry';
+import PubSub from 'pubsub-js';
+import Driver from './Driver';
 
 
 /**
@@ -107,4 +106,4 @@ class PubSubJsDriver extends Driver {
 }
 
 
-module.exports = PubSubJsDriver;
+export default PubSubJsDriver;
