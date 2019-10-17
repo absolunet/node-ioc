@@ -46,7 +46,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "lib/**/*.js"
+      "dist/**/*.js"
     ]
   },
   "devDependencies": {
