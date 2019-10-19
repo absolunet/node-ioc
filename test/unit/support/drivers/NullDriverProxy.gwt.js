@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Drivers - Null Driver Proxy - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container        = require('../../container');
-const NullDriverProxy = require('../../../../dist/node/support/drivers/NullDriverProxy');
+import container        from '../../container';
+import NullDriverProxy from '../../../../dist/node/support/drivers/NullDriverProxy';
 
 let nullInstance;
 let result;
@@ -48,6 +48,12 @@ when.accessingSubProperty = () => {
 when.accessingSubPropertyByDestructuring = () => {
 	when.attempting(() => {
 		({ foo: { bar: result } } = nullInstance);
+	});
+};
+
+when.accessingSymbolProperty = () => {
+	when.attempting(() => {
+		result = nullInstance[Symbol('foo')];
 	});
 };
 
@@ -115,6 +121,16 @@ when.callingObjectGetPrototypeOf = () => {
 //-- Then
 //--------------------------------------------------------
 
+then.resultShouldBe = (expected) => {
+	then.shouldNotHaveThrown();
+	expect(result).toBe(expected);
+};
+
+then.resultShouldEqual = (expected) => {
+	then.shouldNotHaveThrown();
+	expect(result).toStrictEqual(expected);
+};
+
 then.resultShouldBeNullInstance = () => {
 	then.shouldNotHaveThrown();
 	expect(result).toBeTruthy();
@@ -123,13 +139,11 @@ then.resultShouldBeNullInstance = () => {
 };
 
 then.resultShouldBeEmptyArray = () => {
-	then.shouldNotHaveThrown();
-	expect(result).toStrictEqual([]);
+	then.resultShouldEqual([]);
 };
 
 then.resultShouldBeArrayWithContainerDynamicProperties = () => {
-	then.shouldNotHaveThrown();
-	expect(result).toStrictEqual(['__instance', 'init']);
+	then.resultShouldEqual(['__instance', 'init']);
 };
 
 then.resultShouldBePlainFunction = () => {
@@ -144,10 +158,5 @@ then.resultShouldBeEmptyObject = () => {
 	expect(result).not.toBe(nullInstance);
 };
 
-then.resultShouldBeUndefined = () => {
-	then.shouldNotHaveThrown();
-	expect(result).toBe(undefined);
-};
 
-
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Resolver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Resolver  = require('../../../../dist/node/database/services/Resolver');
+import container from '../../container';
+import Resolver  from '../../../../dist/node/database/services/Resolver';
 
 let result;
 let resolver;
@@ -187,4 +187,4 @@ then.configGrammarShouldHaveBeenUsedForEveryPathsAsDefaultPaths = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -19,7 +19,7 @@ class Sync extends forwardCalls() {
 	 * Sync constructor.
 	 *
 	 * @param {...*} parameters - Injected parameters.
-	 * @returns {Sync} - The sync instance wrapped by a proxy.
+	 * @returns {file.system.Sync} The sync instance wrapped by a proxy.
 	 */
 	constructor(...parameters) {
 		super(...parameters);

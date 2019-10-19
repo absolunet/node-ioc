@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Command Registrar - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container        = require('../../container');
-const CommandRegistrar = require('../../../../dist/node/console/services/CommandRegistrar');
-const Command          = require('../../../../dist/node/console/Command');
+import container        from '../../container';
+import CommandRegistrar from '../../../../dist/node/console/services/CommandRegistrar';
+import Command          from '../../../../dist/node/console/Command';
 
 const folder      = '/path/to/folder';
 const emptyFolder = '/path/to/empty/folder';
@@ -309,4 +309,4 @@ then.privateCommandShouldNotHaveBeenBootstrapped = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,10 +1,10 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Events - Services - Dispatcher - Drivers - PubSub.js Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./EventEmitterDriver.gwt');
-const common                = require('./common');
+import gwt from './EventEmitterDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 beforeEach(() => {

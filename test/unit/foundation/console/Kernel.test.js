@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Console - Kernel
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Kernel.gwt');
+import gwt from './Kernel.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

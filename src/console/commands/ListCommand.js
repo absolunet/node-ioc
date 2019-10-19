@@ -101,7 +101,7 @@ class ListCommand extends Command {
 	/**
 	 * Get Command groups.
 	 *
-	 * @returns {object<string, Array<Command>>} - The commands, grouped by name.
+	 * @returns {object<string, Array<Command>>} The commands, grouped by name.
 	 */
 	getCommandGroups() {
 		const all = this.app.make('command').all(true, true);
@@ -129,8 +129,8 @@ class ListCommand extends Command {
 	/**
 	 * Get command description.
 	 *
-	 * @param {Command} command - The command instance.
-	 * @returns {string} - The command instance description.
+	 * @param {console.Command} command - The command instance.
+	 * @returns {string} The command instance description.
 	 */
 	getCommandDescription(command) {
 		const commandRepository = this.app.make('command');

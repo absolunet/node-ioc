@@ -73,7 +73,7 @@ class MakeSeederCommand extends _GeneratorCommand.default {
   /**
    * Get guessed model name based on the class name.
    *
-   * @returns {string} - The model name.
+   * @returns {string} The model name.
    */
 
 

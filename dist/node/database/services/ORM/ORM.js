@@ -47,7 +47,7 @@ class ORM extends (0, _hasDriver.default)((0, _checksTypes.default)()) {
    * If a single argument is provided, the model class name will be used as identifier.
    *
    * @param {string} name - The model name.
-   * @param {Model} Model - The model class.
+   * @param {database.Model} Model - The model class.
    */
 
 
@@ -59,7 +59,7 @@ class ORM extends (0, _hasDriver.default)((0, _checksTypes.default)()) {
    * Retrieve model by name.
    *
    * @param {string} name - The model name.
-   * @returns {Model} - The model instance.
+   * @returns {database.Model} The model instance.
    */
 
 
@@ -70,7 +70,7 @@ class ORM extends (0, _hasDriver.default)((0, _checksTypes.default)()) {
    * Get formatted model name.
    *
    * @param {string} name - The model name.
-   * @returns {string} - The formatted model name.
+   * @returns {string} The formatted model name.
    */
 
 
@@ -81,7 +81,7 @@ class ORM extends (0, _hasDriver.default)((0, _checksTypes.default)()) {
    * Get underlying ORM engine.
    *
    * @param {string} driver - The driver name to get engine from.
-   * @returns {*} - The underlying engine.
+   * @returns {*} The underlying engine.
    */
 
 
@@ -103,7 +103,7 @@ class ORM extends (0, _hasDriver.default)((0, _checksTypes.default)()) {
   /**
    * String helper.
    *
-   * @type {StringHelper}
+   * @type {support.helpers.StringHelper}
    */
 
 

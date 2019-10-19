@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Database Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../container');
-const DatabaseServiceProvider = require('../../../dist/node/database/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../dist/node/security/SecurityServiceProvider');
+import container from '../container';
+import DatabaseServiceProvider from '../../../dist/node/database/DatabaseServiceProvider';
+import SecurityServiceProvider from '../../../dist/node/security/SecurityServiceProvider';
 
 let result;
 let fakeFiles;
@@ -198,4 +198,4 @@ then.shouldNotHaveRegisteredModelFactoriesInFactory = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

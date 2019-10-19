@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Repositories - Controller Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ControllerRepository.gwt');
+import gwt from './ControllerRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -28,14 +28,14 @@ test('Can get controller from name', () => {
 
 test('Can get controller from name based on application controller path', () => {
 	given.fakeAppPath();
-	// when.gettingControllerByName();
-	// then.shouldHaveReceivedStubController();
+	when.gettingControllerByName();
+	then.shouldHaveReceivedStubController();
 });
 
 test('Can get controller from name with namespace based on application controller path', () => {
 	given.fakeAppPath();
-	// when.gettingControllerWithNamespaceByName();
-	// then.shouldHaveReceivedNamespaceStubController();
+	when.gettingControllerWithNamespaceByName();
+	then.shouldHaveReceivedNamespaceStubController();
 });
 
 test('Can get controller from absolute path', () => {

@@ -34,7 +34,7 @@ class TestCase extends (0, _setsUp.default)((0, _expects.default)((0, _asserts.d
    *
    * @param {*} abstract - An abstract that was bound to the container, or a class, closure or instance that can be built by the container.
    * @param {object<string, *>} [parameters={}] - Additional arguments to inject into the concrete when instantiating.
-   * @returns {*} - The instantiated or the singleton concrete.
+   * @returns {*} The instantiated or the singleton concrete.
    */
   make(abstract, parameters = {}) {
     return this.app.make(abstract, parameters);
@@ -52,8 +52,8 @@ class TestCase extends (0, _setsUp.default)((0, _expects.default)((0, _asserts.d
   /**
    * Set current application.
    *
-   * @param {Application} app - The application instance.
-   * @returns {TestCase} - The current test case.
+   * @param {foundation.Application} app - The application instance.
+   * @returns {test.TestCase} The current test case.
    */
 
 
@@ -64,7 +64,7 @@ class TestCase extends (0, _setsUp.default)((0, _expects.default)((0, _asserts.d
   /**
    * Current application accessor.
    *
-   * @type {Application}
+   * @type {foundation.Application}
    */
 
 

@@ -76,7 +76,7 @@ class GeneratorCommand extends Command {
 	 * Generate a file of a specific type from stubs.
 	 *
 	 * @param {string} type - The file type to generate.
-	 * @returns {Promise<boolean>} - The async writing process.
+	 * @returns {Promise<boolean>} The async writing process.
 	 * @see GeneratorCommand#files
 	 */
 	generate(type) {
@@ -93,7 +93,7 @@ class GeneratorCommand extends Command {
 	 * Load a given stub by name.
 	 *
 	 * @param {string} type - The file type to load.
-	 * @returns {string} - The file content.
+	 * @returns {string} The file content.
 	 * @see GeneratorCommand#files
 	 */
 	load(type) {
@@ -105,7 +105,7 @@ class GeneratorCommand extends Command {
 	 *
 	 * @param {string} content - The content to format.
 	 * @param {object<string, string>} patterns - The patterns to replace.
-	 * @returns {string} - The formatted content.
+	 * @returns {string} The formatted content.
 	 */
 	replace(content, patterns) {
 		return Object.keys(patterns).reduce((string, pattern) => {
@@ -117,7 +117,7 @@ class GeneratorCommand extends Command {
 	 * Write the given file to the configured destination folder.
 	 *
 	 * @param {string} content - The content to write.
-	 * @returns {Promise<boolean>} - The async promise.
+	 * @returns {Promise<boolean>} The async promise.
 	 */
 	async write(content) {
 		const fileManager = this.app.make('file');
@@ -132,7 +132,7 @@ class GeneratorCommand extends Command {
 	/**
 	 * Get destination folder.
 	 *
-	 * @returns {string} - The final file destination.
+	 * @returns {string} The final file destination.
 	 * @see GeneratorCommand#destination
 	 * @see GeneratorCommand#fileName
 	 */

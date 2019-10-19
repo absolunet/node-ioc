@@ -30,7 +30,7 @@ const forwardCalls = (0, _mixinFactory.default)(SuperClass => {
      *
      * @param {string} method - The method to call.
      * @param {Array<*>} [parameters=[]] - The parameters to send to the forwarded instance method.
-     * @returns {*} - The method result.
+     * @returns {*} The method result.
      * @memberof support.mixins.ForwardCalls
      * @instance
      */
@@ -40,7 +40,7 @@ const forwardCalls = (0, _mixinFactory.default)(SuperClass => {
     /**
      * Get object which should receive the call forwarding.
      *
-     * @returns {object} - The forward instance.
+     * @returns {object} The forward instance.
      * @abstract
      * @memberof support.mixins.ForwardCalls
      * @instance

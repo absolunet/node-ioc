@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - JavaScript Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const JavaScriptDriver = require('../../../../../../dist/node/file/services/FileManager/drivers/JavaScriptDriver');
+import JavaScriptDriver from '../../../../../../dist/node/file/services/FileManager/drivers/JavaScriptDriver';
 
 
 //-- Given
@@ -23,10 +23,10 @@ given.writeFile = () => {
 };
 
 given.currentDriverContent = () => {
-	given.readContent(`'use strict';\n\nmodule.exports = { foo: 'bar' }\n`);
-	given.writeContent(`'use strict';\n\nmodule.exports = { foo: 'bar' }\n`);
-	given.parsedContent({ foo: 'bar' });
+	given.readContent(`'use strict';\n\nexport default { foo: 'bar' }\n`);
+	given.writeContent(`'use strict';\n\nexport default { foo: 'bar' }\n`);
+	given.parsedContent({ 'default': { foo: 'bar' } });
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

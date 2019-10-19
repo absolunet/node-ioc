@@ -53,7 +53,7 @@ class CommandRegistrar {
 	/**
 	 * Set default command to be executed of nothing is provided.
 	 *
-	 * @param {Command|Function} Command - The default command.
+	 * @param {console.Command|Function} Command - The default command.
 	 */
 	setDefault(Command) {
 		const command = this.app.make(Command.constructor === Function ? Command : Command.constructor);
@@ -78,7 +78,7 @@ class CommandRegistrar {
 	/**
 	 * Retrieve default command from the command repository.
 	 *
-	 * @returns {Command|null} - The default command instance.
+	 * @returns {console.Command|null} The default command instance.
 	 */
 	getDefault() {
 		return this.commandRepository.get('*');
@@ -90,7 +90,7 @@ class CommandRegistrar {
 	 *
 	 * @param {string|Array<string>} command - The command to resolve.
 	 * @param {boolean} [internal] - Specify if the command should be processed as an internal process. If if should check the policies restrictions, set to false.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async resolve(command, internal = false) {
 		const yargs = this.yargs(command);
@@ -153,7 +153,7 @@ class CommandRegistrar {
 	/**
 	 * The command repository.
 	 *
-	 * @type {CommandRepository}
+	 * @type {console.repositories.CommandRepository}
 	 */
 	get commandRepository() {
 		return __(this).get('command');

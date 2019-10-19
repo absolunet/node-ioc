@@ -72,8 +72,7 @@ class DatabaseDriver extends _Driver.default {
   async increment(key, increment = 1) {
     const result = await this.getResult(key);
     const value = await this.getFromResult(result, 0);
-    const seconds = result ? result.expires_at ? this.dateHelper(result.expires_at).unix() - this.now() : null : undefined; // eslint-disable-line unicorn/no-nested-ternary
-
+    const seconds = result ? result.expires_at ? this.dateHelper(result.expires_at).unix() - this.now() : null : undefined;
     await this.put(key, value + increment, seconds);
   }
   /**
@@ -116,7 +115,7 @@ class DatabaseDriver extends _Driver.default {
    * Get full database result from key.
    *
    * @param {string} key - The cache key.
-   * @returns {Promise<{key: string, value: string, expires_at: string|null}|undefined>} - The cache database entry.
+   * @returns {Promise<{key: string, value: string, expires_at: string|null}|undefined>} The cache database entry.
    */
 
 
@@ -135,7 +134,7 @@ class DatabaseDriver extends _Driver.default {
    *
    * @param {{key: string, value: string, expires_at: string|null}|undefined} result - The cache database entry.
    * @param {*} [defaultValue] - The default value to use if the result is empty, expired or not parsable.
-   * @returns {Promise<*>} - The cached value.
+   * @returns {Promise<*>} The cached value.
    */
 
 

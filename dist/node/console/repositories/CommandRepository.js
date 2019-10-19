@@ -44,7 +44,7 @@ class CommandRepository {
    *
    * @param {boolean} [withPolicies] - Use gate service to filter valid commands by policies.
    * @param {boolean} [grouped] - Request grouped command result instead of a single array.
-   * @returns {Array<Command>|object<string,Array<Command>>} - The commands or the grouped commands.
+   * @returns {Array<Command>|object<string,Array<Command>>} The commands or the grouped commands.
    */
 
 
@@ -91,7 +91,7 @@ class CommandRepository {
    * Get command by name.
    *
    * @param {string} name - The command name.
-   * @returns {Command|null} - The command instance, or null if not found.
+   * @returns {console.Command|null} The command instance, or null if not found.
    */
 
 
@@ -106,7 +106,7 @@ class CommandRepository {
    * Check if command is registered.
    *
    * @param {string} name - The command name.
-   * @returns {boolean} - Indicates if the command exists.
+   * @returns {boolean} Indicates if the command exists.
    */
 
 
@@ -116,8 +116,8 @@ class CommandRepository {
   /**
    * Add given command in the command list.
    *
-   * @param {Function|Command} command - The command class or instance.
-   * @returns {Command} - The command instance.
+   * @param {Function|console.Command} command - The command class or instance.
+   * @returns {console.Command} The command instance.
    */
 
 

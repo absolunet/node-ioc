@@ -1,12 +1,14 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Exceptions - Handler - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const ExceptionHandler = require('../../../../dist/node/foundation/exceptions/Handler');
+import container        from '../../container';
+import ExceptionHandler from '../../../../dist/node/foundation/exceptions/Handler';
+import StringHelper     from '../../../../dist/node/support/helpers/StringHelper';
+
 
 let exceptionHandler;
 let result;
@@ -28,21 +30,43 @@ const brokenLogger = {
 };
 
 const fakeTerminal = {
-	warning: jest.fn(),
-	error:   jest.fn()
+	echo:   jest.fn(),
+	spacer: jest.fn(),
+	defaults: {
+		get textColor() {
+			return fakeTerminal.chalk.blue;
+		},
+		get indent() {
+			return 2;
+		}
+	},
+	get chalk() {
+		return require('chalk'); // eslint-disable-line global-require
+	}
 };
 
 const fakeException = new TypeError('An error has occurred...');
 
 const fakeRequest = {
-	get: jest.fn((key) => {
-		return fakeHeader[key];
-	})
+	get: jest.fn((key) => { return fakeHeader[key]; }),
+	get headers()         { return { ...fakeHeader }; },
+	get url()             { return '/'; },
+	get method()          { return 'GET'; },
+	get body()            { return {}; },
+	connection: {
+		encrypted: false,
+		remoteAddress: '127.0.0.1',
+		remotePort: 80
+	}
 };
+
 const fakeResponse = {
-	status: jest.fn(),
-	send:   jest.fn(),
-	json:   jest.fn()
+	status:    jest.fn(),
+	write:     jest.fn(),
+	json:      jest.fn(),
+	setHeader: jest.fn(),
+	writeHead: jest.fn(),
+	end:       jest.fn()
 };
 
 
@@ -60,6 +84,10 @@ given.emptyRequest = () => {
 
 given.emptyResponse = () => {
 	response = undefined;
+};
+
+given.stringHelper = () => {
+	container.singleton('helper.string', StringHelper);
 };
 
 given.fakeLogger = () => {
@@ -82,6 +110,15 @@ given.exception = () => {
 	exception = fakeException;
 };
 
+given.exceptionWithMessage = (message) => {
+	exception = new TypeError(message);
+};
+
+given.exceptionWithStatus = (code) => {
+	exception = new TypeError('An error has occurred...');
+	exception.status = code;
+};
+
 given.fakeRequest = () => {
 	request = fakeRequest;
 	fakeHeader = {
@@ -97,8 +134,8 @@ given.handledException = async () => {
 	await exceptionHandler.handle(fakeException);
 };
 
-given.acceptApplicationJsonHeader = () => {
-	fakeHeader.accept = 'application/json';
+given.xRequestedWithHeader = () => {
+	fakeHeader['x-requested-with'] = 'XmlHttpRequest';
 };
 
 
@@ -111,9 +148,9 @@ when.handlingException = async () => {
 	});
 };
 
-when.renderingException = () => {
-	when.attempting(() => {
-		exceptionHandler.render(exception, request, response);
+when.renderingException = async () => {
+	await when.attemptingAsync(async () => {
+		await exceptionHandler.render(exception, request, response);
 	});
 };
 
@@ -151,17 +188,22 @@ then.shouldHaveReportedException = () => {
 
 then.shouldHaveRenderedExceptionInConsole = () => {
 	then.shouldNotHaveThrown();
-	expect(fakeTerminal.error).toHaveBeenCalled();
+	expect(fakeTerminal.spacer).toHaveBeenCalled();
+	expect(fakeTerminal.echo).toHaveBeenCalled();
+};
+
+then.shouldHaveSetStatus = (status) => {
+	then.shouldNotHaveThrown();
+	expect(response.status).toHaveBeenCalledWith(status);
 };
 
 then.shouldHaveRenderedExceptionInResponse = () => {
-	then.shouldNotHaveThrown();
-	expect(response.status).toHaveBeenCalledWith(500);
+	then.shouldHaveSetStatus(500);
 };
 
 then.shouldHaveRenderedExceptionInResponseAsContent = () => {
 	then.shouldHaveRenderedExceptionInResponse();
-	expect(response.send).toHaveBeenCalled();
+	expect(response.end).toHaveBeenCalled();
 };
 
 then.shouldHaveRenderedExceptionInResponseAsJson = () => {
@@ -170,8 +212,7 @@ then.shouldHaveRenderedExceptionInResponseAsJson = () => {
 };
 
 then.shouldHaveHandledReportException = () => {
-	then.shouldNotHaveThrown();
-	expect(fakeTerminal.warning).toHaveBeenCalled();
+	then.shouldHaveRenderedExceptionInConsole();
 };
 
 then.resultShouldBeFakeException = () => {
@@ -179,4 +220,4 @@ then.resultShouldBeFakeException = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

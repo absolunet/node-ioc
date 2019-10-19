@@ -21,20 +21,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class Handler extends (0, _checksTypes.default)() {
   /**
-   * Class dependencies: <code>['app', 'config', 'router.controller']</code>.
+   * Class dependencies: <code>['app', 'config', 'http.error.mapper', 'router.controller', 'router.route']</code>.
    *
    * @type {Array<string>}
    */
   static get dependencies() {
-    return (super.dependencies || []).concat(['app', 'config', 'router.controller']);
+    return (super.dependencies || []).concat(['app', 'config', 'http.error.mapper', 'router.controller', 'router.route']);
   }
   /**
    * Handle HTTP request.
    *
-   * @param {Route} route - Current route instance.
+   * @param {http.Route} route - Current route instance.
    * @param {request} request - Current request instance.
    * @param {response} response - Current response instance.
-   * @returns {Promise<response>} - The processed response.
+   * @returns {Promise<response>} The processed response.
    */
 
 
@@ -44,12 +44,9 @@ class Handler extends (0, _checksTypes.default)() {
       request,
       response
     });
-    const {
-      action
-    } = route;
 
     try {
-      if (this.isFunction(action)) {
+      if (this.isFunction(route.action)) {
         await this.handleRequestWithClosure();
       } else {
         await this.handleRequestWithController();
@@ -58,38 +55,57 @@ class Handler extends (0, _checksTypes.default)() {
       await this.handleRequestException(error);
     }
 
-    return this.terminateHandling();
+    await this.terminateHandling();
+    return response;
+  }
+  /**
+   * Handle request when the route was not found.
+   *
+   * @param {request} request - Current request instance.
+   * @param {response} response - Current response instance.
+   * @returns {Promise<response>} The processed response.
+   */
+
+
+  handleRouteNotFound(request, response) {
+    const action = () => {
+      throw this.getErrorInstanceFromHttpStatus(this.routes.findByPath(request.url).length > 0 ? 405 : 404);
+    };
+
+    return this.handleRequest({
+      action
+    }, request, response);
   }
   /**
    * Handle current request with give promise or result.
    *
    * @param {Promise<*>|*} promise - The current request process.
-   * @returns {Promise<*>} - The promise that resolves by either the request completion or by a timeout.
+   * @returns {Promise} The async process promise.
    */
 
 
-  handleRequestWith(promise) {
-    return Promise.race([promise, this.getHttpTimeoutPromise()]);
+  async handleRequestWith(promise) {
+    await Promise.race([promise, this.getHttpTimeoutPromise()]);
   }
   /**
    * Handle current request with closure attached to route.
    *
-   * @returns {Promise<*>} - The request handling process.
+   * @returns {Promise} The async process promise.
    */
 
 
-  handleRequestWithClosure() {
-    return this.handleRequestWith(this.route.action(this.request, this.response));
+  async handleRequestWithClosure() {
+    await this.handleRequestWith(this.route.action(this.request, this.response));
   }
   /**
    * Handle current request with controller attached to route.
    *
-   * @returns {Promise<*>} - The request handling process.
+   * @returns {Promise} The async process promise.
    */
 
 
-  handleRequestWithController() {
-    return this.handleRequestWith(this.callControllerAction());
+  async handleRequestWithController() {
+    await this.handleRequestWith(this.callControllerAction());
   }
   /**
    * Get an internal call result handler to either resolve or
@@ -97,7 +113,7 @@ class Handler extends (0, _checksTypes.default)() {
    *
    * @param {Function} resolve - The promise resolving.
    * @param {Function} reject - The promise rejection.
-   * @returns {Function} - The internal call result handler.
+   * @returns {Function} The internal call result handler.
    */
 
 
@@ -128,34 +144,55 @@ class Handler extends (0, _checksTypes.default)() {
   /**
    * Terminate request handling.
    *
-   * @returns {response} - The current response.
+   * @returns {response} The current response.
    */
 
 
-  terminateHandling() {
+  async terminateHandling() {
     const {
+      exceptionHandler,
       response
     } = this;
+
+    if (!response.statusCode) {
+      response.status(exceptionHandler.hadException ? 500 : 200);
+    }
+
+    const {
+      statusCode
+    } = response;
+
+    if ((statusCode < 200 || statusCode >= 400) && !exceptionHandler.hadException) {
+      await this.handleRequestException(this.getErrorInstanceFromHttpStatus(statusCode));
+    }
+
     (0, _privateRegistry.default)(this).set('handling', {});
-    return response;
+
+    if (response.headersSent) {
+      response.end();
+    } else {
+      await new Promise(resolve => {
+        response.on('finish', () => {
+          resolve();
+        });
+      });
+    }
   }
   /**
    * Handle exception that occurred during request handling.
    *
    * @param {Error} exception - The throw exception.
-   * @returns {response} - The current response.
+   * @returns {Promise} The async process promise.
    */
 
 
-  handleRequestException(exception) {
-    const exceptionHandler = this.app.make('exception.handler');
-    exceptionHandler.handle(exception, this.request, this.response);
-    return this.response;
+  async handleRequestException(exception) {
+    await this.exceptionHandler.handle(exception, this.request, this.response);
   }
   /**
    * Call route controller action.
    *
-   * @returns {Promise<*>|*} - The request handling process.
+   * @returns {Promise<*>|*} The request handling process.
    */
 
 
@@ -170,7 +207,7 @@ class Handler extends (0, _checksTypes.default)() {
   /**
    * Resolve controller action method.
    *
-   * @returns {Function} - The bound controller method.
+   * @returns {Function} The bound controller method.
    */
 
 
@@ -193,7 +230,7 @@ class Handler extends (0, _checksTypes.default)() {
    * Get HTTP timeout promise.
    * This promise will be rejected after a configured time lapse.
    *
-   * @returns {Promise<Error>} - The promise of a timeout error.
+   * @returns {Promise<Error>} The promise of a timeout error.
    */
 
 
@@ -207,18 +244,18 @@ class Handler extends (0, _checksTypes.default)() {
   /**
    * Get HTTP timeout exception.
    *
-   * @returns {Error} - The timeout error.
+   * @returns {http.exceptions.TimeoutHttpError} The timeout error.
    */
 
 
   getHttpTimeoutException() {
-    return new Error('Timeout');
+    return this.getErrorInstanceFromHttpStatus(408);
   }
   /**
    * Throw custom TypeError indicating that the controller action was not found.
    *
    * @param {string} controller - The controller action.
-   * @throws TypeError - Indicates that the action was not found in the given controller.
+   * @throws {TypeError} Indicates that the action was not found in the given controller.
    */
 
 
@@ -228,14 +265,35 @@ class Handler extends (0, _checksTypes.default)() {
     throw new TypeError(`Action "${method}" in controller "${name}" does not exists.`);
   }
   /**
+   * Get HTTP error that matches the given status.
+   *
+   * @param {number} status - The HTTP status code.
+   * @returns {http.exceptions.HttpError} The HTTP Error that matches the status, or generic error.
+   */
+
+
+  getErrorInstanceFromHttpStatus(status) {
+    return this.httpErrorMapper.getErrorInstanceFromHttpStatus(status);
+  }
+  /**
    * The current route.
    *
-   * @type {Route}
+   * @type {http.Route}
    */
 
 
   get route() {
     return (0, _privateRegistry.default)(this).get('handling').route;
+  }
+  /**
+   * Route repository.
+   *
+   * @type {http.repositories.RouteRepository}
+   */
+
+
+  get routes() {
+    return this.routerRoute;
   }
   /**
    * The current request.
@@ -256,6 +314,16 @@ class Handler extends (0, _checksTypes.default)() {
 
   get response() {
     return (0, _privateRegistry.default)(this).get('handling').response;
+  }
+  /**
+   * Application exception handler.
+   *
+   * @type {foundation.exceptions.Handler}
+   */
+
+
+  get exceptionHandler() {
+    return this.app.make('exception.handler');
   }
 
 }

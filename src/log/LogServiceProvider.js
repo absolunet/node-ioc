@@ -20,7 +20,7 @@ import LogTableCommand from './commands/LogTableCommand';
  * <ul>
  *     <li><a href="log.commands.LogTableCommand.html">log:table</a></li>
  * </ul>
- * It also uses configuration under "logging" namespace.
+ * It also uses configuration under "log" namespace.
  *
  * @memberof log
  * @augments foundation.ServiceProvider

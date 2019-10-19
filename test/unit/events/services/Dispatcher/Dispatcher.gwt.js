@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Events - Services - Dispatcher - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../../container');
-const Dispatcher = require('../../../../../dist/node/events/services/Dispatcher');
+import container from '../../../container';
+import Dispatcher from '../../../../../dist/node/events/services/Dispatcher';
 
 let dispatcher;
 let result;
@@ -76,4 +76,4 @@ then.shouldHaveCalledOnOnFakeDriver = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

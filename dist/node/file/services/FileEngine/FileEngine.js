@@ -34,7 +34,7 @@ class FileEngine extends (0, _forwardCalls.default)() {
    * FileEngine constructor.
    *
    * @param {...*} parameters - Injected parameters.
-   * @returns {FileEngine} - The file engine instance wrapped by a proxy.
+   * @returns {file.services.FileEngine} The file engine instance wrapped by a proxy.
    */
 
 
@@ -45,7 +45,7 @@ class FileEngine extends (0, _forwardCalls.default)() {
   /**
    * Async file system.
    *
-   * @type {Async}
+   * @type {file.system.Async}
    */
 
 
@@ -55,7 +55,7 @@ class FileEngine extends (0, _forwardCalls.default)() {
   /**
    * Sync file system.
    *
-   * @type {Sync}
+   * @type {file.system.Sync}
    */
 
 

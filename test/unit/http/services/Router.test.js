@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Services - Router
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Router.gwt');
+import gwt from './Router.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -79,7 +79,7 @@ test('Can serve static files from given folder for given path', () => {
 	then.shouldHaveReceivedRouteWithStaticControllerActionForMethodAndPath('get', '/foo/bar/:file');
 	then.actionShouldReceive('path', '/foo/bar');
 	then.actionShouldReceive('folder', __dirname);
-	then.routeShouldHaveConstraint('file', '*');
+	then.routeShouldHaveConstraint('file', '[^\\s]+');
 	then.shouldHaveReceivedRoute();
 });
 

@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Log - Services - Logger - Drivers - Stack Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./StackDriver.gwt');
+import gwt from './StackDriver.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

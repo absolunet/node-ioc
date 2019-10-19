@@ -15,12 +15,12 @@ import __ from '@absolunet/private-registry';
 class Resolver {
 
 	/**
-	 * Class dependencies: <code>['app', 'config', 'file', 'file.engine']</code>.
+	 * Class dependencies: <code>['app', 'config', 'file']</code>.
 	 *
 	 * @type {Array<string>}
 	 */
 	static get dependencies() {
-		return ['app', 'config', 'file', 'file.engine'];
+		return ['app', 'config', 'file'];
 	}
 
 	/**
@@ -35,13 +35,13 @@ class Resolver {
 	 * Find view path by name.
 	 *
 	 * @param {string} view - The view name.
-	 * @returns {string} - The view content.
-	 * @throws TypeError - Indicates that the given view was not found.
+	 * @returns {string} The view content.
+	 * @throws {TypeError} Indicates that the given view was not found.
 	 */
 	find(view) {
 		const viewPath = this.getViewPath(view);
 
-		if (!this.fileEngine.sync.exists(viewPath)) {
+		if (!this.file.exists(viewPath)) {
 			throw new TypeError(`The view "${view}" (${viewPath}) does not exists.`);
 		}
 
@@ -49,10 +49,20 @@ class Resolver {
 	}
 
 	/**
+	 * Check if view file exists by name.
+	 *
+	 * @param {string} view - The view name.
+	 * @returns {boolean} Indicates that the view file exists and may be rendered.
+	 */
+	exists(view) {
+		return this.file.exists(this.getViewPath(view));
+	}
+
+	/**
 	 * Get view path by name.
 	 *
 	 * @param {string} view - The view name.
-	 * @returns {string} - The view file path.
+	 * @returns {string} The view file path.
 	 */
 	getViewPath(view) {
 		return this.file.findFirst(this.extensions.map((extension) => {
@@ -64,8 +74,8 @@ class Resolver {
 	 * Get base path of the given view based on the namespace if present.
 	 *
 	 * @param {string} view - The view name.
-	 * @returns {string} - The view folder path.
-	 * @throws TypeError - Indicates that the given view namespace was not found.
+	 * @returns {string} The view folder path.
+	 * @throws {TypeError} Indicates that the given view namespace was not found.
 	 */
 	getViewBasePath(view) {
 		if (!view.includes(this.namespaceDelimiter)) {
@@ -87,7 +97,7 @@ class Resolver {
 	 *
 	 * @param {string} namespace - The namespace.
 	 * @param {string} folder - The folder.
-	 * @returns {Resolver} - The current resolver instance.
+	 * @returns {view.services.Resolver} The current resolver instance.
 	 */
 	namespace(namespace, folder) {
 		__(this).get('namespaces')[namespace] = folder;

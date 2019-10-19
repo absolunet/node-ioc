@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Helpers - String Helper - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container    = require('../../container');
-const StringHelper = require('../../../../dist/node/support/helpers/StringHelper');
+import container    from '../../container';
+import StringHelper from '../../../../dist/node/support/helpers/StringHelper';
 
 let stringHelper;
 let string;
@@ -80,4 +80,4 @@ then.resultShouldBe = (expected) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -17,7 +17,7 @@ class Server {
 	 * Make a new server instance.
 	 *
 	 * @param {boolean} [unique=false] - Indicates that the servers hould be a unique one and not set as a singleton.
-	 * @returns {Express} - Newly created Express server instance.
+	 * @returns {Express} Newly created Express server instance.
 	 */
 	make(unique = false) {
 		const server = this.applyMiddleware(this.express());
@@ -32,7 +32,7 @@ class Server {
 	/**
 	 * Get an existing server instance if exists or a fresh one otherwise.
 	 *
-	 * @returns {Express} - Existing or newly created Express server instance.
+	 * @returns {Express} Existing or newly created Express server instance.
 	 */
 	getInstance() {
 		return this.hasInstance() ? __(this).get('instance') : this.make();
@@ -42,7 +42,7 @@ class Server {
 	 * Set default server instance.
 	 *
 	 * @param {Express} server - The Express server instance.
-	 * @returns {Server} - The current server instance.
+	 * @returns {http.services.Server} The current server instance.
 	 */
 	setDefaultInstance(server) {
 		__(this).set('instance', server);
@@ -53,7 +53,7 @@ class Server {
 	/**
 	 * Check if an instance already exists.
 	 *
-	 * @returns {boolean} - Indicates that an Express server was already instantiated.
+	 * @returns {boolean} Indicates that an Express server was already instantiated.
 	 */
 	hasInstance() {
 		return Boolean(__(this).get('instance'));
@@ -62,7 +62,7 @@ class Server {
 	/**
 	 * Get Express router.
 	 *
-	 * @returns {express.Router} - Express router instance.
+	 * @returns {express.Router} Express router instance.
 	 */
 	getRouter() {
 		return this.express.Router();
@@ -72,7 +72,7 @@ class Server {
 	 * Apply middleware to given server instance.
 	 *
 	 * @param {Express} server - Express server instance.
-	 * @returns {Express} - Express server instance with applied middleware.
+	 * @returns {Express} Express server instance with applied middleware.
 	 */
 	applyMiddleware(server) {
 		require('run-middleware')(server); // eslint-disable-line global-require

@@ -47,7 +47,7 @@ class FileManager extends (0, _hasDriver.default)() {
    *
    * @param {string} file - The file name.
    * @param {boolean} [async] - Indicates that the call should be made async.
-   * @returns {*|Promise<*>} - The content of the file.
+   * @returns {*|Promise<*>} The content of the file.
    */
 
 
@@ -60,7 +60,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * Asynchronously load file data.
    *
    * @param {string} file - The file name.
-   * @returns {Promise<*>} - The content of the file.
+   * @returns {Promise<*>} The content of the file.
    */
 
 
@@ -71,7 +71,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * Check if file exists.
    *
    * @param {string} file - The file name.
-   * @returns {boolean} - Indicates that toe file or folder exists.
+   * @returns {boolean} Indicates that toe file or folder exists.
    */
 
 
@@ -82,7 +82,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * Find first existing file.
    *
    * @param {Array<string>} files - List of file names.
-   * @returns {string|null} - The first found file in the list, or null if none is found.
+   * @returns {string|null} The first found file in the list, or null if none is found.
    */
 
 
@@ -96,7 +96,7 @@ class FileManager extends (0, _hasDriver.default)() {
    *
    * @param {Array<string>} files - List of file names.
    * @param {boolean} [async=false] - Indicates that the call should be made async.
-   * @returns {*|Promise<*>} - The content of the first found file.
+   * @returns {*|Promise<*>} The content of the first found file.
    */
 
 
@@ -113,7 +113,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * Asynchronously load first existing file.
    *
    * @param {Array<string>} files - List of the file names.
-   * @returns {Promise<*>} - The content of the first found file.
+   * @returns {Promise<*>} The content of the first found file.
    */
 
 
@@ -126,7 +126,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * @param {string} folder - The folder name.
    * @param {*} [options] - The options to send during scanning directory.
    * @param {string|null} [driver] - The driver name to use. If none is provided, the most appropriate driver for each file will be used.
-   * @returns {object<string,*>} - The content fetched for each found file.
+   * @returns {object<string,*>} The content fetched for each found file.
    */
 
 
@@ -151,7 +151,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * @param {string} folder - The folder name.
    * @param {*} [options] - The options to send during scanning directory.
    * @param {string|null} [driver] - The driver name to use. If none is provided, the most appropriate driver for each file will be used.
-   * @returns {object<string,*>} - The content fetched for each found file.
+   * @returns {object<string,*>} The content fetched for each found file.
    */
 
 
@@ -166,7 +166,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * @param {string} folder - The folder to scan.
    * @param {string} [type] - The type of element we need to find, either "file" or "folder".
    * @param {*} [options] - The options to send during scanning directory.
-   * @returns {Array<string>} - The list of found items in the scanned directory.
+   * @returns {Array<string>} The list of found items in the scanned directory.
    */
 
 
@@ -193,7 +193,7 @@ class FileManager extends (0, _hasDriver.default)() {
    *
    * @param {string} file - The file path.
    * @param {string} content - The content to write inside the file.
-   * @returns {Promise<void>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -204,7 +204,7 @@ class FileManager extends (0, _hasDriver.default)() {
    * Get driver based on file extension.
    *
    * @param {string} file - The file name.
-   * @returns {Driver} - The best guessed driver instance for the given file name.
+   * @returns {file.services.FileManager.drivers.Driver} The best guessed driver instance for the given file name.
    */
 
 
@@ -224,7 +224,7 @@ class FileManager extends (0, _hasDriver.default)() {
   /**
    * The file engine.
    *
-   * @type {FileEngine}
+   * @type {file.services.FileEngine}
    */
 
 

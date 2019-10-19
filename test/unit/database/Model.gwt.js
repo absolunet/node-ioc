@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Model - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const BookshelfModel = require('bookshelf/lib/model');
-const container      = require('../container');
-const AbstractModel  = require('../../../dist/node/database/Model');
+import BookshelfModel from 'bookshelf/lib/model';
+import container      from '../container';
+import AbstractModel  from '../../../dist/node/database/Model';
 
 let model;
 let baseModel;
@@ -176,4 +176,4 @@ then.spiedBootShouldHaveBeenCalledTwice = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -85,7 +85,7 @@ class MakeMigrationCommand extends _GeneratorCommand.default {
   /**
    * Get guessed table name based on the class name.
    *
-   * @returns {string} - The database table name.
+   * @returns {string} The database table name.
    */
 
 
@@ -98,7 +98,7 @@ class MakeMigrationCommand extends _GeneratorCommand.default {
   /**
    * Get guessed action based on the class name.
    *
-   * @returns {string} - The action that the migration is doing.
+   * @returns {string} The action that the migration is doing.
    */
 
 

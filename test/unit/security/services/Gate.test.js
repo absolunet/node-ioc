@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Security - Services - Gate
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Gate.gwt');
+import gwt from './Gate.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

@@ -38,7 +38,7 @@ class Engine {
 	 * Extra argument to send to the CLI from the tested folder type.
 	 *
 	 * @param {string} [repositoryName] - The repository name.
-	 * @returns {string} - The path arguments.
+	 * @returns {string} The path arguments.
 	 */
 	getPathArgument(repositoryName) { // eslint-disable-line no-unused-vars
 		return '';

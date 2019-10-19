@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Events - Event Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./EventServiceProvider.gwt');
+import gwt from './EventServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

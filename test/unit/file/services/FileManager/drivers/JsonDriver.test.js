@@ -1,10 +1,10 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - JSON Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./JsonDriver.gwt');
-const common                = require('./common');
+import gwt from './JsonDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 describe('JSON driver', () => {

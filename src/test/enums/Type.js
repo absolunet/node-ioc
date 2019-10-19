@@ -17,21 +17,21 @@ class Type extends Enum {
 	/**
 	 * Unit tests.
 	 *
-	 * @type {string} - Unit test value.
+	 * @type {string}
 	 */
 	get UNIT() { return 'unit'; }
 
 	/**
 	 * Feature tests.
 	 *
-	 * @type {string} - Feature test value.
+	 * @type {string}
 	 */
 	get FEATURE() { return 'feature'; }
 
 	/**
 	 * End to end tests.
 	 *
-	 * @type {string} - End-To-End test value.
+	 * @type {string}
 	 */
 	get ENDTOEND() { return 'endtoend'; }
 

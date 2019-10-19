@@ -29,7 +29,7 @@ class Builder extends forwardCalls() {
 	 * Builder constructor.
 	 *
 	 * @param {...*} parameters - The injected parameters.
-	 * @returns {Builder} - A connection builder wrapped by a forward proxy to forward calls to the default connection.
+	 * @returns {database.services.Builder} A connection builder wrapped by a forward proxy to forward calls to the default connection.
 	 */
 	constructor(...parameters) {
 		super(...parameters);
@@ -41,7 +41,7 @@ class Builder extends forwardCalls() {
 	 * Get connection by name.
 	 *
 	 * @param {string} [name="default"] - The connection name.
-	 * @returns {Knex} - A Knex connection instance.
+	 * @returns {Knex} A Knex connection instance.
 	 */
 	getConnection(name = 'default') {
 		if (name === 'default') {
@@ -64,7 +64,7 @@ class Builder extends forwardCalls() {
 	/**
 	 * Get default connection.
 	 *
-	 * @returns {Knex} - A Knex connection instance.
+	 * @returns {Knex} A Knex connection instance.
 	 */
 	getDefaultConnection() {
 		return this.getConnection('default');
@@ -74,7 +74,7 @@ class Builder extends forwardCalls() {
 	 * Retrieve driver for connection by name.
 	 *
 	 * @param {string|Knex} name - Either a connection name or a Knex connection instance.
-	 * @returns {Driver} - The underlying driver instance.
+	 * @returns {database.services.Connector.drivers.Driver} The underlying driver instance.
 	 */
 	getDriverForConnection(name = 'default') {
 		const connection = typeof name === 'function' ? name : this.getConnection(name);

@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Interceptor
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Interceptor.gwt');
+import gwt from './Interceptor.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

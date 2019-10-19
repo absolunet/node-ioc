@@ -106,7 +106,7 @@ class MakeTestCommand extends _GeneratorCommand.default {
   /**
    * Get the test namespace, which could be a class in the application.
    *
-   * @returns {string} - The namespace.
+   * @returns {string} The namespace.
    */
 
 
@@ -153,7 +153,7 @@ class MakeTestCommand extends _GeneratorCommand.default {
   /**
    * String helper.
    *
-   * @type {StringHelper}
+   * @type {support.helpers.StringHelper}
    */
 
 
@@ -163,7 +163,7 @@ class MakeTestCommand extends _GeneratorCommand.default {
   /**
    * Path helper.
    *
-   * @type {PathHelper}
+   * @type {support.helpers.PathHelper}
    */
 
 

@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Commands - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container              = require('../../container');
-const ConsoleServiceProvider = require('../../../../dist/node/console/ConsoleServiceProvider');
+import container              from '../../container';
+import ConsoleServiceProvider from '../../../../dist/node/console/ConsoleServiceProvider';
 
 let runner;
 let command;
@@ -132,4 +132,4 @@ then.parameterIsRequired = (parameter) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

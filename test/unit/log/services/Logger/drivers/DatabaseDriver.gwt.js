@@ -1,14 +1,14 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Log - Services - Logger - Drivers - Database Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const knex           = require('knex');
-const mockConnection = require('mock-knex');
-const container      = require('../../../../container');
-const DatabaseDriver = require('../../../../../../dist/node/log/services/Logger/drivers/DatabaseDriver');
+import knex           from 'knex';
+import mockConnection from 'mock-knex';
+import container      from '../../../../container';
+import DatabaseDriver from '../../../../../../dist/node/log/services/Logger/drivers/DatabaseDriver';
 
 let tracker;
 let connections;
@@ -250,4 +250,4 @@ then.removeQueryTracker = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -69,7 +69,7 @@ class ConfigGrammar {
    * Format given configuration value.
    *
    * @param {*} value - The value to format.
-   * @returns {*} - The formatted value.
+   * @returns {*} The formatted value.
    */
 
 
@@ -82,7 +82,7 @@ class ConfigGrammar {
    * Parse environment variable in configuration value.
    *
    * @param {string} value - The value to format.
-   * @returns {string} - The formatted value.
+   * @returns {string} The formatted value.
    */
 
 
@@ -97,7 +97,7 @@ class ConfigGrammar {
    * Format given path to absolute path.
    *
    * @param {string} value - The value to format.
-   * @returns {string} - The formatted value.
+   * @returns {string} The formatted value.
    */
 
 
@@ -117,7 +117,7 @@ class ConfigGrammar {
    *
    * @param {string} value - The value to format.
    * @param {string} type - The type of replacement to operate. The type should be an existing key of the replacements property.
-   * @returns {boolean|null|number|string} - The formatted value.
+   * @returns {boolean|null|number|string} The formatted value.
    */
 
 

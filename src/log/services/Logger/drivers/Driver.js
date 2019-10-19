@@ -32,7 +32,7 @@ class Driver extends hasEngine() {
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 * @async
 	 * @abstract
 	 */
@@ -44,7 +44,7 @@ class Driver extends hasEngine() {
 	 * Set configuration for the channel.
 	 *
 	 * @param {object} config - The driver configuration.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {log.services.Logger.drivers.Driver} The current driver instance.
 	 */
 	setConfig(config) {
 		__(this).set('config', config);
@@ -64,7 +64,7 @@ class Driver extends hasEngine() {
 	/**
 	 * Log level enum.
 	 *
-	 * @type {Level}
+	 * @type {log.enums.Level}
 	 */
 	get LEVEL() {
 		return __(this).get('log.level');

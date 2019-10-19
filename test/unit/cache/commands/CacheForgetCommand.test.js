@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Commands - Cache Forget Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CacheForgetCommand.gwt');
+import gwt from './CacheForgetCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

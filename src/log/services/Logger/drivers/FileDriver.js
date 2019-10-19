@@ -55,7 +55,7 @@ class FileDriver extends Driver {
 	 *
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
-	 * @returns {string} - The full formatted message.
+	 * @returns {string} The full formatted message.
 	 */
 	getFullMessage(level, message) {
 		const formattedLevel   = this.getFormattedLevel(level);
@@ -69,7 +69,7 @@ class FileDriver extends Driver {
 	/**
 	 * Get current formatted date.
 	 *
-	 * @returns {string} - The formatted date.
+	 * @returns {string} The formatted date.
 	 */
 	getFormattedDate() {
 		return new Date().toISOString().replace('T', ' ').replace(/\.\d+Z/u, '');
@@ -79,7 +79,7 @@ class FileDriver extends Driver {
 	 * Get formatted level.
 	 *
 	 * @param {number} level - The level value.
-	 * @returns {string} - The formatted level.
+	 * @returns {string} The formatted level.
 	 */
 	getFormattedLevel(level) {
 		return (typeof level === 'string' ? level : this.LEVEL[level]).toLowerCase().padEnd(this.getLevelMaxLength());
@@ -89,7 +89,7 @@ class FileDriver extends Driver {
 	 * Get formatted message with proper spacers.
 	 *
 	 * @param {string} message - The message.
-	 * @returns {string} - The formatted message.
+	 * @returns {string} The formatted message.
 	 */
 	getFormattedMessage(message) {
 		return (typeof message === 'undefined' ? 'undefined' : message)
@@ -100,7 +100,7 @@ class FileDriver extends Driver {
 	/**
 	 * Get formatted application version.
 	 *
-	 * @returns {string} - The formatted application version.
+	 * @returns {string} The formatted application version.
 	 */
 	getFormattedVersion() {
 		return `Version ${this.app.version}`;
@@ -109,7 +109,7 @@ class FileDriver extends Driver {
 	/**
 	 * Get maximum string length of available levels.
 	 *
-	 * @returns {number} - The maximum length of all level in string version.
+	 * @returns {number} The maximum length of all level in string version.
 	 */
 	getLevelMaxLength() {
 		return Math.max(...this.LEVEL.keys().map(({ length }) => {
@@ -120,7 +120,7 @@ class FileDriver extends Driver {
 	/**
 	 * Get white space based on maximum level length.
 	 *
-	 * @returns {string} - A spacer that covers the longest level string.
+	 * @returns {string} A spacer that covers the longest level string.
 	 */
 	getSpacer() {
 		return ' '.repeat(this.getLevelMaxLength());
@@ -146,7 +146,7 @@ class FileDriver extends Driver {
 	/**
 	 * Adjust file content to fit under the configured size limit.
 	 *
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async adjustFile() {
 		if (this.hasLimit()) {
@@ -169,7 +169,7 @@ class FileDriver extends Driver {
 	/**
 	 * Check if configuration has specified size limit.
 	 *
-	 * @returns {boolean} - Indicates if a limit was set in the driver configuration.
+	 * @returns {boolean} Indicates if a limit was set in the driver configuration.
 	 */
 	hasLimit() {
 		return Boolean(this.config.limit);
@@ -178,7 +178,7 @@ class FileDriver extends Driver {
 	/**
 	 * The async file system.
 	 *
-	 * @type {Async}
+	 * @type {file.system.Async}
 	 */
 	get fs() {
 		return this.fileEngine.async;
@@ -187,7 +187,7 @@ class FileDriver extends Driver {
 	/**
 	 * File helper.
 	 *
-	 * @type {FileHelper}
+	 * @type {support.helpers.FileHelper}
 	 */
 	get fileHelper() {
 		return this.helperFile;

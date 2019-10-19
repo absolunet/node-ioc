@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Controllers - Controller - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container  = require('../../container');
-const Controller = require('../../../../dist/node/http/controllers/Controller');
+import container  from '../../container';
+import Controller from '../../../../dist/node/http/controllers/Controller';
 
 let controller;
 let viewModel;
@@ -369,9 +369,8 @@ then.shouldHaveRedirectedWithCode = (code) => {
 };
 
 then.shouldHaveReceivedStatus = (code) => {
-	then.shouldNotHaveThrown();
 	expect(fakeResponse.status).toHaveBeenCalledWith(code);
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

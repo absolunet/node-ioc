@@ -115,7 +115,7 @@ class LogTableCommand extends _GeneratorCommand.default {
   /**
    * Check if migration already exists in configured directory.
    *
-   * @returns {boolean} - Indicates if the migration file already exists.
+   * @returns {boolean} Indicates if the migration file already exists.
    */
 
 
@@ -132,7 +132,7 @@ class LogTableCommand extends _GeneratorCommand.default {
   /**
    * Get the logs table name, "logs" by default.
    *
-   * @returns {string} - Logs table name.
+   * @returns {string} Logs table name.
    */
 
 
@@ -142,7 +142,7 @@ class LogTableCommand extends _GeneratorCommand.default {
   /**
    * Get the migration class name.
    *
-   * @returns {string} - The class name.
+   * @returns {string} The class name.
    */
 
 

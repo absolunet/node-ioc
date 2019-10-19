@@ -68,7 +68,7 @@ class ConfigGrammar {
 	 * Format given configuration value.
 	 *
 	 * @param {*} value - The value to format.
-	 * @returns {*} - The formatted value.
+	 * @returns {*} The formatted value.
 	 */
 	format(value) {
 		return this.pipeline.reduce((formattedValue, action) => {
@@ -80,7 +80,7 @@ class ConfigGrammar {
 	 * Parse environment variable in configuration value.
 	 *
 	 * @param {string} value - The value to format.
-	 * @returns {string} - The formatted value.
+	 * @returns {string} The formatted value.
 	 */
 	formatEnvironment(value) {
 		if (typeof value !== 'string') {
@@ -94,7 +94,7 @@ class ConfigGrammar {
 	 * Format given path to absolute path.
 	 *
 	 * @param {string} value - The value to format.
-	 * @returns {string} - The formatted value.
+	 * @returns {string} The formatted value.
 	 */
 	formatPath(value) {
 		if (typeof value === 'string') {
@@ -113,7 +113,7 @@ class ConfigGrammar {
 	 *
 	 * @param {string} value - The value to format.
 	 * @param {string} type - The type of replacement to operate. The type should be an existing key of the replacements property.
-	 * @returns {boolean|null|number|string} - The formatted value.
+	 * @returns {boolean|null|number|string} The formatted value.
 	 */
 	replaceValue(value, type) {
 		return this.evaluator.evaluate(this.replacements[type].reduce((text, { search, replace }) => {

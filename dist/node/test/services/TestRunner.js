@@ -29,7 +29,7 @@ class TestRunner extends (0, _hasEngine.default)() {
   /**
    * Run a list of tests.
    *
-   * @param {Array<{instane: TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}>} testList - List of tests.
+   * @param {Array<{instane: test.TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}>} testList - List of tests.
    */
 
 
@@ -39,7 +39,7 @@ class TestRunner extends (0, _hasEngine.default)() {
   /**
    * Run every tests of a single test case instance.
    *
-   * @param {{instance: TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}} test - Single test.
+   * @param {{instance: test.TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}} test - Single test.
    */
 
 
@@ -83,7 +83,7 @@ class TestRunner extends (0, _hasEngine.default)() {
    * Describe the inner tests.
    *
    * @param {...*} parameters - Call parameters.
-   * @returns {*} - The call returned value.
+   * @returns {*} The call returned value.
    */
 
 
@@ -94,7 +94,7 @@ class TestRunner extends (0, _hasEngine.default)() {
    * Setup before the first inner test.
    *
    * @param {...*} parameters - Call parameters.
-   * @returns {*} - The call returned value.
+   * @returns {*} The call returned value.
    */
 
 
@@ -105,7 +105,7 @@ class TestRunner extends (0, _hasEngine.default)() {
    * Setup before any inner test.
    *
    * @param {...*} parameters - Call parameters.
-   * @returns {*} - The call returned value.
+   * @returns {*} The call returned value.
    */
 
 
@@ -116,7 +116,7 @@ class TestRunner extends (0, _hasEngine.default)() {
    * Tear down after the last inner test.
    *
    * @param {...*} parameters - Call parameters.
-   * @returns {*} - The call returned value.
+   * @returns {*} The call returned value.
    */
 
 
@@ -127,7 +127,7 @@ class TestRunner extends (0, _hasEngine.default)() {
    * Tear down after any inner test.
    *
    * @param {...*} parameters - Call parameters.
-   * @returns {*} - The call returned value.
+   * @returns {*} The call returned value.
    */
 
 
@@ -138,7 +138,7 @@ class TestRunner extends (0, _hasEngine.default)() {
    * Test a given case.
    *
    * @param {...*} parameters - Call parameters.
-   * @returns {*} - The call returned value.
+   * @returns {*} The call returned value.
    */
 
 

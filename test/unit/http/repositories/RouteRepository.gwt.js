@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Repositories - Route Repository - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container       = require('../../container');
-const RouteRepository = require('../../../../dist/node/http/repositories/RouteRepository');
-const Route           = require('../../../../dist/node/http/Route');
+import container       from '../../container';
+import RouteRepository from '../../../../dist/node/http/repositories/RouteRepository';
+import Route           from '../../../../dist/node/http/Route';
 
 let routeRepository;
 let result;
@@ -146,4 +146,4 @@ then.shouldHaveReceivedGetRouteWithParameter = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

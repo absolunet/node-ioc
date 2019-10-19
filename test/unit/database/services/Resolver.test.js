@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Resolver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Resolver.gwt');
+import gwt from './Resolver.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

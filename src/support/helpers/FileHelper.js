@@ -22,7 +22,7 @@ class FileHelper {
 	 * @param {string} [options.unit] - The unit in which the result will be returned (B/KB/MB/GB/TB).
 	 * @param {string} [options.unitSeparator] - Separator to use between number and unit.
 	 *
-	 * @returns {string|null} - The formatted value.
+	 * @returns {string|null} The formatted value.
 	 */
 	formatSize(size, options) {
 		return this.bytes.format(size, options);
@@ -32,7 +32,7 @@ class FileHelper {
 	 * Parse a human readable file size to bytes number value.
 	 *
 	 * @param {string|number} size - The size to parse.
-	 * @returns {number|null} - The parsed size.
+	 * @returns {number|null} The parsed size.
 	 */
 	parseSize(size) {
 		return this.bytes.parse(size);

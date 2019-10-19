@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Migration - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../container');
-const Migration = require('../../../dist/node/database/Migration');
+import container from '../container';
+import Migration from '../../../dist/node/database/Migration';
 
 let result;
 
@@ -76,4 +76,4 @@ then.resultShouldBePromise = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

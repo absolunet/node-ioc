@@ -26,7 +26,7 @@ class TestCase extends setsUp(expects(asserts(hasEngine()))) {
 	 *
 	 * @param {*} abstract - An abstract that was bound to the container, or a class, closure or instance that can be built by the container.
 	 * @param {object<string, *>} [parameters={}] - Additional arguments to inject into the concrete when instantiating.
-	 * @returns {*} - The instantiated or the singleton concrete.
+	 * @returns {*} The instantiated or the singleton concrete.
 	 */
 	make(abstract, parameters = {}) {
 		return this.app.make(abstract, parameters);
@@ -44,8 +44,8 @@ class TestCase extends setsUp(expects(asserts(hasEngine()))) {
 	/**
 	 * Set current application.
 	 *
-	 * @param {Application} app - The application instance.
-	 * @returns {TestCase} - The current test case.
+	 * @param {foundation.Application} app - The application instance.
+	 * @returns {test.TestCase} The current test case.
 	 */
 	setApp(app) {
 		__(this).set('app', app);
@@ -56,7 +56,7 @@ class TestCase extends setsUp(expects(asserts(hasEngine()))) {
 	/**
 	 * Current application accessor.
 	 *
-	 * @type {Application}
+	 * @type {foundation.Application}
 	 */
 	get app() {
 		return __(this).get('app');

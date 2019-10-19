@@ -24,8 +24,8 @@ class RouteRepository {
 	/**
 	 * Add a route instance.
 	 *
-	 * @param {Route} route - The route instance to add.
-	 * @returns {RouteRepository} - The current route repository instance.
+	 * @param {http.Route} route - The route instance to add.
+	 * @returns {http.repositories.RouteRepository} The current route repository instance.
 	 */
 	add(route) {
 		__(this).get('routes').push(route);
@@ -36,7 +36,7 @@ class RouteRepository {
 	/**
 	 * Get all route instances.
 	 *
-	 * @returns {Array<Route>} - A list of all the registered routes.
+	 * @returns {Array<Route>} A list of all the registered routes.
 	 */
 	all() {
 		return [...__(this).get('routes')];
@@ -46,7 +46,7 @@ class RouteRepository {
 	 * Find a route by given name.
 	 *
 	 * @param {string} name - The route name.
-	 * @returns {Route|null} - The found route instance, or null if not found.
+	 * @returns {http.Route|null} The found route instance, or null if not found.
 	 */
 	findByName(name) {
 		return this.all().find(({ as }) => {
@@ -58,19 +58,18 @@ class RouteRepository {
 	 * Find routes that match given path.
 	 *
 	 * @param {string} path - The route path.
-	 * @returns {Array<Route>} - A list of routes that match the given path.
+	 * @returns {Array<Route>} A list of routes that match the given path.
 	 */
 	findByPath(path) {
 		return this.all().filter((route) => {
 			const { path: pattern } = route;
-			const regex = pattern.replace(/:(?<name>\w+)/ug, (match, name, index) => {
+			const regex = pattern.replace(/:(?<name>\w+)/ug, (match, name) => {
 				const constraint = route.constraints[name] || '[^/]+';
-				const end = pattern.length - index - match.length === 0;
 
-				return `(?<${name}>${constraint})${end ? '$' : ''}`;
+				return `(?<${name}>${constraint})`;
 			});
 
-			return new RegExp(regex, 'u').test(path);
+			return new RegExp(`^${regex}$`, 'u').test(path);
 		});
 	}
 
@@ -79,7 +78,7 @@ class RouteRepository {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string} method - The HTTP method.
-	 * @returns {Route|null} - The found route instance, or null if not found.
+	 * @returns {http.Route|null} The found route instance, or null if not found.
 	 */
 	findByPathForMethod(path, method) {
 		const route = this.findByPath(path)

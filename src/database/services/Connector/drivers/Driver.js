@@ -46,7 +46,7 @@ class Driver {
 	 * Get Knex connection.
 	 *
 	 * @param {string} [name="default"] - The connection name.
-	 * @returns {Knex} - A Knex connection instance.
+	 * @returns {Knex} A Knex connection instance.
 	 */
 	getConnection(name = 'default') {
 		if (!this.hasConnection(name)) {
@@ -59,7 +59,7 @@ class Driver {
 	/**
 	 * Get default Knex connection.
 	 *
-	 * @returns {Knex} - A Knex connection instance.
+	 * @returns {Knex} A Knex connection instance.
 	 */
 	getDefaultConnection() {
 		return this.getConnection('default');
@@ -70,7 +70,7 @@ class Driver {
 	 *
 	 * @param {string} name - The connection name.
 	 * @param {Knex} connection - The Knex connection instance.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
 	 */
 	setConnection(name, connection) {
 		__(this).get('connections')[name] = connection;
@@ -82,7 +82,7 @@ class Driver {
 	 * Set default Knex connection instance.
 	 *
 	 * @param {Knex} connection - The Knex connection instance.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
 	 */
 	setDefaultConnection(connection) {
 		this.setConnection('default', connection);
@@ -94,7 +94,7 @@ class Driver {
 	 * Check if connection exists by name.
 	 *
 	 * @param {string} name - The connection name.
-	 * @returns {boolean} - Indicates that the connection exists.
+	 * @returns {boolean} Indicates that the connection exists.
 	 */
 	hasConnection(name) {
 		return Boolean(__(this).get('connections')[name]);
@@ -105,7 +105,7 @@ class Driver {
 	 *
 	 * @param {string} name - The connection name.
 	 * @param {object} config - The connection configuration.
-	 * @returns {Knex} - A Knex connection instance.
+	 * @returns {Knex} A Knex connection instance.
 	 */
 	getOrCreateConnection(name, config) {
 		if (this.hasConnection(name)) {
@@ -120,7 +120,7 @@ class Driver {
 	 *
 	 * @param {string} name - The connection name.
 	 * @param {object} config - The connection configuration.
-	 * @returns {Knex} - A Knex connection instance.
+	 * @returns {Knex} A Knex connection instance.
 	 */
 	createConnection(name, config) {
 		const connection = this.makeConnection(config);
@@ -134,7 +134,7 @@ class Driver {
 	 * Make new Knex connection.
 	 *
 	 * @param {object} config - The connection configuration.
-	 * @returns {Knex} - A Knex instance.
+	 * @returns {Knex} A Knex instance.
 	 */
 	makeConnection(config) {
 		const connection = require('knex')(this.mapConfig(config)); // eslint-disable-line global-require
@@ -148,7 +148,7 @@ class Driver {
 	 * Map configuration from the driver and given configuration into a Knex configuratioon model.
 	 *
 	 * @param {object} config - The connection configuration.
-	 * @returns {object} - The full Knex connection configuration.
+	 * @returns {object} The full Knex connection configuration.
 	 */
 	mapConfig(config) {
 		return {
@@ -171,7 +171,7 @@ class Driver {
 	 * @see dropAll()
 	 * @param {Knex} [connection] - The Knex connection instance.
 	 * @param {object} [options] - The knex-clean options.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async clean(connection = this.defaultConnection, options = {}) {
 		const { migrationsTable } = this;
@@ -191,7 +191,7 @@ class Driver {
 	 *
 	 * @param {Knex} [connection] - The Knex connection instance.
 	 * @param {object} [options] - The knex-clean options.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async dropAll(connection, options = {}) {
 		const tables = await require('knex-cleaner/lib/knex_tables').getTableNames(connection, options); // eslint-disable-line global-require
@@ -204,7 +204,7 @@ class Driver {
 	 * Get migration status.
 	 *
 	 * @param {Knex} connection - The Knex connection instance.
-	 * @returns {Promise<Array<{name: string, ran: boolean}>>} - The migration status.
+	 * @returns {Promise<Array<{name: string, ran: boolean}>>} The migration status.
 	 */
 	async migrationStatus(connection) {
 		const [migrationsPath] = connection.migrate.generator.config.migrationSource.migrationsPaths;

@@ -87,8 +87,8 @@ class MigrateRefreshCommand extends Command {
 	/**
 	 * Rollback all database migrations.
 	 *
-	 * @param {Connector} connection - The database connetion to use.
-	 * @returns {Promise<{output: *, migrations: *}>} - The migrations that ran and the output made by Knex.
+	 * @param {database.services.Connector} connection - The database connetion to use.
+	 * @returns {Promise<{output: *, migrations: *}>} The migrations that ran and the output made by Knex.
 	 */
 	async rollback(connection) {
 		this.terminalInterceptor.startCapture();

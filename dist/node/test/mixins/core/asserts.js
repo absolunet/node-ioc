@@ -26,7 +26,7 @@ const asserts = (0, _mixinFactory.default)(SuperClass => {
     /**
      * Make assertion.
      *
-     * @returns {Assert|null} - The assert object.
+     * @returns {Assert|null} The assert object.
      * @memberof test.mixins.core.Asserts
      * @instance
      */

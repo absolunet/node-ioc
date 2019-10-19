@@ -12,6 +12,8 @@ var _Handler = _interopRequireDefault(require("./services/Handler"));
 
 var _Router = _interopRequireDefault(require("./services/Router"));
 
+var _HttpErrorMapper = _interopRequireDefault(require("./services/HttpErrorMapper"));
+
 var _RouteRepository = _interopRequireDefault(require("./repositories/RouteRepository"));
 
 var _ControllerRepository = _interopRequireDefault(require("./repositories/ControllerRepository"));
@@ -39,6 +41,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *     <li><a href="http.services.Server.html">server</a></li>
  *     <li><a href="http.services.Router.html">router</a></li>
  *     <li><a href="http.services.Handler.html">router.handler</a></li>
+ *     <li><a href="http.services.HttpErrorMapper.html">http.error.mapper</a></li>
  *     <li><a href="http.repositories.RouteRepository.html">router.route</a></li>
  *     <li><a href="http.repositories.ControllerRepository.html">route.controller</a></li>
  * </ul>
@@ -81,6 +84,7 @@ class HttpServiceProvider extends _ServiceProvider.default {
     this.app.singleton('server', _Server.default);
     this.app.singleton('router', _Router.default);
     this.app.singleton('router.handler', _Handler.default);
+    this.app.singleton('http.error.mapper', _HttpErrorMapper.default);
     this.app.singleton('router.route', _RouteRepository.default);
     this.app.singleton('router.controller', _ControllerRepository.default);
   }

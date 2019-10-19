@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ServiceProvider.gwt');
+import gwt from './ServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 test('Can load commands into the command repository', () => {

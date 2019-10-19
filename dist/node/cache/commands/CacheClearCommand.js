@@ -72,7 +72,7 @@ class CacheClearCommand extends _Command.default {
   /**
    * Get cache store driver instance.
    *
-   * @returns {Driver} - The cache store driver instance.
+   * @returns {cache.services.CacheManager.drivers.Driver} The cache store driver instance.
    */
 
 

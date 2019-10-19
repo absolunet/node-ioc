@@ -7,6 +7,7 @@ import HttpClient            from './services/Client';
 import HttpServer            from './services/Server';
 import Handler               from './services/Handler';
 import Router                from './services/Router';
+import HttpErrorMapper       from './services/HttpErrorMapper';
 import RouteRepository       from './repositories/RouteRepository';
 import ControllerRepository  from './repositories/ControllerRepository';
 import RedirectController    from './controllers/RedirectController';
@@ -24,6 +25,7 @@ import ServeCommand          from './commands/ServeCommand';
  *     <li><a href="http.services.Server.html">server</a></li>
  *     <li><a href="http.services.Router.html">router</a></li>
  *     <li><a href="http.services.Handler.html">router.handler</a></li>
+ *     <li><a href="http.services.HttpErrorMapper.html">http.error.mapper</a></li>
  *     <li><a href="http.repositories.RouteRepository.html">router.route</a></li>
  *     <li><a href="http.repositories.ControllerRepository.html">route.controller</a></li>
  * </ul>
@@ -68,6 +70,7 @@ class HttpServiceProvider extends ServiceProvider {
 		this.app.singleton('server',            HttpServer);
 		this.app.singleton('router',            Router);
 		this.app.singleton('router.handler',    Handler);
+		this.app.singleton('http.error.mapper', HttpErrorMapper);
 		this.app.singleton('router.route',      RouteRepository);
 		this.app.singleton('router.controller', ControllerRepository);
 	}

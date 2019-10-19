@@ -36,7 +36,7 @@ class Gate extends checksTypes() {
 	 * Determine if the user is authorized to get through the given gates.
 	 *
 	 * @param {string|Array<string>} gate - Gate to validate through registered policies.
-	 * @returns {boolean} - Indicates that the policies passed.
+	 * @returns {boolean} Indicates that the policies passed.
 	 */
 	can(gate) {
 		const gates = Array.isArray(gate) ? gate : [gate];
@@ -67,7 +67,7 @@ class Gate extends checksTypes() {
 	 * Resolve policy handlers by name.
 	 *
 	 * @param {string} gate - The gate to resolve.
-	 * @returns {{name: string, parameters: Array<string>, policies: Array<Function|*>}} - The resolved gate name, parametres and policies.
+	 * @returns {{name: string, parameters: Array<string>, policies: Array<Function|*>}} The resolved gate name, parametres and policies.
 	 */
 	resolve(gate) {
 		const name       = this.getGateName(gate);
@@ -84,7 +84,7 @@ class Gate extends checksTypes() {
 	 * Get the gate name, without arguments.
 	 *
 	 * @param {string} gate - The gate.
-	 * @returns {string} - The gate name.
+	 * @returns {string} The gate name.
 	 */
 	getGateName(gate) {
 		return gate.split(':')[0];
@@ -94,7 +94,7 @@ class Gate extends checksTypes() {
 	 * Get gate arguments from string call.
 	 *
 	 * @param {string} gate - The gate.
-	 * @returns {Array<string>} - The list of parameters.
+	 * @returns {Array<string>} The list of parameters.
 	 */
 	getGateParameters(gate) {
 		return (gate.split(':')[1] || '').split(',').filter(Boolean);
@@ -104,7 +104,7 @@ class Gate extends checksTypes() {
 	 * Get policy handler instance, either a closure or a policy class instance.
 	 *
 	 * @param {*} policy - The policy or policy class.
-	 * @returns {Function|Policy} - The policy callable function or class instance.
+	 * @returns {Function|Policy} The policy callable function or class instance.
 	 */
 	getPolicyConcrete(policy) {
 		return this.isFunction(policy) ? policy : this.app.make(policy);
@@ -113,9 +113,9 @@ class Gate extends checksTypes() {
 	/**
 	 * Execute policy handling, either from a closure or a class instance.
 	 *
-	 * @param {Function|Policy} policy - The policy callable function or class instance.
+	 * @param {Function} policy - The policy callable function or class instance.
 	 * @param {Array<string>} parameters - The list of parameters.
-	 * @returns {boolean} - Indicates if the given policy passes with the given parameters.
+	 * @returns {boolean} Indicates if the given policy passes with the given parameters.
 	 */
 	handlePolicy(policy, parameters = []) {
 		return this.isFunction(policy) ? policy(...parameters) : policy.handle(...parameters);

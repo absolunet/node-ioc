@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Factory
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Factory.gwt');
+import gwt from './Factory.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

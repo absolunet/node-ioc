@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Translation - Services - Translator
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Translator.gwt');
+import gwt from './Translator.gwt';
+const { given, when, then } = gwt;
 
 
 

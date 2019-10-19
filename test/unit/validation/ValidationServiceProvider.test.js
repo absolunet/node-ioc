@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Validation - Validation Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ValidationServiceProvider.gwt');
+import gwt from './ValidationServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

@@ -18,6 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {string} [as] - Route name.
  * @property {string} [prefix] - Route path prefix.
  * @property {string} [namespace] - Controller namespace to use.
+ * @memberof http
  */
 
 /**
@@ -27,6 +28,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @property {string} [method] - The route HTTP method.
  * @property {string} [path] - The route path.
  * @property {string|Function} [action] - The route action, either a closure or a controller action.
+ * @memberof http
  */
 
 /**
@@ -34,12 +36,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @typedef {object} BaseResourceData
  * @property {string} name - The resource name.
  * @property {string} method - The resource HTTP method.
+ * @memberof http
  */
 
 /**
  * @private
  * @typedef {ResourceData} ResourceAction
  * @property {boolean} single - Indicates that the resource handle a single instance and not a collection.
+ * @memberof http
  */
 
 /**
@@ -47,6 +51,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @typedef {object} ResourceData
  * @property {string} action - The resource action name.
  * @property {string} url - The resource URL.
+ * @memberof http
  */
 
 /**
@@ -80,7 +85,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -92,7 +97,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -104,7 +109,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -116,7 +121,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -128,7 +133,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -140,7 +145,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -152,7 +157,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -163,7 +168,7 @@ class Router {
    * Register a fallback route that matches anything in the current scope.
    *
    * @param {string|Function} action - The route action.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -177,7 +182,7 @@ class Router {
    * @param {string} from - The path to redirect from.
    * @param {string} to - The destination path to redirect on.
    * @param {boolean} [permanent] - Indicates that the redirection is permanent.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -189,7 +194,7 @@ class Router {
    *
    * @param {string} from - The path to redirect from.
    * @param {string} to - The destination path to redirect on.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -201,12 +206,12 @@ class Router {
    *
    * @param {string} path - The path for static route serving.
    * @param {string} folder - The folder where the static content is hosted.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
   static(path, folder) {
-    return this.get(`${path}/:file`, this.withCorePrefix('StaticController@handle')).where('file', '*').with({
+    return this.get(`${path}/:file`, this.withCorePrefix('StaticController@handle')).where('file', '[^\\s]+').with({
       path,
       folder
     });
@@ -215,23 +220,23 @@ class Router {
    * Get controller name with core prefix.
    *
    * @param {string} name - The controller name.
-   * @returns {string} - The fully qualified controller name.
+   * @returns {string} The fully qualified controller name.
    */
 
 
   withCorePrefix(name) {
     const {
-      coreNamespace: n,
-      namespaceSeparator: s
+      coreNamespace,
+      namespaceSeparator
     } = this.controllers;
-    return `${n}${s}${name}`;
+    return `${coreNamespace}${namespaceSeparator}${name}`;
   }
   /**
    * Add a controller binding.
    *
    * @param {string} name - The controller name.
-   * @param {Controller} controller - The controller class.
-   * @returns {ControllerRepository} - The controller repository instance.
+   * @param {http.controllers.Controller} controller - The controller class.
+   * @returns {http.repositories.ControllerRepository} The controller repository instance.
    */
 
 
@@ -243,7 +248,7 @@ class Router {
    *
    * @param {string} namespace - The controller namespace.
    * @param {Function} group - The controller group closure.
-   * @returns {ControllerRepository} - The controller repository instance.
+   * @returns {http.repositories.ControllerRepository} The controller repository instance.
    */
 
 
@@ -258,7 +263,7 @@ class Router {
    * @param {string} controller - The resource controller name that will handle requests.
    * @param {Array<string>} [only] - Indicates the routes restrictions.
    * @param {boolean} [apiOnly=false] - Indicates that only API routes should be considered.
-   * @returns {Router} - The current router instance.
+   * @returns {http.Router} The current router instance.
    */
 
 
@@ -285,7 +290,7 @@ class Router {
    * @param {string} resource - The resource for which the routes should be created.
    * @param {string} controller - The resource controller name that will handle requests.
    * @param {Array<string>} [only=[]] - Indicates the routes restrictions.
-   * @returns {Router} - The current router instance.
+   * @returns {http.Router} The current router instance.
    */
 
 
@@ -295,9 +300,9 @@ class Router {
   /**
    * Create a route group.
    *
-   * @param {GroupOptions} options - The group options.
+   * @param {http.GroupOptions} options - The group options.
    * @param {Function} group - The group closure.
-   * @returns {Router} - The current router instance.
+   * @returns {http.Router} The current router instance.
    */
 
 
@@ -314,7 +319,7 @@ class Router {
    * @param {string} method - The HTTP verb, such as "GET", "POST", "DELETE", etc.
    * @param {string} path - The route path.
    * @param {string|Function} action - The action that will handle the request.
-   * @returns {Route} - The newly created route instance.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -330,8 +335,8 @@ class Router {
   /**
    * Create a new route instance.
    *
-   * @param {RouteAttributes} attributes - The route attributes.
-   * @returns {Route} - The newly created route instance.
+   * @param {http.RouteAttributes} attributes - The route attributes.
+   * @returns {http.Route} The newly created route instance.
    */
 
 
@@ -361,8 +366,8 @@ class Router {
   /**
    * Get route or route group mapping.
    *
-   * @param {Route} route - The route instance.
-   * @returns {RouteAttributes} - The route mapping.
+   * @param {http.Route} route - The route instance.
+   * @returns {http.RouteAttributes} The route mapping.
    */
 
 
@@ -376,8 +381,8 @@ class Router {
   /**
    * Get route or route group asPrefix mapping.
    *
-   * @param {Route} route - The route instance.
-   * @returns {string} - The route name prefix.
+   * @param {http.Route} route - The route instance.
+   * @returns {string} The route name prefix.
    */
 
 
@@ -389,8 +394,8 @@ class Router {
   /**
    * Get route or route group path mapping.
    *
-   * @param {Route} route - The route instance.
-   * @returns {string} - The full route path.
+   * @param {http.Route} route - The route instance.
+   * @returns {string} The full route path.
    */
 
 
@@ -406,8 +411,8 @@ class Router {
   /**
    * Get route or route group action mapping.
    *
-   * @param {Route} route - The route instance.
-   * @returns {string} - The route action name.
+   * @param {http.Route} route - The route instance.
+   * @returns {string} The route action name.
    */
 
 
@@ -421,13 +426,16 @@ class Router {
   /**
    * Generate route binding in Express server.
    *
-   * @returns {express.Router} - The Express Router instance.
+   * @returns {express.Router} The Express Router instance.
    */
 
 
   generate() {
     if (!(0, _privateRegistry.default)(this).get('expressRouter')) {
       const router = this.server.getRouter();
+      this.post('/allo', (request, response) => {
+        response.send('bob');
+      });
       this.routes.all().forEach(route => {
         const {
           constraints,
@@ -438,6 +446,7 @@ class Router {
           return this.routerHandler.handleRequest(route, request, response);
         });
       });
+      router.all('*', this.routerHandler.handleRouteNotFound.bind(this.routerHandler));
       (0, _privateRegistry.default)(this).set('expressRouter', router);
     }
 
@@ -449,7 +458,7 @@ class Router {
    * @param {string} path - The route path.
    * @param {string} [method] - The HTTP method to use.
    * @param {*} [request] - The request instance to use.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -463,7 +472,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {request} request - The request instance to use.
-   * @returns {Promise<{code: number, data: *}>} - The HTTP code result and the response body.
+   * @returns {Promise<{code: number, data: *}>} The HTTP code result and the response body.
    */
 
 
@@ -496,7 +505,7 @@ class Router {
    *
    * @param {string} resource - The resource from which to get the mapping.
    * @param {string} controller - The controller name.
-   * @returns {Array<object>} - The List of resource action mapping.
+   * @returns {Array<object>} The List of resource action mapping.
    */
 
 
@@ -513,7 +522,7 @@ class Router {
    * @param {string} resource - The resource from which to get data.
    * @param {string} controller - The controller name.
    * @param {string} action - The controller action name.
-   * @returns {ResourceData} - The resource data.
+   * @returns {http.ResourceData} The resource data.
    */
 
 
@@ -528,7 +537,7 @@ class Router {
   /**
    * Get available resource actions.
    *
-   * @returns {Array<{name: string, method: string, single: boolean}>} - The resource actions.
+   * @returns {Array<{name: string, method: string, single: boolean}>} The resource actions.
    */
 
 
@@ -581,7 +590,7 @@ class Router {
    * Get single resource action data.
    *
    * @param {string} action - The action name.
-   * @returns {ResourceAction} - The resource action.
+   * @returns {http.ResourceAction} The resource action.
    */
 
 
@@ -596,7 +605,7 @@ class Router {
    * Get single resource action method name.
    *
    * @param {string} action - The action name.
-   * @returns {string} - The resource action HTTP method.
+   * @returns {string} The resource action HTTP method.
    */
 
 
@@ -608,7 +617,7 @@ class Router {
    *
    * @param {string} resource - The resource name.
    * @param {string} action - The resource action.
-   * @returns {string} - The URL for the resource for the specific action.
+   * @returns {string} The URL for the resource for the specific action.
    */
 
 
@@ -634,7 +643,7 @@ class Router {
    *
    * @param {string} path - The route path.
    * @param {*} constraints - The constraints for route parameters.
-   * @returns {string} - The resolved path.
+   * @returns {string} The resolved path.
    */
 
 
@@ -646,7 +655,7 @@ class Router {
   /**
    * Get server instance.
    *
-   * @returns {Express} - The Express server instance.
+   * @returns {Express} The Express server instance.
    */
 
 
@@ -656,7 +665,7 @@ class Router {
   /**
    * Route repository.
    *
-   * @type {RouteRepository}
+   * @type {http.repositories.RouteRepository}
    */
 
 
@@ -666,7 +675,7 @@ class Router {
   /**
    * Controller repository.
    *
-   * @type {ControllerRepository}
+   * @type {http.repositories.ControllerRepository}
    */
 
 

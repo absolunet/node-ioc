@@ -21,7 +21,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} event - The event to listen.
 	 * @param {Function} listener - The listener.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
 	 * @abstract
 	 */
 	on(event, listener) { // eslint-disable-line no-unused-vars
@@ -33,7 +33,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} event - The event that has been listen.
 	 * @param {Function} listener - The listener.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
 	 * @abstract
 	 */
 	off(event, listener) { // eslint-disable-line no-unused-vars
@@ -45,7 +45,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} event - The event to listen.
 	 * @param {Function} listener - The listener.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
 	 * @abstract
 	 */
 	once(event, listener) { // eslint-disable-line no-unused-vars
@@ -57,7 +57,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} event - The event to dispatch.
 	 * @param {*} [payload] - The payload to send into the listeners.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
 	 * @abstract
 	 */
 	emit(event, payload) { // eslint-disable-line no-unused-vars
@@ -68,7 +68,7 @@ class Driver extends hasEngine() {
 	 * Remove listeners for a given event.
 	 *
 	 * @param {string} event - The event that has been listen.
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
 	 * @abstract
 	 */
 	removeListeners(event) { // eslint-disable-line no-unused-vars
@@ -78,7 +78,7 @@ class Driver extends hasEngine() {
 	/**
 	 * Remove all listeners for all events.
 	 *
-	 * @returns {Driver} - The current driver instance.
+	 * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
 	 * @abstract
 	 */
 	removeAllListeners() {

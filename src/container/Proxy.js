@@ -40,9 +40,9 @@ class ContainerProxy extends BaseProxy {
 	/**
 	 * Container property check handler.
 	 *
-	 * @param {Container} object - The current container.
+	 * @param {container.Container} object - The current container.
 	 * @param {string} property - The property name.
-	 * @returns {boolean} - Indicates that the property exists in the container or that the binding exists.
+	 * @returns {boolean} Indicates that the property exists in the container or that the binding exists.
 	 */
 	has(object, property) {
 		return __(this).get('has')(object, property) || Boolean(__(object).get('bindings')[property]) || object.isTag(property);

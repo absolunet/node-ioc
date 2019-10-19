@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager - Drivers - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../../../container');
+import container from '../../../../container';
 
 let driver;
 let entries;
@@ -138,4 +138,4 @@ then.resultShouldBeUnserializedInstance = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

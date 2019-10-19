@@ -98,7 +98,7 @@ class MakeTestCommand extends GeneratorCommand {
 	/**
 	 * Get the test namespace, which could be a class in the application.
 	 *
-	 * @returns {string} - The namespace.
+	 * @returns {string} The namespace.
 	 */
 	getNamespace() {
 		return this.option('for') || '';
@@ -142,7 +142,7 @@ class MakeTestCommand extends GeneratorCommand {
 	/**
 	 * String helper.
 	 *
-	 * @type {StringHelper}
+	 * @type {support.helpers.StringHelper}
 	 */
 	get stringHelper() {
 		return this.helperString;
@@ -151,7 +151,7 @@ class MakeTestCommand extends GeneratorCommand {
 	/**
 	 * Path helper.
 	 *
-	 * @type {PathHelper}
+	 * @type {support.helpers.PathHelper}
 	 */
 	get pathHelper() {
 		return this.helperPath;

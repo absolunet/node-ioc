@@ -26,7 +26,7 @@ const forwardCalls = factory((SuperClass) => {
 		 *
 		 * @param {string} method - The method to call.
 		 * @param {Array<*>} [parameters=[]] - The parameters to send to the forwarded instance method.
-		 * @returns {*} - The method result.
+		 * @returns {*} The method result.
 		 * @memberof support.mixins.ForwardCalls
 		 * @instance
 		 */
@@ -37,7 +37,7 @@ const forwardCalls = factory((SuperClass) => {
 		/**
 		 * Get object which should receive the call forwarding.
 		 *
-		 * @returns {object} - The forward instance.
+		 * @returns {object} The forward instance.
 		 * @abstract
 		 * @memberof support.mixins.ForwardCalls
 		 * @instance

@@ -56,7 +56,7 @@ class Enum {
   /**
    * Get enumeration keys.
    *
-   * @returns {Array<string>} - The enumeration keys.
+   * @returns {Array<string>} The enumeration keys.
    */
 
 
@@ -66,7 +66,7 @@ class Enum {
   /**
    * Get enumeration values.
    *
-   * @returns {Array<*>} - The enumeration values.
+   * @returns {Array<*>} The enumeration values.
    */
 
 
@@ -76,7 +76,7 @@ class Enum {
   /**
    * Get enumeration entries.
    *
-   * @returns {Array<Array<*>>} - The enumeration entries.
+   * @returns {Array<Array<*>>} The enumeration entries.
    */
 
 

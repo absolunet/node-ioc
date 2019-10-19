@@ -28,7 +28,7 @@ class Driver extends (0, _hasEngine.default)() {
    *
    * @param {string} event - The event to listen.
    * @param {Function} listener - The listener.
-   * @returns {Driver} - The current driver instance.
+   * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
    * @abstract
    */
   on(event, listener) {
@@ -40,7 +40,7 @@ class Driver extends (0, _hasEngine.default)() {
    *
    * @param {string} event - The event that has been listen.
    * @param {Function} listener - The listener.
-   * @returns {Driver} - The current driver instance.
+   * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
    * @abstract
    */
 
@@ -54,7 +54,7 @@ class Driver extends (0, _hasEngine.default)() {
    *
    * @param {string} event - The event to listen.
    * @param {Function} listener - The listener.
-   * @returns {Driver} - The current driver instance.
+   * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
    * @abstract
    */
 
@@ -68,7 +68,7 @@ class Driver extends (0, _hasEngine.default)() {
    *
    * @param {string} event - The event to dispatch.
    * @param {*} [payload] - The payload to send into the listeners.
-   * @returns {Driver} - The current driver instance.
+   * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
    * @abstract
    */
 
@@ -81,7 +81,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Remove listeners for a given event.
    *
    * @param {string} event - The event that has been listen.
-   * @returns {Driver} - The current driver instance.
+   * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
    * @abstract
    */
 
@@ -93,7 +93,7 @@ class Driver extends (0, _hasEngine.default)() {
   /**
    * Remove all listeners for all events.
    *
-   * @returns {Driver} - The current driver instance.
+   * @returns {events.services.Dispatcher.drivers.Driver} The current driver instance.
    * @abstract
    */
 

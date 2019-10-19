@@ -6,7 +6,7 @@ import __ from '@absolunet/private-registry';
 
 
 /**
- * Abstract controller class that describes all the shortcuts to take action on the response object.
+ * Abstract controller class that defines all the shortcuts to take action on the response object.
  *
  * @memberof http.controllers
  * @abstract
@@ -17,7 +17,7 @@ class Controller {
 	/**
 	 * Prepare request handling.
 	 *
-	 * @param {Container} app - The current container instance.
+	 * @param {container.Container} app - The current container instance.
 	 * @param {request} request - The current request instance.
 	 * @param {response} response - The current response instance.
 	 */
@@ -33,7 +33,7 @@ class Controller {
 	 *
 	 * @param {string} view - The view name.
 	 * @param {*} data - The view-model data.
-	 * @returns {response} - The response instance.
+	 * @returns {response} The response instance.
 	 */
 	view(view, data = {}) {
 		return this.response
@@ -45,7 +45,7 @@ class Controller {
 	 * Send JSON response.
 	 *
 	 * @param {string|number|boolean|object} object - The JSON value to send.
-	 * @returns {response} - The response instance.
+	 * @returns {response} The response instance.
 	 */
 	json(object) {
 		return this.response.json(object);
@@ -56,7 +56,7 @@ class Controller {
 	 * Ends the request when the handler resolves.
 	 *
 	 * @param {Function} handler - The stream handler.
-	 * @returns {Promise<Response>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async stream(handler) {
 		__(this).set('isStreaming', true);
@@ -74,7 +74,7 @@ class Controller {
 	 * Write line in the stream response.
 	 *
 	 * @param {string} line - The line to stream into the response.
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	writeStreamLine(line) {
 		if (this.isStreaming) {
@@ -88,7 +88,7 @@ class Controller {
 	 * Send a stream response from command output.
 	 *
 	 * @param {string|Array<string>} command - The command string.
-	 * @returns {Promise<Response>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	streamCommand(command) {
 		const { writeStreamLineHandler: handler } = this;
@@ -104,7 +104,7 @@ class Controller {
 	 *
 	 * @param {string|Array<string>} command - The command string.
 	 * @param {Function|null} [handler] - The handler that will received printed data after command will have run.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async runCommand(command, handler = null) {
 		const commandRegistrar = this.app.make('command.registrar');
@@ -126,7 +126,7 @@ class Controller {
 	 *
 	 * @param {string} to - The URL to redirect to.
 	 * @param {boolean} [permanent=false] - Indicates that the redirection response should flag a permanent redirection.
-	 * @returns {response} - The current response instance.
+	 * @returns {response} The current response instance.
 	 */
 	redirect(to, permanent = false) {
 		return this.response.redirect(permanent ? 301 : 302, to);
@@ -136,7 +136,7 @@ class Controller {
 	 * Redirect to the given URL permanently.
 	 *
 	 * @param {string} to - The URL to redirect to.
-	 * @returns {response} - The current response instance.
+	 * @returns {response} The current response instance.
 	 */
 	permanentRedirect(to) {
 		return this.redirect(to, true);
@@ -146,7 +146,7 @@ class Controller {
 	 * Set response status.
 	 *
 	 * @param {number} status - The HTTP status code.
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	status(status) {
 		this.response.status(status);
@@ -155,9 +155,21 @@ class Controller {
 	}
 
 	/**
+	 * Set response status and throw an HTTP error that reflects the given status.
+	 *
+	 * @param {number} status - The HTTP status code.
+	 * @throws {http.exceptions.HttpError} - The corresponding HTTP error based on the HTTP status code.
+	 */
+	throwWithStatus(status) {
+		this.status(status);
+
+		throw this.app.make('http.error.mapper').getErrorInstanceFromHttpStatus(status);
+	}
+
+	/**
 	 * Set 200 OK status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	ok() {
 		return this.status(200);
@@ -166,7 +178,7 @@ class Controller {
 	/**
 	 * Set 201 Created status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	created() {
 		return this.status(201);
@@ -175,7 +187,7 @@ class Controller {
 	/**
 	 * Set 202 Accepted status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	accepted() {
 		return this.status(202);
@@ -184,7 +196,7 @@ class Controller {
 	/**
 	 * Set 204 No Content status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	noContent() {
 		return this.status(204);
@@ -193,64 +205,64 @@ class Controller {
 	/**
 	 * Set 400 Bad Request status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	badRequest() {
-		return this.status(400);
+		return this.throwWithStatus(400);
 	}
 
 	/**
 	 * Set 401 Unauthorized status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	unauthorized() {
-		return this.status(401);
+		return this.throwWithStatus(401);
 	}
 
 	/**
 	 * Set 403 Forbidden status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	forbidden() {
-		return this.status(403);
+		return this.throwWithStatus(403);
 	}
 
 	/**
 	 * Set 404 Not Found status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	notFound() {
-		return this.status(404);
+		return this.throwWithStatus(404);
 	}
 
 	/**
 	 * Set 405 Method Not Allowed status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	methodNotAllowed() {
-		return this.status(405);
+		return this.throwWithStatus(405);
 	}
 
 	/**
 	 * Set 408 Timeout status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	timeout() {
-		return this.status(408);
+		return this.throwWithStatus(408);
 	}
 
 	/**
 	 * Set 418 I'm A Teapot status.
 	 *
-	 * @returns {Controller} - The current controller instance.
+	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	teapot() {
-		return this.status(418);
+		return this.throwWithStatus(418);
 	}
 
 	/**
@@ -276,7 +288,7 @@ class Controller {
 	/**
 	 * Container.
 	 *
-	 * @type {Container}
+	 * @type {container.Container}
 	 */
 	get app() {
 		return __(this).get('app');

@@ -20,7 +20,7 @@ class Driver extends hasEngine() {
 	 * Create a template instance.
 	 *
 	 * @param {string} view - The view name.
-	 * @returns {template} - The template instance.
+	 * @returns {template} The template instance.
 	 * @abstract
 	 */
 	make(view) { // eslint-disable-line no-unused-vars
@@ -32,7 +32,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} view - The view name.
 	 * @param {*} data - The view-model data.
-	 * @returns {string} - The rendered template as string.
+	 * @returns {string} The rendered template as string.
 	 * @abstract
 	 */
 	render(view, data) { // eslint-disable-line no-unused-vars

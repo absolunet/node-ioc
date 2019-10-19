@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - ORM
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ORM.gwt');
+import gwt from './ORM.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

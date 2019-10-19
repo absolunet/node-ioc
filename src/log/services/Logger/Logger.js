@@ -10,8 +10,8 @@ import StackDriver    from './drivers/StackDriver';
 
 
 /**
- * Logger service that exposes logging methods representing levels.
- * It forwards the logging to the configured driver.
+ * Logger service that exposes log methods representing levels.
+ * It forwards the log to the configured driver.
  *
  * @memberof log.services
  * @augments support.mixins.HasDriver
@@ -47,7 +47,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async emergency(message, context) {
 		await this.log(this.LEVEL.EMERGENCY, message, context);
@@ -58,7 +58,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async alert(message, context) {
 		await this.log(this.LEVEL.ALERT, message, context);
@@ -69,7 +69,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async critical(message, context) {
 		await this.log(this.LEVEL.CRITICAL, message, context);
@@ -80,7 +80,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async error(message, context) {
 		await this.log(this.LEVEL.ERROR, message, context);
@@ -91,7 +91,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async warning(message, context) {
 		await this.log(this.LEVEL.WARNING, message, context);
@@ -102,7 +102,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async notice(message, context) {
 		await this.log(this.LEVEL.NOTICE, message, context);
@@ -113,7 +113,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async info(message, context) {
 		await this.log(this.LEVEL.INFO, message, context);
@@ -124,7 +124,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async debug(message, context) {
 		await this.log(this.LEVEL.DEBUG, message, context);
@@ -136,7 +136,7 @@ class Logger extends hasDriver() {
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async log(level, message, context) {
 		await this.logWithDefaultChannel(level, message, context);
@@ -150,7 +150,7 @@ class Logger extends hasDriver() {
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async logWithChannel(channel, level, message, context) {
 		try {
@@ -171,14 +171,14 @@ class Logger extends hasDriver() {
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
-	 * @throws TypeError - Indicates that the logging channel was not found.
+	 * @returns {Promise} The async process promise.
+	 * @throws {TypeError} Indicates that the log channel was not found.
 	 */
 	async unsafeLogWithChannel(channel, level, message, context) {
-		const config = this.config.get(`logging.channels.${channel}`);
+		const config = this.config.get(`log.channels.${channel}`);
 
 		if (!config) {
-			throw new TypeError(`Cannot find logging channel [${channel}]`);
+			throw new TypeError(`Cannot find log channel [${channel}]`);
 		}
 
 		if (!this.isLevelUnderThreshold(level, config.level)) {
@@ -195,10 +195,10 @@ class Logger extends hasDriver() {
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async logWithDefaultChannel(level, message, context) {
-		await this.logWithChannel(this.config.get('logging.default'), level, message, context);
+		await this.logWithChannel(this.config.get('log.default'), level, message, context);
 	}
 
 	/**
@@ -207,7 +207,7 @@ class Logger extends hasDriver() {
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async logWithFallbackChannel(level, message, context) {
 		await this.logWithChannel(this.fallbackChannel, level, message, context);
@@ -218,7 +218,7 @@ class Logger extends hasDriver() {
 	 *
 	 * @param {string|number} level - The level to evaluate.
 	 * @param {string|number} [threshold] - The threshold.
-	 * @returns {boolean} - Indicates that the given level is under the given threshold.
+	 * @returns {boolean} Indicates that the given level is under the given threshold.
 	 */
 	isLevelUnderThreshold(level, threshold = 0) {
 		return this.getLevelValue(level) < this.getLevelValue(threshold);
@@ -228,7 +228,7 @@ class Logger extends hasDriver() {
 	 * Get parsed level value from either the number value or the verbose string.
 	 *
 	 * @param {string|number} level - The level.
-	 * @returns {number} - The level value as integer.
+	 * @returns {number} The level value as integer.
 	 */
 	getLevelValue(level) {
 		return isNaN(level) ? this.LEVEL[level.toUpperCase()] : parseInt(level, 10);
@@ -246,7 +246,7 @@ class Logger extends hasDriver() {
 	/**
 	 * Log level enum.
 	 *
-	 * @type {Level}
+	 * @type {log.enums.Level}
 	 */
 	get LEVEL() {
 		return __(this).get('log.level');

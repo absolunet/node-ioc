@@ -16,7 +16,7 @@ class DateHelper {
   /**
    * DateHelper constructor.
    *
-   * @returns {moment} - The Moment class.
+   * @returns {moment} The Moment class.
    */
   constructor() {
     return require('moment'); // eslint-disable-line global-require

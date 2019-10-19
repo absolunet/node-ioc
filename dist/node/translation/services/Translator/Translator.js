@@ -57,7 +57,7 @@ class Translator extends (0, _hasDriver.default)() {
    * @param {string} string - The string to translate.
    * @param {object<string, string>} [replacements] - The token replacements.
    * @param {number} [count] - The string count for pluralization.
-   * @returns {string} - The translated string.
+   * @returns {string} The translated string.
    */
 
 
@@ -71,7 +71,7 @@ class Translator extends (0, _hasDriver.default)() {
    * @param {string} string - The string to translate.
    * @param {object<string, string>} [replacements] - The token replacements.
    * @param {number} [count] - The string count for pluralization.
-   * @returns {string} - The translated string.
+   * @returns {string} The translated string.
    */
 
 
@@ -90,7 +90,7 @@ class Translator extends (0, _hasDriver.default)() {
    * @param {string} key - The translation key.
    * @param {string} value - The translation value.
    * @param {string|null} locale - The locale the translation should be used for.
-   * @returns {Translator} - The current translator instance.
+   * @returns {translation.services.Translator} The current translator instance.
    */
 
 
@@ -103,7 +103,7 @@ class Translator extends (0, _hasDriver.default)() {
    *
    * @param {object<string, string>} translations - Collection of translations.
    * @param {string|null} [locale] - The locale the translation should be used for.
-   * @returns {Translator} - The current translator instance.
+   * @returns {translation.services.Translator} The current translator instance.
    */
 
 
@@ -117,7 +117,7 @@ class Translator extends (0, _hasDriver.default)() {
    * Use given translation folder to load all default available translations.
    *
    * @param {string} folder - The folder in which translation files should be loaded.
-   * @returns {Translator} - The current translator instance.
+   * @returns {translation.services.Translator} The current translator instance.
    */
 
 
@@ -129,7 +129,7 @@ class Translator extends (0, _hasDriver.default)() {
    * Set locale to use for translation.
    *
    * @param {string} locale - The locale.
-   * @returns {Translator} - The current translator instance.
+   * @returns {translation.services.Translator} The current translator instance.
    */
 
 
@@ -142,7 +142,7 @@ class Translator extends (0, _hasDriver.default)() {
    * Set fallback locale to use if translation in default locale does not exists.
    *
    * @param {string} locale - The fallback locale.
-   * @returns {Translator} - The current translator instance.
+   * @returns {translation.services.Translator} The current translator instance.
    */
 
 

@@ -17,7 +17,7 @@ class NullDriverProxy {
   /**
    * NullDriverProxy constructor.
    *
-   * @returns {Function} - A generic class wrapped by a proxy, which handler is the current null driver proxy instance.
+   * @returns {Function} A generic class wrapped by a proxy, which handler is the current null driver proxy instance.
    */
   constructor() {
     return new Proxy(class {}, this); // eslint-disable-line jsdoc/require-jsdoc
@@ -25,7 +25,7 @@ class NullDriverProxy {
   /**
    * Handle construct call.
    *
-   * @returns {NullDriverProxy} - A null driver proxy instance.
+   * @returns {support.drivers.NullDriverProxy} A null driver proxy instance.
    */
 
 
@@ -35,9 +35,9 @@ class NullDriverProxy {
   /**
    * Handle property access.
    *
-   * @param {GenericClass} object - The generic class instance.
+   * @param {object} object - The generic class instance.
    * @param {string|symbol|number} property - The property name.
-   * @returns {GeneratorFunction|null|NullDriverProxy} - A generator for iterator property, null for symbol property, null driver proxy instance for anything else.
+   * @returns {GeneratorFunction|null|support.drivers.NullDriverProxy} A generator for iterator property, null for symbol property, null driver proxy instance for anything else.
    */
 
 
@@ -59,7 +59,7 @@ class NullDriverProxy {
   /**
    * Handle function call on null driver.
    *
-   * @returns {NullDriverProxy} - A null driver proxy instance.
+   * @returns {support.drivers.NullDriverProxy} A null driver proxy instance.
    */
 
 
@@ -67,29 +67,9 @@ class NullDriverProxy {
     return this.makeProxy();
   }
   /**
-   * Handle extends usage.
-   *
-   * @returns {boolean} - Indicates that the instance is extensible.
-   */
-
-
-  isExtensible() {
-    return false;
-  }
-  /**
-   * Handle prevent extension call.
-   *
-   * @returns {boolean} - Indicates that instance prevents extension.
-   */
-
-
-  preventExtensions() {
-    return true;
-  }
-  /**
    * Make new null proxy.
    *
-   * @returns {NullDriverProxy} - A null driver proxy instance.
+   * @returns {support.drivers.NullDriverProxy} A null driver proxy instance.
    */
 
 

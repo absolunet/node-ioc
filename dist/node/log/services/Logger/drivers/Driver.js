@@ -39,7 +39,7 @@ class Driver extends (0, _hasEngine.default)() {
    * @param {number} level - The log level.
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    * @async
    * @abstract
    */
@@ -53,7 +53,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Set configuration for the channel.
    *
    * @param {object} config - The driver configuration.
-   * @returns {Driver} - The current driver instance.
+   * @returns {log.services.Logger.drivers.Driver} The current driver instance.
    */
 
 
@@ -74,7 +74,7 @@ class Driver extends (0, _hasEngine.default)() {
   /**
    * Log level enum.
    *
-   * @type {Level}
+   * @type {log.enums.Level}
    */
 
 

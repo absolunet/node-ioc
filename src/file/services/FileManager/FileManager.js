@@ -39,7 +39,7 @@ class FileManager extends hasDriver() {
 	 *
 	 * @param {string} file - The file name.
 	 * @param {boolean} [async] - Indicates that the call should be made async.
-	 * @returns {*|Promise<*>} - The content of the file.
+	 * @returns {*|Promise<*>} The content of the file.
 	 */
 	load(file, async = false) {
 		const driver = this.getDriverForFile(file);
@@ -52,7 +52,7 @@ class FileManager extends hasDriver() {
 	 * Asynchronously load file data.
 	 *
 	 * @param {string} file - The file name.
-	 * @returns {Promise<*>} - The content of the file.
+	 * @returns {Promise<*>} The content of the file.
 	 */
 	loadAsync(file) {
 		return this.load(file, true);
@@ -62,7 +62,7 @@ class FileManager extends hasDriver() {
 	 * Check if file exists.
 	 *
 	 * @param {string} file - The file name.
-	 * @returns {boolean} - Indicates that toe file or folder exists.
+	 * @returns {boolean} Indicates that toe file or folder exists.
 	 */
 	exists(file) {
 		return this.engine.exists(file);
@@ -72,7 +72,7 @@ class FileManager extends hasDriver() {
 	 * Find first existing file.
 	 *
 	 * @param {Array<string>} files - List of file names.
-	 * @returns {string|null} - The first found file in the list, or null if none is found.
+	 * @returns {string|null} The first found file in the list, or null if none is found.
 	 */
 	findFirst(files) {
 		return files.find((f) => {
@@ -85,7 +85,7 @@ class FileManager extends hasDriver() {
 	 *
 	 * @param {Array<string>} files - List of file names.
 	 * @param {boolean} [async=false] - Indicates that the call should be made async.
-	 * @returns {*|Promise<*>} - The content of the first found file.
+	 * @returns {*|Promise<*>} The content of the first found file.
 	 */
 	loadFirst(files, async = false) {
 		const file = this.findFirst(files);
@@ -101,7 +101,7 @@ class FileManager extends hasDriver() {
 	 * Asynchronously load first existing file.
 	 *
 	 * @param {Array<string>} files - List of the file names.
-	 * @returns {Promise<*>} - The content of the first found file.
+	 * @returns {Promise<*>} The content of the first found file.
 	 */
 	loadFirstAsync(files) {
 		return this.loadFirst(files, true);
@@ -113,7 +113,7 @@ class FileManager extends hasDriver() {
 	 * @param {string} folder - The folder name.
 	 * @param {*} [options] - The options to send during scanning directory.
 	 * @param {string|null} [driver] - The driver name to use. If none is provided, the most appropriate driver for each file will be used.
-	 * @returns {object<string,*>} - The content fetched for each found file.
+	 * @returns {object<string,*>} The content fetched for each found file.
 	 */
 	loadInFolder(folder, options = {}, driver = null) {
 		if (!this.exists(folder)) {
@@ -141,7 +141,7 @@ class FileManager extends hasDriver() {
 	 * @param {string} folder - The folder name.
 	 * @param {*} [options] - The options to send during scanning directory.
 	 * @param {string|null} [driver] - The driver name to use. If none is provided, the most appropriate driver for each file will be used.
-	 * @returns {object<string,*>} - The content fetched for each found file.
+	 * @returns {object<string,*>} The content fetched for each found file.
 	 */
 	loadRecursivelyInFolder(folder, options = {}, driver = null) {
 		return this.loadInFolder(folder, { ...options, recursive: true }, driver);
@@ -153,7 +153,7 @@ class FileManager extends hasDriver() {
 	 * @param {string} folder - The folder to scan.
 	 * @param {string} [type] - The type of element we need to find, either "file" or "folder".
 	 * @param {*} [options] - The options to send during scanning directory.
-	 * @returns {Array<string>} - The list of found items in the scanned directory.
+	 * @returns {Array<string>} The list of found items in the scanned directory.
 	 */
 	scandir(folder, type = 'file', options = {}) {
 		try {
@@ -178,7 +178,7 @@ class FileManager extends hasDriver() {
 	 *
 	 * @param {string} file - The file path.
 	 * @param {string} content - The content to write inside the file.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async writeAsync(file, content) {
 		await this.getDriverForFile(file).writeAsync(file, content);
@@ -188,7 +188,7 @@ class FileManager extends hasDriver() {
 	 * Get driver based on file extension.
 	 *
 	 * @param {string} file - The file name.
-	 * @returns {Driver} - The best guessed driver instance for the given file name.
+	 * @returns {file.services.FileManager.drivers.Driver} The best guessed driver instance for the given file name.
 	 */
 	getDriverForFile(file) {
 		if (!file) {
@@ -207,7 +207,7 @@ class FileManager extends hasDriver() {
 	/**
 	 * The file engine.
 	 *
-	 * @type {FileEngine}
+	 * @type {file.services.FileEngine}
 	 */
 	get engine() {
 		return this.app.make('file.engine');

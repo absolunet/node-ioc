@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Interceptor - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container   = require('../../container');
-const Interceptor = require('../../../../dist/node/console/services/Interceptor');
+import container   from '../../container';
+import Interceptor from '../../../../dist/node/console/services/Interceptor';
 
 const normalText  = 'Some text';
 const coloredText = '\u001B[36mSome text\u001B[0m';
@@ -271,4 +271,4 @@ then.shouldHaveReceivedCapturedOnce = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

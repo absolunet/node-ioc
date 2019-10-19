@@ -40,7 +40,7 @@ class Engine extends hasDriver() {
 	 * Make a template instance by name.
 	 *
 	 * @param {string} view - The view name.
-	 * @returns {template} - The template instance.
+	 * @returns {template} The template instance.
 	 */
 	make(view) {
 		return this.driver().make(view);
@@ -51,7 +51,7 @@ class Engine extends hasDriver() {
 	 *
 	 * @param {string} view - The view name.
 	 * @param {*} [data] - The view-model data.
-	 * @returns {string} - The rendered template.
+	 * @returns {string} The rendered template.
 	 */
 	render(view, data = {}) {
 		return this.driver().render(view, data);

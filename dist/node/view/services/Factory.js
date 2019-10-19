@@ -26,7 +26,7 @@ class Factory {
    *
    * @param {string} view - The view name.
    * @param {*} data - The view-model data.
-   * @returns {string} - The rendered view template.
+   * @returns {string} The rendered view template.
    */
 
 

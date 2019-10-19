@@ -8,11 +8,11 @@ import { Migration } from '@absolunet/ioc';
 class %CLASS% extends Migration {
 
 	/**
-	* Run the migrations.
-	*
-	* @param {Knex} connection
-	* @returns {Promise<void>}
-	*/
+	 * Run the migrations.
+	 *
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
+	 */
 	async up({ schema }) {
 		await schema.table('%TABLE%', (table) => {
 			//
@@ -20,11 +20,11 @@ class %CLASS% extends Migration {
 	}
 
 	/**
-	* Reverse the migrations.
-	*
-	* @param {Knex} connection
-	* @returns {Promise<void>}
-	*/
+	 * Reverse the migrations.
+	 *
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
+	 */
 	async down({ schema }) {
 		await schema.table('%TABLE%', (table) => {
 			//

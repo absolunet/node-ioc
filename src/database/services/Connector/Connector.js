@@ -22,7 +22,7 @@ class Connector extends forwardsCall(hasDriver()) {
 	 * Connector constructor.
 	 *
 	 * @param {...*} parameters - The injected parameters.
-	 * @returns {Connector} - A connector instance wrapped by a forward proxy.
+	 * @returns {database.services.Connector} A connector instance wrapped by a forward proxy.
 	 */
 	constructor(...parameters) {
 		super(...parameters);

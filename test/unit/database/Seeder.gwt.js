@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Seeder - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../container');
-const Seeder    = require('../../../dist/node/database/Seeder');
+import container from '../container';
+import Seeder    from '../../../dist/node/database/Seeder';
 
 let result;
 
@@ -77,4 +77,4 @@ then.resultShouldBePromise = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

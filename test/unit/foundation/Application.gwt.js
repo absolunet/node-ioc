@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Application - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const Application     = require('../../../dist/node/foundation/Application');
-const ServiceProvider = require('../../../dist/node/foundation/ServiceProvider');
+import Application     from '../../../dist/node/foundation/Application';
+import ServiceProvider from '../../../dist/node/foundation/ServiceProvider';
 
 let application;
 let fakeConfig;
@@ -430,4 +430,4 @@ then.resultShouldBeFormattedPathFromBinding = (binding, pathParts) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

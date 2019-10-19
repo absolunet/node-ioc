@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Container
 //--------------------------------------------------------
-'use strict';
 
-const { Application } = require('../../dist/node');
+import { Application } from '../../dist/node';
 
 const container = Application.make();
 
@@ -13,4 +12,4 @@ beforeEach(() => {
 });
 
 
-module.exports = container;
+export default container;

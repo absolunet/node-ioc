@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Translation - Services - Translator - Drivers - File Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container  = require('../../../../container');
-const FileDriver = require('../../../../../../dist/node/translation/services/Translator/drivers/FileDriver');
+import container  from '../../../../container';
+import FileDriver from '../../../../../../dist/node/translation/services/Translator/drivers/FileDriver';
 
 let driver;
 let result;
@@ -95,4 +95,4 @@ then.shouldHaveSearchedInTranslationFile = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

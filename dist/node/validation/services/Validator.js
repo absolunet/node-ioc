@@ -16,7 +16,7 @@ class Validator {
   /**
    * Validator constructor.
    *
-   * @returns {joi} - Hapi Joi module.
+   * @returns {joi} Hapi Joi module.
    */
   constructor() {
     return require('@hapi/joi'); // eslint-disable-line global-require

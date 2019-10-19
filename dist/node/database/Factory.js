@@ -31,7 +31,7 @@ class Factory {
    * Factory model attributes.
    *
    * @param {faker} faker - A Faker instance.
-   * @returns {object} - The factoried model data.
+   * @returns {object} The factoried model data.
    * @abstract
    */
 

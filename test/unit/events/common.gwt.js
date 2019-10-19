@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Events - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container            = require('../container');
-const EventServiceProvider = require('../../../dist/node/events/EventServiceProvider');
+import container            from '../container';
+import EventServiceProvider from '../../../dist/node/events/EventServiceProvider';
 
 
 //-- Given
@@ -44,4 +44,4 @@ then.shouldHaveSingleton = (service) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

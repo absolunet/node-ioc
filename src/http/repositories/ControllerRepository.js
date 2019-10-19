@@ -33,8 +33,8 @@ class ControllerRepository {
 	 * Add a controller binding.
 	 *
 	 * @param {string} name - The controller name.
-	 * @param {Controller} controller - The controller class.
-	 * @returns {ControllerRepository} - The current controller repository instance.
+	 * @param {http.controllers.Controller} controller - The controller class.
+	 * @returns {http.repositories.ControllerRepository} The current controller repository instance.
 	 */
 	add(name, controller) {
 		this.app.bind(this.buildName(name), controller);
@@ -47,7 +47,7 @@ class ControllerRepository {
 	 * If it was not registered into the repository, it will attempt to find it in the application folder.
 	 *
 	 * @param {string} name - The controller name.
-	 * @returns {Controller} - The controller instance.
+	 * @returns {http.controllers.Controller} The controller instance.
 	 */
 	get(name) {
 		const fullName = this.getName(name);
@@ -63,7 +63,7 @@ class ControllerRepository {
 	 * Check if the given controller was registered.
 	 *
 	 * @param {string} name - The controller name.
-	 * @returns {boolean} - Indicates that the controller name was already registered into the repository.
+	 * @returns {boolean} Indicates that the controller name was already registered into the repository.
 	 */
 	has(name) {
 		return this.app.isBound(this.getName(name));
@@ -74,7 +74,7 @@ class ControllerRepository {
 	 *
 	 * @param {string} name - The group namespace.
 	 * @param {Function} group - The controller group closure.
-	 * @returns {ControllerRepository} - The current controller repository instance.
+	 * @returns {http.repositories.ControllerRepository} The current controller repository instance.
 	 */
 	group(name, group) {
 		const groups = __(this).get('groups');
@@ -91,7 +91,7 @@ class ControllerRepository {
 	 *
 	 * @param {string} controllerPath - The controller file path.
 	 * @param {string} name - The controller name.
-	 * @returns {Controller} - The resolved controller instance.
+	 * @returns {http.controllers.Controller} The resolved controller instance.
 	 */
 	getFromPath(controllerPath, name) {
 		const escape = '\\';
@@ -106,7 +106,7 @@ class ControllerRepository {
 	 * Resolve the name based on current groups and given name.
 	 *
 	 * @param {string} name - The base name.
-	 * @returns {string} - The resolved, fully qualified, name.
+	 * @returns {string} The resolved, fully qualified, name.
 	 */
 	buildName(name) {
 		return this.getName([...__(this).get('groups'), { name }]
@@ -121,7 +121,7 @@ class ControllerRepository {
 	 *
 	 * @param {string} name - The controller name.
 	 * @param {boolean} [withAction=false] - Indicates that the returned value should contain the action.
-	 * @returns {string} - The controller name into toe container.
+	 * @returns {string} The controller name into toe container.
 	 */
 	getName(name, withAction = false) {
 		const fullName = `controller.${name}`;
@@ -133,7 +133,7 @@ class ControllerRepository {
 	 * Get controller name without container prefix or action.
 	 *
 	 * @param {string} name - The controller action.
-	 * @returns {string} - The controller name without the action method.
+	 * @returns {string} The controller name without the action method.
 	 */
 	resolveName(name) {
 		return name.replace(this.actionPattern, '');
@@ -146,7 +146,7 @@ class ControllerRepository {
 	 * this.resolveAction('PostController@show'); // 'show'
 	 *
 	 * @param {string} name - The controller action.
-	 * @returns {string} - The controller method name, without the controller name.
+	 * @returns {string} The controller method name, without the controller name.
 	 */
 	resolveAction(name) {
 		return name.match(this.actionPattern).groups.action;

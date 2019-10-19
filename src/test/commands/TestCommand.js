@@ -76,7 +76,7 @@ class TestCommand extends Command {
 	/**
 	 * Run test engine on the requested test classes.
 	 *
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	runTestEngine() {
 		const repositoryName = this.getRepositoryName();
@@ -92,7 +92,7 @@ class TestCommand extends Command {
 	/**
 	 * Resolve repository name based on input.
 	 *
-	 * @returns {string} - The repository name.
+	 * @returns {string} The repository name.
 	 */
 	getRepositoryName() {
 		let type    = this.option('type');
@@ -113,7 +113,7 @@ class TestCommand extends Command {
 	 * Store repository name in current process environment.
 	 *
 	 * @param {string} repositoryName - The repository name.
-	 * @returns {TestCommand} - The current command instance.
+	 * @returns {test.commands.TestCommand} The current command instance.
 	 */
 	storeRepositoryName(repositoryName) {
 		process.env.TEST_REPOSITORY = repositoryName; // eslint-disable-line no-process-env
@@ -124,7 +124,7 @@ class TestCommand extends Command {
 	/**
 	 * Resolve engine name based on input.
 	 *
-	 * @returns {string} - The engine short name.
+	 * @returns {string} The engine short name.
 	 */
 	getEngineName() {
 		return this.option('engine');
@@ -133,7 +133,7 @@ class TestCommand extends Command {
 	/**
 	 * Get engine implementation from application.
 	 *
-	 * @returns {*} - The test engine instance.
+	 * @returns {*} The test engine instance.
 	 */
 	getEngine() {
 		return this.app.make(`test.engine.${this.getEngineName()}`);
@@ -143,7 +143,7 @@ class TestCommand extends Command {
 	 * Store engine name in the current process environment variables.
 	 *
 	 * @param {string} engineName - The engine short name.
-	 * @returns {TestCommand} - The current command instance.
+	 * @returns {test.commands.TestCommand} The current command instance.
 	 */
 	storeEngineName(engineName) {
 		process.env.TEST_ENGINE = engineName; // eslint-disable-line no-process-env
@@ -154,7 +154,7 @@ class TestCommand extends Command {
 	/**
 	 * Format current arguments to fit the engine CLI argument model.
 	 *
-	 * @returns {TestCommand} - The current command instance.
+	 * @returns {test.commands.TestCommand} The current command instance.
 	 */
 	formatArgv() {
 		const { argv } = process;

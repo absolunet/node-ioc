@@ -24,7 +24,7 @@ class Async extends (0, _forwardCalls.default)() {
    * Async constructor.
    *
    * @param {...*} parameters - Injected parameters.
-   * @returns {Async} - The async instance wrapped by a proxy.
+   * @returns {file.system.Async} The async instance wrapped by a proxy.
    */
   constructor(...parameters) {
     super(...parameters);
@@ -37,7 +37,7 @@ class Async extends (0, _forwardCalls.default)() {
    * @param {string|RegExp} search - The searched pattern.
    * @param {string} replace - The replacement value.
    * @param {object} [options] - The replace-in-file module options.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 

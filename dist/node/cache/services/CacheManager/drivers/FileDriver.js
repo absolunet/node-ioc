@@ -128,7 +128,7 @@ class FileDriver extends _Driver.default {
   /**
    * Ensure that the JSON file exists.
    *
-   * @returns {Promise<void>} - The async call promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -150,7 +150,7 @@ class FileDriver extends _Driver.default {
    * Get cache entry by key.
    *
    * @param {string} key - The cache key.
-   * @returns {Promise<{value: *, expiration: number}>} - The cache entry.
+   * @returns {Promise<{value: *, expiration: number}>} The cache entry.
    */
 
 
@@ -161,7 +161,7 @@ class FileDriver extends _Driver.default {
   /**
    * Get cache entries.
    *
-   * @returns {Promise<object<string, {value: *, expiration: number}>>} - All the cache entries.
+   * @returns {Promise<object<string, {value: *, expiration: number}>>} All the cache entries.
    */
 
 
@@ -173,7 +173,7 @@ class FileDriver extends _Driver.default {
    * Set cache entries.
    *
    * @param {object<string, { value: *, expiration: number}>} content - The cache entries.
-   * @returns {Promise<void>} - The async call promise.
+   * @returns {Promise} The async process promise.
    */
 
 

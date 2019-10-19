@@ -52,7 +52,7 @@ class Translator extends hasDriver() {
 	 * @param {string} string - The string to translate.
 	 * @param {object<string, string>} [replacements] - The token replacements.
 	 * @param {number} [count] - The string count for pluralization.
-	 * @returns {string} - The translated string.
+	 * @returns {string} The translated string.
 	 */
 	translate(string, replacements = {}, count = 1) {
 		return this.driver().translate(string, replacements, count);
@@ -65,7 +65,7 @@ class Translator extends hasDriver() {
 	 * @param {string} string - The string to translate.
 	 * @param {object<string, string>} [replacements] - The token replacements.
 	 * @param {number} [count] - The string count for pluralization.
-	 * @returns {string} - The translated string.
+	 * @returns {string} The translated string.
 	 */
 	translateForLocale(locale, string, replacements, count) {
 		const { locale: originalLocale } = this;
@@ -82,7 +82,7 @@ class Translator extends hasDriver() {
 	 * @param {string} key - The translation key.
 	 * @param {string} value - The translation value.
 	 * @param {string|null} locale - The locale the translation should be used for.
-	 * @returns {Translator} - The current translator instance.
+	 * @returns {translation.services.Translator} The current translator instance.
 	 */
 	addTranslation(key, value, locale = null) {
 		this.driver().addTranslation(key, value, locale || this.locale);
@@ -95,7 +95,7 @@ class Translator extends hasDriver() {
 	 *
 	 * @param {object<string, string>} translations - Collection of translations.
 	 * @param {string|null} [locale] - The locale the translation should be used for.
-	 * @returns {Translator} - The current translator instance.
+	 * @returns {translation.services.Translator} The current translator instance.
 	 */
 	addTranslations(translations, locale = null) {
 		Object.entries(translations).forEach(([key, value]) => {
@@ -109,7 +109,7 @@ class Translator extends hasDriver() {
 	 * Use given translation folder to load all default available translations.
 	 *
 	 * @param {string} folder - The folder in which translation files should be loaded.
-	 * @returns {Translator} - The current translator instance.
+	 * @returns {translation.services.Translator} The current translator instance.
 	 */
 	useTranslationFolder(folder) {
 		this.driver().useTranslationFolder(folder);
@@ -121,7 +121,7 @@ class Translator extends hasDriver() {
 	 * Set locale to use for translation.
 	 *
 	 * @param {string} locale - The locale.
-	 * @returns {Translator} - The current translator instance.
+	 * @returns {translation.services.Translator} The current translator instance.
 	 */
 	setLocale(locale) {
 		this.config.set('app.locale', locale);
@@ -134,7 +134,7 @@ class Translator extends hasDriver() {
 	 * Set fallback locale to use if translation in default locale does not exists.
 	 *
 	 * @param {string} locale - The fallback locale.
-	 * @returns {Translator} - The current translator instance.
+	 * @returns {translation.services.Translator} The current translator instance.
 	 */
 	setFallbackLocale(locale) {
 		this.config.set('app.fallback_locale', locale);

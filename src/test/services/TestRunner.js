@@ -26,7 +26,7 @@ class TestRunner extends hasEngine() {
 	/**
 	 * Run a list of tests.
 	 *
-	 * @param {Array<{instane: TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}>} testList - List of tests.
+	 * @param {Array<{instane: test.TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}>} testList - List of tests.
 	 */
 	run(testList = []) {
 		testList.forEach(this.runTest.bind(this));
@@ -35,7 +35,7 @@ class TestRunner extends hasEngine() {
 	/**
 	 * Run every tests of a single test case instance.
 	 *
-	 * @param {{instance: TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}} test - Single test.
+	 * @param {{instance: test.TestCase, name: string, namespace: string, tests: Array<{method: string, description: string}>}} test - Single test.
 	 */
 	runTest({ instance, name, namespace, tests }) {
 		if (typeof this.engine === 'undefined') {
@@ -64,7 +64,7 @@ class TestRunner extends hasEngine() {
 	 * Describe the inner tests.
 	 *
 	 * @param {...*} parameters - Call parameters.
-	 * @returns {*} - The call returned value.
+	 * @returns {*} The call returned value.
 	 */
 	describe(...parameters) {
 		return this.engine.describe(...parameters);
@@ -74,7 +74,7 @@ class TestRunner extends hasEngine() {
 	 * Setup before the first inner test.
 	 *
 	 * @param {...*} parameters - Call parameters.
-	 * @returns {*} - The call returned value.
+	 * @returns {*} The call returned value.
 	 */
 	beforeAll(...parameters) {
 		return this.engine.beforeAll(...parameters);
@@ -84,7 +84,7 @@ class TestRunner extends hasEngine() {
 	 * Setup before any inner test.
 	 *
 	 * @param {...*} parameters - Call parameters.
-	 * @returns {*} - The call returned value.
+	 * @returns {*} The call returned value.
 	 */
 	beforeEach(...parameters) {
 		return this.engine.beforeEach(...parameters);
@@ -94,7 +94,7 @@ class TestRunner extends hasEngine() {
 	 * Tear down after the last inner test.
 	 *
 	 * @param {...*} parameters - Call parameters.
-	 * @returns {*} - The call returned value.
+	 * @returns {*} The call returned value.
 	 */
 	afterAll(...parameters) {
 		return this.engine.afterAll(...parameters);
@@ -104,7 +104,7 @@ class TestRunner extends hasEngine() {
 	 * Tear down after any inner test.
 	 *
 	 * @param {...*} parameters - Call parameters.
-	 * @returns {*} - The call returned value.
+	 * @returns {*} The call returned value.
 	 */
 	afterEach(...parameters) {
 		return this.engine.afterEach(...parameters);
@@ -114,7 +114,7 @@ class TestRunner extends hasEngine() {
 	 * Test a given case.
 	 *
 	 * @param {...*} parameters - Call parameters.
-	 * @returns {*} - The call returned value.
+	 * @returns {*} The call returned value.
 	 */
 	test(...parameters) {
 		return this.engine.test(...parameters);

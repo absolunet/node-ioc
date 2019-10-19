@@ -91,7 +91,7 @@ class MakeControllerCommand extends GeneratorCommand {
 	/**
 	 * Get controller type.
 	 *
-	 * @returns {string} - The file type.
+	 * @returns {string} The file type.
 	 */
 	getType() {
 		if (this.flag('resource')) {
@@ -112,7 +112,7 @@ class MakeControllerCommand extends GeneratorCommand {
 	/**
 	 * Path helper.
 	 *
-	 * @type {PathHelper}
+	 * @type {support.helpers.PathHelper}
 	 */
 	get pathHelper() {
 		return this.helperPath;

@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Commands - List Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container   = require('../../container');
-const Command     = require('../../../../dist/node/console/Command');
-const ListCommand = require('../../../../dist/node/console/commands/ListCommand');
+import container   from '../../container';
+import Command     from '../../../../dist/node/console/Command';
+import ListCommand from '../../../../dist/node/console/commands/ListCommand';
 
 
 //-- Given
@@ -61,4 +61,4 @@ then.shouldHaveListedFakeCommand = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

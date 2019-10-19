@@ -35,7 +35,7 @@ class PathHelper extends forwardsCall() {
 	 *
 	 * @param {string} filePath - The path to evaluate.
 	 * @param {string} [extension] - An extension to remove from the result.
-	 * @returns {string} - The basename of the given file path.
+	 * @returns {string} The basename of the given file path.
 	 */
 	basename(filePath, extension) {
 		return this.forwardCall('basename', [filePath, extension]);
@@ -47,7 +47,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#dirname
 	 *
 	 * @param {string} filePath - The path to evaluate.
-	 * @returns {string} - The directory name of the given file path.
+	 * @returns {string} The directory name of the given file path.
 	 */
 	dirname(filePath) {
 		return this.forwardCall('dirname', [filePath]);
@@ -60,7 +60,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#extname
 	 *
 	 * @param {string} filePath - The path to evaluate.
-	 * @returns {string} - The extension name of the given file path.
+	 * @returns {string} The extension name of the given file path.
 	 */
 	extname(filePath) {
 		return this.forwardCall('extname', [filePath]);
@@ -72,7 +72,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#format
 	 *
 	 * @param {FormatInputPathObject} pathObject - The path object to format.
-	 * @returns {string} - The formatted path.
+	 * @returns {string} The formatted path.
 	 */
 	format(pathObject) {
 		return this.forwardCall('format', [pathObject]);
@@ -84,7 +84,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#isAbsolute
 	 *
 	 * @param {string} filePath - The path to test.
-	 * @returns {boolean} - Indicates that the path is an absolute path.
+	 * @returns {boolean} Indicates that the path is an absolute path.
 	 */
 	isAbsolute(filePath) {
 		return this.forwardCall('isAbsolute', [filePath]);
@@ -96,7 +96,7 @@ class PathHelper extends forwardsCall() {
 	 * @see PathHelper#isAbsolute
 	 *
 	 * @param {string} filePath - The path to test.
-	 * @returns {boolean} - Indicates that the path is a relative path.
+	 * @returns {boolean} Indicates that the path is a relative path.
 	 */
 	isRelative(filePath) {
 		return !this.isAbsolute(filePath);
@@ -109,7 +109,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#join
 	 *
 	 * @param {...Array<string>} paths - The paths to join.
-	 * @returns {string} - The joined path.
+	 * @returns {string} The joined path.
 	 */
 	join(...paths) {
 		return this.forwardCall('join', paths);
@@ -122,7 +122,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#normalize
 	 *
 	 * @param {string} filePath - The path to normalize.
-	 * @returns {string} - The normalized path.
+	 * @returns {string} The normalized path.
 	 */
 	normalize(filePath) {
 		return this.forwardCall('normalize', [filePath]);
@@ -134,7 +134,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#parse
 	 *
 	 * @param {string} filePath - The path to evaluate.
-	 * @returns {ParsedPath} - The parsed path object.
+	 * @returns {ParsedPath} The parsed path object.
 	 */
 	parse(filePath) {
 		return this.forwardCall('parse', [filePath]);
@@ -148,7 +148,7 @@ class PathHelper extends forwardsCall() {
 	 *
 	 * @param {string} from - The starting path.
 	 * @param {string} to - The ending path.
-	 * @returns {string} - The relative path.
+	 * @returns {string} The relative path.
 	 */
 	relative(from, to) {
 		return this.forwardCall('relative', [from, to]);
@@ -167,7 +167,7 @@ class PathHelper extends forwardsCall() {
 	 * @see path#resolve
 	 *
 	 * @param {...Array<string>} paths - The paths to join.  Non-string arguments are ignored.
-	 * @returns {string} - The resolved path.
+	 * @returns {string} The resolved path.
 	 */
 	resolve(...paths) {
 		return this.forwardCall('resolve', paths);
@@ -177,7 +177,7 @@ class PathHelper extends forwardsCall() {
 	 * Convert Windows delimiters to POSIX delimiters, removing backslashes in favor of slashes.
 	 *
 	 * @param {string} filePath - The path to format.
-	 * @returns {string} - The formatted path.
+	 * @returns {string} The formatted path.
 	 */
 	slash(filePath) {
 		return slash(filePath);

@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container     = require('../../../container');
-const RuntimeDriver = require('../../../../../dist/node/cache/services/CacheManager/drivers/RuntimeDriver');
-const CacheManager  = require('../../../../../dist/node/cache/services/CacheManager');
+import container     from '../../../container';
+import RuntimeDriver from '../../../../../dist/node/cache/services/CacheManager/drivers/RuntimeDriver';
+import CacheManager  from '../../../../../dist/node/cache/services/CacheManager';
 
 
 //-- Mocks
@@ -161,4 +161,4 @@ then.resultShouldBeTestDriverGetMethodReturnedValue = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

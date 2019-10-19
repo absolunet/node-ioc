@@ -23,7 +23,7 @@ class Dispatcher extends forwardCalls(hasDriver()) {
 	 * Dispatcher constructor.
 	 *
 	 * @param {...*} parameters - Injected parameters.
-	 * @returns {Dispatcher} - The dispatcher instance wrapped by a proxy.
+	 * @returns {event.services.Dispatcher} The dispatcher instance wrapped by a proxy.
 	 */
 	constructor(...parameters) {
 		super(...parameters);

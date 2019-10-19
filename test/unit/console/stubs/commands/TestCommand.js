@@ -1,9 +1,8 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Command stub
 //--------------------------------------------------------
-'use strict';
 
-const Command = require('../../../../../dist/node/console/Command');
+import Command from '../../../../../dist/node/console/Command';
 
 
 class TestCommand extends Command {
@@ -54,4 +53,4 @@ class TestCommand extends Command {
 }
 
 
-module.exports = TestCommand;
+export default TestCommand;

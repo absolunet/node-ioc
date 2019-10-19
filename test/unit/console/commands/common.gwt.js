@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Commands - GWT
 //--------------------------------------------------------
-'use strict';
 
 /* eslint-disable no-console */
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container     = require('../../container');
-const CommandRunner = require('../../../../dist/node/console/services/CommandRunner');
+import container     from '../../container';
+import CommandRunner from '../../../../dist/node/console/services/CommandRunner';
 const { log: consoleLog, error: consoleError } = console;
 
 const fakeCapture = [];
@@ -98,5 +98,5 @@ then.restoreConsole = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });
 /* eslint-enable no-console */

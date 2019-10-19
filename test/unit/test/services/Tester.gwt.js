@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Services - Tester - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Tester    = require('../../../../dist/node/test/services/Tester');
+import container from '../../container';
+import Tester    from '../../../../dist/node/test/services/Tester';
 
 let result;
 let tester;
@@ -239,4 +239,4 @@ then.kernelShouldHaveChanged = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

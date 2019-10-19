@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Connector - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container    = require('../../../container');
-const Connector    = require('../../../../../dist/node/database/services/Connector');
-const SqliteDriver = require('../../../../../dist/node/database/services/Connector/drivers/SqliteDriver');
+import container    from '../../../container';
+import Connector    from '../../../../../dist/node/database/services/Connector';
+import SqliteDriver from '../../../../../dist/node/database/services/Connector/drivers/SqliteDriver';
 
 let connector;
 let result;
@@ -48,4 +48,4 @@ then.shouldHaveReceivedSqliteDriver = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

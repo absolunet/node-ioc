@@ -37,7 +37,7 @@ class ConfigRepository {
 	 *
 	 * @param {string|null} [key] - The configuration key.
 	 * @param {*|null} [defaultValue] - The default value to use if the value is not in configuration.
-	 * @returns {*} - The configuration value.
+	 * @returns {*} The configuration value.
 	 */
 	get(key = null, defaultValue = null) {
 		const config = Object.assign({}, __(this).get('config'));
@@ -130,7 +130,7 @@ class ConfigRepository {
 	 * Format values with grammar.
 	 *
 	 * @param {*} config - The configuration value, either a single value or a whole object.
-	 * @returns {*} - The formatted value or values.
+	 * @returns {*} The formatted value or values.
 	 */
 	formatValues(config) {
 		if (typeof config === 'object' && config) {

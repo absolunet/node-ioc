@@ -63,7 +63,7 @@ class CommandRegistrar {
   /**
    * Set default command to be executed of nothing is provided.
    *
-   * @param {Command|Function} Command - The default command.
+   * @param {console.Command|Function} Command - The default command.
    */
 
 
@@ -86,7 +86,7 @@ class CommandRegistrar {
   /**
    * Retrieve default command from the command repository.
    *
-   * @returns {Command|null} - The default command instance.
+   * @returns {console.Command|null} The default command instance.
    */
 
 
@@ -99,7 +99,7 @@ class CommandRegistrar {
    *
    * @param {string|Array<string>} command - The command to resolve.
    * @param {boolean} [internal] - Specify if the command should be processed as an internal process. If if should check the policies restrictions, set to false.
-   * @returns {Promise<void>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -154,7 +154,7 @@ class CommandRegistrar {
   /**
    * The command repository.
    *
-   * @type {CommandRepository}
+   * @type {console.repositories.CommandRepository}
    */
 
 

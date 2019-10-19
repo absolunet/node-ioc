@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Repositories - Environment Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./EnvironmentRepository.gwt');
+import gwt from './EnvironmentRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

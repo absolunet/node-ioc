@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Container - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const Container = require('../../../dist/node/container/Container');
+import Container from '../../../dist/node/container/Container';
 
 let container;
 let result;
@@ -254,5 +254,5 @@ then.resultShouldBeValueReturnedByDecorator = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });
 

@@ -67,7 +67,7 @@ class CacheClearCommand extends Command {
 	/**
 	 * Get cache store driver instance.
 	 *
-	 * @returns {Driver} - The cache store driver instance.
+	 * @returns {cache.services.CacheManager.drivers.Driver} The cache store driver instance.
 	 */
 	getStore() {
 		const name = this.parameter('store');

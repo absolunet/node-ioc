@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Commands - List Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ListCommand.gwt');
+import gwt from './ListCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

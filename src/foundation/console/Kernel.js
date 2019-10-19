@@ -57,7 +57,7 @@ class Kernel extends BaseKernel {
 	 * Call the given command and process it through the command registrar.
 	 *
 	 * @param {string} command - The current command.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async call(command) {
 		await this.commandRegistrar.resolve(command);
@@ -95,7 +95,7 @@ class Kernel extends BaseKernel {
 	/**
 	 * CommandRegistrar accessor.
 	 *
-	 * @type {CommandRegistrar}
+	 * @type {console.services.CommandRegistrar}
 	 */
 	get commandRegistrar() {
 		return this.app.make('command.registrar');
@@ -104,7 +104,7 @@ class Kernel extends BaseKernel {
 	/**
 	 * Terminal accessor.
 	 *
-	 * @type {Terminal}
+	 * @type {console.services.Terminal}
 	 */
 	get terminal() {
 		return this.app.make('terminal');

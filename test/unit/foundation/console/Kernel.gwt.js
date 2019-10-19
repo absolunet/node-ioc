@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Console - Kernel - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container              = require('../../container');
-const ConsoleKernel          = require('../../../../dist/node/foundation/console/Kernel');
-const ConsoleServiceProvider = require('../../../../dist/node/console/ConsoleServiceProvider');
+import container              from '../../container';
+import ConsoleKernel          from '../../../../dist/node/foundation/console/Kernel';
+import ConsoleServiceProvider from '../../../../dist/node/console/ConsoleServiceProvider';
 
 let consoleKernel;
 let mockExit;
@@ -128,4 +128,4 @@ then.shouldNotHaveExited = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -11,7 +11,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //--------------------------------------------------------
 
 /**
- * Abstract controller class that describes all the shortcuts to take action on the response object.
+ * Abstract controller class that defines all the shortcuts to take action on the response object.
  *
  * @memberof http.controllers
  * @abstract
@@ -21,7 +21,7 @@ class Controller {
   /**
    * Prepare request handling.
    *
-   * @param {Container} app - The current container instance.
+   * @param {container.Container} app - The current container instance.
    * @param {request} request - The current request instance.
    * @param {response} response - The current response instance.
    */
@@ -36,7 +36,7 @@ class Controller {
    *
    * @param {string} view - The view name.
    * @param {*} data - The view-model data.
-   * @returns {response} - The response instance.
+   * @returns {response} The response instance.
    */
 
 
@@ -47,7 +47,7 @@ class Controller {
    * Send JSON response.
    *
    * @param {string|number|boolean|object} object - The JSON value to send.
-   * @returns {response} - The response instance.
+   * @returns {response} The response instance.
    */
 
 
@@ -59,7 +59,7 @@ class Controller {
    * Ends the request when the handler resolves.
    *
    * @param {Function} handler - The stream handler.
-   * @returns {Promise<Response>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -76,7 +76,7 @@ class Controller {
    * Write line in the stream response.
    *
    * @param {string} line - The line to stream into the response.
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
@@ -91,7 +91,7 @@ class Controller {
    * Send a stream response from command output.
    *
    * @param {string|Array<string>} command - The command string.
-   * @returns {Promise<Response>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -109,7 +109,7 @@ class Controller {
    *
    * @param {string|Array<string>} command - The command string.
    * @param {Function|null} [handler] - The handler that will received printed data after command will have run.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -132,7 +132,7 @@ class Controller {
    *
    * @param {string} to - The URL to redirect to.
    * @param {boolean} [permanent=false] - Indicates that the redirection response should flag a permanent redirection.
-   * @returns {response} - The current response instance.
+   * @returns {response} The current response instance.
    */
 
 
@@ -143,7 +143,7 @@ class Controller {
    * Redirect to the given URL permanently.
    *
    * @param {string} to - The URL to redirect to.
-   * @returns {response} - The current response instance.
+   * @returns {response} The current response instance.
    */
 
 
@@ -154,7 +154,7 @@ class Controller {
    * Set response status.
    *
    * @param {number} status - The HTTP status code.
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
@@ -163,9 +163,21 @@ class Controller {
     return this;
   }
   /**
+   * Set response status and throw an HTTP error that reflects the given status.
+   *
+   * @param {number} status - The HTTP status code.
+   * @throws {http.exceptions.HttpError} - The corresponding HTTP error based on the HTTP status code.
+   */
+
+
+  throwWithStatus(status) {
+    this.status(status);
+    throw this.app.make('http.error.mapper').getErrorInstanceFromHttpStatus(status);
+  }
+  /**
    * Set 200 OK status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
@@ -175,7 +187,7 @@ class Controller {
   /**
    * Set 201 Created status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
@@ -185,7 +197,7 @@ class Controller {
   /**
    * Set 202 Accepted status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
@@ -195,7 +207,7 @@ class Controller {
   /**
    * Set 204 No Content status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
@@ -205,72 +217,72 @@ class Controller {
   /**
    * Set 400 Bad Request status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
   badRequest() {
-    return this.status(400);
+    return this.throwWithStatus(400);
   }
   /**
    * Set 401 Unauthorized status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
   unauthorized() {
-    return this.status(401);
+    return this.throwWithStatus(401);
   }
   /**
    * Set 403 Forbidden status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
   forbidden() {
-    return this.status(403);
+    return this.throwWithStatus(403);
   }
   /**
    * Set 404 Not Found status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
   notFound() {
-    return this.status(404);
+    return this.throwWithStatus(404);
   }
   /**
    * Set 405 Method Not Allowed status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
   methodNotAllowed() {
-    return this.status(405);
+    return this.throwWithStatus(405);
   }
   /**
    * Set 408 Timeout status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
   timeout() {
-    return this.status(408);
+    return this.throwWithStatus(408);
   }
   /**
    * Set 418 I'm A Teapot status.
    *
-   * @returns {Controller} - The current controller instance.
+   * @returns {http.controllers.Controller} The current controller instance.
    */
 
 
   teapot() {
-    return this.status(418);
+    return this.throwWithStatus(418);
   }
   /**
    * Command streaming interceptor handler.
@@ -297,7 +309,7 @@ class Controller {
   /**
    * Container.
    *
-   * @type {Container}
+   * @type {container.Container}
    */
 
 

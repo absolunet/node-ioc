@@ -53,7 +53,7 @@ class DatabaseDriver extends _Driver.default {
    * @param {number} level - The log level.
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -79,7 +79,7 @@ class DatabaseDriver extends _Driver.default {
   /**
    * Clear past logs in the database, starting by the least recent ones.
    *
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -107,7 +107,7 @@ class DatabaseDriver extends _Driver.default {
    * Get formatted level value.
    *
    * @param {number|string} level - The level value.
-   * @returns {number} - The formatted level value.
+   * @returns {number} The formatted level value.
    */
 
 
@@ -117,7 +117,7 @@ class DatabaseDriver extends _Driver.default {
   /**
    * Get formatted version value.
    *
-   * @returns {string} - The application version.
+   * @returns {string} The application version.
    */
 
 
@@ -128,7 +128,7 @@ class DatabaseDriver extends _Driver.default {
    * Get formatted message value.
    *
    * @param {string} message - The original message.
-   * @returns {string} - The formatted message.
+   * @returns {string} The formatted message.
    */
 
 
@@ -138,7 +138,7 @@ class DatabaseDriver extends _Driver.default {
   /**
    * Get formatted current command.
    *
-   * @returns {string} - The command.
+   * @returns {string} The command.
    */
 
 
@@ -149,7 +149,7 @@ class DatabaseDriver extends _Driver.default {
    * Get formatted context by converting it into JSON.
    *
    * @param {*} context - The context.
-   * @returns {string} - The formatted context.
+   * @returns {string} The formatted context.
    */
 
 

@@ -84,7 +84,7 @@ class MigrateFreshCommand extends _Command.default {
    * Drop all database tables.
    *
    * @param {Knex} connection - The database connection to use.
-   * @returns {Promise<void>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 

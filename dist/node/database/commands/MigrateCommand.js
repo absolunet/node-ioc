@@ -99,8 +99,8 @@ class MigrateCommand extends _Command.default {
   /**
    * Run database migrations.
    *
-   * @param {Connector} connection - The database connection to use.
-   * @returns {Promise<{output: *, migrations: *, batch: *}>} - The migrations that ran, the current batch and the output made by Knex.
+   * @param {database.services.Connector} connection - The database connection to use.
+   * @returns {Promise<{output: *, migrations: *, batch: *}>} The migrations that ran, the current batch and the output made by Knex.
    */
 
 

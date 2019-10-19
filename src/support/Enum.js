@@ -53,7 +53,7 @@ class Enum {
 	/**
 	 * Get enumeration keys.
 	 *
-	 * @returns {Array<string>} - The enumeration keys.
+	 * @returns {Array<string>} The enumeration keys.
 	 */
 	keys() {
 		return Object.keys(__(this).get('entries'));
@@ -62,7 +62,7 @@ class Enum {
 	/**
 	 * Get enumeration values.
 	 *
-	 * @returns {Array<*>} - The enumeration values.
+	 * @returns {Array<*>} The enumeration values.
 	 */
 	values() {
 		return Object.values(__(this).get('entries'));
@@ -71,7 +71,7 @@ class Enum {
 	/**
 	 * Get enumeration entries.
 	 *
-	 * @returns {Array<Array<*>>} - The enumeration entries.
+	 * @returns {Array<Array<*>>} The enumeration entries.
 	 */
 	entries() {
 		return Object.entries(__(this).get('entries'));

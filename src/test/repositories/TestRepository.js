@@ -35,7 +35,7 @@ class TestRepository {
 	/**
 	 * Get all the tests from the root namespace.
 	 *
-	 * @returns {Array<{file: string, instance: TestCase, name: string, namespace: string, tests: Array<{ method: string, description: string}>}>} - All tests.
+	 * @returns {Array<{file: string, instance: TestCase, name: string, namespace: string, tests: Array<{ method: string, description: string}>}>} All tests.
 	 */
 	all() {
 		return this.fromNamespace();
@@ -45,7 +45,7 @@ class TestRepository {
 	 * Get all the tests from the given namespace.
 	 *
 	 * @param {string} [testNamespace] - The namespace folder.
-	 * @returns {Array<{file: string, instance: TestCase, name: string, namespace: string, tests: Array<{ method: string, description: string}>}>} - All tests from namespace.
+	 * @returns {Array<{file: string, instance: TestCase, name: string, namespace: string, tests: Array<{ method: string, description: string}>}>} All tests from namespace.
 	 */
 	fromNamespace(testNamespace = '') {
 		return this.getFilesFrom(testNamespace).map((file) => {
@@ -61,7 +61,7 @@ class TestRepository {
 	/**
 	 * Get a file list that matches the test class pattern.
 	 *
-	 * @returns {Array<string>} - The files from the root folder.
+	 * @returns {Array<string>} The files from the root folder.
 	 */
 	getFiles() {
 		return this.getFilesFrom('');
@@ -71,7 +71,7 @@ class TestRepository {
 	 * Get a file list from the given folder that matches the test class pattern.
 	 *
 	 * @param {string} [folder=""] - The folder to search.
-	 * @returns {Array<string>} - The files from the searched folder.
+	 * @returns {Array<string>} The files from the searched folder.
 	 */
 	getFilesFrom(folder = '') {
 		const directory = this.app.formatPath(this.basePath, this.scope, folder);
@@ -86,7 +86,7 @@ class TestRepository {
 	 * Get the namespace from full file path.
 	 *
 	 * @param {string} file - The test file path.
-	 * @returns {string} - The file namespace.
+	 * @returns {string} The file namespace.
 	 */
 	getNamespaceFromFile(file) {
 		return this.pathHelper.relative(this.basePath, file).replace(/\/[^/]+.js$/u, '');
@@ -96,7 +96,7 @@ class TestRepository {
 	 * Get human-readable namespace from full file path.
 	 *
 	 * @param {string} file - The test file path.
-	 * @returns {string} - The formatted namespace.
+	 * @returns {string} The formatted namespace.
 	 */
 	getFormattedNamespaceFromFile(file) {
 		return this.stringHelper.title(this.getNamespaceFromFile(file).replace(/\//gu, ' > '));
@@ -106,7 +106,7 @@ class TestRepository {
 	 * Get human-readable name from full file path.
 	 *
 	 * @param {string} file - The test file path.
-	 * @returns {string} - The formatted name.
+	 * @returns {string} The formatted name.
 	 */
 	getFormattedNameFromFile(file) {
 		const fileName = file.replace(/^.*[/\\](?<name>[A-z]+)(?:Test)?.js$/u, '$<name>');
@@ -117,8 +117,8 @@ class TestRepository {
 	/**
 	 * Get all the test methods and their descriptions of a given TestCase instance.
 	 *
-	 * @param {TestCase} instance - The test case instance.
-	 * @returns {Array<{method: string, description: string}>} - The tests methods and descriptions from the test case instance.
+	 * @param {test.TestCase} instance - The test case instance.
+	 * @returns {Array<{method: string, description: string}>} The tests methods and descriptions from the test case instance.
 	 */
 	getTestsFromInstance(instance) {
 		return this.getAllInstanceTestMethods(instance)
@@ -132,8 +132,8 @@ class TestRepository {
 	/**
 	 * Get all instance methods.
 	 *
-	 * @param {TestCase} instance - The test case instance.
-	 * @returns {Array<string>} - List of all instance methods.
+	 * @param {test.TestCase} instance - The test case instance.
+	 * @returns {Array<string>} List of all instance methods.
 	 */
 	getAllInstanceMethods(instance) {
 		const properties  = new Set();
@@ -152,8 +152,8 @@ class TestRepository {
 	/**
 	 * Get all instance methods that are actual test cases.
 	 *
-	 * @param {TestCase} instance - The test case instance.
-	 * @returns {Array<string>} - List of all instance test methods.
+	 * @param {test.TestCase} instance - The test case instance.
+	 * @returns {Array<string>} List of all instance test methods.
 	 */
 	getAllInstanceTestMethods(instance) {
 		return this.getAllInstanceMethods(instance)
@@ -166,7 +166,7 @@ class TestRepository {
 	 * Test method name to verify if its a test case method name.
 	 *
 	 * @param {string} methodName - The method name.
-	 * @returns {boolean} - Indicates that the method name is a valid test method name.
+	 * @returns {boolean} Indicates that the method name is a valid test method name.
 	 */
 	testMethodName(methodName) {
 		return methodName.startsWith('test');
@@ -176,7 +176,7 @@ class TestRepository {
 	 * Get human-readable test case description.
 	 *
 	 * @param {string} methodName - The method name.
-	 * @returns {string} - The formatted description based on method name.
+	 * @returns {string} The formatted description based on method name.
 	 */
 	getFormattedDescription(methodName) {
 		return this.stringHelper.sentence(methodName.replace(/^test/u, ''));
@@ -186,7 +186,7 @@ class TestRepository {
 	 * Set current base path.
 	 *
 	 * @param {string} basePath - Base test path.
-	 * @returns {TestRepository} - Current test repository instance.
+	 * @returns {test.repositories.TestRepository} Current test repository instance.
 	 */
 	setBasePath(basePath) {
 		__(TestRepository).set('basePath', basePath);
@@ -198,7 +198,7 @@ class TestRepository {
 	 * Set current regular expression pattern to test test case classes.
 	 *
 	 * @param {string|RegExp} pattern - Test file pattern.
-	 * @returns {TestRepository} - Current test repository instance.
+	 * @returns {test.repositories.TestRepository} Current test repository instance.
 	 */
 	setPattern(pattern) {
 		__(TestRepository).set('pattern', pattern);
@@ -217,7 +217,7 @@ class TestRepository {
 	/**
 	 * String helper.
 	 *
-	 * @type {StringHelper}
+	 * @type {support.helpers.StringHelper}
 	 */
 	get stringHelper() {
 		return this.helperString;
@@ -226,7 +226,7 @@ class TestRepository {
 	/**
 	 * Path helper.
 	 *
-	 * @type {PathHelper}
+	 * @type {support.helpers.PathHelper}
 	 */
 	get pathHelper() {
 		return this.helperPath;

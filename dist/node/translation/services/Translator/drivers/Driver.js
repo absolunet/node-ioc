@@ -27,7 +27,7 @@ class Driver {
    * @param {string} string - The string to translate.
    * @param {object<string, string>} [replacements] - The token replacements.
    * @param {number} [count] - The string count for pluralization.
-   * @returns {string} - The translated string.
+   * @returns {string} The translated string.
    * @abstract
    */
   translate(string, replacements, count) {
@@ -40,7 +40,7 @@ class Driver {
    * @param {string} key - The translation key.
    * @param {string} value - The translation value.
    * @param {string|null} locale - The locale the translation should be used for.
-   * @returns {Driver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
    * @abstract
    */
 
@@ -53,7 +53,7 @@ class Driver {
    * Use given translation folder to load all default available translations.
    *
    * @param {string} folder - The folder in which translation files should be loaded.
-   * @returns {Driver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
    * @abstract
    */
 
@@ -66,7 +66,7 @@ class Driver {
    * Set locale to use for translation.
    *
    * @param {string} locale - The locale.
-   * @returns {Driver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
    * @abstract
    */
 
@@ -79,7 +79,7 @@ class Driver {
    * Set fallback locale.
    *
    * @param {string} locale - The fallback locale.
-   * @returns {Driver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
    * @abstract
    */
 

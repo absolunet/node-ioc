@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Log - Services - Logger - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../../container');
-const Logger    = require('../../../../../dist/node/log/services/Logger');
+import container from '../../../container';
+import Logger    from '../../../../../dist/node/log/services/Logger';
 
 let logger;
 let level;
@@ -70,13 +70,13 @@ given.brokenDriver = () => {
 };
 
 given.channel = (name) => {
-	fakeConfig[`logging.channels.${name}`] = {
+	fakeConfig[`log.channels.${name}`] = {
 		driver: name
 	};
 };
 
 given.defaultChannel = (name) => {
-	fakeConfig['logging.default'] = name;
+	fakeConfig['log.default'] = name;
 };
 
 given.fallbackChannel = (name) => {
@@ -133,8 +133,8 @@ given.context = () => {
 };
 
 given.thresholdForDefaultChannel = (value) => {
-	const defaultChannel = fakeConfig['logging.default'];
-	fakeConfig[`logging.channels.${defaultChannel}`].level = value;
+	const defaultChannel = fakeConfig['log.default'];
+	fakeConfig[`log.channels.${defaultChannel}`].level = value;
 };
 
 
@@ -211,4 +211,4 @@ then.shouldHaveCalledLogOnOtherDriverWithLevelAndMessage = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

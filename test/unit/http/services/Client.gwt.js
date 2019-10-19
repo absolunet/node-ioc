@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Services - Client - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const axios     = require('axios');
-const container = require('../../container');
-const Client    = require('../../../../dist/node/http/services/Client');
+import axios     from 'axios';
+import container from '../../container';
+import Client    from '../../../../dist/node/http/services/Client';
 
 let result;
 
@@ -40,4 +40,4 @@ then.clientHasSamePropertiesAndMethodAsAxios = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

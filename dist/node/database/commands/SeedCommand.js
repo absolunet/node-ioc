@@ -83,8 +83,8 @@ class SeedCommand extends _Command.default {
   /**
    * Seed the database.
    *
-   * @param {Connector} connection - The database connection to use.
-   * @returns {Promise<{output: *, seeds: *}>} - The seeders that ran and the output made by Knex.
+   * @param {database.services.Connector} connection - The database connection to use.
+   * @returns {Promise<{output: *, seeds: *}>} The seeders that ran and the output made by Knex.
    */
 
 

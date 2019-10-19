@@ -99,7 +99,7 @@ class PubSubJsDriver extends _Driver.default {
    * @param {string} event - The event to listen.
    * @param {Function} listener - The listener.
    * @param {string} method - The method to use on the engine.
-   * @returns {Driver} - The current driver instance.
+   * @returns {events.services.Dispatcher.drivers.PubSubJsDriver} The current driver instance.
    */
 
 

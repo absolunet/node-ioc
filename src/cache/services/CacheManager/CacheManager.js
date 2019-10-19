@@ -33,7 +33,7 @@ class CacheManager extends forwardCalls(hasDriver()) {
 	 * CacheManager constructor.
 	 *
 	 * @param {...*} parameters - The injected parameters.
-	 * @returns {CacheManager} - The cache manager surrounded by a proxy.
+	 * @returns {cache.services.CacheManager} The cache manager surrounded by a proxy.
 	 */
 	constructor(...parameters) {
 		super(...parameters);
@@ -57,8 +57,8 @@ class CacheManager extends forwardCalls(hasDriver()) {
 	 * Resolve cache store by name.
 	 *
 	 * @param {string} [store] - The store name.
-	 * @returns {Driver} - The Driver instance.
-	 * @throws TypeError - Indicates that the driver could not be resolved.
+	 * @returns {cache.services.CacheManager.drivers.Driver} The Driver instance.
+	 * @throws {TypeError} Indicates that the driver could not be resolved.
 	 */
 	resolve(store) {
 		if (!store) {
@@ -80,7 +80,7 @@ class CacheManager extends forwardCalls(hasDriver()) {
 	/**
 	 * Resolve default store.
 	 *
-	 * @returns {Driver} - The default driver instance.
+	 * @returns {cache.services.CacheManager.drivers.Driver} The default driver instance.
 	 */
 	resolveDefault() {
 		return this.resolve(this.config.get('cache.default', 'runtime'));
@@ -91,7 +91,7 @@ class CacheManager extends forwardCalls(hasDriver()) {
 	 *
 	 * @param {string} driver - The driver name.
 	 * @param {object<string, *>} [config={}] - The driver configuration.
-	 * @returns {Driver} - The driver instance.
+	 * @returns {cache.services.CacheManager.drivers.Driver} The driver instance.
 	 */
 	build(driver, config = {}) {
 		const common = this.config.get('cache.common', {});

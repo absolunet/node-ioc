@@ -80,7 +80,7 @@ class MigrateFreshCommand extends Command {
 	 * Drop all database tables.
 	 *
 	 * @param {Knex} connection - The database connection to use.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async dropAllTables(connection) {
 		const driver = this.db.getDriverForConnection(connection);

@@ -52,7 +52,7 @@ class Terminal extends BaseTerminal {
 	 * @param {string} [properties.spinnerColor="blue"] - The <a href="https://www.npmjs.com/package/chalk">Color</a> to be used with spinner.
 	 * @param {string} [properties.lang="en"] - Language to be used in localized outputs (fr|en).
 	 * @param {string} [properties.spinnerType="dots3"] - The <a href="https://www.npmjs.com/package/cli-spinners">Spinner</a> theme.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -64,7 +64,7 @@ class Terminal extends BaseTerminal {
 	 * @see this.setDefaults()
 	 * @deprecated
 	 * @param {object} properties - Properties.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -74,7 +74,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function setLang
 	 * @param {string} lang - Language (fr|en).
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -85,7 +85,7 @@ class Terminal extends BaseTerminal {
 	 * @function setScriptsFiles
 	 * @param {string} path - Path to scripts files.
 	 * @param {object<string, string>} titles - Matching object of script filename to title to be use via `runScript`.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -104,7 +104,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function cleanUp
 	 * @param {string} text - Text to clean.
-	 * @returns {string} - Cleaned text.
+	 * @returns {string} Cleaned text.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -115,7 +115,7 @@ class Terminal extends BaseTerminal {
 	 * @function trans
 	 * @param {string} key - Translation key.
 	 * @param {string} [lang=this.defaults.lang] - Language (fr|en).
-	 * @returns {string} - Translated text.
+	 * @returns {string} Translated text.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -126,7 +126,7 @@ class Terminal extends BaseTerminal {
 	 * @function addTrans
 	 * @param {string} key - Translation key.
 	 * @param {object<string, string>} values - Translations for each language.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -136,7 +136,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function echo
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -146,7 +146,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function echoIndent
 	 * @param {string} text - Text to echo.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -156,7 +156,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function print
 	 * @param {string} text - Text to print.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -166,7 +166,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function println
 	 * @param {string} text - Text to print.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -176,7 +176,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function spacer
 	 * @param {number} [number=1] - Number of line breaks to print.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -187,7 +187,7 @@ class Terminal extends BaseTerminal {
 	 * @function warning
 	 * @param {string} text - Text to output.
 	 * @param {boolean} [newline=true] - Add a newline.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -197,7 +197,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function error
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -207,7 +207,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function success
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -217,7 +217,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function failure
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -226,7 +226,7 @@ class Terminal extends BaseTerminal {
 	 * Display an error message indicating not to use "sudo".
 	 *
 	 * @function dontSudoMe
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -241,7 +241,7 @@ class Terminal extends BaseTerminal {
 	 * @param {string}  options.name - Name of the property.
 	 * @param {string}  options.value - Value of the property.
 	 * @param {string}  [options.msg] - Detailled error message in case of failure.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -252,7 +252,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function printStatus
 	 * @param {object<string, Array<string|{from: string, to: string}>>} status - A <a href="https://www.npmjs.com/package/simple-git">simple-git</a> status object.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -265,7 +265,7 @@ class Terminal extends BaseTerminal {
 	 * @param {Chalk} [style] - {@link https://www.npmjs.com/package/chalk Chalk definition}.
 	 * @param {boolean} [padding=true] - Add vertical padding.
 	 * @param {boolean} [extraPadding=false] - Needs extra padding.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -274,7 +274,7 @@ class Terminal extends BaseTerminal {
 	 * Start timer.
 	 *
 	 * @function startTimer
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -292,7 +292,7 @@ class Terminal extends BaseTerminal {
 	 * Stop timer and retrieve the time elapsed between the call and the last startTimer() call.
 	 *
 	 * @function stopTimer
-	 * @returns {number} - Number of milliseconds.
+	 * @returns {number} Number of milliseconds.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -303,7 +303,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function titleBox
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -313,7 +313,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function infoBox
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -323,7 +323,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function warningBox
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -333,7 +333,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function errorBox
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -343,7 +343,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function completionBox
 	 * @param {boolean} [showDuration=true] - Show amount of time since last TitleBox.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -353,7 +353,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function borderedBox
 	 * @param {string} text - Text to output.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -363,7 +363,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function startSpinner
 	 * @param text - Text to output.
-	 * @returns {ora.Ora} - The <a href="https://www.npmjs.com/package/ora">ora spinner</a> object.
+	 * @returns {Ora} The <a href="https://www.npmjs.com/package/ora">ora spinner</a> object.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -373,7 +373,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function run
 	 * @param {string} command - Command to run.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -386,7 +386,7 @@ class Terminal extends BaseTerminal {
 	 * @param {object} [options={}] - Options.
 	 * @param {string} [options.ignoreError=''] - Error message string to ignore.
 	 * @param {boolean} [options.silent=false] - Silence all errors.
-	 * @returns {Promise<{error: string, stdout: string, stderr: string}>} - Terminal outputs.
+	 * @returns {Promise<{error: string, stdout: string, stderr: string}>} Terminal outputs.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -396,7 +396,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function runAndRead
 	 * @param {string} command - Command to run.
-	 * @returns {string} - Output.
+	 * @returns {string} Output.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -406,7 +406,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function runAndReadLines
 	 * @param {string} command - Command to run.
-	 * @returns {Array<string>} - Output.
+	 * @returns {Array<string>} Output.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -416,7 +416,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function runAndGet
 	 * @param {string} command - Command to run.
-	 * @returns {string} - Output.
+	 * @returns {string} Output.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -426,7 +426,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @function runAndEcho
 	 * @param {string} command - Command to run.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -437,7 +437,7 @@ class Terminal extends BaseTerminal {
 	 * @function runTask
 	 * @param {string} title - Title explaining the command.
 	 * @param {string} command - Command to run.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -449,7 +449,7 @@ class Terminal extends BaseTerminal {
 	 * @function runScript
 	 * @param {string} file - Script filename under path defined via setScriptsFiles.
 	 * @param {...string} [options] - Arguments to pass to the script.
-	 * @returns {Terminal} - Terminal instance.
+	 * @returns {console.services.Terminal} Terminal instance.
 	 * @memberof console.services.Terminal
 	 * @instance
 	 */
@@ -475,7 +475,7 @@ class Terminal extends BaseTerminal {
 	/**
 	 * Get the current console command arguments.
 	 *
-	 * @returns {string} - The arguments.
+	 * @returns {string} The arguments.
 	 */
 	get args() { // eslint-disable-line unicorn/prevent-abbreviations
 		return this.argv.slice(1).join(' ');
@@ -496,7 +496,7 @@ class Terminal extends BaseTerminal {
 	 * @param {string} question - The question to ask.
 	 * @param {string|null} defaultAnswer - The default answer.
 	 * @param {object} options - The inquirer options.
-	 * @returns {Promise<string|null>} - The user answer.
+	 * @returns {Promise<string|null>} The user answer.
 	 */
 	async ask(question, defaultAnswer = null, options = {}) {
 		const { answer } = await this.inquirer.prompt({
@@ -515,7 +515,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @param {string} question - The question to ask.
 	 * @param {object} [options={}] - The inquirer options.
-	 * @returns {Promise<string|null>} - The user answer.
+	 * @returns {Promise<string|null>} The user answer.
 	 */
 	secret(question, options = {}) {
 		return this.ask(question, null, { ...options, type: 'password' });
@@ -526,7 +526,7 @@ class Terminal extends BaseTerminal {
 	 *
 	 * @param {string} statement - The confirmation statement.
 	 * @param {boolean} [defaultValue=false] - The default confirmation value.
-	 * @returns {Promise<boolean>} - The user confirmation.
+	 * @returns {Promise<boolean>} The user confirmation.
 	 */
 	async confirm(statement, defaultValue = false) {
 		const answer = await this.ask(statement, Boolean(defaultValue), { type: 'confirm' });
@@ -540,7 +540,7 @@ class Terminal extends BaseTerminal {
 	 * @param {string} question - The question to ask.
 	 * @param {Array<string>|object<string, string>} choices - The available choices.
 	 * @param {string} [defaultValue] - The default value.
-	 * @returns {Promise<string>} - The user answer.
+	 * @returns {Promise<string>} The user answer.
 	 */
 	async choice(question, choices, defaultValue = '') {
 		const choicesKeys   = Array.isArray(choices) ? choices : Object.keys(choices);
@@ -561,7 +561,7 @@ class Terminal extends BaseTerminal {
 	 * @param {Array<object<string,string>>} data - The table data.
 	 * @param {object} [options={}] - The table options.
 	 * @param {boolean} [print=true] - Indicates if the table should be printed or returned as a string.
-	 * @returns {Terminal|string} - Either the terminal or the table as string.
+	 * @returns {console.services.Terminal|string} Either the terminal or the table as string.
 	 */
 	table(header, data, options = {}, print = true) {
 		const { table }      = require('table'); // eslint-disable-line global-require
@@ -584,7 +584,7 @@ class Terminal extends BaseTerminal {
 	 * @param {boolean} [sideBySide=false] - Indicates that the tables should be side by side instead on one under the other.
 	 * @param {object} [options={}] - The table options.
 	 * @param {boolean} [print=true] - Indicates if the table should be printed or returned as a string.
-	 * @returns {Terminal|string} - Either the terminal or the table as string.
+	 * @returns {console.services.Terminal|string} Either the terminal or the table as string.
 	 */
 	tables(tables, sideBySide = false, options = {}, print = true) {
 		const results = tables.map((data) => {

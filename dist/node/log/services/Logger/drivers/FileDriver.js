@@ -62,7 +62,7 @@ class FileDriver extends _Driver.default {
    *
    * @param {number} level - The log level.
    * @param {string} message - The message.
-   * @returns {string} - The full formatted message.
+   * @returns {string} The full formatted message.
    */
 
 
@@ -76,7 +76,7 @@ class FileDriver extends _Driver.default {
   /**
    * Get current formatted date.
    *
-   * @returns {string} - The formatted date.
+   * @returns {string} The formatted date.
    */
 
 
@@ -87,7 +87,7 @@ class FileDriver extends _Driver.default {
    * Get formatted level.
    *
    * @param {number} level - The level value.
-   * @returns {string} - The formatted level.
+   * @returns {string} The formatted level.
    */
 
 
@@ -98,7 +98,7 @@ class FileDriver extends _Driver.default {
    * Get formatted message with proper spacers.
    *
    * @param {string} message - The message.
-   * @returns {string} - The formatted message.
+   * @returns {string} The formatted message.
    */
 
 
@@ -108,7 +108,7 @@ class FileDriver extends _Driver.default {
   /**
    * Get formatted application version.
    *
-   * @returns {string} - The formatted application version.
+   * @returns {string} The formatted application version.
    */
 
 
@@ -118,7 +118,7 @@ class FileDriver extends _Driver.default {
   /**
    * Get maximum string length of available levels.
    *
-   * @returns {number} - The maximum length of all level in string version.
+   * @returns {number} The maximum length of all level in string version.
    */
 
 
@@ -132,7 +132,7 @@ class FileDriver extends _Driver.default {
   /**
    * Get white space based on maximum level length.
    *
-   * @returns {string} - A spacer that covers the longest level string.
+   * @returns {string} A spacer that covers the longest level string.
    */
 
 
@@ -164,7 +164,7 @@ class FileDriver extends _Driver.default {
   /**
    * Adjust file content to fit under the configured size limit.
    *
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -198,7 +198,7 @@ class FileDriver extends _Driver.default {
   /**
    * Check if configuration has specified size limit.
    *
-   * @returns {boolean} - Indicates if a limit was set in the driver configuration.
+   * @returns {boolean} Indicates if a limit was set in the driver configuration.
    */
 
 
@@ -208,7 +208,7 @@ class FileDriver extends _Driver.default {
   /**
    * The async file system.
    *
-   * @type {Async}
+   * @type {file.system.Async}
    */
 
 
@@ -218,7 +218,7 @@ class FileDriver extends _Driver.default {
   /**
    * File helper.
    *
-   * @type {FileHelper}
+   * @type {support.helpers.FileHelper}
    */
 
 

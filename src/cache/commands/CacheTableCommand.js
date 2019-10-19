@@ -105,7 +105,7 @@ class CacheTableCommand extends GeneratorCommand {
 	/**
 	 * Check if migration already exists in configured directory.
 	 *
-	 * @returns {boolean} - The flag indicating if migration exists.
+	 * @returns {boolean} The flag indicating if migration exists.
 	 */
 	migrationExists() {
 		const { destination: folder } = this;
@@ -120,7 +120,7 @@ class CacheTableCommand extends GeneratorCommand {
 	/**
 	 * Get the cache table name, "cache" by default.
 	 *
-	 * @returns {string} - The cache table name.
+	 * @returns {string} The cache table name.
 	 */
 	getCacheTableName() {
 		return this.app.make('config').get('cache.stores.database.table', 'cache');
@@ -129,7 +129,7 @@ class CacheTableCommand extends GeneratorCommand {
 	/**
 	 * Get the migration class name.
 	 *
-	 * @returns {string} - The migration class name.
+	 * @returns {string} The migration class name.
 	 */
 	getClassName() {
 		return `Create${this.app.make('helper.string').pascal(this.getCacheTableName())}Table`;

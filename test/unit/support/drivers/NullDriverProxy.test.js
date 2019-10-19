@@ -1,14 +1,15 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Drivers - Null Driver Proxy
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./NullDriverProxy.gwt');
+import gwt from './NullDriverProxy.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
 	given.nullInstance();
 });
+
 
 test('Can access property', () => {
 	when.accessingProperty();
@@ -23,6 +24,11 @@ test('Can access sub-property', () => {
 test('Can access sub-property by destructuring', () => {
 	when.accessingSubPropertyByDestructuring();
 	then.resultShouldBeNullInstance();
+});
+
+test('Can access symbol property', () => {
+	when.accessingSymbolProperty();
+	then.resultShouldBe(null);
 });
 
 test('Can assign value to property', () => {
@@ -72,11 +78,10 @@ test('Can call Object.getPrototypeOf() on it', () => {
 
 test('Can access numeric key by destructuring and returns undefined instead of assuming required keys', () => {
 	when.accessingNumericKeyByDestructuring();
-	then.resultShouldBeUndefined();
+	then.resultShouldBe(undefined);
 });
 
 test('Can access property by destructuring and returns undefined instead of assuming required keys', () => {
 	when.accessingPropertyByDestructuring();
 	then.resultShouldBeNullInstance();
 });
-

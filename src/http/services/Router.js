@@ -2,8 +2,8 @@
 //-- Node IoC - HTTP - Services - Router
 //--------------------------------------------------------
 
-import __    from '@absolunet/private-registry';
-import Route from '../Route';
+import __                from '@absolunet/private-registry';
+import Route             from '../Route';
 
 
 /**
@@ -12,6 +12,7 @@ import Route from '../Route';
  * @property {string} [as] - Route name.
  * @property {string} [prefix] - Route path prefix.
  * @property {string} [namespace] - Controller namespace to use.
+ * @memberof http
  */
 
 /**
@@ -21,6 +22,7 @@ import Route from '../Route';
  * @property {string} [method] - The route HTTP method.
  * @property {string} [path] - The route path.
  * @property {string|Function} [action] - The route action, either a closure or a controller action.
+ * @memberof http
  */
 
 /**
@@ -28,12 +30,14 @@ import Route from '../Route';
  * @typedef {object} BaseResourceData
  * @property {string} name - The resource name.
  * @property {string} method - The resource HTTP method.
+ * @memberof http
  */
 
 /**
  * @private
  * @typedef {ResourceData} ResourceAction
  * @property {boolean} single - Indicates that the resource handle a single instance and not a collection.
+ * @memberof http
  */
 
 /**
@@ -41,6 +45,7 @@ import Route from '../Route';
  * @typedef {object} ResourceData
  * @property {string} action - The resource action name.
  * @property {string} url - The resource URL.
+ * @memberof http
  */
 
 /**
@@ -75,7 +80,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	get(path, action) {
 		return this.addRoute('get', path, action);
@@ -86,7 +91,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	post(path, action) {
 		return this.addRoute('post', path, action);
@@ -97,7 +102,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	put(path, action) {
 		return this.addRoute('put', path, action);
@@ -108,7 +113,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	patch(path, action) {
 		return this.addRoute('patch', path, action);
@@ -119,7 +124,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	delete(path, action) {
 		return this.addRoute('delete', path, action);
@@ -130,7 +135,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	any(path, action) {
 		return this.addRoute('all', path, action);
@@ -141,7 +146,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	all(path, action) {
 		return this.any(path, action);
@@ -151,7 +156,7 @@ class Router {
 	 * Register a fallback route that matches anything in the current scope.
 	 *
 	 * @param {string|Function} action - The route action.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	fallback(action) {
 		return this.any('*', action);
@@ -164,7 +169,7 @@ class Router {
 	 * @param {string} from - The path to redirect from.
 	 * @param {string} to - The destination path to redirect on.
 	 * @param {boolean} [permanent] - Indicates that the redirection is permanent.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	redirect(from, to, permanent = false) {
 		return this.any(from, this.withCorePrefix('RedirectController@handle'))
@@ -177,7 +182,7 @@ class Router {
 	 *
 	 * @param {string} from - The path to redirect from.
 	 * @param {string} to - The destination path to redirect on.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	permanentRedirect(from, to) {
 		return this.redirect(from, to, true);
@@ -188,11 +193,11 @@ class Router {
 	 *
 	 * @param {string} path - The path for static route serving.
 	 * @param {string} folder - The folder where the static content is hosted.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	static(path, folder) {
 		return this.get(`${path}/:file`, this.withCorePrefix('StaticController@handle'))
-			.where('file', '*')
+			.where('file', '[^\\s]+')
 			.with({ path, folder });
 	}
 
@@ -200,20 +205,20 @@ class Router {
 	 * Get controller name with core prefix.
 	 *
 	 * @param {string} name - The controller name.
-	 * @returns {string} - The fully qualified controller name.
+	 * @returns {string} The fully qualified controller name.
 	 */
 	withCorePrefix(name) {
-		const { coreNamespace: n, namespaceSeparator: s } = this.controllers;
+		const { coreNamespace, namespaceSeparator } = this.controllers;
 
-		return `${n}${s}${name}`;
+		return `${coreNamespace}${namespaceSeparator}${name}`;
 	}
 
 	/**
 	 * Add a controller binding.
 	 *
 	 * @param {string} name - The controller name.
-	 * @param {Controller} controller - The controller class.
-	 * @returns {ControllerRepository} - The controller repository instance.
+	 * @param {http.controllers.Controller} controller - The controller class.
+	 * @returns {http.repositories.ControllerRepository} The controller repository instance.
 	 */
 	controller(name, controller) {
 		return this.controllers.add(name, controller);
@@ -224,7 +229,7 @@ class Router {
 	 *
 	 * @param {string} namespace - The controller namespace.
 	 * @param {Function} group - The controller group closure.
-	 * @returns {ControllerRepository} - The controller repository instance.
+	 * @returns {http.repositories.ControllerRepository} The controller repository instance.
 	 */
 	controllerGroup(namespace, group) {
 		return this.controllers.group(namespace, group);
@@ -238,7 +243,7 @@ class Router {
 	 * @param {string} controller - The resource controller name that will handle requests.
 	 * @param {Array<string>} [only] - Indicates the routes restrictions.
 	 * @param {boolean} [apiOnly=false] - Indicates that only API routes should be considered.
-	 * @returns {Router} - The current router instance.
+	 * @returns {http.Router} The current router instance.
 	 */
 	resource(resource, controller, only = [], apiOnly = false) {
 		this.getResourceMapping(resource, controller)
@@ -259,7 +264,7 @@ class Router {
 	 * @param {string} resource - The resource for which the routes should be created.
 	 * @param {string} controller - The resource controller name that will handle requests.
 	 * @param {Array<string>} [only=[]] - Indicates the routes restrictions.
-	 * @returns {Router} - The current router instance.
+	 * @returns {http.Router} The current router instance.
 	 */
 	apiResource(resource, controller, only = []) {
 		return this.resource(resource, controller, only, true);
@@ -268,9 +273,9 @@ class Router {
 	/**
 	 * Create a route group.
 	 *
-	 * @param {GroupOptions} options - The group options.
+	 * @param {http.GroupOptions} options - The group options.
 	 * @param {Function} group - The group closure.
-	 * @returns {Router} - The current router instance.
+	 * @returns {http.Router} The current router instance.
 	 */
 	group(options, group) {
 		const data = __(this).get('groups');
@@ -287,7 +292,7 @@ class Router {
 	 * @param {string} method - The HTTP verb, such as "GET", "POST", "DELETE", etc.
 	 * @param {string} path - The route path.
 	 * @param {string|Function} action - The action that will handle the request.
-	 * @returns {Route} - The newly created route instance.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	addRoute(method, path, action) {
 		const route = this.makeRoute({ method, path, action });
@@ -299,8 +304,8 @@ class Router {
 	/**
 	 * Create a new route instance.
 	 *
-	 * @param {RouteAttributes} attributes - The route attributes.
-	 * @returns {Route} - The newly created route instance.
+	 * @param {http.RouteAttributes} attributes - The route attributes.
+	 * @returns {http.Route} The newly created route instance.
 	 */
 	makeRoute(attributes) {
 		const data = { asPrefix: '', path: '', action: '' };
@@ -326,8 +331,8 @@ class Router {
 	/**
 	 * Get route or route group mapping.
 	 *
-	 * @param {Route} route - The route instance.
-	 * @returns {RouteAttributes} - The route mapping.
+	 * @param {http.Route} route - The route instance.
+	 * @returns {http.RouteAttributes} The route mapping.
 	 */
 	getRouteMapping(route) {
 		return {
@@ -340,8 +345,8 @@ class Router {
 	/**
 	 * Get route or route group asPrefix mapping.
 	 *
-	 * @param {Route} route - The route instance.
-	 * @returns {string} - The route name prefix.
+	 * @param {http.Route} route - The route instance.
+	 * @returns {string} The route name prefix.
 	 */
 	getRouteAsPrefixMapping({ as }) {
 		return as || '';
@@ -350,8 +355,8 @@ class Router {
 	/**
 	 * Get route or route group path mapping.
 	 *
-	 * @param {Route} route - The route instance.
-	 * @returns {string} - The full route path.
+	 * @param {http.Route} route - The route instance.
+	 * @returns {string} The full route path.
 	 */
 	getRoutePathMapping({ prefix, path }) {
 		const formattedPath = (prefix || path || '')
@@ -367,8 +372,8 @@ class Router {
 	/**
 	 * Get route or route group action mapping.
 	 *
-	 * @param {Route} route - The route instance.
-	 * @returns {string} - The route action name.
+	 * @param {http.Route} route - The route instance.
+	 * @returns {string} The route action name.
 	 */
 	getRouteActionMapping({ namespace, action }) {
 		const formattedNamespace = (namespace || '')
@@ -380,12 +385,15 @@ class Router {
 	/**
 	 * Generate route binding in Express server.
 	 *
-	 * @returns {express.Router} - The Express Router instance.
+	 * @returns {express.Router} The Express Router instance.
 	 */
 	generate() {
 		if (!__(this).get('expressRouter')) {
 			const router = this.server.getRouter();
 
+			this.post('/allo', (request, response) => {
+				response.send('bob');
+			});
 			this.routes.all().forEach((route) => {
 				const { constraints, path, method } = route;
 
@@ -393,6 +401,8 @@ class Router {
 					return this.routerHandler.handleRequest(route, request, response);
 				});
 			});
+
+			router.all('*', this.routerHandler.handleRouteNotFound.bind(this.routerHandler));
 
 			__(this).set('expressRouter', router);
 		}
@@ -406,7 +416,7 @@ class Router {
 	 * @param {string} path - The route path.
 	 * @param {string} [method] - The HTTP method to use.
 	 * @param {*} [request] - The request instance to use.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	call(path, method = 'get', request = {}) {
 		return this.runMiddleware(path, { ...request, method });
@@ -417,7 +427,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {request} request - The request instance to use.
-	 * @returns {Promise<{code: number, data: *}>} - The HTTP code result and the response body.
+	 * @returns {Promise<{code: number, data: *}>} The HTTP code result and the response body.
 	 */
 	runMiddleware(path, request) {
 		const server = this.server.make().use(this.generate());
@@ -447,7 +457,7 @@ class Router {
 	 *
 	 * @param {string} resource - The resource from which to get the mapping.
 	 * @param {string} controller - The controller name.
-	 * @returns {Array<object>} - The List of resource action mapping.
+	 * @returns {Array<object>} The List of resource action mapping.
 	 */
 	getResourceMapping(resource, controller) {
 		return this.getResourceActions().map((action) => {
@@ -464,7 +474,7 @@ class Router {
 	 * @param {string} resource - The resource from which to get data.
 	 * @param {string} controller - The controller name.
 	 * @param {string} action - The controller action name.
-	 * @returns {ResourceData} - The resource data.
+	 * @returns {http.ResourceData} The resource data.
 	 */
 	getResourceData(resource, controller, action) {
 		return {
@@ -478,7 +488,7 @@ class Router {
 	/**
 	 * Get available resource actions.
 	 *
-	 * @returns {Array<{name: string, method: string, single: boolean}>} - The resource actions.
+	 * @returns {Array<{name: string, method: string, single: boolean}>} The resource actions.
 	 */
 	getResourceActions() {
 		return [
@@ -496,7 +506,7 @@ class Router {
 	 * Get single resource action data.
 	 *
 	 * @param {string} action - The action name.
-	 * @returns {ResourceAction} - The resource action.
+	 * @returns {http.ResourceAction} The resource action.
 	 */
 	getResourceAction(action) {
 		return this.getResourceActions().find(({ name }) => {
@@ -508,7 +518,7 @@ class Router {
 	 * Get single resource action method name.
 	 *
 	 * @param {string} action - The action name.
-	 * @returns {string} - The resource action HTTP method.
+	 * @returns {string} The resource action HTTP method.
 	 */
 	getResourceActionMethod(action) {
 		return (this.getResourceAction(action) || {}).method;
@@ -519,7 +529,7 @@ class Router {
 	 *
 	 * @param {string} resource - The resource name.
 	 * @param {string} action - The resource action.
-	 * @returns {string} - The URL for the resource for the specific action.
+	 * @returns {string} The URL for the resource for the specific action.
 	 */
 	getResourceUrlMapping(resource, action) {
 		const { single, suffix } = this.getResourceAction(action);
@@ -542,7 +552,7 @@ class Router {
 	 *
 	 * @param {string} path - The route path.
 	 * @param {*} constraints - The constraints for route parameters.
-	 * @returns {string} - The resolved path.
+	 * @returns {string} The resolved path.
 	 */
 	resolvePath(path, constraints) {
 		return Object.entries(constraints)
@@ -554,7 +564,7 @@ class Router {
 	/**
 	 * Get server instance.
 	 *
-	 * @returns {Express} - The Express server instance.
+	 * @returns {Express} The Express server instance.
 	 */
 	getServer() {
 		return this.server.getInstance();
@@ -563,7 +573,7 @@ class Router {
 	/**
 	 * Route repository.
 	 *
-	 * @type {RouteRepository}
+	 * @type {http.repositories.RouteRepository}
 	 */
 	get routes() {
 		return __(this).get('router.route');
@@ -572,7 +582,7 @@ class Router {
 	/**
 	 * Controller repository.
 	 *
-	 * @type {ControllerRepository}
+	 * @type {http.repositories.ControllerRepository}
 	 */
 	get controllers() {
 		return __(this).get('router.controller');

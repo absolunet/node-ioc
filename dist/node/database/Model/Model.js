@@ -81,9 +81,9 @@ class Model {
   /**
    * Model constructor.
    *
-   * @param {Application} app - The current application instance.
+   * @param {foundation.Application} app - The current application instance.
    * @param {*} engine - The engine that exposes the base model.
-   * @returns {Function} - An engine model factory, wrapped by a proxy.
+   * @returns {Function} An engine model factory, wrapped by a proxy.
    */
 
 
@@ -112,7 +112,7 @@ class Model {
   /**
    * Get default values.
    *
-   * @returns {object} - The default values.
+   * @returns {object} The default values.
    */
 
 
@@ -122,7 +122,7 @@ class Model {
   /**
    * Get if the model has timestamp columns.
    *
-   * @returns {boolean} - Indicates that the model uses timestamps.
+   * @returns {boolean} Indicates that the model uses timestamps.
    */
 
 
@@ -132,7 +132,7 @@ class Model {
   /**
    * Get primary key column name.
    *
-   * @returns {string} - The primary column name.
+   * @returns {string} The primary column name.
    */
 
 
@@ -142,7 +142,7 @@ class Model {
   /**
    * Get primary key column type.
    *
-   * @returns {string} - The primary column type.
+   * @returns {string} The primary column type.
    */
 
 
@@ -152,7 +152,7 @@ class Model {
   /**
    * Get a list of all processors.
    *
-   * @returns {object<string, Function>} - The processors list for each columns.
+   * @returns {object<string, Function>} The processors list for each columns.
    */
 
 
@@ -169,7 +169,7 @@ class Model {
   /**
    * Get table name.
    *
-   * @returns {string} - The table name.
+   * @returns {string} The table name.
    */
 
 
@@ -188,7 +188,7 @@ class Model {
    * Create a new record in the database.
    *
    * @param {object} attributes - The attributes to create the model with.
-   * @returns {Promise<Model>} - The newly created model instance.
+   * @returns {Promise<database.Model>} The newly created model instance.
    */
 
 
@@ -223,7 +223,7 @@ class Model {
   /**
    * Application accessor.
    *
-   * @type {Application}
+   * @type {foundation.Application}
    */
 
 

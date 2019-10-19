@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Controllers - Redirect Controller - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const RedirectController = require('../../../../dist/node/http/controllers/RedirectController');
+import container from '../../container';
+import RedirectController from '../../../../dist/node/http/controllers/RedirectController';
 
 let redirectController;
 
@@ -59,4 +59,4 @@ then.shouldHaveRedirectPermanently = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

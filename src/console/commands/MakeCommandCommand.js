@@ -50,7 +50,7 @@ class MakeCommandCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	async handle() {
-		const type = this.flag('generator') ? 'generator' : this.flag('private') ? 'private' : 'base'; // eslint-disable-line unicorn/no-nested-ternary
+		const type = this.flag('generator') ? 'generator' : this.flag('private') ? 'private' : 'base';
 		this.debug(`Generating ${type} command file.`);
 		await this.generate(type);
 		this.info(`Command ${this.parameter('class')} file successfully generated!`);

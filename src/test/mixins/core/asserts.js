@@ -23,7 +23,7 @@ const asserts = factory((SuperClass) => {
 		/**
 		 * Make assertion.
 		 *
-		 * @returns {Assert|null} - The assert object.
+		 * @returns {Assert|null} The assert object.
 		 * @memberof test.mixins.core.Asserts
 		 * @instance
 		 */

@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Helpers - Date Helper - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const moment     = require('moment');
-const container  = require('../../container');
-const DateHelper = require('../../../../dist/node/support/helpers/DateHelper');
+import moment     from 'moment';
+import container  from '../../container';
+import DateHelper from '../../../../dist/node/support/helpers/DateHelper';
 
 let dateHelper;
 let result;
@@ -55,4 +55,4 @@ then.resultShouldAtLeastMatchMomentKeys = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

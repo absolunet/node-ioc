@@ -43,7 +43,7 @@ class Driver extends hasEngine() {
 	 * Build an engine with given connection.
 	 *
 	 * @param {Knex} connection - The Knex connection instance.
-	 * @returns {*} - The ORM engine.
+	 * @returns {*} The ORM engine.
 	 * @abstract
 	 */
 	buildEngine(connection) { // eslint-disable-line no-unused-vars
@@ -54,7 +54,7 @@ class Driver extends hasEngine() {
 	 * Get ORM driver with given connection.
 	 *
 	 * @param {Knex} connection - The Knex connection instance.
-	 * @returns {Driver} - A newly created Driver with a given connection.
+	 * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
 	 */
 	withConnection(connection) {
 		return this.app.make(this.constructor, { connection });
@@ -65,8 +65,8 @@ class Driver extends hasEngine() {
 	 * If name and model are provided, the model is registered as name in the engine.
 	 *
 	 * @param {string} name - The model name.
-	 * @param {Model} [Model] - The model class.
-	 * @returns {Model} - Model instance.
+	 * @param {database.Model} [Model] - The model class.
+	 * @returns {database.Model} Model instance.
 	 */
 	model(name, Model) {
 		if (!Model) {
@@ -85,7 +85,7 @@ class Driver extends hasEngine() {
 	 * Get model by name.
 	 *
 	 * @param {string} name - The model name.
-	 * @returns {Model|null} - The model instance, or null if it was not found.
+	 * @returns {database.Model|null} The model instance, or null if it was not found.
 	 */
 	getModel(name) {
 		return this.engine.model(name);
@@ -95,7 +95,7 @@ class Driver extends hasEngine() {
 	 * Set model with given name.
 	 *
 	 * @param {string} name - The model name.
-	 * @param {Model} model - The model instance.
+	 * @param {database.Model} model - The model instance.
 	 */
 	setModel(name, model) {
 		this.engine.model(name, model);
@@ -105,7 +105,7 @@ class Driver extends hasEngine() {
 	 * Resolve model instance by name from the models path in the database resolver.
 	 *
 	 * @param {string} name - The model name.
-	 * @returns {Model|null} - A model instance.
+	 * @returns {database.Model|null} A model instance.
 	 */
 	resolveModel(name) {
 		const fullModelPath = this.app.formatPath(this.dbResolver.resolvePath('models'), `${this.getFormattedModelClassName(name)}.js`);
@@ -116,8 +116,8 @@ class Driver extends hasEngine() {
 	/**
 	 * Build model.
 	 *
-	 * @param {Model} model - The model instance.
-	 * @returns {Model} - The built model instance.
+	 * @param {database.Model} model - The model instance.
+	 * @returns {database.Model} The built model instance.
 	 */
 	buildModel(model) {
 		return model;
@@ -127,7 +127,7 @@ class Driver extends hasEngine() {
 	 * Get formatted model class name.
 	 *
 	 * @param {string} name - The model name.
-	 * @returns {string} - The formatted model name.
+	 * @returns {string} The formatted model name.
 	 */
 	getFormattedModelClassName(name) {
 		return this.stringHelper.pascal(name);
@@ -136,7 +136,7 @@ class Driver extends hasEngine() {
 	/**
 	 * String helper instance.
 	 *
-	 * @type {StringHelper}
+	 * @type {support.helpers.StringHelper}
 	 */
 	get stringHelper() {
 		return this.helperString;

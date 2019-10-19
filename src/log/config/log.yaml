@@ -1,8 +1,8 @@
-# Default logging channel.
+# Default log channel.
 default: '{{LOG_CHANNEL|stack}}'
 
 
-# Available logging channels.
+# Available log channels.
 channels:
 
   stack:

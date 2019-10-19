@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - View - Services - Factory - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const path      = require('path');
-const container = require('../../container');
-const Factory   = require('../../../../dist/node/view/services/Factory');
+import * as path from 'path';
+import container from '../../container';
+import Factory   from '../../../../dist/node/view/services/Factory';
 
 let factory;
 let viewName;
@@ -91,4 +91,4 @@ then.shouldHavePassedViewModelToEngineMethod = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

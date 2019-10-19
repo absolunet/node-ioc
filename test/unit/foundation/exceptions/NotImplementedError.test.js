@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Exceptions - Not Implemented Error
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./NotImplementedError.gwt');
+import gwt from './NotImplementedError.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

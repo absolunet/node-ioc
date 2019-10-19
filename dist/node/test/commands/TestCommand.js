@@ -77,7 +77,7 @@ class TestCommand extends _Command.default {
   /**
    * Run test engine on the requested test classes.
    *
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -92,7 +92,7 @@ class TestCommand extends _Command.default {
   /**
    * Resolve repository name based on input.
    *
-   * @returns {string} - The repository name.
+   * @returns {string} The repository name.
    */
 
 
@@ -116,7 +116,7 @@ class TestCommand extends _Command.default {
    * Store repository name in current process environment.
    *
    * @param {string} repositoryName - The repository name.
-   * @returns {TestCommand} - The current command instance.
+   * @returns {test.commands.TestCommand} The current command instance.
    */
 
 
@@ -128,7 +128,7 @@ class TestCommand extends _Command.default {
   /**
    * Resolve engine name based on input.
    *
-   * @returns {string} - The engine short name.
+   * @returns {string} The engine short name.
    */
 
 
@@ -138,7 +138,7 @@ class TestCommand extends _Command.default {
   /**
    * Get engine implementation from application.
    *
-   * @returns {*} - The test engine instance.
+   * @returns {*} The test engine instance.
    */
 
 
@@ -149,7 +149,7 @@ class TestCommand extends _Command.default {
    * Store engine name in the current process environment variables.
    *
    * @param {string} engineName - The engine short name.
-   * @returns {TestCommand} - The current command instance.
+   * @returns {test.commands.TestCommand} The current command instance.
    */
 
 
@@ -161,7 +161,7 @@ class TestCommand extends _Command.default {
   /**
    * Format current arguments to fit the engine CLI argument model.
    *
-   * @returns {TestCommand} - The current command instance.
+   * @returns {test.commands.TestCommand} The current command instance.
    */
 
 

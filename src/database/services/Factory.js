@@ -34,7 +34,7 @@ class Factory {
 	 * Get model factory instance by name.
 	 *
 	 * @param {string} name - The model factory name.
-	 * @returns {Factory} - The model factory instance.
+	 * @returns {database.Factory} The model factory instance.
 	 */
 	get(name) {
 		const factory = __(this).get('factories')[name];
@@ -58,7 +58,7 @@ class Factory {
 	 * @param {string} model - The model name.
 	 * @param {object<string, *>|number} [parameters={}] - The parameters to put into the model manually, overwriting matching factoried values. Can also be the times if no parameter are given.
 	 * @param {number} [times=1] - The quantity of models that needed to be factoried. Minimum 1 model is required.
-	 * @returns {Model|Collection} - Either a single Model instance or a Model Collection instance, containing N times the requested model.
+	 * @returns {Model|Collection} Either a single Model instance or a Model Collection instance, containing N times the requested model.
 	 */
 	make(model, parameters = {}, times = 1) {
 		const ModelInstance = __(this).get('db.model').get(model);
@@ -81,9 +81,9 @@ class Factory {
 	 * Register factory for a given model.
 	 * If the model name is not provided, it will be taken from the factory instance.
 	 *
-	 * @param {Factory} factory - The factory class.
+	 * @param {database.Factory} factory - The factory class.
 	 * @param {string|null} [model] - The model name. If no value is provided, the factory model will be taken.
-	 * @returns {Factory} - The factory service instance.
+	 * @returns {database.services.Factory} The factory service instance.
 	 */
 	register(factory, model = null) {
 		const instance = this.app.make(factory);

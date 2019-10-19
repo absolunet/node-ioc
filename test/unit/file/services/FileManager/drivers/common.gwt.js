@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const fs        = require('fs');
-const path      = require('path');
-const container = require('../../../../container');
+import * as fs   from 'fs';
+import * as path from 'path';
+import container from '../../../../container';
 
 const readingPath = path.join(__dirname, '..', '..', '..', 'stubs', 'files');
 const writingPath = path.join(__dirname, '..', '..', '..', 'stubs', 'write');
@@ -84,7 +84,12 @@ when.writingFileAsynchronously = async () => {
 
 then.resultShouldEqual = (expected) => {
 	then.shouldNotHaveThrown();
-	expect(result).toStrictEqual(expected);
+	expect(result).toEqual(expected);
+};
+
+then.resultShouldMatchObject = (expected) => {
+	then.shouldNotHaveThrown();
+	expect(result).toMatchObject(expected);
 };
 
 then.deleteWrittenFile = () => {
@@ -103,5 +108,4 @@ then.fileShouldHaveBeenWritten = () => {
 };
 
 
-
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

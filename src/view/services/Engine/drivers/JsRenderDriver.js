@@ -93,7 +93,7 @@ class JsRenderDriver extends Driver {
 	/**
 	 * View factory.
 	 *
-	 * @type {Factory}
+	 * @type {view.services.Factory}
 	 */
 	get view() {
 		return this.app.make('view');

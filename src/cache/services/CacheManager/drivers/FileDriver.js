@@ -110,7 +110,7 @@ class FileDriver extends Driver {
 	/**
 	 * Ensure that the JSON file exists.
 	 *
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async ensureFileExists() {
 		if (!this.file.exists(this.fileName)) {
@@ -131,7 +131,7 @@ class FileDriver extends Driver {
 	 * Get cache entry by key.
 	 *
 	 * @param {string} key - The cache key.
-	 * @returns {Promise<{value: *, expiration: number}>} - The cache entry.
+	 * @returns {Promise<{value: *, expiration: number}>} The cache entry.
 	 */
 	async getEntry(key) {
 		const content = await this.getContent();
@@ -142,7 +142,7 @@ class FileDriver extends Driver {
 	/**
 	 * Get cache entries.
 	 *
-	 * @returns {Promise<object<string, {value: *, expiration: number}>>} - All the cache entries.
+	 * @returns {Promise<object<string, {value: *, expiration: number}>>} All the cache entries.
 	 */
 	async getContent() {
 		await this.ensureFileExists();
@@ -154,7 +154,7 @@ class FileDriver extends Driver {
 	 * Set cache entries.
 	 *
 	 * @param {object<string, { value: *, expiration: number}>} content - The cache entries.
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async setContent(content) {
 		await this.ensureFileExists();

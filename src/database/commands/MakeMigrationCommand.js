@@ -77,7 +77,7 @@ class MakeMigrationCommand extends GeneratorCommand {
 	/**
 	 * Get guessed table name based on the class name.
 	 *
-	 * @returns {string} - The database table name.
+	 * @returns {string} The database table name.
 	 */
 	getTableName() {
 		const table = ((/.+(?<table>[A-Z][a-zA-Z]+)Table$/u).exec(this.parameter('class')) || { groups: {} }).groups.table || 'Table';
@@ -88,7 +88,7 @@ class MakeMigrationCommand extends GeneratorCommand {
 	/**
 	 * Get guessed action based on the class name.
 	 *
-	 * @returns {string} - The action that the migration is doing.
+	 * @returns {string} The action that the migration is doing.
 	 */
 	getAction() {
 		const { action = 'Create' } =  ((/^(?<action>[A-Z][a-z]+)/u).exec(this.parameter('class')) || { groups: {} }).groups;

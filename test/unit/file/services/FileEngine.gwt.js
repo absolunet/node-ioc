@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Engine - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container  = require('../../container');
-const FileEngine = require('../../../../dist/node/file/services/FileEngine');
+import container  from '../../container';
+import FileEngine from '../../../../dist/node/file/services/FileEngine';
 
 let fileEngine;
 let result;
@@ -84,4 +84,4 @@ then.scandirShouldNotHaveBeenCalledOnAsyncSystem = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

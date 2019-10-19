@@ -30,7 +30,7 @@ class CaptureInterceptor {
 	/**
 	 * Flush captured logs.
 	 *
-	 * @returns {CaptureInterceptor} - The Capture interceptor instance.
+	 * @returns {console.interceptors.CaptureInterceptor} The Capture interceptor instance.
 	 */
 	flush() {
 		__(this).get('capture').splice(0);

@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Connector
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Connector.gwt');
+import gwt from './Connector.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

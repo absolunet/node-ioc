@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Services - Tester - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container  = require('../../container');
-const TestRunner = require('../../../../dist/node/test/services/TestRunner');
+import container  from '../../container';
+import TestRunner from '../../../../dist/node/test/services/TestRunner';
 
 let testRunner;
 
@@ -175,5 +175,4 @@ then.allTestCaseTestsSetupsAndTearDownsShouldHaveRun = () => {
 };
 
 
-
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

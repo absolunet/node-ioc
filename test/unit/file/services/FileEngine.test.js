@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Engine
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./FileEngine.gwt');
+import gwt from './FileEngine.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

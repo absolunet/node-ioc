@@ -82,7 +82,7 @@ class Kernel {
   /**
    * Handle the incoming request.
    *
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    * @async
    * @abstract
    */

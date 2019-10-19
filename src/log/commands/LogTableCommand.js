@@ -105,7 +105,7 @@ class LogTableCommand extends GeneratorCommand {
 	/**
 	 * Check if migration already exists in configured directory.
 	 *
-	 * @returns {boolean} - Indicates if the migration file already exists.
+	 * @returns {boolean} Indicates if the migration file already exists.
 	 */
 	migrationExists() {
 		const { destination: folder } = this;
@@ -120,7 +120,7 @@ class LogTableCommand extends GeneratorCommand {
 	/**
 	 * Get the logs table name, "logs" by default.
 	 *
-	 * @returns {string} - Logs table name.
+	 * @returns {string} Logs table name.
 	 */
 	getLogsTableName() {
 		return this.app.make('config').get('log.channels.database.table', 'logs');
@@ -129,7 +129,7 @@ class LogTableCommand extends GeneratorCommand {
 	/**
 	 * Get the migration class name.
 	 *
-	 * @returns {string} - The class name.
+	 * @returns {string} The class name.
 	 */
 	getClassName() {
 		return `Create${this.app.make('helper.string').pascal(this.getLogsTableName())}Table`;

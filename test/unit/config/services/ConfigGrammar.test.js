@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Services - Config Grammar
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ConfigGrammar.gwt');
+import gwt from './ConfigGrammar.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

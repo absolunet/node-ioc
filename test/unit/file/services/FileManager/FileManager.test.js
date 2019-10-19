@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./FileManager.gwt');
+import gwt from './FileManager.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

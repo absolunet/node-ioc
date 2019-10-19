@@ -27,7 +27,7 @@ const checkTypes = (0, _mixinFactory.default)(SuperClass => {
      * Check if the given object is instantiable.
      *
      * @param {*} object - The object to test.
-     * @returns {boolean} - Indicates that the object is instantiable.
+     * @returns {boolean} Indicates that the object is instantiable.
      * @memberof support.mixins.CheckTypesMixin
      * @instance
      */
@@ -38,7 +38,7 @@ const checkTypes = (0, _mixinFactory.default)(SuperClass => {
      * Check if the given object is a function.
      *
      * @param {*} object - The object to test.
-     * @returns {boolean} - Indicates that the object is a function.
+     * @returns {boolean} Indicates that the object is a function.
      * @memberof support.mixins.CheckTypesMixin
      * @instance
      */
@@ -51,7 +51,7 @@ const checkTypes = (0, _mixinFactory.default)(SuperClass => {
      * Check if the given object is an object.
      *
      * @param {*} object - The object to test.
-     * @returns {boolean} - Indicates that the object is an object.
+     * @returns {boolean} Indicates that the object is an object.
      * @memberof support.mixins.CheckTypesMixin
      * @instance
      */
@@ -64,7 +64,7 @@ const checkTypes = (0, _mixinFactory.default)(SuperClass => {
      * Check if method exists in current instance.
      *
      * @param {string} method - The method to test.
-     * @returns {boolean} - Indicates that the method exists in current instance.
+     * @returns {boolean} Indicates that the method exists in current instance.
      * @memberof support.mixins.CheckTypesMixin
      * @instance
      */

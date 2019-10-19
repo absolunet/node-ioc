@@ -49,7 +49,7 @@ class Application extends _Container.default {
   /**
    * Register a service provider.
    *
-   * @param {ServiceProvider} provider - The service provider class to register.
+   * @param {foundation.ServiceProvider} provider - The service provider class to register.
    */
   register(provider) {
     if (this.isRegistered(provider)) {
@@ -66,8 +66,8 @@ class Application extends _Container.default {
   /**
    * Get provider model object.
    *
-   * @param {ServiceProvider} provider - The service provider class.
-   * @returns {{instance: null, provider: *, registered: boolean, booted: boolean}} - The provider model.
+   * @param {foundation.ServiceProvider} provider - The service provider class.
+   * @returns {{instance: null, provider: *, registered: boolean, booted: boolean}} The provider model.
    */
 
 
@@ -83,7 +83,7 @@ class Application extends _Container.default {
    * Ensure that a provider can be properly registered,
    * either before or after booting, but not during providers booting phase.
    *
-   * @throws TypeError - Indicates that the provider was register during booting process.
+   * @throws {TypeError} - Indicates that the provider was register during booting process.
    */
 
 
@@ -104,8 +104,8 @@ class Application extends _Container.default {
   /**
    * Insert service provider in the application at the end of the list.
    *
-   * @param {ServiceProvider} provider - The service provider class.
-   * @returns {{instance: null, provider: *, registered: boolean, booted: boolean}} - The provider model.
+   * @param {foundation.ServiceProvider} provider - The service provider class.
+   * @returns {{instance: null, provider: *, registered: boolean, booted: boolean}} The provider model.
    */
 
 
@@ -118,8 +118,8 @@ class Application extends _Container.default {
   /**
    * Insert service provider in the application at the beginning of the list.
    *
-   * @param {ServiceProvider} provider - The service provider class.
-   * @returns {{instance: null, provider: *, registered: boolean, booted: boolean}} - The provider model.
+   * @param {foundation.ServiceProvider} provider - The service provider class.
+   * @returns {{instance: null, provider: *, registered: boolean, booted: boolean}} The provider model.
    */
 
 
@@ -132,8 +132,8 @@ class Application extends _Container.default {
   /**
    * Boot the application.
    *
-   * @returns {Application} - The current application instance.
-   * @throws TypeError - Indicates that the application was already booted.
+   * @returns {foundation.Application} The current application instance.
+   * @throws {TypeError} Indicates that the application was already booted.
    */
 
 
@@ -216,8 +216,8 @@ class Application extends _Container.default {
   /**
    * Check if a given provider is registered.
    *
-   * @param {ServiceProvider} provider - The service provider class.
-   * @returns {boolean} - Indicates that the service provider was already registered.
+   * @param {foundation.ServiceProvider} provider - The service provider class.
+   * @returns {boolean} Indicates that the service provider was already registered.
    */
 
 
@@ -252,7 +252,7 @@ class Application extends _Container.default {
   /**
    * Boot the container if it was not booted yet.
    *
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -267,8 +267,8 @@ class Application extends _Container.default {
    * Configure application paths.
    *
    * @param {object<string, string>|string|null} paths - The paths to configure into the application.
-   * @returns {foundation.Application} - The current application instance.
-   * @throws TypeError - Indicates that the base path was never defined.
+   * @returns {foundation.Application} The current application instance.
+   * @throws {TypeError} Indicates that the base path was never defined.
    */
 
 
@@ -290,7 +290,7 @@ class Application extends _Container.default {
    * Configure application namespaces.
    *
    * @param {object<string, string>} namespaces - The namespaces to configure into the application.
-   * @returns {foundation.Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -303,7 +303,7 @@ class Application extends _Container.default {
   /**
    * Configure default paths within the container.
    *
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -327,6 +327,7 @@ class Application extends _Container.default {
       'resources': this.formatPath(basePath, 'resources'),
       'storage': this.formatPath(basePath, 'storage'),
       'test': this.formatPath(basePath, 'test'),
+      'upload': this.formatPath(basePath, 'storage', 'uploads'),
       'view': this.formatPath(basePath, 'resources', 'views'),
       'dist': this.formatPath(basePath, distributionNamespace),
       'bootstrap': this.formatPath(basePath, distributionNamespace, 'bootstrap'),
@@ -362,7 +363,7 @@ class Application extends _Container.default {
    * @param {string} from - The original path to replace.
    * @param {string} to - The new path that replaces the older.
    * @param {boolean} isSource - Indicates that the replacement must affect.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -378,7 +379,7 @@ class Application extends _Container.default {
    * Use specific home path.
    *
    * @param {string} homePath - The new home path.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -392,7 +393,7 @@ class Application extends _Container.default {
    * Use base path for all registered paths.
    *
    * @param {string} basePath - The new base path.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -403,7 +404,7 @@ class Application extends _Container.default {
    * Use application path for all application-related registered paths.
    *
    * @param {string} appPath - The new application relative path.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -419,7 +420,7 @@ class Application extends _Container.default {
    * Use source path for all application-related registered paths.
    *
    * @param {string} sourcePath - The new source path.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -434,7 +435,7 @@ class Application extends _Container.default {
    * Use source path for all application-related registered paths.
    *
    * @param {string} distributionPath - The new distribution path.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -448,7 +449,7 @@ class Application extends _Container.default {
    * Format given path or path segments.
    *
    * @param {...string} segments - The segments to join when formatting.
-   * @returns {string} - The formatted path.
+   * @returns {string} The formatted path.
    */
 
 
@@ -460,7 +461,7 @@ class Application extends _Container.default {
    *
    * @param {string} type - The path type to use.
    * @param {string|Array<string>} [relativePath] - The relative path or path segments from the path type.
-   * @returns {string} - The formatted path from the path type.
+   * @returns {string} The formatted path from the path type.
    */
 
 
@@ -473,7 +474,7 @@ class Application extends _Container.default {
    * Get full path from home path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from home path.
-   * @returns {string} - The formatted path from home path.
+   * @returns {string} The formatted path from home path.
    */
 
 
@@ -484,7 +485,7 @@ class Application extends _Container.default {
    * Get full path from app path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from app path.
-   * @returns {string} - The formatted path from app path.
+   * @returns {string} The formatted path from app path.
    */
 
 
@@ -495,7 +496,7 @@ class Application extends _Container.default {
    * Get full path from base path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from base path.
-   * @returns {string} - The formatted path from base path.
+   * @returns {string} The formatted path from base path.
    */
 
 
@@ -506,7 +507,7 @@ class Application extends _Container.default {
    * Get full path from config path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from config path.
-   * @returns {string} - The formatted path from config path.
+   * @returns {string} The formatted path from config path.
    */
 
 
@@ -517,7 +518,7 @@ class Application extends _Container.default {
    * Get full path from controller path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from controller path.
-   * @returns {string} - The formatted path from controller path.
+   * @returns {string} The formatted path from controller path.
    */
 
 
@@ -528,7 +529,7 @@ class Application extends _Container.default {
    * Get full path from command path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from command path.
-   * @returns {string} - The formatted path from command path.
+   * @returns {string} The formatted path from command path.
    */
 
 
@@ -539,7 +540,7 @@ class Application extends _Container.default {
    * Get full path from database path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from database path.
-   * @returns {string} - The formatted path from database path.
+   * @returns {string} The formatted path from database path.
    */
 
 
@@ -553,7 +554,7 @@ class Application extends _Container.default {
    *
    * @param {string} [type] - Either the source type name, or the relative path.
    * @param {string} [relativePath] - The relative path from the given source folder type.
-   * @returns {string} - The formatted path from distribution path.
+   * @returns {string} The formatted path from distribution path.
    */
 
 
@@ -568,7 +569,7 @@ class Application extends _Container.default {
    * Get full path from lang path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from lang path.
-   * @returns {string} - The formatted path from lang path.
+   * @returns {string} The formatted path from lang path.
    */
 
 
@@ -579,7 +580,7 @@ class Application extends _Container.default {
    * Get full path from provider path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from provider path.
-   * @returns {string} - The formatted path from provider path.
+   * @returns {string} The formatted path from provider path.
    */
 
 
@@ -590,7 +591,7 @@ class Application extends _Container.default {
    * Get full path from public path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from public path.
-   * @returns {string} - The formatted path from public path.
+   * @returns {string} The formatted path from public path.
    */
 
 
@@ -601,7 +602,7 @@ class Application extends _Container.default {
    * Get full path from resources path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from resources path.
-   * @returns {string} - The formatted path from resources path.
+   * @returns {string} The formatted path from resources path.
    */
 
 
@@ -612,7 +613,7 @@ class Application extends _Container.default {
    * Get full path from routes path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from resources path.
-   * @returns {string} - The formatted path from resources path.
+   * @returns {string} The formatted path from resources path.
    */
 
 
@@ -626,7 +627,7 @@ class Application extends _Container.default {
    *
    * @param {string} [type] - Either the source type name, or the relative path.
    * @param {string} [relativePath] - The relative path from the given source folder type.
-   * @returns {string} - The formatted path from source path.
+   * @returns {string} The formatted path from source path.
    */
 
 
@@ -641,7 +642,7 @@ class Application extends _Container.default {
    * Get full path from storage path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from storage path.
-   * @returns {string} - The formatted path from storage path.
+   * @returns {string} The formatted path from storage path.
    */
 
 
@@ -652,7 +653,7 @@ class Application extends _Container.default {
    * Get full path from test path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from test path.
-   * @returns {string} - The formatted path from test path.
+   * @returns {string} The formatted path from test path.
    */
 
 
@@ -660,10 +661,21 @@ class Application extends _Container.default {
     return this.path('test', relativePath);
   }
   /**
+   * Get full path from upload path.
+   *
+   * @param {string|Array<string>} [relativePath] - The relative path from upload path.
+   * @returns {string} The formatted path from upload path.
+   */
+
+
+  uploadPath(relativePath) {
+    return this.path('upload', relativePath);
+  }
+  /**
    * Get full path from view path.
    *
    * @param {string|Array<string>} [relativePath] - The relative path from view path.
-   * @returns {string} - The formatted path from view path.
+   * @returns {string} The formatted path from view path.
    */
 
 
@@ -692,7 +704,7 @@ class Application extends _Container.default {
    * Register 'application.booting' callback.
    *
    * @param {Function} callback - The listener.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -705,7 +717,7 @@ class Application extends _Container.default {
    * Will be instantly called if already booted.
    *
    * @param {Function} callback - The listener.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -721,7 +733,7 @@ class Application extends _Container.default {
    * Set current application version.
    *
    * @param {string|number} [version] - The application version.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 
@@ -732,7 +744,7 @@ class Application extends _Container.default {
   /**
    * Current Node IoC version.
    *
-   * @returns {string} - The current Node IoC version.
+   * @returns {string} The current Node IoC version.
    */
 
 
@@ -743,7 +755,7 @@ class Application extends _Container.default {
    * Set the current environment.
    *
    * @param {string} environment - The environment.
-   * @returns {Application} - The current application instance.
+   * @returns {foundation.Application} The current application instance.
    */
 
 

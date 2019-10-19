@@ -49,7 +49,7 @@ class EnvironmentRepository {
 	/**
 	 * Get all loaded environment variables.
 	 *
-	 * @returns {object<string, *>} - The environment variables.
+	 * @returns {object<string, *>} The environment variables.
 	 */
 	all() {
 		return { ...__(this).get('env') || {} };
@@ -62,7 +62,7 @@ class EnvironmentRepository {
 	 *
 	 * @param {string} key - The environment variable name.
 	 * @param {null|boolean|number|string}[defaultValue] - The default value to use if the environment variable is not defined.
-	 * @returns {boolean|null|number|string} - The environment variable value.
+	 * @returns {boolean|null|number|string} The environment variable value.
 	 */
 	get(key, defaultValue = null) {
 		if (!this.has(key)) {
@@ -76,7 +76,7 @@ class EnvironmentRepository {
 	 * Check if environment variable was defined.
 	 *
 	 * @param {string} key - The environment variable name.
-	 * @returns {boolean} - Indicates if the variable exists in environment.
+	 * @returns {boolean} Indicates if the variable exists in environment.
 	 */
 	has(key) {
 		return Object.prototype.hasOwnProperty.call(this.all(), key);

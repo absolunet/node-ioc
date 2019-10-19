@@ -28,9 +28,9 @@ class BaseProxy {
 	/**
 	 * Property accessor.
 	 *
-	 * @param {Connector} object - Proxied object.
+	 * @param {object} object - Proxied object.
 	 * @param {string} property - The property name.
-	 * @returns {*} - The property value.
+	 * @returns {*} The property value.
 	 */
 	get(object, property) {
 		if (property === '__instance') {

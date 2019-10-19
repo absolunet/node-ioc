@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Application - Main - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
 let main;
 let result;
@@ -67,4 +67,4 @@ then.allKeysShouldFactoryConstructor = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -31,7 +31,7 @@ class StringHelper extends forwardsCall() {
 	 *
 	 * @param {string} [string] - The word to pluralize.
 	 * @param {number} [quantity] - How many of the word exist.
-	 * @returns {string} - The pluralized word.
+	 * @returns {string} The pluralized word.
 	 */
 	plural(string, quantity = 2) {
 		return require('pluralize')(string, quantity); // eslint-disable-line global-require
@@ -41,7 +41,7 @@ class StringHelper extends forwardsCall() {
 	 * Convert to singular version of the string.
 	 *
 	 * @param {string} string - The word to singularize.
-	 * @returns {string} - The singularized word.
+	 * @returns {string} The singularized word.
 	 */
 	singular(string) {
 		return this.plural(string, 1);

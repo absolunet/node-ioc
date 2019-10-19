@@ -27,7 +27,7 @@ class Container extends (0, _checksTypes.default)() {
   /**
    * Make a new Container instance.
    *
-   * @returns {Container} - A container instance.
+   * @returns {container.Container} A container instance.
    */
   static make() {
     const instance = new this();
@@ -41,7 +41,7 @@ class Container extends (0, _checksTypes.default)() {
   /**
    * Get the current Container instance or create a new one.
    *
-   * @returns {Container} - The current instance or a newly created instance if no instance exists.
+   * @returns {container.Container} The current instance or a newly created instance if no instance exists.
    */
 
 
@@ -51,8 +51,8 @@ class Container extends (0, _checksTypes.default)() {
   /**
    * Set the current Container instance.
    *
-   * @param {Container} instance - A Container instance.
-   * @throws TypeError - Indicates that the default instance was not a container instance.
+   * @param {container.Container} instance - A Container instance.
+   * @throws {TypeError} Indicates that the default instance was not a container instance.
    */
 
 
@@ -100,7 +100,7 @@ class Container extends (0, _checksTypes.default)() {
   /**
    * Get current JavaScript module context.
    *
-   * @returns {module} - The Node.js module that represents the current context.
+   * @returns {module} The Node.js module that represents the current context.
    */
 
 
@@ -113,7 +113,7 @@ class Container extends (0, _checksTypes.default)() {
    * @param {string} abstract - Abstract representation of a concrete. Should be treated as an interface.
    * @param {Function|*} concrete - Concrete reflecting the abstract. Can be either a class, a factory closure, an instance or even a primitive value, such as a string or a boolean.
    * @param {boolean} shared - Indicates that the concrete should be treated as a singleton and be shared through all the other instances when requested.
-   * @returns {Container} - The current container instance.
+   * @returns {container.Container} The current container instance.
    */
 
 
@@ -130,7 +130,7 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {string} abstract - Abstract representation of a concrete. Should be treated as an interface.
    * @param {Function|*} concrete - Concrete reflecting the abstract. Can be either a class, a factory closure, an instance or even a primitive value, such as a string or a boolean.
-   * @returns {Container} - The current container instance.
+   * @returns {container.Container} The current container instance.
    */
 
 
@@ -144,7 +144,7 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {*} abstract - An abstract that was bound to the container, or a class, closure or instance that can be built by the container.
    * @param {object<string, *>} [parameters={}] - Additional arguments to inject into the concrete when instantiating.
-   * @returns {*} - The instantiated or the singleton concrete.
+   * @returns {*} The instantiated or the singleton concrete.
    */
 
 
@@ -160,7 +160,7 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {*} abstract - An abstract that was bound to the container, or a class, closure or instance that can be built by the container.
    * @param {object<string, *>} [parameters={}] - Additional arguments to inject into the concrete when instantiating.
-   * @returns {*} - The instantiated concrete.
+   * @returns {*} The instantiated concrete.
    */
 
 
@@ -206,7 +206,7 @@ class Container extends (0, _checksTypes.default)() {
    * Check if the given abstract is bound to the container.
    *
    * @param {string} abstract - The abstract to check.
-   * @returns {boolean} - Indicates if the abstract is bound in the container.
+   * @returns {boolean} Indicates if the abstract is bound in the container.
    */
 
 
@@ -216,7 +216,7 @@ class Container extends (0, _checksTypes.default)() {
   /**
    * Get all bindings.
    *
-   * @returns {Array<string>} - List of abstracts bound into the container.
+   * @returns {Array<string>} List of abstracts bound into the container.
    */
 
 
@@ -227,7 +227,7 @@ class Container extends (0, _checksTypes.default)() {
    * Get singleton from its abstract.
    *
    * @param {string} abstract - The abstract name that reflects a singleton already instantiated.
-   * @returns {*} - The singleton instance.
+   * @returns {*} The singleton instance.
    */
 
 
@@ -238,7 +238,7 @@ class Container extends (0, _checksTypes.default)() {
    * Check if a given abstract has a resolved singleton.
    *
    * @param {string} abstract - The abstract name that may reflect an instantiated singleton.
-   * @returns {boolean} - Indicates that the singleton exists and was already instantiated.
+   * @returns {boolean} Indicates that the singleton exists and was already instantiated.
    */
 
 
@@ -250,7 +250,7 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {Function} Concrete - A class that can be instantiated.
    * @param {object<string, *>} [parameters={}] - Additional arguments to inject into the class instance when instantiating.
-   * @returns {*} - The newly created instance.
+   * @returns {*} The newly created instance.
    */
 
 
@@ -287,7 +287,7 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {Function} factory - A closure that factories a concrete.
    * @param {object<string, *>} [parameters={}] - Additional arguments to inject into the factory when calling it.
-   * @returns {*} - The factoried concrete.
+   * @returns {*} The factoried concrete.
    */
 
 
@@ -299,7 +299,7 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {*} object - An instance that can receive parameters by assignation.
    * @param {object<string, *>} [parameters={}] - Additional arguments to associate to the instance.
-   * @returns {*} - The instance.
+   * @returns {*} The instance.
    */
 
 
@@ -314,7 +314,7 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {Function|*} concrete - A concrete that can be either instantiated, called or assigned.
    * @param {object<string, *>} [parameters={}] - Additional arguments to inject into the concrete when instantiating.
-   * @returns {*} - The built concrete.
+   * @returns {*} The built concrete.
    */
 
 
@@ -371,7 +371,7 @@ class Container extends (0, _checksTypes.default)() {
    * Check if the given string was used as a tag.
    *
    * @param {string} tag - The tag name.
-   * @returns {boolean} - Indicates if the tag exists.
+   * @returns {boolean} Indicates if the tag exists.
    */
 
 
@@ -382,7 +382,7 @@ class Container extends (0, _checksTypes.default)() {
    * Get tagged dependencies from the tag name.
    *
    * @param {string} tag - The tag name.
-   * @returns {object<string, *>} - The instances associated to the given tag, in a dictionary, mapping the abstract name to the concrete.
+   * @returns {object<string, *>} The instances associated to the given tag, in a dictionary, mapping the abstract name to the concrete.
    */
 
 
@@ -410,7 +410,7 @@ class Container extends (0, _checksTypes.default)() {
    * Throw an error announcing that the given abstract was not found.
    *
    * @param {string} abstract - The abstract that was not found.
-   * @throws TypeError - Indicates that the given abstract was not found in the container.
+   * @throws {TypeError} Indicates that the given abstract was not found in the container.
    */
 
 
@@ -421,8 +421,8 @@ class Container extends (0, _checksTypes.default)() {
    * Check if the given file is a valid and existing JavaScript file with a valid extension.
    *
    * @param {string} filePath - The file path to load.
-   * @returns {*} - The file parsed value, or null if not found.
-   * @throws Error - Indicate that an error occurred during file loading or parsing.
+   * @returns {*} The file parsed value, or null if not found.
+   * @throws {Error} Indicates that an error occurred during file loading or parsing.
    */
 
 

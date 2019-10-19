@@ -27,14 +27,14 @@ class StaticController extends Controller {
 	 * Handle redirection.
 	 *
 	 * @param {{folder: string}} defaults - The default values.
-	 * @returns {response} - The current response instance.
+	 * @returns {*} The response.
 	 */
 	handle({ folder }) {
 		const { file } = this.request.params;
 		const fullPath = this.app.formatPath(folder, file);
 
 		if (!this.file.exists(fullPath)) {
-			return this.notFound().response;
+			return this.notFound();
 		}
 
 		return this.response.sendFile(fullPath);

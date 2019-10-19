@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Repositories - Config Repository - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const path             = require('path');
-const container        = require('../../container');
-const ConfigRepository = require('../../../../dist/node/config/repositories/ConfigRepository');
+import * as path        from 'path';
+import container        from '../../container';
+import ConfigRepository from '../../../../dist/node/config/repositories/ConfigRepository';
 
 let configRepository;
 let result;
@@ -228,5 +228,4 @@ then.configShouldEqualConfigFile = () => {
 };
 
 
-
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

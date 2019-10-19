@@ -28,7 +28,7 @@ class Evaluator {
 	 * Safely evaluate primitive type.
 	 *
 	 * @param {*} value - The value to evaluate.
-	 * @returns {string|null|boolean|number|*} - The evaluated value.
+	 * @returns {string|null|boolean|number|*} The evaluated value.
 	 */
 	evaluate(value) {
 		if ([null, 'null'].includes(value) || typeof value === 'undefined' || value === 'undefined') {

@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Helpers - Path Helper - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container  = require('../../container');
-const PathHelper = require('../../../../dist/node/support/helpers/PathHelper');
+import container  from '../../container';
+import PathHelper from '../../../../dist/node/support/helpers/PathHelper';
 
 let result;
 let pathHelper;
@@ -126,4 +126,4 @@ then.resultShouldEqual = (expected) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

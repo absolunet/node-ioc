@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Application - Main
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./main.gwt');
+import gwt from './main.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

@@ -49,7 +49,7 @@ class Interceptor {
    *
    * @param {Function} closure - The interceptor closure.
    * @param {number|null} [index] - The index where the interceptor should be inserted.
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -62,7 +62,7 @@ class Interceptor {
    * Remove an stdout interceptor.
    *
    * @param {Function} closure - The interceptor closure.
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -78,7 +78,7 @@ class Interceptor {
   /**
    * Remove all existing interceptors.
    *
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -90,7 +90,7 @@ class Interceptor {
    * Start capture.
    *
    * @param {boolean} [mute=true] - Indicates if the console should be muted.
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -111,7 +111,7 @@ class Interceptor {
    * Stop capture and get the output.
    *
    * @param {boolean} [unmute=true] - Indicates if the console should be unmuted.
-   * @returns {Array<string>} - The captured data.
+   * @returns {Array<string>} The captured data.
    */
 
 
@@ -127,7 +127,7 @@ class Interceptor {
   /**
    * Enable interceptors.
    *
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -143,7 +143,7 @@ class Interceptor {
   /**
    * Disable interceptors.
    *
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -161,7 +161,7 @@ class Interceptor {
    * Mute stdout in process but keep interceptors enabled.
    *
    * @param {boolean} [state=true] - Indicates the mute state.
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -172,7 +172,7 @@ class Interceptor {
   /**
    * Unmute stdout in process.
    *
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -183,7 +183,7 @@ class Interceptor {
    * Allow interceptors to edit output content.
    *
    * @param {boolean} [state] - Indicates the editable state.
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -194,7 +194,7 @@ class Interceptor {
   /**
    * Deny interceptors to edit output content.
    *
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -206,7 +206,7 @@ class Interceptor {
    * Keep styles in content when passing it to interceptors.
    *
    * @param {boolean} [state] - Indicates if the style should be kept.
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -217,7 +217,7 @@ class Interceptor {
   /**
    * Remove styles in content when passing it to interceptor.
    *
-   * @returns {Interceptor} - The Interceptor service instance.
+   * @returns {console.services.Interceptor} The Interceptor service instance.
    */
 
 
@@ -246,7 +246,7 @@ class Interceptor {
   /**
    * Capture interceptor instance.
    *
-   * @type {CaptureInterceptor}
+   * @type {console.interceptors.CaptureInterceptor}
    */
 
 

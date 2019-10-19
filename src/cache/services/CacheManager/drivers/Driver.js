@@ -7,7 +7,7 @@ import NotImplementedError from '../../../../foundation/exceptions/NotImplemente
 
 /* istanbul ignore next */
 /**
- * Abstract cache driver class that describe abstract methods to be implemented for a cache manager driver.
+ * Abstract cache driver class that defined all the abstract methods to be implemented for a cache manager driver.
  *
  * @memberof cache.services.CacheManager.drivers
  * @augments support.mixins.HasEngine
@@ -29,7 +29,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} key - The cache key.
 	 * @param {*} [defaultValue] - The default value.
-	 * @returns {Promise<*>} - The cached value.
+	 * @returns {Promise<*>} The cached value.
 	 * @abstract
 	 */
 	get(key, defaultValue) { // eslint-disable-line no-unused-vars
@@ -42,7 +42,7 @@ class Driver extends hasEngine() {
 	 * @param {string} key - The cache key.
 	 * @param {*} value - The value to cache.
 	 * @param {number} [seconds] - The cache expiration delay, in seconds.
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 * @async
 	 * @abstract
 	 */
@@ -55,7 +55,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} key - The cache key.
 	 * @param {*} value - The value to cache.
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 * @async
 	 * @abstract
 	 */
@@ -68,7 +68,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} key - The cache key.
 	 * @param {number} [increment=1] - The increment value to add to the cached entry.
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 * @async
 	 * @abstract
 	 */
@@ -81,7 +81,7 @@ class Driver extends hasEngine() {
 	 *
 	 * @param {string} key - The cache key.
 	 * @param {number} [decrement] - The decrement value to substract from the cached entry.
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 * @async
 	 * @abstract
 	 */
@@ -93,7 +93,7 @@ class Driver extends hasEngine() {
 	 * Delete an item in the cache by key.
 	 *
 	 * @param {string} key - The cache key.
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 * @async
 	 * @abstract
 	 */
@@ -104,7 +104,7 @@ class Driver extends hasEngine() {
 	/**
 	 * Delete all items the cache.
 	 *
-	 * @returns {Promise<void>} - The async call promise.
+	 * @returns {Promise} The async process promise.
 	 * @async
 	 * @abstract
 	 */
@@ -115,7 +115,7 @@ class Driver extends hasEngine() {
 	/**
 	 * Get current time in seconds.
 	 *
-	 * @returns {number} - The current unix timestamp.
+	 * @returns {number} The current unix timestamp.
 	 */
 	now() {
 		return this.dateHelper().unix();
@@ -133,7 +133,7 @@ class Driver extends hasEngine() {
 	/**
 	 * Date helper.
 	 *
-	 * @type {DateHelper}
+	 * @type {support.helpers.DateHelper}
 	 */
 	get dateHelper() {
 		return this.helperDate;

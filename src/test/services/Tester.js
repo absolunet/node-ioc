@@ -98,7 +98,7 @@ class Tester extends hasEngine() {
 	 * Set test runner instance.
 	 * It allows the tester to keep a singleton even if the application is flushed after every test.
 	 *
-	 * @param {TestRunner} runner - Test runner instance.
+	 * @param {test.services.TestRunner} runner - Test runner instance.
 	 */
 	setRunner(runner) {
 		__(this).set('test.runner', runner);
@@ -109,7 +109,7 @@ class Tester extends hasEngine() {
 	 * It allows the tester to keep a singleton of the kernel constructor even if
 	 * the application and the cache are flushed after every test.
 	 *
-	 * @param {Kernel} kernel - The kernel instance.
+	 * @param {foundation.Kernel} kernel - The kernel instance.
 	 */
 	setKernel(kernel) {
 		__(this).set('kernel', kernel.constructor);
@@ -118,7 +118,7 @@ class Tester extends hasEngine() {
 	/**
 	 * Test runner accessor.
 	 *
-	 * @type {TestRunner}
+	 * @type {test.services.TestRunner}
 	 */
 	get runner() {
 		const name = 'test.runner';
@@ -136,7 +136,7 @@ class Tester extends hasEngine() {
 	/**
 	 * Current kernel accessor.
 	 *
-	 * @type {Kernel}
+	 * @type {foundation.Kernel}
 	 */
 	get kernel() {
 		return __(this).get('kernel');

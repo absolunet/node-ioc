@@ -1,16 +1,16 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Commands - Test Command - GWT
 //--------------------------------------------------------
-'use strict';
 
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-process-env */
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container      = require('../../container');
-const TestCommand    = require('../../../../dist/node/test/commands/TestCommand');
-const CommandRunner  = require('../../../../dist/node/console/services/CommandRunner');
+import container      from '../../container';
+import TestCommand    from '../../../../dist/node/test/commands/TestCommand';
+import CommandRunner  from '../../../../dist/node/console/services/CommandRunner';
 
 const originalProcessArgv = process.argv;
 const originalProcessEnv  = process.env;
@@ -185,7 +185,7 @@ then.shouldRunIntegrationTests = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });
 
 /* eslint-enable unicorn/prevent-abbreviations */
 /* eslint-enable no-process-env */

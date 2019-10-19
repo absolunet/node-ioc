@@ -98,7 +98,7 @@ class FileDriver extends _Driver.default {
   /**
    * Ensure that the translations are loaded from configured path.
    *
-   * @returns {FileDriver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.FileDriver} The current driver instance.
    */
 
 
@@ -121,7 +121,7 @@ class FileDriver extends _Driver.default {
    *
    * @param {string} key - The translation key.
    * @param {string} locale - The locale.
-   * @returns {string} - The translated value.
+   * @returns {string} The translated value.
    */
 
 
@@ -147,7 +147,7 @@ class FileDriver extends _Driver.default {
    * Add multiple translations.
    *
    * @param {object<string, string|object>} translations - The translation collection.
-   * @returns {FileDriver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.FileDriver} The current driver instance.
    */
 
 
@@ -162,7 +162,7 @@ class FileDriver extends _Driver.default {
    * @param {string|Array<string>} string - The value.
    * @param {object<string, string>} [replacements] - The token replacement dictionary.
    * @param {number} [count] - The count for pluralization.
-   * @returns {string} - The parsed string.
+   * @returns {string} The parsed string.
    */
 
 
@@ -171,8 +171,7 @@ class FileDriver extends _Driver.default {
     const [noneValue] = values;
     const singleValue = values[values.length === 3 ? 1 : 0];
     const pluralValue = values[values.length - 1];
-    const value = count === 0 ? noneValue : count === 1 ? singleValue : pluralValue; // eslint-disable-line unicorn/no-nested-ternary
-
+    const value = count === 0 ? noneValue : count === 1 ? singleValue : pluralValue;
     return Object.keys(replacements).reduce((parsed, token) => {
       return parsed.replace(new RegExp(this.buildReplacementPattern(token), 'gu'), replacements[token]);
     }, value);
@@ -181,7 +180,7 @@ class FileDriver extends _Driver.default {
    * Build the replacement pattern from a given token name.
    *
    * @param {string} token - The token to replace.
-   * @returns {string} - The token pattern.
+   * @returns {string} The token pattern.
    */
 
 

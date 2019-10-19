@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Application
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Application.gwt');
+import gwt from './Application.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -250,6 +250,7 @@ test('Can get distribution path', () => {
 	'routes',
 	'storage',
 	'test',
+	'upload',
 	'view'
 ]
 	.forEach((type) => {

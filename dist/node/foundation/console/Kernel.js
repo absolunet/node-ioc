@@ -63,7 +63,7 @@ class Kernel extends _Kernel.default {
    * Call the given command and process it through the command registrar.
    *
    * @param {string} command - The current command.
-   * @returns {Promise<void>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -104,7 +104,7 @@ class Kernel extends _Kernel.default {
   /**
    * CommandRegistrar accessor.
    *
-   * @type {CommandRegistrar}
+   * @type {console.services.CommandRegistrar}
    */
 
 
@@ -114,7 +114,7 @@ class Kernel extends _Kernel.default {
   /**
    * Terminal accessor.
    *
-   * @type {Terminal}
+   * @type {console.services.Terminal}
    */
 
 

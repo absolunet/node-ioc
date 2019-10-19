@@ -19,8 +19,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //--------------------------------------------------------
 
 /**
- * Logger service that exposes logging methods representing levels.
- * It forwards the logging to the configured driver.
+ * Logger service that exposes log methods representing levels.
+ * It forwards the log to the configured driver.
  *
  * @memberof log.services
  * @augments support.mixins.HasDriver
@@ -53,7 +53,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -65,7 +65,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -77,7 +77,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -89,7 +89,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -101,7 +101,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -113,7 +113,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -125,7 +125,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -137,7 +137,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -150,7 +150,7 @@ class Logger extends (0, _hasDriver.default)() {
    * @param {number} level - The log level.
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -165,7 +165,7 @@ class Logger extends (0, _hasDriver.default)() {
    * @param {number} level - The log level.
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -187,16 +187,16 @@ class Logger extends (0, _hasDriver.default)() {
    * @param {number} level - The log level.
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
-   * @throws TypeError - Indicates that the logging channel was not found.
+   * @returns {Promise} The async process promise.
+   * @throws {TypeError} Indicates that the log channel was not found.
    */
 
 
   async unsafeLogWithChannel(channel, level, message, context) {
-    const config = this.config.get(`logging.channels.${channel}`);
+    const config = this.config.get(`log.channels.${channel}`);
 
     if (!config) {
-      throw new TypeError(`Cannot find logging channel [${channel}]`);
+      throw new TypeError(`Cannot find log channel [${channel}]`);
     }
 
     if (!this.isLevelUnderThreshold(level, config.level)) {
@@ -211,12 +211,12 @@ class Logger extends (0, _hasDriver.default)() {
    * @param {number} level - The log level.
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
   async logWithDefaultChannel(level, message, context) {
-    await this.logWithChannel(this.config.get('logging.default'), level, message, context);
+    await this.logWithChannel(this.config.get('log.default'), level, message, context);
   }
   /**
    * Log with fallback channel.
@@ -224,7 +224,7 @@ class Logger extends (0, _hasDriver.default)() {
    * @param {number} level - The log level.
    * @param {string} message - The message.
    * @param {*} [context] - The context.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -236,7 +236,7 @@ class Logger extends (0, _hasDriver.default)() {
    *
    * @param {string|number} level - The level to evaluate.
    * @param {string|number} [threshold] - The threshold.
-   * @returns {boolean} - Indicates that the given level is under the given threshold.
+   * @returns {boolean} Indicates that the given level is under the given threshold.
    */
 
 
@@ -247,7 +247,7 @@ class Logger extends (0, _hasDriver.default)() {
    * Get parsed level value from either the number value or the verbose string.
    *
    * @param {string|number} level - The level.
-   * @returns {number} - The level value as integer.
+   * @returns {number} The level value as integer.
    */
 
 
@@ -267,7 +267,7 @@ class Logger extends (0, _hasDriver.default)() {
   /**
    * Log level enum.
    *
-   * @type {Level}
+   * @type {log.enums.Level}
    */
 
 

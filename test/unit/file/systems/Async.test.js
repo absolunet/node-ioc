@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Systems - Async
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Async.gwt');
+import gwt from './Async.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

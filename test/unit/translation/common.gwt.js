@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Translation - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container                  = require('../container');
-const TranslationServiceProvider = require('../../../dist/node/translation/TranslationServiceProvider');
+import container                  from '../container';
+import TranslationServiceProvider from '../../../dist/node/translation/TranslationServiceProvider';
 
 
 //-- Given
@@ -44,4 +44,4 @@ then.shouldHaveSingleton = (service) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

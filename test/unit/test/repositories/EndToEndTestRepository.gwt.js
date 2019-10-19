@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Repositories - End-To-End Test Repository - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const EndToEndTestRepository = require('../../../../dist/node/test/repositories/EndToEndTestRepository');
+import EndToEndTestRepository from '../../../../dist/node/test/repositories/EndToEndTestRepository';
 
 
 //-- Given
@@ -16,4 +16,4 @@ given.endToEndTestRepository = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

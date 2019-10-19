@@ -73,9 +73,9 @@ class Model {
 	/**
 	 * Model constructor.
 	 *
-	 * @param {Application} app - The current application instance.
+	 * @param {foundation.Application} app - The current application instance.
 	 * @param {*} engine - The engine that exposes the base model.
-	 * @returns {Function} - An engine model factory, wrapped by a proxy.
+	 * @returns {Function} An engine model factory, wrapped by a proxy.
 	 */
 	constructor(app, engine) {
 		const { Model: model } = engine;
@@ -99,7 +99,7 @@ class Model {
 	/**
 	 * Get default values.
 	 *
-	 * @returns {object} - The default values.
+	 * @returns {object} The default values.
 	 */
 	getDefaults() {
 		return this.defaults;
@@ -108,7 +108,7 @@ class Model {
 	/**
 	 * Get if the model has timestamp columns.
 	 *
-	 * @returns {boolean} - Indicates that the model uses timestamps.
+	 * @returns {boolean} Indicates that the model uses timestamps.
 	 */
 	getHasTimestamps() {
 		return this.timestamps;
@@ -117,7 +117,7 @@ class Model {
 	/**
 	 * Get primary key column name.
 	 *
-	 * @returns {string} - The primary column name.
+	 * @returns {string} The primary column name.
 	 */
 	getIdAttribute() {
 		return this.key;
@@ -126,7 +126,7 @@ class Model {
 	/**
 	 * Get primary key column type.
 	 *
-	 * @returns {string} - The primary column type.
+	 * @returns {string} The primary column type.
 	 */
 	getIdType() {
 		return this.keyType;
@@ -135,7 +135,7 @@ class Model {
 	/**
 	 * Get a list of all processors.
 	 *
-	 * @returns {object<string, Function>} - The processors list for each columns.
+	 * @returns {object<string, Function>} The processors list for each columns.
 	 */
 	getProcessors() {
 		const date = this.app.make('helper.date');
@@ -157,7 +157,7 @@ class Model {
 	/**
 	 * Get table name.
 	 *
-	 * @returns {string} - The table name.
+	 * @returns {string} The table name.
 	 */
 	getTableName() {
 		return this.table;
@@ -174,7 +174,7 @@ class Model {
 	 * Create a new record in the database.
 	 *
 	 * @param {object} attributes - The attributes to create the model with.
-	 * @returns {Promise<Model>} - The newly created model instance.
+	 * @returns {Promise<database.Model>} The newly created model instance.
 	 */
 	async create(attributes) {
 		await this.getForward().forge(attributes).save();
@@ -208,7 +208,7 @@ class Model {
 	/**
 	 * Application accessor.
 	 *
-	 * @type {Application}
+	 * @type {foundation.Application}
 	 */
 	get app() {
 		return __(this).get('app');

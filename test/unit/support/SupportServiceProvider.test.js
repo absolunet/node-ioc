@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Support Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./SupportServiceProvider.gwt');
+import gwt from './SupportServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

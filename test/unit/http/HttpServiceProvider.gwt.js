@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - HTTP Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container          = require('../container');
-const RedirectController = require('../../../dist/node/http/controllers/RedirectController');
-const StaticController   = require('../../../dist/node/http/controllers/StaticController');
+import container          from '../container';
+import RedirectController from '../../../dist/node/http/controllers/RedirectController';
+import StaticController   from '../../../dist/node/http/controllers/StaticController';
 
 
 //-- Mocks
@@ -99,4 +99,4 @@ then.staticControllerShouldBeRegistered = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

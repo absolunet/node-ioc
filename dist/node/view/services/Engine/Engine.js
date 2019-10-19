@@ -46,7 +46,7 @@ class Engine extends (0, _hasDriver.default)() {
    * Make a template instance by name.
    *
    * @param {string} view - The view name.
-   * @returns {template} - The template instance.
+   * @returns {template} The template instance.
    */
 
 
@@ -58,7 +58,7 @@ class Engine extends (0, _hasDriver.default)() {
    *
    * @param {string} view - The view name.
    * @param {*} [data] - The view-model data.
-   * @returns {string} - The rendered template.
+   * @returns {string} The rendered template.
    */
 
 

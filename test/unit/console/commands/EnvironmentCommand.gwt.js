@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Commands - Environment Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container          = require('../../container');
-const EnvironmentCommand = require('../../../../dist/node/console/commands/EnvironmentCommand');
+import container          from '../../container';
+import EnvironmentCommand from '../../../../dist/node/console/commands/EnvironmentCommand';
 
 
 //-- Given
@@ -29,4 +29,4 @@ then.shouldHaveReceivedFakeEnvironment = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

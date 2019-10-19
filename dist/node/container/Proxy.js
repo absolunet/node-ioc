@@ -43,9 +43,9 @@ class ContainerProxy extends _BaseProxy.default {
   /**
    * Container property check handler.
    *
-   * @param {Container} object - The current container.
+   * @param {container.Container} object - The current container.
    * @param {string} property - The property name.
-   * @returns {boolean} - Indicates that the property exists in the container or that the binding exists.
+   * @returns {boolean} Indicates that the property exists in the container or that the binding exists.
    */
 
 

@@ -53,7 +53,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
      *
      * @param {string} [name="default"] - The driver name.
      * @param {object} [parameters={}] - The additional parameters to inject into the driver instance.
-     * @returns {Driver} - The resolved driver instance.
+     * @returns {object} The resolved driver instance.
      * @memberof support.mixins.HasDriver
      * @instance
      */
@@ -87,7 +87,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
      *
      * @param {*} driver - The driver instance.
      * @param {string} name - The driver name.
-     * @returns {*} - The driver instance.
+     * @returns {*} The driver instance.
      * @memberof support.mixins.HasDriver
      * @instance
      */
@@ -101,7 +101,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
      * Add a driver and bind it with the given name.
      *
      * @param {string} name - The driver name.
-     * @param {Driver} driver - The driver class or factory.
+     * @param {Function} driver - The driver class or factory.
      * @memberof support.mixins.HasDriver
      * @instance
      */
@@ -146,7 +146,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
      * Check if driver exists.
      *
      * @param  {string} name - The driver name.
-     * @returns {boolean} - Indicates that the driver exists.
+     * @returns {boolean} Indicates that the driver exists.
      * @memberof support.mixins.HasDriver
      * @instance
      */
@@ -159,7 +159,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
      * Check if given driver name is an alias.
      *
      * @param {string} name - The driver alias name.
-     * @returns {boolean} - Indicates that the alias exists.
+     * @returns {boolean} Indicates that the alias exists.
      * @memberof support.mixins.HasDriver
      * @instance
      */

@@ -19,8 +19,8 @@ class Migration {
 	/**
 	 * Call up method on instance.
 	 *
-	 * @param {Knex} connection - The current database connection.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
 	 */
 	static async up(connection) {
 		await this.getInstance().up(connection);
@@ -29,8 +29,8 @@ class Migration {
 	/**
 	 * Call down method on instance.
 	 *
-	 * @param {Knex} connection - The current database connection.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
 	 */
 	static async down(connection) {
 		await this.getInstance().down(connection);
@@ -39,7 +39,7 @@ class Migration {
 	/**
 	 * Get migration instance as a singleton.
 	 *
-	 * @returns {Migration} - Migration singleton instance.
+	 * @returns {database.Migration} Migration singleton instance.
 	 */
 	static getInstance() {
 		let instance = __(this).get('instance');
@@ -55,8 +55,8 @@ class Migration {
 	/**
 	 * Set the current migration instance.
 	 *
-	 * @param {Migration} instance - Migration instance.
-	 * @throws TypeError - Indicates that the default instance was not a migration instance.
+	 * @param {database.Migration} instance - Migration instance.
+	 * @throws {TypeError} Indicates that the default instance was not a migration instance.
 	 */
 	static setDefaultInstance(instance) {
 		if (!(instance instanceof this)) {
@@ -69,8 +69,8 @@ class Migration {
 	/**
 	 * Run the migrations.
 	 *
-	 * @param {Knex} connection - The current database connection.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
 	 * @abstract
 	 */
 	up(connection) { // eslint-disable-line no-unused-vars
@@ -80,8 +80,8 @@ class Migration {
 	/**
 	 * Reverse the migrations.
 	 *
-	 * @param {Knex} connection - The current database connection.
-	 * @returns {Promise<void>} - The async process promise.
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
 	 * @abstract
 	 */
 	down(connection) { // eslint-disable-line no-unused-vars

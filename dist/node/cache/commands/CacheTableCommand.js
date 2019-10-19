@@ -115,7 +115,7 @@ class CacheTableCommand extends _GeneratorCommand.default {
   /**
    * Check if migration already exists in configured directory.
    *
-   * @returns {boolean} - The flag indicating if migration exists.
+   * @returns {boolean} The flag indicating if migration exists.
    */
 
 
@@ -132,7 +132,7 @@ class CacheTableCommand extends _GeneratorCommand.default {
   /**
    * Get the cache table name, "cache" by default.
    *
-   * @returns {string} - The cache table name.
+   * @returns {string} The cache table name.
    */
 
 
@@ -142,7 +142,7 @@ class CacheTableCommand extends _GeneratorCommand.default {
   /**
    * Get the migration class name.
    *
-   * @returns {string} - The migration class name.
+   * @returns {string} The migration class name.
    */
 
 

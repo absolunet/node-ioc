@@ -4,6 +4,12 @@ exports.default = void 0;
 
 var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
 
+var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
+
+var _OuchDriver = _interopRequireDefault(require("./drivers/OuchDriver"));
+
+var _PrettyErrorDriver = _interopRequireDefault(require("./drivers/PrettyErrorDriver"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -14,16 +20,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Main exception handler.
  *
  * @memberof foundation.exceptions
+ * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-class Handler {
+class Handler extends (0, _hasDriver.default)() {
   /**
    * Class dependencies: <code>['app']</code>.
    *
    * @type {Array<string>}
    */
   static get dependencies() {
-    return ['app'];
+    return (super.dependencies || []).concat(['app']);
   }
   /**
    * @inheritdoc
@@ -32,7 +39,12 @@ class Handler {
 
 
   init() {
+    super.init();
     (0, _privateRegistry.default)(this).set('exceptions', []);
+    this.addDriver('prettyError', _PrettyErrorDriver.default);
+    this.addDriver('ouch', _OuchDriver.default);
+    this.setDriverAlias('prettyError', 'console');
+    this.setDriverAlias('ouch', 'http');
   }
   /**
    * Handle the given exception.
@@ -40,20 +52,20 @@ class Handler {
    * @param {Error|string} exception - The handled exception.
    * @param {request} [request] - The current HTTP request.
    * @param {response} [response] - The current HTTP response.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
   async handle(exception, request, response) {
     (0, _privateRegistry.default)(this).get('exceptions').push(exception);
     await this.report(exception);
-    this.render(exception, request, response);
+    await this.render(exception, request, response);
   }
   /**
    * Report an exception.
    *
    * @param {Error|string} exception - The exception to report.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -62,7 +74,7 @@ class Handler {
       try {
         await this.app.make('log').error(exception.stack);
       } catch (error) {
-        this.handleReportException(error);
+        await this.handleReportException(error);
       }
     }
   }
@@ -72,14 +84,15 @@ class Handler {
    * @param {Error|string} exception - The handled exception.
    * @param {request} [request] - The current HTTP request.
    * @param {response} [response] - The current HTTP response.
+   * @returns {Promise} The async process promise.
    */
 
 
-  render(exception, request, response) {
-    if (response && response.send && response.json && response.status) {
-      this.renderResponse(exception, request, response);
+  async render(exception, request, response) {
+    if (response && response.write && response.json && response.status) {
+      await this.renderResponse(exception, request, response);
     } else {
-      this.renderConsole(exception);
+      await this.renderConsole(exception);
     }
   }
   /**
@@ -88,91 +101,64 @@ class Handler {
    * @param {Error|string} exception - The handled exception.
    * @param {request} [request] - The current HTTP request.
    * @param {response} [response] - The current HTTP response.
+   * @returns {Promise} The async process promise.
    */
 
 
-  renderResponse(exception, request, response) {
-    if (exception instanceof TypeError && exception.message === 'Timeout') {
-      response.status(408);
-    } else {
-      response.status(500);
-    }
+  async renderResponse(exception, request, response) {
+    const status = exception.status || 500;
+    response.status(status);
 
-    if (/application\/json/u.test(request.get('accept'))) {
-      response.json(exception);
+    if (this.app.environment !== 'production') {
+      await this.driver('http').render(exception, request, response);
     } else {
-      response.send(this.formatResponseContent(exception));
+      let content = 'Something went wrong...';
+
+      if (this.app.isBound('translator')) {
+        content = this.app.make('translator').translate(content);
+      }
+
+      if (this.app.isBound('view') && this.app.isBound('view.resolver')) {
+        const viewFactory = this.app.make('view');
+        const viewResolver = this.app.make('view.resolver');
+        let viewName = `errors.${status}`;
+
+        if (!viewResolver.exists(viewName)) {
+          viewName = 'errors.generic';
+        }
+
+        if (viewResolver.exists(viewName)) {
+          content = viewFactory.make(viewName, {
+            exception
+          });
+        }
+      }
+
+      response.write(content);
     }
   }
   /**
    * Render exception in console.
    *
    * @param {Error|string} exception - The handled exception.
+   * @returns {Promise} The async process promise.
    */
 
 
-  renderConsole(exception) {
-    this.terminal.error(this.formatConsoleContent(exception));
+  async renderConsole(exception) {
+    await this.driver('console').render(exception);
   }
   /**
    * Handle a report exception.
    *
-   * @param {Error|string} exception - The report exception.
+   * @param {Error|string} exception - The reported exception.
+   * @returns {Promise} The async process promise.
    */
 
 
-  handleReportException(exception) {
+  async handleReportException(exception) {
     (0, _privateRegistry.default)(this).get('exceptions').push(exception);
-    this.terminal.warning(this.formatConsoleContent(exception));
-  }
-  /**
-   * Format HTTP response exception message.
-   *
-   * @param {Error|string} exception - The handled exception.
-   * @returns {string} - The formatted exception.
-   */
-
-
-  formatResponseContent(exception) {
-    let message = (exception || '').toString();
-
-    if (exception instanceof Error) {
-      message = `${exception.message}\n\n${exception.stack}`;
-    }
-
-    return `<pre>${message}</pre>`;
-  }
-  /**
-   * Format a console exception message.
-   *
-   * @param {Error|string} exception - The handled exception.
-   * @returns {string} - The formatted exception.
-   */
-
-
-  formatConsoleContent(exception) {
-    return exception.stack || exception;
-  }
-  /**
-   * Terminal instance.
-   * If not bound into the container, make a rudimentary one.
-   *
-   * @type {{warning: Function, error: Function}}
-   */
-
-
-  get terminal() {
-    if (this.app.isBound('terminal')) {
-      return this.app.make('terminal');
-    }
-    /* eslint-disable no-console */
-
-
-    return {
-      error: console.error.bind(console),
-      warning: console.warn.bind(console)
-    };
-    /* eslint-enable no-console */
+    await this.driver('console').render(exception);
   }
   /**
    * Check if it has already handle an exception during the given request.

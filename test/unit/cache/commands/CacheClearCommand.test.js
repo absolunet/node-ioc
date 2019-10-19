@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Commands - Cache Clear Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CacheClearCommand.gwt');
+import gwt from './CacheClearCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

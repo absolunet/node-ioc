@@ -1,10 +1,10 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - Null Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./NullDriver.gwt');
-const common                = require('./common');
+import gwt from './NullDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 describe('JavaScript driver', () => {

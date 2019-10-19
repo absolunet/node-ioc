@@ -33,7 +33,7 @@ class Resolver {
   /**
    * Get configured paths for the database files.
    *
-   * @returns {{factories: string, models: string, migrations: string, seeds: string}} - The paths for every database folders.
+   * @returns {{factories: string, models: string, migrations: string, seeds: string}} The paths for every database folders.
    */
 
 
@@ -50,7 +50,7 @@ class Resolver {
    * Get specific database files path.
    *
    * @param {string} name - The database folder name.
-   * @returns {string} - The requested database folder path.
+   * @returns {string} The requested database folder path.
    */
 
 
@@ -60,7 +60,7 @@ class Resolver {
   /**
    * Get configured source paths for the database files.
    *
-   * @returns {{factories: string, models: string, migrations: string, seeds: string}} - The paths for every database folders.
+   * @returns {{factories: string, models: string, migrations: string, seeds: string}} The paths for every database folders.
    */
 
 
@@ -77,7 +77,7 @@ class Resolver {
    * Get specific database files source path.
    *
    * @param {string} name - The database folder name.
-   * @returns {string} - The requested database source folder path.
+   * @returns {string} The requested database source folder path.
    */
 
 
@@ -111,7 +111,7 @@ class Resolver {
   /**
    * String helper.
    *
-   * @type {StringHelper}
+   * @type {support.helpers.StringHelper}
    */
 
 

@@ -98,7 +98,7 @@ class ListCommand extends _Command.default {
   /**
    * Get Command groups.
    *
-   * @returns {object<string, Array<Command>>} - The commands, grouped by name.
+   * @returns {object<string, Array<Command>>} The commands, grouped by name.
    */
 
 
@@ -126,8 +126,8 @@ class ListCommand extends _Command.default {
   /**
    * Get command description.
    *
-   * @param {Command} command - The command instance.
-   * @returns {string} - The command instance description.
+   * @param {console.Command} command - The command instance.
+   * @returns {string} The command instance description.
    */
 
 

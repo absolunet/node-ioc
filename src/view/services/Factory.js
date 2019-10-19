@@ -25,7 +25,7 @@ class Factory {
 	 *
 	 * @param {string} view - The view name.
 	 * @param {*} data - The view-model data.
-	 * @returns {string} - The rendered view template.
+	 * @returns {string} The rendered view template.
 	 */
 	make(view, data = {}) {
 		return this.viewEngine.render(this.viewResolver.find(view), data);

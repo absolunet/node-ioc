@@ -88,7 +88,7 @@ class FileDriver extends Driver {
 	/**
 	 * Ensure that the translations are loaded from configured path.
 	 *
-	 * @returns {FileDriver} - The current driver instance.
+	 * @returns {translation.services.Translator.drivers.FileDriver} The current driver instance.
 	 */
 	ensureTranslationsAreLoaded() {
 		if (!__(this).get('loaded')) {
@@ -108,7 +108,7 @@ class FileDriver extends Driver {
 	 *
 	 * @param {string} key - The translation key.
 	 * @param {string} locale - The locale.
-	 * @returns {string} - The translated value.
+	 * @returns {string} The translated value.
 	 */
 	getTranslationForLocale(key, locale) {
 		const translations       = __(this).get('translations');
@@ -131,7 +131,7 @@ class FileDriver extends Driver {
 	 * Add multiple translations.
 	 *
 	 * @param {object<string, string|object>} translations - The translation collection.
-	 * @returns {FileDriver} - The current driver instance.
+	 * @returns {translation.services.Translator.drivers.FileDriver} The current driver instance.
 	 */
 	addTranslations(translations) {
 		__(this).set('translations', deepMerge(__(this).get('translations'), translations));
@@ -146,7 +146,7 @@ class FileDriver extends Driver {
 	 * @param {string|Array<string>} string - The value.
 	 * @param {object<string, string>} [replacements] - The token replacement dictionary.
 	 * @param {number} [count] - The count for pluralization.
-	 * @returns {string} - The parsed string.
+	 * @returns {string} The parsed string.
 	 */
 	parse(string, replacements = {}, count = 1) {
 		const values = Array.isArray(string) ? string : [string];
@@ -155,7 +155,7 @@ class FileDriver extends Driver {
 		const singleValue = values[values.length === 3 ? 1 : 0];
 		const pluralValue = values[values.length - 1];
 
-		const value = count === 0 ? noneValue : count === 1 ? singleValue : pluralValue; // eslint-disable-line unicorn/no-nested-ternary
+		const value = count === 0 ? noneValue : count === 1 ? singleValue : pluralValue;
 
 		return Object.keys(replacements).reduce((parsed, token) => {
 			return parsed.replace(new RegExp(this.buildReplacementPattern(token), 'gu'), replacements[token]);
@@ -166,7 +166,7 @@ class FileDriver extends Driver {
 	 * Build the replacement pattern from a given token name.
 	 *
 	 * @param {string} token - The token to replace.
-	 * @returns {string} - The token pattern.
+	 * @returns {string} The token pattern.
 	 */
 	buildReplacementPattern(token) {
 		return `\\{\\{${token}\\}\\}`;

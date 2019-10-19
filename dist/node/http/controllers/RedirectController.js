@@ -22,7 +22,7 @@ class RedirectController extends _Controller.default {
    * Handle redirection.
    *
    * @param {{to: string, permanent: boolean}} defaults - The default values.
-   * @returns {response} - The current response instance.
+   * @returns {*} The response.
    */
   handle({
     to,

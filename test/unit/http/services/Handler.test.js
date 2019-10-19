@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Services - Handler
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Handler.gwt');
+import gwt from './Handler.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -35,7 +35,6 @@ test('Can handle exception with broken route action as closure', async () => {
 	await when.handlingRequest();
 	then.brokenClosureShouldHaveBeenCalled();
 	then.exceptionShouldHaveBeenHandled();
-	then.shouldHaveReceivedResponse(500);
 });
 
 test('Can handle exception with broken route action as controller action', async () => {
@@ -43,7 +42,6 @@ test('Can handle exception with broken route action as controller action', async
 	await when.handlingRequest();
 	then.brokenControllerActionShouldHaveBeenCalled();
 	then.exceptionShouldHaveBeenHandled();
-	then.shouldHaveReceivedResponse(500);
 });
 
 test('Exception is handled if request times out within closure', async () => {
@@ -52,7 +50,6 @@ test('Exception is handled if request times out within closure', async () => {
 	await when.handlingRequest();
 	then.longClosureActionShouldHaveBeenCalled();
 	then.exceptionShouldHaveBeenHandled();
-	then.shouldHaveReceivedResponse(408);
 });
 
 test('Exception is handled if request times out within controller action', async () => {
@@ -61,7 +58,6 @@ test('Exception is handled if request times out within controller action', async
 	await when.handlingRequest();
 	then.longControllerActionShouldHaveBeenCalled();
 	then.exceptionShouldHaveBeenHandled();
-	then.shouldHaveReceivedResponse(408);
 });
 
 test('Exception is handled if unexisting controller action is given', async () => {

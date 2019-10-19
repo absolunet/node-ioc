@@ -37,7 +37,7 @@ class SecurityServiceProvider extends ServiceProvider {
 	/**
 	 * Define basic policy rules.
 	 *
-	 * @param {Gate} gate - The gate service instance.
+	 * @param {security.services.Gate} gate - The gate service instance.
 	 */
 	defineBasicPolicies(gate) {
 		gate.policy('public', () => {

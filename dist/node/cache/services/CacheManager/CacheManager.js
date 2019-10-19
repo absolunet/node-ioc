@@ -41,7 +41,7 @@ class CacheManager extends (0, _forwardCalls.default)((0, _hasDriver.default)())
    * CacheManager constructor.
    *
    * @param {...*} parameters - The injected parameters.
-   * @returns {CacheManager} - The cache manager surrounded by a proxy.
+   * @returns {cache.services.CacheManager} The cache manager surrounded by a proxy.
    */
 
 
@@ -65,8 +65,8 @@ class CacheManager extends (0, _forwardCalls.default)((0, _hasDriver.default)())
    * Resolve cache store by name.
    *
    * @param {string} [store] - The store name.
-   * @returns {Driver} - The Driver instance.
-   * @throws TypeError - Indicates that the driver could not be resolved.
+   * @returns {cache.services.CacheManager.drivers.Driver} The Driver instance.
+   * @throws {TypeError} Indicates that the driver could not be resolved.
    */
 
 
@@ -92,7 +92,7 @@ class CacheManager extends (0, _forwardCalls.default)((0, _hasDriver.default)())
   /**
    * Resolve default store.
    *
-   * @returns {Driver} - The default driver instance.
+   * @returns {cache.services.CacheManager.drivers.Driver} The default driver instance.
    */
 
 
@@ -104,7 +104,7 @@ class CacheManager extends (0, _forwardCalls.default)((0, _hasDriver.default)())
    *
    * @param {string} driver - The driver name.
    * @param {object<string, *>} [config={}] - The driver configuration.
-   * @returns {Driver} - The driver instance.
+   * @returns {cache.services.CacheManager.drivers.Driver} The driver instance.
    */
 
 

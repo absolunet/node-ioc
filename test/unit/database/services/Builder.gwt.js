@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Builder - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const __        = require('@absolunet/private-registry');
-const container = require('../../container');
-const Builder   = require('../../../../dist/node/database/services/Builder');
+import __        from '@absolunet/private-registry';
+import container from '../../container';
+import Builder   from '../../../../dist/node/database/services/Builder';
 
 let builder;
 let result;
@@ -156,4 +156,4 @@ then.shouldHaveReceivedFakeDriver = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

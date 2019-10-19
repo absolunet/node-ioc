@@ -34,7 +34,7 @@ class StringHelper extends (0, _forwardCalls.default)() {
    *
    * @param {string} [string] - The word to pluralize.
    * @param {number} [quantity] - How many of the word exist.
-   * @returns {string} - The pluralized word.
+   * @returns {string} The pluralized word.
    */
 
 
@@ -45,7 +45,7 @@ class StringHelper extends (0, _forwardCalls.default)() {
    * Convert to singular version of the string.
    *
    * @param {string} string - The word to singularize.
-   * @returns {string} - The singularized word.
+   * @returns {string} The singularized word.
    */
 
 

@@ -86,7 +86,7 @@ class ServeCommand extends _Command.default {
   /**
    * Start Express server.
    *
-   * @returns {Promise} - The infinite process promise (will never be resolved until the process ends).
+   * @returns {Promise} The infinite process promise (will never be resolved until the process ends).
    */
 
 
@@ -100,7 +100,7 @@ class ServeCommand extends _Command.default {
   /**
    * Start daemon server with nodemon.
    *
-   * @returns {Promise} - The nodemon process promise.
+   * @returns {Promise} The nodemon process promise.
    */
 
 
@@ -127,7 +127,7 @@ class ServeCommand extends _Command.default {
   /**
    * Wait indefinitely.
    *
-   * @returns {Promise} - The infinite process promise (will never be resolved until the process ends).
+   * @returns {Promise} The infinite process promise (will never be resolved until the process ends).
    */
 
 

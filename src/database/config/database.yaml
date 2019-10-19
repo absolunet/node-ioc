@@ -11,7 +11,7 @@ connections:
 
   sqlite:
     driver: sqlite
-    database: '{{DB_FILE|@/database/database.sqlite}}'
+    database: '{{DB_FILE|@/storage/databases/database.sqlite}}'
 
 
 paths:

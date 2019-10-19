@@ -27,7 +27,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Create a template instance.
    *
    * @param {string} view - The view name.
-   * @returns {template} - The template instance.
+   * @returns {template} The template instance.
    * @abstract
    */
   make(view) {
@@ -39,7 +39,7 @@ class Driver extends (0, _hasEngine.default)() {
    *
    * @param {string} view - The view name.
    * @param {*} data - The view-model data.
-   * @returns {string} - The rendered template as string.
+   * @returns {string} The rendered template as string.
    * @abstract
    */
 

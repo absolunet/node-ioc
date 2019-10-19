@@ -65,7 +65,7 @@ class MakeSeederCommand extends GeneratorCommand {
 	/**
 	 * Get guessed model name based on the class name.
 	 *
-	 * @returns {string} - The model name.
+	 * @returns {string} The model name.
 	 */
 	getModelName() {
 		const regex = /^(?<model>[A-Z][A-Za-z]+)TableSeeder$/u;

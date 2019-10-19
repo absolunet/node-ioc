@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Terminal
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Terminal.gwt');
+import gwt from './Terminal.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

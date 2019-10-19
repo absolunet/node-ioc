@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container   = require('../../../container');
-const FileManager = require('../../../../../dist/node/file/services/FileManager');
+import container   from '../../../container';
+import FileManager from '../../../../../dist/node/file/services/FileManager';
 
 let fakeFiles;
 let result;
@@ -329,4 +329,4 @@ then.shouldHaveWrittenAsynchronouslyFileThroughJsonDriver = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

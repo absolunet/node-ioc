@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Translation - Translation Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./TranslationServiceProvider.gwt');
+import gwt from './TranslationServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

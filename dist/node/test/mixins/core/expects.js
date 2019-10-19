@@ -27,7 +27,7 @@ const expects = (0, _mixinFactory.default)(SuperClass => {
      * Make expect assertion.
      *
      * @param {...*} parameters - Call parameters.
-     * @returns {Matchers} - Test engine expect matcher instance.
+     * @returns {Matchers} Test engine expect matcher instance.
      * @memberof test.mixins.core.Expects
      * @instance
      */

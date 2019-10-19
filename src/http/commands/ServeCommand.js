@@ -83,7 +83,7 @@ class ServeCommand extends Command {
 	/**
 	 * Start Express server.
 	 *
-	 * @returns {Promise} - The infinite process promise (will never be resolved until the process ends).
+	 * @returns {Promise} The infinite process promise (will never be resolved until the process ends).
 	 */
 	startServer() {
 		const server = this.server.getInstance();
@@ -98,7 +98,7 @@ class ServeCommand extends Command {
 	/**
 	 * Start daemon server with nodemon.
 	 *
-	 * @returns {Promise} - The nodemon process promise.
+	 * @returns {Promise} The nodemon process promise.
 	 */
 	startDaemon() {
 		const commandParts = [
@@ -130,7 +130,7 @@ class ServeCommand extends Command {
 	/**
 	 * Wait indefinitely.
 	 *
-	 * @returns {Promise} - The infinite process promise (will never be resolved until the process ends).
+	 * @returns {Promise} The infinite process promise (will never be resolved until the process ends).
 	 */
 	wait() {
 		return new Promise(() => {}); // eslint-disable-line no-empty-function

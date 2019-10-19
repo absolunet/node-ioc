@@ -96,7 +96,7 @@ class MakeControllerCommand extends _GeneratorCommand.default {
   /**
    * Get controller type.
    *
-   * @returns {string} - The file type.
+   * @returns {string} The file type.
    */
 
 
@@ -118,7 +118,7 @@ class MakeControllerCommand extends _GeneratorCommand.default {
   /**
    * Path helper.
    *
-   * @type {PathHelper}
+   * @type {support.helpers.PathHelper}
    */
 
 

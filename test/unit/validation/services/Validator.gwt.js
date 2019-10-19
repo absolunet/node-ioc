@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Validation - Services - Validator - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const joi       = require('@hapi/joi');
-const container = require('../../container');
-const Validator = require('../../../../dist/node/validation/services/Validator');
+import joi       from '@hapi/joi';
+import container from '../../container';
+import Validator from '../../../../dist/node/validation/services/Validator';
 
 let validator;
 let result;
@@ -40,4 +40,4 @@ then.resultShouldAtLeastMatchJoiKeys = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

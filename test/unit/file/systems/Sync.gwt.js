@@ -1,14 +1,14 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Systems - Sync - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const fss           = require('@absolunet/fss');
-const replaceInFile = require('replace-in-file');
-const container     = require('../../container');
-const SyncSystem    = require('../../../../dist/node/file/systems/Sync');
+import fss           from '@absolunet/fss';
+import replaceInFile from 'replace-in-file';
+import container     from '../../container';
+import SyncSystem    from '../../../../dist/node/file/systems/Sync';
 
 let syncSystem;
 let file;
@@ -104,4 +104,4 @@ then.searchedPatternShouldContainFlagsAndDefaultOnes = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

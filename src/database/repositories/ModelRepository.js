@@ -24,8 +24,8 @@ class ModelRepository {
 	 * Register a model.
 	 *
 	 * @param {string} name - The model name.
-	 * @param {Model} Model - The model instance.
-	 * @returns {ModelRepository} - The current ModelRepository instance.
+	 * @param {database.Model} Model - The model instance.
+	 * @returns {database.repositories.ModelRepository} The current ModelRepository instance.
 	 */
 	set(name, Model) {
 		this.dbOrm.registerModel(name, Model);
@@ -37,8 +37,8 @@ class ModelRepository {
 	 * Get a model by name.
 	 *
 	 * @param {string} name - The model name.
-	 * @returns {Model} - The model instance.
-	 * @throws TypeError - Indicates that the model was not found.
+	 * @returns {database.Model} The model instance.
+	 * @throws {TypeError} Indicates that the model was not found.
 	 */
 	get(name) {
 		const model = this.dbOrm.getModel(name);
@@ -54,7 +54,7 @@ class ModelRepository {
 	 * Check if a model exists.
 	 *
 	 * @param {string} name - The model name.
-	 * @returns {boolean} - Indicates that the model exists.
+	 * @returns {boolean} Indicates that the model exists.
 	 */
 	has(name) {
 		try {

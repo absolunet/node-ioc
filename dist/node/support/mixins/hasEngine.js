@@ -29,7 +29,7 @@ const hasEngine = (0, _mixinFactory.default)(SuperClass => {
      * Set current engine.
      *
      * @param {*} engine - The engine instance.
-     * @returns {HasEngine} - The current instance.
+     * @returns {support.mixins.HasEngine} The current instance.
      * @memberof support.mixins.HasEngine
      * @instance
      */

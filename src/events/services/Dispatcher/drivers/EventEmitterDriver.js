@@ -84,7 +84,7 @@ class EventEmitterDriver extends Driver {
 	 *
 	 * @param {string} event - The event to listen.
 	 * @param {Function} listener - The listener.
-	 * @returns {Function} - The listener wrapper acting as the listener singleton inside the EventEmitter instance.
+	 * @returns {Function} The listener wrapper acting as the listener singleton inside the EventEmitter instance.
 	 */
 	makeListenerForEvent(event, listener) {
 		const realListener = (payload) => {

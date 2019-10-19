@@ -54,7 +54,7 @@ class Driver {
    * Get Knex connection.
    *
    * @param {string} [name="default"] - The connection name.
-   * @returns {Knex} - A Knex connection instance.
+   * @returns {Knex} A Knex connection instance.
    */
 
 
@@ -68,7 +68,7 @@ class Driver {
   /**
    * Get default Knex connection.
    *
-   * @returns {Knex} - A Knex connection instance.
+   * @returns {Knex} A Knex connection instance.
    */
 
 
@@ -80,7 +80,7 @@ class Driver {
    *
    * @param {string} name - The connection name.
    * @param {Knex} connection - The Knex connection instance.
-   * @returns {Driver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
    */
 
 
@@ -92,7 +92,7 @@ class Driver {
    * Set default Knex connection instance.
    *
    * @param {Knex} connection - The Knex connection instance.
-   * @returns {Driver} - The current driver instance.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
    */
 
 
@@ -104,7 +104,7 @@ class Driver {
    * Check if connection exists by name.
    *
    * @param {string} name - The connection name.
-   * @returns {boolean} - Indicates that the connection exists.
+   * @returns {boolean} Indicates that the connection exists.
    */
 
 
@@ -116,7 +116,7 @@ class Driver {
    *
    * @param {string} name - The connection name.
    * @param {object} config - The connection configuration.
-   * @returns {Knex} - A Knex connection instance.
+   * @returns {Knex} A Knex connection instance.
    */
 
 
@@ -132,7 +132,7 @@ class Driver {
    *
    * @param {string} name - The connection name.
    * @param {object} config - The connection configuration.
-   * @returns {Knex} - A Knex connection instance.
+   * @returns {Knex} A Knex connection instance.
    */
 
 
@@ -145,7 +145,7 @@ class Driver {
    * Make new Knex connection.
    *
    * @param {object} config - The connection configuration.
-   * @returns {Knex} - A Knex instance.
+   * @returns {Knex} A Knex instance.
    */
 
 
@@ -160,7 +160,7 @@ class Driver {
    * Map configuration from the driver and given configuration into a Knex configuratioon model.
    *
    * @param {object} config - The connection configuration.
-   * @returns {object} - The full Knex connection configuration.
+   * @returns {object} The full Knex connection configuration.
    */
 
 
@@ -184,7 +184,7 @@ class Driver {
    * @see dropAll()
    * @param {Knex} [connection] - The Knex connection instance.
    * @param {object} [options] - The knex-clean options.
-   * @returns {Promise<void>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -202,7 +202,7 @@ class Driver {
    *
    * @param {Knex} [connection] - The Knex connection instance.
    * @param {object} [options] - The knex-clean options.
-   * @returns {Promise<void>} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -217,7 +217,7 @@ class Driver {
    * Get migration status.
    *
    * @param {Knex} connection - The Knex connection instance.
-   * @returns {Promise<Array<{name: string, ran: boolean}>>} - The migration status.
+   * @returns {Promise<Array<{name: string, ran: boolean}>>} The migration status.
    */
 
 

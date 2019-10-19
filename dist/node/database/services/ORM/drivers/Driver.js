@@ -51,7 +51,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Build an engine with given connection.
    *
    * @param {Knex} connection - The Knex connection instance.
-   * @returns {*} - The ORM engine.
+   * @returns {*} The ORM engine.
    * @abstract
    */
 
@@ -64,7 +64,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Get ORM driver with given connection.
    *
    * @param {Knex} connection - The Knex connection instance.
-   * @returns {Driver} - A newly created Driver with a given connection.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
    */
 
 
@@ -78,8 +78,8 @@ class Driver extends (0, _hasEngine.default)() {
    * If name and model are provided, the model is registered as name in the engine.
    *
    * @param {string} name - The model name.
-   * @param {Model} [Model] - The model class.
-   * @returns {Model} - Model instance.
+   * @param {database.Model} [Model] - The model class.
+   * @returns {database.Model} Model instance.
    */
 
 
@@ -97,7 +97,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Get model by name.
    *
    * @param {string} name - The model name.
-   * @returns {Model|null} - The model instance, or null if it was not found.
+   * @returns {database.Model|null} The model instance, or null if it was not found.
    */
 
 
@@ -108,7 +108,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Set model with given name.
    *
    * @param {string} name - The model name.
-   * @param {Model} model - The model instance.
+   * @param {database.Model} model - The model instance.
    */
 
 
@@ -119,7 +119,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Resolve model instance by name from the models path in the database resolver.
    *
    * @param {string} name - The model name.
-   * @returns {Model|null} - A model instance.
+   * @returns {database.Model|null} A model instance.
    */
 
 
@@ -130,8 +130,8 @@ class Driver extends (0, _hasEngine.default)() {
   /**
    * Build model.
    *
-   * @param {Model} model - The model instance.
-   * @returns {Model} - The built model instance.
+   * @param {database.Model} model - The model instance.
+   * @returns {database.Model} The built model instance.
    */
 
 
@@ -142,7 +142,7 @@ class Driver extends (0, _hasEngine.default)() {
    * Get formatted model class name.
    *
    * @param {string} name - The model name.
-   * @returns {string} - The formatted model name.
+   * @returns {string} The formatted model name.
    */
 
 
@@ -152,7 +152,7 @@ class Driver extends (0, _hasEngine.default)() {
   /**
    * String helper instance.
    *
-   * @type {StringHelper}
+   * @type {support.helpers.StringHelper}
    */
 
 

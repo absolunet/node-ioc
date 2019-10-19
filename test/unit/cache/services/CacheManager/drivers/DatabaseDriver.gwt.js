@@ -1,14 +1,14 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager - Drivers - Database Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const fs             = require('fs');
-const path           = require('path');
-const container      = require('../../../../container');
-const DatabaseDriver = require('../../../../../../dist/node/cache/services/CacheManager/drivers/DatabaseDriver');
+import * as fs        from 'fs';
+import * as path      from 'path';
+import container      from '../../../../container';
+import DatabaseDriver from '../../../../../../dist/node/cache/services/CacheManager/drivers/DatabaseDriver';
 
 const databaseFilePath = path.join(__dirname, '..', '..', '..', 'stubs', 'database.sqlite');
 
@@ -56,4 +56,4 @@ then.dropCacheTable = async () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

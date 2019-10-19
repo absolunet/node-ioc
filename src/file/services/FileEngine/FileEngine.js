@@ -30,7 +30,7 @@ class FileEngine extends forwardCalls() {
 	 * FileEngine constructor.
 	 *
 	 * @param {...*} parameters - Injected parameters.
-	 * @returns {FileEngine} - The file engine instance wrapped by a proxy.
+	 * @returns {file.services.FileEngine} The file engine instance wrapped by a proxy.
 	 */
 	constructor(...parameters) {
 		super(...parameters);
@@ -41,7 +41,7 @@ class FileEngine extends forwardCalls() {
 	/**
 	 * Async file system.
 	 *
-	 * @type {Async}
+	 * @type {file.system.Async}
 	 */
 	get async() {
 		return this.fileSystemAsync;
@@ -50,7 +50,7 @@ class FileEngine extends forwardCalls() {
 	/**
 	 * Sync file system.
 	 *
-	 * @type {Sync}
+	 * @type {file.system.Sync}
 	 */
 	get sync() {
 		return this.fileSystemSync;

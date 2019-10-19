@@ -71,7 +71,7 @@ class Command {
 	 * Preprocess args before handling the command.
 	 *
 	 * @param {object<string, string>} input - The user input.
-	 * @returns {Promise<object<string, string>>|object<string, string>} - A preprocessed input.
+	 * @returns {Promise<object<string, string>>|object<string, string>} A preprocessed input.
 	 */
 	preprocess(input) {
 		return input;
@@ -81,7 +81,7 @@ class Command {
 	 * Handle the command.
 	 * If it returns a value, it will be send to the postprocess method.
 	 *
-	 * @returns {void|Promise} - The async process promise.
+	 * @returns {void|Promise} The async process promise.
 	 * @abstract
 	 */
 	handle() {
@@ -93,7 +93,7 @@ class Command {
 	 * Postprocess the handled data.
 	 *
 	 * @param {*} [output] - The output of the handled data.
-	 * @returns {Promise|void} - The async process promise.
+	 * @returns {Promise|void} The async process promise.
 	 * @async
 	 */
 	postprocess(output) { // eslint-disable-line no-unused-vars
@@ -105,7 +105,7 @@ class Command {
 	 *
 	 * @param {string} command - The command to run.
 	 * @param {*} [options] - The spawn options.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	run(command, options = {}) {
 		return this.spawn(process.argv[0], command, options);
@@ -117,7 +117,7 @@ class Command {
 	 * @param {string} binary - The binary that will execute the command.
 	 * @param {string} command - The command.
 	 * @param {*} [options] - The spawn options.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	spawn(binary, command, options = {}) {
 		return new Promise((resolve, reject) => {
@@ -140,7 +140,7 @@ class Command {
 	 *
 	 * @param {string} command - Command to call.
 	 * @param {boolean} [internal] - Specify if the command should be processed as an internal process. If if should check the policies restrictions, set to false.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	call(command, internal = true) {
 		return this.app.make('command.registrar').resolve(command, internal);
@@ -151,7 +151,7 @@ class Command {
 	 *
 	 * @param {string} command - The command name that should be used instead of handling command.
 	 * @param {boolean} [internal] - Specify if the command should be processed as an internal process. If if should check the policies restrictions, set to false.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	forwardCall(command, internal = true) {
 		return this.call(`${command} ${this.terminal.args}`, internal);
@@ -177,8 +177,8 @@ class Command {
 	 * Create an Argument instance from the given data.
 	 *
 	 * @param {Function} Argument - The argument class to use, either a Parameter, an Option or a Flag.
-	 * @param {Argument|Array<*>|string} data - The data to make as an argument.
-	 * @returns {Argument} - The made argument instance.
+	 * @param {console.models.Argument|Array<*>|string} data - The data to make as an argument.
+	 * @returns {console.models.Argument} The made argument instance.
 	 * @throws TypeError - Indicates that the given data was invalid.
 	 */
 	makeArgument(Argument, data) {
@@ -285,7 +285,7 @@ class Command {
 	 * @param {string} type - The argument type.
 	 * @param {string} name - The argument name.
 	 * @param {boolean} [full] - Indicates if a full argument should be returned instead of the value only.
-	 * @returns {*|Argument} - Either the argument value or the Argument instance.
+	 * @returns {*|Argument} Either the argument value or the Argument instance.
 	 */
 	argument(type, name, full = false) {
 		const argument = this.args[type].find(({ name: argumentName }) => {
@@ -304,7 +304,7 @@ class Command {
 	 *
 	 * @param {string} type - The argument type.
 	 * @param {string} name - The argument name.
-	 * @returns {boolean} - The argument support in the current command.
+	 * @returns {boolean} The argument support in the current command.
 	 */
 	argumentIsSupported(type, name) {
 		return this.args[type].some(({ name: argumentName }) => {
@@ -316,7 +316,7 @@ class Command {
 	 * Get parameter by name.
 	 *
 	 * @param {string} name - The parameter name.
-	 * @returns {string} - The parameter value.
+	 * @returns {string} The parameter value.
 	 */
 	parameter(name) {
 		return this.argument('parameters', name);
@@ -326,7 +326,7 @@ class Command {
 	 * Check if parameter is supported by name.
 	 *
 	 * @param {string} name - The parameter name.
-	 * @returns {boolean} - The parameter support in the current command.
+	 * @returns {boolean} The parameter support in the current command.
 	 */
 	parameterIsSupported(name) {
 		return this.argumentIsSupported('parameters', name);
@@ -336,7 +336,7 @@ class Command {
 	 * Get option by name.
 	 *
 	 * @param {string} name - The option name.
-	 * @returns {string|null} - The option value.
+	 * @returns {string|null} The option value.
 	 */
 	option(name) {
 		return this.argument('options', name);
@@ -346,7 +346,7 @@ class Command {
 	 * Check if option is supported by name.
 	 *
 	 * @param {string} name - The option name.
-	 * @returns {boolean} - The option support in the current command.
+	 * @returns {boolean} The option support in the current command.
 	 */
 	optionIsSupported(name) {
 		return this.argumentIsSupported('options', name);
@@ -356,7 +356,7 @@ class Command {
 	 * Get flag by name.
 	 *
 	 * @param {string} name - The flag name.
-	 * @returns {boolean} - The flag value.
+	 * @returns {boolean} The flag value.
 	 */
 	flag(name) {
 		return this.argument('flags', name);
@@ -366,7 +366,7 @@ class Command {
 	 * Check if flag is supported by name.
 	 *
 	 * @param {string} name - The flag name.
-	 * @returns {boolean} - The flag support in the current command.
+	 * @returns {boolean} The flag support in the current command.
 	 */
 	flagIsSupported(name) {
 		return this.argumentIsSupported('flags', name);
@@ -460,7 +460,7 @@ class Command {
 	 *
 	 * @param {string} question - The question to ask.
 	 * @param {string|null} [defaultAnswer] - The default answer.
-	 * @returns {Promise<string>} - The user answer.
+	 * @returns {Promise<string>} The user answer.
 	 */
 	ask(question, defaultAnswer = null) {
 		return this.terminal.ask(question, defaultAnswer);
@@ -470,7 +470,7 @@ class Command {
 	 * Prompt the user with a question requesting hidden answer.
 	 *
 	 * @param {string} question - The question to ask.
-	 * @returns {Promise<string>} - The user answer.
+	 * @returns {Promise<string>} The user answer.
 	 */
 	secret(question) {
 		return this.terminal.secret(question);
@@ -481,7 +481,7 @@ class Command {
 	 *
 	 * @param {string} statement - The statement to be confirmed.
 	 * @param {boolean} [defaultValue] - The default confirmation value.
-	 * @returns {Promise<boolean>} - The user confirmation.
+	 * @returns {Promise<boolean>} The user confirmation.
 	 */
 	confirm(statement, defaultValue = false) {
 		return this.terminal.confirm(statement, defaultValue);
@@ -497,7 +497,7 @@ class Command {
 	 * @param {string} question - The question to ask.
 	 * @param {Array<string>|object<string, string>} choices - The available answers.
 	 * @param {string} [defaultValue] - The default answer.
-	 * @returns {Promise<string>} - The user answer.
+	 * @returns {Promise<string>} The user answer.
 	 */
 	choice(question, choices, defaultValue) {
 		return this.terminal.choice(question, choices, defaultValue);
@@ -542,7 +542,7 @@ class Command {
 	/**
 	 * Initialize the output capturing phase with the default output interceptor.
 	 *
-	 * @returns {Command} - The current command.
+	 * @returns {console.Command} The current command.
 	 */
 	captureOutput() {
 		this.interceptor.mute().removeStyle().add(this.outputInterceptor);
@@ -553,7 +553,7 @@ class Command {
 	/**
 	 * Stop the output capture by the default interceptor.
 	 *
-	 * @returns {Command} - The current command.
+	 * @returns {console.Command} The current command.
 	 */
 	stopCaptureOutput() {
 		this.interceptor.remove(this.outputInterceptor).keepStyle().unmute();
@@ -565,7 +565,7 @@ class Command {
 	 * Get the captured output.
 	 *
 	 * @param {boolean} [stopCapture] - Indicates if the capture should stop.
-	 * @returns {string} - The captured output.
+	 * @returns {string} The captured output.
 	 */
 	getCapturedOutput(stopCapture = true) {
 		if (stopCapture) {
@@ -639,7 +639,7 @@ class Command {
 	/**
 	 * Build yargs model.
 	 *
-	 * @returns {{builder, describe: string, command: string}} - The yargs model.
+	 * @returns {{builder, describe: string, command: string}} The yargs model.
 	 */
 	buildYargsModel() {
 		if (this.forward) {
@@ -696,7 +696,7 @@ class Command {
 	/**
 	 * The terminal interceptor.
 	 *
-	 * @type {Interceptor}
+	 * @type {console.services.Interceptor}
 	 */
 	get interceptor() {
 		return this.app.make('terminal.interceptor');

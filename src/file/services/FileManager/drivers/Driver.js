@@ -27,7 +27,7 @@ class Driver {
 	 * Load the given file.
 	 *
 	 * @param {string} file - The file path.
-	 * @returns {*} - The file content.
+	 * @returns {*} The file content.
 	 * @abstract
 	 */
 	load(file) { // eslint-disable-line no-unused-vars
@@ -38,7 +38,7 @@ class Driver {
 	 * Asynchronously load the given file.
 	 *
 	 * @param {string} file - The file path.
-	 * @returns {Promise<*>} - The file content.
+	 * @returns {Promise<*>} The file content.
 	 * @abstract
 	 */
 	loadAsync(file) { // eslint-disable-line no-unused-vars
@@ -51,7 +51,7 @@ class Driver {
 	 * @param {string} file - The file path.
 	 * @param {string|Stream} content - The content to put in the file.
 	 * @param {*} [options] - The options to send to the write process.
-	 * @returns {boolean} - Indicates that the process was successful.
+	 * @returns {boolean} Indicates that the process was successful.
 	 */
 	write(file, content, options = {}) {
 		try {
@@ -69,7 +69,7 @@ class Driver {
 	 * @param {string} file - The file path.
 	 * @param {string|Stream} content - The content to put in the file.
 	 * @param {*} [options] - The options to send to the write process.
-	 * @returns {Promise<boolean>} - Indicates that the process was successful.
+	 * @returns {Promise<boolean>} Indicates that the process was successful.
 	 */
 	writeAsync(file, content, options = {}) {
 		return this.fileEngine.async.writeFile(file, content, options);

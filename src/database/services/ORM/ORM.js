@@ -41,7 +41,7 @@ class ORM extends hasDriver(checksTypes()) {
 	 * If a single argument is provided, the model class name will be used as identifier.
 	 *
 	 * @param {string} name - The model name.
-	 * @param {Model} Model - The model class.
+	 * @param {database.Model} Model - The model class.
 	 */
 	registerModel(name, Model) {
 		const modelName = this.getFormattedModelName(typeof name === 'string' ? name : name.name);
@@ -53,7 +53,7 @@ class ORM extends hasDriver(checksTypes()) {
 	 * Retrieve model by name.
 	 *
 	 * @param {string} name - The model name.
-	 * @returns {Model} - The model instance.
+	 * @returns {database.Model} The model instance.
 	 */
 	getModel(name) {
 		return this.driver().model(this.getFormattedModelName(name));
@@ -63,7 +63,7 @@ class ORM extends hasDriver(checksTypes()) {
 	 * Get formatted model name.
 	 *
 	 * @param {string} name - The model name.
-	 * @returns {string} - The formatted model name.
+	 * @returns {string} The formatted model name.
 	 */
 	getFormattedModelName(name) {
 		return this.stringHelper.camel(name);
@@ -73,7 +73,7 @@ class ORM extends hasDriver(checksTypes()) {
 	 * Get underlying ORM engine.
 	 *
 	 * @param {string} driver - The driver name to get engine from.
-	 * @returns {*} - The underlying engine.
+	 * @returns {*} The underlying engine.
 	 */
 	engine(driver) {
 		return this.driver(driver).engine;
@@ -91,7 +91,7 @@ class ORM extends hasDriver(checksTypes()) {
 	/**
 	 * String helper.
 	 *
-	 * @type {StringHelper}
+	 * @type {support.helpers.StringHelper}
 	 */
 	get stringHelper() {
 		return this.helperString;

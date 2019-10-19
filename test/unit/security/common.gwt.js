@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Security - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container               = require('../container');
-const SecurityServiceProvider = require('../../../dist/node/security/SecurityServiceProvider');
+import container               from '../container';
+import SecurityServiceProvider from '../../../dist/node/security/SecurityServiceProvider';
 
 
 
@@ -45,4 +45,4 @@ then.shouldHaveSingleton = (service) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

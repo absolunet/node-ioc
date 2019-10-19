@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Systems - Async - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const fsp         = require('@absolunet/fsp');
-const container   = require('../../container');
-const AsyncSystem = require('../../../../dist/node/file/systems/Async');
+import fsp         from '@absolunet/fsp';
+import container   from '../../container';
+import AsyncSystem from '../../../../dist/node/file/systems/Async';
 
 let asyncSystem;
 let file;
@@ -108,4 +108,4 @@ then.searchedPatternShouldContainFlagsAndDefaultOnes = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

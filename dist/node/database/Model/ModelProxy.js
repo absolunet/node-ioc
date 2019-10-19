@@ -29,7 +29,7 @@ class ModelProxy extends _ForwardProxy.default {
    *
    * @param {Function} factory - The model factory.
    * @param {Array<*>} parameters - The parameters to send to the constructor.
-   * @returns {*} - The newly instantiated model.
+   * @returns {*} The newly instantiated model.
    */
 
 

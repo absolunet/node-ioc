@@ -34,7 +34,7 @@ class Builder extends (0, _forwardCalls.default)() {
    * Builder constructor.
    *
    * @param {...*} parameters - The injected parameters.
-   * @returns {Builder} - A connection builder wrapped by a forward proxy to forward calls to the default connection.
+   * @returns {database.services.Builder} A connection builder wrapped by a forward proxy to forward calls to the default connection.
    */
 
 
@@ -46,7 +46,7 @@ class Builder extends (0, _forwardCalls.default)() {
    * Get connection by name.
    *
    * @param {string} [name="default"] - The connection name.
-   * @returns {Knex} - A Knex connection instance.
+   * @returns {Knex} A Knex connection instance.
    */
 
 
@@ -70,7 +70,7 @@ class Builder extends (0, _forwardCalls.default)() {
   /**
    * Get default connection.
    *
-   * @returns {Knex} - A Knex connection instance.
+   * @returns {Knex} A Knex connection instance.
    */
 
 
@@ -81,7 +81,7 @@ class Builder extends (0, _forwardCalls.default)() {
    * Retrieve driver for connection by name.
    *
    * @param {string|Knex} name - Either a connection name or a Knex connection instance.
-   * @returns {Driver} - The underlying driver instance.
+   * @returns {database.services.Connector.drivers.Driver} The underlying driver instance.
    */
 
 

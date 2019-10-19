@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Connector - Drivers - SQLite Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const __           = require('@absolunet/private-registry');
-const container    = require('../../../../container');
-const SqliteDriver = require('../../../../../../dist/node/database/services/Connector/drivers/SqliteDriver');
+import __           from '@absolunet/private-registry';
+import container    from '../../../../container';
+import SqliteDriver from '../../../../../../dist/node/database/services/Connector/drivers/SqliteDriver';
 
 let result;
 let sqliteDriver;
@@ -191,4 +191,4 @@ then.shouldHaveReceivedProperKnexConfigWithFakeMigrationTableNameAndConnectionCo
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

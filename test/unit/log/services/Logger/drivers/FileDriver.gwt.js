@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Log - Services - Logger - Drivers - File Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container  = require('../../../../container');
-const FileDriver = require('../../../../../../dist/node/log/services/Logger/drivers/FileDriver');
+import container  from '../../../../container';
+import FileDriver from '../../../../../../dist/node/log/services/Logger/drivers/FileDriver';
 
 const filePath      = '/log/file/path.log';
 const otherFilePath = '/log/other/file/path.log';
@@ -165,4 +165,4 @@ then.shouldNotHaveCalledFileEngine = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

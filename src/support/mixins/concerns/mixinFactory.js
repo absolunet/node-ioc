@@ -9,7 +9,7 @@ import GenericClass from './GenericClass';
  * Mixin factory.
  *
  * @param {Function} callback - Mixin closure.
- * @returns {Function} - Mixin.
+ * @returns {Function} Mixin.
  * @memberof support.mixins.concerns
  */
 const factory = (callback) => {

@@ -25,10 +25,10 @@ class CommandRunner {
    * Run command based on argv object.
    * If an exception occurs, handle it with the application exception handler.
    *
-   * @param {Command} command - The command instance.
+   * @param {console.Command} command - The command instance.
    * @param {object<string, string>} argv - The Yargs arguments.
    * @param {Yargs} [yargs] - The Yargs instance.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -42,10 +42,10 @@ class CommandRunner {
   /**
    * Run command based on argv object.
    *
-   * @param {Command} command - The command instance.
+   * @param {console.Command} command - The command instance.
    * @param {object<string, string>} argv - The Yargs arguments.
    * @param {Yargs} [yargs] - The Yargs instance.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -61,9 +61,9 @@ class CommandRunner {
   /**
    * Run command preprocess.
    *
-   * @param {Command} command - The command instance.
+   * @param {console.Command} command - The command instance.
    * @param {object<string, string>} [argv={}] - The Yargs arguments.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 
@@ -74,7 +74,7 @@ class CommandRunner {
   /**
    * Run command handle method.
    *
-   * @param {Command} command - The command instance.
+   * @param {console.Command} command - The command instance.
    * @returns {Promise<*>} The async process promise with the possible returned data from the command.
    */
 
@@ -89,9 +89,9 @@ class CommandRunner {
   /**
    * Run command postprocess.
    *
-   * @param {Command} command - The command instance.
+   * @param {console.Command} command - The command instance.
    * @param {*} [data] - The data to use when postprocessing.
-   * @returns {Promise} - The async process promise.
+   * @returns {Promise} The async process promise.
    */
 
 

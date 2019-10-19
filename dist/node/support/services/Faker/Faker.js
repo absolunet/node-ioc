@@ -24,7 +24,7 @@ class Faker extends (0, _forwardCalls.default)() {
    * Faker constructor.
    *
    * @param {...*} parameters - The injected parameters.
-   * @returns {Faker} - Thee faker instance wrapped by a proxy.
+   * @returns {support.services.Faker} Thee faker instance wrapped by a proxy.
    */
   constructor(...parameters) {
     super(...parameters);

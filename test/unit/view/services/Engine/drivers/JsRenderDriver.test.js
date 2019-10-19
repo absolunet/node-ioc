@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - View - Services - Engine - Drivers - JsRender Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./JsRenderDriver.gwt');
+import gwt from './JsRenderDriver.gwt';
+const { given, when, then } = gwt;
 
 beforeEach(() => {
 	given.providersAndDependencies();

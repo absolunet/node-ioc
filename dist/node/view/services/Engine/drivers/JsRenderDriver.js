@@ -104,7 +104,7 @@ class JsRenderDriver extends _Driver.default {
   /**
    * View factory.
    *
-   * @type {Factory}
+   * @type {view.services.Factory}
    */
 
 

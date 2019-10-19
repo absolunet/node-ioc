@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Commands - Environment Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./EnvironmentCommand.gwt');
+import gwt from './EnvironmentCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Builder
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Builder.gwt');
+import gwt from './Builder.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

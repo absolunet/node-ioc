@@ -102,7 +102,7 @@ class Tester extends (0, _hasEngine.default)() {
    * Set test runner instance.
    * It allows the tester to keep a singleton even if the application is flushed after every test.
    *
-   * @param {TestRunner} runner - Test runner instance.
+   * @param {test.services.TestRunner} runner - Test runner instance.
    */
 
 
@@ -114,7 +114,7 @@ class Tester extends (0, _hasEngine.default)() {
    * It allows the tester to keep a singleton of the kernel constructor even if
    * the application and the cache are flushed after every test.
    *
-   * @param {Kernel} kernel - The kernel instance.
+   * @param {foundation.Kernel} kernel - The kernel instance.
    */
 
 
@@ -124,7 +124,7 @@ class Tester extends (0, _hasEngine.default)() {
   /**
    * Test runner accessor.
    *
-   * @type {TestRunner}
+   * @type {test.services.TestRunner}
    */
 
 
@@ -142,7 +142,7 @@ class Tester extends (0, _hasEngine.default)() {
   /**
    * Current kernel accessor.
    *
-   * @type {Kernel}
+   * @type {foundation.Kernel}
    */
 
 

@@ -48,7 +48,7 @@ class DatabaseDriver extends Driver {
 	 * @param {number} level - The log level.
 	 * @param {string} message - The message.
 	 * @param {*} [context] - The context.
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async storeLog(level, message, context) {
 		const { connection, config: { table } } = this;
@@ -67,7 +67,7 @@ class DatabaseDriver extends Driver {
 	/**
 	 * Clear past logs in the database, starting by the least recent ones.
 	 *
-	 * @returns {Promise} - The async process promise.
+	 * @returns {Promise} The async process promise.
 	 */
 	async cleanPastLogs() {
 		const { connection, config: { table, limit } } = this;
@@ -84,7 +84,7 @@ class DatabaseDriver extends Driver {
 	 * Get formatted level value.
 	 *
 	 * @param {number|string} level - The level value.
-	 * @returns {number} - The formatted level value.
+	 * @returns {number} The formatted level value.
 	 */
 	getFormattedLevel(level) {
 		return typeof level === 'number' ? level : this.LEVEL[level.toUpperCase()];
@@ -93,7 +93,7 @@ class DatabaseDriver extends Driver {
 	/**
 	 * Get formatted version value.
 	 *
-	 * @returns {string} - The application version.
+	 * @returns {string} The application version.
 	 */
 	getFormattedVersion() {
 		return this.app.version;
@@ -103,7 +103,7 @@ class DatabaseDriver extends Driver {
 	 * Get formatted message value.
 	 *
 	 * @param {string} message - The original message.
-	 * @returns {string} - The formatted message.
+	 * @returns {string} The formatted message.
 	 */
 	getFormattedMessage(message) {
 		return message.toString();
@@ -112,7 +112,7 @@ class DatabaseDriver extends Driver {
 	/**
 	 * Get formatted current command.
 	 *
-	 * @returns {string} - The command.
+	 * @returns {string} The command.
 	 */
 	getFormattedCommand() {
 		return this.terminal.command || '';
@@ -122,7 +122,7 @@ class DatabaseDriver extends Driver {
 	 * Get formatted context by converting it into JSON.
 	 *
 	 * @param {*} context - The context.
-	 * @returns {string} - The formatted context.
+	 * @returns {string} The formatted context.
 	 */
 	getFormattedContext(context) {
 		return JSON.stringify(typeof context === 'undefined' ? null : context);

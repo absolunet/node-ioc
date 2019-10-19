@@ -13,7 +13,7 @@ class Route {
 	/**
 	 * Route constructor.
 	 *
-	 * @param {RouteAttributes} attributes - Route attributes.
+	 * @param {http.RouteAttributes} attributes - Route attributes.
 	 */
 	constructor(attributes) {
 		this.as = '';
@@ -30,7 +30,7 @@ class Route {
 	 * Name the route.
 	 *
 	 * @param {string} name - The route name.
-	 * @returns {Route} - The current route instance.
+	 * @returns {http.Route} The current route instance.
 	 */
 	name(name) {
 		this.as = `${this.asPrefix || ''}${name}`;
@@ -42,7 +42,7 @@ class Route {
 	 * Compile path from given parameters.
 	 *
 	 * @param {object} parameters - The route parameters.
-	 * @returns {Route} - The current route instance.
+	 * @returns {http.Route} The current route instance.
 	 */
 	compilePath(parameters = {}) {
 		this.compiledPath = this.path
@@ -58,7 +58,7 @@ class Route {
 	 * Can either be a constraint object or two parameters, key and value.
 	 *
 	 * @param {string|object} constraints - The constraint(s) for the route parameter(s).
-	 * @returns {Route} - The current route instance.
+	 * @returns {http.Route} The current route instance.
 	 */
 	where(...constraints) {
 		return this.merge('constraints', constraints);
@@ -70,7 +70,7 @@ class Route {
 	 * Can either be a constraint object or two parameters, key and value.
 	 *
 	 * @param {string|object} defaults - The default values that will be injected into the action.
-	 * @returns {Route} - The current route instance.
+	 * @returns {http.Route} The current route instance.
 	 */
 	with(...defaults) {
 		return this.merge('defaults', defaults);
@@ -81,7 +81,7 @@ class Route {
 	 *
 	 * @param {string} key - The key to merge the data into.
 	 * @param {Array<string|object>} values - The values to merge.
-	 * @returns {Route} - The current route instance.
+	 * @returns {http.Route} The current route instance.
 	 */
 	merge(key, values) {
 		let data;

@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Repositories - Model Repository - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const ModelRepository = require('../../../../dist/node/database/repositories/ModelRepository');
+import container from '../../container';
+import ModelRepository from '../../../../dist/node/database/repositories/ModelRepository';
 
 let result;
 let modelRepository;
@@ -87,4 +87,4 @@ then.shouldHaveReceivedModel = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

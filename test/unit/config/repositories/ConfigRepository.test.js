@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Repositories - Config Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ConfigRepository.gwt');
+import gwt from './ConfigRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

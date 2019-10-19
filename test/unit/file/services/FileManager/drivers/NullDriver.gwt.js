@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - Null Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const NullDriver = require('../../../../../../dist/node/file/services/FileManager/drivers/NullDriver');
+import NullDriver from '../../../../../../dist/node/file/services/FileManager/drivers/NullDriver';
 
 
 //-- Given
@@ -32,4 +32,4 @@ given.currentDriverContent = () => {
 then.fileShouldHaveBeenWritten = () => {}; // eslint-disable-line no-empty-function
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -84,7 +84,7 @@ class GeneratorCommand extends _Command.default {
    * Generate a file of a specific type from stubs.
    *
    * @param {string} type - The file type to generate.
-   * @returns {Promise<boolean>} - The async writing process.
+   * @returns {Promise<boolean>} The async writing process.
    * @see GeneratorCommand#files
    */
 
@@ -101,7 +101,7 @@ class GeneratorCommand extends _Command.default {
    * Load a given stub by name.
    *
    * @param {string} type - The file type to load.
-   * @returns {string} - The file content.
+   * @returns {string} The file content.
    * @see GeneratorCommand#files
    */
 
@@ -114,7 +114,7 @@ class GeneratorCommand extends _Command.default {
    *
    * @param {string} content - The content to format.
    * @param {object<string, string>} patterns - The patterns to replace.
-   * @returns {string} - The formatted content.
+   * @returns {string} The formatted content.
    */
 
 
@@ -127,7 +127,7 @@ class GeneratorCommand extends _Command.default {
    * Write the given file to the configured destination folder.
    *
    * @param {string} content - The content to write.
-   * @returns {Promise<boolean>} - The async promise.
+   * @returns {Promise<boolean>} The async promise.
    */
 
 
@@ -141,7 +141,7 @@ class GeneratorCommand extends _Command.default {
   /**
    * Get destination folder.
    *
-   * @returns {string} - The final file destination.
+   * @returns {string} The final file destination.
    * @see GeneratorCommand#destination
    * @see GeneratorCommand#fileName
    */

@@ -14,7 +14,7 @@ class YargsEngine {
 	/**
 	 * YargsEngine constructor.
 	 *
-	 * @returns {yargs} - Yargs module.
+	 * @returns {yargs} Yargs module.
 	 */
 	constructor() {
 		return require('yargs'); // eslint-disable-line global-require
