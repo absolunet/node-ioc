@@ -29,25 +29,31 @@ class ViewServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
-		this.app.singleton('view',          Factory);
-		this.app.singleton('view.engine',   Engine);
+		this.loadConfigFromFolder(__dirname, '..', 'config');
+		this.bindViewFactory();
+		this.bindViewEngine();
+		this.bindViewResolver();
+	}
+
+	/**
+	 * Bind view factory service.
+	 */
+	bindViewFactory() {
+		this.app.singleton('view', Factory);
+	}
+
+	/**
+	 * Bind view engine.
+	 */
+	bindViewEngine() {
+		this.app.singleton('view.engine', Engine);
+	}
+
+	/**
+	 * Bind view path resolver service.
+	 */
+	bindViewResolver() {
 		this.app.singleton('view.resolver', Resolver);
-	}
-
-	/**
-	 * Boot the service provider.
-	 */
-	boot() {
-		this.loadConfig();
-	}
-
-	/**
-	 * Load configuration file.
-	 */
-	loadConfig() {
-		if (this.app.isBound('config')) {
-			this.app.make('config').loadConfigFromFolder(this.app.formatPath(__dirname, '..', 'config'));
-		}
 	}
 
 }

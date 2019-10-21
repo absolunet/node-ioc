@@ -46,14 +46,20 @@ class HttpServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
-		this.registerServices();
+		this.loadConfigFromFolder(__dirname, '..', 'config');
+		this.bindHttpClient();
+		this.bindHttpServer();
+		this.bindRouter();
+		this.bindRouteHandler();
+		this.bindHttpErrorMapper();
+		this.bindRouteRepository();
+		this.bindControllerRepository();
 	}
 
 	/**
 	 * Boot the service provider.
 	 */
 	boot() {
-		this.loadConfig();
 		this.createPolicies();
 		this.bootDefaultControllers();
 		this.loadCommands([
@@ -63,25 +69,52 @@ class HttpServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Register HTTP services.
+	 * Bind HTTP client service.
 	 */
-	registerServices() {
-		this.app.singleton('http',              HttpClient);
-		this.app.singleton('server',            HttpServer);
-		this.app.singleton('router',            Router);
-		this.app.singleton('router.handler',    Handler);
-		this.app.singleton('http.error.mapper', HttpErrorMapper);
-		this.app.singleton('router.route',      RouteRepository);
-		this.app.singleton('router.controller', ControllerRepository);
+	bindHttpClient() {
+		this.app.singleton('http', HttpClient);
 	}
 
 	/**
-	 * Load configuration file.
+	 * Bind HTTP server service.
 	 */
-	loadConfig() {
-		if (this.app.isBound('config')) {
-			this.app.make('config').loadConfigFromFolder(this.app.formatPath(__dirname, '..', 'config'));
-		}
+	bindHttpServer() {
+		this.app.singleton('server', HttpServer);
+	}
+
+	/**
+	 * Bind HTTP router.
+	 */
+	bindRouter() {
+		this.app.singleton('router', Router);
+	}
+
+	/**
+	 * Bind router handler service.
+	 */
+	bindRouteHandler() {
+		this.app.singleton('router.handler', Handler);
+	}
+
+	/**
+	 * Bind HTTP error mapper.
+	 */
+	bindHttpErrorMapper() {
+		this.app.singleton('http.error.mapper', HttpErrorMapper);
+	}
+
+	/**
+	 * Bind route repository.
+	 */
+	bindRouteRepository() {
+		this.app.singleton('router.route', RouteRepository);
+	}
+
+	/**
+	 * Bind controller repository.
+	 */
+	bindControllerRepository() {
+		this.app.singleton('router.controller', ControllerRepository);
 	}
 
 	/**

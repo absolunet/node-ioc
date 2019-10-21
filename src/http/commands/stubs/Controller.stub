@@ -5,6 +5,9 @@
 import Controller from '%BASE_CONTROLLER_PATH%';
 
 
+/**
+ * %CLASS%.
+ */
 class %CLASS% extends Controller {
 
 }

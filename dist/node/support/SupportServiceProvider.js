@@ -41,10 +41,50 @@ class SupportServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
+    this.bindDateHelper();
+    this.bindFileHelper();
+    this.bindPathHelper();
+    this.bindStringHelper();
+    this.bindFakerService();
+  }
+  /**
+   * Bind date helper.
+   */
+
+
+  bindDateHelper() {
     this.app.bind('helper.date', _DateHelper.default);
+  }
+  /**
+   * Bind file helper.
+   */
+
+
+  bindFileHelper() {
     this.app.bind('helper.file', _FileHelper.default);
+  }
+  /**
+   * Bind path helper.
+   */
+
+
+  bindPathHelper() {
     this.app.bind('helper.path', _PathHelper.default);
+  }
+  /**
+   * Bind string helper.
+   */
+
+
+  bindStringHelper() {
     this.app.bind('helper.string', _StringHelper.default);
+  }
+  /**
+   * Bind faker service.
+   */
+
+
+  bindFakerService() {
     this.app.singleton('faker', _Faker.default);
   }
 

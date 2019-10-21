@@ -31,18 +31,39 @@ class ConfigServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
-		this.registerServices();
+		this.bindConfigGrammar();
+		this.bindEvaluator();
+		this.bindConfigRepository();
+		this.bindEnvironmentRepository();
 		this.registerConfiguredProviders();
 	}
 
 	/**
-	 * Register configuration services.
+	 * Bind config grammar service.
 	 */
-	registerServices() {
+	bindConfigGrammar() {
 		this.app.singleton('config.grammar', ConfigGrammar);
-		this.app.singleton('config',         ConfigRepository);
-		this.app.singleton('env',            EnvironmentRepository);
-		this.app.singleton('evaluator',      Evaluator);
+	}
+
+	/**
+	 * Bind evaluator service.
+	 */
+	bindEvaluator() {
+		this.app.singleton('evaluator', Evaluator);
+	}
+
+	/**
+	 * Bind configuration repository.
+	 */
+	bindConfigRepository() {
+		this.app.singleton('config', ConfigRepository);
+	}
+
+	/**
+	 * Bind environment repository.
+	 */
+	bindEnvironmentRepository() {
+		this.app.singleton('env', EnvironmentRepository);
 	}
 
 	/**

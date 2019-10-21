@@ -5,6 +5,9 @@
 import { Command } from '@absolunet/ioc';
 
 
+/**
+ * %CLASS%.
+ */
 class %CLASS% extends Command {
 
 	/**

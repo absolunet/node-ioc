@@ -5,6 +5,9 @@
 import { Seeder } from '@absolunet/ioc';
 
 
+/**
+ * %CLASS%.
+ */
 class %CLASS% extends Seeder {
 
 	/**

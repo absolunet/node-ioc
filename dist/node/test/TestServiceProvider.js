@@ -71,9 +71,16 @@ class TestServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.registerRepositories();
-    this.registerServices();
-    this.registerEngines();
+    this.bindTestRepository();
+    this.bindUnitTestRepository();
+    this.bindFeatureTestRepository();
+    this.bindIntegrationTestRepository();
+    this.bindEndToEndRepository();
+    this.tagTestRepositories();
+    this.bindTestRunner();
+    this.bindTester();
+    this.bindTestTypeEnum();
+    this.bindJestEngine();
   }
   /**
    * Boot the service provider.
@@ -84,34 +91,83 @@ class TestServiceProvider extends _ServiceProvider.default {
     this.loadCommands([_MakeTestCommand.default, _TestCommand.default]);
   }
   /**
-   * Register all the test repositories in the container.
+   * Bind base test repository.
    */
 
 
-  registerRepositories() {
+  bindTestRepository() {
     this.app.singleton('test', _TestRepository.default);
-    this.app.singleton('test.unit', _UnitTestRepository.default);
-    this.app.singleton('test.feature', _FeatureTestRepository.default);
-    this.app.singleton('test.endtoend', _EndToEndTestRepository.default);
-    this.app.singleton('test.integration', _IntegrationTestRepository.default);
-    this.app.tag(['test.unit', 'test.feature', 'test.endtoend', 'test.integration'], 'tests');
   }
   /**
-   * Register test services in the container.
+   * Bind unit test repository.
    */
 
 
-  registerServices() {
+  bindUnitTestRepository() {
+    this.app.singleton('test.unit', _UnitTestRepository.default);
+  }
+  /**
+   * Bind feature test repository.
+   */
+
+
+  bindFeatureTestRepository() {
+    this.app.singleton('test.feature', _FeatureTestRepository.default);
+  }
+  /**
+   * Bind integration test repository.
+   */
+
+
+  bindIntegrationTestRepository() {
+    this.app.singleton('test.integration', _IntegrationTestRepository.default);
+  }
+  /**
+   * Bind end-to-end test repository.
+   */
+
+
+  bindEndToEndRepository() {
+    this.app.singleton('test.endtoend', _EndToEndTestRepository.default);
+  }
+  /**
+   * Tag all scoped test repositories.
+   */
+
+
+  tagTestRepositories() {
+    this.app.tag(['test.unit', 'test.feature', 'test.integration', 'test.endtoend'], 'tests');
+  }
+  /**
+   * Bind test runner service.
+   */
+
+
+  bindTestRunner() {
     this.app.singleton('test.runner', _TestRunner.default);
+  }
+  /**
+   * Bind tester service.
+   */
+
+
+  bindTester() {
     this.app.singleton('tester', _Tester.default);
+  }
+  /**
+   * Bind test type enum.
+   */
+
+
+  bindTestTypeEnum() {
     this.app.singleton('test.type', _Type.default);
   }
   /**
-   * Register all the supported engines in the container.
+   * Bind Jest test engine.
    */
 
 
-  registerEngines() {
+  bindJestEngine() {
     this.app.singleton('test.engine.jest', _JestEngine.default);
   }
 

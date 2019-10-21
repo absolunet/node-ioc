@@ -37,9 +37,9 @@ class Kernel extends _Kernel.default {
 
 
   async handle() {
-    await this.onBeforeHandling();
+    await this.beforeHandling();
     await this.call(this.terminal.argv);
-    await this.onAfterHandling();
+    await this.afterHandling();
   }
   /**
    * Called just before handling incoming request.
@@ -48,7 +48,7 @@ class Kernel extends _Kernel.default {
    */
 
 
-  onBeforeHandling() {} //
+  beforeHandling() {} //
 
   /**
    * Called just after handling incoming request, if no error was thrown.
@@ -57,7 +57,7 @@ class Kernel extends _Kernel.default {
    */
 
 
-  onAfterHandling() {} //
+  afterHandling() {} //
 
   /**
    * Call the given command and process it through the command registrar.
@@ -86,7 +86,7 @@ class Kernel extends _Kernel.default {
 
 
   terminate() {
-    this.onTerminating();
+    this.terminating();
 
     if ((0, _privateRegistry.default)(this).get('shouldExit')) {
       process.exit(this.app.make('exception.handler').hadException ? 1 : 0); // eslint-disable-line unicorn/no-process-exit, no-process-exit
@@ -99,7 +99,7 @@ class Kernel extends _Kernel.default {
    */
 
 
-  onTerminating() {} //
+  terminating() {} //
 
   /**
    * CommandRegistrar accessor.

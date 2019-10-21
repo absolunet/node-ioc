@@ -24,6 +24,8 @@ var _ListCommand = _interopRequireDefault(require("./commands/ListCommand"));
 
 var _MakeCommandCommand = _interopRequireDefault(require("./commands/MakeCommandCommand"));
 
+var _MakeProviderCommand = _interopRequireDefault(require("./commands/MakeProviderCommand"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -48,6 +50,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *     <li><a href="console.commands.EnvironmentCommand.html">env</a></li>
  *     <li><a href="console.commands.ListCommand.html">list</a></li>
  *     <li><a href="console.commands.MakeCommandCommand.html">make:command</a></li>
+ *     <li><a href="console.commands.MakeProviderCommand.html">make:provider</a></li>
  * </ul>
  *
  * @memberof console
@@ -59,13 +62,13 @@ class ConsoleServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.app.singleton('command', _CommandRepository.default);
-    this.app.singleton('command.registrar', _CommandRegistrar.default);
-    this.app.singleton('command.runner', _CommandRunner.default);
-    this.app.singleton('terminal', _Terminal.default);
-    this.app.singleton('terminal.interceptor', _Interceptor.default);
-    this.app.singleton('terminal.interceptor.capture', _CaptureInterceptor.default);
-    this.app.singleton('yargs', _YargsEngine.default);
+    this.bindCommandRepository();
+    this.bindCommandRegistrar();
+    this.bindCommandRunner();
+    this.bindTerminal();
+    this.bindInterceptorService();
+    this.bindCaptureInterceptor();
+    this.bindYargsEngine();
   }
   /**
    * Boot the service provider.
@@ -74,8 +77,64 @@ class ConsoleServiceProvider extends _ServiceProvider.default {
 
   boot() {
     this.setDefaultCommand();
-    this.app.make('terminal.interceptor').enable();
-    this.loadCommands([_EnvironmentCommand.default, _ListCommand.default, _MakeCommandCommand.default]);
+    this.enableInterceptor();
+    this.loadCommands([_EnvironmentCommand.default, _ListCommand.default, _MakeCommandCommand.default, _MakeProviderCommand.default]);
+  }
+  /**
+   * Bind command repository.
+   */
+
+
+  bindCommandRepository() {
+    this.app.singleton('command', _CommandRepository.default);
+  }
+  /**
+   * Bind command registrar.
+   */
+
+
+  bindCommandRegistrar() {
+    this.app.singleton('command.registrar', _CommandRegistrar.default);
+  }
+  /**
+   * Bind command runner.
+   */
+
+
+  bindCommandRunner() {
+    this.app.singleton('command.runner', _CommandRunner.default);
+  }
+  /**
+   * Bind terminal service.
+   */
+
+
+  bindTerminal() {
+    this.app.singleton('terminal', _Terminal.default);
+  }
+  /**
+   * Bind interceptor service.
+   */
+
+
+  bindInterceptorService() {
+    this.app.singleton('terminal.interceptor', _Interceptor.default);
+  }
+  /**
+   * Bind capture interceptor.
+   */
+
+
+  bindCaptureInterceptor() {
+    this.app.singleton('terminal.interceptor.capture', _CaptureInterceptor.default);
+  }
+  /**
+   * Bind Yargs service.
+   */
+
+
+  bindYargsEngine() {
+    this.app.singleton('yargs', _YargsEngine.default);
   }
   /**
    * Set default command into the command registrar.
@@ -84,6 +143,14 @@ class ConsoleServiceProvider extends _ServiceProvider.default {
 
   setDefaultCommand() {
     this.app.make('command.registrar').setDefault(_ListCommand.default);
+  }
+  /**
+   * Enable interceptor service.
+   */
+
+
+  enableInterceptor() {
+    this.app.make('terminal.interceptor').enable();
   }
 
 }

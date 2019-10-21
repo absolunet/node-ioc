@@ -2,17 +2,18 @@
 //-- Node IoC - Console - Console Service Provider
 //--------------------------------------------------------
 
-import ServiceProvider    from '../foundation/ServiceProvider';
-import CommandRepository  from './repositories/CommandRepository';
-import CommandRegistrar   from './services/CommandRegistrar';
-import CommandRunner      from './services/CommandRunner';
-import Terminal           from './services/Terminal';
-import Interceptor        from './services/Interceptor';
-import YargsEngine        from './services/YargsEngine';
-import CaptureInterceptor from './interceptors/CaptureInterceptor';
-import EnvironmentCommand from './commands/EnvironmentCommand';
-import ListCommand        from './commands/ListCommand';
-import MakeCommandCommand from './commands/MakeCommandCommand';
+import ServiceProvider     from '../foundation/ServiceProvider';
+import CommandRepository   from './repositories/CommandRepository';
+import CommandRegistrar    from './services/CommandRegistrar';
+import CommandRunner       from './services/CommandRunner';
+import Terminal            from './services/Terminal';
+import Interceptor         from './services/Interceptor';
+import YargsEngine         from './services/YargsEngine';
+import CaptureInterceptor  from './interceptors/CaptureInterceptor';
+import EnvironmentCommand  from './commands/EnvironmentCommand';
+import ListCommand         from './commands/ListCommand';
+import MakeCommandCommand  from './commands/MakeCommandCommand';
+import MakeProviderCommand from './commands/MakeProviderCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -33,6 +34,7 @@ import MakeCommandCommand from './commands/MakeCommandCommand';
  *     <li><a href="console.commands.EnvironmentCommand.html">env</a></li>
  *     <li><a href="console.commands.ListCommand.html">list</a></li>
  *     <li><a href="console.commands.MakeCommandCommand.html">make:command</a></li>
+ *     <li><a href="console.commands.MakeProviderCommand.html">make:provider</a></li>
  * </ul>
  *
  * @memberof console
@@ -45,13 +47,13 @@ class ConsoleServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
-		this.app.singleton('command',                      CommandRepository);
-		this.app.singleton('command.registrar',            CommandRegistrar);
-		this.app.singleton('command.runner',               CommandRunner);
-		this.app.singleton('terminal',                     Terminal);
-		this.app.singleton('terminal.interceptor',         Interceptor);
-		this.app.singleton('terminal.interceptor.capture', CaptureInterceptor);
-		this.app.singleton('yargs',                        YargsEngine);
+		this.bindCommandRepository();
+		this.bindCommandRegistrar();
+		this.bindCommandRunner();
+		this.bindTerminal();
+		this.bindInterceptorService();
+		this.bindCaptureInterceptor();
+		this.bindYargsEngine();
 	}
 
 	/**
@@ -59,19 +61,83 @@ class ConsoleServiceProvider extends ServiceProvider {
 	 */
 	boot() {
 		this.setDefaultCommand();
-		this.app.make('terminal.interceptor').enable();
+		this.enableInterceptor();
 		this.loadCommands([
 			EnvironmentCommand,
 			ListCommand,
-			MakeCommandCommand
+			MakeCommandCommand,
+			MakeProviderCommand
 		]);
 	}
+
+	/**
+	 * Bind command repository.
+	 */
+	bindCommandRepository() {
+		this.app.singleton('command', CommandRepository);
+
+	}
+
+	/**
+	 * Bind command registrar.
+	 */
+	bindCommandRegistrar() {
+		this.app.singleton('command.registrar', CommandRegistrar);
+
+	}
+
+	/**
+	 * Bind command runner.
+	 */
+	bindCommandRunner() {
+		this.app.singleton('command.runner', CommandRunner);
+
+	}
+
+	/**
+	 * Bind terminal service.
+	 */
+	bindTerminal() {
+		this.app.singleton('terminal', Terminal);
+
+	}
+
+	/**
+	 * Bind interceptor service.
+	 */
+	bindInterceptorService() {
+		this.app.singleton('terminal.interceptor', Interceptor);
+
+	}
+
+	/**
+	 * Bind capture interceptor.
+	 */
+	bindCaptureInterceptor() {
+		this.app.singleton('terminal.interceptor.capture', CaptureInterceptor);
+
+	}
+
+	/**
+	 * Bind Yargs service.
+	 */
+	bindYargsEngine() {
+		this.app.singleton('yargs', YargsEngine);
+	}
+
 
 	/**
 	 * Set default command into the command registrar.
 	 */
 	setDefaultCommand() {
 		this.app.make('command.registrar').setDefault(ListCommand);
+	}
+
+	/**
+	 * Enable interceptor service.
+	 */
+	enableInterceptor() {
+		this.app.make('terminal.interceptor').enable();
 	}
 
 }

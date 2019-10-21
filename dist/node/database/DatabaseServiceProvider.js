@@ -79,13 +79,13 @@ class DatabaseServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.app.singleton('db', _Builder.default);
-    this.app.singleton('db.connection', _Connector.default);
-    this.app.singleton('db.factory', _Factory.default);
-    this.app.singleton('db.model', _ModelRepository.default);
-    this.app.singleton('db.orm', _ORM.default);
-    this.app.singleton('db.resolver', _Resolver.default);
-    this.app.alias('model', 'db.model');
+    this.loadConfigFromFolder(__dirname, '..', 'config');
+    this.bindConnectionBuilder();
+    this.bindConnector();
+    this.bindFactoryService();
+    this.bindModelRepository();
+    this.bindORM();
+    this.bindResolver();
   }
   /**
    * Boot the service provider.
@@ -93,20 +93,58 @@ class DatabaseServiceProvider extends _ServiceProvider.default {
 
 
   boot() {
-    this.loadConfig();
     this.createPolicies();
     this.loadAppModelFactories();
     this.loadCommands([_MakeFactoryCommand.default, _MakeMigrationCommand.default, _MakeModelCommand.default, _MakeSeederCommand.default, _MigrateCommand.default, _MigrateFreshCommand.default, _MigrateRefreshCommand.default, _MigrateRollbackCommand.default, _MigrateStatusCommand.default, _SeedCommand.default]);
   }
   /**
-   * Load configuration file.
+   * Bind connection builder service.
    */
 
 
-  loadConfig() {
-    if (this.app.isBound('config')) {
-      this.app.make('config').loadConfigFromFolder(this.app.formatPath(__dirname, '..', 'config'));
-    }
+  bindConnectionBuilder() {
+    this.app.singleton('db', _Builder.default);
+  }
+  /**
+   * Bind database connector.
+   */
+
+
+  bindConnector() {
+    this.app.singleton('db.connection', _Connector.default);
+  }
+  /**
+   * Bind model factory service.
+   */
+
+
+  bindFactoryService() {
+    this.app.singleton('db.factory', _Factory.default);
+  }
+  /**
+   * Bind model repository.
+   */
+
+
+  bindModelRepository() {
+    this.app.singleton('db.model', _ModelRepository.default);
+    this.app.alias('model', 'db.model');
+  }
+  /**
+   * Bind ORM service.
+   */
+
+
+  bindORM() {
+    this.app.singleton('db.orm', _ORM.default);
+  }
+  /**
+   * Bind database path resolver service.
+   */
+
+
+  bindResolver() {
+    this.app.singleton('db.resolver', _Resolver.default);
   }
   /**
    * Create database related policies.

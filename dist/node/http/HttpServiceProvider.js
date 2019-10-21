@@ -61,7 +61,14 @@ class HttpServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.registerServices();
+    this.loadConfigFromFolder(__dirname, '..', 'config');
+    this.bindHttpClient();
+    this.bindHttpServer();
+    this.bindRouter();
+    this.bindRouteHandler();
+    this.bindHttpErrorMapper();
+    this.bindRouteRepository();
+    this.bindControllerRepository();
   }
   /**
    * Boot the service provider.
@@ -69,34 +76,65 @@ class HttpServiceProvider extends _ServiceProvider.default {
 
 
   boot() {
-    this.loadConfig();
     this.createPolicies();
     this.bootDefaultControllers();
     this.loadCommands([_MakeControllerCommand.default, _ServeCommand.default]);
   }
   /**
-   * Register HTTP services.
+   * Bind HTTP client service.
    */
 
 
-  registerServices() {
+  bindHttpClient() {
     this.app.singleton('http', _Client.default);
-    this.app.singleton('server', _Server.default);
-    this.app.singleton('router', _Router.default);
-    this.app.singleton('router.handler', _Handler.default);
-    this.app.singleton('http.error.mapper', _HttpErrorMapper.default);
-    this.app.singleton('router.route', _RouteRepository.default);
-    this.app.singleton('router.controller', _ControllerRepository.default);
   }
   /**
-   * Load configuration file.
+   * Bind HTTP server service.
    */
 
 
-  loadConfig() {
-    if (this.app.isBound('config')) {
-      this.app.make('config').loadConfigFromFolder(this.app.formatPath(__dirname, '..', 'config'));
-    }
+  bindHttpServer() {
+    this.app.singleton('server', _Server.default);
+  }
+  /**
+   * Bind HTTP router.
+   */
+
+
+  bindRouter() {
+    this.app.singleton('router', _Router.default);
+  }
+  /**
+   * Bind router handler service.
+   */
+
+
+  bindRouteHandler() {
+    this.app.singleton('router.handler', _Handler.default);
+  }
+  /**
+   * Bind HTTP error mapper.
+   */
+
+
+  bindHttpErrorMapper() {
+    this.app.singleton('http.error.mapper', _HttpErrorMapper.default);
+  }
+  /**
+   * Bind route repository.
+   */
+
+
+  bindRouteRepository() {
+    this.app.singleton('router.route', _RouteRepository.default);
+  }
+  /**
+   * Bind controller repository.
+   */
+
+
+  bindControllerRepository() {
+    this.app.singleton('router.controller', _ControllerRepository.default);
   }
   /**
    * Create database related policies.

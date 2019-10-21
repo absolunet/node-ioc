@@ -24,22 +24,29 @@ class SecurityServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
-		this.app.singleton('gate', Gate);
+		this.bindGateService();
 	}
 
 	/**
 	 * Boot the service provider.
 	 */
 	boot() {
-		this.defineBasicPolicies(this.app.make('gate'));
+		this.defineBasicPolicies();
+	}
+
+	/**
+	 * Bind gate service.
+	 */
+	bindGateService() {
+		this.app.singleton('gate', Gate);
 	}
 
 	/**
 	 * Define basic policy rules.
-	 *
-	 * @param {security.services.Gate} gate - The gate service instance.
 	 */
-	defineBasicPolicies(gate) {
+	defineBasicPolicies() {
+		const gate = this.app.make('gate');
+
 		gate.policy('public', () => {
 			return true;
 		});

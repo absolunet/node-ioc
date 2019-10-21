@@ -39,19 +39,43 @@ class ConfigServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.registerServices();
+    this.bindConfigGrammar();
+    this.bindEvaluator();
+    this.bindConfigRepository();
+    this.bindEnvironmentRepository();
     this.registerConfiguredProviders();
   }
   /**
-   * Register configuration services.
+   * Bind config grammar service.
    */
 
 
-  registerServices() {
+  bindConfigGrammar() {
     this.app.singleton('config.grammar', _ConfigGrammar.default);
-    this.app.singleton('config', _ConfigRepository.default);
-    this.app.singleton('env', _EnvironmentRepository.default);
+  }
+  /**
+   * Bind evaluator service.
+   */
+
+
+  bindEvaluator() {
     this.app.singleton('evaluator', _Evaluator.default);
+  }
+  /**
+   * Bind configuration repository.
+   */
+
+
+  bindConfigRepository() {
+    this.app.singleton('config', _ConfigRepository.default);
+  }
+  /**
+   * Bind environment repository.
+   */
+
+
+  bindEnvironmentRepository() {
+    this.app.singleton('env', _EnvironmentRepository.default);
   }
   /**
    * Register service providers from configuration file.

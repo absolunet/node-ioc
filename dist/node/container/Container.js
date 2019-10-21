@@ -191,16 +191,15 @@ class Container extends (0, _checksTypes.default)() {
       }
     }
 
-    const build = this.build(concrete, parameters);
-    const object = decorators.reduce((current, decorator) => {
+    const build = decorators.reduce((current, decorator) => {
       return decorator(current);
-    }, build);
+    }, this.build(concrete, parameters));
 
-    if (shared && Object.keys(parameters).length === 0) {
-      (0, _privateRegistry.default)(this).get('singletons')[abstract] = object;
+    if (shared && Object.keys(parameters).length === 0 && !(0, _privateRegistry.default)(this).get('singletons')[abstract]) {
+      (0, _privateRegistry.default)(this).get('singletons')[abstract] = build;
     }
 
-    return object;
+    return build;
   }
   /**
    * Check if the given abstract is bound to the container.

@@ -169,16 +169,15 @@ class Container extends checksTypes() {
 			}
 		}
 
-		const build  = this.build(concrete, parameters);
-		const object = decorators.reduce((current, decorator) => {
+		const build = decorators.reduce((current, decorator) => {
 			return decorator(current);
-		}, build);
+		}, this.build(concrete, parameters));
 
-		if (shared && Object.keys(parameters).length === 0) {
-			__(this).get('singletons')[abstract] = object;
+		if (shared && Object.keys(parameters).length === 0 && !__(this).get('singletons')[abstract]) {
+			__(this).get('singletons')[abstract] = build;
 		}
 
-		return object;
+		return build;
 	}
 
 	/**

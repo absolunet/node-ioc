@@ -29,6 +29,14 @@ class TranslationServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
+    this.bindTranslator();
+  }
+  /**
+   * Bind translator service.
+   */
+
+
+  bindTranslator() {
     this.app.singleton('translator', _Translator.default);
   }
 

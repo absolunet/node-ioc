@@ -5,6 +5,9 @@
 import { GeneratorCommand } from '@absolunet/ioc';
 
 
+/**
+ * %CLASS%.
+ */
 class %CLASS% extends GeneratorCommand {
 
 	/**

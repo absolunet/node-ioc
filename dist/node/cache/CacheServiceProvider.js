@@ -38,7 +38,8 @@ class CacheServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.app.singleton('cache', _CacheManager.default);
+    this.loadConfigFromFolder(__dirname, '..', 'config');
+    this.bindCacheManager();
   }
   /**
    * Boot the service provider.
@@ -46,16 +47,15 @@ class CacheServiceProvider extends _ServiceProvider.default {
 
 
   boot() {
-    this.loadConfig();
     this.loadCommands([_CacheClearCommand.default, _CacheForgetCommand.default, _CacheTableCommand.default]);
   }
   /**
-   * Load configuration file.
+   * Bind cache manager service.
    */
 
 
-  loadConfig() {
-    this.app.make('config').loadConfigFromFolder(this.app.formatPath(__dirname, '..', 'config'));
+  bindCacheManager() {
+    this.app.singleton('cache', _CacheManager.default);
   }
 
 }

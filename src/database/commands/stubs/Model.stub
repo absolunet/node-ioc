@@ -5,6 +5,9 @@
 import { Model } from '@absolunet/ioc';
 
 
+/**
+ * %CLASS%.
+ */
 class %CLASS% extends Model {
 
 }

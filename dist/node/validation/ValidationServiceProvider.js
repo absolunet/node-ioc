@@ -29,6 +29,14 @@ class ValidationServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
+    this.bindValidator();
+  }
+  /**
+   * Bind validator service.
+   */
+
+
+  bindValidator() {
     this.app.singleton('validator', _Validator.default);
   }
 

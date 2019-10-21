@@ -41,6 +41,7 @@ class CommandRunner {
   }
   /**
    * Run command based on argv object.
+   * If an exception occurs, throw it withing catching it through the application exception handler.
    *
    * @param {console.Command} command - The command instance.
    * @param {object<string, string>} argv - The Yargs arguments.

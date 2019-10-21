@@ -29,7 +29,7 @@ class SecurityServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.app.singleton('gate', _Gate.default);
+    this.bindGateService();
   }
   /**
    * Boot the service provider.
@@ -37,16 +37,23 @@ class SecurityServiceProvider extends _ServiceProvider.default {
 
 
   boot() {
-    this.defineBasicPolicies(this.app.make('gate'));
+    this.defineBasicPolicies();
   }
   /**
-   * Define basic policy rules.
-   *
-   * @param {security.services.Gate} gate - The gate service instance.
+   * Bind gate service.
    */
 
 
-  defineBasicPolicies(gate) {
+  bindGateService() {
+    this.app.singleton('gate', _Gate.default);
+  }
+  /**
+   * Define basic policy rules.
+   */
+
+
+  defineBasicPolicies() {
+    const gate = this.app.make('gate');
     gate.policy('public', () => {
       return true;
     });

@@ -38,17 +38,41 @@ class FileServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.registerServices();
+    this.bindFileManager();
+    this.bindFileEngine();
+    this.bindAsyncFileSystem();
+    this.bindSyncFileSystem();
   }
   /**
-   * Register file services.
+   * Bind file manager service.
    */
 
 
-  registerServices() {
+  bindFileManager() {
     this.app.singleton('file', _FileManager.default);
+  }
+  /**
+   * Bind file engine service.
+   */
+
+
+  bindFileEngine() {
     this.app.singleton('file.engine', _FileEngine.default);
+  }
+  /**
+   * Bind async file system.
+   */
+
+
+  bindAsyncFileSystem() {
     this.app.singleton('file.system.async', _Async.default);
+  }
+  /**
+   * Bind sync file system.
+   */
+
+
+  bindSyncFileSystem() {
     this.app.singleton('file.system.sync', _Sync.default);
   }
 

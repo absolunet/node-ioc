@@ -39,8 +39,9 @@ class LogServiceProvider extends _ServiceProvider.default {
    * Register the service provider.
    */
   register() {
-    this.app.singleton('log', _Logger.default);
-    this.app.singleton('log.level', _Level.default);
+    this.loadConfigFromFolder(__dirname, '..', 'config');
+    this.bindLogger();
+    this.bindLogLevelEnum();
   }
   /**
    * Boot the service provider.
@@ -48,18 +49,23 @@ class LogServiceProvider extends _ServiceProvider.default {
 
 
   boot() {
-    this.loadConfig();
     this.loadCommands([_LogTableCommand.default]);
   }
   /**
-   * Load configuration file.
+   * Bind logger service.
    */
 
 
-  loadConfig() {
-    if (this.app.isBound('config')) {
-      this.app.make('config').loadConfigFromFolder(this.app.formatPath(__dirname, '..', 'config'));
-    }
+  bindLogger() {
+    this.app.singleton('log', _Logger.default);
+  }
+  /**
+   * Bind log level enum.
+   */
+
+
+  bindLogLevelEnum() {
+    this.app.singleton('log.level', _Level.default);
   }
 
 }

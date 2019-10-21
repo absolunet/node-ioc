@@ -30,14 +30,14 @@ class CacheServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
-		this.app.singleton('cache', CacheManager);
+		this.loadConfigFromFolder(__dirname, '..', 'config');
+		this.bindCacheManager();
 	}
 
 	/**
 	 * Boot the service provider.
 	 */
 	boot() {
-		this.loadConfig();
 		this.loadCommands([
 			CacheClearCommand,
 			CacheForgetCommand,
@@ -46,10 +46,10 @@ class CacheServiceProvider extends ServiceProvider {
 	}
 
 	/**
-	 * Load configuration file.
+	 * Bind cache manager service.
 	 */
-	loadConfig() {
-		this.app.make('config').loadConfigFromFolder(this.app.formatPath(__dirname, '..', 'config'));
+	bindCacheManager() {
+		this.app.singleton('cache', CacheManager);
 	}
 
 }

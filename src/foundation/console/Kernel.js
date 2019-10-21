@@ -30,9 +30,9 @@ class Kernel extends BaseKernel {
 	 * @inheritdoc
 	 */
 	async handle() {
-		await this.onBeforeHandling();
+		await this.beforeHandling();
 		await this.call(this.terminal.argv);
-		await this.onAfterHandling();
+		await this.afterHandling();
 	}
 
 	/**
@@ -40,7 +40,7 @@ class Kernel extends BaseKernel {
 	 *
 	 * @abstract
 	 */
-	onBeforeHandling() {
+	beforeHandling() {
 		//
 	}
 
@@ -49,7 +49,7 @@ class Kernel extends BaseKernel {
 	 *
 	 * @abstract
 	 */
-	onAfterHandling() {
+	afterHandling() {
 		//
 	}
 
@@ -76,7 +76,7 @@ class Kernel extends BaseKernel {
 	 * @inheritdoc
 	 */
 	terminate() {
-		this.onTerminating();
+		this.terminating();
 
 		if (__(this).get('shouldExit')) {
 			process.exit(this.app.make('exception.handler').hadException ? 1 : 0); // eslint-disable-line unicorn/no-process-exit, no-process-exit
@@ -88,7 +88,7 @@ class Kernel extends BaseKernel {
 	 *
 	 * @abstract
 	 */
-	onTerminating() {
+	terminating() {
 		//
 	}
 

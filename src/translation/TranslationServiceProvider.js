@@ -24,6 +24,13 @@ class TranslationServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
+		this.bindTranslator();
+	}
+
+	/**
+	 * Bind translator service.
+	 */
+	bindTranslator() {
 		this.app.singleton('translator', Translator);
 	}
 
