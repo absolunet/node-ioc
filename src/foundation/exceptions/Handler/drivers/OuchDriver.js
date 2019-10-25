@@ -16,7 +16,7 @@ class OuchDriver extends Driver {
 	 * @type {Array<string>}
 	 */
 	static get dependencies() {
-		return (super.dependencies || []).concat(['app']);
+		return (super.dependencies || []).concat(['app', 'ide.link']);
 	}
 
 	/**
@@ -36,15 +36,13 @@ class OuchDriver extends Driver {
 		const wantsJson = this.wantsJson(request);
 
 		if (wantsJson) {
-			this.engine.pushHandler(new Ouch.handlers.JsonResponseHandler(undefined, this.app.environment !== 'production', false));
+			this.engine.pushHandler(new Ouch.handlers.JsonResponseHandler(undefined, true, false));
 		} else {
 			const editor = this.app.isBound('config') ? this.app.make('config').get('dev.ide') : null;
 			const prettyPageHandler = new Ouch.handlers.PrettyPageHandler('blue', undefined, editor || undefined);
-			prettyPageHandler.addEditor('idea',     'idea://open?file=%file&line=%line');
-			prettyPageHandler.addEditor('phpstorm', 'phpstorm://open?file=%file&line=%line');
-			prettyPageHandler.addEditor('vscode',   'vscode://file/%file:%line');
-			prettyPageHandler.addEditor('atom',     'atom://core/open/file?filename=%file&line=%line');
-			prettyPageHandler.addEditor('espresso', 'x-espresso://open?filepath=%file&lines=%line');
+			this.ideLink.entries().forEach(([ide, link]) => {
+				prettyPageHandler.addEditor(ide.toLowerCase(), link);
+			});
 			this.engine.pushHandler(prettyPageHandler);
 		}
 

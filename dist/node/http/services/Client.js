@@ -3,7 +3,7 @@
 exports.default = void 0;
 
 //--------------------------------------------------------
-//-- Node IoC - HTTP - Services - Client - HTTP Client
+//-- Node IoC - HTTP - Services - Client
 //--------------------------------------------------------
 
 /**

@@ -222,9 +222,11 @@ class Application extends _Container.default {
 
 
   isRegistered(provider) {
-    return (0, _privateRegistry.default)(this).get('providers').some(({
+    return (0, _privateRegistry.default)(this).get('providers').map(({
       provider: p
     }) => {
+      return p;
+    }).concat(coreProviders).some(p => {
       return provider === p;
     });
   }

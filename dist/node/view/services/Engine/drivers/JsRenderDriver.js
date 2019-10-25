@@ -71,6 +71,9 @@ class JsRenderDriver extends _Driver.default {
     this.engine.views.helpers('t', (...parameters) => {
       return this.app.make('translator').translate(...parameters);
     });
+    this.engine.views.helpers('dump', (...parameters) => {
+      return this.app.make('dumper').getDump(...parameters);
+    });
   }
   /**
    * Create all JSRender custom tags.
@@ -93,10 +96,22 @@ class JsRenderDriver extends _Driver.default {
       render() {
         const {
           name,
-          data = {}
+          data = {},
+          inline,
+          escape
         } = this.tagCtx.props;
         data.slot = data.slot || this.tagCtx.render();
-        return self.view.make(name, data);
+        let render = self.view.make(name, data);
+
+        if (inline) {
+          render = render.replace(/\n/gu, '');
+        }
+
+        if (escape) {
+          render = render.replace(/\\/gu, '\\\\');
+        }
+
+        return render;
       }
 
     };

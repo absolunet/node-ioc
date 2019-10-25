@@ -458,10 +458,20 @@ class Terminal extends _terminal.Terminal {
    */
 
   /**
+   * Get the currently executed file. By default, should be "ioc".
+   *
+   * @type {string}
+   */
+  get file() {
+    return process.argv[1];
+  }
+  /**
    * Get the process argv.
    *
    * @type {Array<string>}
    */
+
+
   get argv() {
     return process.argv.slice(2);
   }

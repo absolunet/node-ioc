@@ -71,7 +71,7 @@ class MakeControllerCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get patterns() {
-		const baseControllerPath = this.app.formatPath(this.pathHelper.relative(this.pathHelper.dirname(this.getDestination()), this.app.controllerPath('Controller')));
+		const baseControllerPath = this.app.formatPath(this.pathHelper.relative(this.pathHelper.dirname(this.getDestination()), this.app.sourcePath('controller', 'Controller')));
 
 		return {
 			BASE_CONTROLLER_PATH: baseControllerPath.startsWith('.') ? baseControllerPath : `./${baseControllerPath}`

@@ -13,7 +13,7 @@ class %CLASS% extends Controller {
 	/**
 	 * Handle incoming request.
 	 *
-	 * @returns {response}
+	 * @returns {response} The response.
 	 */
 	handle() {
 		//

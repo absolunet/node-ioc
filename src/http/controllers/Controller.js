@@ -52,6 +52,17 @@ class Controller {
 	}
 
 	/**
+	 * Dump parameters in the current response.
+	 *
+	 * @param {...*} parameters - The dumped values.
+	 */
+	dump(...parameters) {
+		this.app.make('dumper')
+			.setResponse(this.response)
+			.dump(...parameters);
+	}
+
+	/**
 	 * Send a stream response.
 	 * Ends the request when the handler resolves.
 	 *
@@ -119,6 +130,16 @@ class Controller {
 		if (handler) {
 			interceptor.unmute().remove(handler);
 		}
+	}
+
+	/**
+	 * Validate the current request body against the given schema.
+	 *
+	 * @param {Function} validationClosure - The validation callback that returns the validation schema.
+	 */
+	validate(validationClosure) {
+		const validator = this.app.make('validator');
+		validator.assert(this.request.body, validator.object().keys(validationClosure(validator)));
 	}
 
 	/**
@@ -199,7 +220,10 @@ class Controller {
 	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	noContent() {
-		return this.status(204);
+		this.status(204);
+		this.response.end();
+
+		return this;
 	}
 
 	/**

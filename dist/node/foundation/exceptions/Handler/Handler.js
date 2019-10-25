@@ -10,6 +10,8 @@ var _OuchDriver = _interopRequireDefault(require("./drivers/OuchDriver"));
 
 var _PrettyErrorDriver = _interopRequireDefault(require("./drivers/PrettyErrorDriver"));
 
+var _ViewDriver = _interopRequireDefault(require("./drivers/ViewDriver"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -41,10 +43,12 @@ class Handler extends (0, _hasDriver.default)() {
   init() {
     super.init();
     (0, _privateRegistry.default)(this).set('exceptions', []);
-    this.addDriver('prettyError', _PrettyErrorDriver.default);
     this.addDriver('ouch', _OuchDriver.default);
+    this.addDriver('prettyError', _PrettyErrorDriver.default);
+    this.addDriver('view', _ViewDriver.default);
     this.setDriverAlias('prettyError', 'console');
-    this.setDriverAlias('ouch', 'http');
+    this.setDriverAlias('ouch', 'http.debug');
+    this.setDriverAlias('ouch', 'http.production');
   }
   /**
    * Handle the given exception.
@@ -106,35 +110,13 @@ class Handler extends (0, _hasDriver.default)() {
 
 
   async renderResponse(exception, request, response) {
-    const status = exception.status || 500;
-    response.status(status);
+    exception.status = exception.status || 500;
+    response.status(exception.status);
 
-    if (this.app.environment !== 'production') {
-      await this.driver('http').render(exception, request, response);
+    if (['stating', 'production'].includes(this.app.environment)) {
+      await this.driver('http.production').render(exception, request, response);
     } else {
-      let content = 'Something went wrong...';
-
-      if (this.app.isBound('translator')) {
-        content = this.app.make('translator').translate(content);
-      }
-
-      if (this.app.isBound('view') && this.app.isBound('view.resolver')) {
-        const viewFactory = this.app.make('view');
-        const viewResolver = this.app.make('view.resolver');
-        let viewName = `errors.${status}`;
-
-        if (!viewResolver.exists(viewName)) {
-          viewName = 'errors.generic';
-        }
-
-        if (viewResolver.exists(viewName)) {
-          content = viewFactory.make(viewName, {
-            exception
-          });
-        }
-      }
-
-      response.write(content);
+      await this.driver('http.debug').render(exception, request, response);
     }
   }
   /**

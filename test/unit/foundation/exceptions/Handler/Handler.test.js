@@ -12,8 +12,14 @@ beforeEach(() => {
 	given.emptyResponse();
 	given.stringHelper();
 	given.fakeLogger();
-	given.fakeTerminal();
 	given.exceptionHandler();
+	given.fakeDebugHttpDriver();
+	given.fakeProductionHttpDriver();
+	given.fakeConsoleDriver();
+});
+
+afterEach(() => {
+	then.resetEnvironment();
 });
 
 
@@ -35,32 +41,16 @@ test('Can render the exception as an HTTP response if HTTP request and response 
 	given.fakeRequest();
 	given.fakeResponse();
 	await when.renderingException();
-	then.shouldHaveRenderedExceptionInResponseAsContent();
+	then.shouldHaveRenderedExceptionInResponse();
 });
 
-test('Can set 500 HTTP status code if generic error is thrown', async () => {
+test('Can render a specific Web page as an HTTP response if HTTP request and response object are provided in a non-local or testing environment', async () => {
 	given.exception();
 	given.fakeRequest();
 	given.fakeResponse();
+	given.productionEnvironment();
 	await when.renderingException();
-	then.shouldHaveSetStatus(500);
-});
-
-test('Can set 404 HTTP status code if error contains "status" equals 404', async () => {
-	given.exceptionWithStatus(404);
-	given.fakeRequest();
-	given.fakeResponse();
-	await when.renderingException();
-	then.shouldHaveSetStatus(404);
-});
-
-test('Can render the exception as an HTTP response if HTTP request and response objects are provided and request expects JSON response', async () => {
-	given.exception();
-	given.fakeRequest();
-	given.fakeResponse();
-	given.xRequestedWithHeader();
-	await when.renderingException();
-	then.shouldHaveRenderedExceptionInResponseAsJson();
+	then.shouldHaveRenderedExceptionInResponseThroughCustomErrorPage();
 });
 
 test('Can report an exception', async () => {
@@ -69,10 +59,18 @@ test('Can report an exception', async () => {
 	then.shouldHaveReportedException();
 });
 
-test('Can handle report exception', async () => {
+test('Can handle report exception in console', async () => {
 	given.brokenLogger();
 	await when.reportingException();
-	then.shouldHaveHandledReportException();
+	then.shouldHaveHandledReportExceptionInConsole();
+});
+
+test('Can handle report exception in console even if requesting an HTTP response', async () => {
+	given.fakeRequest();
+	given.fakeResponse();
+	given.brokenLogger();
+	await when.reportingException();
+	then.shouldHaveHandledReportExceptionInConsole();
 });
 
 test('Can check if there was any exception during the process', async () => {

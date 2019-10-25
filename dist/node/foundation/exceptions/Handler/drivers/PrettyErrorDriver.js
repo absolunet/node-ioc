@@ -7,7 +7,7 @@ var _Driver = _interopRequireDefault(require("./Driver"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
-//-- Node IoC - Foundation - Exceptions - Handler - Drivers - Ouch Driver
+//-- Node IoC - Foundation - Exceptions - Handler - Drivers - Pretty Error Driver
 //--------------------------------------------------------
 
 /**
@@ -33,15 +33,6 @@ class PrettyErrorDriver extends _Driver.default {
       PrettyError
     } = this;
     this.setEngine(new PrettyError());
-  }
-  /**
-   * @inheritdoc
-   */
-
-
-  setEngine(engine) {
-    super.setEngine(engine);
-    this.setEngineStyles();
   }
   /**
    * Set engine styles.
@@ -89,6 +80,7 @@ class PrettyErrorDriver extends _Driver.default {
 
 
   render(exception) {
+    this.setEngineStyles();
     this.terminal.spacer();
     this.terminal.echo(this.engine.render(exception));
   }

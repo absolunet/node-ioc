@@ -8,6 +8,7 @@ const { given, when, then } = gwt;
 
 beforeEach(() => {
 	given.providersAndDependencies();
+	given.fakeViewResolver();
 });
 
 
@@ -31,6 +32,16 @@ test('String helper is resolvable', () => {
 	then.stringHelperShouldBeResolvable();
 });
 
+test('Dumper service is resolvable', () => {
+	when.bootingContainer();
+	then.dumperServiceShouldBeResolvable();
+});
+
+test('Dumper service is a singleton', () => {
+	when.bootingContainer();
+	then.dumperServiceShouldBeSingleton();
+});
+
 test('Faker service is resolvable', () => {
 	when.bootingContainer();
 	then.fakerShouldBeResolvable();
@@ -39,4 +50,9 @@ test('Faker service is resolvable', () => {
 test('Faker service is a singleton', () => {
 	when.bootingContainer();
 	then.fakerShouldBeSingleton();
+});
+
+test('Dumper view namespace should be created', () => {
+	when.bootingContainer('namespace');
+	then.dumperViewNamespaceShouldBeCreated();
 });

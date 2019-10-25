@@ -2,12 +2,12 @@
 //-- Tests - Unit - Foundation - Exceptions - Handler - GWT
 //--------------------------------------------------------
 
-import gwt from '../common.gwt';
+import gwt from '../../common.gwt';
 const { given, when, then, build } = gwt;
 
-import container        from '../../container';
-import ExceptionHandler from '../../../../dist/node/foundation/exceptions/Handler';
-import StringHelper     from '../../../../dist/node/support/helpers/StringHelper';
+import container        from '../../../container';
+import ExceptionHandler from '../../../../../dist/node/foundation/exceptions/Handler';
+import StringHelper     from '../../../../../dist/node/support/helpers/StringHelper';
 
 
 let exceptionHandler;
@@ -15,18 +15,20 @@ let result;
 let exception;
 let request;
 let response;
-let fakeHeader;
 
 
 //-- Mocks
 //--------------------------------------------------------
+
+const fakeException   = new TypeError('An error has occurred...');
+const loggerException = new TypeError('A logger error has occurred...');
 
 const fakeLogger = {
 	error: jest.fn()
 };
 
 const brokenLogger = {
-	error: jest.fn(() => { throw new TypeError('An error has occurred...'); })
+	error: jest.fn(() => { throw loggerException; })
 };
 
 const fakeTerminal = {
@@ -45,20 +47,8 @@ const fakeTerminal = {
 	}
 };
 
-const fakeException = new TypeError('An error has occurred...');
 
-const fakeRequest = {
-	get: jest.fn((key) => { return fakeHeader[key]; }),
-	get headers()         { return { ...fakeHeader }; },
-	get url()             { return '/'; },
-	get method()          { return 'GET'; },
-	get body()            { return {}; },
-	connection: {
-		encrypted: false,
-		remoteAddress: '127.0.0.1',
-		remotePort: 80
-	}
-};
+const fakeRequest = {};
 
 const fakeResponse = {
 	status:    jest.fn(),
@@ -67,6 +57,18 @@ const fakeResponse = {
 	setHeader: jest.fn(),
 	writeHead: jest.fn(),
 	end:       jest.fn()
+};
+
+const fakeDebugHttpDriver = {
+	render: jest.fn()
+};
+
+const fakeProductionHttpDriver = {
+	render: jest.fn()
+};
+
+const fakeConsoleDriver = {
+	render: jest.fn()
 };
 
 
@@ -78,8 +80,7 @@ given.emptyResult = () => {
 };
 
 given.emptyRequest = () => {
-	request    = undefined;
-	fakeHeader = undefined;
+	request = undefined;
 };
 
 given.emptyResponse = () => {
@@ -106,6 +107,18 @@ given.exceptionHandler = () => {
 	exceptionHandler = container.make(ExceptionHandler);
 };
 
+given.fakeDebugHttpDriver = () => {
+	exceptionHandler.addDriver('http.debug', fakeDebugHttpDriver);
+};
+
+given.fakeProductionHttpDriver = () => {
+	exceptionHandler.addDriver('http.production', fakeProductionHttpDriver);
+};
+
+given.fakeConsoleDriver = () => {
+	exceptionHandler.addDriver('console', fakeConsoleDriver);
+};
+
 given.exception = () => {
 	exception = fakeException;
 };
@@ -121,9 +134,6 @@ given.exceptionWithStatus = (code) => {
 
 given.fakeRequest = () => {
 	request = fakeRequest;
-	fakeHeader = {
-		accept: 'text/html'
-	};
 };
 
 given.fakeResponse = () => {
@@ -134,8 +144,8 @@ given.handledException = async () => {
 	await exceptionHandler.handle(fakeException);
 };
 
-given.xRequestedWithHeader = () => {
-	fakeHeader['x-requested-with'] = 'XmlHttpRequest';
+given.productionEnvironment = () => {
+	container.setEnvironment('production');
 };
 
 
@@ -176,6 +186,10 @@ when.gettingLastException = () => {
 //-- Then
 //--------------------------------------------------------
 
+then.resetEnvironment = () => {
+	container.setEnvironment(process.env.NODE_ENV); // eslint-disable-line no-process-env
+};
+
 then.resultShouldBe = (expected) => {
 	then.shouldNotHaveThrown();
 	expect(result).toBe(expected);
@@ -186,33 +200,34 @@ then.shouldHaveReportedException = () => {
 	expect(fakeLogger.error).toHaveBeenCalled();
 };
 
-then.shouldHaveRenderedExceptionInConsole = () => {
-	then.shouldNotHaveThrown();
-	expect(fakeTerminal.spacer).toHaveBeenCalled();
-	expect(fakeTerminal.echo).toHaveBeenCalled();
-};
-
 then.shouldHaveSetStatus = (status) => {
 	then.shouldNotHaveThrown();
 	expect(response.status).toHaveBeenCalledWith(status);
 };
 
+then.shouldHaveRenderedExceptionInConsole = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeConsoleDriver.render).toHaveBeenCalledWith(exception);
+};
+
 then.shouldHaveRenderedExceptionInResponse = () => {
 	then.shouldHaveSetStatus(500);
+	expect(fakeDebugHttpDriver.render).toHaveBeenCalledWith(exception, fakeRequest, fakeResponse);
 };
 
-then.shouldHaveRenderedExceptionInResponseAsContent = () => {
-	then.shouldHaveRenderedExceptionInResponse();
-	expect(response.end).toHaveBeenCalled();
+then.shouldHaveRenderedExceptionInResponseThroughCustomErrorPage = () => {
+	then.shouldHaveSetStatus(500);
+	expect(fakeProductionHttpDriver.render).toHaveBeenCalledWith(exception, fakeRequest, fakeResponse);
 };
 
-then.shouldHaveRenderedExceptionInResponseAsJson = () => {
-	then.shouldHaveRenderedExceptionInResponse();
-	expect(response.json).toHaveBeenCalled();
+then.shouldHaveHandledReportExceptionInConsole = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeConsoleDriver.render).toHaveBeenCalledWith(loggerException);
 };
 
 then.shouldHaveHandledReportException = () => {
-	then.shouldHaveRenderedExceptionInConsole();
+	then.shouldNotHaveThrown();
+	expect(fakeConsoleDriver.render).toHaveBeenCalledWith(loggerException);
 };
 
 then.resultShouldBeFakeException = () => {

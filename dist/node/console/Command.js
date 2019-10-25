@@ -418,6 +418,18 @@ class Command {
     return this.argumentIsSupported('flags', name);
   }
   /**
+   * Write raw data in console without any verbose restriction.
+   *
+   * @param {...*} parameters - Data to print in console.
+   */
+
+
+  write(...parameters) {
+    parameters.forEach(parameter => {
+      this.termina.echo(parameter);
+    });
+  }
+  /**
    * Print spammy message for developers.
    *
    * @param  {...*} parameters - Data to print as spam.

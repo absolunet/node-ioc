@@ -1,5 +1,5 @@
 //--------------------------------------------------------
-//-- Node IoC - Foundation - Exceptions - Handler - Drivers - Ouch Driver
+//-- Node IoC - Foundation - Exceptions - Handler - Drivers - Pretty Error Driver
 //--------------------------------------------------------
 
 import Driver from './Driver';
@@ -26,14 +26,6 @@ class PrettyErrorDriver extends Driver {
 	init() {
 		const { PrettyError } = this;
 		this.setEngine(new PrettyError());
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	setEngine(engine) {
-		super.setEngine(engine);
-		this.setEngineStyles();
 	}
 
 	/**
@@ -87,6 +79,7 @@ class PrettyErrorDriver extends Driver {
 	 * @inheritdoc
 	 */
 	render(exception) {
+		this.setEngineStyles();
 		this.terminal.spacer();
 		this.terminal.echo(this.engine.render(exception));
 	}

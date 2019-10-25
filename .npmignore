@@ -5,6 +5,7 @@
 .eslintrc.yaml
 .gitignore
 .travis.yml
+bitbucket-pipelines.yml
 code_of_conduct.md
 contributing.md
 manager.js

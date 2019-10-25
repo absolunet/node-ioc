@@ -6,6 +6,7 @@ import __                from '@absolunet/private-registry';
 import hasDriver         from '../../../support/mixins/hasDriver';
 import OuchDriver        from './drivers/OuchDriver';
 import PrettyErrorDriver from './drivers/PrettyErrorDriver';
+import ViewDriver        from './drivers/ViewDriver';
 
 
 /**
@@ -34,10 +35,13 @@ class Handler extends hasDriver() {
 		super.init();
 		__(this).set('exceptions', []);
 
+		this.addDriver('ouch',        OuchDriver);
 		this.addDriver('prettyError', PrettyErrorDriver);
-		this.addDriver('ouch', OuchDriver);
+		this.addDriver('view',        ViewDriver);
+
 		this.setDriverAlias('prettyError', 'console');
-		this.setDriverAlias('ouch', 'http');
+		this.setDriverAlias('ouch',        'http.debug');
+		this.setDriverAlias('ouch',        'http.production');
 	}
 
 	/**
@@ -97,33 +101,13 @@ class Handler extends hasDriver() {
 	 * @returns {Promise} The async process promise.
 	 */
 	async renderResponse(exception, request, response) {
-		const status = exception.status || 500;
-		response.status(status);
+		exception.status = exception.status || 500;
+		response.status(exception.status);
 
-		if (this.app.environment !== 'production') {
-			await this.driver('http').render(exception, request, response);
+		if (['stating', 'production'].includes(this.app.environment)) {
+			await this.driver('http.production').render(exception, request, response);
 		} else {
-			let content = 'Something went wrong...';
-
-			if (this.app.isBound('translator')) {
-				content = this.app.make('translator').translate(content);
-			}
-
-			if (this.app.isBound('view') && this.app.isBound('view.resolver')) {
-				const viewFactory = this.app.make('view');
-				const viewResolver = this.app.make('view.resolver');
-				let viewName = `errors.${status}`;
-
-				if (!viewResolver.exists(viewName)) {
-					viewName = 'errors.generic';
-				}
-
-				if (viewResolver.exists(viewName)) {
-					content = viewFactory.make(viewName, { exception });
-				}
-			}
-
-			response.write(content);
+			await this.driver('http.debug').render(exception, request, response);
 		}
 	}
 

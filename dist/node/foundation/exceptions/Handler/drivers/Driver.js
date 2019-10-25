@@ -27,7 +27,7 @@ class Driver extends (0, _hasEngine.default)() {
    * @param {Error} exception - The exception to render.
    * @param {request} [request] - The current request.
    * @param {response} [response] - The current response.
-   * @returns {Promise} The async process promise.
+   * @returns {Promise|void} The async process promise, if async.
    * @async
    * @abstract
    */

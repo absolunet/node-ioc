@@ -102,7 +102,7 @@ class ServeCommand extends Command {
 	 */
 	startDaemon() {
 		const commandParts = [
-			this.yargs.argv.$0,
+			this.terminal.file,
 			this.name,
 			`--port=${this.option('port')}`,
 			'--start-silent'

@@ -10,7 +10,9 @@ manager.init({
 	dist: {
 		node: true,
 		include: [
-			'**/*.stub'
+			'**/*.stub',
+			'**/*.yaml',
+			'**/*.html'
 		]
 	}
 });

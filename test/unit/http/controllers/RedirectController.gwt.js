@@ -5,7 +5,7 @@
 import gwt from '../common.gwt';
 const { given, when, then, build } = gwt;
 
-import container from '../../container';
+import container          from '../../container';
 import RedirectController from '../../../../dist/node/http/controllers/RedirectController';
 
 let redirectController;

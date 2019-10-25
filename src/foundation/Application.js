@@ -204,9 +204,11 @@ class Application extends Container {
 	 * @returns {boolean} Indicates that the service provider was already registered.
 	 */
 	isRegistered(provider) {
-		return __(this).get('providers').some(({ provider: p }) => {
-			return provider === p;
-		});
+		return __(this).get('providers')
+			.map(({ provider: p }) => { return p; })
+			.concat(coreProviders).some((p) => {
+				return provider === p;
+			});
 	}
 
 	/**

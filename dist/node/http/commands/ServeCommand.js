@@ -105,7 +105,7 @@ class ServeCommand extends _Command.default {
 
 
   startDaemon() {
-    const commandParts = [this.yargs.argv.$0, this.name, `--port=${this.option('port')}`, '--start-silent'];
+    const commandParts = [this.terminal.file, this.name, `--port=${this.option('port')}`, '--start-silent'];
     const silent = this.flag('silent');
 
     if (silent) {

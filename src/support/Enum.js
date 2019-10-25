@@ -51,6 +51,30 @@ class Enum {
 	}
 
 	/**
+	 * Get value by key.
+	 *
+	 * @param {string} search - The searched key.
+	 * @returns {*} The retrieved value.
+	 */
+	get(search) {
+		return (search && this.entries().find(([key]) => {
+			return key.toUpperCase() === search.toUpperCase();
+		})[1]) || null;
+	}
+
+	/**
+	 * Get key by value.
+	 *
+	 * @param {*} search - The searched value.
+	 * @returns {string|null} The retrieved key.
+	 */
+	getKey(search) {
+		return this.entries().find(([, value]) => {
+			return value === search;
+		})[0] || null;
+	}
+
+	/**
 	 * Get enumeration keys.
 	 *
 	 * @returns {Array<string>} The enumeration keys.

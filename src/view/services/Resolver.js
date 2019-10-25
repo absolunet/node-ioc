@@ -82,7 +82,7 @@ class Resolver {
 			return this.path;
 		}
 
-		const namespace = view.slice(0, view.indexOf(this.namespaceDelimiter));
+		const namespace     = view.slice(0, view.indexOf(this.namespaceDelimiter));
 		const namespacePath = __(this).get('namespaces')[namespace];
 
 		if (!namespacePath) {
