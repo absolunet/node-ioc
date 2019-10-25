@@ -5,6 +5,7 @@
 import gwt from '../../common.gwt';
 const { given, when, then, build } = gwt;
 
+import chalk            from 'chalk';
 import container        from '../../../container';
 import ExceptionHandler from '../../../../../dist/node/foundation/exceptions/Handler';
 import StringHelper     from '../../../../../dist/node/support/helpers/StringHelper';
@@ -42,9 +43,7 @@ const fakeTerminal = {
 			return 2;
 		}
 	},
-	get chalk() {
-		return require('chalk'); // eslint-disable-line global-require
-	}
+	chalk
 };
 
 
