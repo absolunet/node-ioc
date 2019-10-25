@@ -130,7 +130,7 @@ then.shouldHaveLoggedWithLevelInFile = (value, file) => {
 		return parameter === file;
 	});
 	expect(call[0]).toBe(file);
-	expect(call[1]).toMatch(new RegExp(`^${value}\\s+\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] \\[Version \\d+\\.\\d+\\.\\d+\\]\\n\\s+${message}`, 'u'));
+	expect(call[1]).toMatch(new RegExp(`^${value}\\s+\\[\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}\\] \\[Version \\d+\\.\\d+\\.\\d+(?:-(?:alpha|beta|rc)(?:\\.\\d+))?\\]\\n\\s+${message}`, 'u'));
 };
 
 then.shouldHaveLoggedInFileWithLevel = (value) => {
