@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Connector - Drivers - SQLite Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./SqliteDriver.gwt');
+import gwt from './SqliteDriver.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -46,7 +46,7 @@ test('Can check if connection does not exists by name', () => {
 
 test('Can get new connection with connection config', () => {
 	given.connectionConfig();
-	when.makingNewConnection();
+	when.makingConnection();
 	then.shouldNotHaveConnection('foo');
 	then.resultShouldBeKnexInstanceWithConfig();
 	then.resultShouldBeAwareOfCurrentDriver();

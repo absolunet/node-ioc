@@ -1,0 +1,20 @@
+{{if empty}}
+    {{:symbols.open}}{{:symbols.close}}
+{{else}}
+    <span class="ioc-dumper-symbol-opening" data-toggle>{{:symbols.open}}</span>
+    <div class="ioc-dumper-group-wrapper">
+        {{for items}}
+        <div class="ioc-dumper-group">
+            {{for depth}}
+            <span class="ioc-dumper-tab"></span>
+            {{/for}}
+            <span class="ioc-dumper-key">{{:key}}</span>
+            {{:value}}
+        </div>
+        {{/for}}
+    </div>
+    {{for depth}}
+    <span class="ioc-dumper-tab"></span>
+    {{/for}}
+    <span class="ioc-dumper-symbol-closing">{{:symbols.close}}</span>
+{{/if}}

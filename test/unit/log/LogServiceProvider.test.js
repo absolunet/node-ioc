@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Log - Log Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./LogServiceProvider.gwt');
+import gwt from './LogServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

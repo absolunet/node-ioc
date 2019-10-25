@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Cache Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CacheServiceProvider.gwt');
+import gwt from './CacheServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

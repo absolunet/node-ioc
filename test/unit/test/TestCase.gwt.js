@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Test Case - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../container');
-const TestCase  = require('../../../lib/test/TestCase');
+import container from '../container';
+import TestCase  from '../../../dist/node/test/TestCase';
 
 let testCase;
 let result;
@@ -132,4 +132,4 @@ then.resultShouldBeEngineAsserts = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

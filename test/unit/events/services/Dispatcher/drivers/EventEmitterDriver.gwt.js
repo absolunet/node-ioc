@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Events - Services - Dispatcher - Drivers - Event Emitter Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const EventEmitterDriver = require('../../../../../../lib/events/services/Dispatcher/drivers/EventEmitterDriver');
+import EventEmitterDriver from '../../../../../../dist/node/events/services/Dispatcher/drivers/EventEmitterDriver';
 
 
 //-- Given
@@ -17,4 +17,4 @@ given.emitterDriver = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

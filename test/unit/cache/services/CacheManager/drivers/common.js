@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager - Drivers - Common tests
 //--------------------------------------------------------
-'use strict';
 
 
-module.exports = ({ given, when, then }) => {
+export default ({ given, when, then }) => {
 
 	test('Can put item in cache and retrieve it', async () => {
 		given.cacheEntry('foo', 'bar');

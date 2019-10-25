@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - ORM - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../../container');
-const ORM       = require('../../../../../lib/database/services/ORM');
+import container from '../../../container';
+import ORM       from '../../../../../dist/node/database/services/ORM';
 
 let orm;
 let result;
@@ -155,5 +155,4 @@ then.otherDriverShouldHaveReceivedCurrentConnection = () => {
 };
 
 
-
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Validation - Validation Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
 
 //-- Then
@@ -18,4 +18,4 @@ then.validatorServiceShouldBeSingleton = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

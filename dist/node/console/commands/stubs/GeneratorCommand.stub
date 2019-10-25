@@ -1,0 +1,62 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Command - %CLASS%
+//--------------------------------------------------------
+
+import { GeneratorCommand } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends GeneratorCommand {
+
+	/**
+	 * @inheritdoc
+	 */
+	get policies() {
+		return ['env:local'];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'make:type';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	get description() {
+		return '%CLASS% description.';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	get files() {
+		return {
+			base: this.app.formatPath(__dirname, 'stubs', 'BaseFile.stub')
+		};
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	get destination() {
+		return this.app.appPath('folder');
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	async handle() {
+		this.debug('Generating some file.');
+		await this.generate('base');
+		this.info('File successfully generated!');
+	}
+
+}
+
+
+export default %CLASS%;

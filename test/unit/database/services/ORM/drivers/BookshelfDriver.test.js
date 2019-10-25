@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - ORM - Drivers - Bookshelf Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./BookshelfDriver.gwt');
+import gwt from './BookshelfDriver.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

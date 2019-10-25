@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Command Runner - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container     = require('../../container');
-const CommandRunner = require('../../../../lib/console/services/CommandRunner');
+import container     from '../../container';
+import CommandRunner from '../../../../dist/node/console/services/CommandRunner';
 
 const fakeArgv = { option: 'value', flag: true };
 
@@ -158,4 +158,4 @@ then.commandShouldHaveBeenForwarded = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

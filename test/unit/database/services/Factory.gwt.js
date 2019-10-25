@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Factory - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Factory   = require('../../../../lib/database/services/Factory');
+import container from '../../container';
+import Factory   from '../../../../dist/node/database/services/Factory';
 
 const fakeNames = ['one', 'two', 'three', 'four', 'five', 'six'];
 
@@ -177,4 +177,4 @@ then.modelsAttributesShouldMatch = (expected) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

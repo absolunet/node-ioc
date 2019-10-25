@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Application
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Application.gwt');
+import gwt from './Application.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -169,7 +169,7 @@ test('Can configure paths', () => {
 
 test('Can reset default paths', () => {
 	given.fakePath();
-	given.newPublicPath();
+	given.fakePublicPath();
 	when.configuringDefaultPaths();
 	then.shouldHaveFakePathBound();
 	then.shouldHaveOriginalPublicPath();
@@ -187,12 +187,28 @@ test('Can configure base path', () => {
 	then.fakePathShouldBePrefixedByNewBasePath();
 });
 
-test('Can configure application source path', () => {
+test('Can configure application path', () => {
 	given.fakePath();
 	when.usingNewAppPath();
 	then.appPathShouldBeNewAppPath();
 	then.fakePathShouldNotHaveChanged();
 	then.providerPathShouldBePrefixedByNewAppPath();
+});
+
+test('Can configure source path', () => {
+	given.fakePath();
+	when.usingNewSourcePath();
+	then.appSourcePathShouldUseNewSourcePath();
+	then.appPathShouldNotHaveChanged();
+	then.fakePathShouldNotHaveChanged();
+});
+
+test('Can configure distribution path', () => {
+	given.fakePath();
+	when.usingNewDistributionPath();
+	then.appSourcePathShouldNotHaveChanged();
+	then.appPathShouldUseNewDistributionPath();
+	then.fakePathShouldNotHaveChanged();
 });
 
 test('Can configure home directory path', () => {
@@ -210,6 +226,16 @@ test('Can set application version', () => {
 	then.applicationShouldHaveNewVersion();
 });
 
+test('Can get source path', () => {
+	when.gettingSourcePath();
+	then.resultShouldBeBinding(`path.src`);
+});
+
+test('Can get distribution path', () => {
+	when.gettingDistributionPath();
+	then.resultShouldBeBinding(`path.dist`);
+});
+
 [
 	'home',
 	'base',
@@ -224,6 +250,7 @@ test('Can set application version', () => {
 	'routes',
 	'storage',
 	'test',
+	'upload',
 	'view'
 ]
 	.forEach((type) => {
@@ -235,5 +262,24 @@ test('Can set application version', () => {
 		test(`Can get absolute path of given relative path from ${type} path`, () => {
 			when.calling(`${type}Path`, [['foo', 'bar']]);
 			then.resultShouldBeFormattedPathFromBinding(`path.${type}`, ['foo', 'bar']);
+		});
+	});
+
+[
+	'controller',
+	'command',
+	'database',
+	'provider',
+	'routes'
+]
+	.forEach((type) => {
+		test(`Can get ${type} source path`, () => {
+			when.calling('sourcePath', [type, '']);
+			then.resultShouldBeBinding(`path.src.${type}`);
+		});
+
+		test(`Can get absolute path of given relative path from ${type} path`, () => {
+			when.calling('sourcePath', [type, ['foo', 'bar']]);
+			then.resultShouldBeFormattedPathFromBinding(`path.src.${type}`, ['foo', 'bar']);
 		});
 	});

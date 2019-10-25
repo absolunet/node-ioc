@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Security - Services - Gate - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./../common.gwt');
+import gwt from './../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Gate      = require('../../../../lib/security/services/Gate');
+import container from '../../container';
+import Gate      from '../../../../dist/node/security/services/Gate';
 
 let gate;
 let result;
@@ -109,4 +109,4 @@ then.policyShouldHaveReceivedArguments = (...parameters) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

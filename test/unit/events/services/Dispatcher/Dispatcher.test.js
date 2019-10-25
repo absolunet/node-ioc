@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Events - Services - Dispatcher
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Dispatcher.gwt');
+import gwt from './Dispatcher.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

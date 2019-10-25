@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Commands - Cache Forget Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const CacheForgetCommand = require('../../../../lib/cache/commands/CacheForgetCommand');
+import CacheForgetCommand from '../../../../dist/node/cache/commands/CacheForgetCommand';
 
 
 given.cacheForgetCommand = () => {
@@ -30,4 +30,5 @@ then.shouldHaveDeletedKeyOnAlternateStore = (key) => {
 	then.shouldHaveDeletedKeyOnStore(key, 'foo');
 };
 
-module.exports = build({ given, when, then });
+
+export default build({ given, when, then });

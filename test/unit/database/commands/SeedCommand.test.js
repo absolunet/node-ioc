@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Commands - Seed Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./SeedCommand.gwt');
+import gwt from './SeedCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

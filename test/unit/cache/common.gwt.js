@@ -1,15 +1,15 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../container');
+import container from '../container';
 
-const CacheServiceProvider    = require('../../../lib/cache/CacheServiceProvider');
-const DatabaseServiceProvider = require('../../../lib/database/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../lib/security/SecurityServiceProvider');
+import CacheServiceProvider    from '../../../dist/node/cache/CacheServiceProvider';
+import DatabaseServiceProvider from '../../../dist/node/database/DatabaseServiceProvider';
+import SecurityServiceProvider from '../../../dist/node/security/SecurityServiceProvider';
 
 
 //-- Given
@@ -69,4 +69,4 @@ then.shouldHaveSingleton = (service) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

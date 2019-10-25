@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - View - Services - Resolver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const path      = require('path');
-const container = require('../../container');
-const Resolver  = require('../../../../lib/view/services/Resolver');
+import * as path from 'path';
+import container from '../../container';
+import Resolver  from '../../../../dist/node/view/services/Resolver';
 
 let resolver;
 let viewName;
@@ -53,6 +53,12 @@ when.findingView = () => {
 	});
 };
 
+when.checkingIfViewExists = () => {
+	when.attempting(() => {
+		result = resolver.exists(viewName);
+	});
+};
+
 
 //-- Then
 //--------------------------------------------------------
@@ -68,4 +74,4 @@ then.shouldHaveReceivedStubsViewPath = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

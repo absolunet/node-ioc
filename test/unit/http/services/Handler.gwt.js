@@ -1,13 +1,14 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Services - Handler - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Handler   = require('../../../../lib/http/services/Handler');
-const Route     = require('../../../../lib/http/models/Route');
+import EventEmitter from 'events';
+import container    from '../../container';
+import Handler      from '../../../../dist/node/http/services/Handler';
+import Route        from '../../../../dist/node/http/Route';
 
 let handler;
 let result;
@@ -42,9 +43,20 @@ const fakeExceptionHandler = {
 };
 
 const fakeRequest  = {};
-const fakeResponse = {
-	status: jest.fn(() => { return fakeResponse; })
-};
+const fakeResponse = new EventEmitter();
+fakeResponse.status      = jest.fn((status) => {
+	fakeResponse.statusCode = status;
+
+	return fakeResponse;
+});
+fakeResponse.headersSent = true;
+fakeResponse.end         = jest.fn();
+fakeResponse.sendFile    = jest.fn(() => {
+	setTimeout(() => {
+		fakeResponse.emit('finish');
+	});
+});
+
 
 const fakeAction   = jest.fn();
 const brokenAction = jest.fn(() => {
@@ -133,6 +145,7 @@ given.unexistingControllerAction = () => {
 //--------------------------------------------------------
 
 when.handlingRequest = async () => {
+	delete fakeResponse.statusCode;
 	await when.attemptingAsync(async () => {
 		result = await handler.handleRequest(route, fakeRequest, fakeResponse);
 	});
@@ -142,9 +155,10 @@ when.handlingRequest = async () => {
 //-- Then
 //--------------------------------------------------------
 
-then.shouldHaveReceivedResponse = () => {
+then.shouldHaveReceivedResponse = (code) => {
 	then.shouldNotHaveThrown();
 	expect(result).toBe(fakeResponse);
+	expect(fakeResponse.status).toHaveBeenCalledWith(code);
 };
 
 then.exceptionShouldHaveBeenHandled = () => {
@@ -193,4 +207,4 @@ then.controllerShouldNotHaveBeenPrepared = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

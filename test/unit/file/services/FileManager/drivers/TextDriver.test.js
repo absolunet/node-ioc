@@ -1,10 +1,10 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - Text Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./TextDriver.gwt');
-const common                = require('./common');
+import gwt from './TextDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 describe('Text driver', () => {

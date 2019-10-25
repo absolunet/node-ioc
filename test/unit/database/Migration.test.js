@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Migration
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Migration.gwt');
+import gwt from './Migration.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

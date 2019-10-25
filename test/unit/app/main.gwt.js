@@ -1,15 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Application - Main - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
-
-const Application = require('../../../lib/foundation/Application');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
 let main;
 let result;
-let mockedSetTimeout;
 
 
 //-- Given
@@ -20,33 +17,17 @@ given.emptyResult = () => {
 };
 
 given.mainFile = () => {
-	main = require('../../../lib'); // eslint-disable-line global-require
-};
-
-given.mockedSetTimeout = () => {
-	mockedSetTimeout = jest.spyOn(global, 'setTimeout');
+	main = require('../../../dist/node'); // eslint-disable-line global-require
 };
 
 
 //-- When
 //--------------------------------------------------------
 
-when.gettingApplication = () => {
-	when.attempting(() => {
-		result = main.app;
-	});
-};
-
 when.gettingMixinsWithoutFactory = () => {
 	when.attempting(() => {
 		({ ...result } = main.mixins);
 		delete result.factory;
-	});
-};
-
-when.loadingMainFile = () => {
-	when.attempting(() => {
-		require('../../../lib'); // eslint-disable-line global-require
 	});
 };
 
@@ -67,19 +48,6 @@ when.gettingAllKeysExceptApplicationAndMixins = () => {
 //-- Then
 //--------------------------------------------------------
 
-then.shouldHaveReceivedApplicationInstance = () => {
-	expect(result).toBeInstanceOf(Application);
-};
-
-then.mockedSetTimeoutCallbackShouldNotHaveBeenCalled = () => {
-	then.shouldNotHaveThrown();
-	expect(mockedSetTimeout).not.toHaveBeenCalled();
-};
-
-then.restoreMockedSetTimeout = () => {
-	mockedSetTimeout.mockRestore();
-};
-
 then.allKeysShouldBeConstructor = () => {
 	then.shouldNotHaveThrown();
 	expect(typeof result).toBe('object');
@@ -99,4 +67,4 @@ then.allKeysShouldFactoryConstructor = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

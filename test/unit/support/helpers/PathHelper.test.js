@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Helpers - Path Helper
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./PathHelper.gwt');
+import gwt from './PathHelper.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

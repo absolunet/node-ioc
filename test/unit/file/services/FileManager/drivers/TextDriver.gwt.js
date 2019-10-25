@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - Text Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const TextDriver = require('../../../../../../lib/file/services/FileManager/drivers/TextDriver');
+import TextDriver from '../../../../../../dist/node/file/services/FileManager/drivers/TextDriver';
 
 
 //-- Given
@@ -29,4 +29,4 @@ given.currentDriverContent = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

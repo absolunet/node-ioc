@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - View - Services - Engine - Drivers - JsRender Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../../../container');
-const JsRenderDriver = require('../../../../../../lib/view/services/Engine/drivers/JsRenderDriver');
+import container from '../../../../container';
+import JsRenderDriver from '../../../../../../dist/node/view/services/Engine/drivers/JsRenderDriver';
 
 let driver;
 let template;
@@ -192,4 +192,4 @@ then.fakeTranslatorShouldHaveBeenCalledWith = (...parameters) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

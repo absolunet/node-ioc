@@ -1,0 +1,79 @@
+//--------------------------------------------------------
+//-- %PROJECT% - HTTP - Controllers - %CLASS%
+//--------------------------------------------------------
+
+import Controller from '%BASE_CONTROLLER_PATH%';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Controller {
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @returns {response} The response.
+	 */
+	index() {
+		//
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @returns {response} The response.
+	 */
+	create() {
+		//
+	}
+
+	/**
+     * Store a newly created resource.
+	 *
+	 * @returns {response} The response.
+	 */
+	store() {
+		//
+	}
+
+	/**
+     * Display the specified resource.
+	 *
+	 * @returns {response} The response.
+	 */
+	show() {
+		//
+	}
+
+	/**
+     * Show the form for editing the specified resource.
+	 *
+	 * @returns {response} The response.
+	 */
+	edit() {
+		//
+	}
+
+	/**
+     * Update the specified resource.
+	 *
+	 * @returns {response} The response.
+	 */
+	update() {
+		//
+	}
+
+	/**
+     * Remove the specified resource.
+     *
+	 * @returns {response} The response.
+	 */
+	destroy() {
+		//
+	}
+
+}
+
+
+export default %CLASS%;

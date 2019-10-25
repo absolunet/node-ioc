@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Services - Config Grammar - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container     = require('../../container');
-const ConfigGrammar = require('../../../../lib/config/services/ConfigGrammar');
+import container     from '../../container';
+import ConfigGrammar from '../../../../dist/node/config/services/ConfigGrammar';
 
 let configGrammar;
 let result;
@@ -92,4 +92,4 @@ then.resultShouldBe = (expected) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

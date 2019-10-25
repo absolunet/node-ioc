@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Console - Kernel - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container              = require('../../container');
-const ConsoleKernel          = require('../../../../lib/foundation/console/Kernel');
-const ConsoleServiceProvider = require('../../../../lib/console/ConsoleServiceProvider');
+import container              from '../../container';
+import ConsoleKernel          from '../../../../dist/node/foundation/console/Kernel';
+import ConsoleServiceProvider from '../../../../dist/node/console/ConsoleServiceProvider';
 
 let consoleKernel;
 let mockExit;
@@ -46,10 +46,6 @@ given.consoleKernel = () => {
 
 given.fakeCommandRegistrar = () => {
 	container.singleton('command.registrar', fakeCommandRegistrar);
-};
-
-given.fakeCommandPath = () => {
-	container.bind('path.command', '/fake/command/path');
 };
 
 given.fakeProcessExit = () => {
@@ -120,11 +116,6 @@ then.commandRegistrarShouldHaveResolvedCommand = () => {
 	expect(fakeCommandRegistrar.resolve).toHaveBeenCalledWith(fakeTerminal.argv);
 };
 
-then.shouldHaveLoadedCommandsFromApplication = () => {
-	then.shouldNotHaveThrown();
-	expect(fakeCommandRegistrar.addFromFolder).toHaveBeenCalledWith(container.make('path.command'));
-};
-
 then.shouldHaveExitedWith = (code) => {
 	then.shouldNotHaveThrown();
 	expect(mockExit).toHaveBeenCalledTimes(1);
@@ -137,4 +128,4 @@ then.shouldNotHaveExited = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

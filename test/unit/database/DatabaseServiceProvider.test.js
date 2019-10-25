@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Database Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./DatabaseServiceProvider.gwt');
+import gwt from './DatabaseServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -118,6 +118,7 @@ test('The application models are loaded dynamically into model factory', () => {
 	given.fakeConfigRepository();
 	given.fakeFileManager();
 	given.fakeModelsFolderPathInConfiguration();
+	given.fakeDatabasePath();
 	when.bootingContainer();
 	then.shouldHaveRegisteredModelFactoriesInFactory();
 });

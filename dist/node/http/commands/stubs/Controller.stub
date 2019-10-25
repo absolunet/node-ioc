@@ -1,0 +1,16 @@
+//--------------------------------------------------------
+//-- %PROJECT% - HTTP - Controllers - %CLASS%
+//--------------------------------------------------------
+
+import Controller from '%BASE_CONTROLLER_PATH%';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Controller {
+
+}
+
+
+export default %CLASS%;

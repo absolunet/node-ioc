@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Translation - Services - Translator - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
 
-const container = require('../../../container');
-const Translator = require('../../../../../lib/translation/services/Translator');
+import container from '../../../container';
+import Translator from '../../../../../dist/node/translation/services/Translator';
 
 
 let translator;
@@ -184,4 +184,4 @@ then.fallbackLocaleInConfigShouldBe = (locale) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

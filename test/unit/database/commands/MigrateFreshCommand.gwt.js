@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Commands - Migrate Fresh Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const MigrateFreshCommand = require('../../../../lib/database/commands/MigrateFreshCommand');
+import MigrateFreshCommand from '../../../../dist/node/database/commands/MigrateFreshCommand';
 
 
 //-- Given
@@ -16,4 +16,4 @@ given.migrateFreshCommand = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

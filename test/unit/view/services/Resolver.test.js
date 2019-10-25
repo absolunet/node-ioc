@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - View - Services - Resolver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Resolver.gwt');
+import gwt from './Resolver.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -29,6 +29,18 @@ test('Fails when trying to resolve unexisting file', () => {
 	given.viewName('unexisting');
 	when.findingView();
 	then.shouldHaveThrown();
+});
+
+test('Can check if file exists', () => {
+	given.viewName('test');
+	when.checkingIfViewExists();
+	then.resultShouldBe(true);
+});
+
+test('Can check if file does not exist', () => {
+	given.viewName('unexisting');
+	when.checkingIfViewExists();
+	then.resultShouldBe(false);
 });
 
 test('Can register namespace', () => {

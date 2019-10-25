@@ -1,24 +1,24 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Kernel - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../container');
-const Kernel    = require('../../../lib/foundation/Kernel');
+import container from '../container';
+import Kernel    from '../../../dist/node/foundation/Kernel';
 
-const NotImplementedError = require('../../../lib/foundation/exceptions/NotImplementedError');
+import NotImplementedError from '../../../dist/node/foundation/exceptions/NotImplementedError';
 
-const CacheServiceProvider       = require('../../../lib/cache/CacheServiceProvider');
-const DatabaseServiceProvider    = require('../../../lib/database/DatabaseServiceProvider');
-const HttpServiceProvider        = require('../../../lib/http/HttpServiceProvider');
-const LogServiceProvider         = require('../../../lib/log/LogServiceProvider');
-const SecurityServiceProvider    = require('../../../lib/security/SecurityServiceProvider');
-const TestServiceProvider        = require('../../../lib/test/TestServiceProvider');
-const TranslationServiceProvider = require('../../../lib/translation/TranslationServiceProvider');
-const ValidationServiceProvider  = require('../../../lib/validation/ValidationServiceProvider');
-const ViewServiceProvider        = require('../../../lib/view/ViewServiceProvider');
+import CacheServiceProvider       from '../../../dist/node/cache/CacheServiceProvider';
+import DatabaseServiceProvider    from '../../../dist/node/database/DatabaseServiceProvider';
+import HttpServiceProvider        from '../../../dist/node/http/HttpServiceProvider';
+import LogServiceProvider         from '../../../dist/node/log/LogServiceProvider';
+import SecurityServiceProvider    from '../../../dist/node/security/SecurityServiceProvider';
+import TestServiceProvider        from '../../../dist/node/test/TestServiceProvider';
+import TranslationServiceProvider from '../../../dist/node/translation/TranslationServiceProvider';
+import ValidationServiceProvider  from '../../../dist/node/validation/ValidationServiceProvider';
+import ViewServiceProvider        from '../../../dist/node/view/ViewServiceProvider';
 
 let kernel;
 
@@ -94,4 +94,4 @@ then.shouldHaveThrownNotImplementedError = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

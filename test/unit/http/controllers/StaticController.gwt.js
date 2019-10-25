@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Controllers - Static Controller - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const StaticController = require('../../../../lib/http/controllers/StaticController');
+import container         from '../../container';
+import StaticController  from '../../../../dist/node/http/controllers/StaticController';
 
 let staticController;
 let folderPath;
@@ -17,7 +17,7 @@ let filePath;
 //--------------------------------------------------------
 
 const fakeRequest  = {
-	get params() {
+	get params() { // eslint-disable-line unicorn/prevent-abbreviations
 		return {
 			file: filePath
 		};
@@ -82,9 +82,14 @@ then.shouldHaveSentFileResponse = () => {
 };
 
 then.shouldHaveReceivedStatus = (status) => {
-	then.shouldNotHaveThrown();
 	expect(fakeResponse.status).toHaveBeenCalledWith(status);
 };
 
+then.shouldHaveThrownNotFoundHttpError = () => {
+	then.shouldHaveThrown();
+	then.exceptionShouldHaveName('NotFoundHttpError');
+	then.shouldHaveReceivedStatus(404);
+};
 
-module.exports = build({ given, when, then });
+
+export default build({ given, when, then });

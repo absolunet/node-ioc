@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CacheManager.gwt');
+import gwt from './CacheManager.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

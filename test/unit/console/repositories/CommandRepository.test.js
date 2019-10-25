@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Repositories - Command Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CommandRepository.gwt');
+import gwt from './CommandRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

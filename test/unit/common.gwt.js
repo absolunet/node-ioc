@@ -1,5 +1,3 @@
-'use strict';
-
 const given = {};
 const when  = {};
 const then  = {};
@@ -87,5 +85,9 @@ then.exceptionShouldBeInstanceOf = (expected) => {
 	expect(exception).toBeInstanceOf(expected);
 };
 
+then.exceptionShouldHaveName = (expected) => {
+	expect(exception.name).toBe(expected);
+};
 
-module.exports = build({ given: {}, when: {}, then: {} });
+
+export default build({ given: {}, when: {}, then: {} });

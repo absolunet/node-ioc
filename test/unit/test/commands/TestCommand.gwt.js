@@ -1,16 +1,16 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Commands - Test Command - GWT
 //--------------------------------------------------------
-'use strict';
 
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-process-env */
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container      = require('../../container');
-const TestCommand    = require('../../../../lib/test/commands/TestCommand');
-const CommandRunner  = require('../../../../lib/console/services/CommandRunner');
+import container      from '../../container';
+import TestCommand    from '../../../../dist/node/test/commands/TestCommand';
+import CommandRunner  from '../../../../dist/node/console/services/CommandRunner';
 
 const originalProcessArgv = process.argv;
 const originalProcessEnv  = process.env;
@@ -95,12 +95,12 @@ given.featureFlag = () => {
 	given.argv('feature', true);
 };
 
-given.standardsFlag = () => {
-	given.argv('standards', true);
+given.endToEndFlag = () => {
+	given.argv('endtoend', true);
 };
 
-given.endToEndFlag = () => {
-	given.argv('e2e', true);
+given.integrationFlag = () => {
+	given.argv('integration', true);
 };
 
 given.unitOption = () => {
@@ -111,12 +111,12 @@ given.featureOption = () => {
 	given.argv('type', 'feature');
 };
 
-given.standardsOption = () => {
-	given.argv('type', 'standards');
+given.endToEndOption = () => {
+	given.argv('type', 'endtoend');
 };
 
-given.endToEndOption = () => {
-	given.argv('type', 'e2e');
+given.integrationOption = () => {
+	given.argv('type', 'integration');
 };
 
 
@@ -176,16 +176,16 @@ then.shouldRunFeatureTests = () => {
 	then.shouldRunTestInRepository('test.feature');
 };
 
-then.shouldRunStandardsTests = () => {
-	then.shouldRunTestInRepository('test.standards');
-};
-
 then.shouldRunEndToEndTests = () => {
-	then.shouldRunTestInRepository('test.e2e');
+	then.shouldRunTestInRepository('test.endtoend');
+};
+
+then.shouldRunIntegrationTests = () => {
+	then.shouldRunTestInRepository('test.integration');
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });
 
 /* eslint-enable unicorn/prevent-abbreviations */
 /* eslint-enable no-process-env */

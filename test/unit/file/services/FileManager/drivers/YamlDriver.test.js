@@ -1,10 +1,10 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - YAML Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./YamlDriver.gwt');
-const common                = require('./common');
+import gwt from './YamlDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 describe('YAML driver', () => {

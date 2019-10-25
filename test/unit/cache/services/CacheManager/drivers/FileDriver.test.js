@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager - Drivers - File Driver
 //--------------------------------------------------------
-'use strict';
 
 
-const { given, when, then } = require('./FileDriver.gwt');
-const common                = require('./common');
+import gwt from './FileDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 beforeAll(() => {

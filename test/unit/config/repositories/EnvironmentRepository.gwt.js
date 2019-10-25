@@ -1,16 +1,16 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Repositories - Environment Repository - GWT
 //--------------------------------------------------------
-'use strict';
 
 /* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable no-process-env */
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const path                  = require('path');
-const container             = require('../../container');
-const EnvironmentRepository = require('../../../../lib/config/repositories/EnvironmentRepository');
+import * as path             from 'path';
+import container             from '../../container';
+import EnvironmentRepository from '../../../../dist/node/config/repositories/EnvironmentRepository';
 
 const originalProcessEnv = process.env;
 const baseDotEnvFile     = path.join(__dirname, '..', 'stubs', '.env');
@@ -176,7 +176,7 @@ then.resultShouldMatchOtherDotEnvFileContent = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });
 
 /* eslint-enable unicorn/prevent-abbreviations */
 /* eslint-enable no-process-env */

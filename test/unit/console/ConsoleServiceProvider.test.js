@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Console Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ConsoleServiceProvider.gwt');
+import gwt from './ConsoleServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

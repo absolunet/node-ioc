@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Repositories - Model Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ModelRepository.gwt');
+import gwt from './ModelRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

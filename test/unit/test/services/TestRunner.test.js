@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Services - Test Runner
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./TestRunner.gwt');
+import gwt from './TestRunner.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

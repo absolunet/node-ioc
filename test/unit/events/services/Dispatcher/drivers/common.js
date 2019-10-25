@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Events - Services - Dispatcher - Drivers - Common tests
 //--------------------------------------------------------
-'use strict';
 
 
-module.exports = ({ given, when, then }) => {
+export default ({ given, when, then }) => {
 
 	beforeEach(() => {
 		given.emptyPayload();

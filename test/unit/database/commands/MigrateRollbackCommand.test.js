@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Commands - Migrate Rollback Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./MigrateRollbackCommand.gwt');
+import gwt from './MigrateRollbackCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

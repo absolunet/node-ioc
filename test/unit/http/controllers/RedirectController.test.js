@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Controllers - Redirect Controller
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./RedirectController.gwt');
+import gwt from './RedirectController.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

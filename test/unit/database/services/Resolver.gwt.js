@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - Resolver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Resolver  = require('../../../../lib/database/services/Resolver');
+import container from '../../container';
+import Resolver  from '../../../../dist/node/database/services/Resolver';
 
 let result;
 let resolver;
@@ -34,6 +34,10 @@ const fakeConfigGrammar = {
 
 given.emptyResult = () => {
 	result = undefined;
+};
+
+given.fakeDatabasePath = () => {
+	container.configurePaths({ database: '/database' });
 };
 
 given.fakeConfigRepository = () => {
@@ -122,35 +126,36 @@ then.pathsShouldBeBoundIntoApplication = () => {
 	then.serviceShouldBeResolvable('path.model');
 	then.serviceShouldBeResolvable('path.seed');
 };
+
 then.fakePathsShouldBeBoundIntoApplication = () => {
 	then.pathsShouldBeBoundIntoApplication();
-	expect(container.make('path.factory')).toBe('/path/to/factories');
-	expect(container.make('path.migration')).toBe('/path/to/migrations');
-	expect(container.make('path.model')).toBe('/path/to/models');
-	expect(container.make('path.seed')).toBe('/path/to/seeds');
+	expect(container.make('path.factory')).toBe('/database/path/to/factories');
+	expect(container.make('path.migration')).toBe('/database/path/to/migrations');
+	expect(container.make('path.model')).toBe('/database/path/to/models');
+	expect(container.make('path.seed')).toBe('/database/path/to/seeds');
 };
 
 then.defaultPathsShouldBeBoundIntoApplication = () => {
 	then.pathsShouldBeBoundIntoApplication();
-	expect(container.make('path.factory')).toBe('@/database/factories');
-	expect(container.make('path.migration')).toBe('@/database/migrations');
-	expect(container.make('path.model')).toBe('@/database/models');
-	expect(container.make('path.seed')).toBe('@/database/seeds');
+	expect(container.make('path.factory')).toBe('/database/factories');
+	expect(container.make('path.migration')).toBe('/database/migrations');
+	expect(container.make('path.model')).toBe('/database/models');
+	expect(container.make('path.seed')).toBe('/database/seeds');
 };
 
 then.fakeMigrationPathShouldBeBoundIntoApplication = () => {
 	then.shouldNotHaveThrown();
 	then.serviceShouldBeResolvable('path.migration');
-	expect(container.make('path.migration')).toBe('/path/to/migrations');
+	expect(container.make('path.migration')).toBe('/database/path/to/migrations');
 };
 
 then.defaultPathsExceptMigrationShouldBeBoundIntoApplication = () => {
 	then.serviceShouldBeResolvable('path.factory');
 	then.serviceShouldBeResolvable('path.model');
 	then.serviceShouldBeResolvable('path.seed');
-	expect(container.make('path.factory')).toBe('@/database/factories');
-	expect(container.make('path.model')).toBe('@/database/models');
-	expect(container.make('path.seed')).toBe('@/database/seeds');
+	expect(container.make('path.factory')).toBe('/database/factories');
+	expect(container.make('path.model')).toBe('/database/models');
+	expect(container.make('path.seed')).toBe('/database/seeds');
 };
 
 then.shouldHaveSamePathsAsBoundInApplication = () => {
@@ -170,12 +175,16 @@ then.shouldHaveSameMigrationPathAsBoundInApplication = () => {
 
 then.configGrammarShouldHaveBeenUsedForEveryPathsAsDefaultPaths = () => {
 	then.shouldNotHaveThrown();
-	expect(fakeConfigGrammar.format).toHaveBeenCalledTimes(4);
-	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(1, '@/database/factories');
-	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(2, '@/database/migrations');
-	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(3, '@/database/models');
-	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(4, '@/database/seeds');
+	expect(fakeConfigGrammar.format).toHaveBeenCalledTimes(8);
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(1, 'factories');
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(2, 'migrations');
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(3, 'models');
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(4, 'seeds');
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(5, 'factories');
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(6, 'migrations');
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(7, 'models');
+	expect(fakeConfigGrammar.format).toHaveBeenNthCalledWith(8, 'seeds');
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

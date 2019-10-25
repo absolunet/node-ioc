@@ -1,0 +1,29 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Providers - %CLASS%
+//--------------------------------------------------------
+
+import { ServiceProvider } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends ServiceProvider {
+
+	/**
+	 * Register any services.
+	 */
+	register() {
+		//
+	}
+
+	/**
+	 * Bootstrap any services.
+	 */
+	boot() {
+		//
+	}
+
+}
+
+export default %CLASS%;

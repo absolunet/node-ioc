@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Command Runner
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CommandRunner.gwt');
+import gwt from './CommandRunner.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

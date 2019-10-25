@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Repositories - Command Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container         = require('../../container');
-const CommandRepository = require('../../../../lib/console/repositories/CommandRepository');
-const Command           = require('../../../../lib/console/Command');
+import container         from '../../container';
+import CommandRepository from '../../../../dist/node/console/repositories/CommandRepository';
+import Command           from '../../../../dist/node/console/Command';
 
 let commandRepository;
 let result;
@@ -221,4 +221,4 @@ then.resultShouldBePrivateCommand = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

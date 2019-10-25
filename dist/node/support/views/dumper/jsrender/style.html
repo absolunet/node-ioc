@@ -1,0 +1,100 @@
+<style>
+    .ioc-dumper {
+        margin: 0;
+        padding: 1em;
+        background: {{:theme.colors.background}};
+        color: {{:theme.colors.text}};
+        font-family: "{{:theme.font.name}}";
+        font-weight: {{:theme.font.weight}};
+        font-size: {{:theme.font.size}};
+    }
+
+    .ioc-dumper span {
+        display: inline-block;
+        padding-bottom: .125em;
+        padding-top: .125em;
+    }
+
+    .ioc-dumper-location-link {
+        color: inherit;
+        display: block;
+        margin-bottom: 1em;
+    }
+
+    .ioc-dumper-dump {
+        margin-bottom: 1em;
+    }
+
+    .ioc-dumper-tab {
+        width: {{:theme.indent * .5}}em;
+        display: inline-block;
+    }
+
+    .ioc-dumper-type-wrapper {
+        padding-right: .25em;
+    }
+
+    .ioc-dumper-symbol-opening {
+        padding-right: .25em;
+        padding-left: .25em;
+        cursor: pointer;
+    }
+
+    .ioc-dumper-symbol-opening:after {
+        content: "\025B2";
+        position: relative;
+        left: .5em;
+        display: inline-block;
+        transform: rotate(90deg);
+    }
+
+    .ioc-dumper-symbol-opening.open:after {
+        transform: rotate(180deg);
+    }
+
+    .ioc-dumper-group-wrapper {
+        display: none;
+    }
+
+    .ioc-dumper-symbol-opening:not(.open) ~ .ioc-dumper-tab {
+        display: none;
+    }
+
+    .open + .ioc-dumper-group-wrapper {
+        display: block;
+    }
+
+    .ioc-dumper-key {
+        color: {{:theme.colors.key}}
+    }
+
+    .ioc-dumper-key:after {
+        content: "\02192";
+        padding: 0 .25em;
+        vertical-align: bottom;
+    }
+
+    .ioc-dumper-type {
+        color: {{:theme.colors.type}}
+    }
+
+    .ioc-dumper-value-boolean {
+        color: {{:theme.colors.boolean}};
+    }
+
+    .ioc-dumper-value-function {
+        color: {{:theme.colors.function}};
+    }
+
+    .ioc-dumper-value-number {
+        color: {{:theme.colors.number}};
+    }
+
+    .ioc-dumper-value-string {
+        color: {{:theme.colors.string}};
+    }
+
+    .ioc-dumper-value-symbol {
+        color: {{:theme.colors.symbol}};
+    }
+</style>

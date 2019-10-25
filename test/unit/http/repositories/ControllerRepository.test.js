@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Repositories - Controller Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ControllerRepository.gwt');
+import gwt from './ControllerRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

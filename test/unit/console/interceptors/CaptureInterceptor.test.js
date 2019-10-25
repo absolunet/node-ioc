@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Capture Interceptor
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CaptureInterceptor.gwt');
+import gwt from './CaptureInterceptor.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

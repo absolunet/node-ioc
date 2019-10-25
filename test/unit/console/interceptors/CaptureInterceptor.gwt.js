@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Interceptors - Capture Interceptor - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container          = require('../../container');
-const CaptureInterceptor = require('../../../../lib/console/interceptors/CaptureInterceptor');
+import container          from '../../container';
+import CaptureInterceptor from '../../../../dist/node/console/interceptors/CaptureInterceptor';
 
 let captureInterceptor;
 let result;
@@ -90,4 +90,5 @@ then.resultShouldNotEqualCapture = () => {
 	expect(result).not.toEqual(captureInterceptor.capture);
 };
 
-module.exports = build({ given, when, then });
+
+export default build({ given, when, then });

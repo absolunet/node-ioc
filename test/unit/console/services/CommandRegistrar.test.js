@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Command Registrar
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./CommandRegistrar.gwt');
+import gwt from './CommandRegistrar.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

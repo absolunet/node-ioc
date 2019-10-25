@@ -1,0 +1,26 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Database - Seeds - %CLASS%
+//--------------------------------------------------------
+
+import { Seeder } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Seeder {
+
+	/**
+	 * Seed the application's database.
+	 *
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
+	 */
+	async seed(connection) {
+		await this.factory('%MODEL%').save();
+	}
+
+}
+
+
+export default %CLASS%;
