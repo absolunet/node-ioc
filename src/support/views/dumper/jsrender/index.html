@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{:~config('app.locale', 'en')}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Node IoC Dump - {{:~config('app.name')}}</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            background: {{:theme.colors.background}};
+        }
+    </style>
+</head>
+<body>
+    {{include name="dumper::jsrender.dump" data=#data /}}
+</body>
+</html>

@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Config Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container                   = require('../container');
-const FakeServiceProvider         = require('./stubs/providers/FakeServiceProvider');
-const UnregisteredServiceProvider = require('./stubs/providers/UnregisteredServiceProvider');
+import container                   from '../container';
+import FakeServiceProvider         from './stubs/providers/FakeServiceProvider';
+import UnregisteredServiceProvider from './stubs/providers/UnregisteredServiceProvider';
 
 let fakeConfig;
 
@@ -110,4 +110,4 @@ then.configuredServiceProvidersShouldBeBooted = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

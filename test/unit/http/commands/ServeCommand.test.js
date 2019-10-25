@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Commands - Serve Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ServeCommand.gwt');
+import gwt from './ServeCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

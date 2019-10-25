@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Log - Services - Logger - Drivers - Stack Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container   = require('../../../../container');
-const StackDriver = require('../../../../../../lib/log/services/Logger/drivers/StackDriver');
+import container   from '../../../../container';
+import StackDriver from '../../../../../../dist/node/log/services/Logger/drivers/StackDriver';
 
 let driver;
 let config;
@@ -125,4 +125,4 @@ then.shouldHaveOneCaughtError = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

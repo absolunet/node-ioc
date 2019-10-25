@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Repositories - End-To-End Test Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./EndToEndTestRepository.gwt');
+import gwt from './EndToEndTestRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -19,7 +19,7 @@ beforeEach(() => {
 });
 
 
-test('Scopes for folder under "e2e"', () => {
+test('Scopes for folder under "endtoend"', () => {
 	when.gettingScope();
-	then.resultShouldBe('e2e');
+	then.resultShouldBe('endtoend');
 });

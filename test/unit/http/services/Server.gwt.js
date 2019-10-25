@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Services - Server - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Server    = require('../../../../lib/http/services/Server');
+import container from '../../container';
+import Server    from '../../../../dist/node/http/services/Server';
 
 let result;
 let server;
@@ -108,4 +108,4 @@ then.shouldHaveReceivedExpressRouter = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

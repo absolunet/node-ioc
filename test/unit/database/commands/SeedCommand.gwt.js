@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Commands - Seed Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const SeedCommand = require('../../../../lib/database/commands/SeedCommand');
+import SeedCommand from '../../../../dist/node/database/commands/SeedCommand';
 
 
 //-- Given
@@ -16,4 +16,4 @@ given.seedCommand = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

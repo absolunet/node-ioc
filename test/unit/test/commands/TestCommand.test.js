@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Commands - Serve Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./TestCommand.gwt');
+import gwt from './TestCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -48,16 +48,16 @@ test('Can run test with Jest on feature test files when specified as option', as
 	then.shouldRunFeatureTests();
 });
 
-test('Can run test with Jest on standards test files when specified as option', async () => {
-	given.standardsOption();
-	await when.runningCommand();
-	then.shouldRunStandardsTests();
-});
-
 test('Can run test with Jest on end-to-end test files when specified as option', async () => {
 	given.endToEndOption();
 	await when.runningCommand();
 	then.shouldRunEndToEndTests();
+});
+
+test('Can run test with Jest on integration test files when specified as option', async () => {
+	given.integrationOption();
+	await when.runningCommand();
+	then.shouldRunIntegrationTests();
 });
 
 test('Can run test with Jest on unit test files when specified as flag', async () => {
@@ -72,16 +72,16 @@ test('Can run test with Jest on feature test files when specified as flag', asyn
 	then.shouldRunFeatureTests();
 });
 
-test('Can run test with Jest on standards test files when specified as flag', async () => {
-	given.standardsFlag();
-	await when.runningCommand();
-	then.shouldRunStandardsTests();
-});
-
 test('Can run test with Jest on end-to-end test files when specified as flag', async () => {
 	given.endToEndFlag();
 	await when.runningCommand();
 	then.shouldRunEndToEndTests();
+});
+
+test('Can run test with Jest on end-to-end test files when specified as flag', async () => {
+	given.integrationFlag();
+	await when.runningCommand();
+	then.shouldRunIntegrationTests();
 });
 
 test('Cannot run test with more than one repository', async () => {

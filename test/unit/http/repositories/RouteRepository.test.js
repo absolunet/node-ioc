@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Repositories - Route Repository
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./RouteRepository.gwt');
+import gwt from './RouteRepository.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

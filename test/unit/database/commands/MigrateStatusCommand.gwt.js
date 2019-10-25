@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Commands - Migrate Status Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const MigrateStatusCommand = require('../../../../lib/database/commands/MigrateStatusCommand');
+import MigrateStatusCommand from '../../../../dist/node/database/commands/MigrateStatusCommand';
 
 
 //-- Given
@@ -16,4 +16,4 @@ given.migrateStatusCommand = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

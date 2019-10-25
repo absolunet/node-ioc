@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Exceptions - Not Implemented Error - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const NotImplementedError = require('../../../../lib/foundation/exceptions/NotImplementedError');
+import NotImplementedError from '../../../../dist/node/foundation/exceptions/NotImplementedError';
 
 let instance;
 let expectedValue;
@@ -87,4 +87,4 @@ then.messageShouldContainClassNameAndMutator = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

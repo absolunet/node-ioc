@@ -1,0 +1,16 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Database - Models - %CLASS%
+//--------------------------------------------------------
+
+import { Model } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Model {
+
+}
+
+
+export default %CLASS%;

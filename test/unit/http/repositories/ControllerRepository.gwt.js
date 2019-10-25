@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Repositories - Controller Repository - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const path                 = require('path');
-const container            = require('../../container');
-const ControllerRepository = require('../../../../lib/http/repositories/ControllerRepository');
+import * as path            from 'path';
+import container            from '../../container';
+import ControllerRepository from '../../../../dist/node/http/repositories/ControllerRepository';
 
 let controllerRepository;
 let result;
@@ -37,6 +37,8 @@ given.controller = () => {
 
 given.fakeAppPath = () => {
 	container.useBasePath(path.dirname(__dirname));
+	container.useSourcePath('');
+	container.useDistributionPath('');
 	container.useAppPath('stubs');
 };
 
@@ -117,11 +119,11 @@ then.shouldHaveReceivedController = () => {
 };
 
 then.shouldHaveReceivedStubController = () => {
-	then.resultShouldBeInstanceOf(require('../stubs/http/controllers/StubController')); // eslint-disable-line global-require
+	then.resultShouldBeInstanceOf(require('../stubs/http/controllers/StubController').default); // eslint-disable-line global-require
 };
 
 then.shouldHaveReceivedNamespaceStubController = () => {
-	then.resultShouldBeInstanceOf(require('../stubs/http/controllers/namespace/StubController')); // eslint-disable-line global-require
+	then.resultShouldBeInstanceOf(require('../stubs/http/controllers/namespace/StubController').default); // eslint-disable-line global-require
 };
 
 then.controllerShouldBeBindToApplication = () => {
@@ -135,4 +137,4 @@ then.controllerShouldBeBindToApplicationWithPrefix = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

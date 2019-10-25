@@ -1,14 +1,14 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Commands - Serve Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const EventEmitter  = require('events');
-const container     = require('../../container');
-const ServeCommand  = require('../../../../lib/http/commands/ServeCommand');
-const CommandRunner = require('../../../../lib/console/services/CommandRunner');
+import EventEmitter  from 'events';
+import container     from '../../container';
+import ServeCommand  from '../../../../dist/node/http/commands/ServeCommand';
+import CommandRunner from '../../../../dist/node/console/services/CommandRunner';
 
 let command;
 let commandArguments;
@@ -217,4 +217,4 @@ then.nodemonShouldHaveStartedCommandWithCustomPort = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

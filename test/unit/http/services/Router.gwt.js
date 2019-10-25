@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Services - Router - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Router    = require('../../../../lib/http/services/Router');
-const Route     = require('../../../../lib/http/models/Route');
+import container from '../../container';
+import Router    from '../../../../dist/node/http/services/Router';
+import Route     from '../../../../dist/node/http/Route';
 
 let result;
 let router;
@@ -28,6 +28,8 @@ const fakeExpress = {
 };
 
 const fakeRouter = {
+	'all':    jest.fn(),
+	'use':    jest.fn(),
 	'get':    jest.fn(),
 	'post':   jest.fn(),
 	'put':    jest.fn(),
@@ -53,8 +55,9 @@ const fakeInternalCallResultHandlerFactory = jest.fn((resolve) => {
 });
 
 const fakeHandler = {
-	handleRequest: jest.fn(() => { return Promise.resolve(); }),
-	prepareHandling: jest.fn(),
+	handleRequest:       jest.fn(() => { return Promise.resolve(); }),
+	handleRouteNotFound: jest.fn(() => { return Promise.reslove(); }),
+	prepareHandling:     jest.fn(),
 	get getInternalCallResultHandler() { return fakeInternalCallResultHandlerFactory; }
 };
 
@@ -392,4 +395,4 @@ then.getRouteHandlerShouldHaveBeenCalled = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Database Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../container');
-const DatabaseServiceProvider = require('../../../lib/database/DatabaseServiceProvider');
-const SecurityServiceProvider = require('../../../lib/security/SecurityServiceProvider');
+import container from '../container';
+import DatabaseServiceProvider from '../../../dist/node/database/DatabaseServiceProvider';
+import SecurityServiceProvider from '../../../dist/node/security/SecurityServiceProvider';
 
 let result;
 let fakeFiles;
@@ -66,6 +66,10 @@ given.emptyResult = () => {
 	result = undefined;
 };
 
+given.fakeDatabasePath = () => {
+	container.configurePaths({ database: '/database' });
+};
+
 given.databaseEnabledInConfiguration = () => {
 	fakeConfig['database.enabled'] = true;
 };
@@ -79,14 +83,14 @@ given.databaseDisabledInConfiguration = () => {
 };
 
 given.fakeModelsFolderPathInConfiguration = () => {
-	fakeConfig['database.paths'] = { factories: '/path/to/factories' };
+	fakeConfig['database.paths'] = { factories: 'path/to/factories' };
 	fakeConfig['database.paths.factories'] = fakeConfig['database.paths'].factories;
-	fakeFiles[`${fakeConfig['database.paths'].factories}/FooFactory.js`] = fakeFactory;
-	fakeFiles[`${fakeConfig['database.paths'].factories}/barFactory.js`] = otherFactory;
+	fakeFiles[`/database/${fakeConfig['database.paths'].factories}/FooFactory.js`] = fakeFactory;
+	fakeFiles[`/database/${fakeConfig['database.paths'].factories}/barFactory.js`] = otherFactory;
 };
 
 given.emptyModelsFolderPathInConfiguration = () => {
-	fakeConfig['database.paths'] = { factories: '/path/to/empty/factories' };
+	fakeConfig['database.paths'] = { factories: 'path/to/empty/factories' };
 	fakeConfig['database.paths.factories'] = fakeConfig['database.paths'].factories;
 };
 
@@ -194,4 +198,4 @@ then.shouldNotHaveRegisteredModelFactoriesInFactory = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

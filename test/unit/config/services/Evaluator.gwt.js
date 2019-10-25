@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Config - Services - Evaluator - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../container');
-const Evaluator = require('../../../../lib/config/services/Evaluator');
+import container from '../../container';
+import Evaluator from '../../../../dist/node/config/services/Evaluator';
 
 let evaluator;
 let result;
@@ -55,4 +55,4 @@ then.resultShouldNotHaveBeenEvaluated = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

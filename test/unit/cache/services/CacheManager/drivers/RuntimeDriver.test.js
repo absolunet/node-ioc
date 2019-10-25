@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager - Drivers - Runtime Driver
 //--------------------------------------------------------
-'use strict';
 
 
-const { given, when, then } = require('./RuntimeDriver.gwt');
-const common                = require('./common');
+import gwt from './RuntimeDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 beforeEach(() => {

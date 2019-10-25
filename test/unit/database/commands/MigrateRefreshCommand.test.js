@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Commands - Migrate Refresh Command
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./MigrateRefreshCommand.gwt');
+import gwt from './MigrateRefreshCommand.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

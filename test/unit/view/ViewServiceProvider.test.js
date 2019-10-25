@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - View - View Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./ViewServiceProvider.gwt');
+import gwt from './ViewServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

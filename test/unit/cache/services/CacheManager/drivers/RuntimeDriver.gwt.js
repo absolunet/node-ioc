@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Cache - Services - Cache Manager - Drivers - Runtime Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const RuntimeDriver = require('../../../../../../lib/cache/services/CacheManager/drivers/RuntimeDriver');
+import RuntimeDriver from '../../../../../../dist/node/cache/services/CacheManager/drivers/RuntimeDriver';
 
 
 //-- Given
@@ -16,4 +16,4 @@ given.runtimeDriver = (parameters) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

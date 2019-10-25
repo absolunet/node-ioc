@@ -1,0 +1,37 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Command - %CLASS%
+//--------------------------------------------------------
+
+import { Command } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Command {
+
+	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'name:command';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	get description() {
+		return '%CLASS% description.';
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	handle() {
+		this.info('To be implemented...');
+	}
+
+}
+
+
+export default %CLASS%;

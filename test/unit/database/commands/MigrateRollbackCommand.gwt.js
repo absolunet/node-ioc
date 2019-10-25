@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Commands - Migrate Rollback Command - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const MigrateRollbackCommand = require('../../../../lib/database/commands/MigrateRollbackCommand');
+import MigrateRollbackCommand from '../../../../dist/node/database/commands/MigrateRollbackCommand';
 
 
 //-- Given
@@ -16,4 +16,4 @@ given.migrateRollbackCommand = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,11 +1,11 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - JSON Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const JsonDriver = require('../../../../../../lib/file/services/FileManager/drivers/JsonDriver');
+import JsonDriver from '../../../../../../dist/node/file/services/FileManager/drivers/JsonDriver';
 
 
 //-- Given
@@ -30,4 +30,4 @@ given.currentDriverContent = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,0 +1,18 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Test - End to end - %CLASS%
+//--------------------------------------------------------
+'use strict';
+
+const TestCase = require('%TEST_CASE_PATH%');
+
+
+class %CLASS% extends TestCase {
+
+	testSomething() {
+		this.expect(true).toBe(true);
+	}
+
+}
+
+
+module.exports = %CLASS%;

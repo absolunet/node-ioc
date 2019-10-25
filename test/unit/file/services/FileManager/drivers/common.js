@@ -1,10 +1,8 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - Common tests
 //--------------------------------------------------------
-'use strict';
 
-
-module.exports = ({ given, when, then }) => {
+export default ({ given, when, then }) => {
 
 	beforeEach(() => {
 		given.providersAndDependencies();

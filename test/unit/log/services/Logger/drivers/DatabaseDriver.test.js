@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Log - Services - Logger - Drivers - Database Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./DatabaseDriver.gwt');
+import gwt from './DatabaseDriver.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

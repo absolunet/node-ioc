@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Helpers - String Helper
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./StringHelper.gwt');
+import gwt from './StringHelper.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

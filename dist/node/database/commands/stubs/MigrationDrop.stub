@@ -1,0 +1,39 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Database - Migrations - %CLASS%
+//--------------------------------------------------------
+
+import { Migration } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
+	 */
+	async up({ schema }) {
+		await schema.dropTableIfExists('%TABLE%');
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @param {Knex} connection - The Knex connection instance.
+	 * @returns {Promise} The async process promise.
+	 */
+	async down({ schema }) {
+		await schema.createTable('%TABLE%', (table) => {
+			table.uuid('id').primary();
+			table.timestamps();
+		});
+	}
+
+}
+
+
+export default %CLASS%;

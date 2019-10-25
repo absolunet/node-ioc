@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Systems - Sync
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Sync.gwt');
+import gwt from './Sync.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

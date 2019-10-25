@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Seeder
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Seeder.gwt');
+import gwt from './Seeder.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

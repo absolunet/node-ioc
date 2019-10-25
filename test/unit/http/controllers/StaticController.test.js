@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - HTTP - Controllers - Static Controller
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./StaticController.gwt');
+import gwt from './StaticController.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -25,5 +25,5 @@ test('Send a not found response if file does not exists', () => {
 	given.existingFolder();
 	given.unexistingFileInRequest();
 	when.handling();
-	then.shouldHaveReceivedStatus(404);
+	then.shouldHaveThrownNotFoundHttpError();
 });

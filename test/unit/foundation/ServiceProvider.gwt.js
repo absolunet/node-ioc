@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container       = require('../container');
-const Command         = require('../../../lib/console/Command');
-const ServiceProvider = require('../../../lib/foundation/ServiceProvider');
+import container       from '../container';
+import Command         from '../../../dist/node/console/Command';
+import ServiceProvider from '../../../dist/node/foundation/ServiceProvider';
 
 let serviceProvider;
 let commands;
@@ -63,4 +63,4 @@ then.commandShouldHaveBeenLoaded = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

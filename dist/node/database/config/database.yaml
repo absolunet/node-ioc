@@ -1,0 +1,25 @@
+enabled: true
+
+
+command_namespace: '{{DB_COMMAND_NAMESPACE|db}}'
+
+
+default: '{{DB_CONNECTION|sqlite}}'
+
+
+connections:
+
+  sqlite:
+    driver: sqlite
+    database: '{{DB_FILE|@/storage/databases/database.sqlite}}'
+
+
+paths:
+  factories: 'factories'
+  migrations: 'migrations'
+  models: 'models'
+  seeds: 'seeds'
+
+
+
+migration_table: 'migrations'

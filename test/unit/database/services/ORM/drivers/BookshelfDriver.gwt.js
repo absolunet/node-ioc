@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Database - Services - ORM - Drivers - Bookshelf Driver - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../../common.gwt');
+import gwt from '../../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container       = require('../../../../container');
-const BookshelfDriver = require('../../../../../../lib/database/services/ORM/drivers/BookshelfDriver');
+import container       from '../../../../container';
+import BookshelfDriver from '../../../../../../dist/node/database/services/ORM/drivers/BookshelfDriver';
 
 let result;
 let bookshelfDriver;
@@ -283,4 +283,4 @@ then.resultShouldHaveOtherConnection = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

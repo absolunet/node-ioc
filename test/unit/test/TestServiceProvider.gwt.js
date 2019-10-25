@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Test Service Provider - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('./common.gwt');
+import gwt from './common.gwt';
+const { given, when, then, build } = gwt;
 
-const container      = require('../container');
-const TestRepository = require('../../../lib/test/repositories/TestRepository');
+import container      from '../container';
+import TestRepository from '../../../dist/node/test/repositories/TestRepository';
 
 
 //-- Then
@@ -36,20 +36,20 @@ then.featureTestRepositoryShouldBeSingleton = () => {
 	then.shouldHaveSingleton('test.feature');
 };
 
-then.standardsTestRepositoryShouldBeResolvable = () => {
-	then.serviceShouldBeResolvable('test.standards');
-};
-
-then.standardsTestRepositoryShouldBeSingleton = () => {
-	then.shouldHaveSingleton('test.standards');
-};
-
 then.endToEndTestRepositoryShouldBeResolvable = () => {
-	then.serviceShouldBeResolvable('test.e2e');
+	then.serviceShouldBeResolvable('test.endtoend');
 };
 
-then.endToEndRepositoryShouldBeSingleton = () => {
-	then.shouldHaveSingleton('test.e2e');
+then.endToEndTestRepositoryShouldBeSingleton = () => {
+	then.shouldHaveSingleton('test.endtoend');
+};
+
+then.integrationTestRepositoryShouldBeResolvable = () => {
+	then.serviceShouldBeResolvable('test.integration');
+};
+
+then.integrationTestRepositoryShouldBeSingleton = () => {
+	then.shouldHaveSingleton('test.integration');
 };
 
 then.testRunnerShouldBeResolvable = () => {
@@ -95,4 +95,4 @@ then.testRepositoriesShouldHaveSameTag = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

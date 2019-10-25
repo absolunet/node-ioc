@@ -1,10 +1,10 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - Services - File Manager - Drivers - JavaScript Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./JavaScriptDriver.gwt');
-const common                = require('./common');
+import gwt from './JavaScriptDriver.gwt';
+const { given, when, then } = gwt;
+import common                from './common';
 
 
 describe('JavaScript driver', () => {

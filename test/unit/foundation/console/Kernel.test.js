@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Console - Kernel
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Kernel.gwt');
+import gwt from './Kernel.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {
@@ -29,15 +29,6 @@ test('Handles the console command through the command registrar', async () => {
 	given.consoleKernel();
 	await when.handling();
 	then.commandRegistrarShouldHaveResolvedCommand();
-});
-
-test('Register all application commands before handling the command', async () => {
-	given.fakeCommandRegistrar();
-	given.fakeCommandPath();
-	given.fakeTerminal();
-	given.consoleKernel();
-	await when.handling();
-	then.shouldHaveLoadedCommandsFromApplication();
 });
 
 test('Exit process on termination if asked to with 0 if no exception were reported', () => {

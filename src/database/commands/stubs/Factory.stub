@@ -1,0 +1,37 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Database - Factories - %CLASS%
+//--------------------------------------------------------
+
+import { ModelFactory } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends ModelFactory {
+
+	/**
+	 * Name of the associated model.
+	 *
+	 * @type {string}
+	 */
+	get model() {
+		return '%MODEL%';
+	}
+
+	/**
+	 * Factory model attributes.
+	 *
+	 * @param {support.services.Faker} faker - The Faker instance.
+	 * @returns {object}
+	 */
+	make(faker) {
+		return {
+			//
+		};
+	}
+
+}
+
+
+export default %CLASS%;

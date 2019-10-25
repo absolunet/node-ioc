@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Foundation - Kernel
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./Kernel.gwt');
+import gwt from './Kernel.gwt';
+const { given, when, then } = gwt;
 
 
 test('Register all development providers into the application after booting', () => {

@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Test - Test Case
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./TestCase.gwt');
+import gwt from './TestCase.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

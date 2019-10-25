@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - File - File Service Provider
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./FileServiceProvider.gwt');
+import gwt from './FileServiceProvider.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

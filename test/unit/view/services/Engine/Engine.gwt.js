@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - View - Services - Engine - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../../common.gwt');
+import gwt from '../../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container = require('../../../container');
-const Engine    = require('../../../../../lib/view/services/Engine');
+import container from '../../../container';
+import Engine    from '../../../../../dist/node/view/services/Engine';
 
 let engine;
 let result;
@@ -83,4 +83,4 @@ then.shouldReturnDriverResultFromRenderMethodWithViewModel = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,9 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Translation - Services - Translator - Drivers - File Driver
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then } = require('./FileDriver.gwt');
+import gwt from './FileDriver.gwt';
+const { given, when, then } = gwt;
 
 
 beforeEach(() => {

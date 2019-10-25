@@ -1,0 +1,25 @@
+//--------------------------------------------------------
+//-- %PROJECT% - HTTP - Controllers - %CLASS%
+//--------------------------------------------------------
+
+import Controller from '%BASE_CONTROLLER_PATH%';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Controller {
+
+	/**
+	 * Handle incoming request.
+	 *
+	 * @returns {response} The response.
+	 */
+	handle() {
+		//
+	}
+
+}
+
+
+export default %CLASS%;

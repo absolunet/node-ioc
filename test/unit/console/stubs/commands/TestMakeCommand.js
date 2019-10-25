@@ -1,10 +1,9 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Command stub
 //--------------------------------------------------------
-'use strict';
 
-const path             = require('path');
-const GeneratorCommand = require('../../../../../lib/console/GeneratorCommand');
+import * as path        from 'path';
+import GeneratorCommand from '../../../../../dist/node/console/GeneratorCommand';
 
 
 class TestMakeCommand extends GeneratorCommand {
@@ -49,4 +48,4 @@ class TestMakeCommand extends GeneratorCommand {
 }
 
 
-module.exports = TestMakeCommand;
+export default TestMakeCommand;

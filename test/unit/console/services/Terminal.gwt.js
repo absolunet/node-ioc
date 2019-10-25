@@ -1,13 +1,13 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Console - Services - Terminal - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const inquirer     = require('inquirer');
-const container    = require('../../container');
-const Terminal     = require('../../../../lib/console/services/Terminal');
+import inquirer     from 'inquirer';
+import container    from '../../container';
+import Terminal     from '../../../../dist/node/console/services/Terminal';
 const originalArgv = process.argv;
 
 let mockedPrompt;
@@ -351,4 +351,4 @@ then.shouldHaveReceivedTableSideBySideAsString = () => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });

@@ -1,12 +1,12 @@
 //--------------------------------------------------------
 //-- Tests - Unit - Support - Helpers - File Helper - GWT
 //--------------------------------------------------------
-'use strict';
 
-const { given, when, then, build } = require('../common.gwt');
+import gwt from '../common.gwt';
+const { given, when, then, build } = gwt;
 
-const container  = require('../../container');
-const FileHelper = require('../../../../lib/support/helpers/FileHelper');
+import container  from '../../container';
+import FileHelper from '../../../../dist/node/support/helpers/FileHelper';
 
 let fileHelper;
 let size;
@@ -63,4 +63,4 @@ then.resultShouldBe = (expected) => {
 };
 
 
-module.exports = build({ given, when, then });
+export default build({ given, when, then });
