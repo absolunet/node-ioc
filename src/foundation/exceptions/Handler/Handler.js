@@ -41,7 +41,7 @@ class Handler extends hasDriver() {
 
 		this.setDriverAlias('prettyError', 'console');
 		this.setDriverAlias('ouch',        'http.debug');
-		this.setDriverAlias('ouch',        'http.production');
+		this.setDriverAlias('view',        'http.production');
 	}
 
 	/**
@@ -103,12 +103,8 @@ class Handler extends hasDriver() {
 	async renderResponse(exception, request, response) {
 		exception.status = exception.status || 500;
 		response.status(exception.status);
-
-		if (['stating', 'production'].includes(this.app.environment)) {
-			await this.driver('http.production').render(exception, request, response);
-		} else {
-			await this.driver('http.debug').render(exception, request, response);
-		}
+		const driverType = ['staging', 'production'].includes(this.app.environment) ? 'production' : 'debug';
+		await this.driver(`http.${driverType}`).render(exception, request, response);
 	}
 
 	/**
