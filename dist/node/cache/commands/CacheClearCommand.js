@@ -56,7 +56,7 @@ class CacheClearCommand extends _Command.default {
 
 
   get parameters() {
-    return [['store', null, false, 'The name of the store you would like to clear.']];
+    return [['store', false, null, 'The name of the store you would like to clear.']];
   }
   /**
    * @inheritdoc

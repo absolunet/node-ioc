@@ -49,7 +49,7 @@ class CacheClearCommand extends Command {
 	 */
 	get parameters() {
 		return [
-			['store', null, false, 'The name of the store you would like to clear.']
+			['store', false, null, 'The name of the store you would like to clear.']
 		];
 	}
 
