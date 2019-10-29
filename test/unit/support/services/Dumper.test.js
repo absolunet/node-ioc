@@ -55,3 +55,23 @@ test('Can dump circular object', () => {
 	when.dumping();
 	then.shouldNotHaveThrown();
 });
+
+test('Cannot dump if in a forbidden environment silently', () => {
+	given.disabledTestEnvironmentInConfiguration();
+	given.data();
+	given.fakeResponse();
+	when.dumping();
+	then.shouldNotHaveDumpedInResponse();
+	then.shouldNotHaveDumpedInConsole();
+	then.shouldNotHaveRendered();
+});
+
+test('Cannot get dump if in a forbidden environment silently', () => {
+	given.disabledTestEnvironmentInConfiguration();
+	given.data();
+	given.fakeResponse();
+	when.gettingDump();
+	then.shouldNotHaveDumpedInResponse();
+	then.shouldNotHaveDumpedInConsole();
+	then.shouldNotHaveRendered();
+});

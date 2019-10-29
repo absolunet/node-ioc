@@ -37,7 +37,7 @@ class Dumper extends (0, _checksTypes.default)() {
     (0, _privateRegistry.default)(this).set('instances', new Map());
     (0, _privateRegistry.default)(this).set('currentInstances', []);
     this.resetDelta();
-    this.useTheme(this.config.get('dev.dumper.default'));
+    this.useTheme(this.config.get('dev.dumper.default', 'absolunet'));
   }
   /**
    * Dump variables as an HTTP response, or in the console if response is not available.
@@ -51,15 +51,18 @@ class Dumper extends (0, _checksTypes.default)() {
       response,
       terminal
     } = this;
-    const data = this.getDumpData(...parameters);
 
-    if (response) {
-      response.status(500).end(this.makeView('index', data));
-      this.setResponse(undefined);
-    } else {
-      data.values.forEach(value => {
-        terminal.echo(value);
-      });
+    if (this.shouldDump()) {
+      const data = this.getDumpData(...parameters);
+
+      if (response) {
+        response.status(500).end(this.makeView('index', data));
+        this.setResponse(undefined);
+      } else {
+        data.values.forEach(value => {
+          terminal.echo(value);
+        });
+      }
     }
   }
   /**
@@ -71,7 +74,11 @@ class Dumper extends (0, _checksTypes.default)() {
 
 
   getDump(...parameters) {
-    return this.makeView('dump', this.getDumpData(...parameters));
+    if (this.shouldDump()) {
+      return this.makeView('dump', this.getDumpData(...parameters));
+    }
+
+    return '';
   }
   /**
    * Get dump data without the main rendered view.
@@ -342,6 +349,16 @@ class Dumper extends (0, _checksTypes.default)() {
     return (this.ideLink.get(this.config.get('dev.ide')) || '').replace('%line', encodeURIComponent(line)).replace('%file', encodeURIComponent(file));
   }
   /**
+   * Check if the dumper should dump or return dumped content based on the current environment and configuration.
+   *
+   * @returns {boolean} Indicates that the dumper should dump.
+   */
+
+
+  shouldDump() {
+    return !this.config.get('dev.dumper.disabled_environments', []).includes(this.app.environment);
+  }
+  /**
    * The theme configuration.
    *
    * @type {object<string, *>}
@@ -349,7 +366,27 @@ class Dumper extends (0, _checksTypes.default)() {
 
 
   get theme() {
-    return this.config.get(`dev.dumper.themes.${(0, _privateRegistry.default)(this).get('theme')}`);
+    return this.config.get(`dev.dumper.themes.${(0, _privateRegistry.default)(this).get('theme')}`, {
+      indent: 4,
+      open: false,
+      font: {
+        name: 'Fira mono',
+        weight: 400,
+        size: '1em',
+        link: 'https://fonts.googleapis.com/css?family=Fira+Mono:400',
+        colors: {
+          'background': '#2b2d3c',
+          'text': '#4ea4e7',
+          'key': '#f2f2f2',
+          'type': '#1aabb6',
+          'boolean': '#ff5252',
+          'function': '#ff5252',
+          'number': '#ff5252',
+          'string': '#b6d8ee',
+          'symbol': '#b6d8ee'
+        }
+      }
+    });
   }
   /**
    * The current response instance.

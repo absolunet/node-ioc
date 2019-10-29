@@ -64,6 +64,7 @@ given.fakeResponse = () => {
 given.baseDevConfig = () => { // eslint-disable-line unicorn/prevent-abbreviations
 	container.make('config').set('dev', {
 		dumper: {
+			'disabled_environments': [],
 			'default': 'fake',
 			'themes': {
 				fake: {}
@@ -91,6 +92,12 @@ given.otherData = () => {
 given.circularData = () => {
 	given.data();
 	data.self = data;
+};
+
+given.disabledTestEnvironmentInConfiguration = () => {
+	container.make('config').set('dev.dumper.disabled_environments', [
+		container.environment
+	]);
 };
 
 
@@ -157,6 +164,11 @@ then.shouldHaveRenderedHtmlPartial = () => {
 	expect(fakeViewFactory.make).toHaveBeenCalled();
 	const { calls } = fakeViewFactory.make.mock;
 	expect(calls[calls.length - 1][0]).toBe('dumper::jsrender.dump');
+};
+
+then.shouldNotHaveRendered = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeViewFactory.make).not.toHaveBeenCalled();
 };
 
 

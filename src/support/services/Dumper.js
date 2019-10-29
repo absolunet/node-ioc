@@ -31,7 +31,7 @@ class Dumper extends checksTypes() {
 		__(this).set('instances', new Map());
 		__(this).set('currentInstances', []);
 		this.resetDelta();
-		this.useTheme(this.config.get('dev.dumper.default'));
+		this.useTheme(this.config.get('dev.dumper.default', 'absolunet'));
 	}
 
 	/**
@@ -41,16 +41,19 @@ class Dumper extends checksTypes() {
 	 */
 	dump(...parameters) {
 		const { response, terminal } = this;
-		const data = this.getDumpData(...parameters);
 
-		if (response) {
-			response.status(500).end(this.makeView('index', data));
+		if (this.shouldDump()) {
+			const data = this.getDumpData(...parameters);
 
-			this.setResponse(undefined);
-		} else {
-			data.values.forEach((value) => {
-				terminal.echo(value);
-			});
+			if (response) {
+				response.status(500).end(this.makeView('index', data));
+
+				this.setResponse(undefined);
+			} else {
+				data.values.forEach((value) => {
+					terminal.echo(value);
+				});
+			}
 		}
 	}
 
@@ -61,7 +64,11 @@ class Dumper extends checksTypes() {
 	 * @returns {string} The rendered dump.
 	 */
 	getDump(...parameters) {
-		return this.makeView('dump', this.getDumpData(...parameters));
+		if (this.shouldDump()) {
+			return this.makeView('dump', this.getDumpData(...parameters));
+		}
+
+		return '';
 	}
 
 	/**
@@ -305,12 +312,41 @@ class Dumper extends checksTypes() {
 	}
 
 	/**
+	 * Check if the dumper should dump or return dumped content based on the current environment and configuration.
+	 *
+	 * @returns {boolean} Indicates that the dumper should dump.
+	 */
+	shouldDump() {
+		return !this.config.get('dev.dumper.disabled_environments', []).includes(this.app.environment);
+	}
+
+	/**
 	 * The theme configuration.
 	 *
 	 * @type {object<string, *>}
 	 */
 	get theme() {
-		return this.config.get(`dev.dumper.themes.${__(this).get('theme')}`);
+		return this.config.get(`dev.dumper.themes.${__(this).get('theme')}`, {
+			indent: 4,
+			open:   false,
+			font: {
+				name:   'Fira mono',
+				weight: 400,
+				size:   '1em',
+				link:   'https://fonts.googleapis.com/css?family=Fira+Mono:400',
+				colors: {
+					'background': '#2b2d3c',
+					'text':       '#4ea4e7',
+					'key':        '#f2f2f2',
+					'type':       '#1aabb6',
+					'boolean':    '#ff5252',
+					'function':   '#ff5252',
+					'number':     '#ff5252',
+					'string':     '#b6d8ee',
+					'symbol':     '#b6d8ee'
+				}
+			}
+		});
 	}
 
 	/**
