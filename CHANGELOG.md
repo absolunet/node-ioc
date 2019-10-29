@@ -13,6 +13,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-alpha.2] - 2019-10-29
+
+### Added
+ - Support for configuration if directory for complex namespaces
+
+### Fixed
+ - typo in `write` command method
+ - JSDoc router references
+ - Teapot does not throw HTTP error anymore
+ 
+
+
 ## [1.0.0-alpha.1] - 2019-10-25
 
 ### Added
@@ -446,7 +458,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.1...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.2...HEAD
+[1.0.0-alpha.2]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.1...1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/absolunet/node-ioc/compare/0.10.0...1.0.0-alpha.1
 [0.10.0]:        https://github.com/absolunet/node-ioc/compare/0.9.0...0.10.0
 [0.9.0]:         https://github.com/absolunet/node-ioc/compare/0.8.3...0.9.0
