@@ -134,7 +134,7 @@ then.shouldHaveRenderedJsonException = () => {
 	expect(mockedOuch.pushHandler).toHaveBeenCalledWith(mockedJsonResponseHandler);
 	expect(response.json).toHaveBeenCalledTimes(1);
 	expect(response.json.mock.calls[0][0]).toMatchObject({
-		type: 'TypeError',
+		type:    'TypeError',
 		message: 'An error has occurred...'
 	});
 };

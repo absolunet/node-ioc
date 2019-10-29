@@ -93,3 +93,19 @@ test('Can render 404 view if view factory and view resolver exist with 404 excep
 	await when.renderingException();
 	then.shouldHaveRenderedNotFoundView();
 });
+
+test('Can render exception as JSON if accepts JSON', async () => {
+	given.fakeViewFactory();
+	given.fakeViewResolver();
+	given.acceptApplicationJsonHeader();
+	await when.renderingException();
+	then.shouldHaveRenderedJsonException();
+});
+
+test('Can render exception as JSON if requested over XHR', async () => {
+	given.fakeViewFactory();
+	given.fakeViewResolver();
+	given.xRequestedWitXmlHttpRequesthHeader();
+	await when.renderingException();
+	then.shouldHaveRenderedJsonException();
+});

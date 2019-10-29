@@ -14,6 +14,7 @@ let request;
 let response;
 let fakeViews;
 let fakeTranslations;
+let fakeHeaders;
 
 
 //-- Mocks
@@ -42,10 +43,15 @@ const fakeTranslator = {
 	})
 };
 
-const fakeRequest = {};
+const fakeRequest = {
+	get: jest.fn((key) => {
+		return fakeHeaders[key];
+	})
+};
 
 const fakeResponse = {
-	end: jest.fn()
+	end:  jest.fn(),
+	json: jest.fn()
 };
 
 
@@ -82,6 +88,7 @@ given.notFoundException = () => {
 
 given.fakeRequest = () => {
 	request = fakeRequest;
+	fakeHeaders = {};
 };
 
 given.fakeResponse = () => {
@@ -102,6 +109,14 @@ given.genericView = () => {
 
 given.notFoundView = () => {
 	given.view('404', 'Not found content');
+};
+
+given.acceptApplicationJsonHeader = () => {
+	fakeHeaders.accept = 'application/json';
+};
+
+given.xRequestedWitXmlHttpRequesthHeader = () => {
+	fakeHeaders['x-requested-with'] = 'XmlHttpRequest';
 };
 
 
@@ -156,6 +171,15 @@ then.shouldHaveRenderedDefaultText = () => {
 then.shouldHaveRenderedTranslatedText = () => {
 	then.shouldHaveRenderedText('Translated message');
 	expect(fakeTranslator.translate).toHaveBeenCalledWith('Something went wrong...');
+};
+
+then.shouldHaveRenderedJsonException = () => {
+	then.shouldNotHaveThrown();
+	expect(response.json).toHaveBeenCalledTimes(1);
+	expect(response.json.mock.calls[0][0]).toMatchObject({
+		type:    'TypeError',
+		message: 'An error has occurred...'
+	});
 };
 
 
