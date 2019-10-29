@@ -305,7 +305,7 @@ class Controller {
 
 
   teapot() {
-    return this.throwWithStatus(418);
+    return this.status(418);
   }
   /**
    * Command streaming interceptor handler.

@@ -43,7 +43,7 @@
 	
 
 	<header>
-		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.0-alpha.1</span></p>
+		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.0-alpha.2</span></p>
 		<a href="https://github.com/absolunet/node-ioc" class="github" data-external="external">View on GitHub</a>
 	</header>
 
@@ -445,7 +445,7 @@ class Command {
 	 */
 	write(...parameters) {
 		parameters.forEach((parameter) => {
-			this.termina.echo(parameter);
+			this.terminal.echo(parameter);
 		});
 	}
 
@@ -720,7 +720,7 @@ class Command {
 	 */
 	buildYargsModel() {
 		if (this.forward) {
-			const model = this.app.make('command').get(this.forward).yargsModel;
+			const model = this.app.make('command').get(this.forward).buildYargsModel();
 			model.command = model.command.replace(this.forward, this.name);
 
 			return model;

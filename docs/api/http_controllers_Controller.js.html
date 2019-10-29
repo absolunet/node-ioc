@@ -43,7 +43,7 @@
 	
 
 	<header>
-		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.0-alpha.1</span></p>
+		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.0-alpha.2</span></p>
 		<a href="https://github.com/absolunet/node-ioc" class="github" data-external="external">View on GitHub</a>
 	</header>
 
@@ -352,7 +352,7 @@ class Controller {
 	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	teapot() {
-		return this.throwWithStatus(418);
+		return this.status(418);
 	}
 
 	/**

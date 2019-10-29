@@ -119,6 +119,15 @@ describe('With fake file manager', () => {
 		then.resultShouldBe('config');
 	});
 
+	test('Can load nested configuration files from given folder', () => {
+		given.otherFolder();
+		given.configInFolderInsideOtherFolder({ foo: 'subfolder' });
+		when.loadingFolder();
+		when.gettingConfig('folder.foo');
+		then.resultShouldBe('subfolder');
+		then.shouldHaveLoadedFilesRecursively();
+	});
+
 	test('Ignore other folder if not specified', () => {
 		given.configInOtherFolder({ other: { foo: 'config' } });
 		when.loadingFolder();
