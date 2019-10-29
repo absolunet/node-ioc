@@ -243,7 +243,7 @@ class Router {
 	 * @param {string} controller - The resource controller name that will handle requests.
 	 * @param {Array<string>} [only] - Indicates the routes restrictions.
 	 * @param {boolean} [apiOnly=false] - Indicates that only API routes should be considered.
-	 * @returns {http.Router} The current router instance.
+	 * @returns {http.services.Router} The current router instance.
 	 */
 	resource(resource, controller, only = [], apiOnly = false) {
 		this.getResourceMapping(resource, controller)
@@ -264,7 +264,7 @@ class Router {
 	 * @param {string} resource - The resource for which the routes should be created.
 	 * @param {string} controller - The resource controller name that will handle requests.
 	 * @param {Array<string>} [only=[]] - Indicates the routes restrictions.
-	 * @returns {http.Router} The current router instance.
+	 * @returns {http.services.Router} The current router instance.
 	 */
 	apiResource(resource, controller, only = []) {
 		return this.resource(resource, controller, only, true);
@@ -275,7 +275,7 @@ class Router {
 	 *
 	 * @param {http.GroupOptions} options - The group options.
 	 * @param {Function} group - The group closure.
-	 * @returns {http.Router} The current router instance.
+	 * @returns {http.services.Router} The current router instance.
 	 */
 	group(options, group) {
 		const data = __(this).get('groups');

@@ -95,7 +95,7 @@ class ConfigRepository {
 	 */
 	init() {
 		this.setConfig({});
-		this.loadConfigFromFolder(null, true);
+		this.loadConfigFromFolder(this.app.configPath(), true);
 	}
 
 	/**
@@ -137,12 +137,14 @@ class ConfigRepository {
 	 * @param {boolean} [overwrite] - Flag that indicates if the old value should be overwritten or merged.
 	 */
 	merge(key, value, overwrite = false) {
-		if (typeof value === 'object' &amp;&amp; value) {
-			const original    = this.get(key, {});
-			const mergedValue = overwrite ? Object.assign(original, value) : Object.assign({}, value, original);
+		let mergedValue = value;
 
-			this.set(key, mergedValue);
+		if (typeof value === 'object' &amp;&amp; value) {
+			const original = this.get(key, {});
+			mergedValue = overwrite ? Object.assign(original, value) : Object.assign({}, value, original);
 		}
+
+		this.set(key, mergedValue);
 	}
 
 	/**
@@ -157,14 +159,13 @@ class ConfigRepository {
 	/**
 	 * Set global configuration based on folder files.
 	 *
-	 * @param {string|null} [folder] - The folder to search configuration file into.
+	 * @param {string} folder - The folder to search configuration file into.
 	 * @param {boolean} [overwrite] - Flag that indicates if the current configuration should be overridden or merged.
 	 */
-	loadConfigFromFolder(folder = null, overwrite = false) {
-		const directory = folder || this.app.make('path.config');
-		this.file.scandir(directory).forEach((file) => {
-			const index = file.split('/').pop().split('.').shift();
-			this.loadConfig(index, this.app.formatPath(directory, file), overwrite);
+	loadConfigFromFolder(folder, overwrite = false) {
+		this.file.scandir(folder, 'file', { recursive: true }).forEach((file) => {
+			const index = file.split('.').shift().replace(/\//gu, '.');
+			this.loadConfig(index, this.app.formatPath(folder, file), overwrite);
 		});
 	}
 
