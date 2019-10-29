@@ -426,7 +426,7 @@ class Command {
 
   write(...parameters) {
     parameters.forEach(parameter => {
-      this.termina.echo(parameter);
+      this.terminal.echo(parameter);
     });
   }
   /**
@@ -728,7 +728,7 @@ class Command {
 
   buildYargsModel() {
     if (this.forward) {
-      const model = this.app.make('command').get(this.forward).yargsModel;
+      const model = this.app.make('command').get(this.forward).buildYargsModel();
       model.command = model.command.replace(this.forward, this.name);
       return model;
     }

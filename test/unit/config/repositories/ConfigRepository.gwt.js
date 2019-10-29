@@ -16,6 +16,7 @@ let file;
 
 const folderPath               = path.join('folder', 'app', 'config');
 const otherFolderPath          = path.join('folder', 'other', 'config');
+const folderInOtherFolderPath  = path.join('folder', 'other', 'config', 'folder');
 const unexistingFolerPath      = path.join('folder', 'unexisting', 'folder');
 const emptyFolderPath          = path.join('folder', 'empty', 'folder');
 
@@ -120,8 +121,18 @@ given.emptyFolder = () => {
 	given.folder(emptyFolderPath);
 };
 
+given.folderInOtherFolder = () => {
+	given.folder(folderInOtherFolderPath);
+};
+
 given.configInOtherFolder = (config) => {
 	given.config(config, otherFolderPath);
+};
+
+given.configInFolderInsideOtherFolder = (config) => {
+	Object.keys(config).forEach((key) => {
+		given.config({ [`folder/${key}`]: config[key] }, otherFolderPath);
+	});
 };
 
 given.file = (value) => {
@@ -209,7 +220,9 @@ then.formatShouldHaveBeenCalledOnGrammar = () => {
 
 then.shouldHaveReadFilesInConfigFolder = () => {
 	then.shouldNotHaveThrown();
-	expect(fakeFileManager.scandir).toHaveBeenCalledWith(folder);
+	expect(fakeFileManager.scandir).toHaveBeenCalled();
+	const { calls } = fakeFileManager.scandir.mock;
+	expect(calls[calls.length - 1][0]).toBe(folder);
 	const configFiles = Object.keys(files).filter((filePath) => {
 		return filePath.startsWith(folder);
 	});
@@ -225,6 +238,14 @@ then.shouldHaveReadFilesInConfigFolder = () => {
 then.configShouldEqualConfigFile = () => {
 	then.shouldNotHaveThrown();
 	expect(configRepository.get()).toStrictEqual(files[file]);
+};
+
+then.shouldHaveLoadedFilesRecursively = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeFileManager.scandir).toHaveBeenCalled();
+	const { calls } = fakeFileManager.scandir.mock;
+	expect(calls[calls.length - 1][1]).toBe('file');
+	expect(calls[calls.length - 1][2]).toMatchObject({ recursive: true });
 };
 
 

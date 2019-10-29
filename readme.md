@@ -12,7 +12,7 @@
 
 > **NOTE**: This is the Node IoC framework repository. If you want to build an application, please visit the [main application repository](https://github.com/absolunet/node-ioc-app).
 
-Node IoC is a [node.js](https://nodejs.org) framework designed to help developers create elegant and well-designed applications, for both the Web and the CLI. Based on _[SOLID](https://en.wikipedia.org/wiki/SOLID)_ principles, it comes out with a lot of features that removes the pain of crafting new applications:
+Node IoC is a [Node.js](https://nodejs.org) framework designed to help developers create elegant and well-designed applications, for both the Web and the CLI. Based on _[SOLID](https://en.wikipedia.org/wiki/SOLID)_ principles, it comes out with a lot of features that removes the pain of crafting new applications:
 
  - Simple, yet powerful, [dependency injection container](https://documentation.absolunet.com/docs-node-ioc/en/1.0/architecture/container)
  - Complete [CLI command system](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/commands) powered by [Yargs](http://yargs.js.org/)
@@ -24,7 +24,7 @@ Node IoC is a [node.js](https://nodejs.org) framework designed to help developer
  - [Modular structure with simple integration](https://documentation.absolunet.com/docs-node-ioc/en/1.0/architecture/service-provider)
  - Complete and powerful [Jest integration for testing](https://documentation.absolunet.com/docs-node-ioc/en/1.0/going-deeper/test) with a class-based approach, like [PHPUnit (PHP)](https://phpunit.de/) or [NUnit (C#)](https://nunit.org/)
 
-Node IoC was mostly inspired by Laravel and Symfony for the structure, as well by Angular.js for the dependency injection approach. The key that makes Node IoC a better platform to start with is that it is based on all the better things that have been made in JavaScript so far: it unifies the most popular tools and makes implementing them under a complex application feel like a breeze.
+Node IoC was mostly inspired by Laravel and Symfony for the structure, as well by Angular.js for the dependency injection approach. The key that makes Node IoC a better platform to start with is that it is based on all the best things that have been made in JavaScript so far: it unifies the most popular tools and makes implementing them under a complex application feel like a breeze.
 
 
 ## Learning Node IoC

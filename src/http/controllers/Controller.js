@@ -286,7 +286,7 @@ class Controller {
 	 * @returns {http.controllers.Controller} The current controller instance.
 	 */
 	teapot() {
-		return this.throwWithStatus(418);
+		return this.status(418);
 	}
 
 	/**
