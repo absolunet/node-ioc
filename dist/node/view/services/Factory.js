@@ -24,14 +24,20 @@ class Factory {
   /**
    * Create a rendered template from a view name and data.
    *
-   * @param {string} view - The view name.
+   * @param {string} name - The view name.
    * @param {*} data - The view-model data.
    * @returns {string} The rendered view template.
    */
 
 
-  make(view, data = {}) {
-    return this.viewEngine.render(this.viewResolver.find(view), data);
+  make(name, data = {}) {
+    const path = this.viewResolver.getViewPath(name);
+    return this.viewEngine.render(this.viewResolver.find(name), { ...data,
+      __meta: {
+        name,
+        path
+      }
+    });
   }
 
 }

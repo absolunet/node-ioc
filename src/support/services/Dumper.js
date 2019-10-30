@@ -7,6 +7,52 @@ import checksTypes from '../../support/mixins/checksTypes';
 
 
 /**
+ * @private
+ * @typedef {object<string, string|number>} DumperThemeFont
+ * @property {string} name - The font family name.
+ * @property {number} weight - The font weight.
+ * @property {string} size - The font size, with the unit of measure.
+ * @property {string} link - The URL to load the font from.
+ * @memberof support.services.Dumper
+ */
+
+/**
+ * @private
+ * @typedef {object<string, string>} DumperThemeColors
+ * @property {string} background - The background color.
+ * @property {string} text - The default text color.
+ * @property {string} key - The object and array keys color.
+ * @property {string} type - The value type names color.
+ * @property {string} boolean - The boolean values color.
+ * @property {string} function - The function values color.
+ * @property {string} number - The numeric value color.
+ * @property {string} string - The string values color.
+ * @property {string} symbol - The Symbol values color.
+ * @memberof support.services.Dumper
+ */
+
+/**
+ * @private
+ * @typedef {object} DumperTheme
+ * @property {number} indent - The indentation size.
+ * @property {boolean} open - Indicates that the dumper should expand all objects and arrays on render.
+ * @property {support.services.Dumper.DumperThemeFont} font - The font configuration.
+ * @property {support.services.Dumper.DumperThemeColors} colors - The colors.
+ * @memberof support.services.Dumper
+ */
+
+/**
+ * @private
+ * @typedef {object} DumperData
+ * @property {Array<string>} dumps - The rendered dumps.
+ * @property {Array<*>} values - The dumped raw values.
+ * @property {support.services.Dumper.DumperTheme} theme - The current theme configuration.
+ * @property {string} [location] - The dump file location.
+ * @property {string} [locationLink] - The dump file location link formatted for current IDE.
+ * @memberof support.services.Dumper
+ */
+
+/**
  * HTTP variable dumper.
  *
  * @memberof support.services
@@ -40,10 +86,31 @@ class Dumper extends checksTypes() {
 	 * @param {...*} parameters - The dumped parameters.
 	 */
 	dump(...parameters) {
-		const { response, terminal } = this;
-
 		if (this.shouldDump()) {
-			const data = this.getDumpData(...parameters);
+			this.respondWithDump(this.getDumpData(...parameters));
+		}
+	}
+
+	/**
+	 * Dump variable from the explicitly given file.
+	 *
+	 * @param {string} file - The file the dump was originally called.
+	 * @param {...*} parameters - The dumped parameters.
+	 */
+	dumpForFile(file, ...parameters) {
+		if (this.shouldDump()) {
+			this.respondWithDump(this.getDumpDataForFile(file, ...parameters));
+		}
+	}
+
+	/**
+	 * Send the proper response with the dumped data.
+	 *
+	 * @param {support.services.Dumper.DumperData} data - The processed dump data model.
+	 */
+	respondWithDump(data) {
+		const { response, terminal } = this;
+		if (this.shouldDump()) {
 
 			if (response) {
 				response.status(500).end(this.makeView('index', data));
@@ -64,18 +131,35 @@ class Dumper extends checksTypes() {
 	 * @returns {string} The rendered dump.
 	 */
 	getDump(...parameters) {
-		if (this.shouldDump()) {
-			return this.makeView('dump', this.getDumpData(...parameters));
-		}
+		return this.makeDump(this.getDumpData(...parameters));
+	}
 
-		return '';
+	/**
+	 * Get dump without the whole HTML page around it from the explicitly given file.
+	 *
+	 * @param {string} file - The file the dump was originally called.
+	 * @param {...*} parameters - The dumped parameters.
+	 * @returns {string} The rendered dump.
+	 */
+	getDumpForFile(file, ...parameters) {
+		return this.makeDump(this.getDumpDataForFile(file, ...parameters));
+	}
+
+	/**
+	 * Make dump view with the dump formatted data.
+	 *
+	 * @param {support.services.Dumper.DumperData} data - The processed dump data model.
+	 * @returns {string} The rendered dump.
+	 */
+	makeDump(data) {
+		return this.makeView('dump', data);
 	}
 
 	/**
 	 * Get dump data without the main rendered view.
 	 *
 	 * @param {...*} parameters - The dumped parameters.
-	 * @returns {{dumps: *, values: *, location: *, theme: *, locationLink: *}} The dump data model.
+	 * @returns {support.services.Dumper.DumperData} The processed dump data model.
 	 */
 	getDumpData(...parameters) {
 		const { theme } = this;
@@ -89,6 +173,21 @@ class Dumper extends checksTypes() {
 		this.resetDelta();
 
 		return { dumps, location, locationLink, theme, values: parameters };
+	}
+
+	/**
+	 * Get dump data withou the main rendered view for the explicitly given file.
+	 *
+	 * @param {string} file - The file the dump was originally called.
+	 * @param {...*} parameters - The dumped parameters.
+	 * @returns {support.services.Dumper.DumperData} The processed dump data model.
+	 */
+	getDumpDataForFile(file, ...parameters) {
+		const data        = this.getDumpData(...parameters);
+		data.location     = file;
+		data.locationLink = this.getLocationLink(file);
+
+		return data;
 	}
 
 	/**
@@ -283,7 +382,11 @@ class Dumper extends checksTypes() {
 	 * @returns {string} The rendered view.
 	 */
 	makeView(viewName, data) {
-		return this.view.make(`dumper::${this.config.get('view.engine', 'jsrender')}.${viewName}`, data);
+		if (this.shouldDump()) {
+			return this.view.make(`dumper::${this.config.get('view.engine', 'jsrender')}.${viewName}`, data);
+		}
+
+		return '';
 	}
 
 	/**
@@ -300,10 +403,10 @@ class Dumper extends checksTypes() {
 	/**
 	 * Get the dump location IDE link.
 	 *
+	 * @param {string} [location=this.getLocation()] - The location to get link from.
 	 * @returns {string} The IDE link to the dump call.
 	 */
-	getLocationLink() {
-		const location = this.getLocation();
+	getLocationLink(location = this.getLocation()) {
 		const [file, line] = location.split(':');
 
 		return (this.ideLink.get(this.config.get('dev.ide')) || '')

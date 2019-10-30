@@ -10,6 +10,7 @@ beforeEach(() => {
 	given.providersAndDependencies();
 	given.bootedContainer();
 	given.emptyResult();
+	given.emptyFileName();
 	given.fakeTerminal();
 	given.fakeViewFactory();
 	given.baseDevConfig();
@@ -74,4 +75,26 @@ test('Cannot get dump if in a forbidden environment silently', () => {
 	then.shouldNotHaveDumpedInResponse();
 	then.shouldNotHaveDumpedInConsole();
 	then.shouldNotHaveRendered();
+});
+
+test('Can dump with a specific file name', () => {
+	given.data();
+	given.fakeResponse();
+	given.fileName();
+	when.dumpingForFile();
+	then.shouldHaveDumpedInResponse();
+	then.shouldHaveUsedGivenFileName();
+	then.shouldNotHaveDumpedInConsole();
+});
+
+test('Can get dump with a specific file name', () => {
+	given.data();
+	given.fakeResponse();
+	given.fileName();
+	when.gettingDumpForFile();
+	then.shouldNotHaveDumpedInResponse();
+	then.shouldNotHaveDumpedInConsole();
+	then.shouldHaveReceivedDumpRenderedView();
+	then.shouldHaveRenderedHtmlPartial();
+	then.shouldHaveUsedGivenFileName();
 });

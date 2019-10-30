@@ -23,7 +23,10 @@ const fakeEngine = {
 };
 
 const fakeResolver = {
-	find: jest.fn()
+	find: jest.fn(),
+	getViewPath: jest.fn((name) => {
+		return name.split('.').join('/');
+	})
 };
 
 
@@ -76,18 +79,37 @@ then.resultShouldBe = (expected) => {
 	expect(result).toBe(expected);
 };
 
-then.shouldHaveReturnedEngineResultFromResolverPath = () => {
+then.shouldHaveRenderedOnce = () => {
 	then.shouldNotHaveThrown();
-	expect(fakeResolver.find).toHaveBeenCalledTimes(1);
 	expect(fakeEngine.render).toHaveBeenCalledTimes(1);
+};
+
+then.shouldHaveReturnedEngineResultFromResolverPath = () => {
+	then.shouldHaveRenderedOnce();
+	expect(fakeResolver.find).toHaveBeenCalledTimes(1);
 	expect(fakeEngine.render.mock.calls[0][0]).toBe(fakeResolver.find.mock.results[0].value);
 	expect(fakeEngine.render).toHaveReturnedWith(result);
 };
 
-then.shouldHavePassedViewModelToEngineMethod = () => {
-	then.shouldNotHaveThrown();
-	expect(fakeEngine.render).toHaveBeenCalledTimes(1);
-	expect(fakeEngine.render.mock.calls[0][1]).toStrictEqual(viewModel);
+then.shouldHaveMetaData = () => {
+	then.shouldHaveRenderedOnce();
+	expect(fakeEngine.render.mock.calls[0][1]).toStrictEqual({
+		__meta: {
+			name: viewName,
+			path: viewName.split('.').join('/')
+		}
+	});
+};
+
+then.shouldHavePassedViewModelToEngineMethodWithMetaData = () => {
+	then.shouldHaveRenderedOnce();
+	expect(fakeEngine.render.mock.calls[0][1]).toStrictEqual({
+		...viewModel,
+		__meta: {
+			name: viewName,
+			path: viewName.split('.').join('/')
+		}
+	});
 };
 
 

@@ -14,46 +14,49 @@
     {{/for}}
 </div>
 <script>
-    document.addEventListener('jquery.loaded', function() {
-        var openClass = 'open';
-        var toggleSelector = '[data-toggle]';
-        var $dumper = $('[data-ioc-dumper]');
-        $dumper.on('click', toggleSelector, function() {
-            var $this = $(this);
-            $this.toggleClass(openClass);
-            if (!$this.hasClass(openClass)) {
-                $this.next().find(toggleSelector).removeClass(openClass);
+    if (!window.__IOC_DUMPER_ENABLED__) {
+		window.__IOC_DUMPER_ENABLED__ = true;
+        document.addEventListener('jquery.loaded', function() {
+            var openClass = 'open';
+            var toggleSelector = '[data-toggle]';
+            var $dumper = $('[data-ioc-dumper]');
+            $dumper.on('click', toggleSelector, function() {
+                var $this = $(this);
+                $this.toggleClass(openClass);
+                if (!$this.hasClass(openClass)) {
+                    $this.next().find(toggleSelector).removeClass(openClass);
+                }
+            });
+            {{if theme.open}}
+            $dumper.find(toggleSelector).addClass('open');
+            {{/if}}
+        });
+		window.addEventListener('DOMContentLoaded', () => {
+            if (!document.querySelector('[data-ioc-dumper-style]')) {
+                var iocDumperStyle = document.createElement('template');
+                iocDumperStyle.setAttribute('data-ioc-dumper-style', '');
+                iocDumperStyle.innerHTML = '{{include name="dumper::jsrender.style" data=#data inline=true escape=true /}}'.trim().replace(/\s{2,}/gu, ' ');
+                document.head.append(iocDumperStyle.content.firstChild);
+            }
+            {{if theme.font.link}}
+            if (!document.querySelector('[data-ioc-dumper-font]')) {
+                var iocDumperFont = document.createElement('link');
+                iocDumperStyle.setAttribute('data-ioc-dumper-font', '');
+                iocDumperFont.rel = 'stylesheet';
+                iocDumperFont.href = '{{:theme.font.link}}';
+                document.head.append(iocDumperFont);
+            }
+            {{/if}}
+            if (!window.$) {
+                var jQueryScript = document.createElement('script');
+                jQueryScript.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+                jQueryScript.onload = function() {
+                    document.dispatchEvent(new Event('jquery.loaded'));
+                };
+                document.head.append(jQueryScript);
+            } else {
+                document.dispatchEvent(new Event('jquery.loaded'));
             }
         });
-        {{if theme.open}}
-        $dumper.find(toggleSelector).addClass('open');
-        {{/if}}
-	});
-    (function() {
-		if (!document.querySelector('[data-ioc-dumper-style]')) {
-			var iocDumperStyle = document.createElement('style');
-			iocDumperStyle.setAttribute('data-ioc-dumper-style', '');
-			iocDumperStyle.innerText = '{{include name="dumper::jsrender.style" data=#data inline=true escape=true /}}'.replace('<style>', '').replace('</style>', '');
-			document.head.append(iocDumperStyle);
-		}
-		{{if theme.font.link}}
-		if (!document.querySelector('[data-ioc-dumper-font]')) {
-            var iocDumperFont = document.createElement('link');
-			iocDumperStyle.setAttribute('data-ioc-dumper-font', '');
-			iocDumperFont.rel = 'stylesheet';
-            iocDumperFont.href = '{{:theme.font.link}}';
-            document.head.append(iocDumperFont);
-		}
-        {{/if}}
-        if (!window.$) {
-            var jQueryScript = document.createElement('script');
-            jQueryScript.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
-            jQueryScript.onload = function() {
-                document.dispatchEvent(new Event('jquery.loaded'));
-            };
-            document.head.append(jQueryScript);
-        } else {
-            document.dispatchEvent(new Event('jquery.loaded'));
-	    }
-    })();
+    }
 </script>
