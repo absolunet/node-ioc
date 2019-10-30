@@ -28,7 +28,11 @@ class ViewDriver extends _Driver.default {
 
 
   render(exception, request, response) {
-    response.end(this.renderView(exception));
+    if (this.wantsJson(request)) {
+      return response.json(this.renderJson(exception));
+    }
+
+    return response.end(this.renderView(exception));
   }
   /**
    * Render view template, if possible.

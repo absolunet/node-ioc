@@ -40,6 +40,19 @@ class Driver extends hasEngine() {
 		return request && ((/application\/json/u).test(request.get('accept')) || (/xmlhttprequest/iu).test(request.get('x-requested-with')));
 	}
 
+	/**
+	 * Return a JSON renderable object that represents the exception.
+	 *
+	 * @param {Error} exception - The current exception.
+	 * @returns {{type: *, message: *}} - The renderable object.
+	 */
+	renderJson(exception) {
+		return {
+			type:    exception.name,
+			message: exception.message
+		};
+	}
+
 }
 
 

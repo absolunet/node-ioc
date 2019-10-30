@@ -12,6 +12,7 @@
             background: {{:theme.colors.background}};
         }
     </style>
+    {{include name="dumper::jsrender.style" data=#data}}
 </head>
 <body>
     {{include name="dumper::jsrender.dump" data=#data /}}

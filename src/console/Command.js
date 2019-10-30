@@ -166,9 +166,8 @@ class Command {
 		__(this).set('arguments', parameters);
 		Object.keys(argumentModels).forEach((type) => {
 			const Argument = argumentModels[type];
-			parameters[type] = [];
-			this[type].forEach((parameter, index) => {
-				parameters[type][index] = this.makeArgument(Argument, parameter);
+			parameters[type] = this[type].map((parameter) => {
+				return this.makeArgument(Argument, parameter);
 			});
 		});
 	}
@@ -208,7 +207,7 @@ class Command {
 			return signature;
 		}).join(' ');
 
-		return `${name} ${p}`.replace(/\s\s+/u, ' ').trim();
+		return `${name} ${p}`.replace(/\s{2,}/u, ' ').trim();
 	}
 
 	/**
@@ -296,7 +295,7 @@ class Command {
 			throw new TypeError(`${type} [${name}] does not exists.`);
 		}
 
-		return full ? argument : argument.value;
+		return full ? argument : argument.value || argument.defaultValue;
 	}
 
 	/**
@@ -650,7 +649,7 @@ class Command {
 	/**
 	 * Build yargs model.
 	 *
-	 * @returns {{builder, describe: string, command: string}} The yargs model.
+	 * @returns {{builder, describe: string, command: string}} The Yargs model.
 	 */
 	buildYargsModel() {
 		if (this.forward) {

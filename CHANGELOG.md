@@ -13,6 +13,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-alpha.3] - 2019-10-30
+
+### Added
+ - Dumper bypass to prevent undesired dumps by environment
+
+### Changed
+ - View dumps display the file where the dump was done instead of the `dump` helper declaration location
+ - Updated `@absolunet/tester` to `3.0.5`
+ - Updated `deepmerge` to `4.2.2`
+
+### Fixed
+ - Properly support command parameters default value
+ - HTTP error handling in production properly uses the error pages
+
+
+
 ## [1.0.0-alpha.2] - 2019-10-29
 
 ### Added
@@ -458,7 +474,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.2...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.3...HEAD
+[1.0.0-alpha.3]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.2...1.0.0-alpha.3
 [1.0.0-alpha.2]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.1...1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/absolunet/node-ioc/compare/0.10.0...1.0.0-alpha.1
 [0.10.0]:        https://github.com/absolunet/node-ioc/compare/0.9.0...0.10.0

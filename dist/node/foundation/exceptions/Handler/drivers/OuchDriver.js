@@ -83,16 +83,17 @@ class OuchDriver extends _Driver.default {
     try {
       data = JSON.parse(output[0]);
     } catch (error) {
-      data = {
-        type: exception.name,
-        message: exception.message
-      };
+      data = this.renderJson(exception);
     }
 
     if (this.app.environment === 'production') {
+      const {
+        type,
+        message
+      } = data;
       data = {
-        type: data.type,
-        message: data.message
+        type,
+        message
       };
     }
 

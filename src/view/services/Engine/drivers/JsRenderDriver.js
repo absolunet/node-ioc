@@ -51,20 +51,71 @@ class JsRenderDriver extends Driver {
 	 * Create custom JSRender helper functions.
 	 */
 	createCustomHelpers() {
-		this.engine.views.helpers('inject', this.app.make.bind(this.app));
+		this.createInjectHelper();
+		this.createConfigHelper();
+		this.createRouteHelper();
+		this.createTranslateHelper();
+		this.createDumpHelper();
+	}
+
+	/**
+	 * Create "inject" helper function.
+	 */
+	createInjectHelper() {
+		this.engine.views.helpers('inject', (...parameters) => {
+			return this.app.make(...parameters);
+		});
+	}
+
+	/**
+	 * Create "config" helper function.
+	 */
+	createConfigHelper() {
 		this.engine.views.helpers('config', (...parameters) => {
 			return this.app.make('config').get(...parameters);
 		});
+	}
+
+	/**
+	 * Create "route" helper function.
+	 */
+	createRouteHelper() {
 		this.engine.views.helpers('route', (name, parameters = {}) => {
 			const route = this.app.make('router.route').findByName(name);
 
 			return route.compilePath(parameters).compiledPath || '/';
 		});
+	}
+
+	/**
+	 * Create "t" helper function.
+	 */
+	createTranslateHelper() {
 		this.engine.views.helpers('t', (...parameters) => {
 			return this.app.make('translator').translate(...parameters);
 		});
-		this.engine.views.helpers('dump', (...parameters) => {
-			return this.app.make('dumper').getDump(...parameters);
+	}
+
+	/**
+	 * Create "dump" helper function.
+	 */
+	createDumpHelper() {
+		const { app } = this;
+		this.engine.views.helpers('dump', function(...parameters) {
+			const dumper = app.make('dumper');
+			let meta;
+			let current = this; // eslint-disable-line consistent-this
+
+			while (!meta && current) {
+				({ __meta: meta } = current.data);
+				current = current.parent;
+			}
+
+			if (meta) {
+				return dumper.getDumpForFile(meta.path, ...parameters);
+			}
+
+			return dumper.getDump(...parameters);
 		});
 	}
 
@@ -72,18 +123,17 @@ class JsRenderDriver extends Driver {
 	 * Create all JSRender custom tags.
 	 */
 	createCustomTags() {
-		this.engine.views.tags('include', this.includeHandler);
+		this.createIncludeTag();
 	}
 
 	/**
-	 * Handler for the "include" tag.
-	 *
-	 * @type {{render: Function}}
+	 * Create "include" tag.
+	 * JSRender already defines this tag, but an overwrite is necessary in order to use the view resolver.
 	 */
-	get includeHandler() {
+	createIncludeTag() {
 		const self = this;
 
-		return {
+		this.engine.views.tags('include', {
 			render() {
 				const { name, data = {}, inline, escape } = this.tagCtx.props;
 				data.slot = data.slot || this.tagCtx.render();
@@ -100,7 +150,8 @@ class JsRenderDriver extends Driver {
 
 				return render;
 			}
-		};
+		});
+
 	}
 
 	/**

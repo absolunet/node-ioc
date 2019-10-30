@@ -12,12 +12,15 @@ let result;
 let dumper;
 let data;
 let otherData;
+let fileName;
 
 
 //-- Mocks
 //--------------------------------------------------------
 
 const fakeRenderedTemplate = 'fake rendered template';
+
+const fakeFileName = '/path/to/file';
 
 const fakeTerminal = {
 	echo: jest.fn()
@@ -49,6 +52,10 @@ given.emptyResult = () => {
 	result = undefined;
 };
 
+given.emptyFileName = () => {
+	fileName = undefined;
+};
+
 given.fakeTerminal = () => {
 	container.singleton('terminal', fakeTerminal);
 };
@@ -64,6 +71,7 @@ given.fakeResponse = () => {
 given.baseDevConfig = () => { // eslint-disable-line unicorn/prevent-abbreviations
 	container.make('config').set('dev', {
 		dumper: {
+			'disabled_environments': [],
 			'default': 'fake',
 			'themes': {
 				fake: {}
@@ -93,6 +101,16 @@ given.circularData = () => {
 	data.self = data;
 };
 
+given.disabledTestEnvironmentInConfiguration = () => {
+	container.make('config').set('dev.dumper.disabled_environments', [
+		container.environment
+	]);
+};
+
+given.fileName = () => {
+	fileName = fakeFileName;
+};
+
 
 //-- When
 //--------------------------------------------------------
@@ -103,9 +121,21 @@ when.dumping = () => {
 	});
 };
 
+when.dumpingForFile = () => {
+	when.attempting(() => {
+		dumper.dumpForFile(fileName, ...[data, otherData].filter(Boolean));
+	});
+};
+
 when.gettingDump = () => {
 	when.attempting(() => {
 		result = dumper.getDump(...[data, otherData].filter(Boolean));
+	});
+};
+
+when.gettingDumpForFile = () => {
+	when.attempting(() => {
+		result = dumper.getDumpForFile(fileName, ...[data, otherData].filter(Boolean));
 	});
 };
 
@@ -157,6 +187,20 @@ then.shouldHaveRenderedHtmlPartial = () => {
 	expect(fakeViewFactory.make).toHaveBeenCalled();
 	const { calls } = fakeViewFactory.make.mock;
 	expect(calls[calls.length - 1][0]).toBe('dumper::jsrender.dump');
+};
+
+then.shouldNotHaveRendered = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeViewFactory.make).not.toHaveBeenCalled();
+};
+
+then.shouldHaveUsedGivenFileName = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeViewFactory.make).toHaveBeenCalled();
+	const { calls } = fakeViewFactory.make.mock;
+	expect(calls[calls.length - 1][1]).toMatchObject({
+		location: fileName
+	});
 };
 
 

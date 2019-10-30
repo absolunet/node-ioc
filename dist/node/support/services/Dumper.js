@@ -13,6 +13,52 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //--------------------------------------------------------
 
 /**
+ * @private
+ * @typedef {object<string, string|number>} DumperThemeFont
+ * @property {string} name - The font family name.
+ * @property {number} weight - The font weight.
+ * @property {string} size - The font size, with the unit of measure.
+ * @property {string} link - The URL to load the font from.
+ * @memberof support.services.Dumper
+ */
+
+/**
+ * @private
+ * @typedef {object<string, string>} DumperThemeColors
+ * @property {string} background - The background color.
+ * @property {string} text - The default text color.
+ * @property {string} key - The object and array keys color.
+ * @property {string} type - The value type names color.
+ * @property {string} boolean - The boolean values color.
+ * @property {string} function - The function values color.
+ * @property {string} number - The numeric value color.
+ * @property {string} string - The string values color.
+ * @property {string} symbol - The Symbol values color.
+ * @memberof support.services.Dumper
+ */
+
+/**
+ * @private
+ * @typedef {object} DumperTheme
+ * @property {number} indent - The indentation size.
+ * @property {boolean} open - Indicates that the dumper should expand all objects and arrays on render.
+ * @property {support.services.Dumper.DumperThemeFont} font - The font configuration.
+ * @property {support.services.Dumper.DumperThemeColors} colors - The colors.
+ * @memberof support.services.Dumper
+ */
+
+/**
+ * @private
+ * @typedef {object} DumperData
+ * @property {Array<string>} dumps - The rendered dumps.
+ * @property {Array<*>} values - The dumped raw values.
+ * @property {support.services.Dumper.DumperTheme} theme - The current theme configuration.
+ * @property {string} [location] - The dump file location.
+ * @property {string} [locationLink] - The dump file location link formatted for current IDE.
+ * @memberof support.services.Dumper
+ */
+
+/**
  * HTTP variable dumper.
  *
  * @memberof support.services
@@ -37,7 +83,7 @@ class Dumper extends (0, _checksTypes.default)() {
     (0, _privateRegistry.default)(this).set('instances', new Map());
     (0, _privateRegistry.default)(this).set('currentInstances', []);
     this.resetDelta();
-    this.useTheme(this.config.get('dev.dumper.default'));
+    this.useTheme(this.config.get('dev.dumper.default', 'absolunet'));
   }
   /**
    * Dump variables as an HTTP response, or in the console if response is not available.
@@ -47,19 +93,45 @@ class Dumper extends (0, _checksTypes.default)() {
 
 
   dump(...parameters) {
+    if (this.shouldDump()) {
+      this.respondWithDump(this.getDumpData(...parameters));
+    }
+  }
+  /**
+   * Dump variable from the explicitly given file.
+   *
+   * @param {string} file - The file the dump was originally called.
+   * @param {...*} parameters - The dumped parameters.
+   */
+
+
+  dumpForFile(file, ...parameters) {
+    if (this.shouldDump()) {
+      this.respondWithDump(this.getDumpDataForFile(file, ...parameters));
+    }
+  }
+  /**
+   * Send the proper response with the dumped data.
+   *
+   * @param {support.services.Dumper.DumperData} data - The processed dump data model.
+   */
+
+
+  respondWithDump(data) {
     const {
       response,
       terminal
     } = this;
-    const data = this.getDumpData(...parameters);
 
-    if (response) {
-      response.status(500).end(this.makeView('index', data));
-      this.setResponse(undefined);
-    } else {
-      data.values.forEach(value => {
-        terminal.echo(value);
-      });
+    if (this.shouldDump()) {
+      if (response) {
+        response.status(500).end(this.makeView('index', data));
+        this.setResponse(undefined);
+      } else {
+        data.values.forEach(value => {
+          terminal.echo(value);
+        });
+      }
     }
   }
   /**
@@ -71,13 +143,36 @@ class Dumper extends (0, _checksTypes.default)() {
 
 
   getDump(...parameters) {
-    return this.makeView('dump', this.getDumpData(...parameters));
+    return this.makeDump(this.getDumpData(...parameters));
+  }
+  /**
+   * Get dump without the whole HTML page around it from the explicitly given file.
+   *
+   * @param {string} file - The file the dump was originally called.
+   * @param {...*} parameters - The dumped parameters.
+   * @returns {string} The rendered dump.
+   */
+
+
+  getDumpForFile(file, ...parameters) {
+    return this.makeDump(this.getDumpDataForFile(file, ...parameters));
+  }
+  /**
+   * Make dump view with the dump formatted data.
+   *
+   * @param {support.services.Dumper.DumperData} data - The processed dump data model.
+   * @returns {string} The rendered dump.
+   */
+
+
+  makeDump(data) {
+    return this.makeView('dump', data);
   }
   /**
    * Get dump data without the main rendered view.
    *
    * @param {...*} parameters - The dumped parameters.
-   * @returns {{dumps: *, values: *, location: *, theme: *, locationLink: *}} The dump data model.
+   * @returns {support.services.Dumper.DumperData} The processed dump data model.
    */
 
 
@@ -98,6 +193,21 @@ class Dumper extends (0, _checksTypes.default)() {
       theme,
       values: parameters
     };
+  }
+  /**
+   * Get dump data withou the main rendered view for the explicitly given file.
+   *
+   * @param {string} file - The file the dump was originally called.
+   * @param {...*} parameters - The dumped parameters.
+   * @returns {support.services.Dumper.DumperData} The processed dump data model.
+   */
+
+
+  getDumpDataForFile(file, ...parameters) {
+    const data = this.getDumpData(...parameters);
+    data.location = file;
+    data.locationLink = this.getLocationLink(file);
+    return data;
   }
   /**
    * Stringify a value by using the dedicated views for the current view engine.
@@ -315,7 +425,11 @@ class Dumper extends (0, _checksTypes.default)() {
 
 
   makeView(viewName, data) {
-    return this.view.make(`dumper::${this.config.get('view.engine', 'jsrender')}.${viewName}`, data);
+    if (this.shouldDump()) {
+      return this.view.make(`dumper::${this.config.get('view.engine', 'jsrender')}.${viewName}`, data);
+    }
+
+    return '';
   }
   /**
    * Get the dump file and line location.
@@ -332,14 +446,24 @@ class Dumper extends (0, _checksTypes.default)() {
   /**
    * Get the dump location IDE link.
    *
+   * @param {string} [location=this.getLocation()] - The location to get link from.
    * @returns {string} The IDE link to the dump call.
    */
 
 
-  getLocationLink() {
-    const location = this.getLocation();
+  getLocationLink(location = this.getLocation()) {
     const [file, line] = location.split(':');
     return (this.ideLink.get(this.config.get('dev.ide')) || '').replace('%line', encodeURIComponent(line)).replace('%file', encodeURIComponent(file));
+  }
+  /**
+   * Check if the dumper should dump or return dumped content based on the current environment and configuration.
+   *
+   * @returns {boolean} Indicates that the dumper should dump.
+   */
+
+
+  shouldDump() {
+    return !this.config.get('dev.dumper.disabled_environments', []).includes(this.app.environment);
   }
   /**
    * The theme configuration.
@@ -349,7 +473,27 @@ class Dumper extends (0, _checksTypes.default)() {
 
 
   get theme() {
-    return this.config.get(`dev.dumper.themes.${(0, _privateRegistry.default)(this).get('theme')}`);
+    return this.config.get(`dev.dumper.themes.${(0, _privateRegistry.default)(this).get('theme')}`, {
+      indent: 4,
+      open: false,
+      font: {
+        name: 'Fira mono',
+        weight: 400,
+        size: '1em',
+        link: 'https://fonts.googleapis.com/css?family=Fira+Mono:400',
+        colors: {
+          'background': '#2b2d3c',
+          'text': '#4ea4e7',
+          'key': '#f2f2f2',
+          'type': '#1aabb6',
+          'boolean': '#ff5252',
+          'function': '#ff5252',
+          'number': '#ff5252',
+          'string': '#b6d8ee',
+          'symbol': '#b6d8ee'
+        }
+      }
+    });
   }
   /**
    * The current response instance.

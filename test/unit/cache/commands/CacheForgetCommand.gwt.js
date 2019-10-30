@@ -23,7 +23,7 @@ then.shouldHaveDeletedKeyOnStore = (key, store) => {
 };
 
 then.shouldHaveDeletedKeyOnDefaultStore = (key) => {
-	then.shouldHaveDeletedKeyOnStore(key, undefined);
+	then.shouldHaveDeletedKeyOnStore(key, null);
 };
 
 then.shouldHaveDeletedKeyOnAlternateStore = (key) => {

@@ -25,13 +25,14 @@ describe('Factory', () => {
 	test('Call engine with resolved path from given view name', () => {
 		when.makingView();
 		then.shouldHaveReturnedEngineResultFromResolverPath();
+		then.shouldHaveMetaData();
 	});
 
 	test('Call engine with resolved path from given view name and view-model', () => {
 		given.viewModel({ key: 'value' });
 		when.makingView();
 		then.shouldHaveReturnedEngineResultFromResolverPath();
-		then.shouldHavePassedViewModelToEngineMethod();
+		then.shouldHavePassedViewModelToEngineMethodWithMetaData();
 	});
 
 });

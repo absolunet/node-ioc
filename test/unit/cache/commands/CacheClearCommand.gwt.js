@@ -24,7 +24,7 @@ then.storeShouldHaveBeenFlushed = (store) => {
 };
 
 then.defaultStoreShouldHaveBeenFlushed = () => {
-	then.storeShouldHaveBeenFlushed(undefined);
+	then.storeShouldHaveBeenFlushed(null);
 };
 
 then.alternateStoreShouldHaveBeenFlushed = () => {
