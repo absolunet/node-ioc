@@ -91,7 +91,7 @@ class MakeMigrationCommand extends GeneratorCommand {
 	 * @returns {string} The action that the migration is doing.
 	 */
 	getAction() {
-		const { action = 'Create' } =  ((/^(?<action>[A-Z][a-z]+)/u).exec(this.parameter('class')) || { groups: {} }).groups;
+		const { action = 'Alter' } =  ((/^(?<action>[A-Z][a-z]+)/u).exec(this.parameter('class')) || { groups: {} }).groups;
 
 		const supported = Object.keys(this.files);
 		const slug = this.app.make('helper.string').slug(action);

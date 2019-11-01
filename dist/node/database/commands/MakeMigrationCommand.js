@@ -104,7 +104,7 @@ class MakeMigrationCommand extends _GeneratorCommand.default {
 
   getAction() {
     const {
-      action = 'Create'
+      action = 'Alter'
     } = (/^(?<action>[A-Z][a-z]+)/u.exec(this.parameter('class')) || {
       groups: {}
     }).groups;
