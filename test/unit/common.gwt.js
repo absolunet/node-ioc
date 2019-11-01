@@ -70,7 +70,7 @@ then.shouldHaveThrown = () => {
 };
 
 then.shouldNotHaveThrown = () => {
-	expect(exception).toBeFalsy();
+	expect((exception || {}).stack).toBeFalsy();
 };
 
 then.exceptionShouldBe = (expected) => {
