@@ -22,10 +22,9 @@ class %CLASS% extends ModelFactory {
 	/**
 	 * Factory model attributes.
 	 *
-	 * @param {support.services.Faker} faker - The Faker instance.
 	 * @returns {object}
 	 */
-	make(faker) {
+	make() {
 		return {
 			//
 		};
