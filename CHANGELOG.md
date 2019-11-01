@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-alpha.5] - 2019-11-01
+
+### Fixed
+ - Disable capture interceptor when handling error.
+
+
+
 ## [1.0.0-alpha.4] - 2019-11-01
 
 ### Added
@@ -493,7 +500,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.4...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.5...HEAD
+[1.0.0-alpha.5]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.4...1.0.0-alpha.5
 [1.0.0-alpha.4]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.3...1.0.0-alpha.4
 [1.0.0-alpha.3]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.2...1.0.0-alpha.3
 [1.0.0-alpha.2]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.1...1.0.0-alpha.2
