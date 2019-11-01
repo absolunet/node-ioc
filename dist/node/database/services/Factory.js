@@ -78,7 +78,7 @@ class Factory {
     }
 
     const models = [...new Array(count).keys()].map(() => {
-      return new ModelInstance({ ...factory.make(this.faker),
+      return new ModelInstance({ ...factory.make(),
         ...properties
       });
     });
@@ -95,7 +95,9 @@ class Factory {
 
 
   register(factory, model = null) {
-    const instance = this.app.make(factory);
+    const instance = this.app.make(factory, {
+      faker: this.app.make('faker')
+    });
     (0, _privateRegistry.default)(this).get('factories')[model || instance.model] = instance;
     return this;
   }

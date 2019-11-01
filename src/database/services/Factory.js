@@ -71,7 +71,7 @@ class Factory {
 		}
 
 		const models = [...new Array(count).keys()].map(() => {
-			return new ModelInstance({ ...factory.make(this.faker), ...properties });
+			return new ModelInstance({ ...factory.make(), ...properties });
 		});
 
 		return count === 1 ? models[0] : ModelInstance.collection(models);
@@ -86,7 +86,7 @@ class Factory {
 	 * @returns {database.services.Factory} The factory service instance.
 	 */
 	register(factory, model = null) {
-		const instance = this.app.make(factory);
+		const instance = this.app.make(factory, { faker: this.app.make('faker') });
 		__(this).get('factories')[model || instance.model] = instance;
 
 		return this;
