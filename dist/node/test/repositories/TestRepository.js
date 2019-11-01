@@ -4,6 +4,8 @@ exports.default = void 0;
 
 var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
 
+var _getsMethods = _interopRequireDefault(require("../../support/mixins/getsMethods"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -16,7 +18,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @memberof test.repositories
  * @hideconstructor
  */
-class TestRepository {
+class TestRepository extends (0, _getsMethods.default)() {
   /**
    * Class dependencies: <code>['app', 'file', 'helper.path', 'helper.string']</code>.
    *
@@ -139,34 +141,13 @@ class TestRepository {
 
 
   getTestsFromInstance(instance) {
-    return this.getAllInstanceTestMethods(instance).map(method => {
+    return this.getTestMethods(instance).map(method => {
       const description = this.getFormattedDescription(method);
       return {
         method,
         description
       };
     });
-  }
-  /**
-   * Get all instance methods.
-   *
-   * @param {test.TestCase} instance - The test case instance.
-   * @returns {Array<string>} List of all instance methods.
-   */
-
-
-  getAllInstanceMethods(instance) {
-    const properties = new Set();
-    let currentObject = instance;
-
-    do {
-      Object.keys(Object.getOwnPropertyDescriptors(currentObject)).forEach(name => {
-        properties.add(name);
-      });
-      currentObject = Object.getPrototypeOf(currentObject);
-    } while (currentObject && currentObject !== Object.prototype);
-
-    return [...properties.keys()];
   }
   /**
    * Get all instance methods that are actual test cases.
@@ -176,8 +157,8 @@ class TestRepository {
    */
 
 
-  getAllInstanceTestMethods(instance) {
-    return this.getAllInstanceMethods(instance).filter(name => {
+  getTestMethods(instance) {
+    return this.getMethods(instance).filter(name => {
       return this.testMethodName(name);
     });
   }

@@ -7,19 +7,19 @@ import NotImplementedError from '../../foundation/exceptions/NotImplementedError
 
 
 /**
- * Forward calls mixin.
+ * Forwards calls mixin.
  *
  * @class
- * @name ForwardCalls
+ * @name ForwardsCalls
  * @memberof support.mixins
  * @hideconstructor
  */
-const forwardCalls = factory((SuperClass) => {
+const forwardsCalls = factory((SuperClass) => {
 
 	/**
-	 * Forward calls mixin.
+	 * Forwards calls mixin.
 	 */
-	return class ForwardCallsMixin extends SuperClass {
+	return class ForwardsCallsMixin extends SuperClass {
 
 		/**
 		 * Forward call to given object.
@@ -27,7 +27,7 @@ const forwardCalls = factory((SuperClass) => {
 		 * @param {string} method - The method to call.
 		 * @param {Array<*>} [parameters=[]] - The parameters to send to the forwarded instance method.
 		 * @returns {*} The method result.
-		 * @memberof support.mixins.ForwardCalls
+		 * @memberof support.mixins.ForwardsCalls
 		 * @instance
 		 */
 		forwardCall(method, parameters = []) {
@@ -39,7 +39,7 @@ const forwardCalls = factory((SuperClass) => {
 		 *
 		 * @returns {object} The forward instance.
 		 * @abstract
-		 * @memberof support.mixins.ForwardCalls
+		 * @memberof support.mixins.ForwardsCalls
 		 * @instance
 		 */
 		getForward() {
@@ -51,4 +51,4 @@ const forwardCalls = factory((SuperClass) => {
 });
 
 
-export default forwardCalls;
+export default forwardsCalls;

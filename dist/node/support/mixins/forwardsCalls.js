@@ -13,25 +13,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //--------------------------------------------------------
 
 /**
- * Forward calls mixin.
+ * Forwards calls mixin.
  *
  * @class
- * @name ForwardCalls
+ * @name ForwardsCalls
  * @memberof support.mixins
  * @hideconstructor
  */
-const forwardCalls = (0, _mixinFactory.default)(SuperClass => {
+const forwardsCalls = (0, _mixinFactory.default)(SuperClass => {
   /**
-   * Forward calls mixin.
+   * Forwards calls mixin.
    */
-  return class ForwardCallsMixin extends SuperClass {
+  return class ForwardsCallsMixin extends SuperClass {
     /**
      * Forward call to given object.
      *
      * @param {string} method - The method to call.
      * @param {Array<*>} [parameters=[]] - The parameters to send to the forwarded instance method.
      * @returns {*} The method result.
-     * @memberof support.mixins.ForwardCalls
+     * @memberof support.mixins.ForwardsCalls
      * @instance
      */
     forwardCall(method, parameters = []) {
@@ -42,7 +42,7 @@ const forwardCalls = (0, _mixinFactory.default)(SuperClass => {
      *
      * @returns {object} The forward instance.
      * @abstract
-     * @memberof support.mixins.ForwardCalls
+     * @memberof support.mixins.ForwardsCalls
      * @instance
      */
 
@@ -53,7 +53,7 @@ const forwardCalls = (0, _mixinFactory.default)(SuperClass => {
 
   };
 });
-var _default = forwardCalls;
+var _default = forwardsCalls;
 exports.default = _default;
 module.exports = exports.default;
 module.exports.default = exports.default;

@@ -2,7 +2,8 @@
 //-- Node IoC - Test - Repository - Abstract Test repository
 //--------------------------------------------------------
 
-import __ from '@absolunet/private-registry';
+import __          from '@absolunet/private-registry';
+import getsMethods from '../../support/mixins/getsMethods';
 
 
 /**
@@ -11,7 +12,7 @@ import __ from '@absolunet/private-registry';
  * @memberof test.repositories
  * @hideconstructor
  */
-class TestRepository {
+class TestRepository extends getsMethods() {
 
 	/**
 	 * Class dependencies: <code>['app', 'file', 'helper.path', 'helper.string']</code>.
@@ -121,7 +122,7 @@ class TestRepository {
 	 * @returns {Array<{method: string, description: string}>} The tests methods and descriptions from the test case instance.
 	 */
 	getTestsFromInstance(instance) {
-		return this.getAllInstanceTestMethods(instance)
+		return this.getTestMethods(instance)
 			.map((method) => {
 				const description = this.getFormattedDescription(method);
 
@@ -130,33 +131,13 @@ class TestRepository {
 	}
 
 	/**
-	 * Get all instance methods.
-	 *
-	 * @param {test.TestCase} instance - The test case instance.
-	 * @returns {Array<string>} List of all instance methods.
-	 */
-	getAllInstanceMethods(instance) {
-		const properties  = new Set();
-		let currentObject = instance;
-
-		do {
-			Object.keys(Object.getOwnPropertyDescriptors(currentObject)).forEach((name) => {
-				properties.add(name);
-			});
-			currentObject = Object.getPrototypeOf(currentObject);
-		} while (currentObject && currentObject !== Object.prototype);
-
-		return [...properties.keys()];
-	}
-
-	/**
 	 * Get all instance methods that are actual test cases.
 	 *
 	 * @param {test.TestCase} instance - The test case instance.
 	 * @returns {Array<string>} List of all instance test methods.
 	 */
-	getAllInstanceTestMethods(instance) {
-		return this.getAllInstanceMethods(instance)
+	getTestMethods(instance) {
+		return this.getMethods(instance)
 			.filter((name) => {
 				return this.testMethodName(name);
 			});

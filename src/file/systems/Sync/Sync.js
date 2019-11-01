@@ -2,18 +2,18 @@
 //-- Node IoC - File - Engine - System - Sync
 //--------------------------------------------------------
 
-import SyncProxy    from './SyncProxy';
-import forwardCalls from '../../../support/mixins/forwardCalls';
+import SyncProxy     from './SyncProxy';
+import forwardsCalls from '../../../support/mixins/forwardsCalls';
 
 
 /**
  * The sync file system.
  *
  * @memberof file.systems
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Sync extends forwardCalls() {
+class Sync extends forwardsCalls() {
 
 	/**
 	 * Sync constructor.

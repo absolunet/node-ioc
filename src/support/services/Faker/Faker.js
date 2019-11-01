@@ -3,17 +3,17 @@
 //--------------------------------------------------------
 
 import FakerProxy   from './FakerProxy';
-import forwardCalls from '../../mixins/forwardCalls';
+import forwardsCalls from '../../mixins/forwardsCalls';
 
 
 /**
  * Faker class that decorates the faker module.
  *
  * @memberof support.services
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Faker extends forwardCalls() {
+class Faker extends forwardsCalls() {
 
 	/**
 	 * Faker constructor.

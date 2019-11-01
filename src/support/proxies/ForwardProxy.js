@@ -2,20 +2,20 @@
 //-- Node IoC - Support - Proxies - Base Proxy
 //--------------------------------------------------------
 
-import __           from '@absolunet/private-registry';
-import forwardCalls from '../mixins/forwardCalls';
-import BaseProxy    from './BaseProxy';
+import __            from '@absolunet/private-registry';
+import forwardsCalls from '../mixins/forwardsCalls';
+import BaseProxy     from './BaseProxy';
 
 
 /**
  * Proxy that forwards calls to a forwarded instance if property is not found in the instance.
  *
  * @memberof support.proxies
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @augments support.proxies.BaseProxy
  * @hideconstructor
  */
-class ForwardProxy extends forwardCalls(BaseProxy) {
+class ForwardProxy extends forwardsCalls(BaseProxy) {
 
 	/**
 	 * @inheritdoc

@@ -4,7 +4,7 @@ exports.default = void 0;
 
 var _AsyncProxy = _interopRequireDefault(require("./AsyncProxy"));
 
-var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16,10 +16,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * The async file system.
  *
  * @memberof file.systems
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Async extends (0, _forwardCalls.default)() {
+class Async extends (0, _forwardsCalls.default)() {
   /**
    * Async constructor.
    *

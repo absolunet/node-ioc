@@ -2,7 +2,7 @@
 //-- Node IoC - Cache - Services - Store Resolver
 //--------------------------------------------------------
 
-import forwardCalls      from '../../../support/mixins/forwardCalls';
+import forwardsCalls     from '../../../support/mixins/forwardsCalls';
 import hasDriver         from '../../../support/mixins/hasDriver';
 import CacheManagerProxy from './CacheManagerProxy';
 import DatabaseDriver    from './drivers/DatabaseDriver';
@@ -14,11 +14,11 @@ import RuntimeDriver     from './drivers/RuntimeDriver';
  * Cache manager that uses the configuration to properly handle caching operation through drivers.
  *
  * @memberof cache.services
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-class CacheManager extends forwardCalls(hasDriver()) {
+class CacheManager extends forwardsCalls(hasDriver()) {
 
 	/**
 	 * Class dependencies: <code>['app', 'config']</code>.

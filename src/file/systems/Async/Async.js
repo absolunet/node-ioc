@@ -2,18 +2,18 @@
 //-- Node IoC - File - Engine - System - Async
 //--------------------------------------------------------
 
-import AsyncProxy   from './AsyncProxy';
-import forwardCalls from '../../../support/mixins/forwardCalls';
+import AsyncProxy    from './AsyncProxy';
+import forwardsCalls from '../../../support/mixins/forwardsCalls';
 
 
 /**
  * The async file system.
  *
  * @memberof file.systems
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Async extends forwardCalls() {
+class Async extends forwardsCalls() {
 
 	/**
 	 * Async constructor.

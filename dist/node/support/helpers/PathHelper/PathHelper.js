@@ -6,7 +6,7 @@ var _slash = _interopRequireDefault(require("slash"));
 
 var _PathHelperProxy = _interopRequireDefault(require("./PathHelperProxy"));
 
-var _forwardCalls = _interopRequireDefault(require("../../mixins/forwardCalls"));
+var _forwardsCalls = _interopRequireDefault(require("../../mixins/forwardsCalls"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18,10 +18,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Path helper.
  *
  * @memberof support.helpers
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class PathHelper extends (0, _forwardCalls.default)() {
+class PathHelper extends (0, _forwardsCalls.default)() {
   /**
    * PathHelper constructor.
    *
