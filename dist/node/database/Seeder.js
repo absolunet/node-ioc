@@ -81,8 +81,7 @@ class Seeder {
    */
 
 
-  seed() {} // eslint-disable-line no-unused-vars
-  //
+  seed() {} //
 
   /**
    * Retrieve the model by name.

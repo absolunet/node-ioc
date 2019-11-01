@@ -72,7 +72,7 @@ class Seeder {
 	 * @async
 	 * @abstract
 	 */
-	seed() { // eslint-disable-line no-unused-vars
+	seed() {
 		//
 	}
 
