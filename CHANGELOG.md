@@ -13,6 +13,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-alpha.4] - 2019-11-01
+
+### Added
+ - `getsMethods` mixin to quickly get all instance methods
+ - Model relations can be set by implementing methods which name ends with `Relation`
+
+### Changed
+ - `db:seed` only call `DatabaseSeeder` class. Other seeders must either be manually run with the `--file` option or by calling `run()` in the `DatabaseSeeder`
+ - Renamed `forwardCalls` mixin to `forwardsCall`
+ - Connection is set on the migration instances instead of being forwarded in the `up` and `down` methods
+ - Connection is set on the seeder instances instead of being forwarded in the `seed` method
+ - Faker service is injected in model factory instead of being passed as argument when making model data
+
+### Fixed
+ - More verbosity for exceptions that should not have been thrown in tests
+ - Remove redundant public policies in framework commands
+
+
+
 ## [1.0.0-alpha.3] - 2019-10-30
 
 ### Added
@@ -474,7 +493,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.3...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.4...HEAD
+[1.0.0-alpha.4]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.3...1.0.0-alpha.4
 [1.0.0-alpha.3]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.2...1.0.0-alpha.3
 [1.0.0-alpha.2]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.1...1.0.0-alpha.2
 [1.0.0-alpha.1]: https://github.com/absolunet/node-ioc/compare/0.10.0...1.0.0-alpha.1
