@@ -55,6 +55,10 @@ class Handler extends hasDriver() {
 	async handle(exception, request, response) {
 		__(this).get('exceptions').push(exception);
 
+		if (this.app.isBound('terminal.interceptor')) {
+			this.app.make('terminal.interceptor').stopCapture();
+		}
+
 		await this.report(exception);
 
 		await this.render(exception, request, response);

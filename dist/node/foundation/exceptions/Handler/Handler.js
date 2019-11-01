@@ -62,6 +62,11 @@ class Handler extends (0, _hasDriver.default)() {
 
   async handle(exception, request, response) {
     (0, _privateRegistry.default)(this).get('exceptions').push(exception);
+
+    if (this.app.isBound('terminal.interceptor')) {
+      this.app.make('terminal.interceptor').stopCapture();
+    }
+
     await this.report(exception);
     await this.render(exception, request, response);
   }
