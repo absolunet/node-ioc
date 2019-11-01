@@ -6,6 +6,10 @@ var _privateRegistry = _interopRequireDefault(require("@absolunet/private-regist
 
 var _ModelProxy = _interopRequireDefault(require("./ModelProxy"));
 
+var _getsMethods = _interopRequireDefault(require("../../support/mixins/getsMethods"));
+
+var _forwardsCalls = _interopRequireDefault(require("../../support/mixins/forwardsCalls"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -16,9 +20,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Database model that implements ORM features to transact with Knex with an Active Record Pattern (ARP) approach.
  *
  * @memberof database
+ * @augments {support.mixins.GetsMethod}
+ * @augments {support.mixins.ForwardsCalls}
  * @abstract
  */
-class Model {
+class Model extends (0, _forwardsCalls.default)((0, _getsMethods.default)()) {
   /**
    * Class dependencies: <code>['app', 'engine']</code>.
    *
@@ -88,6 +94,7 @@ class Model {
 
 
   constructor(app, engine) {
+    super();
     const {
       Model: model
     } = engine;
@@ -97,6 +104,11 @@ class Model {
       return self;
     };
 
+    Object.defineProperty(factory, 'name', {
+      get: () => {
+        return this.constructor.name;
+      }
+    });
     (0, _privateRegistry.default)(this).set('app', app);
     (0, _privateRegistry.default)(this).set('super', model.prototype);
     (0, _privateRegistry.default)(this).set('model', model.extend(this.definition));
@@ -185,6 +197,24 @@ class Model {
     return (0, _privateRegistry.default)(this).get('model');
   }
   /**
+   * Get relation builders that maps relation names with their query builder.
+   *
+   * @returns {object<string, Function>} The mapped relations with their builder.
+   */
+
+
+  getRelationBuilders() {
+    const self = this;
+    const relationEntries = this.getMethods(this).filter(method => {
+      return method.endsWith('Relation');
+    }).map(method => {
+      return [method.replace(/Relation$/u, ''), function (...parameters) {
+        return self[method](this, ...parameters);
+      }];
+    });
+    return Object.fromEntries(relationEntries);
+  }
+  /**
    * Create a new record in the database.
    *
    * @param {object} attributes - The attributes to create the model with.
@@ -216,8 +246,9 @@ class Model {
       initialize() {
         (0, _privateRegistry.default)(self).get('super').initialize.call(this);
         return self.boot(this);
-      }
+      },
 
+      ...this.getRelationBuilders()
     };
   }
   /**
