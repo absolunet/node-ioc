@@ -13,10 +13,9 @@ class %CLASS% extends Seeder {
 	/**
 	 * Seed the application's database.
 	 *
-	 * @param {Knex} connection - The Knex connection instance.
 	 * @returns {Promise} The async process promise.
 	 */
-	async seed(connection) {
+	async seed() {
 		await this.factory('%MODEL%').save();
 	}
 

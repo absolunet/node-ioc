@@ -22,12 +22,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class Seeder {
   /**
-   * Class dependencies: <code>['db.model', 'db.factory']</code>.
+   * Class dependencies: <code>['app', 'db.model', 'db.factory']</code>.
    *
    * @type {Array<string>}
    */
   static get dependencies() {
-    return ['db.model', 'db.factory'];
+    return ['app', 'db.model', 'db.factory'];
   }
   /**
    * Call seed method on instance.
@@ -38,7 +38,7 @@ class Seeder {
 
 
   static async seed(connection) {
-    await this.getInstance().seed(connection);
+    await this.getInstance().setConnection(connection).seed();
   }
   /**
    * Get seeder instance as a singleton.
@@ -75,13 +75,13 @@ class Seeder {
   /**
    * Seed the application's database.
    *
-   * @param {Knex} connection - The Knex connection instance.
    * @returns {Promise} The async process promise.
+   * @async
    * @abstract
    */
 
 
-  seed(connection) {} // eslint-disable-line no-unused-vars
+  seed() {} // eslint-disable-line no-unused-vars
   //
 
   /**
@@ -93,7 +93,7 @@ class Seeder {
 
 
   model(model) {
-    return (0, _privateRegistry.default)(this).get('db.model').get(model);
+    return this.dbModel.get(model);
   }
   /**
    * Get a factory for a model by name.
@@ -106,7 +106,47 @@ class Seeder {
 
 
   factory(model, parameters, times) {
-    return (0, _privateRegistry.default)(this).get('db.factory').make(model, parameters, times);
+    return this.dbFactory.make(model, parameters, times);
+  }
+  /**
+   * Run seeders.
+   *
+   * @param {Array<string|Seeder>} seeders - The seeders to run.
+   * @returns {Promise} The async process promise.
+   */
+
+
+  async run(seeders) {
+    const {
+      app,
+      connection
+    } = this;
+    await Promise.all(seeders.map(async seeder => {
+      const instance = app.make(typeof seeder === 'string' ? app.path('seed', seeder) : seeder);
+      await instance.setConnection(connection).seed();
+    }));
+  }
+  /**
+   * Set current connection instance.
+   *
+   * @param {Knex} connection - The current connection instance.
+   * @returns {database.Seeder} Current seeder instance.
+   */
+
+
+  setConnection(connection) {
+    (0, _privateRegistry.default)(this).set('connection', connection);
+    return this;
+  }
+  /**
+   * The current connection instance.
+   *
+   * @type {Knex}
+   */
+
+
+  get connection() {
+    return (0, _privateRegistry.default)(this).get('connection');
   }
 
 }

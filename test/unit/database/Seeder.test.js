@@ -19,14 +19,28 @@ test('Can get singleton instance from class', () => {
 	then.resultShouldBeFakeInstance();
 });
 
-test('Can call seed method from class to the singleton with the given connection', () => {
+test('Can call seed method from class to the singleton with the given connection', async () => {
 	given.fakeInstance();
-	when.callingOnClassWithConnection('seed');
+	await when.callingOnClassWithConnection('seed');
 	then.shouldHaveCalledOnFakeInstanceWithConnection('seed');
 });
 
-test('Static call to the seed method results by an async call by default', () => {
+test('Static call to the seed method results by an async call by default', async () => {
 	given.fakeInstance();
-	when.callingOnClassWithConnection('seed');
+	await when.callingSyncOnClassWithConnection('seed');
 	then.resultShouldBePromise();
+});
+
+test('Can run other database seeders by file name', async () => {
+	given.fakeInstance();
+	given.fakeSeederPath();
+	given.otherSeederInSeederPath();
+	await when.runningOtherSeederByName();
+	then.shouldHaveRunOtherSeeder();
+});
+
+test('Can run other database seeders by class', async () => {
+	given.fakeInstance();
+	await when.runningOtherSeederByReference();
+	then.shouldHaveRunOtherSeeder();
 });
