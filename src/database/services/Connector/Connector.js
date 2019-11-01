@@ -2,7 +2,7 @@
 //-- Node IoC - Database - Services - Connector
 //--------------------------------------------------------
 
-import forwardsCall   from '../../../support/mixins/forwardCalls';
+import forwardsCalls  from '../../../support/mixins/forwardsCalls';
 import hasDriver      from '../../../support/mixins/hasDriver';
 import ConnectorProxy from './ConnectorProxy';
 import SqliteDriver   from './drivers/SqliteDriver';
@@ -12,11 +12,11 @@ import SqliteDriver   from './drivers/SqliteDriver';
  * Connector that decorates a Knex connection through a driver.
  *
  * @memberof database.services
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-class Connector extends forwardsCall(hasDriver()) {
+class Connector extends forwardsCalls(hasDriver()) {
 
 	/**
 	 * Connector constructor.

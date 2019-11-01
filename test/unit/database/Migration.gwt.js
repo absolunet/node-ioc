@@ -14,10 +14,11 @@ let result;
 //-- Mocks
 //--------------------------------------------------------
 
-const fakeConnection        = {};
-const fakeMigrationInstance = container.make(Migration);
-fakeMigrationInstance.up    = jest.fn();
-fakeMigrationInstance.down  = jest.fn();
+const fakeConnection                = {};
+const fakeMigrationInstance         = container.make(Migration);
+fakeMigrationInstance.setConnection = jest.fn(() => { return fakeMigrationInstance; });
+fakeMigrationInstance.up            = jest.fn(() => { return Promise.resolve(); });
+fakeMigrationInstance.down          = jest.fn(() => { return Promise.resolve(); });
 
 
 //-- Given
@@ -65,10 +66,14 @@ then.resultShouldBeFakeInstance = () => {
 	then.resultShouldBe(fakeMigrationInstance);
 };
 
-then.shouldHaveCalledOnFakeInstanceWithConnection = (method) => {
+then.shouldHaveReceivedConnection = () => {
 	then.shouldNotHaveThrown();
+	expect(fakeMigrationInstance.setConnection).toHaveBeenCalledWith(fakeConnection);
+};
+
+then.shouldHaveCalledOnFakeInstanceWithConnection = (method) => {
+	then.shouldHaveReceivedConnection();
 	expect(fakeMigrationInstance[method]).toHaveBeenCalledTimes(1);
-	expect(fakeMigrationInstance[method]).toHaveBeenCalledWith(fakeConnection);
 };
 
 then.resultShouldBePromise = () => {

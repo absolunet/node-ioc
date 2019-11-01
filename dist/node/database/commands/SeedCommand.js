@@ -51,6 +51,14 @@ class SeedCommand extends _Command.default {
     return 'Seed the database with records.';
   }
   /**
+   * @inheritdoc
+   */
+
+
+  get options() {
+    return [['file', 'DatabaseSeeder', 'The file to run']];
+  }
+  /**
    * Command prefix.
    *
    * @type {string}
@@ -90,7 +98,10 @@ class SeedCommand extends _Command.default {
 
   async seed(connection) {
     this.terminalInterceptor.startCapture();
-    const [seeds] = await connection.seed.run();
+    const specific = `${this.option('file').replace(/\.js$/u, '')}.js`;
+    const [seeds] = await connection.seed.run({
+      specific
+    });
     const output = this.terminalInterceptor.stopCapture();
     return {
       seeds,

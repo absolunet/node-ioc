@@ -17,13 +17,6 @@ class ListCommand extends Command {
 	/**
 	 * @inheritdoc
 	 */
-	get policies() {
-		return ['public'];
-	}
-
-	/**
-	 * @inheritdoc
-	 */
 	get name() {
 		return 'list';
 	}

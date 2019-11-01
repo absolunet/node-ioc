@@ -2,7 +2,7 @@
 
 exports.default = void 0;
 
-var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
 
 var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
 
@@ -20,11 +20,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Connector that decorates a Knex connection through a driver.
  *
  * @memberof database.services
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-class Connector extends (0, _forwardCalls.default)((0, _hasDriver.default)()) {
+class Connector extends (0, _forwardsCalls.default)((0, _hasDriver.default)()) {
   /**
    * Connector constructor.
    *

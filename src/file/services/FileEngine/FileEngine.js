@@ -3,7 +3,7 @@
 //--------------------------------------------------------
 
 import FileEngineProxy from './FileEngineProxy';
-import forwardCalls    from '../../../support/mixins/forwardCalls';
+import forwardsCalls   from '../../../support/mixins/forwardsCalls';
 
 
 /**
@@ -12,10 +12,10 @@ import forwardCalls    from '../../../support/mixins/forwardCalls';
  * Any calls that are not listed are forwarded to the sync file system.
  *
  * @memberof file.services
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class FileEngine extends forwardCalls() {
+class FileEngine extends forwardsCalls() {
 
 	/**
 	 * Class dependencies: <code>['app', 'file.system.async', 'file.system.sync']</code>.

@@ -54,20 +54,20 @@ const fakeFaker = {
 
 const modelFactoryForFoo = {
 	model: 'foo',
-	make: jest.fn((faker) => {
+	make: jest.fn(() => {
 		return {
-			bar: faker.name.findName(),
-			qux: faker.name.findName()
+			bar: modelFactoryForFoo.faker.name.findName(),
+			qux: modelFactoryForFoo.faker.name.findName()
 		};
 	})
 };
 
 const otherModelFactoryForFoo = {
 	model: 'foo',
-	make: jest.fn((faker) => {
+	make: jest.fn(() => {
 		return {
-			bar: faker.name.findName(),
-			qux: faker.name.findName()
+			bar: otherModelFactoryForFoo.faker.name.findName(),
+			qux: otherModelFactoryForFoo.faker.name.findName()
 		};
 	})
 };

@@ -4,14 +4,14 @@
 
 import slash           from 'slash';
 import PathHelperProxy from './PathHelperProxy';
-import forwardsCall    from '../../mixins/forwardCalls';
+import forwardsCall    from '../../mixins/forwardsCalls';
 
 
 /**
  * Path helper.
  *
  * @memberof support.helpers
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
 class PathHelper extends forwardsCall() {

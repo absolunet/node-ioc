@@ -4,17 +4,17 @@
 
 import __           from '@absolunet/private-registry';
 import BuilderProxy from './BuilderProxy';
-import forwardCalls from '../../../support/mixins/forwardCalls';
+import forwardsCalls from '../../../support/mixins/forwardsCalls';
 
 
 /**
  * Database connection builder that uses configuration to create connection without effort.
  *
  * @memberof database.services
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Builder extends forwardCalls() {
+class Builder extends forwardsCalls() {
 
 	/**
 	 * Class dependencies: <code>['config', 'db.connection']</code>.

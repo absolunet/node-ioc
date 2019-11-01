@@ -134,13 +134,13 @@ when.gettingFormattedNameFromFile = () => {
 
 when.gettingAllTestMethods = () => {
 	when.attempting(() => {
-		result = testRepository.getAllInstanceTestMethods(testCaseInstance);
+		result = testRepository.getTestMethods(testCaseInstance);
 	});
 };
 
 when.gettingAllMethods = () => {
 	when.attempting(() => {
-		result = testRepository.getAllInstanceMethods(testCaseInstance);
+		result = testRepository.getMethods(testCaseInstance);
 	});
 };
 
@@ -205,11 +205,11 @@ then.shouldHaveReceivedFileObjectsNamed = (files) => {
 };
 
 then.shouldHaveReceivedTestCaseInstanceTestMethodNamesOnly = () => {
-	then.resultShouldMatchObject(['testFooBar', 'testBazQux']);
+	then.resultShouldMatchObject(['testBazQux', 'testFooBar']);
 };
 
 then.shouldHaveReceivedTestCaseInstanceMethodNames = () => {
-	then.resultShouldMatchObject(['testFooBar', 'testBazQux', 'givenFoo', 'givenTest', 'givenTestBar']);
+	then.resultShouldMatchObject(['givenFoo', 'givenTest', 'givenTestBar', 'testBazQux', 'testFooBar']);
 };
 
 

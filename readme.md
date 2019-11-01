@@ -17,7 +17,7 @@ Node IoC is a [Node.js](https://nodejs.org) framework designed to help developer
  - Simple, yet powerful, [dependency injection container](https://documentation.absolunet.com/docs-node-ioc/en/1.0/architecture/container)
  - Complete [CLI command system](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/commands) powered by [Yargs](http://yargs.js.org/)
  - Full [routing and HTTP handling](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/routing) powered by [Express](https://expressjs.com/)
- - [Knex](http://knexjs.org/) [database connections](https://documentation.absolunet.com/docs-node-ioc/en/1.0/handling-data/database) with [Bookshelf ORM](https://bookshelfjs.org/)
+ - [Knex.js](http://knexjs.org/) [database connections](https://documentation.absolunet.com/docs-node-ioc/en/1.0/handling-data/database) with [Bookshelf ORM](https://bookshelfjs.org/)
  - [Cache system with multiple back-ends](https://documentation.absolunet.com/docs-node-ioc/en/1.0/going-deeper/caching)  
  - [Configuration over code approach](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/config)
  - Multiple 3rd-party integrations such as [PubSubJS](https://github.com/mroderick/PubSubJS), [joi](https://hapi.dev/family/joi/), [JsRender](https://www.jsviews.com/) and much more

@@ -4,7 +4,7 @@ exports.default = void 0;
 
 var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
 
-var _forwardCalls = _interopRequireDefault(require("../mixins/forwardCalls"));
+var _forwardsCalls = _interopRequireDefault(require("../mixins/forwardsCalls"));
 
 var _BaseProxy = _interopRequireDefault(require("./BaseProxy"));
 
@@ -18,11 +18,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Proxy that forwards calls to a forwarded instance if property is not found in the instance.
  *
  * @memberof support.proxies
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @augments support.proxies.BaseProxy
  * @hideconstructor
  */
-class ForwardProxy extends (0, _forwardCalls.default)(_BaseProxy.default) {
+class ForwardProxy extends (0, _forwardsCalls.default)(_BaseProxy.default) {
   /**
    * @inheritdoc
    */

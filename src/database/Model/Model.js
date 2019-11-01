@@ -2,17 +2,21 @@
 //-- Node IoC - Database - Model
 //--------------------------------------------------------
 
-import __         from '@absolunet/private-registry';
-import ModelProxy from './ModelProxy';
+import __            from '@absolunet/private-registry';
+import ModelProxy    from './ModelProxy';
+import getsMethods   from '../../support/mixins/getsMethods';
+import forwardsCalls from '../../support/mixins/forwardsCalls';
 
 
 /**
  * Database model that implements ORM features to transact with Knex with an Active Record Pattern (ARP) approach.
  *
  * @memberof database
+ * @augments {support.mixins.GetsMethod}
+ * @augments {support.mixins.ForwardsCalls}
  * @abstract
  */
-class Model {
+class Model extends forwardsCalls(getsMethods()) {
 
 	/**
 	 * Class dependencies: <code>['app', 'engine']</code>.
@@ -78,9 +82,13 @@ class Model {
 	 * @returns {Function} An engine model factory, wrapped by a proxy.
 	 */
 	constructor(app, engine) {
+		super();
 		const { Model: model } = engine;
 		const self             = this;
 		const factory          = function() { return self; };
+		Object.defineProperty(factory, 'name', {
+			get: () => { return this.constructor.name; }
+		});
 
 		__(this).set('app',   app);
 		__(this).set('super', model.prototype);
@@ -171,6 +179,27 @@ class Model {
 	}
 
 	/**
+	 * Get relation builders that maps relation names with their query builder.
+	 *
+	 * @returns {object<string, Function>} The mapped relations with their builder.
+	 */
+	getRelationBuilders() {
+		const self = this;
+		const relationEntries = this.getMethods(this)
+			.filter((method) => {
+				return method.endsWith('Relation');
+			})
+			.map((method) => {
+				return [
+					method.replace(/Relation$/u, ''),
+					function(...parameters) { return self[method](this, ...parameters); }
+				];
+			});
+
+		return Object.fromEntries(relationEntries);
+	}
+
+	/**
 	 * Create a new record in the database.
 	 *
 	 * @param {object} attributes - The attributes to create the model with.
@@ -201,7 +230,8 @@ class Model {
 				__(self).get('super').initialize.call(this);
 
 				return self.boot(this);
-			}
+			},
+			...this.getRelationBuilders()
 		};
 	}
 

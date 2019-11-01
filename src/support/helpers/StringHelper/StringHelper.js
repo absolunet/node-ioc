@@ -3,14 +3,14 @@
 //--------------------------------------------------------
 
 import StringHelperProxy from './StringHelperProxy';
-import forwardsCall      from '../../mixins/forwardCalls';
+import forwardsCall      from '../../mixins/forwardsCalls';
 
 
 /**
  * String helper.
  *
  * @memberof support.helpers
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
 class StringHelper extends forwardsCall() {

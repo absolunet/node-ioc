@@ -4,7 +4,7 @@ exports.default = void 0;
 
 var _StringHelperProxy = _interopRequireDefault(require("./StringHelperProxy"));
 
-var _forwardCalls = _interopRequireDefault(require("../../mixins/forwardCalls"));
+var _forwardsCalls = _interopRequireDefault(require("../../mixins/forwardsCalls"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16,10 +16,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * String helper.
  *
  * @memberof support.helpers
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class StringHelper extends (0, _forwardCalls.default)() {
+class StringHelper extends (0, _forwardsCalls.default)() {
   /**
    * StringHelper constructor.
    *

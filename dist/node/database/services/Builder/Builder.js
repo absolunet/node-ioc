@@ -6,7 +6,7 @@ var _privateRegistry = _interopRequireDefault(require("@absolunet/private-regist
 
 var _BuilderProxy = _interopRequireDefault(require("./BuilderProxy"));
 
-var _forwardCalls = _interopRequireDefault(require("../../../support/mixins/forwardCalls"));
+var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -18,10 +18,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Database connection builder that uses configuration to create connection without effort.
  *
  * @memberof database.services
- * @augments support.mixins.ForwardCalls
+ * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Builder extends (0, _forwardCalls.default)() {
+class Builder extends (0, _forwardsCalls.default)() {
   /**
    * Class dependencies: <code>['config', 'db.connection']</code>.
    *

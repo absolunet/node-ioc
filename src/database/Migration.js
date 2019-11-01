@@ -23,7 +23,7 @@ class Migration {
 	 * @returns {Promise} The async process promise.
 	 */
 	static async up(connection) {
-		await this.getInstance().up(connection);
+		await this.getInstance().setConnection(connection).up();
 	}
 
 	/**
@@ -33,7 +33,7 @@ class Migration {
 	 * @returns {Promise} The async process promise.
 	 */
 	static async down(connection) {
-		await this.getInstance().down(connection);
+		await this.getInstance().setConnection(connection).down();
 	}
 
 	/**
@@ -69,23 +69,42 @@ class Migration {
 	/**
 	 * Run the migrations.
 	 *
-	 * @param {Knex} connection - The Knex connection instance.
 	 * @returns {Promise} The async process promise.
 	 * @abstract
 	 */
-	up(connection) { // eslint-disable-line no-unused-vars
+	up() {
 		//
 	}
 
 	/**
 	 * Reverse the migrations.
 	 *
-	 * @param {Knex} connection - The Knex connection instance.
 	 * @returns {Promise} The async process promise.
 	 * @abstract
 	 */
-	down(connection) { // eslint-disable-line no-unused-vars
+	down() {
 		//
+	}
+
+	/**
+	 * Set current connection instance.
+	 *
+	 * @param {Knex} connection - The current connection instance.
+	 * @returns {database.Migration} Current migration instance.
+	 */
+	setConnection(connection) {
+		__(this).set('connection', connection);
+
+		return this;
+	}
+
+	/**
+	 * The current connection instance.
+	 *
+	 * @type {Knex}
+	 */
+	get connection() {
+		return __(this).get('connection');
 	}
 
 }

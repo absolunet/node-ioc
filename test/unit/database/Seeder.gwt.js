@@ -17,8 +17,14 @@ let result;
 const fakeConnection      = {};
 const fakeFactory         = {};
 const fakeModelRepository = {};
-const fakeSeederInstance  = container.make(Seeder, { 'db.factory': fakeFactory, 'db.model': fakeModelRepository });
-fakeSeederInstance.seed   = jest.fn();
+
+const fakeSeederInstance           = container.make(Seeder, { 'db.factory': fakeFactory, 'db.model': fakeModelRepository });
+const spiedFakeSeederSetConnection = jest.spyOn(fakeSeederInstance, 'setConnection');
+fakeSeederInstance.seed            = jest.fn(() => { return Promise.resolve(); });
+
+const otherSeederInstance           = container.make(Seeder, { 'db.factory': fakeFactory, 'db.model': fakeModelRepository });
+const spiedOtherSeederSetConnection = jest.spyOn(otherSeederInstance, 'setConnection');
+otherSeederInstance.seed            = jest.fn(() => { return Promise.resolve(); });
 
 
 //-- Given
@@ -32,6 +38,14 @@ given.fakeInstance = () => {
 	Seeder.setDefaultInstance(fakeSeederInstance);
 };
 
+given.fakeSeederPath = () => {
+	container.bind('path.seed', '/path/to/seeds');
+};
+
+given.otherSeederInSeederPath = () => {
+	container.singleton('/path/to/seeds/OtherSeeder', otherSeederInstance);
+};
+
 
 //-- When
 //--------------------------------------------------------
@@ -42,10 +56,30 @@ when.gettingInstance = () => {
 	});
 };
 
-when.callingOnClassWithConnection = (method) => {
+when.callingOnClassWithConnection = async (method) => {
+	await when.attemptingAsync(async () => {
+		await Seeder[method](fakeConnection);
+	});
+};
+
+when.callingSyncOnClassWithConnection = (method) => {
 	when.attempting(() => {
 		result = Seeder[method](fakeConnection);
 	});
+};
+
+when.running = async (seeders) => {
+	await when.attemptingAsync(async () => {
+		await fakeSeederInstance.setConnection(fakeConnection).run(seeders);
+	});
+};
+
+when.runningOtherSeederByName = async () => {
+	await when.running(['OtherSeeder']);
+};
+
+when.runningOtherSeederByReference = async () => {
+	await when.running([otherSeederInstance]);
 };
 
 
@@ -68,12 +102,19 @@ then.resultShouldBeFakeInstance = () => {
 
 then.shouldHaveCalledOnFakeInstanceWithConnection = (method) => {
 	then.shouldNotHaveThrown();
+	expect(spiedFakeSeederSetConnection).toHaveBeenCalledTimes(1);
+	expect(spiedFakeSeederSetConnection).toHaveBeenCalledWith(fakeConnection);
 	expect(fakeSeederInstance[method]).toHaveBeenCalledTimes(1);
-	expect(fakeSeederInstance[method]).toHaveBeenCalledWith(fakeConnection);
 };
 
 then.resultShouldBePromise = () => {
 	then.resultShouldBeInstanceOf(Promise);
+};
+
+then.shouldHaveRunOtherSeeder = () => {
+	expect(spiedOtherSeederSetConnection).toHaveBeenCalledTimes(1);
+	expect(spiedOtherSeederSetConnection).toHaveBeenCalledWith(fakeConnection);
+	expect(otherSeederInstance.seed).toHaveBeenCalledTimes(1);
 };
 
 
