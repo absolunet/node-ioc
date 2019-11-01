@@ -21,14 +21,6 @@ class EnvironmentCommand extends _Command.default {
   /**
    * @inheritdoc
    */
-  get policies() {
-    return ['public'];
-  }
-  /**
-   * @inheritdoc
-   */
-
-
   get name() {
     return 'env';
   }

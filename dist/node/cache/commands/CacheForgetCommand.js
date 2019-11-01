@@ -31,14 +31,6 @@ class CacheForgetCommand extends _Command.default {
    */
 
 
-  get policies() {
-    return ['public'];
-  }
-  /**
-   * @inheritdoc
-   */
-
-
   get name() {
     return 'cache:forget';
   }
