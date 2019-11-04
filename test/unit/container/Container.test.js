@@ -133,7 +133,6 @@ describe('Instance', () => {
 	});
 
 	test('Can use tags on multiple bindings at once', () => {
-
 		given.concreteBinding('foo');
 		given.constructorBinding('bar');
 		when.tagging(['foo', 'bar'], 'tag');
@@ -176,6 +175,26 @@ describe('Instance', () => {
 		given.context({ 'bar.baz': 'test' });
 		when.making('foo');
 		then.resultShouldHaveProperty('barBaz', 'test');
+	});
+
+	test('The binding "app" is resolved as container', () => {
+		when.making('app');
+		then.resultShouldBeContainerInstance();
+	});
+
+	test('Can resolve dependency through property of "app"', () => {
+		given.concreteBinding('foo');
+		when.making('app');
+		when.gettingResultProperty('foo');
+		then.resultShouldBeConcrete();
+	});
+
+	test('Can resolve self through property of "app"', () => {
+		when.making('app');
+		when.gettingResultProperty('app');
+		when.gettingResultProperty('app');
+		when.gettingResultProperty('app');
+		then.resultShouldBeContainerInstance();
 	});
 
 });

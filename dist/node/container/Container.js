@@ -81,12 +81,15 @@ class Container extends (0, _checksTypes.default)() {
       collection[key].push(value);
     });
     this.flush();
-    return new Proxy(this, new _Proxy.default());
+    const proxy = new Proxy(this, new _Proxy.default());
+    (0, _privateRegistry.default)(this).set('proxy', proxy);
+    return proxy;
   }
   /**
    * Set JavaScript module context.
    *
    * @param {module} context - The Node.js module that represents the current context.
+   * @returns {container.Container} The current container instance.
    */
 
 
@@ -96,6 +99,7 @@ class Container extends (0, _checksTypes.default)() {
     }
 
     (0, _privateRegistry.default)(this).set('context', context);
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Get current JavaScript module context.
@@ -123,7 +127,7 @@ class Container extends (0, _checksTypes.default)() {
       shared
     };
     delete (0, _privateRegistry.default)(this).get('singletons')[abstract];
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Bind abstract as a singleton to the container.
@@ -333,17 +337,20 @@ class Container extends (0, _checksTypes.default)() {
    *
    * @param {string} abstract - The abstract to decorate.
    * @param {Function} decorator - The decorator function.
+   * @returns {container.Container} The current container instance.
    */
 
 
   decorate(abstract, decorator) {
     (0, _privateRegistry.default)(this).get('pushInto')('decorators', abstract, decorator);
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Tag a given abstract.
    *
    * @param {string|Array<string>} abstract - The abstract(s) to tag.
    * @param {string} tag - The tag to give to the abstract(s).
+   * @returns {container.Container} The current container instance.
    */
 
 
@@ -352,17 +359,19 @@ class Container extends (0, _checksTypes.default)() {
     abstracts.forEach(a => {
       (0, _privateRegistry.default)(this).get('pushInto')('tags', tag, a);
     });
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Alias an abstract.
    *
    * @param {string} alias - The alias to given.
    * @param {string} abstract - The abstract to associate to the alias.
+   * @returns {container.Container} The current container instance.
    */
 
 
   alias(alias, abstract) {
-    this.bind(alias, () => {
+    return this.bind(alias, () => {
       return this.make(abstract);
     });
   }
@@ -395,6 +404,8 @@ class Container extends (0, _checksTypes.default)() {
   }
   /**
    * Flush container from attached abstracts and concretes.
+   *
+   * @returns {container.Container} The current container instance.
    */
 
 
@@ -403,7 +414,9 @@ class Container extends (0, _checksTypes.default)() {
     (0, _privateRegistry.default)(this).set('singletons', {});
     (0, _privateRegistry.default)(this).set('decorators', {});
     (0, _privateRegistry.default)(this).set('tags', {});
-    this.singleton('app', this);
+    return this.singleton('app', () => {
+      return (0, _privateRegistry.default)(this).get('proxy');
+    });
   }
   /**
    * Throw an error announcing that the given abstract was not found.
