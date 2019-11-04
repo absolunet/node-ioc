@@ -1,41 +1,6 @@
 "use strict";
 
-Object.defineProperty(exports, "factory", {
-  enumerable: true,
-  get: function () {
-    return _mixinFactory.default;
-  }
-});
-Object.defineProperty(exports, "checksTypes", {
-  enumerable: true,
-  get: function () {
-    return _checksTypes.default;
-  }
-});
-Object.defineProperty(exports, "forwardsCalls", {
-  enumerable: true,
-  get: function () {
-    return _forwardsCalls.default;
-  }
-});
-Object.defineProperty(exports, "getsMethods", {
-  enumerable: true,
-  get: function () {
-    return _getsMethods.default;
-  }
-});
-Object.defineProperty(exports, "hasDriver", {
-  enumerable: true,
-  get: function () {
-    return _hasDriver.default;
-  }
-});
-Object.defineProperty(exports, "hasEngine", {
-  enumerable: true,
-  get: function () {
-    return _hasEngine.default;
-  }
-});
+exports.default = void 0;
 
 var _mixinFactory = _interopRequireDefault(require("./concerns/mixinFactory"));
 
@@ -50,3 +15,25 @@ var _hasDriver = _interopRequireDefault(require("./hasDriver"));
 var _hasEngine = _interopRequireDefault(require("./hasEngine"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//--------------------------------------------------------
+//-- IoC - Foundation - Mixins
+//--------------------------------------------------------
+
+/* istanbul ignore next */
+const mixins = {
+  checksTypes: _checksTypes.default,
+  forwardsCalls: _forwardsCalls.default,
+  getsMethods: _getsMethods.default,
+  hasDriver: _hasDriver.default,
+  hasEngine: _hasEngine.default
+};
+
+mixins.factory = (name, callback) => {
+  mixins[name] = (0, _mixinFactory.default)(callback);
+};
+
+var _default = mixins;
+exports.default = _default;
+module.exports = exports.default;
+module.exports.default = exports.default;

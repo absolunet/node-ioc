@@ -11,11 +11,17 @@ import hasDriver     from './hasDriver';
 import hasEngine     from './hasEngine';
 
 
-export {
-	factory,
+const mixins = {
 	checksTypes,
 	forwardsCalls,
 	getsMethods,
 	hasDriver,
 	hasEngine
 };
+
+mixins.factory = (name, callback) => {
+	mixins[name] = factory(callback);
+};
+
+
+export default mixins;

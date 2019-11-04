@@ -23,6 +23,6 @@ module.exports = {
 	get ServiceProvider() {     return require('./foundation/ServiceProvider').default; },
 	get TestCase() {            return require('./test/TestCase').default; },
 	get Tester() {              return require('./test/services/Tester').default; },
-	get mixins() {              return require('./support/mixins'); }
+	get mixins() {              return require('./support/mixins').default; }
 };
 /* eslint-enable global-require */

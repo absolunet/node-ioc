@@ -26,8 +26,9 @@ given.mainFile = () => {
 
 when.gettingMixinsWithoutFactory = () => {
 	when.attempting(() => {
-		({ ...result } = main.mixins);
+		({ ...result } = main.mixins.default);
 		delete result.factory;
+		delete result.default;
 	});
 };
 

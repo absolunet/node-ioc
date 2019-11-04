@@ -79,7 +79,7 @@ module.exports = {
   },
 
   get mixins() {
-    return require('./support/mixins');
+    return require('./support/mixins').default;
   }
 
 };
