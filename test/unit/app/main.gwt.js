@@ -28,6 +28,7 @@ when.gettingMixinsWithoutFactory = () => {
 	when.attempting(() => {
 		({ ...result } = main.mixins.default);
 		delete result.factory;
+		delete result.add;
 		delete result.default;
 	});
 };
