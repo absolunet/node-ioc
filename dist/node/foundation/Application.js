@@ -166,7 +166,7 @@ class Application extends _Container.default {
 
     (0, _privateRegistry.default)(this).set('booted', true);
     this.make('event').emit('application.booted', this);
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Boot core service providers.
@@ -202,7 +202,7 @@ class Application extends _Container.default {
 
     if (!registered) {
       const instance = this.make(provider, {
-        app: this
+        app: (0, _privateRegistry.default)(this).get('proxy')
       });
       model.instance = instance;
 
@@ -263,7 +263,7 @@ class Application extends _Container.default {
       this.boot();
     }
 
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Configure application paths.
@@ -286,7 +286,7 @@ class Application extends _Container.default {
     Object.keys(pathsToConfigure).forEach(p => {
       this.bind(`path.${p}`, this.formatPath(pathsToConfigure[p]));
     });
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Configure application namespaces.
@@ -300,7 +300,7 @@ class Application extends _Container.default {
     Object.keys(namespaces).forEach(namespace => {
       this.bind(`namespace.${namespace}`, namespaces[namespace]);
     });
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Configure default paths within the container.
@@ -320,7 +320,7 @@ class Application extends _Container.default {
       // eslint-disable-line unicorn/prevent-abbreviations
       dist: distributionNamespace
     });
-    this.configurePaths({
+    return this.configurePaths({
       'home': os.homedir(),
       'base': this.formatPath(basePath),
       'config': this.formatPath(basePath, 'config'),
@@ -348,7 +348,6 @@ class Application extends _Container.default {
       'src.controller': this.formatPath(basePath, sourceNamespace, appNamespace, 'http', 'controllers'),
       'src.provider': this.formatPath(basePath, sourceNamespace, appNamespace, 'providers')
     });
-    return this;
   }
   /**
    * Replace bound paths that matches the given original one by a new one.
@@ -375,7 +374,7 @@ class Application extends _Container.default {
         this.bind(name, this.formatPath(this.make(name).replace(new RegExp(`^${from}`, 'u'), to)));
       }
     });
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Use specific home path.
@@ -386,10 +385,9 @@ class Application extends _Container.default {
 
 
   useHomePath(homePath) {
-    this.configurePaths({
+    return this.configurePaths({
       home: homePath
     });
-    return this;
   }
   /**
    * Use base path for all registered paths.
@@ -416,7 +414,7 @@ class Application extends _Container.default {
     });
     this.replacePaths(this.sourcePath('app', ''), this.sourcePath(appPath), true);
     this.replacePaths(this.distributionPath('app', ''), this.distributionPath(appPath));
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Use source path for all application-related registered paths.
@@ -712,7 +710,7 @@ class Application extends _Container.default {
 
   onBooting(callback) {
     (0, _privateRegistry.default)(this).get('onBooting').push(callback);
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Register 'application.booted' callback.
@@ -729,7 +727,7 @@ class Application extends _Container.default {
     }
 
     (0, _privateRegistry.default)(this).get('onBooted').push(callback);
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Set current application version.
@@ -740,8 +738,7 @@ class Application extends _Container.default {
 
 
   setVersion(version) {
-    this.bind('version', (version || this.getIocVersion()).toString());
-    return this;
+    return this.bind('version', (version || this.getIocVersion()).toString());
   }
   /**
    * Current Node IoC version.
@@ -770,7 +767,7 @@ class Application extends _Container.default {
 
     process.env.APP_ENV = environment; // eslint-disable-line no-process-env
 
-    return this;
+    return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
    * Get current application version.

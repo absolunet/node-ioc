@@ -153,7 +153,7 @@ class Application extends Container {
 		__(this).set('booted', true);
 		this.make('event').emit('application.booted', this);
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -186,7 +186,7 @@ class Application extends Container {
 	registerProvider(model) {
 		const { provider, registered } = model;
 		if (!registered) {
-			const instance = this.make(provider, { app: this });
+			const instance = this.make(provider, { app: __(this).get('proxy') });
 			model.instance = instance;
 
 			if (typeof instance.register === 'function') {
@@ -237,7 +237,7 @@ class Application extends Container {
 			this.boot();
 		}
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -258,7 +258,7 @@ class Application extends Container {
 			this.bind(`path.${p}`, this.formatPath(pathsToConfigure[p]));
 		});
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -272,7 +272,7 @@ class Application extends Container {
 			this.bind(`namespace.${namespace}`, namespaces[namespace]);
 		});
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -292,7 +292,7 @@ class Application extends Container {
 			dist: distributionNamespace
 		});
 
-		this.configurePaths({
+		return this.configurePaths({
 			'home':           os.homedir(),
 			'base':           this.formatPath(basePath),
 			'config':         this.formatPath(basePath, 'config'),
@@ -320,8 +320,6 @@ class Application extends Container {
 			'src.controller': this.formatPath(basePath, sourceNamespace, appNamespace, 'http', 'controllers'),
 			'src.provider':   this.formatPath(basePath, sourceNamespace, appNamespace, 'providers')
 		});
-
-		return this;
 	}
 
 	/**
@@ -348,7 +346,7 @@ class Application extends Container {
 			}
 		});
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -358,9 +356,7 @@ class Application extends Container {
 	 * @returns {foundation.Application} The current application instance.
 	 */
 	useHomePath(homePath) {
-		this.configurePaths({ home: homePath });
-
-		return this;
+		return this.configurePaths({ home: homePath });
 	}
 
 	/**
@@ -385,7 +381,7 @@ class Application extends Container {
 		this.replacePaths(this.sourcePath('app', ''),       this.sourcePath(appPath), true);
 		this.replacePaths(this.distributionPath('app', ''), this.distributionPath(appPath));
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -658,7 +654,7 @@ class Application extends Container {
 	onBooting(callback) {
 		__(this).get('onBooting').push(callback);
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -675,7 +671,7 @@ class Application extends Container {
 
 		__(this).get('onBooted').push(callback);
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -685,9 +681,7 @@ class Application extends Container {
 	 * @returns {foundation.Application} The current application instance.
 	 */
 	setVersion(version) {
-		this.bind('version', (version || this.getIocVersion()).toString());
-
-		return this;
+		return this.bind('version', (version || this.getIocVersion()).toString());
 	}
 
 	/**
@@ -714,7 +708,7 @@ class Application extends Container {
 
 		process.env.APP_ENV = environment; // eslint-disable-line no-process-env
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
