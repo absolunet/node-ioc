@@ -47,7 +47,7 @@ class Driver extends (0, _hasEngine.default)() {
 
   log(level, message, context) {
     // eslint-disable-line no-unused-vars
-    throw new _NotImplementedError.default(this, 'log', 'Promise<any>');
+    throw new _NotImplementedError.default(this, 'log', 'Promise');
   }
   /**
    * Set configuration for the channel.
