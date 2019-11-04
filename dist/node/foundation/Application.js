@@ -145,10 +145,10 @@ class Application extends _Container.default {
     this.bootCoreProviders();
     const dispatcher = this.make('event');
     (0, _privateRegistry.default)(this).get('onBooting').forEach(callback => {
-      dispatcher.on('application.booting', callback);
+      dispatcher.once('application.booting', callback);
     });
     (0, _privateRegistry.default)(this).get('onBooted').forEach(callback => {
-      dispatcher.on('application.booted', callback);
+      dispatcher.once('application.booted', callback);
     });
     dispatcher.emit('application.booting', this);
     const providers = (0, _privateRegistry.default)(this).get('providers'); // We use a for loop instead of a forEach to allow providers to register other providers,

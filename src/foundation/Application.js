@@ -130,10 +130,10 @@ class Application extends Container {
 
 		const dispatcher = this.make('event');
 		__(this).get('onBooting').forEach((callback) => {
-			dispatcher.on('application.booting', callback);
+			dispatcher.once('application.booting', callback);
 		});
 		__(this).get('onBooted').forEach((callback) => {
-			dispatcher.on('application.booted', callback);
+			dispatcher.once('application.booted', callback);
 		});
 
 		dispatcher.emit('application.booting', this);
