@@ -1,0 +1,55 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Bootstrap - Mixins - %NAME%
+//--------------------------------------------------------
+
+import { mixins } from '@absolunet/ioc';
+
+
+/**
+ * The %NAME% mixin.
+ *
+ * @class
+ * @name %CLASS%
+ * @memberof bootstrap.mixins
+ * @hideconstructor
+ */
+mixins.factory('%NAME%', (SuperClass) => {
+
+	/**
+	 * The %NAME% mixin.
+	 */
+	return class %CLASS% extends SuperClass {
+
+		/**
+		 * Class dependencies: <code>[]</code>.
+		 *
+		 * @type {Array<string>}
+		 */
+		static get dependencies() {
+			return (super.dependencies || []).concat([]);
+		}
+
+		/**
+		 * @inheritdoc
+		 * @private
+		 */
+		init() {
+			if (super.init) {
+				super.init();
+			}
+		}
+
+		/**
+		 * The %NAME% method description.
+		 *
+		 * @returns {void} The returned value.
+		 * @memberof bootstrap.mixins
+		 * @instance
+		 */
+		%NAME%() {
+			//
+		}
+
+	};
+
+});

@@ -4,6 +4,8 @@ exports.default = void 0;
 
 var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
 
+var _MakeMixinCommand = _interopRequireDefault(require("./commands/MakeMixinCommand"));
+
 var _DateHelper = _interopRequireDefault(require("./helpers/DateHelper"));
 
 var _FileHelper = _interopRequireDefault(require("./helpers/FileHelper"));
@@ -62,6 +64,7 @@ class SupportServiceProvider extends _ServiceProvider.default {
 
   boot() {
     this.createDumperViewNamespace();
+    this.loadCommands([_MakeMixinCommand.default]);
   }
   /**
    * Bind date helper.
