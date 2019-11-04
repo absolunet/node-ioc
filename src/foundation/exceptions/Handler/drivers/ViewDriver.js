@@ -43,7 +43,7 @@ class ViewDriver extends Driver {
 	renderView(exception) {
 		if (this.app.isBound('view') && this.app.isBound('view.resolver')) {
 			const viewResolver = this.app.make('view.resolver');
-			let viewName = `errors.${exception.status}`;
+			let viewName = `errors.${exception.status || 500}`;
 
 			if (!viewResolver.exists(viewName)) {
 				viewName = 'errors.generic';
