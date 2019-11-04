@@ -22,17 +22,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /* istanbul ignore next */
 const mixins = {
+  factory: _mixinFactory.default,
   checksTypes: _checksTypes.default,
   forwardsCalls: _forwardsCalls.default,
   getsMethods: _getsMethods.default,
   hasDriver: _hasDriver.default,
-  hasEngine: _hasEngine.default
+  hasEngine: _hasEngine.default,
+  add: (name, callback) => {
+    mixins[name] = (0, _mixinFactory.default)(callback);
+  }
 };
-
-mixins.factory = (name, callback) => {
-  mixins[name] = (0, _mixinFactory.default)(callback);
-};
-
 var _default = mixins;
 exports.default = _default;
 module.exports = exports.default;

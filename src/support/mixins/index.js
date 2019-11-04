@@ -12,15 +12,15 @@ import hasEngine     from './hasEngine';
 
 
 const mixins = {
+	factory,
 	checksTypes,
 	forwardsCalls,
 	getsMethods,
 	hasDriver,
-	hasEngine
-};
-
-mixins.factory = (name, callback) => {
-	mixins[name] = factory(callback);
+	hasEngine,
+	add: (name, callback) => {
+		mixins[name] = factory(callback);
+	}
 };
 
 

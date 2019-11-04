@@ -13,7 +13,7 @@ import { mixins } from '@absolunet/ioc';
  * @memberof bootstrap.mixins
  * @hideconstructor
  */
-mixins.factory('%NAME%', (SuperClass) => {
+mixins.add('%NAME%', (SuperClass) => {
 
 	/**
 	 * The %NAME% mixin.
