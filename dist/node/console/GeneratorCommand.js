@@ -71,7 +71,11 @@ class GeneratorCommand extends _Command.default {
 
 
   get fileName() {
-    return `${this.parameter('class')}.js`;
+    if (this.parameterIsSupported('class')) {
+      return `${this.parameter('class')}.js`;
+    }
+
+    throw new Error('The "class" parameter does not exists. You must manually define "fileName" accessor.');
   }
   /**
    * Replacement patterns accessor.
