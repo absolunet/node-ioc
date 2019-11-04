@@ -35,21 +35,18 @@ const fakeConfigGrammar = {
 };
 
 const nullFileManager = {
-	scandir: jest.fn(() => {
-		return [];
+	loadRecursivelyInFolder: jest.fn(() => {
+		return {};
 	})
 };
 
 const fakeFileManager = {
-	scandir: jest.fn((directory) => {
-		return Object.keys(files).filter((filePath) => {
+	loadRecursivelyInFolder: jest.fn((directory) => {
+		return Object.fromEntries(Object.entries(files).filter(([filePath]) => {
 			return filePath.startsWith(directory);
-		}).map((filePath) => {
-			return path.relative(directory, filePath);
-		});
-	}),
-	load: jest.fn((filePath) => {
-		return files[filePath];
+		}).map(([filePath, content]) => {
+			return [path.relative(directory, filePath).replace(/\.\w+$/u, ''), content];
+		}));
 	}),
 	loadFirst: jest.fn((paths) => {
 		const firstPath = paths.find((filePath) => {
@@ -220,19 +217,7 @@ then.formatShouldHaveBeenCalledOnGrammar = () => {
 
 then.shouldHaveReadFilesInConfigFolder = () => {
 	then.shouldNotHaveThrown();
-	expect(fakeFileManager.scandir).toHaveBeenCalled();
-	const { calls } = fakeFileManager.scandir.mock;
-	expect(calls[calls.length - 1][0]).toBe(folder);
-	const configFiles = Object.keys(files).filter((filePath) => {
-		return filePath.startsWith(folder);
-	});
-	const allLoaded = configFiles.every((filePath) => {
-		return fakeFileManager.load.mock.calls.some(([parameter]) => {
-			return parameter === filePath;
-		});
-	});
-	expect(fakeFileManager.load).toHaveBeenCalledTimes(configFiles.length);
-	expect(allLoaded).toBe(true);
+	expect(fakeFileManager.loadRecursivelyInFolder).toHaveBeenCalledWith(folder);
 };
 
 then.configShouldEqualConfigFile = () => {
@@ -241,11 +226,7 @@ then.configShouldEqualConfigFile = () => {
 };
 
 then.shouldHaveLoadedFilesRecursively = () => {
-	then.shouldNotHaveThrown();
-	expect(fakeFileManager.scandir).toHaveBeenCalled();
-	const { calls } = fakeFileManager.scandir.mock;
-	expect(calls[calls.length - 1][1]).toBe('file');
-	expect(calls[calls.length - 1][2]).toMatchObject({ recursive: true });
+	then.shouldHaveReadFilesInConfigFolder();
 };
 
 

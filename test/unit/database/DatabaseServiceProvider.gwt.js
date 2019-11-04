@@ -27,19 +27,23 @@ const fakeFileManager = {
 			return filePath.startsWith(folder);
 		});
 	}),
-	scandir: jest.fn((folder) => {
-		return Object.keys(fakeFiles).filter((filePath) => {
-			return filePath.startsWith(folder);
-		});
-	}),
 	loadInFolder: jest.fn((folder) => {
-		return Object.entries(fakeFiles)
+		return Object.fromEntries(Object.entries(fakeFiles)
+			.filter(([filePath]) => {
+				return filePath.startsWith(folder) && !filePath.replace(folder, '').match(/^.\//u);
+			})
+			.map(([key, value]) => {
+				return [key.replace(/\.\w+/u, ''), value];
+			}));
+	}),
+	loadRecursivelyInFolder: jest.fn((folder) => {
+		return Object.fromEntries(Object.entries(fakeFiles)
 			.filter(([filePath]) => {
 				return filePath.startsWith(folder);
 			})
-			.map(([, concrete]) => {
-				return concrete;
-			});
+			.map(([key, value]) => {
+				return [key.replace(/\.\w+/u, ''), value];
+			}));
 	})
 };
 
