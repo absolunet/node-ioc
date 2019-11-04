@@ -21,6 +21,13 @@ class GeneratorCommand extends Command {
 	/**
 	 * @inheritdoc
 	 */
+	get policies() {
+		return ['env:local'];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	get description() {
 		return `Create a ${this.type} class.`;
 	}

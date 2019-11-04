@@ -27,7 +27,7 @@ class MakeControllerCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get policies() {
-		return ['env:local', 'http'];
+		return (super.policies || []).concat(['http']);
 	}
 
 	/**

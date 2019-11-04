@@ -17,13 +17,6 @@ class MakeCommandCommand extends GeneratorCommand {
 	/**
 	 * @inheritdoc
 	 */
-	get policies() {
-		return ['env:local'];
-	}
-
-	/**
-	 * @inheritdoc
-	 */
 	get name() {
 		return 'make:command';
 	}
