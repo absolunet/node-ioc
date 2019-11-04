@@ -7,6 +7,9 @@ import Driver from './Driver';
 
 /**
  * Ouch exception render driver.
+ *
+ * @memberof foundation.exceptions.Handler.drivers
+ * @augments foundation.exceptions.Handler.drivers.Driver
  */
 class OuchDriver extends Driver {
 

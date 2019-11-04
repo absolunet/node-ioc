@@ -12,6 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * Ouch exception render driver.
+ *
+ * @memberof foundation.exceptions.Handler.drivers
+ * @augments foundation.exceptions.Handler.drivers.Driver
  */
 class OuchDriver extends _Driver.default {
   /**

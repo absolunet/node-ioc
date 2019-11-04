@@ -7,6 +7,9 @@ import Driver from './Driver';
 
 /**
  * Pretty Error exception render driver.
+ *
+ * @memberof foundation.exceptions.Handler.drivers
+ * @augments foundation.exceptions.Handler.drivers.Driver
  */
 class PrettyErrorDriver extends Driver {
 

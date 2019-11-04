@@ -12,6 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * Pretty Error exception render driver.
+ *
+ * @memberof foundation.exceptions.Handler.drivers
+ * @augments foundation.exceptions.Handler.drivers.Driver
  */
 class PrettyErrorDriver extends _Driver.default {
   /**
