@@ -62,7 +62,7 @@ const hasDriver = factory((SuperClass) => {
 			if (!data.concrete || Object.keys(parameters) > 0) {
 				const concrete = this.app.make(data.abstract, parameters);
 
-				if (!this.isAlias(name)) {
+				if (!this.isDriverAlias(name)) {
 					this.bootDriver(concrete, name);
 				}
 
@@ -151,7 +151,7 @@ const hasDriver = factory((SuperClass) => {
 		 * @memberof support.mixins.HasDriver
 		 * @instance
 		 */
-		isAlias(name) {
+		isDriverAlias(name) {
 			return Object.keys(__(this).get('aliases')).includes(name);
 		}
 
