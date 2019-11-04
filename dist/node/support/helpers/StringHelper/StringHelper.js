@@ -4,8 +4,6 @@ exports.default = void 0;
 
 var _StringHelperProxy = _interopRequireDefault(require("./StringHelperProxy"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../mixins/forwardsCalls"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -16,17 +14,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * String helper.
  *
  * @memberof support.helpers
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class StringHelper extends (0, _forwardsCalls.default)() {
+class StringHelper {
   /**
    * StringHelper constructor.
-   *
-   * @param {...*} parameters - The injected parameters.
    */
-  constructor(...parameters) {
-    super(...parameters);
+  constructor() {
     return new Proxy(this, new _StringHelperProxy.default());
   }
   /**
@@ -53,7 +47,9 @@ class StringHelper extends (0, _forwardsCalls.default)() {
     return this.plural(string, 1);
   }
   /**
-   * @inheritdoc
+   * Get to-case package for forward calls.
+   *
+   * @returns {ToCase} The to-case package.
    */
 
 

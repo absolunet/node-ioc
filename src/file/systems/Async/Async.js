@@ -3,27 +3,22 @@
 //--------------------------------------------------------
 
 import AsyncProxy    from './AsyncProxy';
-import forwardsCalls from '../../../support/mixins/forwardsCalls';
 
 
 /**
  * The async file system.
  *
  * @memberof file.systems
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Async extends forwardsCalls() {
+class Async {
 
 	/**
 	 * Async constructor.
 	 *
-	 * @param {...*} parameters - Injected parameters.
 	 * @returns {file.system.Async} The async instance wrapped by a proxy.
 	 */
-	constructor(...parameters) {
-		super(...parameters);
-
+	constructor() {
 		return new Proxy(this, new AsyncProxy());
 	}
 
@@ -49,7 +44,9 @@ class Async extends forwardsCalls() {
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get @absolunet/fsp package for forward calls.
+	 *
+	 * @returns {*} The @absolunet/fsp package.
 	 */
 	getForward() {
 		return require('@absolunet/fsp'); // eslint-disable-line global-require

@@ -4,8 +4,6 @@ exports.default = void 0;
 
 var _SyncProxy = _interopRequireDefault(require("./SyncProxy"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -16,18 +14,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * The sync file system.
  *
  * @memberof file.systems
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Sync extends (0, _forwardsCalls.default)() {
+class Sync {
   /**
    * Sync constructor.
    *
-   * @param {...*} parameters - Injected parameters.
    * @returns {file.system.Sync} The sync instance wrapped by a proxy.
    */
-  constructor(...parameters) {
-    super(...parameters);
+  constructor() {
     return new Proxy(this, new _SyncProxy.default());
   }
   /**
@@ -52,7 +47,9 @@ class Sync extends (0, _forwardsCalls.default)() {
     });
   }
   /**
-   * @inheritdoc
+   * Get @absolunet/fss package for forward calls.
+   *
+   * @returns {*} The @absolunet/fss package.
    */
 
 

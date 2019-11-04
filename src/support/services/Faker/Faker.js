@@ -2,33 +2,30 @@
 //-- Node IoC - Support - Services - Faker
 //--------------------------------------------------------
 
-import FakerProxy   from './FakerProxy';
-import forwardsCalls from '../../mixins/forwardsCalls';
+import FakerProxy from './FakerProxy';
 
 
 /**
  * Faker class that decorates the faker module.
  *
  * @memberof support.services
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Faker extends forwardsCalls() {
+class Faker {
 
 	/**
 	 * Faker constructor.
 	 *
-	 * @param {...*} parameters - The injected parameters.
-	 * @returns {support.services.Faker} Thee faker instance wrapped by a proxy.
+	 * @returns {support.services.Faker} The faker instance wrapped by a proxy.
 	 */
-	constructor(...parameters) {
-		super(...parameters);
-
+	constructor() {
 		return new Proxy(this, new FakerProxy());
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get faker package for forward calls.
+	 *
+	 * @returns {Faker} The faker package.
 	 */
 	getForward() {
 		return require('faker'); // eslint-disable-line global-require

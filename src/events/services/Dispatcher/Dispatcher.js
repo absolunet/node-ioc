@@ -3,7 +3,6 @@
 //--------------------------------------------------------
 
 import hasDriver          from '../../../support/mixins/hasDriver';
-import forwardsCalls      from '../../../support/mixins/forwardsCalls';
 import DispatcherProxy    from './DispatcherProxy';
 import EventEmitterDriver from './drivers/EventEmitterDriver';
 import PubSubJsDriver     from './drivers/PubSubJsDriver';
@@ -13,11 +12,10 @@ import PubSubJsDriver     from './drivers/PubSubJsDriver';
  * Event dispatcher that manages the events publishing and subscribing.
  *
  * @memberof events.services
- * @augments support.mixins.ForwardsCalls
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-class Dispatcher extends forwardsCalls(hasDriver()) {
+class Dispatcher extends hasDriver() {
 
 	/**
 	 * Dispatcher constructor.
@@ -48,7 +46,9 @@ class Dispatcher extends forwardsCalls(hasDriver()) {
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get default driver for forward calls.
+	 *
+	 * @returns {event.services.Dispatcher.drivers.Driver} The default driver instance.
 	 */
 	getForward() {
 		return this.driver();

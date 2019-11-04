@@ -5,7 +5,6 @@
 import __            from '@absolunet/private-registry';
 import ModelProxy    from './ModelProxy';
 import getsMethods   from '../../support/mixins/getsMethods';
-import forwardsCalls from '../../support/mixins/forwardsCalls';
 
 
 /**
@@ -13,10 +12,9 @@ import forwardsCalls from '../../support/mixins/forwardsCalls';
  *
  * @memberof database
  * @augments {support.mixins.GetsMethod}
- * @augments {support.mixins.ForwardsCalls}
  * @abstract
  */
-class Model extends forwardsCalls(getsMethods()) {
+class Model extends getsMethods() {
 
 	/**
 	 * Class dependencies: <code>['app', 'engine']</code>.
@@ -172,7 +170,9 @@ class Model extends forwardsCalls(getsMethods()) {
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get ORM model for forward calls.
+	 *
+	 * @returns {*} The ORM model instance.
 	 */
 	getForward() {
 		return __(this).get('model');

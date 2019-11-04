@@ -4,8 +4,6 @@ exports.default = void 0;
 
 var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
-
 var _DispatcherProxy = _interopRequireDefault(require("./DispatcherProxy"));
 
 var _EventEmitterDriver = _interopRequireDefault(require("./drivers/EventEmitterDriver"));
@@ -22,11 +20,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Event dispatcher that manages the events publishing and subscribing.
  *
  * @memberof events.services
- * @augments support.mixins.ForwardsCalls
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-class Dispatcher extends (0, _forwardsCalls.default)((0, _hasDriver.default)()) {
+class Dispatcher extends (0, _hasDriver.default)() {
   /**
    * Dispatcher constructor.
    *
@@ -54,7 +51,9 @@ class Dispatcher extends (0, _forwardsCalls.default)((0, _hasDriver.default)()) 
     this.setDefaultDriver(defaultDriver);
   }
   /**
-   * @inheritdoc
+   * Get default driver for forward calls.
+   *
+   * @returns {event.services.Dispatcher.drivers.Driver} The default driver instance.
    */
 
 

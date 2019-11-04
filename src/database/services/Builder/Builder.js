@@ -4,17 +4,15 @@
 
 import __           from '@absolunet/private-registry';
 import BuilderProxy from './BuilderProxy';
-import forwardsCalls from '../../../support/mixins/forwardsCalls';
 
 
 /**
  * Database connection builder that uses configuration to create connection without effort.
  *
  * @memberof database.services
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Builder extends forwardsCalls() {
+class Builder {
 
 	/**
 	 * Class dependencies: <code>['config', 'db.connection']</code>.
@@ -28,12 +26,9 @@ class Builder extends forwardsCalls() {
 	/**
 	 * Builder constructor.
 	 *
-	 * @param {...*} parameters - The injected parameters.
 	 * @returns {database.services.Builder} A connection builder wrapped by a forward proxy to forward calls to the default connection.
 	 */
-	constructor(...parameters) {
-		super(...parameters);
-
+	constructor() {
 		return new Proxy(this, new BuilderProxy());
 	}
 
@@ -83,7 +78,9 @@ class Builder extends forwardsCalls() {
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get default connection for forward calls.
+	 *
+	 * @returns {Knex} The connection instance.
 	 */
 	getForward() {
 		return this.getDefaultConnection();
