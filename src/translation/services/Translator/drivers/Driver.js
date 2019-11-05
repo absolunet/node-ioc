@@ -15,6 +15,17 @@ import NotImplementedError from '../../../../foundation/exceptions/NotImplemente
 class Driver {
 
 	/**
+	 * Load translations from source.
+	 *
+	 * @returns {Promise|void} The possible async process promise.
+	 * @async
+	 * @abstract
+	 */
+	loadTranslations() {
+		throw new NotImplementedError(this, 'loadTranslations', 'Promise|void');
+	}
+
+	/**
 	 * Translate a string for the current locale.
 	 * If replacement array is given, replace %s by the given replacement in order of appearance.
 	 *
@@ -39,17 +50,6 @@ class Driver {
 	 */
 	addTranslation(key, value, locale) { // eslint-disable-line no-unused-vars
 		throw new NotImplementedError(this, 'addTranslation', 'Driver');
-	}
-
-	/**
-	 * Use given translation folder to load all default available translations.
-	 *
-	 * @param {string} folder - The folder in which translation files should be loaded.
-	 * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
-	 * @abstract
-	 */
-	useTranslationFolder(folder) { // eslint-disable-line no-unused-vars
-		throw new NotImplementedError(this, 'useTranslationFolder');
 	}
 
 	/**

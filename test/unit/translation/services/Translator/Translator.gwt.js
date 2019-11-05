@@ -106,10 +106,6 @@ when.addingMultipleTranslations = (...parameters) => {
 	when.callingOnTranslator('addTranslations', parameters);
 };
 
-when.changingTranslationFolder = (parameters) => {
-	when.callingOnTranslator('useTranslationFolder', parameters);
-};
-
 when.gettingLocale = () => {
 	result = translator.locale;
 };
@@ -147,10 +143,6 @@ then.shouldHaveSetConfiguredLocaleOnDriver = () => {
 
 then.shouldHaveSetConfiguredFallbackLocaleOnDriver = () => {
 	then.shouldHaveCalledDriverMethodWith('setFallbackLocale', [container.make('config').get('app.fallback_locale')]);
-};
-
-then.shouldHaveSetConfiguredTranslationFolderOnDriver = () => {
-	then.shouldHaveCalledDriverMethodWith('useTranslationFolder', [container.langPath()]);
 };
 
 then.driverShouldHaveTranslated = (key) => {

@@ -31,10 +31,17 @@ class FileDriver extends Driver {
 	 * @private
 	 */
 	init() {
-		__(this).set('locale', null);
+		__(this).set('locale',         null);
 		__(this).set('fallbackLocale', null);
-		__(this).set('translations', {});
-		__(this).set('loaded', false);
+		__(this).set('translations',   {});
+		__(this).set('loaded',         false);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	loadTranslations() {
+		this.ensureTranslationsAreLoaded();
 	}
 
 	/**
@@ -42,7 +49,6 @@ class FileDriver extends Driver {
 	 */
 	translate(string, replacements = {}, count = 1) {
 		const { locale } = this;
-		this.ensureTranslationsAreLoaded(locale);
 		const replacementObject = typeof replacements === 'object' && replacements ? replacements : {};
 		const countValue        = typeof replacements === 'number' ? replacements : count;
 
@@ -54,15 +60,6 @@ class FileDriver extends Driver {
 	 */
 	addTranslation(key, value, locale = this.locale) {
 		dot.str(`${key}.${locale}`, value, __(this).get('translations'));
-
-		return this;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	useTranslationFolder(folder) {
-		__(this).set('folder', folder);
 
 		return this;
 	}
@@ -93,7 +90,7 @@ class FileDriver extends Driver {
 	ensureTranslationsAreLoaded() {
 		if (!__(this).get('loaded')) {
 			if (this.file.exists(this.folder)) {
-				const translations = this.file.loadInFolder(this.folder, { recursive: true });
+				const translations = this.file.loadRecursivelyInFolder(this.folder);
 				this.addTranslations(translations);
 				__(this).set('loaded', true);
 			}
@@ -196,7 +193,7 @@ class FileDriver extends Driver {
 	 * @type {string}
 	 */
 	get folder() {
-		return __(this).get('folder') || this.app.langPath();
+		return this.app.langPath();
 	}
 
 	/**

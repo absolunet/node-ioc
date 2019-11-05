@@ -20,7 +20,6 @@ test('Basic application configuration are used to start the driver', () => {
 	when.creatingDriver();
 	then.shouldHaveSetConfiguredLocaleOnDriver();
 	then.shouldHaveSetConfiguredFallbackLocaleOnDriver();
-	then.shouldHaveSetConfiguredTranslationFolderOnDriver();
 });
 
 test('Delegates translation to driver', () => {
@@ -43,11 +42,6 @@ test('Delegates adding multiple translations to driver', () => {
 	when.addingMultipleTranslations({ foo: 'bar', baz: 'test' }, 'en');
 	then.driverShouldHaveAddedTranslation('foo', 'bar', 'en');
 	then.driverShouldHaveAddedTranslation('baz', 'test', 'en');
-});
-
-test('Delegates using a translation folder to driver', () => {
-	when.changingTranslationFolder();
-	then.shouldHaveSetConfiguredTranslationFolderOnDriver();
 });
 
 test('Getting locale relies on configuration', () => {

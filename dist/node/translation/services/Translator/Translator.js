@@ -47,8 +47,17 @@ class Translator extends (0, _hasDriver.default)() {
   bootDriver(driver) {
     driver.setLocale(this.locale);
     driver.setFallbackLocale(this.fallbackLocale);
-    driver.useTranslationFolder(this.app.langPath());
     return super.bootDriver(driver);
+  }
+  /**
+   * Load translations from source.
+   *
+   * @returns {Promise} The async process promise.
+   */
+
+
+  async loadTranslations() {
+    await this.driver().loadTranslations();
   }
   /**
    * Translate a string for the current locale.
@@ -111,18 +120,6 @@ class Translator extends (0, _hasDriver.default)() {
     Object.entries(translations).forEach(([key, value]) => {
       this.addTranslation(key, value, locale);
     });
-    return this;
-  }
-  /**
-   * Use given translation folder to load all default available translations.
-   *
-   * @param {string} folder - The folder in which translation files should be loaded.
-   * @returns {translation.services.Translator} The current translator instance.
-   */
-
-
-  useTranslationFolder(folder) {
-    this.driver().useTranslationFolder(folder);
     return this;
   }
   /**
