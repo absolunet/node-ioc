@@ -4,8 +4,6 @@ exports.default = void 0;
 
 var _FileEngineProxy = _interopRequireDefault(require("./FileEngineProxy"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -18,28 +16,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Any calls that are not listed are forwarded to the sync file system.
  *
  * @memberof file.services
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class FileEngine extends (0, _forwardsCalls.default)() {
+class FileEngine {
   /**
    * Class dependencies: <code>['app', 'file.system.async', 'file.system.sync']</code>.
    *
    * @type {Array<string>}
    */
   static get dependencies() {
-    return (super.dependencies || []).concat(['app', 'file.system.async', 'file.system.sync']);
+    return ['app', 'file.system.async', 'file.system.sync'];
   }
   /**
    * FileEngine constructor.
    *
-   * @param {...*} parameters - Injected parameters.
    * @returns {file.services.FileEngine} The file engine instance wrapped by a proxy.
    */
 
 
-  constructor(...parameters) {
-    super(...parameters);
+  constructor() {
     return new Proxy(this, new _FileEngineProxy.default());
   }
   /**
@@ -63,7 +58,9 @@ class FileEngine extends (0, _forwardsCalls.default)() {
     return this.fileSystemSync;
   }
   /**
-   * @inheritdoc
+   * Get the sync file system for forward calls.
+   *
+   * @returns {file.systems.Sync} The sync file system.
    */
 
 

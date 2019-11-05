@@ -4,8 +4,6 @@ exports.default = void 0;
 
 var _FakerProxy = _interopRequireDefault(require("./FakerProxy"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../mixins/forwardsCalls"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -16,22 +14,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Faker class that decorates the faker module.
  *
  * @memberof support.services
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Faker extends (0, _forwardsCalls.default)() {
+class Faker {
   /**
    * Faker constructor.
    *
-   * @param {...*} parameters - The injected parameters.
-   * @returns {support.services.Faker} Thee faker instance wrapped by a proxy.
+   * @returns {support.services.Faker} The faker instance wrapped by a proxy.
    */
-  constructor(...parameters) {
-    super(...parameters);
+  constructor() {
     return new Proxy(this, new _FakerProxy.default());
   }
   /**
-   * @inheritdoc
+   * Get faker package for forward calls.
+   *
+   * @returns {Faker} The faker package.
    */
 
 

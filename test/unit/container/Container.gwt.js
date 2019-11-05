@@ -153,6 +153,11 @@ when.tagging = (abstracts, tag) => {
 		container.tag(abstracts, tag);
 	});
 };
+when.gettingResultProperty = (property) => {
+	when.attempting(() => {
+		result = result[property];
+	});
+};
 
 
 //-- Then
@@ -251,6 +256,10 @@ then.resultShouldNotBeConcrete = () => {
 then.resultShouldBeValueReturnedByDecorator = () => {
 	expect(decoratorReplacing).toHaveBeenCalled();
 	then.resultShouldBe(decoratorReplacing.mock.results[0].value);
+};
+
+then.resultShouldBeContainerInstance = () => {
+	then.resultShouldBe(container);
 };
 
 

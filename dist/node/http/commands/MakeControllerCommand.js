@@ -32,7 +32,7 @@ class MakeControllerCommand extends _GeneratorCommand.default {
 
 
   get policies() {
-    return ['env:local', 'http'];
+    return (super.policies || []).concat(['http']);
   }
   /**
    * @inheritdoc

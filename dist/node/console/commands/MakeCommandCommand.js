@@ -21,14 +21,6 @@ class MakeCommandCommand extends _GeneratorCommand.default {
   /**
    * @inheritdoc
    */
-  get policies() {
-    return ['env:local'];
-  }
-  /**
-   * @inheritdoc
-   */
-
-
   get name() {
     return 'make:command';
   }

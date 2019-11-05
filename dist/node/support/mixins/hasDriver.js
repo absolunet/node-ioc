@@ -69,7 +69,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
       if (!data.concrete || Object.keys(parameters) > 0) {
         const concrete = this.app.make(data.abstract, parameters);
 
-        if (!this.isAlias(name)) {
+        if (!this.isDriverAlias(name)) {
           this.bootDriver(concrete, name);
         }
 
@@ -165,7 +165,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
      */
 
 
-    isAlias(name) {
+    isDriverAlias(name) {
       return Object.keys((0, _privateRegistry.default)(this).get('aliases')).includes(name);
     }
 

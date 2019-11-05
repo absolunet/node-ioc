@@ -3,27 +3,22 @@
 //--------------------------------------------------------
 
 import SyncProxy     from './SyncProxy';
-import forwardsCalls from '../../../support/mixins/forwardsCalls';
 
 
 /**
  * The sync file system.
  *
  * @memberof file.systems
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Sync extends forwardsCalls() {
+class Sync {
 
 	/**
 	 * Sync constructor.
 	 *
-	 * @param {...*} parameters - Injected parameters.
 	 * @returns {file.system.Sync} The sync instance wrapped by a proxy.
 	 */
-	constructor(...parameters) {
-		super(...parameters);
-
+	constructor() {
 		return new Proxy(this, new SyncProxy());
 	}
 
@@ -48,7 +43,9 @@ class Sync extends forwardsCalls() {
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get @absolunet/fss package for forward calls.
+	 *
+	 * @returns {*} The @absolunet/fss package.
 	 */
 	getForward() {
 		return require('@absolunet/fss'); // eslint-disable-line global-require

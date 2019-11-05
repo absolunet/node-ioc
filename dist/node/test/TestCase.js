@@ -12,6 +12,8 @@ var _expects = _interopRequireDefault(require("./mixins/core/expects"));
 
 var _setsUp = _interopRequireDefault(require("./mixins/core/setsUp"));
 
+var _bindings = _interopRequireDefault(require("./mixins/expectations/bindings"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -28,7 +30,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @augments support.mixins.HasEngine
  * @hideconstructor
  */
-class TestCase extends (0, _setsUp.default)((0, _expects.default)((0, _asserts.default)((0, _hasEngine.default)()))) {
+class TestCase extends (0, _bindings.default)((0, _setsUp.default)((0, _expects.default)((0, _asserts.default)((0, _hasEngine.default)())))) {
   /**
    * Call make method from the current application.
    *
@@ -38,16 +40,6 @@ class TestCase extends (0, _setsUp.default)((0, _expects.default)((0, _asserts.d
    */
   make(abstract, parameters = {}) {
     return this.app.make(abstract, parameters);
-  }
-  /**
-   * Expect given abstract to be bound in the application.
-   *
-   * @param {string} abstract - The abstract to check.
-   */
-
-
-  expectBound(abstract) {
-    this.expect(this.app.isBound(abstract)).toBe(true);
   }
   /**
    * Set current application.

@@ -8,8 +8,6 @@ var _ModelProxy = _interopRequireDefault(require("./ModelProxy"));
 
 var _getsMethods = _interopRequireDefault(require("../../support/mixins/getsMethods"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../support/mixins/forwardsCalls"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -21,10 +19,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *
  * @memberof database
  * @augments {support.mixins.GetsMethod}
- * @augments {support.mixins.ForwardsCalls}
  * @abstract
  */
-class Model extends (0, _forwardsCalls.default)((0, _getsMethods.default)()) {
+class Model extends (0, _getsMethods.default)() {
   /**
    * Class dependencies: <code>['app', 'engine']</code>.
    *
@@ -189,7 +186,9 @@ class Model extends (0, _forwardsCalls.default)((0, _getsMethods.default)()) {
     return this.table;
   }
   /**
-   * @inheritdoc
+   * Get ORM model for forward calls.
+   *
+   * @returns {*} The ORM model instance.
    */
 
 

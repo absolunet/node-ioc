@@ -2,14 +2,15 @@
 //-- Node IoC - Support - Support Service Provider
 //--------------------------------------------------------
 
-import ServiceProvider from '../foundation/ServiceProvider';
-import DateHelper      from './helpers/DateHelper';
-import FileHelper      from './helpers/FileHelper';
-import PathHelper      from './helpers/PathHelper';
-import StringHelper    from './helpers/StringHelper';
-import Dumper          from './services/Dumper';
-import Faker           from './services/Faker';
-import IdeLink         from './enums/IdeLink';
+import ServiceProvider  from '../foundation/ServiceProvider';
+import MakeMixinCommand from './commands/MakeMixinCommand';
+import DateHelper       from './helpers/DateHelper';
+import FileHelper       from './helpers/FileHelper';
+import PathHelper       from './helpers/PathHelper';
+import StringHelper     from './helpers/StringHelper';
+import Dumper           from './services/Dumper';
+import Faker            from './services/Faker';
+import IdeLink          from './enums/IdeLink';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -50,6 +51,9 @@ class SupportServiceProvider extends ServiceProvider {
 	 */
 	boot() {
 		this.createDumperViewNamespace();
+		this.loadCommands([
+			MakeMixinCommand
+		]);
 	}
 
 	/**

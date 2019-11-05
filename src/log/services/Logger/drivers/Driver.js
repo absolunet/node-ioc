@@ -37,7 +37,7 @@ class Driver extends hasEngine() {
 	 * @abstract
 	 */
 	log(level, message, context) { // eslint-disable-line no-unused-vars
-		throw new NotImplementedError(this, 'log', 'Promise<any>');
+		throw new NotImplementedError(this, 'log', 'Promise');
 	}
 
 	/**

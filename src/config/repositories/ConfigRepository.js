@@ -51,6 +51,7 @@ class ConfigRepository {
 	 *
 	 * @param {string} key - The configuration key.
 	 * @param {*} value - The configuration value.
+	 * @returns {config.repositories.ConfigRepository} The current config repository instance.
 	 */
 	set(key, value) {
 		if (typeof key === 'string') {
@@ -61,6 +62,8 @@ class ConfigRepository {
 		} else {
 			this.setConfig(key);
 		}
+
+		return this;
 	}
 
 	/**
@@ -69,6 +72,7 @@ class ConfigRepository {
 	 * @param {string} key - The configuration key.
 	 * @param {*} value - The configuration value.
 	 * @param {boolean} [overwrite] - Flag that indicates if the old value should be overwritten or merged.
+	 * @returns {config.repositories.ConfigRepository} The current config repository instance.
 	 */
 	merge(key, value, overwrite = false) {
 		let mergedValue = value;
@@ -78,16 +82,19 @@ class ConfigRepository {
 			mergedValue = overwrite ? Object.assign(original, value) : Object.assign({}, value, original);
 		}
 
-		this.set(key, mergedValue);
+		return this.set(key, mergedValue);
 	}
 
 	/**
 	 * Set global configuration.
 	 *
 	 * @param {*} config - The full configuration object.
+	 * @returns {config.repositories.ConfigRepository} The current config repository instance.
 	 */
 	setConfig(config) {
 		__(this).set('config', this.formatValues(config));
+
+		return this;
 	}
 
 	/**
@@ -95,12 +102,14 @@ class ConfigRepository {
 	 *
 	 * @param {string} folder - The folder to search configuration file into.
 	 * @param {boolean} [overwrite] - Flag that indicates if the current configuration should be overridden or merged.
+	 * @returns {config.repositories.ConfigRepository} The current config repository instance.
 	 */
 	loadConfigFromFolder(folder, overwrite = false) {
-		this.file.scandir(folder, 'file', { recursive: true }).forEach((file) => {
-			const index = file.split('.').shift().replace(/\//gu, '.');
-			this.loadConfig(index, this.app.formatPath(folder, file), overwrite);
+		Object.entries(this.file.loadRecursivelyInFolder(folder)).forEach(([key, value]) => {
+			this.merge(key.replace(/\//gu, '.'), value, overwrite);
 		});
+
+		return this;
 	}
 
 	/**
@@ -109,15 +118,17 @@ class ConfigRepository {
 	 * @param {string} key - The configuration key.
 	 * @param {string} filePath - The file to load which contains the configuration object for the specified key.
 	 * @param {boolean} [overwrite] - Flag that indicates if the current configuration should be overridden or merged.
+	 * @returns {config.repositories.ConfigRepository} The current config repository instance.
 	 */
 	loadConfig(key, filePath, overwrite = false) {
-		this.merge(key, this.file.load(filePath), overwrite);
+		return this.merge(key, this.file.load(filePath), overwrite);
 	}
 
 	/**
 	 * Set global configuration from file.
 	 *
 	 * @param {string|Array<string>}file - The file, or set of files, to load to set config from. If a set of file is given, the first existing one will be used, and all the others will be ignored.
+	 * @returns {config.repositories.ConfigRepository} The current config repository instance.
 	 */
 	setConfigFromFile(file) {
 		const config = this.file.loadFirst(Array.isArray(file) ? file : [file]);
@@ -125,6 +136,8 @@ class ConfigRepository {
 		if (config) {
 			this.setConfig(config);
 		}
+
+		return this;
 	}
 
 	/**

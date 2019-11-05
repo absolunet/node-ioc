@@ -12,6 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * Pretty Error exception render driver.
+ *
+ * @memberof foundation.exceptions.Handler.drivers
+ * @augments foundation.exceptions.Handler.drivers.Driver
  */
 class ViewDriver extends _Driver.default {
   /**
@@ -46,7 +49,7 @@ class ViewDriver extends _Driver.default {
   renderView(exception) {
     if (this.app.isBound('view') && this.app.isBound('view.resolver')) {
       const viewResolver = this.app.make('view.resolver');
-      let viewName = `errors.${exception.status}`;
+      let viewName = `errors.${exception.status || 500}`;
 
       if (!viewResolver.exists(viewName)) {
         viewName = 'errors.generic';

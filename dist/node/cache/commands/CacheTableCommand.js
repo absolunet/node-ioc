@@ -22,7 +22,7 @@ class CacheTableCommand extends _GeneratorCommand.default {
    * @inheritdoc
    */
   get policies() {
-    return ['db', 'env:local'];
+    return (super.policies || []).concat(['db']);
   }
   /**
    * @inheritdoc

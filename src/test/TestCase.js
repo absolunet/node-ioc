@@ -7,6 +7,7 @@ import hasEngine from '../support/mixins/hasEngine';
 import asserts   from './mixins/core/asserts';
 import expects   from './mixins/core/expects';
 import setsUp    from './mixins/core/setsUp';
+import bindings  from './mixins/expectations/bindings';
 
 
 /**
@@ -19,7 +20,7 @@ import setsUp    from './mixins/core/setsUp';
  * @augments support.mixins.HasEngine
  * @hideconstructor
  */
-class TestCase extends setsUp(expects(asserts(hasEngine()))) {
+class TestCase extends bindings(setsUp(expects(asserts(hasEngine())))) {
 
 	/**
 	 * Call make method from the current application.
@@ -30,15 +31,6 @@ class TestCase extends setsUp(expects(asserts(hasEngine()))) {
 	 */
 	make(abstract, parameters = {}) {
 		return this.app.make(abstract, parameters);
-	}
-
-	/**
-	 * Expect given abstract to be bound in the application.
-	 *
-	 * @param {string} abstract - The abstract to check.
-	 */
-	expectBound(abstract) {
-		this.expect(this.app.isBound(abstract)).toBe(true);
 	}
 
 	/**

@@ -3,7 +3,6 @@
 //--------------------------------------------------------
 
 import FileEngineProxy from './FileEngineProxy';
-import forwardsCalls   from '../../../support/mixins/forwardsCalls';
 
 
 /**
@@ -12,10 +11,9 @@ import forwardsCalls   from '../../../support/mixins/forwardsCalls';
  * Any calls that are not listed are forwarded to the sync file system.
  *
  * @memberof file.services
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class FileEngine extends forwardsCalls() {
+class FileEngine {
 
 	/**
 	 * Class dependencies: <code>['app', 'file.system.async', 'file.system.sync']</code>.
@@ -23,18 +21,15 @@ class FileEngine extends forwardsCalls() {
 	 * @type {Array<string>}
 	 */
 	static get dependencies() {
-		return (super.dependencies || []).concat(['app', 'file.system.async', 'file.system.sync']);
+		return ['app', 'file.system.async', 'file.system.sync'];
 	}
 
 	/**
 	 * FileEngine constructor.
 	 *
-	 * @param {...*} parameters - Injected parameters.
 	 * @returns {file.services.FileEngine} The file engine instance wrapped by a proxy.
 	 */
-	constructor(...parameters) {
-		super(...parameters);
-
+	constructor() {
 		return new Proxy(this, new FileEngineProxy());
 	}
 
@@ -57,7 +52,9 @@ class FileEngine extends forwardsCalls() {
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get the sync file system for forward calls.
+	 *
+	 * @returns {file.systems.Sync} The sync file system.
 	 */
 	getForward() {
 		return this.sync;

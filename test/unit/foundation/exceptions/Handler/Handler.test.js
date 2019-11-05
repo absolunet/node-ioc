@@ -11,15 +11,12 @@ beforeEach(() => {
 	given.emptyRequest();
 	given.emptyResponse();
 	given.stringHelper();
+	given.fakeConfigRepository();
 	given.fakeLogger();
 	given.exceptionHandler();
 	given.fakeDebugHttpDriver();
 	given.fakeProductionHttpDriver();
 	given.fakeConsoleDriver();
-});
-
-afterEach(() => {
-	then.resetEnvironment();
 });
 
 
@@ -44,11 +41,11 @@ test('Can render the exception as an HTTP response if HTTP request and response 
 	then.shouldHaveRenderedExceptionInResponse();
 });
 
-test('Can render a specific Web page as an HTTP response if HTTP request and response object are provided in a non-local or testing environment', async () => {
+test('Can render a specific Web page as an HTTP response if HTTP request and response object are provided in a non-debug environment', async () => {
 	given.exception();
 	given.fakeRequest();
 	given.fakeResponse();
-	given.productionEnvironment();
+	given.noDebugInConfiguration();
 	await when.renderingException();
 	then.shouldHaveRenderedExceptionInResponseThroughCustomErrorPage();
 });

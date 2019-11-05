@@ -49,11 +49,18 @@ class FileDriver extends _Driver.default {
    */
 
 
+  loadTranslations() {
+    this.ensureTranslationsAreLoaded();
+  }
+  /**
+   * @inheritdoc
+   */
+
+
   translate(string, replacements = {}, count = 1) {
     const {
       locale
     } = this;
-    this.ensureTranslationsAreLoaded(locale);
     const replacementObject = typeof replacements === 'object' && replacements ? replacements : {};
     const countValue = typeof replacements === 'number' ? replacements : count;
     return this.parse(this.getTranslationForLocale(string, locale), replacementObject, countValue);
@@ -66,15 +73,6 @@ class FileDriver extends _Driver.default {
   addTranslation(key, value, locale = this.locale) {
     _dotObject.default.str(`${key}.${locale}`, value, (0, _privateRegistry.default)(this).get('translations'));
 
-    return this;
-  }
-  /**
-   * @inheritdoc
-   */
-
-
-  useTranslationFolder(folder) {
-    (0, _privateRegistry.default)(this).set('folder', folder);
     return this;
   }
   /**
@@ -105,9 +103,7 @@ class FileDriver extends _Driver.default {
   ensureTranslationsAreLoaded() {
     if (!(0, _privateRegistry.default)(this).get('loaded')) {
       if (this.file.exists(this.folder)) {
-        const translations = this.file.loadInFolder(this.folder, {
-          recursive: true
-        });
+        const translations = this.file.loadRecursivelyInFolder(this.folder);
         this.addTranslations(translations);
         (0, _privateRegistry.default)(this).set('loaded', true);
       }
@@ -215,7 +211,7 @@ class FileDriver extends _Driver.default {
 
 
   get folder() {
-    return (0, _privateRegistry.default)(this).get('folder') || this.app.langPath();
+    return this.app.langPath();
   }
   /**
    * The default namespace for translations.

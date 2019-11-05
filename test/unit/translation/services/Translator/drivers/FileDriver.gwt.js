@@ -18,7 +18,7 @@ let fakeTranslations;
 
 const fakeFileManager = {
 	exists: jest.fn(() => { return true; }),
-	loadInFolder: jest.fn(() => { return fakeTranslations; })
+	loadRecursivelyInFolder: jest.fn(() => { return fakeTranslations; })
 };
 
 
@@ -60,6 +60,12 @@ given.emptyResult = () => {
 //-- When
 //--------------------------------------------------------
 
+when.loadingTranslations = async () => {
+	await when.attemptingAsync(async () => {
+		await driver.loadTranslations();
+	});
+};
+
 when.translating = (...parameters) => {
 	when.attempting(() => {
 		result = driver.translate(...parameters);
@@ -87,7 +93,7 @@ then.resultShouldBe = (expected) => {
 
 then.shouldHaveLoadedFilesInFolder = (folder) => {
 	then.shouldNotHaveThrown();
-	expect(fakeFileManager.loadInFolder).toHaveBeenCalledWith(folder, { recursive: true });
+	expect(fakeFileManager.loadRecursivelyInFolder).toHaveBeenCalledWith(folder);
 };
 
 then.shouldHaveSearchedInTranslationFile = () => {

@@ -107,7 +107,7 @@ class Handler extends hasDriver() {
 	async renderResponse(exception, request, response) {
 		exception.status = exception.status || 500;
 		response.status(exception.status);
-		const driverType = ['staging', 'production'].includes(this.app.environment) ? 'production' : 'debug';
+		const driverType = this.app.isBound('config') && this.app.make('config').get('app.debug', false) ? 'debug' : 'production';
 		await this.driver(`http.${driverType}`).render(exception, request, response);
 	}
 

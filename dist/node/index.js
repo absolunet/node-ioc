@@ -54,6 +54,10 @@ module.exports = {
     return require('./database/Factory').default;
   },
 
+  get NotImplementedError() {
+    return require('./foundation/exceptions/NotImplementedError').default;
+  },
+
   get NullDriverProxy() {
     return require('./support/drivers/NullDriverProxy').default;
   },
@@ -75,7 +79,7 @@ module.exports = {
   },
 
   get mixins() {
-    return require('./support/mixins');
+    return require('./support/mixins').default;
   }
 
 };

@@ -116,18 +116,19 @@ class FileManager extends hasDriver() {
 	 * @returns {object<string,*>} The content fetched for each found file.
 	 */
 	loadInFolder(folder, options = {}, driver = null) {
+		const data = {};
+
 		if (!this.exists(folder)) {
-			throw new TypeError(`Folder [${folder}] does not exists.`);
+			return data;
 		}
 
 		const files = this.scandir(folder, 'file', options);
-		const data = {};
 
 		const driverInstance = driver ? this.driver(driver) : null;
 
 		files.forEach((file) => {
 			const fileData = (driverInstance || this.getDriverForFile(file)).load(this.app.formatPath(folder, file));
-			const fileName = file.split('/').pop().split('.').shift();
+			const fileName = file.replace(/.\w+$/u, '');
 
 			data[fileName] = fileData;
 		});

@@ -2,8 +2,6 @@
 
 exports.default = void 0;
 
-var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
-
 var _hasDriver = _interopRequireDefault(require("../../../support/mixins/hasDriver"));
 
 var _CacheManagerProxy = _interopRequireDefault(require("./CacheManagerProxy"));
@@ -24,11 +22,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Cache manager that uses the configuration to properly handle caching operation through drivers.
  *
  * @memberof cache.services
- * @augments support.mixins.ForwardsCalls
  * @augments support.mixins.HasDriver
  * @hideconstructor
  */
-class CacheManager extends (0, _forwardsCalls.default)((0, _hasDriver.default)()) {
+class CacheManager extends (0, _hasDriver.default)() {
   /**
    * Class dependencies: <code>['app', 'config']</code>.
    *
@@ -117,7 +114,9 @@ class CacheManager extends (0, _forwardsCalls.default)((0, _hasDriver.default)()
     });
   }
   /**
-   * @inheritdoc
+   * Get default cache store driver for forward calls.
+   *
+   * @returns {cache.services.CacheManager.drivers.Driver} The default driver instance.
    */
 
 

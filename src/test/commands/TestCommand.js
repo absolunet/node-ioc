@@ -52,9 +52,9 @@ class TestCommand extends Command {
 	 */
 	get flags() {
 		return [
-			[this.testType.UNIT,      'Run unit tests.'],
-			[this.testType.FEATURE,   'Run feature tests.'],
-			[this.testType.ENDTOEND,       'Run end-to-end tests.'],
+			[this.testType.UNIT,        'Run unit tests.'],
+			[this.testType.FEATURE,     'Run feature tests.'],
+			[this.testType.ENDTOEND,    'Run end-to-end tests.'],
 			[this.testType.INTEGRATION, 'Run integration tests.']
 		];
 	}
@@ -166,11 +166,11 @@ class TestCommand extends Command {
 	 */
 	get repositories() {
 		return {
-			'':                        'test',
-			'all':                     'test',
-			[this.testType.UNIT]:      'test.unit',
-			[this.testType.FEATURE]:   'test.feature',
-			[this.testType.ENDTOEND]:       'test.endtoend',
+			'':                          'test',
+			'all':                       'test',
+			[this.testType.UNIT]:        'test.unit',
+			[this.testType.FEATURE]:     'test.feature',
+			[this.testType.ENDTOEND]:    'test.endtoend',
 			[this.testType.INTEGRATION]: 'test.integration'
 		};
 	}

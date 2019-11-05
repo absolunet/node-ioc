@@ -13,6 +13,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-beta.1] - 2019-11-05
+
+### Added
+ - `app.debug` and `dev.dumper.enabled` configuration keys that should reflect debugging mode
+ - `make:mixin` scaffold command to create mixin file
+ - Dynamic mixin system for public registration and usage through exposed `mixins`'s `add` method
+ - Exposed `NotImplementedError` class from main file
+ - Added `loadTranslations` method to translator and assume it's async.
+
+### Changed
+ - Exception handler HTTP driver is chosen based on `app.debug` instead of environment name
+ - Dumper is enabled if `dev.dumper.enabled` is set to `true`
+ - Moved `env:local` policy from commands to GeneratorCommand class to prevent redundancy
+ - Renamed `isAlias` to `isDriverAlias` in `hasDriver` mixin
+ - Added support for current locale in `Moment.js` when instantiating `helper.date`
+ - Changed `file`'s `loadInFolder` method to support recursive load by using relative path as content key instead of file name, still without extension
+ - Prevented error when loading in folder from `file`'s `loadInFolder` and `loadRecursivelyInFolder`
+ - `config`'s `loadConfigInFolder` now uses the `loadRecursivelyInFolder` instead of `scandir` and `load`
+ - Updated `dot-object` to `2.1.2`
+ - Updated `knex` to `0.20.1`
+ - Updated `mock-knex` to `0.4.7`
+
+### Fixed
+ - Ensured that container/application proxy is returned instead of instance in methods for dynamic accessor resolving
+ - Used `500 Internal Server Error` status code by default in the `exception.handler`'s `view` (`http.production`) driver
+ - Bound lifecycle events once
+ - Added verbosity in generator command when file name cannot be computed
+ - Used `bindings` mixin instead of the duplicated `expectBound` method in test case
+
+### Removed
+ - Removed unnecessary forwardsCalls mixin usage
+ - `useTranslationFolder` method on both `translator` service and its `file` driver.
+ - `dev.dumper.disabled_environments` abandoned for `dev.dumper.enabled`
+
+
+
 ## [1.0.0-alpha.5] - 2019-11-01
 
 ### Fixed
@@ -500,7 +536,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.5...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.1...HEAD
+[1.0.0-beta.1]:  https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.5...1.0.0-beta.1
 [1.0.0-alpha.5]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.4...1.0.0-alpha.5
 [1.0.0-alpha.4]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.3...1.0.0-alpha.4
 [1.0.0-alpha.3]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.2...1.0.0-alpha.3

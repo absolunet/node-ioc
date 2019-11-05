@@ -6,8 +6,6 @@ var _privateRegistry = _interopRequireDefault(require("@absolunet/private-regist
 
 var _BuilderProxy = _interopRequireDefault(require("./BuilderProxy"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -18,10 +16,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * Database connection builder that uses configuration to create connection without effort.
  *
  * @memberof database.services
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Builder extends (0, _forwardsCalls.default)() {
+class Builder {
   /**
    * Class dependencies: <code>['config', 'db.connection']</code>.
    *
@@ -33,13 +30,11 @@ class Builder extends (0, _forwardsCalls.default)() {
   /**
    * Builder constructor.
    *
-   * @param {...*} parameters - The injected parameters.
    * @returns {database.services.Builder} A connection builder wrapped by a forward proxy to forward calls to the default connection.
    */
 
 
-  constructor(...parameters) {
-    super(...parameters);
+  constructor() {
     return new Proxy(this, new _BuilderProxy.default());
   }
   /**
@@ -90,7 +85,9 @@ class Builder extends (0, _forwardsCalls.default)() {
     return (0, _privateRegistry.default)(connection).get('driver');
   }
   /**
-   * @inheritdoc
+   * Get default connection for forward calls.
+   *
+   * @returns {Knex} The connection instance.
    */
 
 

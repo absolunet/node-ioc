@@ -12,6 +12,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /**
  * Ouch exception render driver.
+ *
+ * @memberof foundation.exceptions.Handler.drivers
+ * @augments foundation.exceptions.Handler.drivers.Driver
  */
 class OuchDriver extends _Driver.default {
   /**
@@ -86,7 +89,7 @@ class OuchDriver extends _Driver.default {
       data = this.renderJson(exception);
     }
 
-    if (this.app.environment === 'production') {
+    if (!this.app.isBound('config') || !this.app.make('config').get('app.debug', false)) {
       const {
         type,
         message

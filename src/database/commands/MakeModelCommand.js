@@ -18,7 +18,7 @@ class MakeModelCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get policies() {
-		return ['db', 'env:local'];
+		return (super.policies || []).concat(['db']);
 	}
 
 	/**

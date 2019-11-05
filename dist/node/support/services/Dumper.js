@@ -463,7 +463,7 @@ class Dumper extends (0, _checksTypes.default)() {
 
 
   shouldDump() {
-    return !this.config.get('dev.dumper.disabled_environments', []).includes(this.app.environment);
+    return this.config.get('dev.dumper.enabled', false);
   }
   /**
    * The theme configuration.

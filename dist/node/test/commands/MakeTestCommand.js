@@ -31,14 +31,6 @@ class MakeTestCommand extends _GeneratorCommand.default {
    */
 
 
-  get policies() {
-    return ['env:local'];
-  }
-  /**
-   * @inheritdoc
-   */
-
-
   get name() {
     return 'make:test';
   }

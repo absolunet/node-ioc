@@ -3,26 +3,20 @@
 //--------------------------------------------------------
 
 import StringHelperProxy from './StringHelperProxy';
-import forwardsCall      from '../../mixins/forwardsCalls';
 
 
 /**
  * String helper.
  *
  * @memberof support.helpers
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class StringHelper extends forwardsCall() {
+class StringHelper {
 
 	/**
 	 * StringHelper constructor.
-	 *
-	 * @param {...*} parameters - The injected parameters.
 	 */
-	constructor(...parameters) {
-		super(...parameters);
-
+	constructor() {
 		return new Proxy(this, new StringHelperProxy());
 	}
 
@@ -48,7 +42,9 @@ class StringHelper extends forwardsCall() {
 	}
 
 	/**
-	 * @inheritdoc
+	 * Get to-case package for forward calls.
+	 *
+	 * @returns {ToCase} The to-case package.
 	 */
 	getForward() {
 		return require('to-case'); // eslint-disable-line global-require

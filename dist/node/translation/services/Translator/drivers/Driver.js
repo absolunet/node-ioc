@@ -21,6 +21,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class Driver {
   /**
+   * Load translations from source.
+   *
+   * @returns {Promise|void} The possible async process promise.
+   * @async
+   * @abstract
+   */
+  loadTranslations() {
+    throw new _NotImplementedError.default(this, 'loadTranslations', 'Promise|void');
+  }
+  /**
    * Translate a string for the current locale.
    * If replacement array is given, replace %s by the given replacement in order of appearance.
    *
@@ -30,6 +40,8 @@ class Driver {
    * @returns {string} The translated string.
    * @abstract
    */
+
+
   translate(string, replacements, count) {
     // eslint-disable-line no-unused-vars
     throw new _NotImplementedError.default(this, 'translate', 'string');
@@ -48,19 +60,6 @@ class Driver {
   addTranslation(key, value, locale) {
     // eslint-disable-line no-unused-vars
     throw new _NotImplementedError.default(this, 'addTranslation', 'Driver');
-  }
-  /**
-   * Use given translation folder to load all default available translations.
-   *
-   * @param {string} folder - The folder in which translation files should be loaded.
-   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
-   * @abstract
-   */
-
-
-  useTranslationFolder(folder) {
-    // eslint-disable-line no-unused-vars
-    throw new _NotImplementedError.default(this, 'useTranslationFolder');
   }
   /**
    * Set locale to use for translation.

@@ -4,8 +4,6 @@ exports.default = void 0;
 
 var _AsyncProxy = _interopRequireDefault(require("./AsyncProxy"));
 
-var _forwardsCalls = _interopRequireDefault(require("../../../support/mixins/forwardsCalls"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -16,18 +14,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * The async file system.
  *
  * @memberof file.systems
- * @augments support.mixins.ForwardsCalls
  * @hideconstructor
  */
-class Async extends (0, _forwardsCalls.default)() {
+class Async {
   /**
    * Async constructor.
    *
-   * @param {...*} parameters - Injected parameters.
    * @returns {file.system.Async} The async instance wrapped by a proxy.
    */
-  constructor(...parameters) {
-    super(...parameters);
+  constructor() {
     return new Proxy(this, new _AsyncProxy.default());
   }
   /**
@@ -52,7 +47,9 @@ class Async extends (0, _forwardsCalls.default)() {
     });
   }
   /**
-   * @inheritdoc
+   * Get @absolunet/fsp package for forward calls.
+   *
+   * @returns {*} The @absolunet/fsp package.
    */
 
 

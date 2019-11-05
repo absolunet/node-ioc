@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/ioc",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-beta.1",
   "description": "The perfect IoC framework for Node.js lovers",
   "definition": "",
   "homepage": "https://github.com/absolunet/node-ioc",
@@ -50,7 +50,7 @@
     "@absolunet/manager": "2.0.0",
     "@absolunet/tester": "3.0.5",
     "jest": "24.9.0",
-    "mock-knex": "0.4.6"
+    "mock-knex": "0.4.7"
   },
   "dependencies": {
     "@absolunet/fsp": "^1.6.2",
@@ -63,7 +63,7 @@
     "bookshelf-uuid": "^1.0.1",
     "bytes": "^3.1.0",
     "deepmerge": "^4.2.2",
-    "dot-object": "^1.9.0",
+    "dot-object": "^2.1.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",
@@ -71,7 +71,7 @@
     "intercept-stdout": "^0.1.2",
     "js-yaml": "^3.13.1",
     "jsrender": "^1.0.5",
-    "knex": "^0.19.5",
+    "knex": "^0.20.1",
     "knex-cleaner": "^1.3.0",
     "method-override": "^3.0.0",
     "moment": "^2.24.0",

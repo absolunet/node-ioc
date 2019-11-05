@@ -69,13 +69,17 @@ class Container extends checksTypes() {
 		});
 		this.flush();
 
-		return new Proxy(this, new ContainerProxy());
+		const proxy = new Proxy(this, new ContainerProxy());
+		__(this).set('proxy', proxy);
+
+		return proxy;
 	}
 
 	/**
 	 * Set JavaScript module context.
 	 *
 	 * @param {module} context - The Node.js module that represents the current context.
+	 * @returns {container.Container} The current container instance.
 	 */
 	setContext(context) {
 		if (!this.isFunction(context.require)) {
@@ -83,6 +87,8 @@ class Container extends checksTypes() {
 		}
 
 		__(this).set('context', context);
+
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -106,7 +112,7 @@ class Container extends checksTypes() {
 		__(this).get('bindings')[abstract] = { concrete, shared };
 		delete __(this).get('singletons')[abstract];
 
-		return this;
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -310,9 +316,12 @@ class Container extends checksTypes() {
 	 *
 	 * @param {string} abstract - The abstract to decorate.
 	 * @param {Function} decorator - The decorator function.
+	 * @returns {container.Container} The current container instance.
 	 */
 	decorate(abstract, decorator) {
 		__(this).get('pushInto')('decorators', abstract, decorator);
+
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -320,12 +329,15 @@ class Container extends checksTypes() {
 	 *
 	 * @param {string|Array<string>} abstract - The abstract(s) to tag.
 	 * @param {string} tag - The tag to give to the abstract(s).
+	 * @returns {container.Container} The current container instance.
 	 */
 	tag(abstract, tag) {
 		const abstracts = Array.isArray(abstract) ? abstract : [abstract];
 		abstracts.forEach((a) => {
 			__(this).get('pushInto')('tags', tag, a);
 		});
+
+		return __(this).get('proxy');
 	}
 
 	/**
@@ -333,9 +345,10 @@ class Container extends checksTypes() {
 	 *
 	 * @param {string} alias - The alias to given.
 	 * @param {string} abstract - The abstract to associate to the alias.
+	 * @returns {container.Container} The current container instance.
 	 */
 	alias(alias, abstract) {
-		this.bind(alias, () => {
+		return this.bind(alias, () => {
 			return this.make(abstract);
 		});
 	}
@@ -368,13 +381,18 @@ class Container extends checksTypes() {
 
 	/**
 	 * Flush container from attached abstracts and concretes.
+	 *
+	 * @returns {container.Container} The current container instance.
 	 */
 	flush() {
 		__(this).set('bindings', {});
 		__(this).set('singletons', {});
 		__(this).set('decorators', {});
 		__(this).set('tags', {});
-		this.singleton('app', this);
+
+		return this.singleton('app', () => {
+			return __(this).get('proxy');
+		});
 	}
 
 	/**
