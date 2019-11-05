@@ -12,6 +12,7 @@ beforeEach(() => {
 	given.fakeException();
 	given.fakeRequest();
 	given.fakeResponse();
+	given.fakeConfigRepository();
 	given.ouchDriver();
 });
 
@@ -24,11 +25,18 @@ test('Can render exception as HTML', async () => {
 test('Can render exception as JSON if accepts JSON', async () => {
 	given.acceptApplicationJsonHeader();
 	await when.renderingException();
-	then.shouldHaveRenderedJsonException();
+	then.shouldHaveRenderedJsonExceptionWithStackTrace();
 });
 
 test('Can render exception as JSON if requested over XHR', async () => {
 	given.xRequestedWitXmlHttpRequesthHeader();
 	await when.renderingException();
-	then.shouldHaveRenderedJsonException();
+	then.shouldHaveRenderedJsonExceptionWithStackTrace();
+});
+
+test('Can render non-verbose exception as JSON if requested over XHR and not in debug mode', async () => {
+	given.xRequestedWitXmlHttpRequesthHeader();
+	given.noDebugInConfiguration();
+	await when.renderingException();
+	then.shouldHaveRenderedJsonExceptionWithOnly(['type', 'message']);
 });

@@ -420,7 +420,7 @@ class Dumper extends checksTypes() {
 	 * @returns {boolean} Indicates that the dumper should dump.
 	 */
 	shouldDump() {
-		return !this.config.get('dev.dumper.disabled_environments', []).includes(this.app.environment);
+		return this.config.get('dev.dumper.enabled', false);
 	}
 
 	/**

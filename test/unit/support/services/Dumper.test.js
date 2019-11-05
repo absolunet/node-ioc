@@ -40,7 +40,6 @@ test('Can dump multiple objects in console', () => {
 	then.shouldNotHaveDumpedInResponse();
 });
 
-
 test('Can dump data in partial HTML for manual injection', () => {
 	given.data();
 	given.fakeResponse();
@@ -57,8 +56,8 @@ test('Can dump circular object', () => {
 	then.shouldNotHaveThrown();
 });
 
-test('Cannot dump if in a forbidden environment silently', () => {
-	given.disabledTestEnvironmentInConfiguration();
+test('Cannot dump if disabled, silently', () => {
+	given.disabledDumperInConfiguration();
 	given.data();
 	given.fakeResponse();
 	when.dumping();
@@ -67,8 +66,8 @@ test('Cannot dump if in a forbidden environment silently', () => {
 	then.shouldNotHaveRendered();
 });
 
-test('Cannot get dump if in a forbidden environment silently', () => {
-	given.disabledTestEnvironmentInConfiguration();
+test('Cannot get dump if disabled, silently', () => {
+	given.disabledDumperInConfiguration();
 	given.data();
 	given.fakeResponse();
 	when.gettingDump();

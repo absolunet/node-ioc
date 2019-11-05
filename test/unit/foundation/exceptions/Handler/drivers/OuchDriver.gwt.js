@@ -13,10 +13,17 @@ let exception;
 let request;
 let response;
 let fakeHeaders;
+let fakeConfig;
 
 
 //-- Mocks
 //--------------------------------------------------------
+
+const fakeConfigRepository = {
+	get: jest.fn((key, defaultValue = null) => {
+		return fakeConfig[key] || defaultValue;
+	})
+};
 
 const mockedPrettyPageHandler = {
 	addEditor: jest.fn()
@@ -27,7 +34,20 @@ const mockedJsonResponseHandler = {};
 const mockedOuch = {
 	pushHandler:     jest.fn(),
 	handleException: jest.fn((a, b, c, closure) => {
-		closure('{}');
+		closure([JSON.stringify({
+			type:    'TypeError',
+			message: 'An error has occurred...',
+			file:    '/path/to/file.js',
+			line:    12,
+			trace: [
+				{
+					'file':     '/path/to/file.js',
+					'line':     12,
+					'function': '<#anonymous>',
+					'class':    ''
+				}
+			]
+		})]);
 	}),
 	clearHandlers:   jest.fn()
 };
@@ -84,6 +104,16 @@ given.fakeResponse = () => {
 	response = fakeResponse;
 };
 
+given.fakeConfigRepository = () => {
+	container.singleton('config', fakeConfigRepository);
+	fakeConfig = {
+		'app.debug': true,
+		'app': {
+			debug: true
+		}
+	};
+};
+
 given.ouchDriver = () => {
 	ouchDriver = container.make(OuchDriver);
 };
@@ -94,6 +124,11 @@ given.acceptApplicationJsonHeader = () => {
 
 given.xRequestedWitXmlHttpRequesthHeader = () => {
 	fakeHeaders['x-requested-with'] = 'XmlHttpRequest';
+};
+
+given.noDebugInConfiguration = () => {
+	fakeConfig['app.debug'] = false;
+	fakeConfig.app.debug    = false;
 };
 
 
@@ -137,6 +172,16 @@ then.shouldHaveRenderedJsonException = () => {
 		type:    'TypeError',
 		message: 'An error has occurred...'
 	});
+};
+
+then.shouldHaveRenderedJsonExceptionWithStackTrace = () => {
+	then.shouldHaveRenderedJsonException();
+	expect(response.json.mock.calls[0][0]).toHaveProperty('trace');
+};
+
+then.shouldHaveRenderedJsonExceptionWithOnly = (expected) => {
+	then.shouldHaveRenderedJsonException();
+	expect(Object.keys(response.json.mock.calls[0][0])).toStrictEqual(expected);
 };
 
 

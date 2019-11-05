@@ -16,6 +16,7 @@ let result;
 let exception;
 let request;
 let response;
+let fakeConfig;
 
 
 //-- Mocks
@@ -23,6 +24,12 @@ let response;
 
 const fakeException   = new TypeError('An error has occurred...');
 const loggerException = new TypeError('A logger error has occurred...');
+
+const fakeConfigRepository = {
+	get: jest.fn((key, defaultValue = null) => {
+		return fakeConfig[key] || defaultValue;
+	})
+};
 
 const fakeLogger = {
 	error: jest.fn()
@@ -90,6 +97,16 @@ given.stringHelper = () => {
 	container.singleton('helper.string', StringHelper);
 };
 
+given.fakeConfigRepository = () => {
+	container.singleton('config', fakeConfigRepository);
+	fakeConfig = {
+		'app.debug': true,
+		'app': {
+			debug: true
+		}
+	};
+};
+
 given.fakeLogger = () => {
 	container.singleton('log', fakeLogger);
 };
@@ -143,8 +160,9 @@ given.handledException = async () => {
 	await exceptionHandler.handle(fakeException);
 };
 
-given.productionEnvironment = () => {
-	container.setEnvironment('production');
+given.noDebugInConfiguration = () => {
+	fakeConfig['app.debug'] = false;
+	fakeConfig.app.debug    = false;
 };
 
 
@@ -184,10 +202,6 @@ when.gettingLastException = () => {
 
 //-- Then
 //--------------------------------------------------------
-
-then.resetEnvironment = () => {
-	container.setEnvironment(process.env.NODE_ENV); // eslint-disable-line no-process-env
-};
 
 then.resultShouldBe = (expected) => {
 	then.shouldNotHaveThrown();

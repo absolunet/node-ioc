@@ -79,7 +79,7 @@ class OuchDriver extends Driver {
 			data = this.renderJson(exception);
 		}
 
-		if (this.app.environment === 'production') {
+		if (!this.app.isBound('config') || !this.app.make('config').get('app.debug', false)) {
 			const { type, message } = data;
 			data = { type, message };
 		}

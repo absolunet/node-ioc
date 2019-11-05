@@ -71,7 +71,7 @@ given.fakeResponse = () => {
 given.baseDevConfig = () => { // eslint-disable-line unicorn/prevent-abbreviations
 	container.make('config').set('dev', {
 		dumper: {
-			'disabled_environments': [],
+			'enabled': true,
 			'default': 'fake',
 			'themes': {
 				fake: {}
@@ -101,10 +101,8 @@ given.circularData = () => {
 	data.self = data;
 };
 
-given.disabledTestEnvironmentInConfiguration = () => {
-	container.make('config').set('dev.dumper.disabled_environments', [
-		container.environment
-	]);
+given.disabledDumperInConfiguration = () => {
+	container.make('config').set('dev.dumper.enabled', false);
 };
 
 given.fileName = () => {
