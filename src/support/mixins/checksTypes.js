@@ -29,7 +29,7 @@ const checkTypes = factory((SuperClass) => {
 		 * @instance
 		 */
 		isInstantiable(object) {
-			return Boolean(object) && Boolean(object.prototype) && Boolean(object.prototype.constructor.name);
+			return Boolean(object) && Boolean(object.prototype) && Boolean(object.prototype.constructor);
 		}
 
 		/**
