@@ -15,6 +15,15 @@ import GeneratorCommand from '../GeneratorCommand';
 class MakeProviderCommand extends GeneratorCommand {
 
 	/**
+	 * Class dependencies: <code>['helper.string']</code>.
+	 *
+	 * @type {Array<string>}
+	 */
+	static get dependencies() {
+		return ['helper.string'];
+	}
+
+	/**
 	 * @inheritdoc
 	 */
 	get name() {
@@ -40,10 +49,28 @@ class MakeProviderCommand extends GeneratorCommand {
 	/**
 	 * @inheritdoc
 	 */
+	get patterns() {
+		return {
+			NAME: this.getProviderName()
+		};
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	async handle() {
 		this.debug(`Generating ${this.parameter('class')} service provider file.`);
 		await this.generate('base');
 		this.info(`${this.parameter('class')} service provider file successfully generated!`);
+	}
+
+	/**
+	 * Get provider human-readable name.
+	 *
+	 * @returns {string} The provider guessed name.
+	 */
+	getProviderName() {
+		return this.stringHelper.capital(this.parameter('class').replace(/ServiceProvider$/u, ''));
 	}
 
 }

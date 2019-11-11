@@ -6,6 +6,7 @@ import * as os                from 'os';
 import * as path              from 'path';
 import slash                  from 'slash';
 import __                     from '@absolunet/private-registry';
+import ServiceProvider        from './ServiceProvider';
 import Container              from '../container/Container';
 import ConfigServiceProvider  from '../config/ConfigServiceProvider';
 import EventServiceProvider   from '../events/EventServiceProvider';
@@ -636,11 +637,14 @@ class Application extends Container {
 
 		super.flush();
 
-		__(this).set('providers', []);
-		__(this).set('booted', false);
-		__(this).set('booted.core', false);
-		__(this).set('onBooting', []);
-		__(this).set('onBooted', []);
+		__(ServiceProvider).get('publishable').clear();
+
+		const _this = __(this);
+		_this.set('providers',   []);
+		_this.set('booted',      false);
+		_this.set('booted.core', false);
+		_this.set('onBooting',   []);
+		_this.set('onBooted',    []);
 
 		this.configureDefaultPaths();
 	}

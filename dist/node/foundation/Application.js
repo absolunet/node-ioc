@@ -10,6 +10,8 @@ var _slash = _interopRequireDefault(require("slash"));
 
 var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
 
+var _ServiceProvider = _interopRequireDefault(require("./ServiceProvider"));
+
 var _Container = _interopRequireDefault(require("../container/Container"));
 
 var _ConfigServiceProvider = _interopRequireDefault(require("../config/ConfigServiceProvider"));
@@ -693,11 +695,20 @@ class Application extends _Container.default {
     }
 
     super.flush();
-    (0, _privateRegistry.default)(this).set('providers', []);
-    (0, _privateRegistry.default)(this).set('booted', false);
-    (0, _privateRegistry.default)(this).set('booted.core', false);
-    (0, _privateRegistry.default)(this).set('onBooting', []);
-    (0, _privateRegistry.default)(this).set('onBooted', []);
+    (0, _privateRegistry.default)(_ServiceProvider.default).get('publishable').clear();
+
+    const _this = (0, _privateRegistry.default)(this);
+
+    _this.set('providers', []);
+
+    _this.set('booted', false);
+
+    _this.set('booted.core', false);
+
+    _this.set('onBooting', []);
+
+    _this.set('onBooted', []);
+
     this.configureDefaultPaths();
   }
   /**

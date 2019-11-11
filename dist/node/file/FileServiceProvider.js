@@ -35,8 +35,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class FileServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - File';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
     this.bindFileManager();
     this.bindFileEngine();

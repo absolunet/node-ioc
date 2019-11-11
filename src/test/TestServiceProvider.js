@@ -53,6 +53,13 @@ import TestCommand             from './commands/TestCommand';
 class TestServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Test';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {

@@ -33,10 +33,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class ViewServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - View';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
-    this.loadConfigFromFolder(__dirname, '..', 'config');
+    this.loadAndPublishConfig(this.app.formatPath(__dirname, 'config'));
     this.bindViewFactory();
     this.bindViewEngine();
     this.bindViewResolver();

@@ -44,6 +44,13 @@ import MakeProviderCommand from './commands/MakeProviderCommand';
 class ConsoleServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Console';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {

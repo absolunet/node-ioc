@@ -27,6 +27,13 @@ import Sync            from './systems/Sync';
 class FileServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - File';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {

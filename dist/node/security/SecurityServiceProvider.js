@@ -26,8 +26,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class SecurityServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - Security';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
     this.bindGateService();
   }

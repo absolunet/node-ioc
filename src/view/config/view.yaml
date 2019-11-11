@@ -2,6 +2,7 @@
 # The only engine provided by the application is "jsrender"
 engine: jsrender
 
+
 # The supported file extensions.
 extensions:
   - html

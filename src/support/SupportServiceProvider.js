@@ -2,15 +2,16 @@
 //-- Node IoC - Support - Support Service Provider
 //--------------------------------------------------------
 
-import ServiceProvider  from '../foundation/ServiceProvider';
-import MakeMixinCommand from './commands/MakeMixinCommand';
-import DateHelper       from './helpers/DateHelper';
-import FileHelper       from './helpers/FileHelper';
-import PathHelper       from './helpers/PathHelper';
-import StringHelper     from './helpers/StringHelper';
-import Dumper           from './services/Dumper';
-import Faker            from './services/Faker';
-import IdeLink          from './enums/IdeLink';
+import ServiceProvider      from '../foundation/ServiceProvider';
+import MakeMixinCommand     from './commands/MakeMixinCommand';
+import VendorPublishCommand from './commands/VendorPublishCommand';
+import DateHelper           from './helpers/DateHelper';
+import FileHelper           from './helpers/FileHelper';
+import PathHelper           from './helpers/PathHelper';
+import StringHelper         from './helpers/StringHelper';
+import Dumper               from './services/Dumper';
+import Faker                from './services/Faker';
+import IdeLink              from './enums/IdeLink';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -34,9 +35,17 @@ import IdeLink          from './enums/IdeLink';
 class SupportServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Support';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {
+		this.loadAndPublishConfig(this.app.formatPath(__dirname, 'config'));
 		this.bindDateHelper();
 		this.bindFileHelper();
 		this.bindPathHelper();
@@ -52,7 +61,8 @@ class SupportServiceProvider extends ServiceProvider {
 	boot() {
 		this.createDumperViewNamespace();
 		this.loadCommands([
-			MakeMixinCommand
+			MakeMixinCommand,
+			VendorPublishCommand
 		]);
 	}
 

@@ -1,19 +1,26 @@
+# Indicates if the database features are enabled.
 enabled: true
 
 
+# Database command namespace.
+# It allows to change default "db:migrate" to "database:migrate", for instance.
 command_namespace: '{{DB_COMMAND_NAMESPACE|db}}'
 
 
+# Default connection to use
 default: '{{DB_CONNECTION|sqlite}}'
 
 
+# All available static connections.
 connections:
 
   sqlite:
     driver: sqlite
-    database: '{{DB_FILE|@/storage/databases/database.sqlite}}'
+    filename: '{{DB_FILE|@/storage/databases/database.sqlite}}'
 
 
+# Paths to the different database-related folders from the database folder.
+# This will be used when creating the Knex instance.
 paths:
   factories: 'factories'
   migrations: 'migrations'
@@ -21,5 +28,6 @@ paths:
   seeds: 'seeds'
 
 
-
+# The migrations table to be used by Knex.
+# It's set to "migrations" by default, but feel freee to change it.
 migration_table: 'migrations'

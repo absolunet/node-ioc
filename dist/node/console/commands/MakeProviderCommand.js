@@ -19,8 +19,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class MakeProviderCommand extends _GeneratorCommand.default {
   /**
+   * Class dependencies: <code>['helper.string']</code>.
+   *
+   * @type {Array<string>}
+   */
+  static get dependencies() {
+    return ['helper.string'];
+  }
+  /**
    * @inheritdoc
    */
+
+
   get name() {
     return 'make:provider';
   }
@@ -47,10 +57,30 @@ class MakeProviderCommand extends _GeneratorCommand.default {
    */
 
 
+  get patterns() {
+    return {
+      NAME: this.getProviderName()
+    };
+  }
+  /**
+   * @inheritdoc
+   */
+
+
   async handle() {
     this.debug(`Generating ${this.parameter('class')} service provider file.`);
     await this.generate('base');
     this.info(`${this.parameter('class')} service provider file successfully generated!`);
+  }
+  /**
+   * Get provider human-readable name.
+   *
+   * @returns {string} The provider guessed name.
+   */
+
+
+  getProviderName() {
+    return this.stringHelper.capital(this.parameter('class').replace(/ServiceProvider$/u, ''));
   }
 
 }

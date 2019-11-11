@@ -68,8 +68,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class TestServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - Test';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
     this.bindTestRepository();
     this.bindUnitTestRepository();

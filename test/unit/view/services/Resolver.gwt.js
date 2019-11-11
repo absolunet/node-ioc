@@ -43,7 +43,7 @@ given.emptyResult = () => {
 
 when.gettingResolverPath = () => {
 	when.attempting(() => {
-		result = resolver.path;
+		result = resolver.getBasePaths();
 	});
 };
 
@@ -70,7 +70,8 @@ then.resultShouldBe = (expected) => {
 };
 
 then.shouldHaveReceivedStubsViewPath = () => {
-	then.resultShouldBe(container.viewPath());
+	then.shouldNotHaveThrown();
+	expect(result).toStrictEqual([container.viewPath()]);
 };
 
 

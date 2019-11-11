@@ -29,10 +29,17 @@ import LogTableCommand from './commands/LogTableCommand';
 class LogServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Log';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {
-		this.loadConfigFromFolder(__dirname, '..', 'config');
+		this.loadAndPublishConfig(this.app.formatPath(__dirname, 'config'));
 		this.bindLogger();
 		this.bindLogLevelEnum();
 	}
