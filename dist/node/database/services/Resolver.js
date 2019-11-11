@@ -86,10 +86,13 @@ class Resolver {
   }
   /**
    * Bind paths into application.
+   *
    * This will bind "path.factory", "path.model", "path.migration", "path.seed" and other
    * configured paths within "database.paths" configuration for execution.
+   *
    * It will also bind "path.src.factory", "path.src.model", "path.src.migration", "path.src.seed" and other
    * configured paths within "database.paths" configuration for scaffolding.
+   *
    * The path keys will be converted to their singular form.
    */
 
