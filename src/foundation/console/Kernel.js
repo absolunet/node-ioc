@@ -79,7 +79,13 @@ class Kernel extends BaseKernel {
 		this.terminating();
 
 		if (__(this).get('shouldExit')) {
-			process.exit(this.app.make('exception.handler').hadException ? 1 : 0); // eslint-disable-line unicorn/no-process-exit, no-process-exit
+			let code = 0;
+
+			if (this.app.isBound('exception.handler')) {
+				code = Number(this.app.make('exception.handler').hadException);
+			}
+
+			process.exit(code); // eslint-disable-line unicorn/no-process-exit, no-process-exit
 		}
 	}
 
