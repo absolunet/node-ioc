@@ -26,8 +26,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class TranslationServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - Translation';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
     this.bindTranslator();
   }

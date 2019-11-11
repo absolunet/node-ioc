@@ -21,6 +21,13 @@ import ServiceProvider from '../foundation/ServiceProvider';
 class SecurityServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Security';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {

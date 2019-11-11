@@ -21,6 +21,13 @@ import Validator       from './services/Validator';
 class ValidationServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Validation';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {

@@ -28,6 +28,7 @@ class Resolver {
 	 * @private
 	 */
 	init() {
+		__(this).set('paths',      []);
 		__(this).set('namespaces', {});
 	}
 
@@ -41,8 +42,8 @@ class Resolver {
 	find(view) {
 		const viewPath = this.getViewPath(view);
 
-		if (!this.file.exists(viewPath)) {
-			throw new TypeError(`The view "${view}" (${viewPath}) does not exists.`);
+		if (!viewPath) {
+			throw new TypeError(`The view "${view}" does not exists.`);
 		}
 
 		return this.file.driver('text').load(viewPath);
@@ -55,41 +56,56 @@ class Resolver {
 	 * @returns {boolean} Indicates that the view file exists and may be rendered.
 	 */
 	exists(view) {
-		return this.file.exists(this.getViewPath(view));
+		return Boolean(this.getViewPath(view));
 	}
 
 	/**
 	 * Get view path by name.
 	 *
 	 * @param {string} view - The view name.
-	 * @returns {string} The view file path.
+	 * @returns {string|null} The found view path, or null if not found.
 	 */
 	getViewPath(view) {
-		return this.file.findFirst(this.extensions.map((extension) => {
-			return this.app.formatPath(this.getViewBasePath(view), `${view.replace(/^.+::/u, '').replace(/\./gu, '/')}.${extension}`);
-		}));
+		return this.file.findFirst(this.getViewPaths(view)) || null;
+	}
+
+	/**
+	 * Get view possible paths by name.
+	 *
+	 * @param {string} view - The view name.
+	 * @returns {Array<string>} The possible view file paths.
+	 */
+	getViewPaths(view) {
+		const namespaceRegex = new RegExp(`^.+${this.namespaceDelimiter}`, 'u');
+		const viewFileName   = `${view.replace(namespaceRegex, '').replace(/\./gu, '/')}`;
+
+		return this.getViewBasePaths(view).flatMap((basePath) => {
+			return this.extensions.flatMap((extension) => {
+				return this.app.formatPath(basePath, `${viewFileName}.${extension}`);
+			});
+		});
 	}
 
 	/**
 	 * Get base path of the given view based on the namespace if present.
 	 *
 	 * @param {string} view - The view name.
-	 * @returns {string} The view folder path.
+	 * @returns {Array<string>} The view folder paths.
 	 * @throws {TypeError} Indicates that the given view namespace was not found.
 	 */
-	getViewBasePath(view) {
+	getViewBasePaths(view) {
 		if (!view.includes(this.namespaceDelimiter)) {
-			return this.path;
+			return this.getBasePaths();
 		}
 
-		const namespace     = view.slice(0, view.indexOf(this.namespaceDelimiter));
-		const namespacePath = __(this).get('namespaces')[namespace];
+		const namespace      = view.slice(0, view.indexOf(this.namespaceDelimiter));
+		const namespacePaths = __(this).get('namespaces')[namespace];
 
-		if (!namespacePath) {
+		if (!namespacePaths || namespacePaths.length === 0) {
 			throw new TypeError(`View namespace "${namespace}" (${view}) does not exist`);
 		}
 
-		return namespacePath;
+		return [...namespacePaths];
 	}
 
 	/**
@@ -100,18 +116,35 @@ class Resolver {
 	 * @returns {view.services.Resolver} The current resolver instance.
 	 */
 	namespace(namespace, folder) {
-		__(this).get('namespaces')[namespace] = folder;
+		const namespaces = __(this).get('namespaces');
+		namespaces[namespace] = namespaces[namespace] || [];
+		namespaces[namespace].push(folder);
 
 		return this;
 	}
 
 	/**
-	 * The view path.
+	 * Add possible views path.
 	 *
-	 * @type {string}
+	 * @param {string} path - The new views path.
+	 * @returns {view.services.Resolver} The current resolver instance.
 	 */
-	get path() {
-		return this.app.viewPath();
+	addPath(path) {
+		__(this).get('paths').push(path);
+
+		return this;
+	}
+
+	/**
+	 * Get all views base paths.
+	 *
+	 * @returns {Array<string>} The view base paths.
+	 */
+	getBasePaths() {
+		return [
+			this.app.viewPath(),
+			...__(this).get('paths')
+		];
 	}
 
 	/**

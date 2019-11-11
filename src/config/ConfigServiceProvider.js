@@ -28,6 +28,13 @@ import Evaluator             from './services/Evaluator';
 class ConfigServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Config';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {

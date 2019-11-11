@@ -26,10 +26,17 @@ import Resolver        from './services/Resolver';
 class ViewServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - View';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {
-		this.loadConfigFromFolder(__dirname, '..', 'config');
+		this.loadAndPublishConfig(this.app.formatPath(__dirname, 'config'));
 		this.bindViewFactory();
 		this.bindViewEngine();
 		this.bindViewResolver();
