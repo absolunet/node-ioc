@@ -7,7 +7,7 @@ var _privateRegistry = _interopRequireDefault(require("@absolunet/private-regist
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
-//-- Node IoC - Console - CommandRepository
+//-- Node IoC - Console - Repositories - Command Repository
 //--------------------------------------------------------
 
 /**
