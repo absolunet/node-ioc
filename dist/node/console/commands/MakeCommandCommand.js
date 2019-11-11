@@ -29,6 +29,14 @@ class MakeCommandCommand extends _GeneratorCommand.default {
    */
 
 
+  get flags() {
+    return [['generator', 'Generate a generator command class.'], ['private', 'Generate a private command class.']];
+  }
+  /**
+   * @inheritdoc
+   */
+
+
   get files() {
     return {
       'base': this.app.formatPath(__dirname, 'stubs', 'BaseCommand.stub'),
@@ -54,14 +62,6 @@ class MakeCommandCommand extends _GeneratorCommand.default {
     this.debug(`Generating ${type} command file.`);
     await this.generate(type);
     this.info(`Command ${this.parameter('class')} file successfully generated!`);
-  }
-  /**
-   * @inheritdoc
-   */
-
-
-  get flags() {
-    return [['generator', 'Generate a generator command class.'], ['private', 'Generate a private command class.']];
   }
 
 }
