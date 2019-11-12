@@ -132,6 +132,12 @@ given.configInFolderInsideOtherFolder = (config) => {
 	});
 };
 
+given.configInSubfolderInsideOtherFolderOnWindows = (config) => {
+	Object.keys(config).forEach((key) => {
+		given.config({ [`folder\\subfolder\\${key.replace(/\//u, '\\')}`]: config[key] }, otherFolderPath);
+	});
+};
+
 given.file = (value) => {
 	file = value;
 };

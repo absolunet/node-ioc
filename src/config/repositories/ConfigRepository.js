@@ -106,7 +106,7 @@ class ConfigRepository {
 	 */
 	loadConfigFromFolder(folder, overwrite = false) {
 		Object.entries(this.file.loadRecursivelyInFolder(folder)).forEach(([key, value]) => {
-			this.merge(key.replace(/\//gu, '.'), value, overwrite);
+			this.merge(key.replace(/[/\\]/gu, '.'), value, overwrite);
 		});
 
 		return this;
