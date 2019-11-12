@@ -35,6 +35,14 @@ class VendorPublishCommand extends _Command.default {
    */
 
 
+  get policies() {
+    return ['env:local'];
+  }
+  /**
+   * @inheritdoc
+   */
+
+
   get name() {
     return 'vendor:publish';
   }

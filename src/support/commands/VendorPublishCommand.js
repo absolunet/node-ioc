@@ -28,6 +28,13 @@ class VendorPublishCommand extends Command {
 	/**
 	 * @inheritdoc
 	 */
+	get policies() {
+		return ['env:local'];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	get name() {
 		return 'vendor:publish';
 	}
