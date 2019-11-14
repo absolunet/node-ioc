@@ -440,7 +440,7 @@ class Dumper extends (0, _checksTypes.default)() {
 
   getLocation() {
     return new Error().stack.split('\n').slice(1).filter(line => {
-      return !line.includes(this.app.formatPath(__filename, '..', '..'));
+      return !line.includes(this.app.formatPath(__dirname, '..'));
     }).shift().replace(/.*\((?<location>.*:\w+:\w+)\)/u, '$<location>');
   }
   /**
