@@ -38,6 +38,33 @@ class GeneratorCommand extends _Command.default {
     return `Create a ${this.type} class.`;
   }
   /**
+   * @inheritdoc
+   */
+
+
+  get parameters() {
+    return [['class', true, null, `Class name of the ${this.type}.`]];
+  }
+  /**
+   * @inheritdoc
+   */
+
+
+  get options() {
+    return [['destination', null, 'File destination.']];
+  }
+  /**
+   * Get the class type that is being made.
+   *
+   * @type {string}
+   */
+
+
+  get type() {
+    const type = this.constructor.name.replace(/^Make(?<name>.*)Command$/u, '$<name>') || this.name.split(':')[1];
+    return this.app.make('helper.string').lower(type);
+  }
+  /**
    * Files accessor.
    * It should offers a dictionary associating the type of file to the specific stub.
    *
@@ -169,33 +196,6 @@ class GeneratorCommand extends _Command.default {
     }
 
     return this.app.formatPath(process.cwd(), this.option('destination'), fileName);
-  }
-  /**
-   * @inheritdoc
-   */
-
-
-  get parameters() {
-    return [['class', true, null, `Class name of the ${this.type}.`]];
-  }
-  /**
-   * @inheritdoc
-   */
-
-
-  get options() {
-    return [['destination', null, 'File destination.']];
-  }
-  /**
-   * Get the class type that is being made.
-   *
-   * @type {string}
-   */
-
-
-  get type() {
-    const type = this.constructor.name.replace(/^Make(?<name>.*)Command$/u, '$<name>') || this.name.split(':')[1];
-    return this.app.make('helper.string').lower(type);
   }
 
 }

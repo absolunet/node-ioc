@@ -1,5 +1,5 @@
 //--------------------------------------------------------
-//-- Node IoC - Console - CommandRepository
+//-- Node IoC - Console - Repositories - Command Repository
 //--------------------------------------------------------
 
 import __ from '@absolunet/private-registry';

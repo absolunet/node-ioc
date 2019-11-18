@@ -128,6 +128,15 @@ describe('With fake file manager', () => {
 		then.shouldHaveLoadedFilesRecursively();
 	});
 
+	test('Can load nested configuration files from given folder on Windows', () => {
+		given.otherFolder();
+		given.configInSubfolderInsideOtherFolderOnWindows({ foo: 'Windows subfolder' });
+		when.loadingFolder();
+		when.gettingConfig('folder.subfolder.foo');
+		then.resultShouldBe('Windows subfolder');
+		then.shouldHaveLoadedFilesRecursively();
+	});
+
 	test('Ignore other folder if not specified', () => {
 		given.configInOtherFolder({ other: { foo: 'config' } });
 		when.loadingFolder();

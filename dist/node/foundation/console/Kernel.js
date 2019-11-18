@@ -89,7 +89,13 @@ class Kernel extends _Kernel.default {
     this.terminating();
 
     if ((0, _privateRegistry.default)(this).get('shouldExit')) {
-      process.exit(this.app.make('exception.handler').hadException ? 1 : 0); // eslint-disable-line unicorn/no-process-exit, no-process-exit
+      let code = 0;
+
+      if (this.app.isBound('exception.handler')) {
+        code = Number(this.app.make('exception.handler').hadException);
+      }
+
+      process.exit(code); // eslint-disable-line unicorn/no-process-exit, no-process-exit
     }
   }
   /**

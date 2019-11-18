@@ -59,8 +59,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class ConsoleServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - Console';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
     this.bindCommandRepository();
     this.bindCommandRegistrar();

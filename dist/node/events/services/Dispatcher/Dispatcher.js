@@ -44,21 +44,25 @@ class Dispatcher extends (0, _hasDriver.default)() {
     super.init();
     this.addDriver('emitter', _EventEmitterDriver.default);
     this.addDriver('pubsubjs', _PubSubJsDriver.default);
-    const {
-      app
-    } = this;
-    const defaultDriver = app.isBound('config') ? app.make('config').get('events.default', 'emitter') : 'emitter';
-    this.setDefaultDriver(defaultDriver);
   }
   /**
-   * Get default driver for forward calls.
+   * Get default driver to forward calls.
    *
    * @returns {event.services.Dispatcher.drivers.Driver} The default driver instance.
    */
 
 
   getForward() {
-    return this.driver();
+    if (this.hasDriver('default')) {
+      return this.driver();
+    }
+
+    const {
+      app
+    } = this;
+    const defaultDriver = 'emitter';
+    const driver = app.isBound('config') ? app.make('config').get('events.default', defaultDriver) : defaultDriver;
+    return this.driver(driver);
   }
 
 }

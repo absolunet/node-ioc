@@ -27,10 +27,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class EventServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - Events';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
-    this.loadConfigFromFolder(__dirname, '..', 'config');
+    this.loadAndPublishConfig(this.app.formatPath(__dirname, 'config'));
     this.bindEventDispatcher();
   }
   /**

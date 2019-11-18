@@ -32,7 +32,7 @@ const checkTypes = (0, _mixinFactory.default)(SuperClass => {
      * @instance
      */
     isInstantiable(object) {
-      return Boolean(object) && Boolean(object.prototype) && Boolean(object.prototype.constructor.name);
+      return Boolean(object) && Boolean(object.prototype) && Boolean(object.prototype.constructor);
     }
     /**
      * Check if the given object is a function.

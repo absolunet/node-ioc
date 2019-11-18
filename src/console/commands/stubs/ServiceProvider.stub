@@ -11,6 +11,13 @@ import { ServiceProvider } from '@absolunet/ioc';
 class %CLASS% extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return '%PROJECT% - %NAME%;
+	}
+
+	/**
 	 * Register any services.
 	 */
 	register() {

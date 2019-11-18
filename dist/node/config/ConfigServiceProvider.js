@@ -36,8 +36,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class ConfigServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - Config';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
     this.bindConfigGrammar();
     this.bindEvaluator();

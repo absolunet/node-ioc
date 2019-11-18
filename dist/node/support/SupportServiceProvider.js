@@ -6,6 +6,8 @@ var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProv
 
 var _MakeMixinCommand = _interopRequireDefault(require("./commands/MakeMixinCommand"));
 
+var _VendorPublishCommand = _interopRequireDefault(require("./commands/VendorPublishCommand"));
+
 var _DateHelper = _interopRequireDefault(require("./helpers/DateHelper"));
 
 var _FileHelper = _interopRequireDefault(require("./helpers/FileHelper"));
@@ -46,9 +48,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class SupportServiceProvider extends _ServiceProvider.default {
   /**
+   * @inheritdoc
+   */
+  get name() {
+    return 'Node IoC - Support';
+  }
+  /**
    * Register the service provider.
    */
+
+
   register() {
+    this.loadAndPublishConfig(this.app.formatPath(__dirname, 'config'));
     this.bindDateHelper();
     this.bindFileHelper();
     this.bindPathHelper();
@@ -64,7 +75,7 @@ class SupportServiceProvider extends _ServiceProvider.default {
 
   boot() {
     this.createDumperViewNamespace();
-    this.loadCommands([_MakeMixinCommand.default]);
+    this.loadCommands([_MakeMixinCommand.default, _VendorPublishCommand.default]);
   }
   /**
    * Bind date helper.

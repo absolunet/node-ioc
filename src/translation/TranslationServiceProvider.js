@@ -21,6 +21,13 @@ import Translator      from './services/Translator';
 class TranslationServiceProvider extends ServiceProvider {
 
 	/**
+	 * @inheritdoc
+	 */
+	get name() {
+		return 'Node IoC - Translation';
+	}
+
+	/**
 	 * Register the service provider.
 	 */
 	register() {

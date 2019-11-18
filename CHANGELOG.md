@@ -13,6 +13,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-beta.2] - 2019-11-13
+
+### Added
+ - `vendor:publish` local command to publish files from extensions service provider
+ - `name` accessor on service provider for verbose identification
+ - Allow to publish stub migration files as JavaScript files
+
+### Fixed
+ - Event dispatcher's default driver is selected dynamically depending on configuration on each call
+ - Console kernel checks for exception handler existence before using it
+ - Remove name check in `checksTypes` mixin's `isInstantiable` method, which is no longer true on Node.js 13.x
+ - Add support for nested configuration folders on Windows
+
+
+
 ## [1.0.0-beta.1] - 2019-11-05
 
 ### Added
@@ -536,7 +551,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.1...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.2...HEAD
+[1.0.0-beta.2]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.1...1.0.0-beta.2
 [1.0.0-beta.1]:  https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.5...1.0.0-beta.1
 [1.0.0-alpha.5]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.4...1.0.0-alpha.5
 [1.0.0-alpha.4]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.3...1.0.0-alpha.4

@@ -31,6 +31,15 @@ class MakeMigrationCommand extends GeneratorCommand {
 	/**
 	 * @inheritdoc
 	 */
+	get flags() {
+		return super.flags.concat([
+			['stub', 'Generate stub migration file.']
+		]);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	get files() {
 		return {
 			'create': this.app.formatPath(__dirname, 'stubs', 'MigrationCreate.stub'),
@@ -53,7 +62,7 @@ class MakeMigrationCommand extends GeneratorCommand {
 	get fileName() {
 		const prefix = this.app.make('helper.date')().format('YYYYMMDDHHmmss');
 
-		return `${prefix}_${this.parameter('class')}.js`;
+		return `${prefix}_${this.parameter('class')}.${this.flag('stub') ? 'stub' : 'js'}`;
 	}
 
 	/**
