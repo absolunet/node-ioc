@@ -13,6 +13,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-beta.3] - 2019-11-20
+
+### Changed
+ - Updates `knex` to `0.20.2`
+ - Updated `yargs` to `15.0.2`
+
+
+
 ## [1.0.0-beta.2] - 2019-11-13
 
 ### Added
@@ -551,7 +559,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.2...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.3...HEAD
+[1.0.0-beta.3]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.2...1.0.0-beta.3
 [1.0.0-beta.2]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.1...1.0.0-beta.2
 [1.0.0-beta.1]:  https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.5...1.0.0-beta.1
 [1.0.0-alpha.5]: https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.4...1.0.0-alpha.5
