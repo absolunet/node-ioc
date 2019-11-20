@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0-beta.3] - 2019-11-20
 
 ### Changed
- - Updates `knex` to `0.20.2`
+ - Updated `knex` to `0.20.2`
  - Updated `yargs` to `15.0.2`
 
 
