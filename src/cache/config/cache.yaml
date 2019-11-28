@@ -1,3 +1,7 @@
+# Indicates if the cache features are enabled.
+enabled: true
+
+
 # Default cache store.
 default: '{{CACHE_STORE|file}}'
 

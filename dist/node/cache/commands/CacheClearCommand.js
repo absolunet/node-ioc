@@ -31,6 +31,14 @@ class CacheClearCommand extends _Command.default {
    */
 
 
+  get policies() {
+    return ['cache'];
+  }
+  /**
+   * @inheritdoc
+   */
+
+
   get name() {
     return 'cache:clear';
   }
