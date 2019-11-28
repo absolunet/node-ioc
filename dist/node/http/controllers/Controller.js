@@ -187,7 +187,7 @@ class Controller {
    * Set response status and throw an HTTP error that reflects the given status.
    *
    * @param {number} status - The HTTP status code.
-   * @throws {http.exceptions.HttpError} - The corresponding HTTP error based on the HTTP status code.
+   * @throws {http.exceptions.HttpError} The corresponding HTTP error based on the HTTP status code.
    */
 
 
