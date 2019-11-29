@@ -125,8 +125,8 @@ const hasDriver = factory((SuperClass) => {
 		 * @instance
 		 */
 		setDriverAlias(name, alias) {
-			this.addDriver(alias, () => {
-				return this.driver(name);
+			this.addDriver(alias, (app, parameters) => {
+				return this.driver(name, parameters);
 			});
 			__(this).get('aliases')[alias] = name;
 		}
