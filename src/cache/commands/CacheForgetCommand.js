@@ -26,6 +26,13 @@ class CacheForgetCommand extends Command {
 	/**
 	 * @inheritdoc
 	 */
+	get policies() {
+		return ['cache'];
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	get name() {
 		return 'cache:forget';
 	}

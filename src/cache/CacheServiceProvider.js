@@ -45,6 +45,7 @@ class CacheServiceProvider extends ServiceProvider {
 	 * Boot the service provider.
 	 */
 	boot() {
+		this.createPolicies();
 		this.loadCommands([
 			CacheClearCommand,
 			CacheForgetCommand,
@@ -57,6 +58,20 @@ class CacheServiceProvider extends ServiceProvider {
 	 */
 	bindCacheManager() {
 		this.app.singleton('cache', CacheManager);
+	}
+
+	/**
+	 * Create cache related policies.
+	 */
+	createPolicies() {
+		if (this.app.isBound('gate')) {
+			this.app.make('gate')
+				.policy('cache', () => {
+					const config = this.app.make('config');
+
+					return Boolean(config.get('cache.enabled', false));
+				});
+		}
 	}
 
 }
