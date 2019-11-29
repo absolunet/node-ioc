@@ -13,6 +13,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-rc.1] - 2019-11-29
+
+### Added
+ - `cache.enabled` configuration key to control cache command access
+
+### Changed
+ - Return main container instance as `app` instead of self
+ - Updated `@absolunet/tester` to `3.1.0`
+ - Updated `@hapi/joi` to `16.1.8`
+ - Updated `knex` to `0.20.3`
+ - Updated `nodemon` to `2.0.1`
+
+### Fixed
+ - Support driver parameters
+ - Use fresh application instance in test case classes for each test
+
+
+
 ## [1.0.0-beta.3] - 2019-11-20
 
 ### Changed
@@ -559,7 +577,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.3...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.1...HEAD
+[1.0.0-rc.1]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.3...1.0.0-rc.1
 [1.0.0-beta.3]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.2...1.0.0-beta.3
 [1.0.0-beta.2]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.1...1.0.0-beta.2
 [1.0.0-beta.1]:  https://github.com/absolunet/node-ioc/compare/1.0.0-alpha.5...1.0.0-beta.1
