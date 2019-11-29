@@ -54,13 +54,18 @@ class Tester extends (0, _hasEngine.default)() {
    * Run tests from a given repository abstract name.
    *
    * @param {string} [repositoryName="test"] - The test repository short name.
+   * @param {Function} [beforeEachClosure] - The callback to run each atime a test will run.
    */
 
 
-  run(repositoryName = 'test') {
+  run(repositoryName = 'test', beforeEachClosure) {
     this.bootIfNotBooted();
     this.engine.beforeEach(() => {
-      this.createFreshApplication();
+      const app = this.createFreshApplication();
+
+      if (beforeEachClosure) {
+        beforeEachClosure(app);
+      }
     });
     const repository = this.app.make(repositoryName);
     this.runner.run(repository.all());
@@ -85,6 +90,8 @@ class Tester extends (0, _hasEngine.default)() {
   }
   /**
    * Create a fresh application by flushing all existing bindings.
+   *
+   * @returns {Application} The fresh application instance.
    */
 
 
@@ -94,9 +101,7 @@ class Tester extends (0, _hasEngine.default)() {
     Application.setDefaultInstance(app);
     app.setContext(this.app.getContext());
     app.setEnvironment('test');
-    this.app.singleton('app', app);
-    app.make(this.app.make('kernel').constructor);
-    app.bootIfNotBooted();
+    return app;
   }
   /**
    * Set test runner instance.
