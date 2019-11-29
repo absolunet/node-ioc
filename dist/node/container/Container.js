@@ -415,7 +415,7 @@ class Container extends (0, _checksTypes.default)() {
     (0, _privateRegistry.default)(this).set('decorators', {});
     (0, _privateRegistry.default)(this).set('tags', {});
     return this.singleton('app', () => {
-      return (0, _privateRegistry.default)(this).get('proxy');
+      return this.constructor.getInstance();
     });
   }
   /**
