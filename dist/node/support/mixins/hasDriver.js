@@ -137,8 +137,8 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
 
 
     setDriverAlias(name, alias) {
-      this.addDriver(alias, () => {
-        return this.driver(name);
+      this.addDriver(alias, (app, parameters) => {
+        return this.driver(name, parameters);
       });
       (0, _privateRegistry.default)(this).get('aliases')[alias] = name;
     }
