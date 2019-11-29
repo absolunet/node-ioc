@@ -391,7 +391,7 @@ class Container extends checksTypes() {
 		__(this).set('tags', {});
 
 		return this.singleton('app', () => {
-			return __(this).get('proxy');
+			return this.constructor.getInstance();
 		});
 	}
 
