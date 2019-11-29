@@ -44,11 +44,13 @@ class TestRunner extends hasEngine() {
 
 
 		instance
-			.setApp(this.app)
 			.setEngine(this.engine);
 
 		this.describe(namespace, () => {
 			this.describe(name, () => {
+				this.beforeEach(() => {
+					instance.setApp(this.app.make('app'));
+				});
 				this.beforeAll((...parameters) => { return instance.beforeAll(...parameters); });
 				this.beforeEach((...parameters) => { return instance.beforeEach(...parameters); });
 				tests.forEach(({ method, description }) => {
