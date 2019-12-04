@@ -390,7 +390,7 @@ class Container extends checksTypes() {
 		__(this).set('decorators', {});
 		__(this).set('tags', {});
 
-		return this.singleton('app', () => {
+		return this.bind('app', () => {
 			return this.constructor.getInstance();
 		});
 	}
