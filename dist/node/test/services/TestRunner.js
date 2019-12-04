@@ -53,9 +53,12 @@ class TestRunner extends (0, _hasEngine.default)() {
       throw new TypeError('Test engine is not defined');
     }
 
-    instance.setApp(this.app).setEngine(this.engine);
+    instance.setEngine(this.engine);
     this.describe(namespace, () => {
       this.describe(name, () => {
+        this.beforeEach(() => {
+          instance.setApp(this.app.make('app'));
+        });
         this.beforeAll((...parameters) => {
           return instance.beforeAll(...parameters);
         });

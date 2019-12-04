@@ -178,7 +178,7 @@ class Command {
 	 * @param {Function} Argument - The argument class to use, either a Parameter, an Option or a Flag.
 	 * @param {console.models.Argument|Array<*>|string} data - The data to make as an argument.
 	 * @returns {console.models.Argument} The made argument instance.
-	 * @throws TypeError - Indicates that the given data was invalid.
+	 * @throws {TypeError} Indicates that the given data was invalid.
 	 */
 	makeArgument(Argument, data) {
 		if (data instanceof Argument) {

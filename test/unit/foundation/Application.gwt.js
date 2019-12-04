@@ -70,7 +70,8 @@ given.emptyResult = () => {
 };
 
 given.application = () => {
-	application = new Application();
+	delete Application.instance;
+	application = Application.make();
 };
 
 given.registeredProvider = () => {

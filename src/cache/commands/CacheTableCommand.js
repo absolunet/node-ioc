@@ -18,7 +18,7 @@ class CacheTableCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get policies() {
-		return (super.policies || []).concat(['db']);
+		return (super.policies || []).concat(['cache', 'db']);
 	}
 
 	/**

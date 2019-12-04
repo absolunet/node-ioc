@@ -184,8 +184,6 @@ then.shouldHaveRefreshedApplication = () => {
 	expect(fakeApplicationMakeSpy).toHaveBeenCalled();
 	expect(fakeApplication.setContext).toHaveBeenCalled();
 	expect(fakeApplication.setEnvironment).toHaveBeenCalledWith('test');
-	expect(fakeApplication.make).toHaveBeenCalledWith(FakeConsoleKernel);
-	expect(fakeApplication.boot).toHaveBeenCalled();
 };
 
 then.shouldSetUpWithFreshApplication = () => {

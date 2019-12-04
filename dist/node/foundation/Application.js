@@ -85,7 +85,7 @@ class Application extends _Container.default {
    * Ensure that a provider can be properly registered,
    * either before or after booting, but not during providers booting phase.
    *
-   * @throws {TypeError} - Indicates that the provider was register during booting process.
+   * @throws {TypeError} Indicates that the provider was register during booting process.
    */
 
 

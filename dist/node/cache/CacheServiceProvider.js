@@ -55,6 +55,7 @@ class CacheServiceProvider extends _ServiceProvider.default {
 
 
   boot() {
+    this.createPolicies();
     this.loadCommands([_CacheClearCommand.default, _CacheForgetCommand.default, _CacheTableCommand.default]);
   }
   /**
@@ -64,6 +65,19 @@ class CacheServiceProvider extends _ServiceProvider.default {
 
   bindCacheManager() {
     this.app.singleton('cache', _CacheManager.default);
+  }
+  /**
+   * Create cache related policies.
+   */
+
+
+  createPolicies() {
+    if (this.app.isBound('gate')) {
+      this.app.make('gate').policy('cache', () => {
+        const config = this.app.make('config');
+        return Boolean(config.get('cache.enabled', false));
+      });
+    }
   }
 
 }
