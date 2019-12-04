@@ -40,7 +40,7 @@ class BaseProxy {
 		if (__(this).get('has')(object, property)) {
 			const value = object[property];
 
-			if (typeof value === 'function') {
+			if (typeof value === 'function' && property !== 'constructor') {
 				return value.bind(object);
 			}
 

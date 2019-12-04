@@ -179,7 +179,7 @@ describe('Instance', () => {
 
 	test('The binding "app" is resolved as container', () => {
 		when.making('app');
-		then.resultShouldBeContainerInstance();
+		then.resultShouldBeCurrentContainer();
 	});
 
 	test('Can resolve dependency through property of "app"', () => {
@@ -194,7 +194,19 @@ describe('Instance', () => {
 		when.gettingResultProperty('app');
 		when.gettingResultProperty('app');
 		when.gettingResultProperty('app');
-		then.resultShouldBeContainerInstance();
+		then.resultShouldBeCurrentContainer();
+	});
+
+	test('Can resolve current application instance from old application', () => {
+		given.otherInstance();
+		when.settingOtherInstanceAsDefault();
+		when.making('app');
+		then.resultShouldBeOtherContainer();
+	});
+
+	test('Constructor property is real container constructor', () => {
+		when.gettingProperty('constructor');
+		then.shouldHaveReceivedContainer();
 	});
 
 });
