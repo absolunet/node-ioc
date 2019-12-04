@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+
+## [1.0.0-rc.2] - 2019-12-04
+
 ### Fixed
  - Proxy does not bind constructor
  - Application considered as binding instead of singleton since statically resolved
@@ -582,6 +586,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 [Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.1...HEAD
+[1.0.0-rc.2]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.1...1.0.0-rc.2
 [1.0.0-rc.1]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.3...1.0.0-rc.1
 [1.0.0-beta.3]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.2...1.0.0-beta.3
 [1.0.0-beta.2]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.1...1.0.0-beta.2
