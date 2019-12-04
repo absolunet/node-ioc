@@ -8,6 +8,7 @@ const { given, when, then, build } = gwt;
 import Container from '../../../dist/node/container/Container';
 
 let container;
+let otherContainer;
 let result;
 let context;
 
@@ -23,7 +24,8 @@ let decoratorReplacing;
 //--------------------------------------------------------
 
 given.freshContainer = () => {
-	container = undefined;
+	container      = undefined;
+	otherContainer = undefined;
 	delete Container.instance;
 };
 
@@ -50,6 +52,10 @@ given.freshMocks = () => {
 
 given.containerInstance = () => {
 	container = Container.getInstance();
+};
+
+given.otherInstance = () => {
+	otherContainer = Container.make();
 };
 
 given.binding = (abstract, concrete) => {
@@ -159,6 +165,10 @@ when.gettingResultProperty = (property) => {
 	});
 };
 
+when.settingOtherInstanceAsDefault = () => {
+	Container.setDefaultInstance(otherContainer);
+};
+
 
 //-- Then
 //--------------------------------------------------------
@@ -184,6 +194,10 @@ then.shouldHaveContainer = () => {
 
 then.resultShouldBeCurrentContainer = () => {
 	then.resultShouldBe(container);
+};
+
+then.resultShouldBeOtherContainer = () => {
+	then.resultShouldBe(otherContainer);
 };
 
 then.resultShouldBeCallbackResult = () => {
@@ -258,8 +272,8 @@ then.resultShouldBeValueReturnedByDecorator = () => {
 	then.resultShouldBe(decoratorReplacing.mock.results[0].value);
 };
 
-then.resultShouldBeContainerInstance = () => {
-	then.resultShouldBe(container);
+then.shouldHaveReceivedContainer = () => {
+	then.resultShouldBe(Container);
 };
 
 
