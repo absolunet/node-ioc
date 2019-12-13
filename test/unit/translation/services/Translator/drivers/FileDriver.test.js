@@ -287,3 +287,29 @@ test('Can handle pluralization with three possible values with parameters and 2'
 	when.translating('key', {}, 2);
 	then.resultShouldBe('values');
 });
+
+test('Can load nested translation files with proper formatting', async () => {
+	given.locale('en');
+	given.translation('foo/bar', 'baz', 'qux', 'en');
+	await when.loadingTranslations();
+	when.translating('foo.bar.baz');
+	then.resultShouldBe('qux');
+});
+
+test('Nested file has priority over global file when nested is loaded first', async () => {
+	given.locale('en');
+	given.translation('foo/bar', 'baz', 'nested', 'en');
+	given.translation('foo', 'bar.baz', 'top-level', 'en');
+	await when.loadingTranslations();
+	when.translating('foo.bar.baz');
+	then.resultShouldBe('nested');
+});
+
+test('Nested file has priority over global file when nested is loaded last', async () => {
+	given.locale('en');
+	given.translation('foo', 'bar.baz', 'top-level', 'en');
+	given.translation('foo/bar', 'baz', 'nested', 'en');
+	await when.loadingTranslations();
+	when.translating('foo.bar.baz');
+	then.resultShouldBe('nested');
+});

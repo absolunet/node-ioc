@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+ - Nested translation files can be used with dot syntax
+
 
 
 ## [1.0.0-rc.2] - 2019-12-04
