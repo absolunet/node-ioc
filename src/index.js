@@ -11,6 +11,7 @@ module.exports = {
 	get Command() {             return require('./console/Command').default; },
 	get ConsoleKernel() {       return require('./foundation/console/Kernel').default; },
 	get ExceptionHandler() {    return require('./foundation/exceptions/Handler').default; },
+	get Enum() {                return require('./support/Enum').default; },
 	get ForwardProxy() {        return require('./support/proxies/ForwardProxy').default; },
 	get GeneratorCommand() {    return require('./console/GeneratorCommand').default; },
 	get Kernel() {              return require('./foundation/Kernel').default; },

@@ -30,6 +30,10 @@ module.exports = {
     return require('./foundation/exceptions/Handler').default;
   },
 
+  get Enum() {
+    return require('./support/Enum').default;
+  },
+
   get ForwardProxy() {
     return require('./support/proxies/ForwardProxy').default;
   },
