@@ -11,6 +11,7 @@ import Terminal     from '../../../../dist/node/console/services/Terminal';
 const originalArgv = process.argv;
 
 let mockedPrompt;
+let mockedSpawn;
 let mockedPrint;
 let result;
 let terminal;
@@ -40,9 +41,18 @@ given.fakePromptResult = (value) => {
 	fakePromptResult = value;
 };
 
-given.mockInquirerPrompt = () => {
+given.mockedInquirerPrompt = () => {
 	mockedPrompt = jest.spyOn(inquirer, 'prompt').mockImplementation(() => {
 		return Promise.resolve(fakePromptResult || {});
+	});
+};
+
+given.mockedCrossSpawn = () => {
+	jest.mock('cross-spawn', () => {
+		mockedSpawn      = jest.fn();
+		mockedSpawn.sync = jest.fn();
+
+		return mockedSpawn;
 	});
 };
 
@@ -92,6 +102,14 @@ when.gettingArgs = () => { // eslint-disable-line unicorn/prevent-abbreviations
 
 when.gettingInquirer = () => {
 	when.getting('inquirer');
+};
+
+when.callingSpawn = (...parameters) => {
+	when.callingWithoutResult('spawn', parameters);
+};
+
+when.callingSpawnSync = (...parameters) => {
+	when.callingWithoutResult('spawnSync', parameters);
 };
 
 when.askingQuestion = async () => {
@@ -186,6 +204,16 @@ then.resultShouldBeCurrentCommandArguments = () => {
 
 then.resultShouldBeInquirerModule = () => {
 	then.resultShouldBe(inquirer);
+};
+
+then.shouldHaveCalledCrossSpawn = (...parameters) => {
+	then.shouldNotHaveThrown();
+	expect(mockedSpawn).toHaveBeenCalledWith(...parameters);
+};
+
+then.shouldHaveCalledCrossSpawnSync = (...parameters) => {
+	then.shouldNotHaveThrown();
+	expect(mockedSpawn.sync).toHaveBeenCalledWith(...parameters);
 };
 
 then.shouldHaveCalledPromptOnInquirer = () => {

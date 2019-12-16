@@ -15,8 +15,6 @@ import CommandRunner  from '../../../../dist/node/console/services/CommandRunner
 const originalProcessArgv = process.argv;
 const originalProcessEnv  = process.env;
 
-let fakeSpawnProcess;
-let spiedSpawn;
 let fakeProcessArgv;
 let fakeProcessEnv;
 let commandRunner;
@@ -31,23 +29,22 @@ const fakeJestEngine = {
 	getPathArgument: jest.fn(() => { return '/path/to/jest'; })
 };
 
-const fakeTerminal = {};
+const spiedSpawnProcess = jest.fn();
+
+const fakeTerminal = {
+	spawn: jest.fn(() => {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				spiedSpawnProcess();
+				resolve();
+			});
+		});
+	})
+};
 
 
 //-- Given
 //--------------------------------------------------------
-
-given.mockedChildProcess = () => {
-	jest.mock('child_process', () => {
-		const EventEmitter = require('events'); // eslint-disable-line global-require
-		const spawnProcess = new EventEmitter();
-		fakeSpawnProcess   = spawnProcess;
-		const spawn        = jest.fn(() => { return spawnProcess; });
-		spiedSpawn         = spawn;
-
-		return { spawn };
-	});
-};
 
 given.fakeProcessArgv = () => {
 	fakeProcessArgv = [...originalProcessArgv];
@@ -75,7 +72,7 @@ given.commandRunner = () => {
 given.testCommand = () => {
 	testCommand = container.make(TestCommand, {
 		app:       container,
-		terrminal: container.make('terminal')
+		terminal: container.make('terminal')
 	});
 };
 
@@ -133,7 +130,6 @@ when.runningCommand = async () => {
 				return [name, defaultValue];
 			})
 		]);
-		setTimeout(() => { fakeSpawnProcess.emit('close', 0); }, 5);
 		await commandRunner.unsafeRun(testCommand, { ...argv, ...commandArgv });
 	});
 };
@@ -141,10 +137,6 @@ when.runningCommand = async () => {
 
 //-- Then
 //--------------------------------------------------------
-
-then.resetFakeSpawnProcess = () => {
-	fakeSpawnProcess.removeAllListeners();
-};
 
 then.resetProcessArgv = () => {
 	process.argv = originalProcessArgv;
@@ -161,7 +153,8 @@ then.processEnvShouldHave = (key, value) => {
 
 then.shouldRunTestInRepository = (repositoryName) => {
 	then.processEnvShouldHave('TEST_REPOSITORY', repositoryName);
-	expect(spiedSpawn).toHaveBeenCalledTimes(1);
+	expect(fakeTerminal.spawn).toHaveBeenCalledTimes(1);
+	expect(spiedSpawnProcess).toHaveBeenCalledTimes(1);
 };
 
 then.shouldRunAllTests = () => {

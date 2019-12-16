@@ -114,25 +114,13 @@ class Command {
 	/**
 	 * Run script in a new spawn shell.
 	 *
-	 * @param {string} binary - The binary that will execute the command.
-	 * @param {string} command - The command.
+	 * @param {string} command - The binary that will execute the command.
+	 * @param {Array<string>|string} [parameters=''] - The command.
 	 * @param {*} [options] - The spawn options.
 	 * @returns {Promise} The async process promise.
 	 */
-	spawn(binary, command, options = {}) {
-		return new Promise((resolve, reject) => {
-			const spawnOptions = Object.assign({ stdio: 'inherit' }, options);
-
-			// eslint-disable-next-line global-require
-			require('child_process').spawn(binary, command.split(' '), spawnOptions)
-				.on('close', (code) => {
-					if (code === 0) {
-						resolve();
-					} else {
-						reject(code);
-					}
-				});
-		});
+	async spawn(command, parameters = '', options = {}) {
+		await this.terminal.spawn(command, Array.isArray(parameters) ? parameters : parameters.split(' '), Object.assign({ stdio: 'inherit' }, options));
 	}
 
 	/**

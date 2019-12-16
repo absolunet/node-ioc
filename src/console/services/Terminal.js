@@ -500,6 +500,47 @@ class Terminal extends BaseTerminal {
 	}
 
 	/**
+	 * Spawn a process as a promise.
+	 *
+	 * @param {string} command - The command to run.
+	 * @param {Array<string>} parameters - The command arguments.
+	 * @param {object} options - The spawn options.
+	 * @returns {Promise} The async process promise.
+	 */
+	async spawn(command, parameters, options) {
+		await new Promise((resolve, reject) => {
+			this.crossSpawn(command, parameters, options)
+				.on('close', (code) => {
+					if (code === 0) {
+						resolve();
+					} else {
+						reject(code);
+					}
+				});
+		});
+	}
+
+	/**
+	 * Spawn a process in sync mode.
+	 *
+	 * @param {string} command - The command to run.
+	 * @param {Array<string>} parameters - The command arguments.
+	 * @param {object} options - The spawn options.
+	 */
+	spawnSync(command, parameters, options) {
+		this.crossSpawn.sync(command, parameters, options);
+	}
+
+	/**
+	 * The cross-spawn module.
+	 *
+	 * @type {spawn}
+	 */
+	get crossSpawn() {
+		return require('cross-spawn'); // eslint-disable-line global-require
+	}
+
+	/**
 	 * Ask a question to the user.
 	 *
 	 * @param {string} question - The question to ask.
