@@ -18,7 +18,7 @@ import Driver    from './Driver';
 class FileDriver extends Driver {
 
 	/**
-	 * Class dependencies: <code>['app', 'file']</code>.
+	 * Class dependencies: <code>['app', 'file', 'helper.string']</code>.
 	 *
 	 * @type {Array<string>}
 	 */

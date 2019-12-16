@@ -25,7 +25,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class FileDriver extends _Driver.default {
   /**
-   * Class dependencies: <code>['app', 'file']</code>.
+   * Class dependencies: <code>['app', 'file', 'helper.string']</code>.
    *
    * @type {Array<string>}
    */
