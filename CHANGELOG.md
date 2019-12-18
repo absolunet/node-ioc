@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+ - Updated `inquirer` to `7.0.1`
+ - Updated `knex` to `0.20.4`
+ - Updated `nodemon` to `2.0.2`
+ - Updated `replace-in-file` to `5.0.2`
+
 
 
 ## [1.0.0-rc.2] - 2019-12-04
