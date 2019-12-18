@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
  - Exposed `Enum` class
+ - Updated `sqlite3` to `4.1.1`
+ - Used `cross-spawn` module for Windows compatibility
+
+### Fixed
+ - Nested translation files can be used with dot syntax
 
 
 

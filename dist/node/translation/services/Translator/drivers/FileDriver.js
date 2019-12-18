@@ -25,12 +25,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class FileDriver extends _Driver.default {
   /**
-   * Class dependencies: <code>['app', 'file']</code>.
+   * Class dependencies: <code>['app', 'file', 'helper.string']</code>.
    *
    * @type {Array<string>}
    */
   static get dependencies() {
-    return (super.dependencies || []).concat(['app', 'file']);
+    return (super.dependencies || []).concat(['app', 'file', 'helper.string']);
   }
   /**
    * @inheritdoc
@@ -104,6 +104,13 @@ class FileDriver extends _Driver.default {
     if (!(0, _privateRegistry.default)(this).get('loaded')) {
       if (this.file.exists(this.folder)) {
         const translations = this.file.loadRecursivelyInFolder(this.folder);
+        Object.entries(translations).forEach(([key, value]) => {
+          if (key.includes('/')) {
+            delete translations[key];
+
+            _dotObject.default.str(this.stringHelper.dot(key), value, translations);
+          }
+        });
         this.addTranslations(translations);
         (0, _privateRegistry.default)(this).set('loaded', true);
       }
@@ -222,6 +229,16 @@ class FileDriver extends _Driver.default {
 
   get defaultNamespace() {
     return 'translations';
+  }
+  /**
+   * String helper.
+   *
+   * @type {support.helpers.StringHelper}
+   */
+
+
+  get stringHelper() {
+    return this.helperString;
   }
 
 }
