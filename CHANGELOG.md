@@ -13,6 +13,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0-rc.3] - 2019-12-19
+
+### Changed
+ - Exposed `Enum` class
+  - Used `cross-spawn` module for Windows compatibility
+ - Updated `sqlite3` to `4.1.1`
+ - Updated `inquirer` to `7.0.1`
+ - Updated `knex` to `0.20.4`
+ - Updated `nodemon` to `2.0.2`
+ - Updated `replace-in-file` to `5.0.2`
+
+### Fixed
+ - Nested translation files can be used with dot syntax
+
+
+
 ## [1.0.0-rc.2] - 2019-12-04
 
 ### Fixed
@@ -585,7 +601,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.2...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.3...HEAD
+[1.0.0-rc.3]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.2...1.0.0-rc.3
 [1.0.0-rc.2]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.1...1.0.0-rc.2
 [1.0.0-rc.1]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.3...1.0.0-rc.1
 [1.0.0-beta.3]:  https://github.com/absolunet/node-ioc/compare/1.0.0-beta.2...1.0.0-beta.3

@@ -12,7 +12,8 @@ beforeEach(() => {
 	given.bootedContainer();
 	given.terminal();
 	given.fakeProcessArgv();
-	given.mockInquirerPrompt();
+	given.mockedInquirerPrompt();
+	given.mockedCrossSpawn();
 	given.fakePromptResult(undefined);
 });
 
@@ -40,6 +41,16 @@ test('Can get command arguments, assuming that current command does not contains
 test('Can get inquirer instance', () => {
 	when.gettingInquirer();
 	then.resultShouldBeInquirerModule();
+});
+
+test('Can spawn', () => {
+	when.callingSpawn('node', ['foo', 'bar'], { stdio: 'inherit' });
+	then.shouldHaveCalledCrossSpawn('node', ['foo', 'bar'], { stdio: 'inherit' });
+});
+
+test('Can spawn sync', () => {
+	when.callingSpawnSync('node', ['foo', 'bar'], { stdio: 'inherit' });
+	then.shouldHaveCalledCrossSpawnSync('node', ['foo', 'bar'], { stdio: 'inherit' });
 });
 
 test('Can ask question', async () => {

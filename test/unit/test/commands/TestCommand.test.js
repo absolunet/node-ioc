@@ -9,7 +9,6 @@ const { given, when, then } = gwt;
 beforeEach(() => {
 	given.providersAndDependencies();
 	given.bootedContainer();
-	given.mockedChildProcess();
 	given.fakeProcessArgv();
 	given.fakeProcessEnv();
 	given.fakeJestTestEngine();
@@ -19,7 +18,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-	then.resetFakeSpawnProcess();
 	then.resetProcessArgv();
 	then.resetProcessEnv();
 });
