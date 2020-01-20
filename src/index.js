@@ -20,6 +20,7 @@ module.exports = {
 	get ModelFactory() {        return require('./database/Factory').default; },
 	get NotImplementedError() { return require('./foundation/exceptions/NotImplementedError').default; },
 	get NullDriverProxy() {     return require('./support/drivers/NullDriverProxy').default; },
+	get Policy() {              return require('./security/Policy').default; },
 	get Seeder() {              return require('./database/Seeder').default; },
 	get ServiceProvider() {     return require('./foundation/ServiceProvider').default; },
 	get TestCase() {            return require('./test/TestCase').default; },

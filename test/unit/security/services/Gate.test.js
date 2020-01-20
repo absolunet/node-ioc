@@ -94,7 +94,21 @@ test('Can handle argument', () => {
 
 test('Can handle multiple arguments', () => {
 	given.passingPolicy('foo');
-	when.testingPolicy('foo:bar,baz,test');
+	when.testingPolicy('foo:bar,baz,qux');
 	then.shouldHavePassedGate();
-	then.policyShouldHaveReceivedArguments('bar', 'baz', 'test');
+	then.policyShouldHaveReceivedArguments('bar', 'baz', 'qux');
+});
+
+test('Can register passing policy class', () => {
+	given.registeredPassingPolicyClass('foo');
+	when.testingPolicy('foo:bar,baz,qux');
+	then.shouldHavePassedGate();
+	then.policyShouldHaveReceivedArguments('bar', 'baz', 'qux');
+});
+
+test('Can register failing policy class', () => {
+	given.registeredFailingPolicyClass('foo');
+	when.testingPolicy('foo:bar,baz,qux');
+	then.shouldNotHavePassedGate();
+	then.policyShouldHaveReceivedArguments('bar', 'baz', 'qux');
 });

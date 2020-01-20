@@ -71,6 +71,19 @@ class Gate extends (0, _checksTypes.default)() {
     policies[policy].push(handler);
   }
   /**
+   * Register policy class.
+   *
+   * @param {ioc.security.Policy} policy - The policy class.
+   */
+
+
+  register(policy) {
+    const policyInstance = this.app.make(policy);
+    this.policy(policyInstance.name, (...parameters) => {
+      return policyInstance.passes(...parameters);
+    });
+  }
+  /**
    * Resolve policy handlers by name.
    *
    * @param {string} gate - The gate to resolve.

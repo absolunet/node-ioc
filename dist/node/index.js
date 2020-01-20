@@ -66,6 +66,10 @@ module.exports = {
     return require('./support/drivers/NullDriverProxy').default;
   },
 
+  get Policy() {
+    return require('./security/Policy').default;
+  },
+
   get Seeder() {
     return require('./database/Seeder').default;
   },
