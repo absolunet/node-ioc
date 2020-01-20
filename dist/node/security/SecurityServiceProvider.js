@@ -6,6 +6,8 @@ var _Gate = _interopRequireDefault(require("./services/Gate"));
 
 var _ServiceProvider = _interopRequireDefault(require("../foundation/ServiceProvider"));
 
+var _MakePolicyCommand = _interopRequireDefault(require("./commands/MakePolicyCommand"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -46,6 +48,7 @@ class SecurityServiceProvider extends _ServiceProvider.default {
 
   boot() {
     this.defineBasicPolicies();
+    this.loadCommands([_MakePolicyCommand.default]);
   }
   /**
    * Bind gate service.

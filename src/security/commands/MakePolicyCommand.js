@@ -1,18 +1,18 @@
 //--------------------------------------------------------
-//-- Node IoC - Console - Command - Make Provider
+//-- Node IoC - Security - Command - Make Policy
 //--------------------------------------------------------
 
-import GeneratorCommand from '../GeneratorCommand';
+import GeneratorCommand from '../../console/GeneratorCommand';
 
 
 /**
- * Command that makes a service provider class file inside the application providers folder.
+ * Command that makes a policy class file inside the application policies folder.
  *
  * @memberof console.commands
  * @augments console.GeneratorCommand
  * @hideconstructor
  */
-class MakeProviderCommand extends GeneratorCommand {
+class MakePolicyCommand extends GeneratorCommand {
 
 	/**
 	 * Class dependencies: <code>['helper.string']</code>.
@@ -27,7 +27,7 @@ class MakeProviderCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get name() {
-		return 'make:provider';
+		return 'make:policy';
 	}
 
 	/**
@@ -35,7 +35,7 @@ class MakeProviderCommand extends GeneratorCommand {
 	 */
 	get files() {
 		return {
-			base: this.app.formatPath(__dirname, 'stubs', 'ServiceProvider.stub')
+			base: this.app.formatPath(__dirname, 'stubs', 'Policy.stub')
 		};
 	}
 
@@ -43,7 +43,7 @@ class MakeProviderCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	get destination() {
-		return this.app.sourcePath('provider', '');
+		return this.app.sourcePath('policy', '');
 	}
 
 	/**
@@ -51,7 +51,7 @@ class MakeProviderCommand extends GeneratorCommand {
 	 */
 	get patterns() {
 		return {
-			NAME: this.getProviderName()
+			NAME: this.getPolicyName()
 		};
 	}
 
@@ -59,18 +59,18 @@ class MakeProviderCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	async handle() {
-		this.debug(`Generating ${this.parameter('class')} service provider file.`);
+		this.debug(`Generating ${this.parameter('class')} policy file.`);
 		await this.generate('base');
-		this.info(`${this.parameter('class')} service provider file successfully generated!`);
+		this.info(`${this.parameter('class')} policy file successfully generated!`);
 	}
 
 	/**
-	 * Get provider human-readable name.
+	 * Get policy guessed name.
 	 *
-	 * @returns {string} The provider guessed name.
+	 * @returns {string} The policy guessed name.
 	 */
-	getProviderName() {
-		return this.stringHelper.capital(this.parameter('class').replace(/ServiceProvider$/u, ''));
+	getPolicyName() {
+		return this.stringHelper.dot(this.parameter('class').replace(/Policy$/u, ''));
 	}
 
 	/**
@@ -85,4 +85,4 @@ class MakeProviderCommand extends GeneratorCommand {
 }
 
 
-export default MakeProviderCommand;
+export default MakePolicyCommand;

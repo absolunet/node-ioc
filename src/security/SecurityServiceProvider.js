@@ -2,8 +2,9 @@
 //-- Node IoC - Security - Security Service Provider
 //--------------------------------------------------------
 
-import Gate            from './services/Gate';
-import ServiceProvider from '../foundation/ServiceProvider';
+import Gate              from './services/Gate';
+import ServiceProvider   from '../foundation/ServiceProvider';
+import MakePolicyCommand from './commands/MakePolicyCommand';
 
 
 // eslint-disable-next-line jsdoc/require-description-complete-sentence
@@ -39,6 +40,9 @@ class SecurityServiceProvider extends ServiceProvider {
 	 */
 	boot() {
 		this.defineBasicPolicies();
+		this.loadCommands([
+			MakePolicyCommand
+		]);
 	}
 
 	/**

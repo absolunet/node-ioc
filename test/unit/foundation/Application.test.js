@@ -244,6 +244,7 @@ test('Can get distribution path', () => {
 	'command',
 	'database',
 	'lang',
+	'policy',
 	'provider',
 	'public',
 	'resources',
@@ -269,11 +270,13 @@ test('Can get distribution path', () => {
 	'controller',
 	'command',
 	'database',
+	'policy',
 	'provider',
 	'routes'
 ]
 	.forEach((type) => {
 		test(`Can get ${type} source path`, () => {
+			when.calling('sourcePath', [type, '']);
 			when.calling('sourcePath', [type, '']);
 			then.resultShouldBeBinding(`path.src.${type}`);
 		});

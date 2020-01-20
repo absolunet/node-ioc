@@ -1,0 +1,35 @@
+//--------------------------------------------------------
+//-- %PROJECT% - Policies - %CLASS%
+//--------------------------------------------------------
+
+import { Policy } from '@absolunet/ioc';
+
+
+/**
+ * %CLASS%.
+ */
+class %CLASS% extends Policy {
+
+	/**
+	 * Policy name.
+	 *
+	 * @type {string}
+	 */
+	get name() {
+		return '%NAME%';
+	}
+
+	/**
+	 * Test if the policy passes.
+	 *
+	 * @param {...*} parameters - The given parameters.
+	 * @returns {boolean} Indicates that the policy passed.
+	 */
+	passes() {
+		return true;
+	}
+
+}
+
+
+export default %CLASS%;
