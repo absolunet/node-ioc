@@ -28,7 +28,7 @@ const fakeDriver = {
 
 		return fakeDriver;
 	}),
-	addTranslations: jest.fn((translations) => {
+	addTranslations: jest.fn((translations) => {
 		Object.entries(translations).forEach(([key, values]) => {
 			Object.entries(values).forEach(([locale, value]) => {
 				fakeTranslations[`${key}.${locale}`] = value;
