@@ -35,13 +35,17 @@ test('Delegates translation for specific locale to driver', () => {
 
 test('Delegates adding translation to driver', () => {
 	when.addingTranslation('foo', 'bar', 'en');
+	then.shouldHaveCalledAddedTranslationOnDriver();
 	then.driverShouldHaveAddedTranslation('foo', 'bar', 'en');
 });
 
 test('Delegates adding multiple translations to driver', () => {
-	when.addingMultipleTranslations({ foo: 'bar', baz: 'test' }, 'en');
-	then.driverShouldHaveAddedTranslation('foo', 'bar', 'en');
-	then.driverShouldHaveAddedTranslation('baz', 'test', 'en');
+	when.addingMultipleTranslations({ foo: { en: 'bar EN', fr: 'bar FR' }, baz: { en: 'qux EN', fr: 'qux FR' } });
+	then.shouldHaveCalledAddedTranslationsOnDriver();
+	then.driverShouldHaveAddedTranslation('foo', 'bar EN', 'en');
+	then.driverShouldHaveAddedTranslation('foo', 'bar FR', 'fr');
+	then.driverShouldHaveAddedTranslation('baz', 'qux EN', 'en');
+	then.driverShouldHaveAddedTranslation('baz', 'qux FR', 'fr');
 });
 
 test('Getting locale relies on configuration', () => {
