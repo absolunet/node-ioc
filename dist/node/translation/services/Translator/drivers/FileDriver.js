@@ -71,8 +71,25 @@ class FileDriver extends _Driver.default {
 
 
   addTranslation(key, value, locale = this.locale) {
-    _dotObject.default.str(`${key}.${locale}`, value, (0, _privateRegistry.default)(this).get('translations'));
+    _dotObject.default.str(`${key.replace(/\//gu, '')}.${locale}`, value, (0, _privateRegistry.default)(this).get('translations'));
 
+    return this;
+  }
+  /**
+   * @inheritdoc
+   */
+
+
+  addTranslations({ ...translations
+  }) {
+    Object.entries(translations).forEach(([key, value]) => {
+      if (key.includes('/')) {
+        delete translations[key];
+
+        _dotObject.default.str(this.stringHelper.dot(key), value, translations);
+      }
+    });
+    (0, _privateRegistry.default)(this).set('translations', (0, _deepmerge.default)((0, _privateRegistry.default)(this).get('translations'), translations));
     return this;
   }
   /**
@@ -104,13 +121,6 @@ class FileDriver extends _Driver.default {
     if (!(0, _privateRegistry.default)(this).get('loaded')) {
       if (this.file.exists(this.folder)) {
         const translations = this.file.loadRecursivelyInFolder(this.folder);
-        Object.entries(translations).forEach(([key, value]) => {
-          if (key.includes('/')) {
-            delete translations[key];
-
-            _dotObject.default.str(this.stringHelper.dot(key), value, translations);
-          }
-        });
         this.addTranslations(translations);
         (0, _privateRegistry.default)(this).set('loaded', true);
       }
@@ -145,18 +155,6 @@ class FileDriver extends _Driver.default {
     }
 
     return translation || key;
-  }
-  /**
-   * Add multiple translations.
-   *
-   * @param {object<string, string|object>} translations - The translation collection.
-   * @returns {translation.services.Translator.drivers.FileDriver} The current driver instance.
-   */
-
-
-  addTranslations(translations) {
-    (0, _privateRegistry.default)(this).set('translations', (0, _deepmerge.default)((0, _privateRegistry.default)(this).get('translations'), translations));
-    return this;
   }
   /**
    * Parse given string with the given token replacements.

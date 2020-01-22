@@ -59,7 +59,23 @@ class FileDriver extends Driver {
 	 * @inheritdoc
 	 */
 	addTranslation(key, value, locale = this.locale) {
-		dot.str(`${key}.${locale}`, value, __(this).get('translations'));
+		dot.str(`${key.replace(/\//gu, '')}.${locale}`, value, __(this).get('translations'));
+
+		return this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	addTranslations({ ...translations }) {
+		Object.entries(translations).forEach(([key, value]) => {
+			if (key.includes('/')) {
+				delete translations[key];
+				dot.str(this.stringHelper.dot(key), value, translations);
+			}
+		});
+
+		__(this).set('translations', deepMerge(__(this).get('translations'), translations));
 
 		return this;
 	}
@@ -91,12 +107,6 @@ class FileDriver extends Driver {
 		if (!__(this).get('loaded')) {
 			if (this.file.exists(this.folder)) {
 				const translations = this.file.loadRecursivelyInFolder(this.folder);
-				Object.entries(translations).forEach(([key, value]) => {
-					if (key.includes('/')) {
-						delete translations[key];
-						dot.str(this.stringHelper.dot(key), value, translations);
-					}
-				});
 				this.addTranslations(translations);
 				__(this).set('loaded', true);
 			}
@@ -128,18 +138,6 @@ class FileDriver extends Driver {
 		}
 
 		return translation || key;
-	}
-
-	/**
-	 * Add multiple translations.
-	 *
-	 * @param {object<string, string|object>} translations - The translation collection.
-	 * @returns {translation.services.Translator.drivers.FileDriver} The current driver instance.
-	 */
-	addTranslations(translations) {
-		__(this).set('translations', deepMerge(__(this).get('translations'), translations));
-
-		return this;
 	}
 
 	/**

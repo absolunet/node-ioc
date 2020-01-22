@@ -108,18 +108,25 @@ class Translator extends (0, _hasDriver.default)() {
     return this;
   }
   /**
-   * Add translations from key-value pair object for given locale or current locale.
+   * Add translations from key-value pair object.
    *
-   * @param {object<string, string>} translations - Collection of translations.
-   * @param {string|null} [locale] - The locale the translation should be used for.
+   * @example
+   * translator.addTranslations({
+   *     foo: {
+   *         bar: {
+   *             en: 'baz',
+   *             fr: 'qux'
+   *         }
+   *     }
+   * });
+   *
+   * @param {object<string, object<string, object|string>>} translations - Collection of translations.
    * @returns {translation.services.Translator} The current translator instance.
    */
 
 
-  addTranslations(translations, locale = null) {
-    Object.entries(translations).forEach(([key, value]) => {
-      this.addTranslation(key, value, locale);
-    });
+  addTranslations(translations) {
+    this.driver().addTranslations(translations);
     return this;
   }
   /**

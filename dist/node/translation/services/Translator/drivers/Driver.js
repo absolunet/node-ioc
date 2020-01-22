@@ -62,6 +62,29 @@ class Driver {
     throw new _NotImplementedError.default(this, 'addTranslation', 'Driver');
   }
   /**
+   * Add translations from key-value pair object.
+   *
+   * @example
+   * driver.addTranslations({
+   *     foo: {
+   *         bar: {
+   *             en: 'baz',
+   *             fr: 'qux'
+   *         }
+   *     }
+   * });
+   *
+   * @param {string} translations - The translations.
+   * @returns {translation.services.Translator.drivers.Driver} The current driver instance.
+   * @abstract
+   */
+
+
+  addTranslations(translations) {
+    // eslint-disable-line no-unused-vars
+    throw new _NotImplementedError.default(this, 'addTranslations', 'Driver');
+  }
+  /**
    * Set locale to use for translation.
    *
    * @param {string} locale - The locale.
