@@ -356,6 +356,7 @@ then.shouldHaveDefaultPathsBound = () => {
 	expect(application.isBound('path.command')).toBe(true);
 	expect(application.isBound('path.database')).toBe(true);
 	expect(application.isBound('path.lang')).toBe(true);
+	expect(application.isBound('path.policy')).toBe(true);
 	expect(application.isBound('path.provider')).toBe(true);
 	expect(application.isBound('path.public')).toBe(true);
 	expect(application.isBound('path.resources')).toBe(true);

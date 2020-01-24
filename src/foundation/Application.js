@@ -311,6 +311,7 @@ class Application extends Container {
 			'app':            this.formatPath(basePath, distributionNamespace, appNamespace),
 			'command':        this.formatPath(basePath, distributionNamespace, appNamespace, 'console', 'commands'),
 			'controller':     this.formatPath(basePath, distributionNamespace, appNamespace, 'http', 'controllers'),
+			'policy':         this.formatPath(basePath, distributionNamespace, appNamespace, 'policies'),
 			'provider':       this.formatPath(basePath, distributionNamespace, appNamespace, 'providers'),
 			'src':            this.formatPath(basePath, sourceNamespace),
 			'src.bootstrap':  this.formatPath(basePath, sourceNamespace, 'bootstrap'),
@@ -319,6 +320,7 @@ class Application extends Container {
 			'src.app':        this.formatPath(basePath, sourceNamespace, appNamespace),
 			'src.command':    this.formatPath(basePath, sourceNamespace, appNamespace, 'console', 'commands'),
 			'src.controller': this.formatPath(basePath, sourceNamespace, appNamespace, 'http', 'controllers'),
+			'src.policy':     this.formatPath(basePath, sourceNamespace, appNamespace, 'policies'),
 			'src.provider':   this.formatPath(basePath, sourceNamespace, appNamespace, 'providers')
 		});
 	}
@@ -528,6 +530,16 @@ class Application extends Container {
 	 */
 	langPath(relativePath) {
 		return this.path('lang', relativePath);
+	}
+
+	/**
+	 * Get full path from policies path.
+	 *
+	 * @param {string|Array<string>} [relativePath] - The relative path from policies path.
+	 * @returns {string} The formatted path from policies path.
+	 */
+	policyPath(relativePath) {
+		return this.path('policy', relativePath);
 	}
 
 	/**

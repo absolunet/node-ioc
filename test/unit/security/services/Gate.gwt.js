@@ -7,6 +7,7 @@ const { given, when, then, build } = gwt;
 
 import container from '../../container';
 import Gate      from '../../../../dist/node/security/services/Gate';
+import Policy    from '../../../../dist/node/security/Policy';
 
 let gate;
 let result;
@@ -50,6 +51,34 @@ given.passingDefaultPolicy = () => {
 
 given.denyingDefaultPolicy = () => {
 	given.denyingPolicy('default');
+};
+
+given.registeredPolicyClass = (name, passing) => {
+	const spy = jest.fn(() => {
+		return passing;
+	});
+	const PolicyClass = class extends Policy {
+
+		get name() {
+			return name;
+		}
+
+		passes(...parameters) {
+			return spy(...parameters);
+		}
+
+	};
+
+	gate.register(PolicyClass);
+	handlers.push(spy);
+};
+
+given.registeredPassingPolicyClass = (name) => {
+	given.registeredPolicyClass(name, true);
+};
+
+given.registeredFailingPolicyClass = (name) => {
+	given.registeredPolicyClass(name, false);
 };
 
 
