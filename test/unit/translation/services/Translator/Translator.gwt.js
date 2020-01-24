@@ -24,9 +24,16 @@ const fakeDriver = {
 		return fakeTranslations[key] ? fakeTranslations[key].value : key;
 	}),
 	addTranslation: jest.fn((key, value, locale = container.make('config').get('locale')) => {
-		fakeTranslations[key] = { value, locale };
+		fakeTranslations[`${key}.${locale}`] = value;
 
 		return fakeDriver;
+	}),
+	addTranslations: jest.fn((translations) => {
+		Object.entries(translations).forEach(([key, values]) => {
+			Object.entries(values).forEach(([locale, value]) => {
+				fakeTranslations[`${key}.${locale}`] = value;
+			});
+		});
 	}),
 	useTranslationFolder: jest.fn(() => { return fakeDriver; }),
 	setLocale: jest.fn(() => { return fakeDriver; }),
@@ -149,6 +156,16 @@ then.driverShouldHaveTranslated = (key) => {
 	then.shouldHaveCalledDriverMethodWith('translate', [key, {}, 1]);
 };
 
+then.shouldHaveCalledAddedTranslationOnDriver = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeDriver.addTranslation).toHaveBeenCalled();
+};
+
+then.shouldHaveCalledAddedTranslationsOnDriver = () => {
+	then.shouldNotHaveThrown();
+	expect(fakeDriver.addTranslations).toHaveBeenCalled();
+};
+
 then.shouldHaveSetLocaleOnDriverTwice = (first, second) => {
 	then.shouldNotHaveThrown();
 	const { length: count } = fakeDriver.setLocale.mock.calls;
@@ -158,8 +175,7 @@ then.shouldHaveSetLocaleOnDriverTwice = (first, second) => {
 
 then.driverShouldHaveAddedTranslation = (key, value, locale) => {
 	then.shouldNotHaveThrown();
-	expect(fakeDriver.addTranslation).toHaveBeenCalled();
-	expect(fakeTranslations).toMatchObject({ [key]: { value, locale } });
+	expect(fakeTranslations).toMatchObject({ [`${key}.${locale}`]: value });
 };
 
 then.configShouldHave = (key, value) => {
