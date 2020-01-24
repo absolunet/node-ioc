@@ -2,7 +2,8 @@
 //-- Node IoC - Console - Repositories - Command Repository
 //--------------------------------------------------------
 
-import __ from '@absolunet/private-registry';
+import __      from '@absolunet/private-registry';
+import Command from '../Command';
 
 
 /**
@@ -43,8 +44,12 @@ class CommandRepository {
 	 * @returns {Array<Command>|object<string,Array<Command>>} The commands or the grouped commands.
 	 */
 	all(withPolicies = true, grouped = false) {
+		const { app, terminal, yargs } = this;
 		const gate = __(this).get('gate');
 		const commands = __(this).get('commands')
+			.map((command) => {
+				return this.makeCommand(command);
+			})
 			.filter(({ policies = [] }) => {
 				return !withPolicies || policies.every((scope) => {
 					return !gate || gate.can(scope);
@@ -85,8 +90,18 @@ class CommandRepository {
 	 * @returns {console.Command|null} The command instance, or null if not found.
 	 */
 	get(name) {
-		return __(this).get('commands').find(({ name: commandName }) => {
-			return name === commandName;
+		return __(this).get('commands').find((command) => {
+			let instance = command instanceof Command ? command : command.prototype;
+
+			while (instance !== Command.prototype) {
+				if (instance.name === name) {
+					return this.makeCommand(command);
+				}
+
+				instance = Object.getPrototypeOf(instance);
+			}
+
+			return null;
 		}) || null;
 	}
 
@@ -104,16 +119,25 @@ class CommandRepository {
 	 * Add given command in the command list.
 	 *
 	 * @param {Function|console.Command} command - The command class or instance.
-	 * @returns {console.Command} The command instance.
+	 * @returns {console.repositories.CommandRepository} The current command repository instance.
 	 */
 	add(command) {
-		const { app, terminal, yargs } = this;
-		const instance = app.make(command, { app, terminal, yargs });
-		__(this).get('commands').push(instance);
+		__(this).get('commands').push(command);
 
-		return instance;
+		return this;
 	}
 
+	/**
+	 * Make a command instance.
+	 *
+	 * @param {Command|Function} command - A command class.
+	 * @returns {Command} The command class instance.
+	 */
+	makeCommand(command) {
+		const { app, terminal, yargs } = this;
+
+		return app.make(command, { app, terminal, yargs });
+	}
 }
 
 

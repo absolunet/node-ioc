@@ -41,7 +41,7 @@ class MigrateStatusCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Show the status of each migration.';
+		return this.t('commands.db-migrate-status.description');
 	}
 
 	/**
@@ -59,9 +59,13 @@ class MigrateStatusCommand extends Command {
 	async handle() {
 		const connection = this.db.getConnection();
 		const status     = await this.db.getDriverForConnection(connection).migrationStatus(connection);
+		const columns    = [
+			this.t('commands.db-migrate-status.messages.ran'),
+			this.t('commands.db-migrate-status.messages.migration')
+		];
 
-		this.table(['Ran?', 'Migration'], status.map(({ ran, name }) => {
-			return [ran ? 'Y' : 'N', name];
+		this.table(columns, status.map(({ ran, name }) => {
+			return [this.t(`commands.db-migrate-status.messages.${ran ? 'yes' : 'no'}`), name];
 		}));
 	}
 

@@ -40,7 +40,7 @@ class TestCommand extends _Command.default {
 
 
   get description() {
-    return 'Test the application.';
+    return this.t('commands.test.description');
   }
   /**
    * @inheritdoc
@@ -48,7 +48,7 @@ class TestCommand extends _Command.default {
 
 
   get options() {
-    return [['engine', 'jest', 'Test engine to work with.'], ['type', null, 'Type of test to run.']];
+    return [['engine', 'jest', this.t('commands.test.options.engine')], ['type', null, this.t('commands.test.options.type')]];
   }
   /**
    * @inheritdoc
@@ -56,7 +56,7 @@ class TestCommand extends _Command.default {
 
 
   get flags() {
-    return [[this.testType.UNIT, 'Run unit tests.'], [this.testType.FEATURE, 'Run feature tests.'], [this.testType.ENDTOEND, 'Run end-to-end tests.'], [this.testType.INTEGRATION, 'Run integration tests.']];
+    return [[this.testType.UNIT, this.t('commands.test.flags.unit')], [this.testType.FEATURE, this.t('commands.test.flags.feature')], [this.testType.ENDTOEND, this.t('commands.test.flags.endtoend')], [this.testType.INTEGRATION, this.t('commands.test.flags.integration')]];
   }
   /**
    * @inheritdoc

@@ -43,7 +43,7 @@ class VendorPublishCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Publish any publishable files from extensions.';
+		return this.t('commands.vendor-publish.description');
 	}
 
 	/**
@@ -51,8 +51,8 @@ class VendorPublishCommand extends Command {
 	 */
 	get options() {
 		return [
-			['provider', null, 'The service provider name to publish.'],
-			['tag',      null, 'The tag to publish.']
+			['provider', null, this.t('commands.vendor-publish.options.provider')],
+			['tag',      null, this.t('commands.vendor-publish.options.tag')]
 		];
 	}
 
@@ -61,9 +61,9 @@ class VendorPublishCommand extends Command {
 	 */
 	get flags() {
 		return [
-			['all',       'Publish all files from all providers and tags.'],
-			['overwrite', 'Allow publishing already published or existing files.'],
-			['safe',      'Prevent publishing already published or existing files.']
+			['all',       this.t('commands.vendor-publish.flags.all')],
+			['overwrite', this.t('commands.vendor-publish.flags.overwrite')],
+			['safe',      this.t('commands.vendor-publish.flags.safe')]
 		];
 	}
 
@@ -72,7 +72,7 @@ class VendorPublishCommand extends Command {
 	 */
 	async handle() {
 		const published = [];
-		__(this).set('published', published);
+		__(this).set('published',    published);
 		__(this).set('confirmQueue', []);
 
 		const publishable = await this.getPublishable();
@@ -84,14 +84,17 @@ class VendorPublishCommand extends Command {
 		this.terminal.spacer();
 
 		if (published.length === 0) {
-			this.info('Nothing has been published.');
+			this.info(this.t('commands.vendor-publish.messages.empty'));
 		}
 
 		published.forEach(({ from, to }) => {
 			const relativeFrom = this.pathHelper.relative(this.app.basePath(), from);
 			const relativeTo   = this.pathHelper.relative(this.app.basePath(), to);
 
-			this.success(`Successfully published from [${relativeFrom}] to [${relativeTo}].`);
+			this.success(this.t('commands.vendor-publish.messages.success', {
+				from: relativeFrom,
+				to:   relativeTo
+			}));
 		});
 	}
 
@@ -210,17 +213,17 @@ class VendorPublishCommand extends Command {
 		if (!provider && !tag) {
 			const options = {
 				...[
-					'Publish files from all providers and tags listed below',
-					...providersOptions.map((value) => {
-						return `Provider: ${value}`;
+					this.t('commands.vendor-publish.messages.publish-all'),
+					...providersOptions.map((name) => {
+						return this.t('commands.vendor-publish.messages.publish-provider', { name });
 					}),
-					...tagsOptions.map((value) => {
-						return `Tag: ${value}`;
+					...tagsOptions.map((name) => {
+						return this.t('commands.vendor-publish.messages.publish-tag', { name });
 					})
 				]
 			};
 
-			const choice = await this.choice('Please choose a vendor or a tag to publish.', options, 0);
+			const choice = await this.choice(this.t('commands.vendor-publish.messages.choose'), options, 0);
 
 			const index = Number(choice) - 1;
 
@@ -285,7 +288,7 @@ class VendorPublishCommand extends Command {
 		queue.push((async () => {
 			await Promise.all([...queue]);
 
-			answer = await this.confirm(`The file ${to} already exists. Do you want to overwrite it?`);
+			answer = await this.confirm(this.t('commands.vendor-publish.messages.confirm-overwrite', { file: to }));
 		})());
 
 		await Promise.all([...queue]);

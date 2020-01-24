@@ -54,6 +54,7 @@ class ConsoleServiceProvider extends ServiceProvider {
 	 * Register the service provider.
 	 */
 	register() {
+		this.loadAndPublishTranslations(this.app.formatPath(__dirname, 'lang'));
 		this.bindCommandRepository();
 		this.bindCommandRegistrar();
 		this.bindCommandRunner();

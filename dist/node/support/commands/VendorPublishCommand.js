@@ -52,7 +52,7 @@ class VendorPublishCommand extends _Command.default {
 
 
   get description() {
-    return 'Publish any publishable files from extensions.';
+    return this.t('commands.vendor-publish.description');
   }
   /**
    * @inheritdoc
@@ -60,7 +60,7 @@ class VendorPublishCommand extends _Command.default {
 
 
   get options() {
-    return [['provider', null, 'The service provider name to publish.'], ['tag', null, 'The tag to publish.']];
+    return [['provider', null, this.t('commands.vendor-publish.options.provider')], ['tag', null, this.t('commands.vendor-publish.options.tag')]];
   }
   /**
    * @inheritdoc
@@ -68,7 +68,7 @@ class VendorPublishCommand extends _Command.default {
 
 
   get flags() {
-    return [['all', 'Publish all files from all providers and tags.'], ['overwrite', 'Allow publishing already published or existing files.'], ['safe', 'Prevent publishing already published or existing files.']];
+    return [['all', this.t('commands.vendor-publish.flags.all')], ['overwrite', this.t('commands.vendor-publish.flags.overwrite')], ['safe', this.t('commands.vendor-publish.flags.safe')]];
   }
   /**
    * @inheritdoc
@@ -86,7 +86,7 @@ class VendorPublishCommand extends _Command.default {
     this.terminal.spacer();
 
     if (published.length === 0) {
-      this.info('Nothing has been published.');
+      this.info(this.t('commands.vendor-publish.messages.empty'));
     }
 
     published.forEach(({
@@ -95,7 +95,10 @@ class VendorPublishCommand extends _Command.default {
     }) => {
       const relativeFrom = this.pathHelper.relative(this.app.basePath(), from);
       const relativeTo = this.pathHelper.relative(this.app.basePath(), to);
-      this.success(`Successfully published from [${relativeFrom}] to [${relativeTo}].`);
+      this.success(this.t('commands.vendor-publish.messages.success', {
+        from: relativeFrom,
+        to: relativeTo
+      }));
     });
   }
   /**
@@ -219,13 +222,17 @@ class VendorPublishCommand extends _Command.default {
     let tag = this.option('tag'); // If no provider or tag were received, prompt the user to resolve the publisher to get publishable from.
 
     if (!provider && !tag) {
-      const options = { ...['Publish files from all providers and tags listed below', ...providersOptions.map(value => {
-          return `Provider: ${value}`;
-        }), ...tagsOptions.map(value => {
-          return `Tag: ${value}`;
+      const options = { ...[this.t('commands.vendor-publish.messages.publish-all'), ...providersOptions.map(name => {
+          return this.t('commands.vendor-publish.messages.publish-provider', {
+            name
+          });
+        }), ...tagsOptions.map(name => {
+          return this.t('commands.vendor-publish.messages.publish-tag', {
+            name
+          });
         })]
       };
-      const choice = await this.choice('Please choose a vendor or a tag to publish.', options, 0);
+      const choice = await this.choice(this.t('commands.vendor-publish.messages.choose'), options, 0);
       const index = Number(choice) - 1; // If the user answered to have all publishable, no need to go through the final process.
 
       if (index === -1) {
@@ -286,7 +293,9 @@ class VendorPublishCommand extends _Command.default {
     let answer;
     queue.push((async () => {
       await Promise.all([...queue]);
-      answer = await this.confirm(`The file ${to} already exists. Do you want to overwrite it?`);
+      answer = await this.confirm(this.t('commands.vendor-publish.messages.confirm-overwrite', {
+        file: to
+      }));
     })());
     await Promise.all([...queue]);
     return answer;

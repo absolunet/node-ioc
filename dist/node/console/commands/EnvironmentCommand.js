@@ -30,7 +30,7 @@ class EnvironmentCommand extends _Command.default {
 
 
   get description() {
-    return 'Display the application environment.';
+    return this.t('commands.env.description');
   }
   /**
    * @inheritdoc
@@ -38,7 +38,9 @@ class EnvironmentCommand extends _Command.default {
 
 
   handle() {
-    this.terminal.echo(`Current application environment: "${this.app.environment}"`);
+    this.terminal.echo(this.t('commands.env.messages.current', {
+      name: this.app.environment
+    }));
   }
 
 }

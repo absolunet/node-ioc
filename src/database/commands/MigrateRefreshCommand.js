@@ -41,7 +41,7 @@ class MigrateRefreshCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Reset and re-run all migrations.';
+		return this.t('commands.db-migrate-refresh.description');
 	}
 
 	/**
@@ -58,7 +58,7 @@ class MigrateRefreshCommand extends Command {
 	 */
 	get flags() {
 		return [
-			['seed', 'Seed the database after the migrations.']
+			['seed', this.t('commands.db-migrate-refresh.flags.seed')]
 		];
 	}
 
@@ -68,7 +68,7 @@ class MigrateRefreshCommand extends Command {
 	async handle() {
 		const connection = await this.db.getConnection();
 
-		this.info('Rolling back migrations');
+		this.info(this.t('commands.db-migrate-refresh.messages.rolling-back'));
 		const rollback = await this.rollback(connection);
 
 		rollback.output.forEach((string) => {
@@ -77,7 +77,7 @@ class MigrateRefreshCommand extends Command {
 
 		if (rollback.migrations.length > 0) {
 			rollback.migrations.forEach((migration) => {
-				this.success(`Rolled back: ${migration}`);
+				this.success(this.t('commands.db-migrate-refresh.messages.rolled-back', { migration }));
 			});
 		}
 

@@ -122,15 +122,33 @@ class CommandRegistrar {
       app
     } = this;
 
-    if (app.isBound('version')) {
-      yargs.version(app.make('version'));
-    }
+    const translate = (key, defaultValue) => {
+      if (!app.isBound('translator')) {
+        return defaultValue;
+      }
 
+      return app.make('translator').translate(key);
+    };
+
+    const translations = Object.create({}, Object.fromEntries(Object.entries({
+      options: 'Options:',
+      positionals: 'Positionals:'
+    }).map(([key, original]) => {
+      return [original, {
+        configurable: true,
+        enumerable: true,
+
+        get() {
+          return translate(`commands.yargs.${key}`, original);
+        }
+
+      }];
+    })));
     yargs.option('v', {
       alias: 'verbose',
-      describe: 'Adjust the verbosity of the command',
+      describe: translate('commands.list.flags.verbose', 'Adjust the verbosity of the command.'),
       type: 'boolean'
-    }).count('v').exitProcess(false).showHelpOnFail(false).locale('en').strict().wrap(Math.min(120, yargs.terminalWidth()));
+    }).version('version', translate('commands.list.flags.version', 'Show version number.'), app.version).help('help', translate('commands.list.flags.help', 'Show help.')).updateStrings(translations).count('v').exitProcess(false).showHelpOnFail(false).locale('en').strict().wrap(Math.min(120, yargs.terminalWidth()));
     this.commandRepository.all(withPolicies).forEach(command => {
       yargs.command(Object.assign({
         handler: argv => {

@@ -66,9 +66,14 @@ class MakeSeederCommand extends _GeneratorCommand.default {
 
 
   async handle() {
-    this.debug(`Generating ${this.parameter('class')} seed file.`);
+    const name = this.parameter('class');
+    this.debug(this.t('commands.make-seeder.messages.generating', {
+      name
+    }));
     await this.generate('base');
-    this.info(`${this.parameter('class')} seed file successfully generated!`);
+    this.info(this.t('commands.make-seeder.messages.success', {
+      name
+    }));
   }
   /**
    * Get guessed model name based on the class name.

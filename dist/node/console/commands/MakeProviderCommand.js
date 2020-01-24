@@ -68,9 +68,11 @@ class MakeProviderCommand extends _GeneratorCommand.default {
 
 
   async handle() {
-    this.debug(`Generating ${this.parameter('class')} service provider file.`);
+    this.debug(this.t('commands.make-provider.messages.generating'));
     await this.generate('base');
-    this.info(`${this.parameter('class')} service provider file successfully generated!`);
+    this.info(this.t('commands.make-provider.messages.success', {
+      name: this.parameter('class')
+    }));
   }
   /**
    * Get provider human-readable name.

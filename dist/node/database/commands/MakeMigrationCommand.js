@@ -38,7 +38,7 @@ class MakeMigrationCommand extends _GeneratorCommand.default {
 
 
   get flags() {
-    return super.flags.concat([['stub', 'Generate stub migration file.']]);
+    return super.flags.concat([['stub', this.t('commands.make-migration.flags.stub')]]);
   }
   /**
    * @inheritdoc
@@ -86,9 +86,14 @@ class MakeMigrationCommand extends _GeneratorCommand.default {
 
 
   async handle() {
-    this.debug(`Generating ${this.parameter('class')} migration file.`);
+    const name = this.parameter('class');
+    this.debug(this.t('commands.make-migration.messages.generating', {
+      name
+    }));
     await this.generate(this.getAction());
-    this.info(`${this.parameter('class')} migration file successfully generated!`);
+    this.info(this.t('commands.make-migration.messages.success', {
+      name
+    }));
   }
   /**
    * Get guessed table name based on the class name.

@@ -29,7 +29,9 @@ class GeneratorCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return `Create a ${this.type} class.`;
+		const { type } = this;
+
+		return this.t('commands.make-abstract.description', { type });
 	}
 
 	/**
@@ -37,7 +39,7 @@ class GeneratorCommand extends Command {
 	 */
 	get parameters() {
 		return [
-			['class', true, null, `Class name of the ${this.type}.`]
+			['class', true, null, this.t('commands.make-abstract.parameters.class', { type: this.type })]
 		];
 	}
 
@@ -46,7 +48,7 @@ class GeneratorCommand extends Command {
 	 */
 	get options() {
 		return [
-			['destination', null, 'File destination.']
+			['destination', null, this.t('commands.make-abstract.options.destination')]
 		];
 	}
 

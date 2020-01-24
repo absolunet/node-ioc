@@ -34,7 +34,7 @@ class TestCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Test the application.';
+		return this.t('commands.test.description');
 	}
 
 	/**
@@ -42,8 +42,8 @@ class TestCommand extends Command {
 	 */
 	get options() {
 		return [
-			['engine', 'jest', 'Test engine to work with.'],
-			['type',   null,   'Type of test to run.']
+			['engine', 'jest', this.t('commands.test.options.engine')],
+			['type',   null,   this.t('commands.test.options.type')]
 		];
 	}
 
@@ -52,10 +52,10 @@ class TestCommand extends Command {
 	 */
 	get flags() {
 		return [
-			[this.testType.UNIT,        'Run unit tests.'],
-			[this.testType.FEATURE,     'Run feature tests.'],
-			[this.testType.ENDTOEND,    'Run end-to-end tests.'],
-			[this.testType.INTEGRATION, 'Run integration tests.']
+			[this.testType.UNIT,        this.t('commands.test.flags.unit')],
+			[this.testType.FEATURE,     this.t('commands.test.flags.feature')],
+			[this.testType.ENDTOEND,    this.t('commands.test.flags.endtoend')],
+			[this.testType.INTEGRATION, this.t('commands.test.flags.integration')]
 		];
 	}
 

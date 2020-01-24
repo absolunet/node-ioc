@@ -23,7 +23,7 @@ class FileDriver extends Driver {
 	 * @type {Array<string>}
 	 */
 	static get dependencies() {
-		return (super.dependencies || []).concat(['app', 'file', 'helper.string']);
+		return (super.dependencies || []).concat(['app', 'file']);
 	}
 
 	/**
@@ -71,7 +71,7 @@ class FileDriver extends Driver {
 		Object.entries(translations).forEach(([key, value]) => {
 			if (key.includes('/')) {
 				delete translations[key];
-				dot.str(this.stringHelper.dot(key), value, translations);
+				dot.str(key.replace(/\//gu, '.'), value, translations);
 			}
 		});
 
@@ -207,15 +207,6 @@ class FileDriver extends Driver {
 	 */
 	get defaultNamespace() {
 		return 'translations';
-	}
-
-	/**
-	 * String helper.
-	 *
-	 * @type {support.helpers.StringHelper}
-	 */
-	get stringHelper() {
-		return this.helperString;
 	}
 
 }

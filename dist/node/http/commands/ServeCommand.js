@@ -48,7 +48,7 @@ class ServeCommand extends _Command.default {
 
 
   get description() {
-    return 'Serve the application.';
+    return this.t('commands.serve.description');
   }
   /**
    * @inheritdoc
@@ -56,7 +56,7 @@ class ServeCommand extends _Command.default {
 
 
   get options() {
-    return [['port', 8080, 'Port to use to serve the application.']];
+    return [['port', 8080, this.t('commands.serve.options.port')]];
   }
   /**
    * @inheritdoc
@@ -64,7 +64,7 @@ class ServeCommand extends _Command.default {
 
 
   get flags() {
-    return [['daemon', 'Use a daemon to automatically restart the serve process when a file has changed.'], ['silent', 'Silently run the process without any console output.'], ['start-silent', 'Silently start the process, but still output data in the console afterwards.']];
+    return [['daemon', this.t('commands.serve.flags.daemon')], ['silent', this.t('commands.serve.flags.silent')], ['start-silent', this.t('commands.serve.flags.start-silent')]];
   }
   /**
    * @inheritdoc
@@ -72,40 +72,46 @@ class ServeCommand extends _Command.default {
 
 
   handle() {
+    const port = this.option('port');
+
     if (!this.flag('silent') && !this.flag('start-silent')) {
       this.terminal.spacer();
-      this.info(`This is serving on port ${this.option('port')}...`);
+      this.info(this.t('commands.serve.messages.starting', {
+        port
+      }));
     }
 
     if (this.flag('daemon')) {
-      return this.startDaemon();
+      return this.startDaemon(port);
     }
 
-    return this.startServer();
+    return this.startServer(port);
   }
   /**
    * Start Express server.
    *
+   * @param {string|number} port - The HTTP port.
    * @returns {Promise} The infinite process promise (will never be resolved until the process ends).
    */
 
 
-  startServer() {
+  startServer(port) {
     const server = this.server.getInstance();
     server.use(this.middleware);
     server.use(this.router.generate());
-    server.listen(this.option('port'));
+    server.listen(port);
     return this.wait();
   }
   /**
    * Start daemon server with nodemon.
    *
+   * @param {string|number} port - The HTTP port.
    * @returns {Promise} The nodemon process promise.
    */
 
 
-  startDaemon() {
-    const commandParts = [this.terminal.file, this.name, `--port=${this.option('port')}`, '--start-silent'];
+  startDaemon(port) {
+    const commandParts = [this.terminal.file, this.name, `--port=${port}`, '--start-silent'];
     const silent = this.flag('silent');
 
     if (silent) {
@@ -116,7 +122,7 @@ class ServeCommand extends _Command.default {
 
     if (!silent) {
       nodemonProcess.on('restart', () => {
-        this.info('Daemon is reloading files...');
+        this.info(this.t('commands.serve.messages.reloading'));
       });
     }
 

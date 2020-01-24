@@ -48,7 +48,7 @@ class SeedCommand extends _Command.default {
 
 
   get description() {
-    return 'Seed the database with records.';
+    return this.t('commands.db-seed.description');
   }
   /**
    * @inheritdoc
@@ -56,7 +56,7 @@ class SeedCommand extends _Command.default {
 
 
   get options() {
-    return [['file', 'DatabaseSeeder', 'The file to run']];
+    return [['file', 'DatabaseSeeder', this.t('commands.db-seed.options.file')]];
   }
   /**
    * Command prefix.
@@ -75,7 +75,7 @@ class SeedCommand extends _Command.default {
 
   async handle() {
     const connection = await this.db.getConnection();
-    this.info('Seeding database');
+    this.info(this.t('commands.db-seed.messages.seeding'));
     const {
       seeds,
       output
@@ -83,9 +83,11 @@ class SeedCommand extends _Command.default {
     output.forEach(string => {
       this.warning(string);
     });
-    this.info('Seed successful!');
+    this.info(this.t('commands.db-seed.messages.success'));
     seeds.forEach(seed => {
-      this.success(`Seeded: ${seed.replace('\\', '/').split('/').pop()}`);
+      this.success(this.t('commands.db-seed.messages.seeded', {
+        seeder: seed.replace('\\', '/').split('/').pop()
+      }));
     });
   }
   /**

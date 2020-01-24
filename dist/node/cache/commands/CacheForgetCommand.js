@@ -48,7 +48,7 @@ class CacheForgetCommand extends _Command.default {
 
 
   get description() {
-    return 'Remove an item from the cache.';
+    return this.t('commands.cache-forget.description');
   }
   /**
    * @inheritdoc
@@ -56,7 +56,7 @@ class CacheForgetCommand extends _Command.default {
 
 
   get parameters() {
-    return [['key', true, null, 'The name of the cache key you would like to clear.'], ['store', false, null, 'The name of the store for which you would like to clear the key.']];
+    return [['key', true, null, this.t('commands.cache-forget.parameters.key')], ['store', false, null, this.t('commands.cache-forget.parameters.store')]];
   }
   /**
    * @inheritdoc
@@ -66,9 +66,9 @@ class CacheForgetCommand extends _Command.default {
   async handle() {
     const store = this.getStore();
     const key = this.parameter('key');
-    this.info(`Deleting cache item [${key}]`);
+    this.info(this.t('commands.cache-forget.messages.deleting'));
     await store.delete(key);
-    this.info(`Cache key [${key}] deleted`);
+    this.info(this.t('commands.cache-forget.messages.deleted'));
   }
   /**
    * Get cache store driver instance.
@@ -78,9 +78,11 @@ class CacheForgetCommand extends _Command.default {
 
 
   getStore() {
-    const name = this.parameter('store');
-    this.spam(`Getting ${name ? `[${name}]` : 'default'} store instance`);
-    return this.cache.resolve(name);
+    const store = this.parameter('store');
+    this.spam(this.t('commands.cache-forget.messages.get-store', {
+      store: store || 'default'
+    }));
+    return this.cache.resolve(store);
   }
 
 }

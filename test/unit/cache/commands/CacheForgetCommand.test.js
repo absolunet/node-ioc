@@ -32,7 +32,7 @@ test('Can flush given key from default store', async () => {
 
 test('Can flush given key from given store', async () => {
 	given.cacheKeyAsParameter('my_key');
-	given.alternateStoreAsOption();
+	given.alternateStoreAsParameter();
 	await when.runningCommand();
 	then.shouldHaveDeletedKeyOnAlternateStore('my_key');
 });

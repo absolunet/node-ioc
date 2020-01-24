@@ -25,7 +25,8 @@ given.fakeEnvironmentInContainer = () => {
 //--------------------------------------------------------
 
 then.shouldHaveReceivedFakeEnvironment = () => {
-	then.shouldHaveOutput('Current application environment: "fake"');
+	then.shouldHaveTranslated('commands.env.messages.current', { name: 'fake' });
+	then.shouldHaveOutput('commands.env.messages.current {"name":"fake"}');
 };
 
 

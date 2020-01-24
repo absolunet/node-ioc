@@ -55,8 +55,8 @@ class MakeTestCommand extends GeneratorCommand {
 	 */
 	get options() {
 		return super.options.concat([
-			['type', '', 'Indicates the test type.'],
-			['for',  '', 'Indicates the file or the class the test is intended for.']
+			['type', '', this.t('commands.make-test.options.type')],
+			['for',  '', this.t('commands.make-test.options.for')]
 		]);
 	}
 
@@ -65,7 +65,7 @@ class MakeTestCommand extends GeneratorCommand {
 	 */
 	get flags() {
 		return this.testTypes.map((type) => {
-			return [type, `Generate a ${type} test class.`];
+			return [type, this.t(`commands.make-test.flags.${type}`)];
 		});
 	}
 
@@ -82,10 +82,13 @@ class MakeTestCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	async handle() {
-		const type = this.testTypeName;
-		this.debug(`Generating ${this.stringHelper.lower(type)} test file.`);
-		await this.generate(type);
-		this.info(`${this.stringHelper.pascal(type)} test ${this.parameter('class')} file successfully generated!`);
+		const testType = this.testTypeName;
+		const type     = this.stringHelper.lower(testType);
+		const name     = this.parameter('class');
+
+		this.debug(this.t('commands.make-test.messages.generating', { type, name }));
+		await this.generate(testType);
+		this.info(this.t('commands.make-test.messages.success', { type, name }));
 	}
 
 	/**

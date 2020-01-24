@@ -11,6 +11,7 @@ beforeEach(() => {
 	given.bootedContainer();
 	given.commandRunner();
 	given.fakeTerminal();
+	given.fakeTranslator();
 	given.environmentCommand();
 });
 

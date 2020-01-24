@@ -60,6 +60,12 @@ const fakeTerminal = {
 	spacer:  jest.fn()
 };
 
+const fakeTranslator = {
+	translate: jest.fn((key, replace = {}) => {
+		return `${key} ${JSON.stringify(replace)}`;
+	})
+};
+
 const fakeFileSystemAsync = {
 	stat: jest.fn((value) => {
 		return Promise.resolve({
@@ -118,6 +124,10 @@ given.commandRunner = () => {
 
 given.fakeTerminal = () => {
 	container.singleton('terminal', fakeTerminal);
+};
+
+given.fakeTranslator = () => {
+	container.singleton('translator', fakeTranslator);
 };
 
 given.fakeFileSystemAsync = () => {
@@ -238,7 +248,7 @@ when.runningCommand = async () => {
 };
 
 when.answering = async (value) => {
-	await new Promise((resolve) => { setTimeout(resolve); });
+	await new Promise(setTimeout);
 	questions[questions.length - 1].resolve(value);
 };
 
@@ -253,12 +263,14 @@ then.shouldNotHavePublishedAnything = () => {
 
 then.shouldHavePrintedThatNothingWasPublished = () => {
 	then.shouldNotHaveThrown();
-	expect(fakeTerminal.println).toHaveBeenCalledWith('Nothing has been published.');
+	expect(fakeTranslator.translate).toHaveBeenCalledWith('commands.vendor-publish.messages.empty');
+	expect(fakeTerminal.println).toHaveBeenCalledWith('commands.vendor-publish.messages.empty {}');
 };
 
 then.shouldHavePublished = ({ from, to }) => {
 	then.shouldNotHaveThrown();
-	expect(fakeTerminal.println).not.toHaveBeenCalledWith('Nothing has been published.');
+	expect(fakeTranslator.translate).not.toHaveBeenCalledWith('commands.vendor-publish.messages.empty');
+	expect(fakeTerminal.println).not.toHaveBeenCalledWith('commands.vendor-publish.messages.empty {}');
 
 	const destinationFolder = slash(path.dirname(to));
 	const relativeFrom      = path.relative(container.basePath(), from);
@@ -275,7 +287,7 @@ then.shouldHavePublished = ({ from, to }) => {
 	expect(hasCalledCopyFile).toBe(true);
 
 	const hasPrintedSuccessfulCopy = fakeTerminal.success.mock.calls.some(([value]) => {
-		return value === `Successfully published from [${relativeFrom}] to [${relativeTo}].`;
+		return value === `commands.vendor-publish.messages.success {"from":"${relativeFrom}","to":"${relativeTo}"}`;
 	});
 	expect(hasPrintedSuccessfulCopy).toBe(true);
 };
@@ -292,7 +304,7 @@ then.shouldNotHavePublished = ({ from, to }) => {
 	expect(hasCalledCopyFile).toBe(false);
 
 	const hasPrintedSuccessfulCopy = fakeTerminal.success.mock.calls.some(([value]) => {
-		return value === `Successfully published from [${relativeFrom}] to [${relativeTo}].`;
+		return value === `'commands.vendor-publish.messages.success {"from":"${relativeFrom}","to":"${relativeTo}"}`;
 	});
 	expect(hasPrintedSuccessfulCopy).toBe(false);
 };
@@ -360,8 +372,13 @@ then.shouldNotHaveAskedConfirmation = () => {
 
 then.shouldHaveAskedForConfigOverwrite = (name) => {
 	then.shouldNotHaveThrown();
+	const hasTranslatedConfigOverwriteMessage = fakeTranslator.translate.mock.calls.some(([key, replace]) => {
+		return key === 'commands.vendor-publish.messages.confirm-overwrite' && replace.file === `config/${name}`;
+	});
+	expect(hasTranslatedConfigOverwriteMessage).toBe(true);
+
 	const askedConfigOverwrite = fakeTerminal.confirm.mock.calls.some(([question]) => {
-		return question === `The file config/${name} already exists. Do you want to overwrite it?`;
+		return question === `commands.vendor-publish.messages.confirm-overwrite {"file":"config/${name}"}`;
 	});
 	expect(askedConfigOverwrite).toBe(true);
 };

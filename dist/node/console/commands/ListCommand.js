@@ -30,15 +30,15 @@ class ListCommand extends _Command.default {
 
 
   get description() {
-    return 'List all available commands.';
+    return this.t('commands.list.description');
   }
   /**
    * @inheritdoc
    */
 
 
-  handle() {
-    this.captureOutput().call('--help', false);
+  async handle() {
+    await this.captureOutput().call('--help', false);
     this.printPrettifiedYargsHelp(this.getCapturedOutput());
   }
   /**
@@ -67,10 +67,10 @@ class ListCommand extends _Command.default {
     this.terminal.spacer();
     this.terminal.echo(this.app.make('config').get('app.name', 'Node IoC'));
     this.terminal.spacer();
-    this.terminal.echo('Usage:');
-    this.terminal.print('command [arguments] [options]');
+    this.terminal.echo(`${this.t('commands.list.messages.usage')}:`);
+    this.terminal.print(`${this.t('commands.list.messages.usage-example')}`);
     this.terminal.spacer();
-    this.terminal.echo('Available commands:');
+    this.terminal.echo(`${this.t('commands.list.messages.available-commands')}:`);
     Object.keys(groups).sort().forEach(group => {
       if (group) {
         this.terminal.print(group);

@@ -638,6 +638,23 @@ class Command {
     return (0, _privateRegistry.default)(this).get('capturedOutput');
   }
   /**
+   * Translate with the translator service.
+   * If it does not exist, returns the given string.
+   *
+   * @param {string} key - The translation key to translate.
+   * @param {...*} parameters - Translator's translate parameters.
+   * @returns {string} The translated content.
+   */
+
+
+  t(key, ...parameters) {
+    if (this.app.isBound('translator')) {
+      return this.app.make('translator').translate(key, ...parameters);
+    }
+
+    return key;
+  }
+  /**
    * Get verbose level, from 0 to 3.
    *
    * @example
@@ -722,16 +739,26 @@ class Command {
       return model;
     }
 
-    const builder = {};
     const {
+      parameters,
       options,
       flags
     } = (0, _privateRegistry.default)(this).get('arguments');
-    [...options, ...flags].forEach(argument => {
-      builder[argument.name] = argument.yargsModel;
-    });
     return {
-      builder,
+      builder: yargs => {
+        parameters.forEach(({
+          name,
+          yargsModel
+        }) => {
+          yargs.positional(name, yargsModel);
+        });
+        [...options, ...flags].forEach(({
+          name,
+          yargsModel
+        }) => {
+          yargs.option(name, yargsModel);
+        });
+      },
       command: this.signature,
       describe: this.description
     };

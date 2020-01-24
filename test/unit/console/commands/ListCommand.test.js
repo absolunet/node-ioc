@@ -11,6 +11,7 @@ beforeEach(() => {
 	given.bootedContainer();
 	given.commandRunner();
 	given.fakeTerminal();
+	given.fakeTranslator();
 	given.fakeInterceptorAndConsole();
 	given.listCommand();
 });
@@ -23,6 +24,7 @@ afterEach(() => {
 test('Can list all available commands and global options', async () => {
 	await when.runningCommand();
 	then.shouldHaveListedAllCommands();
+	then.yargsStringsShouldHaveBeenTranslated();
 });
 
 test('Can list new command', async () => {
@@ -30,4 +32,5 @@ test('Can list new command', async () => {
 	await when.runningCommand();
 	then.shouldHaveListedAllCommands();
 	then.shouldHaveListedFakeCommand();
+	then.yargsStringsShouldHaveBeenTranslated();
 });

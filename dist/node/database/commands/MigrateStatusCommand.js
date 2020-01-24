@@ -48,7 +48,7 @@ class MigrateStatusCommand extends _Command.default {
 
 
   get description() {
-    return 'Show the status of each migration.';
+    return this.t('commands.db-migrate-status.description');
   }
   /**
    * Command prefix.
@@ -68,11 +68,12 @@ class MigrateStatusCommand extends _Command.default {
   async handle() {
     const connection = this.db.getConnection();
     const status = await this.db.getDriverForConnection(connection).migrationStatus(connection);
-    this.table(['Ran?', 'Migration'], status.map(({
+    const columns = [this.t('commands.db-migrate-status.messages.ran'), this.t('commands.db-migrate-status.messages.migration')];
+    this.table(columns, status.map(({
       ran,
       name
     }) => {
-      return [ran ? 'Y' : 'N', name];
+      return [this.t(`commands.db-migrate-status.messages.${ran ? 'yes' : 'no'}`), name];
     }));
   }
 

@@ -57,9 +57,10 @@ class MakeFactoryCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	async handle() {
-		this.debug(`Generating ${this.parameter('class')} model factory file.`);
+		const name = this.parameter('class');
+		this.debug(this.t('commands.make-factory.messages.generating', { name }));
 		await this.generate('base');
-		this.info(`${this.parameter('class')} model factory file successfully generated!`);
+		this.info(this.t('commands.make-factory.messages.success', { name }));
 	}
 
 	/**

@@ -17,6 +17,7 @@ beforeEach(() => {
 	given.fakeConfigRepository();
 	given.fakeCommandRegistrar();
 	given.databasePrefix('db');
+	given.fakeTranslator();
 	given.seedCommand();
 });
 

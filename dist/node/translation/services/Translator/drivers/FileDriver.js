@@ -30,7 +30,7 @@ class FileDriver extends _Driver.default {
    * @type {Array<string>}
    */
   static get dependencies() {
-    return (super.dependencies || []).concat(['app', 'file', 'helper.string']);
+    return (super.dependencies || []).concat(['app', 'file']);
   }
   /**
    * @inheritdoc
@@ -86,7 +86,7 @@ class FileDriver extends _Driver.default {
       if (key.includes('/')) {
         delete translations[key];
 
-        _dotObject.default.str(this.stringHelper.dot(key), value, translations);
+        _dotObject.default.str(key.replace(/\//gu, '.'), value, translations);
       }
     });
     (0, _privateRegistry.default)(this).set('translations', (0, _deepmerge.default)((0, _privateRegistry.default)(this).get('translations'), translations));
@@ -227,16 +227,6 @@ class FileDriver extends _Driver.default {
 
   get defaultNamespace() {
     return 'translations';
-  }
-  /**
-   * String helper.
-   *
-   * @type {support.helpers.StringHelper}
-   */
-
-
-  get stringHelper() {
-    return this.helperString;
   }
 
 }

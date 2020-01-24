@@ -38,7 +38,7 @@ class LogTableCommand extends _GeneratorCommand.default {
 
 
   get description() {
-    return 'Create a migration for the log database table.';
+    return this.t('commands.log-table.description');
   }
   /**
    * @inheritdoc
@@ -101,16 +101,16 @@ class LogTableCommand extends _GeneratorCommand.default {
 
 
   async handle() {
-    this.debug(`Generating log migration file.`);
+    this.debug(this.t('commands.log-table.messages.generating'));
 
     if (this.migrationExists()) {
-      this.warning('The migration already exists.');
+      this.warning(this.t('commands.log-table.messages.already-exists'));
       return;
     }
 
     await this.generate('base');
-    this.info(`Log migration file successfully generated!`);
-    this.info(`Don't forget to run migration command.`);
+    this.info(this.t('commands.log-table.messages.success'));
+    this.info(this.t('commands.log-table.messages.reminder'));
   }
   /**
    * Check if migration already exists in configured directory.

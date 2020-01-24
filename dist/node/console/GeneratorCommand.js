@@ -35,7 +35,12 @@ class GeneratorCommand extends _Command.default {
 
 
   get description() {
-    return `Create a ${this.type} class.`;
+    const {
+      type
+    } = this;
+    return this.t('commands.make-abstract.description', {
+      type
+    });
   }
   /**
    * @inheritdoc
@@ -43,7 +48,9 @@ class GeneratorCommand extends _Command.default {
 
 
   get parameters() {
-    return [['class', true, null, `Class name of the ${this.type}.`]];
+    return [['class', true, null, this.t('commands.make-abstract.parameters.class', {
+      type: this.type
+    })]];
   }
   /**
    * @inheritdoc
@@ -51,7 +58,7 @@ class GeneratorCommand extends _Command.default {
 
 
   get options() {
-    return [['destination', null, 'File destination.']];
+    return [['destination', null, this.t('commands.make-abstract.options.destination')]];
   }
   /**
    * Get the class type that is being made.

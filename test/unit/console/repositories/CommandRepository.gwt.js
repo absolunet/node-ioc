@@ -81,6 +81,10 @@ given.commandAsConstructor = (instance) => {
 			return instance;
 		}
 
+		get name() {
+			return instance.name;
+		}
+
 	};
 	commandRepository.add(constructor);
 };

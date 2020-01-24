@@ -11,6 +11,7 @@ beforeEach(() => {
 	given.bootedContainer();
 	given.noArgument();
 	given.fakeTerminal();
+	given.fakeTranslator();
 	given.mockedNodemon();
 	given.fakeServer();
 	given.fakeRouter();

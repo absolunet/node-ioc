@@ -61,9 +61,9 @@ class MakeControllerCommand extends GeneratorCommand {
 	 */
 	get flags() {
 		return [
-			['resource', 'Generate a resource controller class.'],
-			['api',      'Generate an API resource controller class, without "create" and "edit" actions.'],
-			['handler',  'Generate a single method handler controller class.']
+			['resource', this.t('commands.make-controller.flags.resource')],
+			['api',      this.t('commands.make-controller.flags.api')],
+			['handler',  this.t('commands.make-controller.flags.handler')]
 		];
 	}
 
@@ -83,9 +83,11 @@ class MakeControllerCommand extends GeneratorCommand {
 	 */
 	async handle() {
 		const type = this.getType();
-		this.debug(`Generating ${this.parameter('class')} ${type} controller file.`);
+		const name = this.parameter('class');
+
+		this.debug(this.t('commands.make-controller.messages.generating', { type, name }));
 		await this.generate(type);
-		this.info(`${this.parameter('class')} ${type} controller file successfully generated!`);
+		this.info(this.t('commands.make-controller.messages.success', { type, name }));
 	}
 
 	/**

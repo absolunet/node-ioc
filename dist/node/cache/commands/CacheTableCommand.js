@@ -38,7 +38,7 @@ class CacheTableCommand extends _GeneratorCommand.default {
 
 
   get description() {
-    return 'Create a migration for the cache database table.';
+    return this.t('commands.cache-table.description');
   }
   /**
    * @inheritdoc
@@ -101,16 +101,16 @@ class CacheTableCommand extends _GeneratorCommand.default {
 
 
   async handle() {
-    this.debug(`Generating cache migration file.`);
+    this.debug(this.t('commands.cache-table.messages.generating'));
 
     if (this.migrationExists()) {
-      this.warning('The migration already exists.');
+      this.warning(this.t('commands.cache-table.messages.already-exists'));
       return;
     }
 
     await this.generate('base');
-    this.info(`Cache migration file successfully generated!`);
-    this.info(`Don't forget to run migration command.`);
+    this.info(this.t('commands.cache-table.messages.success'));
+    this.info(this.t('commands.cache-table.messages.reminder'));
   }
   /**
    * Check if migration already exists in configured directory.
