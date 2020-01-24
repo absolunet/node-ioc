@@ -13,6 +13,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [1.0.0] - 2020-01-24
+
+### Added
+ - `Policy` class to create custom policies
+ - `register` method on `gate` service to register `Policy` class
+ - `make:policy` scaffold command to create policy file
+ - `policy` and `src.policy` paths in application
+ - `t()` method in command for translation, that works even if the `translator` service is not bound
+ - `commands.yaml` translation file publishable under the `CommandServiceProvider` provider and `translations` tag
+ - `addTranslations` method in translator to handle multiple translation objects (`{ foo: { en: 'EN', fr: 'FR' } }`) in translator drivers
+
+### Changed
+ - Usage of translations keys in commands for description, arguments and messages
+
+### Fixed
+ - Handle translation keys that contains slashes the same way it would have been if separated by dots
+
+
+
 ## [1.0.0-rc.3] - 2019-12-19
 
 ### Changed
@@ -601,7 +620,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.3...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.0...HEAD
+[1.0.0]:         https://github.com/absolunet/node-ioc/compare/1.0.0-rc.3...1.0.0
 [1.0.0-rc.3]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.2...1.0.0-rc.3
 [1.0.0-rc.2]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.1...1.0.0-rc.2
 [1.0.0-rc.1]:    https://github.com/absolunet/node-ioc/compare/1.0.0-beta.3...1.0.0-rc.1
