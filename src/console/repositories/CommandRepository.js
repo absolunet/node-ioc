@@ -44,8 +44,7 @@ class CommandRepository {
 	 * @returns {Array<Command>|object<string,Array<Command>>} The commands or the grouped commands.
 	 */
 	all(withPolicies = true, grouped = false) {
-		const { app, terminal, yargs } = this;
-		const gate = __(this).get('gate');
+		const gate     = __(this).get('gate');
 		const commands = __(this).get('commands')
 			.map((command) => {
 				return this.makeCommand(command);
@@ -138,6 +137,7 @@ class CommandRepository {
 
 		return app.make(command, { app, terminal, yargs });
 	}
+
 }
 
 

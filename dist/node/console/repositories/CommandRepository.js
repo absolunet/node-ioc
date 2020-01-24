@@ -51,11 +51,6 @@ class CommandRepository {
 
 
   all(withPolicies = true, grouped = false) {
-    const {
-      app,
-      terminal,
-      yargs
-    } = this;
     const gate = (0, _privateRegistry.default)(this).get('gate');
     const commands = (0, _privateRegistry.default)(this).get('commands').map(command => {
       return this.makeCommand(command);
