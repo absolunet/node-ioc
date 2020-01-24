@@ -40,6 +40,12 @@ const fakeInterceptor = {
 	})
 };
 
+const fakeTranslator = {
+	translate: jest.fn((key, replace = {}) => {
+		return `${key} ${JSON.stringify(replace)}`;
+	})
+};
+
 const fakeConnection = {
 	migrate: {
 		latest: jest.fn(() => {
@@ -123,6 +129,10 @@ given.fakeTerminal = () => {
 	container.singleton('terminal', fakeTerminal);
 };
 
+given.fakeTranslator = () => {
+	container.singleton('translator', fakeTranslator);
+};
+
 given.fakeInterceptor = () => {
 	container.singleton('terminal.interceptor', fakeInterceptor);
 	fakeCapture = [];
@@ -159,8 +169,8 @@ given.seedFlag = () => {
 
 given.twoMigrationsToRun = () => {
 	migrationsToRun = [
-		'12345678900000_CreateFooTable',
-		'12345678900001_CreateBarTable'
+		'12345678900002_CreateFooTable',
+		'12345678900003_CreateBarTable'
 	];
 };
 
@@ -181,7 +191,7 @@ given.twoMigrationsInFirstBatch = () => {
 
 given.oneMigrationInSecondBatch = () => {
 	ranMigrations[2] = [
-		'02345678900000_CreateBazTable'
+		'02345678900002_CreateBazTable'
 	];
 };
 
@@ -225,17 +235,25 @@ then.shouldHaveRunMigrations = () => {
 	expect(fakeConnection.migrate.latest).toHaveBeenCalledTimes(1);
 };
 
+then.shouldHaveTranslated = (...parameters) => {
+	then.shouldNotHaveThrown();
+	expect(fakeTranslator.translate).toHaveBeenCalledWith(...parameters);
+};
+
 then.shouldHavePrintedTwoMigrations = () => {
 	then.shouldNotHaveThrown();
+	then.shouldHaveTranslated('commands.db-migrate.messages.migrated', { migration: '12345678900002_CreateFooTable' });
+	then.shouldHaveTranslated('commands.db-migrate.messages.migrated', { migration: '12345678900003_CreateBarTable' });
 	expect(fakeTerminal.success).toHaveBeenCalledTimes(2);
-	expect(fakeTerminal.success).toHaveBeenNthCalledWith(1, 'Migrated: 12345678900000_CreateFooTable');
-	expect(fakeTerminal.success).toHaveBeenNthCalledWith(2, 'Migrated: 12345678900001_CreateBarTable');
+	expect(fakeTerminal.success).toHaveBeenNthCalledWith(1, 'commands.db-migrate.messages.migrated {"migration":"12345678900002_CreateFooTable"}');
+	expect(fakeTerminal.success).toHaveBeenNthCalledWith(2, 'commands.db-migrate.messages.migrated {"migration":"12345678900003_CreateBarTable"}');
 };
 
 then.shouldHavePrintedThatNoMigrationRan = () => {
 	then.shouldNotHaveThrown();
+	then.shouldHaveTranslated('commands.db-migrate.messages.up-to-date');
 	expect(fakeTerminal.success).not.toHaveBeenCalled();
-	expect(fakeTerminal.print).toHaveBeenCalledWith('Already up to date');
+	expect(fakeTerminal.print).toHaveBeenCalledWith('commands.db-migrate.messages.up-to-date {}');
 };
 
 then.commandShouldHaveRunWithPrefix = (prefix, name) => {
@@ -295,16 +313,20 @@ then.shouldNotHaveMigrationsRemaining = () => {
 then.threeMigrationsShouldHaveRunDown = () => {
 	then.shouldHaveRolledBack();
 	then.shouldNotHaveMigrationsRemaining();
+	then.shouldHaveTranslated('commands.db-migrate-refresh.messages.rolled-back', { migration: '02345678900002_CreateBazTable' });
+	then.shouldHaveTranslated('commands.db-migrate-refresh.messages.rolled-back', { migration: '02345678900001_AlterQuxTable' });
+	then.shouldHaveTranslated('commands.db-migrate-refresh.messages.rolled-back', { migration: '02345678900000_CreateQuxTable' });
 	expect(fakeTerminal.success).toHaveBeenCalledTimes(3);
-	expect(fakeTerminal.success).toHaveBeenNthCalledWith(1, 'Rolled back: 02345678900000_CreateBazTable');
-	expect(fakeTerminal.success).toHaveBeenNthCalledWith(2, 'Rolled back: 02345678900001_AlterQuxTable');
-	expect(fakeTerminal.success).toHaveBeenNthCalledWith(3, 'Rolled back: 02345678900000_CreateQuxTable');
+	expect(fakeTerminal.success).toHaveBeenNthCalledWith(1, 'commands.db-migrate-refresh.messages.rolled-back {"migration":"02345678900002_CreateBazTable"}');
+	expect(fakeTerminal.success).toHaveBeenNthCalledWith(2, 'commands.db-migrate-refresh.messages.rolled-back {"migration":"02345678900001_AlterQuxTable"}');
+	expect(fakeTerminal.success).toHaveBeenNthCalledWith(3, 'commands.db-migrate-refresh.messages.rolled-back {"migration":"02345678900000_CreateQuxTable"}');
 };
 
 then.oneMigrationShouldHaveRunDown = () => {
 	then.shouldHaveRolledBack();
+	then.shouldHaveTranslated('commands.db-migrate-rollback.messages.rolled-back', { migration: '02345678900002_CreateBazTable' });
 	expect(fakeTerminal.success).toHaveBeenCalledTimes(1);
-	expect(fakeTerminal.success).toHaveBeenCalledWith('Rolled back: 02345678900000_CreateBazTable');
+	expect(fakeTerminal.success).toHaveBeenCalledWith('commands.db-migrate-rollback.messages.rolled-back {"migration":"02345678900002_CreateBazTable"}');
 };
 
 then.shouldHaveTwoMigrationsInOneBatchRemaining = () => {
@@ -320,17 +342,22 @@ then.shouldHaveTwoMigrationsInOneBatchRemaining = () => {
 
 then.noMigrationShouldHaveRunDown = () => {
 	then.shouldHaveRolledBack();
+	then.shouldHaveTranslated('commands.db-migrate-rollback.messages.up-to-date');
 	expect(fakeTerminal.success).not.toHaveBeenCalled();
-	expect(fakeTerminal.print).toHaveBeenCalledWith('No migration rollback to run');
+	expect(fakeTerminal.print).toHaveBeenCalledWith('commands.db-migrate-rollback.messages.up-to-date {}');
 };
 
 then.shouldHavePrintedTwoRanMigrationsAndTwoPendingMigrations = () => {
 	then.shouldNotHaveThrown();
-	expect(fakeTerminal.table).toHaveBeenCalledWith(['Ran?', 'Migration'], [
-		['Y', '02345678900000_CreateQuxTable'],
-		['Y', '02345678900001_AlterQuxTable'],
-		['N', '12345678900000_CreateFooTable'],
-		['N', '12345678900001_CreateBarTable']
+	then.shouldHaveTranslated('commands.db-migrate-status.messages.ran');
+	then.shouldHaveTranslated('commands.db-migrate-status.messages.migration');
+	then.shouldHaveTranslated('commands.db-migrate-status.messages.yes');
+	then.shouldHaveTranslated('commands.db-migrate-status.messages.no');
+	expect(fakeTerminal.table).toHaveBeenCalledWith(['commands.db-migrate-status.messages.ran {}', 'commands.db-migrate-status.messages.migration {}'], [
+		['commands.db-migrate-status.messages.yes {}', '02345678900000_CreateQuxTable'],
+		['commands.db-migrate-status.messages.yes {}', '02345678900001_AlterQuxTable'],
+		['commands.db-migrate-status.messages.no {}',  '12345678900002_CreateFooTable'],
+		['commands.db-migrate-status.messages.no {}',  '12345678900003_CreateBarTable']
 	]);
 };
 
@@ -341,9 +368,11 @@ then.shouldHaveSeeded = () => {
 
 then.shouldHavePrintedTwoSeededClasses = () => {
 	then.shouldNotHaveThrown();
+	then.shouldHaveTranslated('commands.db-seed.messages.seeded', { seeder: 'FooTableSeeder' });
+	then.shouldHaveTranslated('commands.db-seed.messages.seeded', { seeder: 'BarTableSeeder' });
 	expect(fakeTerminal.success).toHaveBeenCalledTimes(2);
-	expect(fakeTerminal.success).toHaveBeenNthCalledWith(1, 'Seeded: FooTableSeeder');
-	expect(fakeTerminal.success).toHaveBeenNthCalledWith(2, 'Seeded: BarTableSeeder');
+	expect(fakeTerminal.success).toHaveBeenNthCalledWith(1, 'commands.db-seed.messages.seeded {"seeder":"FooTableSeeder"}');
+	expect(fakeTerminal.success).toHaveBeenNthCalledWith(2, 'commands.db-seed.messages.seeded {"seeder":"BarTableSeeder"}');
 };
 
 

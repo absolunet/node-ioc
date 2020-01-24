@@ -13,6 +13,7 @@ beforeEach(() => {
 	given.fakeConnectionBuilder();
 	given.commandRunner();
 	given.fakeTerminal();
+	given.fakeTranslator();
 	given.fakeConfigRepository();
 	given.fakeCommandRegistrar();
 	given.databasePrefix('db');

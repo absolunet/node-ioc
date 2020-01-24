@@ -23,7 +23,7 @@ test('Flushes the default store', async () => {
 });
 
 test('Flushes the given store instead of the default one', async () => {
-	given.alternateStoreAsOption();
+	given.alternateStoreAsParameter();
 	await when.runningCommand();
 	then.alternateStoreShouldHaveBeenFlushed();
 });

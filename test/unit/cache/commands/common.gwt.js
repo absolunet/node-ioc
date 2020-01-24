@@ -84,8 +84,8 @@ given.flag = (name) => {
 	given.option(name, true);
 };
 
-given.alternateStoreAsOption = () => {
-	given.option('store', 'foo');
+given.alternateStoreAsParameter = () => {
+	given.parameter('store', 'foo');
 };
 
 

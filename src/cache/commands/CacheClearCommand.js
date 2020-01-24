@@ -41,7 +41,7 @@ class CacheClearCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Flush the application cache.';
+		return this.t('commands.cache-clear.description');
 	}
 
 	/**
@@ -49,7 +49,7 @@ class CacheClearCommand extends Command {
 	 */
 	get parameters() {
 		return [
-			['store', false, null, 'The name of the store you would like to clear.']
+			['store', false, null, this.t('commands.cache-clear.parameters.store')]
 		];
 	}
 
@@ -59,9 +59,9 @@ class CacheClearCommand extends Command {
 	async handle() {
 		const store = this.getStore();
 
-		this.info('Flushing cache');
+		this.info(this.t('commands.cache-clear.messages.flushing'));
 		await store.flush();
-		this.info('Cache flushed');
+		this.info(this.t('commands.cache-clear.messages.flushed'));
 	}
 
 	/**
@@ -70,10 +70,10 @@ class CacheClearCommand extends Command {
 	 * @returns {cache.services.CacheManager.drivers.Driver} The cache store driver instance.
 	 */
 	getStore() {
-		const name = this.parameter('store');
-		this.spam(`Getting ${name ? `[${name}]` : 'default'} store instance`);
+		const store = this.parameter('store');
+		this.spam(this.t('commands.cache-clear.messages.get-store', { store: store || 'default' }));
 
-		return this.cache.resolve(name);
+		return this.cache.resolve(store);
 	}
 
 }

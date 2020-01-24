@@ -38,7 +38,7 @@ class MakeModelCommand extends _GeneratorCommand.default {
 
 
   get flags() {
-    return [['all', 'Generate factory, migration and seeder classes for the generated model.'], ['factory', 'Generate a factory class for the generated model.'], ['migration', 'Generate a migration class for the generated model.'], ['seeder', 'Generate a seeder class for the generated model.']];
+    return [['all', this.t('commands.make-model.flags.all')], ['factory', this.t('commands.make-model.flags.factory')], ['migration', this.t('commands.make-model.flags.migration')], ['seeder', this.t('commands.make-model.flags.seeder')]];
   }
   /**
    * @inheritdoc
@@ -66,9 +66,13 @@ class MakeModelCommand extends _GeneratorCommand.default {
   async handle() {
     const model = this.parameter('class');
     const table = this.app.make('helper.string').plural(model);
-    this.debug(`Generating ${model} model file.`);
+    this.debug(this.t('commands.make-model.messages.generating', {
+      name: model
+    }));
     await this.generate('base');
-    this.info(`${model} model file successfully generated!`);
+    this.info(this.t('commands.make-model.messages.success', {
+      name: model
+    }));
     const all = this.flag('all');
 
     if (all || this.flag('factory')) {

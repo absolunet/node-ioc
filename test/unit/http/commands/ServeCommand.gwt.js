@@ -28,6 +28,12 @@ const fakeTerminal = {
 	spacer:     jest.fn((...parameters) => { return fakeTerminal.echo(...parameters); })
 };
 
+const fakeTranslator = {
+	translate: jest.fn((key, replace = {}) => {
+		return `${key} ${JSON.stringify(replace)}`;
+	})
+};
+
 const fakeExpress = {
 	use:    jest.fn((middleware) => { fakeMiddlewares.push(middleware); }),
 	listen: jest.fn()
@@ -76,6 +82,10 @@ given.mockedNodemon = () => {
 
 given.fakeTerminal = () => {
 	container.singleton('terminal', fakeTerminal);
+};
+
+given.fakeTranslator = () => {
+	container.singleton('translator', fakeTranslator);
 };
 
 given.fakeServer = () => {
@@ -171,6 +181,16 @@ then.serverShouldUseCustomPort = () => {
 	expect(fakeExpress.listen).toHaveBeenCalledWith(1234);
 };
 
+then.shouldHaveTranslated = (key, replace) => {
+	then.shouldNotHaveThrown();
+	const hasTranslated = fakeTranslator.translate.mock.calls.some(([calledKey, calledReplace]) => {
+		return calledKey === key && (!replace || Object.entries(replace).every(([replaceKey, replaceValue]) => {
+			return calledReplace[replaceKey] === replaceValue;
+		}));
+	});
+	expect(hasTranslated).toBe(true);
+};
+
 then.shouldHaveOutputPattern = (pattern) => {
 	then.shouldNotHaveThrown();
 	const hasOutputPatternAtLeastOnce = fakeTerminal.echo.mock.calls.some(([output]) => {
@@ -180,11 +200,13 @@ then.shouldHaveOutputPattern = (pattern) => {
 };
 
 then.shouldHaveOutputPort = () => {
-	then.shouldHaveOutputPattern(/^This is serving on port 8080\.\.\.$/u);
+	then.shouldHaveTranslated('commands.serve.messages.starting', { port: 8080 });
+	then.shouldHaveOutputPattern(/^commands\.serve\.messages\.starting \{"port":"?8080"?\}$/u);
 };
 
 then.shouldHaveOutputCustomPort = () => {
-	then.shouldHaveOutputPattern(/^This is serving on port 1234\.\.\.$/u);
+	then.shouldHaveTranslated('commands.serve.messages.starting', { port: 1234 });
+	then.shouldHaveOutputPattern(/^commands\.serve\.messages\.starting \{"port":"?1234"?\}$/u);
 };
 
 then.shouldHaveOutputRouteResult = () => {

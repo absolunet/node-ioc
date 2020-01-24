@@ -25,14 +25,14 @@ class EnvironmentCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Display the application environment.';
+		return this.t('commands.env.description');
 	}
 
 	/**
 	 * @inheritdoc
 	 */
 	handle() {
-		this.terminal.echo(`Current application environment: "${this.app.environment}"`);
+		this.terminal.echo(this.t('commands.env.messages.current', { name: this.app.environment }));
 	}
 
 }

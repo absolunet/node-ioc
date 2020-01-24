@@ -30,6 +30,12 @@ const fakeTerminal = {
 	spacer: jest.fn()
 };
 
+const fakeTranslator = {
+	translate: jest.fn((key, replace = {}) => {
+		return `${key} ${JSON.stringify(replace)}`;
+	})
+};
+
 const fakeCaptureInterceptor = {
 	handler: jest.fn((...parameters) => {
 		parameters.forEach((parameter) => {
@@ -53,6 +59,10 @@ given.commandRunner = () => {
 given.fakeTerminal = () => {
 	container.singleton('terminal', fakeTerminal);
 	output = [];
+};
+
+given.fakeTranslator = () => {
+	container.singleton('translator', fakeTranslator);
 };
 
 given.command = (Command) => {
@@ -95,6 +105,11 @@ then.shouldHaveOutput = (expected) => {
 then.restoreConsole = () => {
 	console.log   = consoleLog;
 	console.error = consoleError;
+};
+
+then.shouldHaveTranslated = (...parameters) => {
+	then.shouldNotHaveThrown();
+	expect(fakeTranslator.translate).toHaveBeenCalledWith(...parameters);
 };
 
 

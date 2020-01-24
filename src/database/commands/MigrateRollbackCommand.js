@@ -41,7 +41,7 @@ class MigrateRollbackCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Rollback the last database migrations.';
+		return this.t('commands.db-migrate-rollback.description');
 	}
 
 	/**
@@ -59,7 +59,7 @@ class MigrateRollbackCommand extends Command {
 	async handle() {
 		const connection = await this.db.getConnection();
 
-		this.info('Rolling back last migration batch');
+		this.info(this.t('commands.db-migrate-rollback.messages.rolling-back'));
 		const { batch, migrations, output } = await this.rollback(connection);
 
 		output.forEach((string) => {
@@ -67,11 +67,11 @@ class MigrateRollbackCommand extends Command {
 		});
 
 		if (migrations.length === 0) {
-			this.info('No migration rollback to run');
+			this.info(this.t('commands.db-migrate-rollback.messages.up-to-date'));
 		} else {
 			this.info(`Migration #${batch} rollback successful!`);
 			migrations.forEach((migration) => {
-				this.success(`Rolled back: ${migration}`);
+				this.success(this.t('commands.db-migrate-rollback.messages.rolled-back', { migration }));
 			});
 		}
 	}

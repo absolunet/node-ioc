@@ -40,7 +40,7 @@ class MigrateFreshCommand extends Command {
 	 * @inheritdoc
 	 */
 	get description() {
-		return 'Drop all tables and re-run all migrations.';
+		return this.t('commands.db-migrate-fresh.description');
 	}
 
 	/**
@@ -57,7 +57,7 @@ class MigrateFreshCommand extends Command {
 	 */
 	get flags() {
 		return [
-			['seed', 'Seed the database after the migrations.']
+			['seed', this.t('commands.db-migrate-fresh.flags.seed')]
 		];
 	}
 
@@ -67,11 +67,11 @@ class MigrateFreshCommand extends Command {
 	async handle() {
 		const connection = await this.db.getConnection();
 
-		this.info('Migrating all migrations in fresh database');
+		this.info(this.t('commands.db-migrate-fresh.messages.migrating'));
 
-		this.info('Dropping all tables');
+		this.info(this.t('commands.db-migrate-fresh.messages.dropping'));
 		await this.dropAllTables(connection);
-		this.info('All tables dropped');
+		this.info(this.t('commands.db-migrate-fresh.messages.dropped'));
 
 		await this.call(`${this.prefix}:migrate${this.flag('seed') ? ' --seed' : ''}`);
 	}

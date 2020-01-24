@@ -48,7 +48,7 @@ class MigrateCommand extends _Command.default {
 
 
   get description() {
-    return 'Run the database migrations.';
+    return this.t('commands.db-migrate.description');
   }
   /**
    * Command prefix.
@@ -66,7 +66,7 @@ class MigrateCommand extends _Command.default {
 
 
   get flags() {
-    return [['seed', 'Seed the database after the migrations.']];
+    return [['seed', this.t('commands.db-migrate.flags.seed')]];
   }
   /**
    * @inheritdoc
@@ -75,7 +75,7 @@ class MigrateCommand extends _Command.default {
 
   async handle() {
     const connection = await this.db.getConnection();
-    this.info('Migrating latest migrations');
+    this.info(this.t('commands.db-migrate.messages.migrating'));
     const {
       migrations,
       output
@@ -85,10 +85,12 @@ class MigrateCommand extends _Command.default {
     });
 
     if (migrations.length === 0) {
-      this.info('Already up to date');
+      this.info(this.t('commands.db-migrate.messages.up-to-date'));
     } else {
       migrations.forEach(migration => {
-        this.success(`Migrated: ${migration}`);
+        this.success(this.t('commands.db-migrate.messages.migrated', {
+          migration
+        }));
       });
     }
 

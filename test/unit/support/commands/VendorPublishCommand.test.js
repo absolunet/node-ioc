@@ -16,6 +16,7 @@ beforeEach(() => {
 	given.extensionServiceProvider();
 	given.otherServiceProvider();
 	given.commandRunner();
+	given.fakeTranslator();
 	given.vendorPublishCommand();
 });
 

@@ -76,7 +76,7 @@ test('Can run test with Jest on end-to-end test files when specified as flag', a
 	then.shouldRunEndToEndTests();
 });
 
-test('Can run test with Jest on end-to-end test files when specified as flag', async () => {
+test('Can run test with Jest on integration test files when specified as flag', async () => {
 	given.integrationFlag();
 	await when.runningCommand();
 	then.shouldRunIntegrationTests();

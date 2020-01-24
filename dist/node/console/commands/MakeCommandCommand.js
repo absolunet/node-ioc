@@ -30,7 +30,7 @@ class MakeCommandCommand extends _GeneratorCommand.default {
 
 
   get flags() {
-    return [['generator', 'Generate a generator command class.'], ['private', 'Generate a private command class.']];
+    return [['generator', this.t('commands.make-command.flags.generator')], ['private', this.t('commands.make-command.flags.private')]];
   }
   /**
    * @inheritdoc
@@ -59,9 +59,16 @@ class MakeCommandCommand extends _GeneratorCommand.default {
 
   async handle() {
     const type = this.flag('generator') ? 'generator' : this.flag('private') ? 'private' : 'base';
-    this.debug(`Generating ${type} command file.`);
+    const name = this.parameter('class');
+    this.debug(this.t('commands.make-command.messages.generating', {
+      type,
+      name
+    }));
     await this.generate(type);
-    this.info(`Command ${this.parameter('class')} file successfully generated!`);
+    this.info(this.t('commands.make-command.messages.success', {
+      type,
+      name
+    }));
   }
 
 }

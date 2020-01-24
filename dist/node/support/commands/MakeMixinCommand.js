@@ -29,14 +29,6 @@ class MakeMixinCommand extends _GeneratorCommand.default {
    */
 
 
-  get description() {
-    return 'Create a mixin class factory.';
-  }
-  /**
-   * @inheritdoc
-   */
-
-
   get destination() {
     return this.app.sourcePath('bootstrap', 'mixins');
   }
@@ -56,7 +48,7 @@ class MakeMixinCommand extends _GeneratorCommand.default {
 
 
   get parameters() {
-    return [['name', true, null, `Mixin name.`]];
+    return [['name', true, null, this.t('commands.make-mixin.parameters.name')]];
   }
   /**
    * @inheritdoc
@@ -64,7 +56,7 @@ class MakeMixinCommand extends _GeneratorCommand.default {
 
 
   get flags() {
-    return [['noBootstrap', 'Indicates that the mixin should not be bootstrapped.']];
+    return [['noBootstrap', this.t('commands.make-mixin.flags.no-bootstrap')]];
   }
   /**
    * @inheritdoc
@@ -91,9 +83,14 @@ class MakeMixinCommand extends _GeneratorCommand.default {
 
 
   async handle() {
-    this.debug(`Generating mixin file for "${this.parameter('name')}".`);
+    const name = this.parameter('name');
+    this.debug(this.t('commands.make-mixin.messages.generating', {
+      name
+    }));
     await this.generate('base');
-    this.info(`Mixin file for "${this.parameter('name')}" successfully generated!`);
+    this.info(this.t('commands.make-mixin.messages.success', {
+      name
+    }));
     await this.bootstrapMixin();
   }
   /**
@@ -111,12 +108,12 @@ class MakeMixinCommand extends _GeneratorCommand.default {
       const mixinBootstrapper = await fileDriver.loadAsync(mixinBootstrapperPath);
 
       if (!mixinBootstrapper.includes(importStatement)) {
-        this.debug('Adding auto-bootstrap statement.');
+        this.debug(this.t('commands.make-mixin.messages.bootstrapping'));
         await fileDriver.writeAsync(mixinBootstrapperPath, `${mixinBootstrapper}${importStatement}\n`);
-        this.info('Mixin automatically bootstrapped!');
+        this.info(this.t('commands.make-mixin.messages.bootstrapped'));
       }
     } else {
-      this.info('You will have to manually bootstrap the mixin.');
+      this.info(this.t('commands.make-mixin.messages.manual-bootstrap'));
     }
   }
   /**

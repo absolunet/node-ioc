@@ -4,6 +4,8 @@ exports.default = void 0;
 
 var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
 
+var _Command = _interopRequireDefault(require("../Command"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -49,8 +51,15 @@ class CommandRepository {
 
 
   all(withPolicies = true, grouped = false) {
+    const {
+      app,
+      terminal,
+      yargs
+    } = this;
     const gate = (0, _privateRegistry.default)(this).get('gate');
-    const commands = (0, _privateRegistry.default)(this).get('commands').filter(({
+    const commands = (0, _privateRegistry.default)(this).get('commands').map(command => {
+      return this.makeCommand(command);
+    }).filter(({
       policies = []
     }) => {
       return !withPolicies || policies.every(scope => {
@@ -96,10 +105,18 @@ class CommandRepository {
 
 
   get(name) {
-    return (0, _privateRegistry.default)(this).get('commands').find(({
-      name: commandName
-    }) => {
-      return name === commandName;
+    return (0, _privateRegistry.default)(this).get('commands').find(command => {
+      let instance = command instanceof _Command.default ? command : command.prototype;
+
+      while (instance !== _Command.default.prototype) {
+        if (instance.name === name) {
+          return this.makeCommand(command);
+        }
+
+        instance = Object.getPrototypeOf(instance);
+      }
+
+      return null;
     }) || null;
   }
   /**
@@ -117,23 +134,33 @@ class CommandRepository {
    * Add given command in the command list.
    *
    * @param {Function|console.Command} command - The command class or instance.
-   * @returns {console.Command} The command instance.
+   * @returns {console.repositories.CommandRepository} The current command repository instance.
    */
 
 
   add(command) {
+    (0, _privateRegistry.default)(this).get('commands').push(command);
+    return this;
+  }
+  /**
+   * Make a command instance.
+   *
+   * @param {Command|Function} command - A command class.
+   * @returns {Command} The command class instance.
+   */
+
+
+  makeCommand(command) {
     const {
       app,
       terminal,
       yargs
     } = this;
-    const instance = app.make(command, {
+    return app.make(command, {
       app,
       terminal,
       yargs
     });
-    (0, _privateRegistry.default)(this).get('commands').push(instance);
-    return instance;
   }
 
 }

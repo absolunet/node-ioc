@@ -39,13 +39,13 @@ then.shouldHaveListed = (lines) => {
 then.shouldHaveListedHeaderAndOptions = () => {
 	then.shouldHaveListed([
 		'Node IoC',
-		'Usage:',
-		'command [arguments] [options]',
-		'Available commands:',
-		/^\s*Options:$/u,
-		/^\s*--help /u,
-		/^\s*--version /u,
-		/^\s*-v, --verbose /u
+		'commands.list.messages.usage {}:',
+		'commands.list.messages.usage-example {}',
+		'commands.list.messages.available-commands {}:',
+		/^\s*commands\.yargs\.options \{\}$/u,
+		/^\s*--help\s*commands\.list\.flags\.help \{\} /u,
+		/^\s*--version\s*commands\.list\.flags\.version \{\} /u,
+		/^\s*-v, --verbose\s*commands\.list\.flags\.verbose \{\} /u
 	]);
 };
 
@@ -58,6 +58,20 @@ then.shouldHaveListedFakeCommand = () => {
 		'foo',
 		/^\s*foo:bar /u
 	]);
+};
+
+then.yargsStringsShouldHaveBeenTranslated = () => {
+	[
+		'commands.list.flags.help',
+		'commands.list.flags.version',
+		'commands.list.flags.verbose',
+		'commands.list.messages.usage',
+		'commands.list.messages.usage-example',
+		'commands.list.messages.available-commands',
+		'commands.yargs.positionals'
+	].forEach((key) => {
+		then.shouldHaveTranslated(key);
+	});
 };
 
 

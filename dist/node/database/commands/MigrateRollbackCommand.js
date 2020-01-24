@@ -48,7 +48,7 @@ class MigrateRollbackCommand extends _Command.default {
 
 
   get description() {
-    return 'Rollback the last database migrations.';
+    return this.t('commands.db-migrate-rollback.description');
   }
   /**
    * Command prefix.
@@ -67,7 +67,7 @@ class MigrateRollbackCommand extends _Command.default {
 
   async handle() {
     const connection = await this.db.getConnection();
-    this.info('Rolling back last migration batch');
+    this.info(this.t('commands.db-migrate-rollback.messages.rolling-back'));
     const {
       batch,
       migrations,
@@ -78,11 +78,13 @@ class MigrateRollbackCommand extends _Command.default {
     });
 
     if (migrations.length === 0) {
-      this.info('No migration rollback to run');
+      this.info(this.t('commands.db-migrate-rollback.messages.up-to-date'));
     } else {
       this.info(`Migration #${batch} rollback successful!`);
       migrations.forEach(migration => {
-        this.success(`Rolled back: ${migration}`);
+        this.success(this.t('commands.db-migrate-rollback.messages.rolled-back', {
+          migration
+        }));
       });
     }
   }

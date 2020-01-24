@@ -81,7 +81,7 @@ const fakeYargsFactory = () => {
 
 	factoriedYargs._commands = {};
 
-	['option', 'count', 'exitProcess', 'showHelpOnFail', 'locale', 'strict', 'wrap', 'terminalWidth'].forEach((method) => {
+	['option', 'count', 'exitProcess', 'showHelpOnFail', 'locale', 'strict', 'wrap', 'terminalWidth', 'updateStrings', 'version', 'help'].forEach((method) => {
 		factoriedYargs[method] = jest.fn(() => { return factoriedYargs; });
 	});
 

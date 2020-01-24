@@ -70,6 +70,7 @@ class ConsoleServiceProvider extends _ServiceProvider.default {
 
 
   register() {
+    this.loadAndPublishTranslations(this.app.formatPath(__dirname, 'lang'));
     this.bindCommandRepository();
     this.bindCommandRegistrar();
     this.bindCommandRunner();

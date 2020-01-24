@@ -24,13 +24,6 @@ class MakeMixinCommand extends GeneratorCommand {
 	/**
 	 * @inheritdoc
 	 */
-	get description() {
-		return 'Create a mixin class factory.';
-	}
-
-	/**
-	 * @inheritdoc
-	 */
 	get destination() {
 		return this.app.sourcePath('bootstrap', 'mixins');
 	}
@@ -49,7 +42,7 @@ class MakeMixinCommand extends GeneratorCommand {
 	 */
 	get parameters() {
 		return [
-			['name', true, null, `Mixin name.`]
+			['name', true, null, this.t('commands.make-mixin.parameters.name')]
 		];
 	}
 
@@ -58,7 +51,7 @@ class MakeMixinCommand extends GeneratorCommand {
 	 */
 	get flags() {
 		return [
-			['noBootstrap', 'Indicates that the mixin should not be bootstrapped.']
+			['noBootstrap', this.t('commands.make-mixin.flags.no-bootstrap')]
 		];
 	}
 
@@ -83,9 +76,11 @@ class MakeMixinCommand extends GeneratorCommand {
 	 * @inheritdoc
 	 */
 	async handle() {
-		this.debug(`Generating mixin file for "${this.parameter('name')}".`);
+		const name = this.parameter('name');
+
+		this.debug(this.t('commands.make-mixin.messages.generating', { name }));
 		await this.generate('base');
-		this.info(`Mixin file for "${this.parameter('name')}" successfully generated!`);
+		this.info(this.t('commands.make-mixin.messages.success', { name }));
 
 		await this.bootstrapMixin();
 	}
@@ -97,18 +92,19 @@ class MakeMixinCommand extends GeneratorCommand {
 	 */
 	async bootstrapMixin() {
 		if (!this.flag('noBootstrap')) {
-			const fileDriver = this.app.make('file').driver();
+			const fileDriver            = this.app.make('file').driver();
 			const mixinBootstrapperPath = this.app.sourcePath('bootstrap', ['mixins', 'index.js']);
-			const importStatement = `import './${this.parameter('name')}';`;
+			const importStatement       = `import './${this.parameter('name')}';`;
 
 			const mixinBootstrapper = await fileDriver.loadAsync(mixinBootstrapperPath);
+
 			if (!mixinBootstrapper.includes(importStatement)) {
-				this.debug('Adding auto-bootstrap statement.');
+				this.debug(this.t('commands.make-mixin.messages.bootstrapping'));
 				await fileDriver.writeAsync(mixinBootstrapperPath, `${mixinBootstrapper}${importStatement}\n`);
-				this.info('Mixin automatically bootstrapped!');
+				this.info(this.t('commands.make-mixin.messages.bootstrapped'));
 			}
 		} else {
-			this.info('You will have to manually bootstrap the mixin.');
+			this.info(this.t('commands.make-mixin.messages.manual-bootstrap'));
 		}
 	}
 
