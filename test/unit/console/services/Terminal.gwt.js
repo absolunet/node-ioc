@@ -21,6 +21,12 @@ let fakePromptResult;
 //-- Mocks
 //--------------------------------------------------------
 
+const mockedSpawnInstance = {
+	on: jest.fn((event, closure) => {
+		const closureParameters = event === 'close' ? [0] : [];
+		closure(...closureParameters);
+	})
+};
 
 //-- Given
 //--------------------------------------------------------
@@ -49,7 +55,9 @@ given.mockedInquirerPrompt = () => {
 
 given.mockedCrossSpawn = () => {
 	jest.mock('cross-spawn', () => {
-		mockedSpawn      = jest.fn();
+		mockedSpawn      = jest.fn(() => {
+			return mockedSpawnInstance;
+		});
 		mockedSpawn.sync = jest.fn();
 
 		return mockedSpawn;
