@@ -75,7 +75,7 @@ serve:
       fr: 'Exécuter le processus silencieusement sans aucune sortie console.'
 
     start-silent:
-      en: 'Silently start the process, but still output data in the console afterwards.'
+      en: 'Silently start the process, but still output data in the console afterward.'
       fr: 'Exécuter le processus silencieusement, mais toujours afficher l''information dans la console par après.'
 
   messages:
