@@ -24,12 +24,14 @@ class ForwardProxy extends forwardsCalls(BaseProxy) {
 		const value = super.get(object, property);
 
 		if (typeof value === 'undefined' && property !== 'init') {
-			const forward = __(this).get('has')(object, 'getForward')
-				? object.getForward()
-				: this.getForward(object);
+			const forward = __(this).get('has')(object, 'getForward') ? object.getForward() : this.getForward(object);
 			const forwardedValue = forward[property];
 
-			return typeof forwardedValue === 'function' ? forwardedValue.bind(forward) : forwardedValue;
+			if (typeof forwardedValue === 'function') {
+				return Function.prototype.bind.call(forwardedValue, forward);
+			}
+
+			return forwardedValue;
 		}
 
 		return value;
