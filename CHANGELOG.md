@@ -11,6 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+ - Updated engine to fit `>=12` instead of `>=12.0.0`
+ - Updated `@absolunet/terminal` to `3.0.2`
+ - Updated `@hapi/joi` to `17.1.0`
+ - Updated `axios` to `0.19.2`
+ - Updated `bookshelf` to `1.1.0`
+ - Updated `dot-object` to `2.1.3`
+ - Updated `inquirer` to `7.0.6`
+ - Updated `jsrender` to `1.0.6`
+ - Updated `knex` to `0.20.10`
+ - Updated `pubsub-js` to `1.8.0`
+ - Updated `yargs` to `15.1.0`
+ - Updated `@absolunet/manager` (dev) to `2.1.0`
+ - Updated `@absolunet/tester` (dev) to `3.2.2`
+ - Updated `jest` (dev) to `25.1.0`
+
 
 
 ## [1.0.1] - 2020-03-05
@@ -216,16 +232,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Commands are public by default instead of being private
  - `make:command` replace `--public` flag to `--private` (see line above)
  - `logging` configuration renamed to `log`
- - Update `@absolunet/manager` to `2.0.0`
- - Update `@absolunet/tester` to `3.0.4`
- - Update `@hapi/joi` to `16.1.7`
- - Update `bookshelf` to `1.0.1`
- - Update `deepmerge` to `4.2.1`
- - Update `dotenv` to `8.2.0`
- - Update `knex` to `0.19.5`
- - Update `nodemon` to `1.19.4`
- - Update `replace-in-file` to `4.2.0`
- - Update `yargs` to `14.2.0`
+ - Updated `@absolunet/manager` (dev) to `2.0.0`
+ - Updated `@absolunet/tester` (dev) to `3.0.4`
+ - Updated `@hapi/joi` to `16.1.7`
+ - Updated `bookshelf` to `1.0.1`
+ - Updated `deepmerge` to `4.2.1`
+ - Updated `dotenv` to `8.2.0`
+ - Updated `knex` to `0.19.5`
+ - Updated `nodemon` to `1.19.4`
+ - Updated `replace-in-file` to `4.2.0`
+ - Updated `yargs` to `14.2.0`
 
 ### Fixed
  - Node.js `>=12.0.0` instead of `>=12.5.0` (lowest LTS version will be used over time, such as `12.0.0`, `14.0.0`, etc.) 
@@ -244,9 +260,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
  - Enhanced command descriptions
- - Update `@hapi/joi` to `16.1.5`
- - Update `jsrender` to `1.0.5`
- - Update `nodemon` to `1.19.3`
+ - Updated `@hapi/joi` to `16.1.5`
+ - Updated `jsrender` to `1.0.5`
+ - Updated `nodemon` to `1.19.3`
 
 ### Fixed
  - ESLint error fixed (tests was not properly run before the previous release, fixed)
@@ -345,8 +361,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Move `SupportServiceProvider` from Kernel to Application core bootstrapper
  - `json` file manager driver uses `writeJson` method from both file systems
  - `jsrender` module now exposed through `engine` property in `jsrender` view engine driver
- - Update `@hapi/joi` to `16.0.1`
- - Update `bookshelf` to `1.0.0`
+ - Updated `@hapi/joi` to `16.0.1`
+ - Updated `bookshelf` to `1.0.0`
 
 ### Fixed
  - `storage/logs` folder removed from `npm` publication
@@ -363,7 +379,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
  - Change `yargs` parsing to strict mode
- - Update `knex` to `0.19.4`
+ - Updated `knex` to `0.19.4`
  
 
 
@@ -387,10 +403,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - `exception.handler` now render as response if request and response objects are passed as parameters
  - `exception.handler` formats response to JSON if request accepts `application/json`
  - `file` log channel renamed to `single`
- - Update `@absolunet/tester` to `2.6.9`
- - Update `@absolunet/terminal` to `2.1.1`
- - Update `inquirer` to `7.0.0`
- - Update `nodemon` to `1.19.2`
+ - Updated `@absolunet/tester` to `2.6.9`
+ - Updated `@absolunet/terminal` to `2.1.1`
+ - Updated `inquirer` to `7.0.0`
+ - Updated `nodemon` to `1.19.2`
 
 ### Fixed
  - Add support for file scaffold through generator command with folder namespace such as `make:command foo/BarCommand`
@@ -504,10 +520,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.4.2] - 2019-07-22
 
 ### Changed
- - Update `dot-object` to `1.8.1`
- - Update `inquirer` to `6.5.0`
- - Update `table` to `5.4.4`
- - Update `yargs` to `13.3.0`
+ - Updated `dot-object` to `1.8.1`
+ - Updated `inquirer` to `6.5.0`
+ - Updated `table` to `5.4.4`
+ - Updated `yargs` to `13.3.0`
 
 
 
@@ -530,7 +546,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
  - Move route handling to a `route.handler` service that handles the request through either a closure or a controller action
- - Update `jest-extended` to `0.11.2`
+ - Updated `jest-extended` to `0.11.2`
 
 
 
@@ -577,9 +593,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - `alias` method in `Container`
 
 ### Changed
- - Update `axios` to `0.19.0`
- - Update `@absolunet/manager` to `1.1.0`
- - Update `@absolunet/tester` to `2.6.8`
+ - Updated `axios` to `0.19.0`
+ - Updated `@absolunet/manager` (dev) to `1.1.0`
+ - Updated `@absolunet/tester` (dev) to `2.6.8`
 
 ### Fixed
  - Test coverage from git repository
@@ -601,15 +617,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
  - Slash as explicit dependency
- - Added `@absolunet/manager` to manage package
+ - Added `@absolunet/manager` (dev) to manage package
 
 ### Changed
- - Update `@absolunet/tester` to `2.6.4`
- - Update `@absolunet/fsp` to `1.6.0`
- - Update `@absolunet/fss` to `1.6.0`
- - Update `jest` to `24.7.1`
- - Update `inquirer` to `6.3.1`
- - Update `yargs` to `13.2.2`
+ - Updated `@absolunet/tester` to `2.6.4`
+ - Updated `@absolunet/fsp` to `1.6.0`
+ - Updated `@absolunet/fss` to `1.6.0`
+ - Updated `jest` to `24.7.1`
+ - Updated `inquirer` to `6.3.1`
+ - Updated `yargs` to `13.2.2`
 
 
 
