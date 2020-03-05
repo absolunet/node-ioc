@@ -43,7 +43,7 @@
 	
 
 	<header>
-		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.0</span></p>
+		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.1</span></p>
 		<a href="https://github.com/absolunet/node-ioc" class="github" data-external="external">View on GitHub</a>
 	</header>
 
@@ -107,7 +107,7 @@ class BaseProxy {
 			const value = object[property];
 
 			if (typeof value === 'function' &amp;&amp; property !== 'constructor') {
-				return value.bind(object);
+				return Function.prototype.bind.call(value, object);
 			}
 
 			return value;

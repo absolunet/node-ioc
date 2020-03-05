@@ -43,7 +43,7 @@
 	
 
 	<header>
-		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.0</span></p>
+		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.1</span></p>
 		<a href="https://github.com/absolunet/node-ioc" class="github" data-external="external">View on GitHub</a>
 	</header>
 
@@ -125,7 +125,7 @@ const hasDriver = factory((SuperClass) => {
 
 			const data = __(this).get('drivers')[name];
 
-			if (!data.concrete || Object.keys(parameters) > 0) {
+			if (!data.concrete || Object.keys(parameters).length > 0) {
 				const concrete = this.app.make(data.abstract, parameters);
 
 				if (!this.isDriverAlias(name)) {
