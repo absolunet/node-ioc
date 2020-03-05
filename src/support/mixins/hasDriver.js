@@ -59,7 +59,7 @@ const hasDriver = factory((SuperClass) => {
 
 			const data = __(this).get('drivers')[name];
 
-			if (!data.concrete || Object.keys(parameters) > 0) {
+			if (!data.concrete || Object.keys(parameters).length > 0) {
 				const concrete = this.app.make(data.abstract, parameters);
 
 				if (!this.isDriverAlias(name)) {

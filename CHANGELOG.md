@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
  - Handle prototype-less function binding with proxy handlers
-
+ - Check parameter count when instantiating a driver
 
 
 ## [1.0.0] - 2020-01-24
