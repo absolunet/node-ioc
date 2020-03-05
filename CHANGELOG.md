@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+ - Handle prototype-less function binding with proxy handlers
+
 
 
 ## [1.0.0] - 2020-01-24
