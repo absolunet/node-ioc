@@ -41,7 +41,7 @@ class BaseProxy {
 			const value = object[property];
 
 			if (typeof value === 'function' && property !== 'constructor') {
-				return value.bind(object);
+				return Function.prototype.bind.call(value, object);
 			}
 
 			return value;

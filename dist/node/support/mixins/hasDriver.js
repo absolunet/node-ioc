@@ -66,7 +66,7 @@ const hasDriver = (0, _mixinFactory.default)(SuperClass => {
 
       const data = (0, _privateRegistry.default)(this).get('drivers')[name];
 
-      if (!data.concrete || Object.keys(parameters) > 0) {
+      if (!data.concrete || Object.keys(parameters).length > 0) {
         const concrete = this.app.make(data.abstract, parameters);
 
         if (!this.isDriverAlias(name)) {

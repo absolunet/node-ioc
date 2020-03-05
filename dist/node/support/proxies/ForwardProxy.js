@@ -32,7 +32,12 @@ class ForwardProxy extends (0, _forwardsCalls.default)(_BaseProxy.default) {
     if (typeof value === 'undefined' && property !== 'init') {
       const forward = (0, _privateRegistry.default)(this).get('has')(object, 'getForward') ? object.getForward() : this.getForward(object);
       const forwardedValue = forward[property];
-      return typeof forwardedValue === 'function' ? forwardedValue.bind(forward) : forwardedValue;
+
+      if (typeof forwardedValue === 'function') {
+        return Function.prototype.bind.call(forwardedValue, forward);
+      }
+
+      return forwardedValue;
     }
 
     return value;

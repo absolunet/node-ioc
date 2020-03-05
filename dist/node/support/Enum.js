@@ -36,7 +36,7 @@ class Enum {
    * Enum constructor.
    *
    * Create dynamic properties reversing the enumerated keys and values.
-   * An enum listing foo => bar would exposes "foo" => "bar" and "bar" => "foo" afterwards.
+   * An enum listing foo => bar would exposes "foo" => "bar" and "bar" => "foo" afterward.
    */
   constructor() {
     const entries = {};

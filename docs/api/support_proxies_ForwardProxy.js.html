@@ -43,7 +43,7 @@
 	
 
 	<header>
-		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.0</span></p>
+		<p class="package"><a href="../">@absolunet/ioc</a><span class="version">1.0.1</span></p>
 		<a href="https://github.com/absolunet/node-ioc" class="github" data-external="external">View on GitHub</a>
 	</header>
 
@@ -90,12 +90,14 @@ class ForwardProxy extends forwardsCalls(BaseProxy) {
 		const value = super.get(object, property);
 
 		if (typeof value === 'undefined' &amp;&amp; property !== 'init') {
-			const forward = __(this).get('has')(object, 'getForward')
-				? object.getForward()
-				: this.getForward(object);
+			const forward = __(this).get('has')(object, 'getForward') ? object.getForward() : this.getForward(object);
 			const forwardedValue = forward[property];
 
-			return typeof forwardedValue === 'function' ? forwardedValue.bind(forward) : forwardedValue;
+			if (typeof forwardedValue === 'function') {
+				return Function.prototype.bind.call(forwardedValue, forward);
+			}
+
+			return forwardedValue;
 		}
 
 		return value;
