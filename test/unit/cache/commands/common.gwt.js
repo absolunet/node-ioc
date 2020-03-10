@@ -20,8 +20,16 @@ const fakeCacheManagerDriver = {
 	'flush':  jest.fn(() => { return Promise.resolve(); }),
 	'delete': jest.fn(() => { return Promise.resolve(); })
 };
-const fakeCacheManager = { resolve: jest.fn(() => { return fakeCacheManagerDriver; }) };
-const fakeTerminal     = { println: jest.fn() };
+
+const fakeCacheManager = {
+	resolve: jest.fn(() => {
+		return fakeCacheManagerDriver;
+	})
+};
+
+const fakeTerminal = {
+	print: jest.fn()
+};
 
 
 //-- Given

@@ -1,5 +1,8 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = void 0;
 
 var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
@@ -505,7 +508,7 @@ class Command {
   print(level, ...parameters) {
     if (this.verbose >= level) {
       parameters.forEach(parameter => {
-        this.terminal.println(parameter);
+        this.terminal.print(parameter);
       });
     }
   }

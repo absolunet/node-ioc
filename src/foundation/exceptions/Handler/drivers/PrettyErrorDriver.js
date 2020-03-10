@@ -42,7 +42,7 @@ class PrettyErrorDriver extends Driver {
 			paddingBottom: 1
 		};
 
-		const [textColor] = this.terminal.defaults.textColor._styles;
+		const [textColor] = this.terminal.theme.textColor._styles;
 
 		const colorName = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gray', 'grey', 'blackBright', 'redBright', 'greenBright', 'yellowBright', 'blueBright', 'magentaBright', 'cyanBright', 'whiteBright'].find((name) => {
 			return this.terminal.chalk[name] && this.terminal.chalk[name]._styles[0] === textColor;
@@ -52,7 +52,7 @@ class PrettyErrorDriver extends Driver {
 
 		this.engine.appendStyle({
 			'pretty-error': {
-				paddingLeft: this.terminal.defaults.indent
+				paddingLeft: this.terminal.theme.indent
 			},
 			'pretty-error > header > title > kind': {
 				...headerStyle,

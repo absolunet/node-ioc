@@ -448,7 +448,7 @@ class Command {
 	print(level, ...parameters) {
 		if (this.verbose >= level) {
 			parameters.forEach((parameter) => {
-				this.terminal.println(parameter);
+				this.terminal.print(parameter);
 			});
 		}
 	}

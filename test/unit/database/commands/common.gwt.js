@@ -27,9 +27,6 @@ const fakeTerminal = {
 	success: jest.fn(),
 	warning: jest.fn(),
 	print:   jest.fn(),
-	println: jest.fn((...parameters) => {
-		fakeTerminal.print(...parameters);
-	}),
 	table: jest.fn()
 };
 

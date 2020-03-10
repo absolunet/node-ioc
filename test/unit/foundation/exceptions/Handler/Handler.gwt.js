@@ -42,13 +42,9 @@ const brokenLogger = {
 const fakeTerminal = {
 	echo:   jest.fn(),
 	spacer: jest.fn(),
-	defaults: {
-		get textColor() {
-			return fakeTerminal.chalk.blue;
-		},
-		get indent() {
-			return 2;
-		}
+	theme: {
+		textColor: chalk.blue,
+		indent: 2
 	},
 	chalk
 };

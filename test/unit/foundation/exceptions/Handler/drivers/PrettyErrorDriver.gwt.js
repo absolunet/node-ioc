@@ -34,7 +34,7 @@ const mockedPrettyErrorConstructor = jest.fn(() => {
 });
 
 const fakeTerminal = {
-	defaults: {
+	theme: {
 		textColor: chalk.blue,
 		indent: 2
 	},
@@ -71,11 +71,11 @@ given.prettyErrorDriver = () => {
 };
 
 given.magentaColorInTerminal = () => {
-	fakeTerminal.defaults.textColor = chalk.magenta;
+	fakeTerminal.theme.textColor = chalk.magenta;
 };
 
 given.indentationOfSevenInTerminal = () => {
-	fakeTerminal.defaults.indent = 7;
+	fakeTerminal.theme.indent = 7;
 };
 
 

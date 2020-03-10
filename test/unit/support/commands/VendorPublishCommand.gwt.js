@@ -56,7 +56,7 @@ const fakeTerminal = {
 	choice:  jest.fn(deferQuestion),
 	confirm: jest.fn(deferQuestion),
 	success: jest.fn(),
-	println: jest.fn(),
+	print:   jest.fn(),
 	spacer:  jest.fn()
 };
 
@@ -264,13 +264,13 @@ then.shouldNotHavePublishedAnything = () => {
 then.shouldHavePrintedThatNothingWasPublished = () => {
 	then.shouldNotHaveThrown();
 	expect(fakeTranslator.translate).toHaveBeenCalledWith('commands.vendor-publish.messages.empty');
-	expect(fakeTerminal.println).toHaveBeenCalledWith('commands.vendor-publish.messages.empty {}');
+	expect(fakeTerminal.print).toHaveBeenCalledWith('commands.vendor-publish.messages.empty {}');
 };
 
 then.shouldHavePublished = ({ from, to }) => {
 	then.shouldNotHaveThrown();
 	expect(fakeTranslator.translate).not.toHaveBeenCalledWith('commands.vendor-publish.messages.empty');
-	expect(fakeTerminal.println).not.toHaveBeenCalledWith('commands.vendor-publish.messages.empty {}');
+	expect(fakeTerminal.print).not.toHaveBeenCalledWith('commands.vendor-publish.messages.empty {}');
 
 	const destinationFolder = slash(path.dirname(to));
 	const relativeFrom      = path.relative(container.basePath(), from);
