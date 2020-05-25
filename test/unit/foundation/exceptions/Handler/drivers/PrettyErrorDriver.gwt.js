@@ -5,7 +5,6 @@
 import gwt from '../../../common.gwt';
 const { given, when, then, build } = gwt;
 
-import chalk from 'chalk';
 import container from '../../../../container';
 import PrettyErrorDriver from '../../../../../../dist/node/foundation/exceptions/Handler/drivers/PrettyErrorDriver';
 
@@ -35,12 +34,11 @@ const mockedPrettyErrorConstructor = jest.fn(() => {
 
 const fakeTerminal = {
 	theme: {
-		textColor: chalk.blue,
+		textColor: 'blue',
 		indent: 2
 	},
 	spacer: jest.fn(),
-	echo:   jest.fn(),
-	chalk
+	echo:   jest.fn()
 };
 
 
@@ -71,7 +69,7 @@ given.prettyErrorDriver = () => {
 };
 
 given.magentaColorInTerminal = () => {
-	fakeTerminal.theme.textColor = chalk.magenta;
+	fakeTerminal.theme.textColor = 'magenta';
 };
 
 given.indentationOfSevenInTerminal = () => {

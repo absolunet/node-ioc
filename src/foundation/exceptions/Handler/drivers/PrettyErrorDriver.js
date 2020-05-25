@@ -42,13 +42,11 @@ class PrettyErrorDriver extends Driver {
 			paddingBottom: 1
 		};
 
-		const [textColor] = this.terminal.theme.textColor._styles;
-
-		const colorName = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gray', 'grey', 'blackBright', 'redBright', 'greenBright', 'yellowBright', 'blueBright', 'magentaBright', 'cyanBright', 'whiteBright'].find((name) => {
-			return this.terminal.chalk[name] && this.terminal.chalk[name]._styles[0] === textColor;
-		}) || 'yellowBright';
-
-		const prettyColorAccentColorName = this.stringHelper.slug(colorName).split('-').reverse().join('-');
+		const prettyColorAccentColorName = this.stringHelper
+			.slug(this.terminal.theme.textColor)
+			.split('-')
+			.reverse()
+			.join('-');
 
 		this.engine.appendStyle({
 			'pretty-error': {
