@@ -1,5 +1,8 @@
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 exports.default = void 0;
 
 var _Driver = _interopRequireDefault(require("./Driver"));
@@ -49,14 +52,14 @@ class PrettyErrorDriver extends _Driver.default {
       paddingTop: 1,
       paddingBottom: 1
     };
-    const [textColor] = this.terminal.defaults.textColor._styles;
+    const [textColor] = this.terminal.theme.textColor._styles;
     const colorName = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'gray', 'grey', 'blackBright', 'redBright', 'greenBright', 'yellowBright', 'blueBright', 'magentaBright', 'cyanBright', 'whiteBright'].find(name => {
       return this.terminal.chalk[name] && this.terminal.chalk[name]._styles[0] === textColor;
     }) || 'yellowBright';
     const prettyColorAccentColorName = this.stringHelper.slug(colorName).split('-').reverse().join('-');
     this.engine.appendStyle({
       'pretty-error': {
-        paddingLeft: this.terminal.defaults.indent
+        paddingLeft: this.terminal.theme.indent
       },
       'pretty-error > header > title > kind': { ...headerStyle,
         paddingLeft: 2

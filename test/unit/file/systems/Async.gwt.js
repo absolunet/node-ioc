@@ -55,7 +55,7 @@ given.searchString = () => {
 };
 
 given.searchPatternWithFlags = () => {
-	search = /search string/mi; // eslint-disable-line require-unicode-regexp
+	search = /search string/im; // eslint-disable-line require-unicode-regexp
 };
 
 given.replace = () => {
