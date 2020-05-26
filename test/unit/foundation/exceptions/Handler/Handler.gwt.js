@@ -5,7 +5,6 @@
 import gwt from '../../common.gwt';
 const { given, when, then, build } = gwt;
 
-import chalk            from 'chalk';
 import container        from '../../../container';
 import ExceptionHandler from '../../../../../dist/node/foundation/exceptions/Handler';
 import StringHelper     from '../../../../../dist/node/support/helpers/StringHelper';
@@ -43,10 +42,9 @@ const fakeTerminal = {
 	echo:   jest.fn(),
 	spacer: jest.fn(),
 	theme: {
-		textColor: chalk.blue,
+		textColor: 'blue',
 		indent: 2
-	},
-	chalk
+	}
 };
 
 
