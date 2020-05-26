@@ -137,6 +137,13 @@ describe('With fake file manager', () => {
 		then.shouldHaveLoadedFilesRecursively();
 	});
 
+	test('Can load array configuration', () => {
+		given.config({ key: [{ foo: 'bar' }, { baz: 'qux' }] });
+		when.loadingFolder();
+		when.gettingConfig('key');
+		then.resultShouldEqual([{ foo: 'bar' }, { baz: 'qux' }]);
+	});
+
 	test('Ignore other folder if not specified', () => {
 		given.configInOtherFolder({ other: { foo: 'config' } });
 		when.loadingFolder();
