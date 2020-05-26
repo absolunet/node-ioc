@@ -77,9 +77,9 @@ class ConfigRepository {
 	merge(key, value, overwrite = false) {
 		let mergedValue = value;
 
-		if (typeof value === 'object' && value) {
+		if (typeof value === 'object' && value && !Array.isArray(value)) {
 			const original = this.get(key, {});
-			mergedValue = overwrite ? Object.assign(original, value) : Object.assign({}, value, original);
+			mergedValue    = overwrite ? Object.assign(original, value) : Object.assign({}, value, original);
 		}
 
 		return this.set(key, mergedValue);
