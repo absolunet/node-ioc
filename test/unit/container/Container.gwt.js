@@ -238,6 +238,12 @@ then.resultShouldHaveProperty = (key, value) => {
 	expect(result[key]).toBe(value);
 };
 
+then.resultShouldNotHaveProperty = (key) => {
+	then.shouldNotHaveThrown();
+	expect(result).toBeTruthy();
+	expect(result[key]).toBeUndefined();
+};
+
 then.resultShouldBeObject = () => {
 	then.shouldNotHaveThrown();
 	expect(typeof result).toBe('object');

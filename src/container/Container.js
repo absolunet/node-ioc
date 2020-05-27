@@ -250,7 +250,9 @@ class Container extends checksTypes() {
 		const realInstance = instance.__instance || instance;
 		dependencies.forEach((dependency, index) => {
 			__(realInstance).set(dependency, resolvedDependencies[index]);
-			const formattedName = to.camel(dependency);
+			const formattedName = to.camel(dependency.split('.').map((dependencyPart) => {
+				return to.dot(dependencyPart);
+			}).join('.'));
 			if (!Object.prototype.hasOwnProperty.call(realInstance, formattedName)) {
 				Object.defineProperty(realInstance, formattedName, {
 					value:    resolvedDependencies[index],

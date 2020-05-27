@@ -272,7 +272,9 @@ class Container extends (0, _checksTypes.default)() {
     dependencies.forEach((dependency, index) => {
       (0, _privateRegistry.default)(realInstance).set(dependency, resolvedDependencies[index]);
 
-      const formattedName = _toCase.default.camel(dependency);
+      const formattedName = _toCase.default.camel(dependency.split('.').map(dependencyPart => {
+        return _toCase.default.dot(dependencyPart);
+      }).join('.'));
 
       if (!Object.prototype.hasOwnProperty.call(realInstance, formattedName)) {
         Object.defineProperty(realInstance, formattedName, {
