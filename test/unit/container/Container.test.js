@@ -177,6 +177,38 @@ describe('Instance', () => {
 		then.resultShouldHaveProperty('barBaz', 'test');
 	});
 
+	test('Dependency property name can handle dotted and camel syntax', () => {
+		given.constructorBinding('foo');
+		given.context({ 'bar.bazQux': 'test' });
+		when.making('foo');
+		then.resultShouldHaveProperty('barBazQux', 'test');
+		then.resultShouldNotHaveProperty('bar.bazQux');
+	});
+
+	test('Dependency property name can handle dotted and kebab syntax', () => {
+		given.constructorBinding('foo');
+		given.context({ 'bar.baz-qux': 'test' });
+		when.making('foo');
+		then.resultShouldHaveProperty('barBazQux', 'test');
+		then.resultShouldNotHaveProperty('bar.baz-qux');
+	});
+
+	test('Dependency property name can handle dotted and snake syntax', () => {
+		given.constructorBinding('foo');
+		given.context({ 'bar.baz_qux': 'test' });
+		when.making('foo');
+		then.resultShouldHaveProperty('barBazQux', 'test');
+		then.resultShouldNotHaveProperty('bar.baz_qux');
+	});
+
+	test('Dependency property name can handle pascal-case syntax', () => {
+		given.constructorBinding('foo');
+		given.context({ BarBazQux: 'test' });
+		when.making('foo');
+		then.resultShouldHaveProperty('barBazQux', 'test');
+		then.resultShouldNotHaveProperty('BarBazQux');
+	});
+
 	test('The binding "app" is resolved as container', () => {
 		when.making('app');
 		then.resultShouldBeCurrentContainer();
