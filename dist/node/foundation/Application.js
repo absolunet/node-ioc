@@ -173,7 +173,7 @@ class Application extends _Container.default {
       }
 
       (0, _privateRegistry.default)(this).set('booted', true);
-      this.make('event').emit('application.booted', this);
+      dispatcher.emit('application.booted', this);
     } catch (error) {
       throw new _ApplicationBootingError.default(error);
     }

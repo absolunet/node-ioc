@@ -154,7 +154,7 @@ class Application extends Container {
 			}
 
 			__(this).set('booted', true);
-			this.make('event').emit('application.booted', this);
+			dispatcher.emit('application.booted', this);
 		} catch (error) {
 			throw new ApplicationBootingError(error);
 		}
