@@ -11,8 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+
+
+## [2.0.0] - 2020-05-28
+
+### Added
+ - Added support for abstract command classes in application without auto-loading
+
 ### Changed
- - Updated engine to fit `>=12` instead of `>=12.0.0`
+ - Updated the engine to fit `>=12` instead of `>=12.0.0`
  - Updated `@absolunet/terminal` to `3.0.2`
  - Updated `@hapi/joi` to `17.1.0`
  - Updated `axios` to `0.19.2`
@@ -26,6 +33,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Updated `@absolunet/manager` (dev) to `2.1.0`
  - Updated `@absolunet/tester` (dev) to `3.2.2`
  - Updated `jest` (dev) to `25.1.0`
+
+### Fixed
+ - Added `chalk` as explicit dependency to `3.0.0` to ensure same version as the `@absolunet/terminal` package
+ - Allow an array as root value in configuration files
+ - Allow mixed-case injectable name to be properly named as camel-case property
+ - Trap error during application booting phase to throw a specific `ApplicationBootingError`
+ - Use instantiated dispatcher instead of retrieving the singleton in the booting phase
 
 
 
@@ -209,7 +223,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - typo in `write` command method
  - JSDoc router references
  - Teapot does not throw HTTP error anymore
- 
+
 
 
 ## [1.0.0-alpha.1] - 2019-10-25
@@ -244,10 +258,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Updated `yargs` to `14.2.0`
 
 ### Fixed
- - Node.js `>=12.0.0` instead of `>=12.5.0` (lowest LTS version will be used over time, such as `12.0.0`, `14.0.0`, etc.) 
+ - Node.js `>=12.0.0` instead of `>=12.5.0` (lowest LTS version will be used over time, such as `12.0.0`, `14.0.0`, etc.)
 
 ### Removed
- - Moved bootstrapped application to the application repository 
+ - Moved bootstrapped application to the application repository
 
 
 
@@ -311,7 +325,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Service providers are now all located in root folder of their modules instead of the `providers` folder
  - `loadCommands` service provider method allowing command registration from manual insertion
  - Remove all `ConsoleServiceProvider` classes in modules exposing commands (keeps the `console/ConsoleServiceProvider`)
- 
+
 
 
 
@@ -380,7 +394,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
  - Change `yargs` parsing to strict mode
  - Updated `knex` to `0.19.4`
- 
+
 
 
 ## [0.7.1] - 2019-09-09
@@ -645,7 +659,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/1.0.1...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/2.0.0...HEAD
+[2.0.0]:         https://github.com/absolunet/node-ioc/compare/1.0.1...2.0.0
 [1.0.1]:         https://github.com/absolunet/node-ioc/compare/1.0.0...1.0.1
 [1.0.0]:         https://github.com/absolunet/node-ioc/compare/1.0.0-rc.3...1.0.0
 [1.0.0-rc.3]:    https://github.com/absolunet/node-ioc/compare/1.0.0-rc.2...1.0.0-rc.3
