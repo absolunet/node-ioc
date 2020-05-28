@@ -178,17 +178,7 @@ class Application extends Container {
 				})
 				.reverse()
 				.forEach((providerModel) => {
-					try {
-						this.registerProvider(providerModel);
-					} catch (error) {
-						const errors = __(this).get('registerErrors');
-
-						if (errors) {
-							errors.push(error);
-						} else {
-							throw error;
-						}
-					}
+					this.registerProvider(providerModel);
 				});
 			__(this).set('booted.core', true);
 		}

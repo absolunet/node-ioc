@@ -194,17 +194,7 @@ class Application extends _Container.default {
       [...coreProviders].reverse().map(provider => {
         return this.unshiftProvider(provider);
       }).reverse().forEach(providerModel => {
-        try {
-          this.registerProvider(providerModel);
-        } catch (error) {
-          const errors = (0, _privateRegistry.default)(this).get('registerErrors');
-
-          if (errors) {
-            errors.push(error);
-          } else {
-            throw error;
-          }
-        }
+        this.registerProvider(providerModel);
       });
       (0, _privateRegistry.default)(this).set('booted.core', true);
     }
