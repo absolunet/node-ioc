@@ -5,8 +5,9 @@
 import gwt from './common.gwt';
 const { given, when, then, build } = gwt;
 
-import Application     from '../../../dist/node/foundation/Application';
-import ServiceProvider from '../../../dist/node/foundation/ServiceProvider';
+import Application             from '../../../dist/node/foundation/Application';
+import ServiceProvider         from '../../../dist/node/foundation/ServiceProvider';
+import ApplicationBootingError from '../../../dist/node/foundation/exceptions/ApplicationBootingError';
 
 let application;
 let fakeConfig;
@@ -46,6 +47,22 @@ const ProviderRegisteringOtherProviderOnBoot = class extends ServiceProvider {
 ProviderRegisteringOtherProviderOnBoot.prototype.register = jest.fn();
 ProviderRegisteringOtherProviderOnBoot.prototype._boot    = jest.fn();
 
+const ProviderThatThrowsDuringRegisteringPhase = class extends ServiceProvider {
+
+	register() {
+		throw new Error('Test provider register error');
+	}
+
+};
+
+const ProviderThatThrowsDuringBootingPhase = class extends ServiceProvider {
+
+	boot() {
+		throw new Error('Test provider boot error');
+	}
+
+};
+
 const fakeDispatcher = {
 	removeAllListeners: jest.fn()
 };
@@ -84,6 +101,14 @@ given.registeredProviderRegisteringOtherProviderOnRegister = () => {
 
 given.registeredProviderRegisteringOtherProviderOnBoot = () => {
 	application.register(ProviderRegisteringOtherProviderOnBoot);
+};
+
+given.registeredProviderThatThrowsDuringRegisteringPhase = () => {
+	application.register(ProviderThatThrowsDuringRegisteringPhase);
+};
+
+given.registeredProviderThatThrowsDuringBootingPhase = () => {
+	application.register(ProviderThatThrowsDuringBootingPhase);
 };
 
 given.fakeDispatcher = () => {
@@ -429,6 +454,18 @@ then.applicationShouldHaveNewVersion = () => {
 then.resultShouldBeFormattedPathFromBinding = (binding, pathParts) => {
 	then.shouldNotHaveThrown();
 	expect(result).toBe(`${application.make(binding)}/${pathParts.join('/')}`);
+};
+
+then.shouldHaveThrownApplicationBootingError = () => {
+	then.shouldHaveThrown();
+	then.exceptionShouldBeInstanceOf(ApplicationBootingError);
+};
+
+then.shouldHaveThrownApplicationBootingErrorMatching = (expected) => {
+	then.shouldHaveThrownApplicationBootingError();
+	then.exceptionShould((exception) => {
+		expect(exception.error.message).toMatch(expected);
+	});
 };
 
 

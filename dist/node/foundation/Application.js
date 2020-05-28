@@ -13,6 +13,8 @@ var _slash = _interopRequireDefault(require("slash"));
 
 var _privateRegistry = _interopRequireDefault(require("@absolunet/private-registry"));
 
+var _ApplicationBootingError = _interopRequireDefault(require("./exceptions/ApplicationBootingError"));
+
 var _ServiceProvider = _interopRequireDefault(require("./ServiceProvider"));
 
 var _Container = _interopRequireDefault(require("../container/Container"));
@@ -147,30 +149,35 @@ class Application extends _Container.default {
       throw new TypeError('The container was already booted.');
     }
 
-    this.bootCoreProviders();
-    const dispatcher = this.make('event');
-    (0, _privateRegistry.default)(this).get('onBooting').forEach(callback => {
-      dispatcher.once('application.booting', callback);
-    });
-    (0, _privateRegistry.default)(this).get('onBooted').forEach(callback => {
-      dispatcher.once('application.booted', callback);
-    });
-    dispatcher.emit('application.booting', this);
-    const providers = (0, _privateRegistry.default)(this).get('providers'); // We use a for loop instead of a forEach to allow providers to register other providers,
-    // so they can be properly registered and booted during application boot process.
+    try {
+      this.bootCoreProviders();
+      const dispatcher = this.make('event');
+      (0, _privateRegistry.default)(this).get('onBooting').forEach(callback => {
+        dispatcher.once('application.booting', callback);
+      });
+      (0, _privateRegistry.default)(this).get('onBooted').forEach(callback => {
+        dispatcher.once('application.booted', callback);
+      });
+      dispatcher.emit('application.booting', this);
+      const providers = (0, _privateRegistry.default)(this).get('providers'); // We use a for loop instead of a forEach to allow providers to register other providers,
+      // so they can be properly registered and booted during application boot process.
 
-    let i;
+      let i;
 
-    for (i = coreProviders.length; i < providers.length; i++) {
-      this.registerProvider(providers[i]);
+      for (i = coreProviders.length; i < providers.length; i++) {
+        this.registerProvider(providers[i]);
+      }
+
+      for (i = 0; i < providers.length; i++) {
+        this.bootProvider(providers[i]);
+      }
+
+      (0, _privateRegistry.default)(this).set('booted', true);
+      this.make('event').emit('application.booted', this);
+    } catch (error) {
+      throw new _ApplicationBootingError.default(error);
     }
 
-    for (i = 0; i < providers.length; i++) {
-      this.bootProvider(providers[i]);
-    }
-
-    (0, _privateRegistry.default)(this).set('booted', true);
-    this.make('event').emit('application.booted', this);
     return (0, _privateRegistry.default)(this).get('proxy');
   }
   /**
@@ -187,7 +194,17 @@ class Application extends _Container.default {
       [...coreProviders].reverse().map(provider => {
         return this.unshiftProvider(provider);
       }).reverse().forEach(providerModel => {
-        this.registerProvider(providerModel);
+        try {
+          this.registerProvider(providerModel);
+        } catch (error) {
+          const errors = (0, _privateRegistry.default)(this).get('registerErrors');
+
+          if (errors) {
+            errors.push(error);
+          } else {
+            throw error;
+          }
+        }
       });
       (0, _privateRegistry.default)(this).set('booted.core', true);
     }

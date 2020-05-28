@@ -73,6 +73,10 @@ then.shouldNotHaveThrown = () => {
 	expect((exception || {}).stack).toBeFalsy();
 };
 
+then.exceptionShould = (exceptionTest) => {
+	exceptionTest(exception);
+};
+
 then.exceptionShouldBe = (expected) => {
 	expect(exception.message).toBe(expected);
 };

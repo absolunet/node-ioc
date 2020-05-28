@@ -63,7 +63,7 @@ test('A provider can register another provider during the register phase', () =>
 test('A provider cannot register another provider during the boot phase', () => {
 	given.registeredProviderRegisteringOtherProviderOnBoot();
 	when.booting();
-	then.exceptionShouldMatch(/^Cannot register a service provider during the booting phase/u);
+	then.shouldHaveThrownApplicationBootingErrorMatching(/^Cannot register a service provider during the booting phase/u);
 });
 
 test('Can manually boot core providers', () => {
@@ -75,6 +75,18 @@ test('Throws if manually booting core providers while already booted', () => {
 	when.booting();
 	when.bootingCoreProviders();
 	then.shouldHaveThrown();
+});
+
+test('Throws a specific exception if an error is thrown during the registering phase', () => {
+	given.registeredProviderThatThrowsDuringRegisteringPhase();
+	when.booting();
+	then.shouldHaveThrownApplicationBootingError();
+});
+
+test('Throws a specific exception if an error is thrown during the booting phase', () => {
+	given.registeredProviderThatThrowsDuringBootingPhase();
+	when.booting();
+	then.shouldHaveThrownApplicationBootingError();
 });
 
 test('Can manually boot core provider and boot application afterwards', () => {

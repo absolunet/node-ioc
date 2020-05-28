@@ -58,6 +58,10 @@ module.exports = {
     return require('./database/Factory').default;
   },
 
+  get ApplicationBootingError() {
+    return require('./foundation/exceptions/ApplicationBootingError').default;
+  },
+
   get NotImplementedError() {
     return require('./foundation/exceptions/NotImplementedError').default;
   },
