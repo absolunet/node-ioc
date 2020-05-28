@@ -86,3 +86,15 @@ test('Can add a command as constructor', () => {
 	when.gettingAllWithoutPolicies();
 	then.shouldHaveCommand();
 });
+
+test('Skip added command if abstract', () => {
+	given.abstractCommandConstructor();
+	when.gettingAllWithoutPolicies();
+	then.shouldNotHaveAbstractCommand();
+});
+
+test('Can add a command that extends an abstract command', () => {
+	given.concreteCommandExtendingAbstractCommandConstructor();
+	when.gettingAllWithoutPolicies();
+	then.shouldHaveConcreteCommandExtendingAbstractCommandConstructor();
+});

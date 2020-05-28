@@ -121,7 +121,9 @@ class CommandRepository {
 	 * @returns {console.repositories.CommandRepository} The current command repository instance.
 	 */
 	add(command) {
-		__(this).get('commands').push(command);
+		if (!command.abstract) {
+			__(this).get('commands').push(command);
+		}
 
 		return this;
 	}

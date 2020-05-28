@@ -52,6 +52,40 @@ const otherNamespaceCommand = container.make(class extends Command {
 
 });
 
+const abstractCommand = container.make(class extends Command {
+
+});
+
+const concreteCommandExtendingAbstractCommand = container.make(class extends Command {
+
+});
+
+const AbstractCommandConstructor = class extends Command {
+
+	static get abstract() {
+		return this === AbstractCommandConstructor;
+	}
+
+	constructor() {
+		super();
+
+		return abstractCommand;
+	}
+
+	get name() { return 'abstract:command'; }
+
+};
+
+const ConcreteCommandExtendingAbstractCommandConstructor = class extends AbstractCommandConstructor {
+
+	constructor() {
+		super();
+
+		return concreteCommandExtendingAbstractCommand;
+	}
+
+};
+
 
 //-- Given
 //--------------------------------------------------------
@@ -113,6 +147,15 @@ given.commandConstructor = () => {
 	given.commandAsConstructor(command);
 };
 
+given.abstractCommandConstructor = () => {
+	commandRepository.add(AbstractCommandConstructor);
+};
+
+given.concreteCommandExtendingAbstractCommandConstructor = () => {
+	commandRepository.add(ConcreteCommandExtendingAbstractCommandConstructor);
+};
+
+
 //-- When
 //--------------------------------------------------------
 
@@ -150,6 +193,7 @@ when.checkingIfCommandExists = () => {
 	});
 };
 
+
 //-- Then
 //--------------------------------------------------------
 
@@ -178,6 +222,14 @@ then.shouldHavePrivateCommand = () => {
 
 then.shouldNotHavePrivateCommand = () => {
 	then.resultShouldNotInclude(privateCommand);
+};
+
+then.shouldNotHaveAbstractCommand = () => {
+	then.resultShouldNotInclude(abstractCommand);
+};
+
+then.shouldHaveConcreteCommandExtendingAbstractCommandConstructor = () => {
+	then.resultShouldInclude(concreteCommandExtendingAbstractCommand);
 };
 
 then.shouldHaveCommandAndPrivateCommand = () => {
