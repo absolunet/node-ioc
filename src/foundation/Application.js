@@ -2,16 +2,17 @@
 //-- Node IoC - Foundation - Application
 //--------------------------------------------------------
 
-import * as os                from 'os';
-import * as path              from 'path';
-import slash                  from 'slash';
-import __                     from '@absolunet/private-registry';
-import ServiceProvider        from './ServiceProvider';
-import Container              from '../container/Container';
-import ConfigServiceProvider  from '../config/ConfigServiceProvider';
-import EventServiceProvider   from '../events/EventServiceProvider';
-import FileServiceProvider    from '../file/FileServiceProvider';
-import SupportServiceProvider from '../support/SupportServiceProvider';
+import * as os                 from 'os';
+import * as path               from 'path';
+import slash                   from 'slash';
+import __                      from '@absolunet/private-registry';
+import ApplicationBootingError from './exceptions/ApplicationBootingError';
+import ServiceProvider         from './ServiceProvider';
+import Container               from '../container/Container';
+import ConfigServiceProvider   from '../config/ConfigServiceProvider';
+import EventServiceProvider    from '../events/EventServiceProvider';
+import FileServiceProvider     from '../file/FileServiceProvider';
+import SupportServiceProvider  from '../support/SupportServiceProvider';
 
 /**
  * Base application service providers.
@@ -127,32 +128,36 @@ class Application extends Container {
 			throw new TypeError('The container was already booted.');
 		}
 
-		this.bootCoreProviders();
+		try {
+			this.bootCoreProviders();
 
-		const dispatcher = this.make('event');
-		__(this).get('onBooting').forEach((callback) => {
-			dispatcher.once('application.booting', callback);
-		});
-		__(this).get('onBooted').forEach((callback) => {
-			dispatcher.once('application.booted', callback);
-		});
+			const dispatcher = this.make('event');
+			__(this).get('onBooting').forEach((callback) => {
+				dispatcher.once('application.booting', callback);
+			});
+			__(this).get('onBooted').forEach((callback) => {
+				dispatcher.once('application.booted', callback);
+			});
 
-		dispatcher.emit('application.booting', this);
-		const providers = __(this).get('providers');
+			dispatcher.emit('application.booting', this);
+			const providers = __(this).get('providers');
 
 
-		// We use a for loop instead of a forEach to allow providers to register other providers,
-		// so they can be properly registered and booted during application boot process.
-		let i;
-		for (i = coreProviders.length; i < providers.length; i++) {
-			this.registerProvider(providers[i]);
+			// We use a for loop instead of a forEach to allow providers to register other providers,
+			// so they can be properly registered and booted during application boot process.
+			let i;
+			for (i = coreProviders.length; i < providers.length; i++) {
+				this.registerProvider(providers[i]);
+			}
+			for (i = 0; i < providers.length; i++) {
+				this.bootProvider(providers[i]);
+			}
+
+			__(this).set('booted', true);
+			dispatcher.emit('application.booted', this);
+		} catch (error) {
+			throw new ApplicationBootingError(error);
 		}
-		for (i = 0; i < providers.length; i++) {
-			this.bootProvider(providers[i]);
-		}
-
-		__(this).set('booted', true);
-		this.make('event').emit('application.booted', this);
 
 		return __(this).get('proxy');
 	}
