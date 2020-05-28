@@ -137,7 +137,10 @@ class CommandRepository {
 
 
   add(command) {
-    (0, _privateRegistry.default)(this).get('commands').push(command);
+    if (!command.abstract) {
+      (0, _privateRegistry.default)(this).get('commands').push(command);
+    }
+
     return this;
   }
   /**

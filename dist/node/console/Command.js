@@ -9,6 +9,8 @@ var _privateRegistry = _interopRequireDefault(require("@absolunet/private-regist
 
 var _NotImplementedError = _interopRequireDefault(require("../foundation/exceptions/NotImplementedError"));
 
+var _NotInstantiableError = _interopRequireDefault(require("../foundation/exceptions/NotInstantiableError"));
+
 var _Flag = _interopRequireDefault(require("./models/Flag"));
 
 var _Option = _interopRequireDefault(require("./models/Option"));
@@ -31,9 +33,31 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 class Command {
   /**
+   * Indicates that the command is abstract and should be skipped for execution.
+   *
+   * @type {boolean}
+   */
+  static get abstract() {
+    return this === Command;
+  }
+  /**
+   * Command constructor.
+   *
+   * @throws {NotInstantiableError} Indicates that the command is meant to be abstract.
+   */
+
+
+  constructor() {
+    if (this.constructor.abstract) {
+      throw new _NotInstantiableError.default(this.constructor);
+    }
+  }
+  /**
    * @inheritdoc
    * @private
    */
+
+
   init() {
     (0, _privateRegistry.default)(this).set('verbose', 0);
     this.formatArguments();

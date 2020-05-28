@@ -29,6 +29,14 @@ class GeneratorCommand extends _Command.default {
   /**
    * @inheritdoc
    */
+  static get abstract() {
+    return this === GeneratorCommand;
+  }
+  /**
+   * @inheritdoc
+   */
+
+
   get policies() {
     return ['env:local'];
   }

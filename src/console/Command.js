@@ -2,11 +2,12 @@
 //-- Node IoC - Console - Command
 //--------------------------------------------------------
 
-import __                  from '@absolunet/private-registry';
-import NotImplementedError from '../foundation/exceptions/NotImplementedError';
-import Flag                from './models/Flag';
-import Option              from './models/Option';
-import Parameter           from './models/Parameter';
+import __                   from '@absolunet/private-registry';
+import NotImplementedError  from '../foundation/exceptions/NotImplementedError';
+import NotInstantiableError from '../foundation/exceptions/NotInstantiableError';
+import Flag                 from './models/Flag';
+import Option               from './models/Option';
+import Parameter            from './models/Parameter';
 
 
 /**
@@ -18,6 +19,26 @@ import Parameter           from './models/Parameter';
  * @hideconstructor
  */
 class Command {
+
+	/**
+	 * Indicates that the command is abstract and should be skipped for execution.
+	 *
+	 * @type {boolean}
+	 */
+	static get abstract() {
+		return this === Command;
+	}
+
+	/**
+	 * Command constructor.
+	 *
+	 * @throws {NotInstantiableError} Indicates that the command is meant to be abstract.
+	 */
+	constructor() {
+		if (this.constructor.abstract) {
+			throw new NotInstantiableError(this.constructor);
+		}
+	}
 
 	/**
 	 * @inheritdoc
