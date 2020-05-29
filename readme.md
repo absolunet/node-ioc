@@ -18,7 +18,7 @@ Node IoC is a [Node.js](https://nodejs.org) framework designed to help developer
  - Complete [CLI command system](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/commands) powered by [Yargs](http://yargs.js.org/)
  - Full [routing and HTTP handling](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/routing) powered by [Express](https://expressjs.com/)
  - [Knex.js](http://knexjs.org/) [database connections](https://documentation.absolunet.com/docs-node-ioc/en/1.0/handling-data/database) with [Bookshelf ORM](https://bookshelfjs.org/)
- - [Cache system with multiple back-ends](https://documentation.absolunet.com/docs-node-ioc/en/1.0/going-deeper/caching)  
+ - [Cache system with multiple back-ends](https://documentation.absolunet.com/docs-node-ioc/en/1.0/going-deeper/caching)
  - [Configuration over code approach](https://documentation.absolunet.com/docs-node-ioc/en/1.0/basics/config)
  - Multiple 3rd-party integrations such as [PubSubJS](https://github.com/mroderick/PubSubJS), [joi](https://hapi.dev/family/joi/), [JsRender](https://www.jsviews.com/) and much more
  - [Modular structure with simple integration](https://documentation.absolunet.com/docs-node-ioc/en/1.0/architecture/service-provider)
@@ -29,7 +29,7 @@ Node IoC was mostly inspired by Laravel and Symfony for the structure, as well b
 
 ## Learning Node IoC
 
-The simplest way to learn Node IoC is through the [official documentation](https://documentation.absolunet.com/docs-node-ioc). You can easily get started with the early chapters that give you the step-by-step approach to install the application and to implement basic features. However, if you want to go deeper, the documentation covers all key features, or you can read the [API documentation](https://documentation.absolunet.com/docs-node-ioc/api).
+The simplest way to learn Node IoC is through the [official documentation](https://documentation.absolunet.com/docs-node-ioc). You can easily get started with the early chapters that give you the step-by-step approach to install the application and to implement basic features. However, if you want to go deeper, the documentation covers all key features, or you can read the [API documentation](https://documentation.absolunet.com/node-ioc/api).
 
 
 ## Contributing
