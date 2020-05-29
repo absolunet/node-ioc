@@ -34,7 +34,7 @@ The simplest way to learn Node IoC is through the [official documentation](https
 
 ## Contributing
 
-You are welcome to contribute to the Node IoC framework. You can find the official contribution guide in the [official documentation](https://documentation.absolunet.com/docs-node-ioc/en/1.0/contributions).
+You are welcome to contribute to the Node IoC framework. Please read the [Contribution Guidelines](contributing.md).
 
 
 ## Code of Conduct
