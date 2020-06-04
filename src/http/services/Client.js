@@ -15,7 +15,7 @@ class Client {
 	 * HTTP Client constructor.
 	 */
 	constructor() {
-		return require('axios').create(); // eslint-disable-line global-require
+		return require('axios'); // eslint-disable-line global-require
 	}
 
 }
