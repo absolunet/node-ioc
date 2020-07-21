@@ -51,8 +51,8 @@ class Kernel extends _Kernel.default {
    */
 
 
-  beforeHandling() {} //
-
+  beforeHandling() {//
+  }
   /**
    * Called just after handling incoming request, if no error was thrown.
    *
@@ -60,8 +60,8 @@ class Kernel extends _Kernel.default {
    */
 
 
-  afterHandling() {} //
-
+  afterHandling() {//
+  }
   /**
    * Call the given command and process it through the command registrar.
    *
@@ -108,8 +108,8 @@ class Kernel extends _Kernel.default {
    */
 
 
-  terminating() {} //
-
+  terminating() {//
+  }
   /**
    * CommandRegistrar accessor.
    *

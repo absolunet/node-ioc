@@ -99,8 +99,8 @@ class Kernel {
    */
 
 
-  terminate() {} //
-
+  terminate() {//
+  }
   /**
    * Bootstrapper service providers accessor.
    *

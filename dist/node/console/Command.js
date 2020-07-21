@@ -125,8 +125,8 @@ class Command {
    */
 
 
-  handle() {} //
-  // eslint-disable-next-line jsdoc/require-returns-check
+  handle() {//
+  } // eslint-disable-next-line jsdoc/require-returns-check
 
   /**
    * Postprocess the handled data.
@@ -137,9 +137,9 @@ class Command {
    */
 
 
-  postprocess(output) {} // eslint-disable-line no-unused-vars
-  //
-
+  postprocess(output) {// eslint-disable-line no-unused-vars
+    //
+  }
   /**
    * Run node script in a new spawn shell.
    *

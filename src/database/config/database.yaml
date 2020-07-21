@@ -18,6 +18,14 @@ connections:
     driver: sqlite
     filename: '{{DB_FILE|@/storage/databases/database.sqlite}}'
 
+  mysql:
+    driver: mysql
+    host: '{{DB_HOST|localhost}}'
+    user: '{{DB_USER}}'
+    password: '{{DB_PASSWORD}}'
+    database: '{{DB_NAME}}'
+    port: '{{DB_PORT|3306}}'
+
 
 # Paths to the different database-related folders from the database folder.
 # This will be used when creating the Knex instance.

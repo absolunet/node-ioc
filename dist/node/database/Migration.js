@@ -84,8 +84,8 @@ class Migration {
    */
 
 
-  up() {} //
-
+  up() {//
+  }
   /**
    * Reverse the migrations.
    *
@@ -94,8 +94,8 @@ class Migration {
    */
 
 
-  down() {} //
-
+  down() {//
+  }
   /**
    * Set current connection instance.
    *

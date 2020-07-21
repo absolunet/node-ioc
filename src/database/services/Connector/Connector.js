@@ -5,6 +5,7 @@
 import hasDriver      from '../../../support/mixins/hasDriver';
 import ConnectorProxy from './ConnectorProxy';
 import SqliteDriver   from './drivers/SqliteDriver';
+import MySQLDriver    from './drivers/MySQLDriver';
 
 
 /**
@@ -36,6 +37,7 @@ class Connector extends hasDriver() {
 		super.init();
 
 		this.addDriver('sqlite', SqliteDriver);
+		this.addDriver('mysql', MySQLDriver);
 	}
 
 }

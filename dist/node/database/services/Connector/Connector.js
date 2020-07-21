@@ -11,6 +11,8 @@ var _ConnectorProxy = _interopRequireDefault(require("./ConnectorProxy"));
 
 var _SqliteDriver = _interopRequireDefault(require("./drivers/SqliteDriver"));
 
+var _MySQLDriver = _interopRequireDefault(require("./drivers/MySQLDriver"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 //--------------------------------------------------------
@@ -44,6 +46,7 @@ class Connector extends (0, _hasDriver.default)() {
   init() {
     super.init();
     this.addDriver('sqlite', _SqliteDriver.default);
+    this.addDriver('mysql', _MySQLDriver.default);
   }
 
 }

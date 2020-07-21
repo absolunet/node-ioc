@@ -119,8 +119,8 @@ class Model extends (0, _getsMethods.default)() {
    */
 
 
-  boot() {} //
-
+  boot() {//
+  }
   /**
    * Get default values.
    *
