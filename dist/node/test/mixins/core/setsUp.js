@@ -32,8 +32,8 @@ const setsUp = (0, _mixinFactory.default)(SuperClass => {
      * @memberof test.mixins.core.SetsUp
      * @instance
      */
-    beforeAll() {//
-    }
+    beforeAll() {} //
+
     /**
      * Setup before any class test.
      *
@@ -42,8 +42,8 @@ const setsUp = (0, _mixinFactory.default)(SuperClass => {
      */
 
 
-    beforeEach() {//
-    }
+    beforeEach() {} //
+
     /**
      * Tear down after any class test.
      *
@@ -52,8 +52,8 @@ const setsUp = (0, _mixinFactory.default)(SuperClass => {
      */
 
 
-    afterEach() {//
-    }
+    afterEach() {} //
+
     /**
      * Tear down after the last class test.
      *

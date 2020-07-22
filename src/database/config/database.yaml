@@ -20,7 +20,7 @@ connections:
 
   mysql:
     driver: mysql
-    host: '{{DB_HOST|localhost}}'
+    host: '{{DB_HOST}}'
     user: '{{DB_USER}}'
     password: '{{DB_PASSWORD}}'
     database: '{{DB_NAME}}'

@@ -13,13 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-## [2.1.0] - 2020-07-21
-
-### Added
- - Added support for MySQL databases (`mysql` driver)
-
-
-
 ## [2.0.0] - 2020-05-28
 
 ### Added

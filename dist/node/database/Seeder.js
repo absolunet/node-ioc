@@ -84,8 +84,8 @@ class Seeder {
    */
 
 
-  seed() {//
-  }
+  seed() {} //
+
   /**
    * Retrieve the model by name.
    *

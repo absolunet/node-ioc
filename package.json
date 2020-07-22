@@ -1,6 +1,6 @@
 {
   "name": "@absolunet/ioc",
-  "version": "2.1.0",
+  "version": "2.0.0",
   "description": "The perfect IoC framework for Node.js lovers",
   "definition": "",
   "homepage": "https://documentation.absolunet.com/docs-node-ioc",
