@@ -138,7 +138,7 @@ class Command {
 
 
   postprocess(output) {} // eslint-disable-line no-unused-vars
-    //
+  //
 
   /**
    * Run node script in a new spawn shell.
