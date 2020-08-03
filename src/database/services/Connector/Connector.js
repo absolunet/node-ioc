@@ -37,7 +37,7 @@ class Connector extends hasDriver() {
 		super.init();
 
 		this.addDriver('sqlite', SqliteDriver);
-		this.addDriver('mysql', MySQLDriver);
+		this.addDriver('mysql',  MySQLDriver);
 	}
 
 }
