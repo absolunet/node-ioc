@@ -8,6 +8,7 @@ const { given, when, then, build } = gwt;
 import container    from '../../../container';
 import Connector    from '../../../../../dist/node/database/services/Connector';
 import SqliteDriver from '../../../../../dist/node/database/services/Connector/drivers/SqliteDriver';
+import MySQLDriver from '../../../../../dist/node/database/services/Connector/drivers/MySQLDriver';
 
 let connector;
 let result;
@@ -45,6 +46,10 @@ then.resultShouldBeInstanceOf = (expected) => {
 
 then.shouldHaveReceivedSqliteDriver = () => {
 	then.resultShouldBeInstanceOf(SqliteDriver);
+};
+
+then.shouldHaveReceivedMySQLDriver = () => {
+	then.resultShouldBeInstanceOf(MySQLDriver);
 };
 
 

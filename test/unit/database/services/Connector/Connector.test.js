@@ -18,3 +18,9 @@ test('Exposes sqlite driver', () => {
 	when.gettingDriver('sqlite');
 	then.shouldHaveReceivedSqliteDriver();
 });
+
+
+test('Exposes mysql driver', () => {
+	when.gettingDriver('mysql');
+	then.shouldHaveReceivedMySQLDriver();
+});
