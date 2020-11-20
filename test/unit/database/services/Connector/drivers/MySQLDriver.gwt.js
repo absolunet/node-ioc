@@ -5,8 +5,8 @@
 import gwt from '../../../common.gwt';
 const { given, when, then, build } = gwt;
 
-import __           from '@absolunet/private-registry';
-import container    from '../../../../container';
+import __          from '@absolunet/private-registry';
+import container   from '../../../../container';
 import MySQLDriver from '../../../../../../dist/node/database/services/Connector/drivers/MySQLDriver';
 
 let result;
@@ -81,7 +81,7 @@ given.connectionConfig = () => {
 		user: 'root',
 		password: 'password',
 		database: 'database',
-		port: '3306',
+		port: '3306'
 	};
 };
 
