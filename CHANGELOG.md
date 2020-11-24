@@ -11,11 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
- - Allow `http` to create dedicated connector instance
+### Added
+ - Added MySQL driver for the database connector (thanks to [@LilyWonhalf](https://github.com/LilyWonhalf))
 
 ### Changed
- - Replace `@hapi/joi` (deprecated) with `joi` at version `17.3.0`
+ - Replaced `@hapi/joi` (deprecated) with `joi` at version `17.3.0`
  - Updated `@absolunet/terminal` to `3.1.0`
  - Updated `axios` to `0.21.0`
  - Updated `bookshelf` to `1.2.0`
@@ -38,6 +38,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Updated `yargs` to `16.1.1`
  - Updated `jest` (dev) to `26.6.3`
  - Updated `mock-knex` (dev) to `0.4.9`
+
+### Fixed
+ - Allow `http` to create dedicated connector instance
 
 
 
