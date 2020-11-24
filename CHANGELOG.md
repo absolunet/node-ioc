@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
- - Added MySQL driver for the database connector (thanks to [@lilybergonzat](https://github.com/lilybergonzat))
+ - Added MySQL driver for the database connector (thanks to [@LilyWonhalf](https://github.com/LilyWonhalf))
 
 ### Changed
  - Replaced `@hapi/joi` (deprecated) with `joi` at version `17.3.0`
