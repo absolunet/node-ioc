@@ -5,7 +5,7 @@
 import gwt from '../common.gwt';
 const { given, when, then, build } = gwt;
 
-import joi       from '@hapi/joi';
+import joi       from 'joi';
 import container from '../../container';
 import Validator from '../../../../dist/node/validation/services/Validator';
 
