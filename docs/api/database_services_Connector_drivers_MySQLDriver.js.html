@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>http/controllers/StaticController.js - @absolunet/ioc API documentation</title>
+	<title>database/services/Connector/drivers/MySQLDriver.js - @absolunet/ioc API documentation</title>
 
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<meta http-equiv="cleartype" content="on">
@@ -54,7 +54,7 @@
 
 		<div id="main">
 		
-			<h1 class="page-title">http/controllers/StaticController.js</h1>
+			<h1 class="page-title">database/services/Connector/drivers/MySQLDriver.js</h1>
 		
 
 			
@@ -65,51 +65,30 @@
     <section>
         <article>
             <pre id="line" class="line-numbers"><code class="language-js">//--------------------------------------------------------
-//-- Node IoC - HTTP - Controllers - Default Controller
+//-- Node IoC - Database - Connector - MySQL Driver
 //--------------------------------------------------------
 
-import Controller from './Controller';
-
+import Driver from './Driver';
 
 /**
- * Controller that handle static content response.
+ * MySQL connector driver.
  *
- * @memberof http.controllers
- * @augments http.controllers.Controller
+ * @memberof database.services.Connector.drivers
+ * @augments database.services.Connector.drivers.Driver
  * @hideconstructor
  */
-class StaticController extends Controller {
+class MySQLDriver extends Driver {
 
 	/**
-	 * Class dependencies: &lt;code>['file']&lt;/code>.
-	 *
-	 * @type {Array&lt;string>}
+	 * @inheritdoc
 	 */
-	static get dependencies() {
-		return (super.dependencies || []).concat(['file']);
-	}
-
-	/**
-	 * Handle redirection.
-	 *
-	 * @param {{folder: string}} defaults - The default values.
-	 * @returns {*} The response.
-	 */
-	handle({ folder }) {
-		const { file } = this.request.params;
-		const fullPath = this.app.formatPath(folder, file);
-
-		if (!this.file.exists(fullPath)) {
-			return this.notFound();
-		}
-
-		return this.response.sendFile(fullPath);
+	get client() {
+		return 'mysql';
 	}
 
 }
 
-
-export default StaticController;
+export default MySQLDriver;
 </code></pre>
         </article>
     </section>
