@@ -36,7 +36,8 @@ when.creatingHttpClient = () => {
 then.clientHasSamePropertiesAndMethodAsAxios = () => {
 	then.shouldNotHaveThrown();
 	expect(result).toBeTruthy();
-	expect(Object.keys(result)).toStrictEqual(Object.keys(axios.create()));
+	expect(Object.keys(result)).toStrictEqual(expect.arrayContaining(Object.keys(axios.create())));
+	expect(result.create).toBeInstanceOf(Function);
 };
 
 

@@ -13,6 +13,41 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
+## [2.1.0] - 2020-11-24
+
+### Added
+ - Added MySQL driver for the database connector (thanks to [@LilyWonhalf](https://github.com/LilyWonhalf))
+
+### Changed
+ - Replaced `@hapi/joi` (deprecated) with `joi` at version `17.3.0`
+ - Updated `@absolunet/terminal` to `3.1.0`
+ - Updated `axios` to `0.21.0`
+ - Updated `bookshelf` to `1.2.0`
+ - Updated `chalk` to `4.1.0`
+ - Updated `cross-spawn` to `7.0.3`
+ - Updated `dot-object` to `2.1.4`
+ - Updated `faker` to `5.1.0`
+ - Updated `inquirer` to `7.3.3`
+ - Updated `js-yaml` to `3.14.0`
+ - Updated `jsrender` to `1.0.8`
+ - Updated `knex` to `0.21.12`
+ - Updated `knex-cleaner` to `1.3.1`
+ - Updated `moment` to `2.29.1`
+ - Updated `nodemon` to `2.0.6`
+ - Updated `pretty-error` to `2.1.2`
+ - Updated `pubsub-js` to `1.9.1`
+ - Updated `replace-in-file` to `6.1.0`
+ - Updated `sqlite3` to `5.0.0`
+ - Updated `table` to `6.0.4`
+ - Updated `yargs` to `16.1.1`
+ - Updated `jest` (dev) to `26.6.3`
+ - Updated `mock-knex` (dev) to `0.4.9`
+
+### Fixed
+ - Allow `http` to create dedicated connector instance
+
+
+
 ## [2.0.0] - 2020-05-28
 
 ### Added
@@ -659,7 +694,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 
-[Unreleased]:    https://github.com/absolunet/node-ioc/compare/2.0.0...HEAD
+[Unreleased]:    https://github.com/absolunet/node-ioc/compare/2.1.0...HEAD
+[2.1.0]:         https://github.com/absolunet/node-ioc/compare/2.0.0...2.1.0
 [2.0.0]:         https://github.com/absolunet/node-ioc/compare/1.0.1...2.0.0
 [1.0.1]:         https://github.com/absolunet/node-ioc/compare/1.0.0...1.0.1
 [1.0.0]:         https://github.com/absolunet/node-ioc/compare/1.0.0-rc.3...1.0.0

@@ -18,6 +18,14 @@ connections:
     driver: sqlite
     filename: '{{DB_FILE|@/storage/databases/database.sqlite}}'
 
+  mysql:
+    driver: mysql
+    host: '{{DB_HOST}}'
+    port: '{{DB_PORT|3306}}'
+    database: '{{DB_DATABASE}}'
+    user: '{{DB_USERNAME}}'
+    password: '{{DB_PASSWORD}}'
+
 
 # Paths to the different database-related folders from the database folder.
 # This will be used when creating the Knex instance.
@@ -29,5 +37,5 @@ paths:
 
 
 # The migrations table to be used by Knex.
-# It's set to "migrations" by default, but feel freee to change it.
+# It's set to "migrations" by default, but feel free to change it.
 migration_table: 'migrations'

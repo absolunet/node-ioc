@@ -22,7 +22,7 @@ class Validator {
    * @returns {joi} Hapi Joi module.
    */
   constructor() {
-    return require('@hapi/joi'); // eslint-disable-line global-require
+    return require('joi'); // eslint-disable-line global-require
   }
 
 }
